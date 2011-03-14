@@ -46,6 +46,7 @@ public class LocationActivity extends MapActivity implements Runnable,
 				txtLocation.setText(currentLocation.getLongitude() + " "
 						+ currentLocation.getLatitude());
 				showMap();
+				
 			}
 		}
 	};
@@ -115,8 +116,9 @@ public class LocationActivity extends MapActivity implements Runnable,
 		geoPoint = new GeoPoint(
 				(int) (currentLocation.getLatitude()*1000000),
 				(int) (currentLocation.getLongitude()*1000000));
-		//mapControl.setZoom(20);
+		mapControl.setZoom(14);
 		mapControl.animateTo(geoPoint);
+		mapControl.setCenter(geoPoint);
 		if (myposOverlay == null)
 			myposOverlay = new PositionOverlay();
 		else
@@ -126,6 +128,8 @@ public class LocationActivity extends MapActivity implements Runnable,
 		overlays.add(myposOverlay);
 		myposOverlay.setLocation(currentLocation);
 		mapView.setClickable(true);
+		mapControl.setCenter(geoPoint);
+		
 	}
 
 	
