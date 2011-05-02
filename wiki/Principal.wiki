@@ -12,5 +12,3 @@ Proyecto de Grado
 
 
 
-
-*[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
