@@ -1,5 +1,9 @@
 #summary Informacion General.
 
-= Introduction =
+= Informacion General=
 
 lalalala
+
+
+
+*[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
