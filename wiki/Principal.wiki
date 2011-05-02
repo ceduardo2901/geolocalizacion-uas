@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Pagina Principal.
 
 = Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM=
 
