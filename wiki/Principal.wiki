@@ -1,11 +1,11 @@
 #summary Pagina Principal.
 
-= Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM=
+== Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM==
 
 Proyecto de Grado
 
 
-= Indice =
+== Indice ==
 
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/InformacionGeneral Informacion General]*
   * *[http://url Pagina 2]*
