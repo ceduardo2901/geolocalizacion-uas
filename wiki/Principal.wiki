@@ -8,4 +8,9 @@ Proyecto de Grado
 = Indice =
 
   * Text in *bold* or _italic_
-  * *[http://domain/page Prueba link]*
+  * *[http://code.google.com/p/geolocalizacion-uas/wiki/InformacionGeneral Informacion General]*
+
+
+
+
+*[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
