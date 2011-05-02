@@ -6,7 +6,7 @@ A continuación se enumeran diferentes tutoriales
 
   * *[http://www.devdaily.com/android/android-eclipse-create-android-virtual-device-avd How to create a new Android Virtual Device (AVD) emulator]*
   * *[http://www.vogella.de/articles/Android/article.html Android Tutorial]*
-  * *[http://developer.android.com/sdk/eclipse-adt.html ADT Plugin for Eclipse]*
+  * *[http://www.maestrosdelweb.com/editorial/trabajando-con-el-api-de-google-maps/ Api Google Maps]*
 
 
 *[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
