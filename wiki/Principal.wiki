@@ -7,8 +7,7 @@ Proyecto de Grado
 
 = Indice =
 
-  * Text in *bold* or _italic_
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/InformacionGeneral Informacion General]*
-
-
-
+  * *[http://url Pagina 2]*
+  * *[http://url Pagina 3]*
+  * *[http://url Pagina n]*
