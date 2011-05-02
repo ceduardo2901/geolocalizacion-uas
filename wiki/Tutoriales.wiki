@@ -6,7 +6,7 @@ A continuación se enumeran diferentes tutoriales
 
   * *[http://www.devdaily.com/android/android-eclipse-create-android-virtual-device-avd How to create a new Android Virtual Device (AVD) emulator]*
   * *[http://www.vogella.de/articles/Android/article.html Android Tutorial]*
- * *[http://code.google.com/android/add-ons/google-apis/mapkey.html Obtaining a Maps API Key]*
+  * *[http://code.google.com/android/add-ons/google-apis/mapkey.html Obtaining a Maps API Key]*
   * *[http://www.maestrosdelweb.com/editorial/trabajando-con-el-api-de-google-maps/ Api Google Maps]*
 
 
