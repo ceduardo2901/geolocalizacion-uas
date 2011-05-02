@@ -9,5 +9,5 @@ Proyecto de Grado
 
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/InformacionGeneral Informacion General]*
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/Herramientas Herramientas]*
-  * *[http://url Pagina 3]*
+  * *[http://code.google.com/p/geolocalizacion-uas/wiki/Tutoriales Tutoriales]*
   * *[http://url Pagina n]*
