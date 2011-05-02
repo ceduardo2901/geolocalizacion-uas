@@ -5,7 +5,9 @@
 A continuación se enumeran las herramientas utilizadas en el proyecto
 
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+  * *[http://www.eclipse.org/downloads/ Eclipse]*
+  * *[http://developer.android.com/sdk/index.html Android SDK]*
+  * *[http://developer.android.com/sdk/eclipse-adt.html ADT Plugin for Eclipse]*
+
+
+*[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
