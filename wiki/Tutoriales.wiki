@@ -4,8 +4,8 @@
 
 A continuación se enumeran diferentes tutoriales
 
-  * *[http://www.eclipse.org/downloads/ Eclipse]*
-  * *[http://developer.android.com/sdk/index.html Android SDK]*
+  * *[http://www.devdaily.com/android/android-eclipse-create-android-virtual-device-avd How to create a new Android Virtual Device (AVD) emulator]*
+  * *[http://www.vogella.de/articles/Android/article.html Android Tutorial]*
   * *[http://developer.android.com/sdk/eclipse-adt.html ADT Plugin for Eclipse]*
 
 
