@@ -1,6 +1,6 @@
-#summary Pagina Principal.
+#summary Pagina Principal
 #labels Featured
-
+#sidebar Menu
 
 == Geolocalización de Sitios de Interés Para Teléfonos Móviles ==
 == G-SIAM ==
