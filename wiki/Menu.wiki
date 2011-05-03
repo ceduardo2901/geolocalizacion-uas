@@ -2,14 +2,11 @@
 
 == Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM==
 
-Proyecto de Grado
-
-
 == Temas ==
 
 
-  * *[http://code.google.com/p/geolocalizacion-uas/wiki/Herramientas Herramientas]*
-  * *[http://code.google.com/p/geolocalizacion-uas/wiki/Tutoriales Tutoriales]*
-  * *[http://code.google.com/p/geolocalizacion-uas/wiki/ConsejosAndriod Consejos para desarrollar en Android]*
-  * *[http://www.oracle.com/technetwork/java/codeconv-138413.html Estándares]*
-  * *[http://code.google.com/p/geolocalizacion-uas/wiki/Glosario Glosario]*
+ * * *[http://code.google.com/p/geolocalizacion-uas/wiki/Herramientas Herramientas]*
+ * * *[http://code.google.com/p/geolocalizacion-uas/wiki/Tutoriales Tutoriales]*
+ * * *[http://code.google.com/p/geolocalizacion-uas/wiki/ConsejosAndriod Consejos para desarrollar en Android]*
+ * * *[http://www.oracle.com/technetwork/java/codeconv-138413.html Estándares]*
+ * * *[http://code.google.com/p/geolocalizacion-uas/wiki/Glosario Glosario]*
