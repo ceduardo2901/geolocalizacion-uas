@@ -1,5 +1,6 @@
-#summary Estándares.
+#summary Estándares
 #labels Featured
+#sidebar Menu
 
 == Estándares==
 
