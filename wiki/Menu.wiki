@@ -1,7 +1,5 @@
 #summary Menu.
 
-== Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM==
-
 == Temas ==
 
 
