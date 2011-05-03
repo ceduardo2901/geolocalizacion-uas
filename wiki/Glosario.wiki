@@ -1,4 +1,5 @@
 #summary Glosario.
+#labels Featured
 
 == Glosario==
 
