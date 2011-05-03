@@ -1,4 +1,5 @@
 #summary Menu.
+#labels Featured
 
 == Temas ==
 
