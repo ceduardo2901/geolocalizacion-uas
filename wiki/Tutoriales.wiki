@@ -1,5 +1,6 @@
 #summary Tutoriales.
 #labels Featured
+#sidebar Menu
 
 == Tutoriales ==
 
