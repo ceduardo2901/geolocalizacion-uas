@@ -1,5 +1,6 @@
-#summary Glosario.
+#summary Glosario
 #labels Featured
+#sidebar Menu
 
 == Glosario==
 
