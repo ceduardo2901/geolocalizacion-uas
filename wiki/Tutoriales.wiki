@@ -1,4 +1,5 @@
 #summary Tutoriales.
+#labels Featured
 
 == Tutoriales ==
 
