@@ -1,5 +1,6 @@
-#summary Herramientas.
+#summary Herramientas
 #labels Featured
+#sidebar Menu
 
 == Herramientas ==
 
