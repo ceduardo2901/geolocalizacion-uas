@@ -10,4 +10,4 @@ Proyecto de Grado
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/InformacionGeneral Información General]*
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/Herramientas Herramientas]*
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/Tutoriales Tutoriales]*
-  * *[http://url Estandares]*
+  * *[http://www.oracle.com/technetwork/java/codeconv-138413.html Estandares]*
