@@ -1,4 +1,4 @@
-#summary Tutoriales.
+#summary Tutoriales
 #labels Featured
 #sidebar Menu
 
