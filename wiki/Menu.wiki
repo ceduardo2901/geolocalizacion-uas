@@ -8,8 +8,3 @@
  * [http://code.google.com/p/geolocalizacion-uas/wiki/ConsejosAndriod Consejos para desarrollar en Android]
  * [http://code.google.com/p/geolocalizacion-uas/wiki/Estandares Estándares]
  * [http://code.google.com/p/geolocalizacion-uas/wiki/Glosario Glosario]
-
-
-  * [DOMReference DOM reference]
-  * [HTMLElements HTML reference]
-  * [CSSReference CSS reference]
