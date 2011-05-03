@@ -1,5 +1,6 @@
-#summary Consejos para desarrollar en Android.
+#summary Consejos para desarrollar en Android
 #labels Featured
+#sidebar Menu
 
 == Consejos para desarrollar en Android ==
 
