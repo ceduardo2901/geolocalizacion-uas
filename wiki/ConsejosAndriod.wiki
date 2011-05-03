@@ -1,4 +1,5 @@
 #summary Consejos para desarrollar en Android.
+#labels Featured
 
 == Consejos para desarrollar en Android ==
 
