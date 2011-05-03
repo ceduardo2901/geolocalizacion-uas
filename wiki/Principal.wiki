@@ -2,13 +2,11 @@
 #labels Featured
 
 
-== Geolocalización de Sitios de Interés Para Teléfonos Móviles - G-SIAM==
+== Geolocalización de Sitios de Interés Para Teléfonos Móviles ==
+== G-SIAM ==
 
-Proyecto de Grado
 
-
-== Temas ==
-
+Proyecto de Grado 
 
 Licenciatura en Informática
 Instituto Universitario Autónomo del Sur
