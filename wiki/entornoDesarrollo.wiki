@@ -9,7 +9,7 @@
 * Instalar el SDK de Android y plataforma Android 2.3
 
 * Instalar plugin para eclipse ADT 10.0.1
+
+* Instalar subeclipse 1.6
      
  
-
-
