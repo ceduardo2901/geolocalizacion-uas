@@ -2,14 +2,14 @@
 = Entorno de desarrollo a utilizar en G-SIAM =
 
 
-* Instalar java 1.6 update 24
+ Instalar java 1.6 update 24
 
-* Instalar eclipse JEE developer 3.6 (Helio)
+ Instalar eclipse classic 3.6.2 (Helio)
 
-* Instalar el SDK de Android y plataforma Android 2.3
+ Instalar el SDK de Android y plataforma Android 2.3
 
-* Instalar plugin para eclipse ADT 10.0.1
+ Instalar plugin para eclipse ADT 10.0.1
 
-* Instalar subeclipse 1.6
+ Instalar subeclipse 1.6
      
  
