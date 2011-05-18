@@ -1,4 +1,7 @@
+#summary Entorno de desarrollo
 #labels Phase-Implementation,Featured
+#sidebar Menu
+
 = Entorno de desarrollo a utilizar en G-SIAM =
 
 
@@ -14,3 +17,4 @@
  Instalar subeclipse 1.6
      
  
+*[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
