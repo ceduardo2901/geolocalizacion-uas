@@ -6,7 +6,8 @@
 
  Instalar eclipse classic 3.6.2 (Helio)
 
- Instalar el SDK de Android y plataforma Android 2.3
+ Instalar el SDK de Android y plataforma Android 2.3 (agregar al path de windows tools/ y platform-tools/)
+  
 
  Instalar plugin para eclipse ADT 10.0.1
 
