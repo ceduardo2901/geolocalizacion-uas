@@ -12,7 +12,7 @@ A continuación se enumeran las herramientas utilizadas en el proyecto
   * *[http://developer.android.com/sdk/eclipse-adt.html ADT Plugin for Eclipse]*
   * *[https://app.gantter.com/ Gantter]*
   * *[http://subclipse.tigris.org// Subclipse]*
-
+  * *[http://code.google.com/p/geolocalizacion-uas/wiki/entornoDesarrollo Entorno de Desarrollo]*
 
 
 *[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
