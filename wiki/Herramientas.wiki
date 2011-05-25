@@ -13,6 +13,7 @@ A continuación se enumeran las herramientas utilizadas en el proyecto
   * *[https://app.gantter.com/ Gantter]*
   * *[http://subclipse.tigris.org// Subclipse]*
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/entornoDesarrollo Entorno de Desarrollo]*
+  * *[http://www.postgresql.org/ Postgres]*
 
 
 *[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
