@@ -15,6 +15,10 @@
  Instalar plugin para eclipse ADT 10.0.1
 
  Instalar subeclipse 1.6
+
+Instalar postgres 9.0
+
+Instalar postgis 
      
  
 *[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
