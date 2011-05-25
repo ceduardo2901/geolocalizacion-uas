@@ -16,9 +16,10 @@
 
  Instalar subeclipse 1.6
 
-Instalar postgres 9.0
+ Instalar postgres 9.0 
 
-Instalar postgis 
+ Instalar postgis 
+
      
  
 *[http://code.google.com/p/geolocalizacion-uas/wiki/Principal Volver]*
