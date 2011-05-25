@@ -11,6 +11,7 @@
 
  Instalar el SDK de Android y plataforma Android 2.3.4 (agregar al path de windows tools/ y platform-tools/)
   
+ Instalar wtp (web tool plataform)
 
  Instalar plugin para eclipse ADT 10.0.1
 
