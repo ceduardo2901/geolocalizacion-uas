@@ -15,6 +15,8 @@ A continuación se enumeran las herramientas utilizadas en el proyecto
   * *[http://code.google.com/p/geolocalizacion-uas/wiki/entornoDesarrollo Entorno de Desarrollo]*
   * *[http://www.postgresql.org/ Postgres]*
   * *[http://www.eclipse.org/webtools/ Web Tool Platform]*
+  * *[http://tomcat.apache.org/ Apache Tomcat]*
+  * *[http://www.jboss.org/richfaces Rich Faces]*
 
 
 
