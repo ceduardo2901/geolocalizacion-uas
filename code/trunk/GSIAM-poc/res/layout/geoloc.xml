@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:layout_centerVertical="true">
+
+	<TextView android:id="@+id/PostalCodeLabel"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true" android:layout_marginLeft="80dip"
+		android:textColor="#FFFFFF" android:text="@string/postalCodeLabel"
+		android:paddingTop="30dp"></TextView>
+
+	<EditText android:text="@string/postalCodeText" android:id="@+id/PostalCodeText"
+		android:layout_centerHorizontal="true" android:layout_width="fill_parent"
+		android:numeric="integer" android:maxLines="1" android:lines="1"
+		android:inputType="number" android:hint="@string/postalCodeTextDefault"
+		android:layout_height="wrap_content"></EditText>
+
+	<TextView android:id="@+id/CountryCodeLabel"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true" android:layout_marginLeft="80dip"
+		android:textColor="#FFFFFF" android:text="@string/CountryCodeLabel"
+		android:paddingTop="10dp"></TextView>
+	<EditText android:text="@string/countryCodeText" android:id="@+id/CountryCodeText"
+		android:layout_centerHorizontal="true" android:layout_width="fill_parent"
+		android:maxLines="1" android:lines="1" android:hint="@string/countryCodeTextDefault"
+		android:layout_height="wrap_content"></EditText>
+	<TextView android:id="@+id/RadiusLabel" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:layout_centerHorizontal="true"
+		android:layout_marginLeft="80dip" android:textColor="#FFFFFF"
+		android:text="@string/radiusLabel" android:paddingTop="10dp"></TextView>
+	<EditText android:text="@string/radiusText" android:id="@+id/RadiusText"
+		android:layout_centerHorizontal="true" android:layout_width="fill_parent"
+		android:numeric="integer" android:maxLines="1" android:lines="1"
+		android:inputType="number" android:hint="@string/radiusTextDefault"
+		android:layout_height="wrap_content"></EditText>
+	<Button android:text="@string/findDetail" android:id="@+id/findDetail"
+		android:layout_marginLeft="80dip" android:layout_width="wrap_content"
+		android:layout_height="wrap_content"></Button>
+
+</LinearLayout>

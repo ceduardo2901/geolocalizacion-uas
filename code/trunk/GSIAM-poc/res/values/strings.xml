@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Prueba de Concepto</string>
-    <string name="app_name">GSIAM - POC</string>
-    <string name="updateBtn">Actualizar GPS</string>
+	<string name="hello">Prueba de Concepto</string>
+	<string name="app_name">GSIAM - POC</string>
+	<string name="updateBtn">Actualizar GPS</string>
+	<string name="postalCodeLabel">Please enter postal code:</string>
+	<string name="findDetail">Find Locations</string>
+	<string name="postalCodeText">92187</string>
+	<string name="radiusText">10</string>
+	<string name="postalCodeTextDefault">Type your postal code</string>
+	<string name="radiusTextDefault">Enter the Radius</string>
+	<string name="countryCodeTextDefault">Enter Country Code</string>
+	<string name="CountryCodeLabel">Enter Country Code</string>
+	<string name="radiusLabel">Enter Radius</string>
+	<string name="countryCodeText">US</string>
 </resources>
