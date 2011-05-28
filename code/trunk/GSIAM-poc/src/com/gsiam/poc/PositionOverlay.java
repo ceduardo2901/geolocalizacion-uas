@@ -11,6 +11,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 
+
 public class PositionOverlay extends Overlay {
 
 	private final int mRadius = 5;
