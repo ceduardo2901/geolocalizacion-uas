@@ -4,7 +4,7 @@ import javax.faces.event.ActionEvent;
 
 public class EchoBean {
 
-	private String name;
+	private String name="Tony";
 	private Integer count;
  
 	public EchoBean(){
