@@ -1,7 +1,11 @@
 package com.gsiam.web;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+@ManagedBean(name = "echoBean")
+@SessionScoped
 public class EchoBean {
 
 	private String name="Tony";
