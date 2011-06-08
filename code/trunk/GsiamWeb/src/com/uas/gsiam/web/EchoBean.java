@@ -1,4 +1,4 @@
-package com.gsiam.web;
+package com.uas.gsiam.web;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
