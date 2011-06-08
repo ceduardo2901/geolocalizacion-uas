@@ -1,4 +1,4 @@
-package com.gsiam.web;
+package com.uas.gsiam.web;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

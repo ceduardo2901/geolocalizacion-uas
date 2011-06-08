@@ -1,4 +1,4 @@
-package com.gsiam.web;
+package com.uas.gsiam.web;
 
 import java.io.Serializable;
 import java.util.Date;
