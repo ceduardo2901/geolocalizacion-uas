@@ -12,15 +12,15 @@ import javax.ws.rs.core.MediaType;
 @Path("/aircrafts")
 public class AircraftTypeList {
 
-	 static final List<AircraftType> aircraftTypes = new LinkedList<AircraftType>();
+	 static final List<AircraftTypes> aircraftTypes = new LinkedList<AircraftTypes>();
 
 	    static {
-	        aircraftTypes.add(new AircraftType("B737", 42.1, 204));
-	        aircraftTypes.add(new AircraftType("A330", 58.8, 253));
+	        aircraftTypes.add(new AircraftTypes("B737", 42.1, 204));
+	        aircraftTypes.add(new AircraftTypes("A330", 58.8, 253));
 	    }
 
 	    @GET @Produces({MediaType.APPLICATION_JSON})
-	    public List<AircraftType> getAircraftTypes() {
+	    public List<AircraftTypes> getAircraftTypes() {
 	        return aircraftTypes;
 	    }
   
