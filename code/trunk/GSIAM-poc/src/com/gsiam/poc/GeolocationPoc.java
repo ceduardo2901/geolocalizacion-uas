@@ -160,11 +160,13 @@ public class GeolocationPoc extends Activity {
                             // The URL for making the GET request
                             String url = "http://ws.geonames.org/findNearbyPostalCodesJSON?postalcode=92187&country=US&radius=10";
                             String url2 = "http://api.geonames.org/findNearbyJSON?lat=47.3&lng=9&username=demo"; 
-                            String url3 = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={query}";
-                            String result3 = restTemplate.getForObject(url2, String.class);
+                            String url3 = "http://10.0.2.2:8080/GsiamWeb/rest/hello";
+                            String url4 = "http://10.0.2.2:8080/GsiamWeb/rest/aircrafts";
+                            //String result3 = restTemplate.getForObject(url3, String.class);
                             //String result2 = restTemplate.getForObject("http://example.com/hotels/{hotel}/bookings/{booking}", String.class, "42", "21");                            
                             // Initiate the HTTP GET request, expecting an array of State
                             // objects in response
+                            AircraftTypes result2 = restTemplate.getForObject(url4, AircraftTypes.class);
                             PostalCodes result = restTemplate.getForObject(url, PostalCodes.class);
 
                             // convert the array to a list and return it
