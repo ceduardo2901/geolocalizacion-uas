@@ -2,4 +2,8 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">GsiamMovil</string>
+    <string name="email">Email</string>
+    <string name="pass">Contrasena</string>
+    <string name="entrar">Entrar</string>
+    
 </resources>
