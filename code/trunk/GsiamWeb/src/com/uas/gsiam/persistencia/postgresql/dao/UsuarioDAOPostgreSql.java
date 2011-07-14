@@ -6,6 +6,6 @@ import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
 
 public class UsuarioDAOPostgreSql implements IUsuarioDAO {
 
-	
+	// lala
 	
 }
