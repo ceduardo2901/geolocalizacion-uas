@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/spring-android-auth-1.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="lib/spring-android-core-1.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M3.jar"/>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
