@@ -1,8 +1,9 @@
 package com.uas.gsiam.persistencia.postgresql;
 
 import com.uas.gsiam.persistencia.AbstractFactory;
+import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
-import com.uas.gsiam.persistencia.postgresql.dao.UsuarioDAOPostgreSql;
+import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
 
 
 /**
@@ -17,8 +18,11 @@ public class PostgreSqlFactory extends AbstractFactory{
 	 */
 	@Override
 	public IUsuarioDAO getUsuarioDAO() {
-		return new UsuarioDAOPostgreSql();
+		return new UsuarioDAO();
 	}
 	
+	public ISitioDAO getSitioDAO(){
+		return null;
+	}
 	
 }
