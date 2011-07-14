@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.ResourceBundle;
 
+import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
 
 /**
@@ -35,5 +36,6 @@ public abstract class AbstractFactory {
 	 */
 	public abstract IUsuarioDAO getUsuarioDAO();
 	
+	public abstract ISitioDAO getSitioDAO();
 	
 }
