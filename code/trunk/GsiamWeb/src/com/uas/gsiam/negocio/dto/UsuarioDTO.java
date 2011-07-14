@@ -1,4 +1,4 @@
-package com.uas.gsiam.logica.dto;
+package com.uas.gsiam.negocio.dto;
 
 public class UsuarioDTO {
 
