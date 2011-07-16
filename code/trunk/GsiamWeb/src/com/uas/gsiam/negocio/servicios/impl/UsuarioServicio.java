@@ -11,7 +11,6 @@ public class UsuarioServicio implements IUsuarioServicio{
 	
 	public void login (UsuarioDTO usuario){
 		
-	
 		try {
 			
 			usuario = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);

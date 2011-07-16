@@ -6,18 +6,21 @@ package com.uas.gsiam.persistencia.utiles;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import org.apache.taglibs.standard.lang.jstl.Coercions;
-
+import java.util.ResourceBundle;
 
 
 public class ConexionJDBCUtil {
 
 
-	static String driver = "org.postgresql.Driver";
-	static String connectString = "jdbc:postgresql://localhost:5432/BD_GSIAM";
-	static String user = "postgres";
-	static String password = "postgres";
+	//TODO tener una lcase Constantes???
+	private static final String archivo = "com.uas.obligatorio.negocio.utiles.configuracion";
+	private static ResourceBundle rb = ResourceBundle.getBundle(archivo);
+	
+	
+	private static String driver = rb.getString("driver");
+	private static String connectString = rb.getString("url");
+	private static String user = rb.getString("user");
+	private static String password = rb.getString("pass");
 	
 	private static Connection conexion = null;
 	

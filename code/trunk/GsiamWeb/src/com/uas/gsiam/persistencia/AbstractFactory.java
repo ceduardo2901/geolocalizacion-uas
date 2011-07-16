@@ -1,8 +1,8 @@
 package com.uas.gsiam.persistencia;
 
 import java.io.IOException;
-
 import java.util.ResourceBundle;
+
 
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
@@ -12,10 +12,12 @@ import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
  */
 public abstract class AbstractFactory {
 	
-//	private static final String archivo = "com.uas.obligatorio.negocio.utiles.configuracion";
-//	private static final String postgresql = "postgresql";
-//	private static ResourceBundle rb = ResourceBundle.getBundle(archivo);
-
+	//TODO tener una lcase Constantes???
+	private static final String archivo = "com.uas.obligatorio.negocio.utiles.configuracion";
+	private static ResourceBundle rb = ResourceBundle.getBundle(archivo);
+	
+	
+	
 	/**
 	 * Metodo estatico que retorna la instancia
 	 * @return AbstractFactory
@@ -25,8 +27,7 @@ public abstract class AbstractFactory {
 	 * @throws ClassNotFoundException
 	 */
 	public static AbstractFactory getInstance() throws IOException,InstantiationException, IllegalAccessException,ClassNotFoundException {
-		//return (AbstractFactory) Class.forName(rb.getString(postgresql)).newInstance();
-		return (AbstractFactory) Class.forName("com.uas.gsiam.persistencia.postgresql.PostgreSqlFactory").newInstance();
+		return (AbstractFactory) Class.forName(rb.getString("postgresql")).newInstance();
 	}
 	
 
