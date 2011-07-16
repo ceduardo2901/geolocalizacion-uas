@@ -126,7 +126,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	// TODO Definir donde se encripta el password. 
 	// TODO Falta poner el tipo de la foto del usuario...
 	/*
-	 * Metodo que crea al usuario
+	 * Metodo que modifica al usuario
 	 */
 	public void modificarUsuario(UsuarioDTO usuario){
 		
@@ -155,6 +155,31 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
-	
+	// TODO Definir donde se encripta el password. 
+	// TODO Falta poner el tipo de la foto del usuario...
+	/*
+	 * Metodo que elimina usuario
+	 */
+	public void eliminarUsuario(UsuarioDTO usuario){
+		
+		PreparedStatement ps;
+		
+		try {
+			
+			String sqlModificarUsuario = "DELETE t_usuario WHERE usu_id = ?";
+			// TODO Ver como se eliminar los contactos del mismo
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlModificarUsuario);
+			
+			ps.setInt(1, usuario.getId());
+			
+			ps.close();
+ 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	}
 	
 }

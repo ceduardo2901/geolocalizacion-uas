@@ -14,4 +14,6 @@ public interface IUsuarioDAO {
 	public void crearUsuario(UsuarioDTO usuario);
 		
 	public void modificarUsuario(UsuarioDTO usuario);
+	
+	public void eliminarUsuario(UsuarioDTO usuario);
 }
