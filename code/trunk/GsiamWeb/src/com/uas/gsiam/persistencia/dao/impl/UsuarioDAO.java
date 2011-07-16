@@ -81,32 +81,33 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	// TODO Ver si retornamos el id para seguir teniendo referencia.. o agregar el campo id al DTO y retornar el DTO
 	// TODO Definir donde se encripta el password. 
+	// TODO Falta poner el tipo de la foto del usuario...
 	/*
 	 * Metodo que crea al usuario
 	 */
-	public int crearUsuario(UsuarioDTO usuario){
+	public void crearUsuario(UsuarioDTO usuario){
 		
 		PreparedStatement ps;
-		int idUsuario = 0;
-		
+	
 		try {
 			
-			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
-					                 "VALUES (?, ?, ?) RETURNING usu_id";
+			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_fecha_nacimiento) " +
+					                 "VALUES (?, ?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
 			
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
-				
+			ps.setDate(4, usuario.getFechaNacimiento());
+			/*	
 			ResultSet rsid = ps.executeQuery();
 			rsid.next();
 			idUsuario = rsid.getInt(1);
-			
 			rsid.close();
+			*/
+			
 			ps.close();
  
 			
@@ -114,12 +115,40 @@ public class UsuarioDAO implements IUsuarioDAO {
 			e.printStackTrace();
 		}
 		
-		return idUsuario;		
-		
 	}
 	
 	
-	
+	// TODO Definir donde se encripta el password. 
+	// TODO Falta poner el tipo de la foto del usuario...
+	/*
+	 * Metodo que crea al usuario
+	 */
+	public void modificarUsuario(UsuarioDTO usuario){
+		
+		PreparedStatement ps;
+		
+		try {
+			
+			String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ?, usu_fecha_nacimiento = ? " +
+					                 "WHERE usu_id = ?";
+			
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlModificarUsuario);
+			
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getEmail());
+			ps.setString(3, usuario.getPassword());
+			ps.setDate(4, usuario.getFechaNacimiento());
+			ps.setInt(5, usuario.getId());
+			
+			ps.close();
+ 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	}
 	
 	
 	
