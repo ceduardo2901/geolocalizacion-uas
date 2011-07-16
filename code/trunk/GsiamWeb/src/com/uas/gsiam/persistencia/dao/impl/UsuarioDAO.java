@@ -16,14 +16,14 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	//TODO Ver como manejamos las conexiones y el abstract factory.
 	
-	public String login(UsuarioDTO usuario){
+	public UsuarioDTO login(UsuarioDTO usuario){
 		
 		PreparedStatement ps;
-		String nombre = null;
+		UsuarioDTO usuarioRetorno = null;
 		
 		try {
 			
-			String sqlLogin = "SELECT u.usu_nombre FROM t_usuario u " +
+			String sqlLogin = "SELECT * FROM t_usuario u " +
 	                          "WHERE u.usu_mail = ? AND u.usu_password = ?";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlLogin);
@@ -33,7 +33,12 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
-				nombre = rs.getString("usu_nombre");	
+				usuario.setNombre(rs.getString("usu_nombre"));	
+				usuario.setFechaNacimiento(rs.getDate("usu_fecha_nacimiento"));
+				usuario.setId(rs.getInt("usu_id"));
+				usuario.setEmail(usuario.getEmail());
+				usuario.setPassword(usuario.getPassword());
+				
 			}
 				
 			rs.close();
@@ -43,7 +48,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			e.printStackTrace();
 		}
 		
-		return nombre;		
+		return usuarioRetorno;		
 		
 	}
 	

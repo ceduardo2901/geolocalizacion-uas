@@ -13,7 +13,7 @@ public class Prueba {
 		System.out.println("#### Arranca la cosa.....");
 		
 		UsuarioDTO userDTO = new UsuarioDTO();
-		userDTO.setEmail("pepe@1gmail.com");
+		userDTO.setEmail("pepe@gmail.com");
 		userDTO.setNombre("Pedro Petero");
 		userDTO.setPassword("pass");
 		UsuarioDAO dao = new UsuarioDAO();
@@ -21,10 +21,12 @@ public class Prueba {
 		
 // Login...
 		
+		UsuarioDTO Utest = dao.login(userDTO);
 		
-		String test = dao.login(userDTO);
+		System.out.println("user id: " + Utest.getId());
+		System.out.println("user nombre: " + Utest.getNombre());
+		System.out.println("user fecha: " + Utest.getFechaNacimiento());
 		
-		System.out.println("Test: " + test);
 
 		
 // Create...
