@@ -7,7 +7,7 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 public interface IUsuarioDAO {
 
 	
-	public String login(UsuarioDTO usuario);
+	public UsuarioDTO login(UsuarioDTO usuario);
 	
 	public boolean existeUsuario(UsuarioDTO usuario);
 	
