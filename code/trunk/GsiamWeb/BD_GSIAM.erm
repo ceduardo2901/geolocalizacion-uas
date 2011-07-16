@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
 	<x>0</x>
-	<y>0</y>
+	<y>115</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -108,7 +108,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2011-06-25 20:34:17</creation_date>
-			<updated_date>2011-07-10 14:13:06</updated_date>
+			<updated_date>2011-07-15 21:51:57</updated_date>
 			<model_property>
 				<name>Project Name</name>
 				<value></value>
@@ -346,25 +346,12 @@
 			<unsigned>false</unsigned>
 			<args></args>
 			<description></description>
-			<logical_name>usu_nick</logical_name>
-			<physical_name>usu_nick</physical_name>
-			<type>long</type>
-		</word>
-		<word>
-			<id>16</id>
-			<length>null</length>
-			<decimal>null</decimal>
-			<array>false</array>
-			<array_dimension>null</array_dimension>
-			<unsigned>false</unsigned>
-			<args></args>
-			<description></description>
 			<logical_name>usu_nombre</logical_name>
 			<physical_name>usu_nombre</physical_name>
 			<type>long</type>
 		</word>
 		<word>
-			<id>17</id>
+			<id>16</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -386,8 +373,93 @@
 			<width>-1</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>69</x>
-			<y>213</y>
+			<x>90</x>
+			<y>45</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+			</connections>
+			<physical_name>t_categoria</physical_name>
+			<logical_name>t_categoria</logical_name>
+			<description></description>
+			<constraint></constraint>
+			<primary_key_name>pk_cat</primary_key_name>
+			<columns>
+				<normal_column>
+					<word_id>1</word_id>
+					<id>0</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>serial</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>true</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>0</word_id>
+					<id>1</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>long</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<complex_unique_key_list>
+			</complex_unique_key_list>
+			<table_properties>
+				<without_oids>true</without_oids>
+				<schema>public</schema>
+			</table_properties>
+		</table>
+		<table>
+			<id>1</id>
+			<height>-1</height>
+			<width>-1</width>
+				<font_name>Segoe UI</font_name>
+				<font_size>9</font_size>
+			<x>78</x>
+			<y>236</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -396,8 +468,8 @@
 			<connections>
 				<relation>
 					<id>0</id>
-					<source>4</source>
-					<target>0</target>
+					<source>0</source>
+					<target>1</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
@@ -420,7 +492,7 @@
 			<columns>
 				<normal_column>
 					<word_id>10</word_id>
-					<id>0</id>
+					<id>2</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -447,7 +519,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>12</word_id>
-					<id>1</id>
+					<id>3</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -474,7 +546,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>11</word_id>
-					<id>2</id>
+					<id>4</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -500,8 +572,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<id>3</id>
-					<referenced_column>21</referenced_column>
+					<id>5</id>
+					<referenced_column>0</referenced_column>
 					<relation>0</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -529,7 +601,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>8</word_id>
-					<id>4</id>
+					<id>6</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -556,7 +628,7 @@
 				</normal_column>
 				<normal_column>
 					<word_id>9</word_id>
-					<id>5</id>
+					<id>7</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -592,13 +664,13 @@
 			</table_properties>
 		</table>
 		<table>
-			<id>1</id>
+			<id>2</id>
 			<height>-1</height>
 			<width>-1</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>431</x>
-			<y>47</y>
+			<x>83</x>
+			<y>489</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -607,12 +679,12 @@
 			<connections>
 				<relation>
 					<id>1</id>
-					<source>2</source>
-					<target>1</target>
+					<source>1</source>
+					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
-					<name>fk_con_usu_amigo</name>
+					<name>fk_pub_sit</name>
 					<on_delete_action>NO ACTION</on_delete_action>
 					<on_update_action>NO ACTION</on_update_action>
 					<source_xp>-1</source_xp>
@@ -624,12 +696,12 @@
 				</relation>
 				<relation>
 					<id>2</id>
-					<source>2</source>
-					<target>1</target>
+					<source>4</source>
+					<target>2</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
-					<name>fk_con_usu</name>
+					<name>fk_sit_usu</name>
 					<on_delete_action>NO ACTION</on_delete_action>
 					<on_update_action>NO ACTION</on_update_action>
 					<source_xp>-1</source_xp>
@@ -640,70 +712,14 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>t_contacto</physical_name>
-			<logical_name>t_contacto</logical_name>
+			<physical_name>t_publicacion</physical_name>
+			<logical_name>t_publicacion</logical_name>
 			<description></description>
 			<constraint></constraint>
-			<primary_key_name>pk_con</primary_key_name>
+			<primary_key_name>pk_pub</primary_key_name>
 			<columns>
 				<normal_column>
-					<id>6</id>
-					<referenced_column>14</referenced_column>
-					<relation>2</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name>con_id_usuario</logical_name>
-					<physical_name>con_id_usuario</physical_name>
-					<type>integer</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<id>7</id>
-					<referenced_column>14</referenced_column>
-					<relation>1</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name>con_id_amigo</logical_name>
-					<physical_name>con_id_amigo</physical_name>
-					<type>integer</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>2</word_id>
+					<word_id>5</word_id>
 					<id>8</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -730,18 +746,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>3</word_id>
+					<word_id>4</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>boolean</type>
+					<type>long</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<sequence>
@@ -756,50 +772,19 @@
 						<description></description>
 					</sequence>
 				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<without_oids>true</without_oids>
-				<schema>public</schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>2</id>
-			<height>-1</height>
-			<width>-1</width>
-				<font_name>Segoe UI</font_name>
-				<font_size>9</font_size>
-			<x>463</x>
-			<y>252</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-			</connections>
-			<physical_name>t_usuario</physical_name>
-			<logical_name>t_usuario</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name>pk_usu</primary_key_name>
-			<columns>
 				<normal_column>
-					<word_id>16</word_id>
+					<word_id>6</word_id>
 					<id>10</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>long</type>
+					<type>blob</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
+					<not_null>false</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<sequence>
@@ -815,17 +800,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>15</word_id>
 					<id>11</id>
+					<referenced_column>21</referenced_column>
+					<relation>2</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>long</type>
+					<logical_name>pub_id_usuario</logical_name>
+					<physical_name>pub_id_usuario</physical_name>
+					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
+					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
@@ -842,17 +828,18 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>17</word_id>
 					<id>12</id>
+					<referenced_column>7</referenced_column>
+					<relation>1</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>long</type>
+					<logical_name>pub_id_sitio</logical_name>
+					<physical_name>pub_id_sitio</physical_name>
+					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
+					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
@@ -869,35 +856,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>14</word_id>
+					<word_id>7</word_id>
 					<id>13</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>long</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>13</word_id>
-					<id>14</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -938,8 +898,8 @@
 			<width>-1</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>76</x>
-			<y>469</y>
+			<x>408</x>
+			<y>133</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -948,12 +908,12 @@
 			<connections>
 				<relation>
 					<id>3</id>
-					<source>0</source>
+					<source>4</source>
 					<target>3</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
-					<name>fk_pub_sit</name>
+					<name>fk_con_usu</name>
 					<on_delete_action>NO ACTION</on_delete_action>
 					<on_update_action>NO ACTION</on_update_action>
 					<source_xp>-1</source_xp>
@@ -965,12 +925,12 @@
 				</relation>
 				<relation>
 					<id>4</id>
-					<source>2</source>
+					<source>4</source>
 					<target>3</target>
 					<child_cardinality>1..n</child_cardinality>
 					<parent_cardinality>1</parent_cardinality>
 					<reference_for_pk>true</reference_for_pk>
-					<name>fk_sit_usu</name>
+					<name>fk_con_usu_amigo</name>
 					<on_delete_action>NO ACTION</on_delete_action>
 					<on_update_action>NO ACTION</on_update_action>
 					<source_xp>-1</source_xp>
@@ -981,15 +941,71 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>t_publicacion</physical_name>
-			<logical_name>t_publicacion</logical_name>
+			<physical_name>t_contacto</physical_name>
+			<logical_name>t_contacto</logical_name>
 			<description></description>
 			<constraint></constraint>
-			<primary_key_name>pk_pub</primary_key_name>
+			<primary_key_name>pk_con</primary_key_name>
 			<columns>
 				<normal_column>
-					<word_id>5</word_id>
+					<id>14</id>
+					<referenced_column>21</referenced_column>
+					<relation>3</relation>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name>con_id_usuario</logical_name>
+					<physical_name>con_id_usuario</physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+				<normal_column>
 					<id>15</id>
+					<referenced_column>21</referenced_column>
+					<relation>4</relation>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name>con_id_amigo</logical_name>
+					<physical_name>con_id_amigo</physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>2</word_id>
+					<id>16</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1015,129 +1031,19 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>4</word_id>
-					<id>16</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>long</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>6</word_id>
+					<word_id>3</word_id>
 					<id>17</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>blob</type>
+					<type>boolean</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<id>18</id>
-					<referenced_column>14</referenced_column>
-					<relation>4</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name>pub_id_usuario</logical_name>
-					<physical_name>pub_id_usuario</physical_name>
-					<type>integer</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<id>19</id>
-					<referenced_column>5</referenced_column>
-					<relation>3</relation>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name>pub_id_sitio</logical_name>
-					<physical_name>pub_id_sitio</physical_name>
-					<type>integer</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>true</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<cycle>false</cycle>
-						<description></description>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>7</word_id>
-					<id>20</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>serial</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>true</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
 					<unique_key>false</unique_key>
 					<sequence>
 						<name></name>
@@ -1167,8 +1073,8 @@
 			<width>-1</width>
 				<font_name>Segoe UI</font_name>
 				<font_size>9</font_size>
-			<x>80</x>
-			<y>51</y>
+			<x>438</x>
+			<y>311</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -1176,26 +1082,26 @@
 			</color>
 			<connections>
 			</connections>
-			<physical_name>t_categoria</physical_name>
-			<logical_name>t_categoria</logical_name>
+			<physical_name>t_usuario</physical_name>
+			<logical_name>t_usuario</logical_name>
 			<description></description>
 			<constraint></constraint>
-			<primary_key_name>pk_cat</primary_key_name>
+			<primary_key_name>pk_usu</primary_key_name>
 			<columns>
 				<normal_column>
-					<word_id>1</word_id>
-					<id>21</id>
+					<word_id>15</word_id>
+					<id>18</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>serial</type>
+					<type>long</type>
 					<constraint></constraint>
 					<default_value></default_value>
-					<auto_increment>true</auto_increment>
+					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
-					<primary_key>true</primary_key>
+					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>
 					<sequence>
 						<name></name>
@@ -1210,8 +1116,8 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>0</word_id>
-					<id>22</id>
+					<word_id>16</word_id>
+					<id>19</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -1223,6 +1129,60 @@
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>14</word_id>
+					<id>20</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>long</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<cycle>false</cycle>
+						<description></description>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<word_id>13</word_id>
+					<id>21</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>serial</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>true</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
 					<unique_key>false</unique_key>
 					<sequence>
 						<name></name>
@@ -1253,12 +1213,12 @@
 	</test_data_list>
 	<sequence_set>
 		<sequence>
-			<name>americas_south_america_uruguay_poi_gid_seq</name>
+			<name>t_categoria_cat_id_seq</name>
 			<schema>public</schema>
 			<increment>1</increment>
 			<min_value>1</min_value>
 			<max_value>9223372036854775807</max_value>
-			<start>721</start>
+			<start>1</start>
 			<cache>1</cache>
 			<cycle>false</cycle>
 			<description></description>
@@ -1286,7 +1246,40 @@
 			<description></description>
 		</sequence>
 		<sequence>
+			<name>t_publicacion_pub_id_seq</name>
+			<schema>public</schema>
+			<increment>1</increment>
+			<min_value>1</min_value>
+			<max_value>9223372036854775807</max_value>
+			<start>1</start>
+			<cache>1</cache>
+			<cycle>false</cycle>
+			<description></description>
+		</sequence>
+		<sequence>
 			<name>t_sitio_sit_id_seq</name>
+			<schema>public</schema>
+			<increment>1</increment>
+			<min_value>1</min_value>
+			<max_value>9223372036854775807</max_value>
+			<start>1</start>
+			<cache>1</cache>
+			<cycle>false</cycle>
+			<description></description>
+		</sequence>
+		<sequence>
+			<name>t_sitio_sit_id_seq</name>
+			<schema>public</schema>
+			<increment>1</increment>
+			<min_value>1</min_value>
+			<max_value>9223372036854775807</max_value>
+			<start>1</start>
+			<cache>1</cache>
+			<cycle>false</cycle>
+			<description></description>
+		</sequence>
+		<sequence>
+			<name>t_usuario_usu_id_seq</name>
 			<schema>public</schema>
 			<increment>1</increment>
 			<min_value>1</min_value>
