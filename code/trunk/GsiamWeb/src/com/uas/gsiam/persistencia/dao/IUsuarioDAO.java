@@ -9,6 +9,8 @@ public interface IUsuarioDAO {
 	
 	public String login(UsuarioDTO usuario);
 	
+	public boolean existeUsuario(UsuarioDTO usuario);
+	
 	public int crearUsuario(UsuarioDTO usuario);
 		
 }
