@@ -6,5 +6,7 @@ public interface IUsuarioServicio {
 
 	
 	public void login (UsuarioDTO usuario);
+
+	public void crearUsuario (UsuarioDTO usuario);
 	
 }
