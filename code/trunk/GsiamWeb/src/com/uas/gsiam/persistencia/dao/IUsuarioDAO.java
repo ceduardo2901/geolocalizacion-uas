@@ -11,6 +11,7 @@ public interface IUsuarioDAO {
 	
 	public boolean existeUsuario(UsuarioDTO usuario);
 	
-	public int crearUsuario(UsuarioDTO usuario);
+	public void crearUsuario(UsuarioDTO usuario);
 		
+	public void modificarUsuario(UsuarioDTO usuario);
 }
