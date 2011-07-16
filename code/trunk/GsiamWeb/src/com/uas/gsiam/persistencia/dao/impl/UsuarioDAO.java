@@ -18,27 +18,26 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	public String login(UsuarioDTO usuario){
 		
-		PreparedStatement stmt;
+		PreparedStatement ps;
 		String nombre = null;
 		
 		try {
 			
-			String sqlLogin = "SELECT t_usuario.usu_nombre FROM public.t_usuario " +
-	                          "WHERE t_usuario.usu_mail = ? AND t_usuario.usu_password = ?";
+			String sqlLogin = "SELECT u.usu_nombre FROM t_usuario u " +
+	                          "WHERE u.usu_mail = ? AND u.usu_password = ?";
 			
-			stmt = ConexionJDBCUtil.getConexion().prepareStatement(sqlLogin);
-			stmt.setString(1, usuario.getEmail());
-			stmt.setString(2, usuario.getPassword());
-			
-			ResultSet rs = stmt.executeQuery(sqlLogin);
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlLogin);
 
-			 while ( rs.next() ) {
-					nombre = rs.getString( "usu_nombre" );
-					System.out.println( nombre );
-				    }
+			ps.setString(1, usuario.getEmail());
+			ps.setString(2, usuario.getPassword());
 			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				nombre = rs.getString("usu_nombre");	
+			}
+				
 			rs.close();
-			stmt.close();
+			ps.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -48,12 +47,48 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
+	
+	public boolean existeUsuario(UsuarioDTO usuario){
+		
+		PreparedStatement ps;
+		boolean existe = false;
+		
+		try {
+			
+			
+			String sqlExisteUsuario = "SELECT COUNT(*) FROM t_usuario u " +
+            						  "WHERE u.usu_mail = ?";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteUsuario);
+			
+			ps.setString(1, usuario.getEmail());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			if (rs.getInt(1) == 1)
+				 existe = true;
+			 
+			 rs.close();
+			 ps.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return existe;		
+		
+	}
+	
+	
 	// TODO Ver si retornamos el id para seguir teniendo referencia.. o agregar el campo id al DTO y retornar el DTO
 	// TODO Definir donde se encripta el password. 
-	// TODO Ver como retornamos el id
+	/*
+	 * Metodo que crea al usuario
+	 */
 	public int crearUsuario(UsuarioDTO usuario){
 		
-		PreparedStatement stmt;
+		PreparedStatement ps;
 		int idUsuario = 0;
 		
 		try {
@@ -61,19 +96,18 @@ public class UsuarioDAO implements IUsuarioDAO {
 			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
 					                 "VALUES (?, ?, ?) RETURNING usu_id";
 			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
 			
-			stmt = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
-			stmt.setString(1, usuario.getNombre());
-			stmt.setString(2, usuario.getEmail());
-			stmt.setString(3, usuario.getPassword());
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getEmail());
+			ps.setString(3, usuario.getPassword());
+				
+			ResultSet rsid = ps.executeQuery();
+			rsid.next();
+			idUsuario = rsid.getInt(1);
 			
-		//	stmt.executeUpdate(sqlCrearUsuario);
-			
-			ResultSet rsgfid = stmt.executeQuery();
-			rsgfid.next();
-			idUsuario = rsgfid.getInt(1);
-			rsgfid.close();
-			stmt.close();
+			rsid.close();
+			ps.close();
  
 			
 		} catch (SQLException e) {
