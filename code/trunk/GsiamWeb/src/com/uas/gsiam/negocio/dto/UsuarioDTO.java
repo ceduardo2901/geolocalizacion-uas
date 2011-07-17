@@ -2,6 +2,9 @@ package com.uas.gsiam.negocio.dto;
 
 import java.sql.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class UsuarioDTO {
 
 	//TODO: Como almacenamos la foto del usuario??
@@ -11,6 +14,10 @@ public class UsuarioDTO {
 	private String email;
 	private String password;
 	private Date fechaNacimiento;
+	
+	public UsuarioDTO (){
+		
+	}
 	
 	public int getId() {
 		return id;
