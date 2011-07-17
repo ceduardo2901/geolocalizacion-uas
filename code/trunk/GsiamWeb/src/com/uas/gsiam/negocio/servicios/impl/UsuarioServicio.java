@@ -9,11 +9,11 @@ import com.uas.gsiam.persistencia.AbstractFactory;
 public class UsuarioServicio implements IUsuarioServicio{
 
 	
-	public void login (UsuarioDTO usuario){
-		
+	public UsuarioDTO login (UsuarioDTO usuario){
+		UsuarioDTO user=null;
 		try {
 			
-			usuario = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
+			user = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -28,6 +28,8 @@ public class UsuarioServicio implements IUsuarioServicio{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return user;
 	
 	}
 	
