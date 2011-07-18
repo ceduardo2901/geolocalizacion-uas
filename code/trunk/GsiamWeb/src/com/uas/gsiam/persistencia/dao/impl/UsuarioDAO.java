@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
 
@@ -16,7 +17,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	//TODO Ver como manejamos las conexiones y el abstract factory.
 	
-	public UsuarioDTO login(UsuarioDTO usuario){
+	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		
 		PreparedStatement ps;
 		UsuarioDTO usuarioRetorno = null;
@@ -45,7 +46,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.close();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UsuarioNoExisteExcepcion(e.getMessage());
 		}
 		
 		return usuarioRetorno;		
@@ -105,7 +106,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
-			ps.setDate(4, usuario.getFechaNacimiento());
+			
+			//ps.setDate(4, usuario.getFechaNacimiento());
 			/*	
 			ResultSet rsid = ps.executeQuery();
 			rsid.next();
@@ -143,7 +145,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
-			ps.setDate(4, usuario.getFechaNacimiento());
+			//ps.setDate(4, usuario.getFechaNacimiento());
 			ps.setInt(5, usuario.getId());
 			
 			ps.close();

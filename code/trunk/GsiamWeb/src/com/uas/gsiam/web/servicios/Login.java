@@ -9,6 +9,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.IUsuarioServicio;
 import com.uas.gsiam.negocio.servicios.impl.UsuarioServicio;
 import com.uas.gsiam.web.AircraftTypes;
@@ -29,7 +30,14 @@ public class Login {
 		UsuarioDTO user = new UsuarioDTO();
 		user.setEmail(email);
 		user.setPassword(pass);
-		user = servicio.login(user);
+		try {
+			user = servicio.login(user);
+		} catch (UsuarioNoExisteExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(user.getEmail());
 		return user;
     }
 }

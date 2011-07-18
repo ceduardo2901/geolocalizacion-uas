@@ -1,6 +1,7 @@
 package com.uas.gsiam.persistencia.test;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
 
 public class Prueba {
@@ -21,11 +22,18 @@ public class Prueba {
 		
 // Login...
 		
-		UsuarioDTO Utest = dao.login(userDTO);
+		UsuarioDTO Utest;
+		try {
+			Utest = dao.login(userDTO);
+			System.out.println("user id: " + Utest.getId());
+			System.out.println("user nombre: " + Utest.getNombre());
+			System.out.println("user fecha: " + Utest.getFechaNacimiento());
+		} catch (UsuarioNoExisteExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		System.out.println("user id: " + Utest.getId());
-		System.out.println("user nombre: " + Utest.getNombre());
-		System.out.println("user fecha: " + Utest.getFechaNacimiento());
+		
 		
 
 		

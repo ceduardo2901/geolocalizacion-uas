@@ -3,13 +3,14 @@ package com.uas.gsiam.negocio.servicios.impl;
 import java.io.IOException;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.IUsuarioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
 
 public class UsuarioServicio implements IUsuarioServicio{
 
 	
-	public UsuarioDTO login (UsuarioDTO usuario){
+	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		UsuarioDTO user=null;
 		try {
 			
