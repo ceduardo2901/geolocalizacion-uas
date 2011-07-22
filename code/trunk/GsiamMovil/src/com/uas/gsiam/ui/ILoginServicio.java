@@ -1,8 +1,9 @@
 package com.uas.gsiam.ui;
 
 import com.uas.gsiam.negocio.Usuario;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
 public interface ILoginServicio {
 
-	Usuario login(String email, String pass);
+	UsuarioDTO login(String email, String pass);
 }
