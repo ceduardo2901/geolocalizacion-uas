@@ -16,7 +16,7 @@ public class ServiceLocatorNegocio {
 	//TODO Hay que poner el datasource nuevo
 	private ServiceLocatorNegocio() throws NamingException {
 		Context ctx = new InitialContext();
-		dt = (DataSource) ctx.lookup("java:MySqlDS");
+		dt = (DataSource) ctx.lookup("PostgreSqlDS");
 		
 	}
 
