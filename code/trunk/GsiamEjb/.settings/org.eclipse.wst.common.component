@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="GsiamEjb">
+        <wb-resource deploy-path="/" source-path="/ejbModule"/>
+        <property name="java-output-path" value="/GsiamEjb/build/classes"/>
+        <property name="ClientProject" value="GsiamEjbClient"/>
+        <property name="ClientJARURI" value="GsiamEjbClient.jar"/>
+    </wb-module>
+</project-modules>
