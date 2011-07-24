@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.IUsuarioServicio;
-import com.uas.gsiam.negocio.servicios.impl.UsuarioServicio;
+import com.uas.gsiam.negocio.servicios.impl.UsuarioServicioBean;
 import com.uas.gsiam.web.AircraftTypes;
 
 @Path("/usuario")
@@ -20,7 +20,7 @@ public class Login {
 	private IUsuarioServicio servicio;
 	
 	public Login(){
-		servicio = new UsuarioServicio();
+		servicio = new UsuarioServicioBean();
 	}
 	
 	@GET

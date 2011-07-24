@@ -4,7 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import com.uas.gsiam.negocio.servicios.UsuarioServicioRemote;
+import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 
 
 
@@ -15,7 +15,7 @@ import com.uas.gsiam.negocio.servicios.UsuarioServicioRemote;
 public class ServiceLocator {
 
 	private static ServiceLocator instancia;
-	private UsuarioServicioRemote usuarioServicio;
+	private UsuarioServicio usuarioServicio;
 	private String jndi;
 
 	
@@ -37,10 +37,10 @@ public class ServiceLocator {
 	 * @return La fachada del EJB de Usuario
 	 * @throws NamingException
 	 */
-	public UsuarioServicioRemote getUsuarioServicio() throws NamingException{
+	public UsuarioServicio getUsuarioServicio() throws NamingException{
 		Context ctx = new InitialContext();
 		jndi = "ProyectoEAR/UsuarioServicio/remote";
-		usuarioServicio = (UsuarioServicioRemote) ctx.lookup(jndi);
+		usuarioServicio = (UsuarioServicio) ctx.lookup(jndi);
 		return usuarioServicio; 
 	}
 	
