@@ -15,7 +15,7 @@ import com.uas.gsiam.persistencia.AbstractFactory;
  */
 @Stateless(mappedName = "usuario-ejb")
 @LocalBean
-public class UsuarioServicioBean implements UsuarioServicioBean {
+public class UsuarioServicioBean implements UsuarioServicio {
 
     /**
      * Default constructor. 
