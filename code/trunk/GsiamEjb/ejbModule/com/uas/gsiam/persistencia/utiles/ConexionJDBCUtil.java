@@ -4,31 +4,27 @@
 package com.uas.gsiam.persistencia.utiles;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 
 public class ConexionJDBCUtil {
-
-
-	//TODO tener una lcase Constantes???
-	private static final String archivo = "com.uas.obligatorio.negocio.utiles.configuracion";
-	private static ResourceBundle rb = ResourceBundle.getBundle(archivo);
 	
 	
-	private static String driver = rb.getString("driver");
-	private static String connectString = rb.getString("url");
-	private static String user = rb.getString("user");
-	private static String password = rb.getString("pass");
+	private static DataSource dt;
 	
-	private static Connection conexion = null;
 	
 	static {
 		try {
 			
-			Class.forName(driver);
-			conexion = DriverManager.getConnection(connectString, user, password);
+			
+			
+			System.out.println("ACA ESTOY");
+			Context ctx = new InitialContext();
+			dt = (DataSource) ctx.lookup("java:PostgreSqlDS");
+			System.out.println("ACA ESTOY TERMIONE");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,16 +33,11 @@ public class ConexionJDBCUtil {
 	}
 
 	
-	public static Connection getConexion()  {
-		return conexion;
+	public static Connection getConexion() throws SQLException  {
+		return dt.getConnection();
 	}
 	
-	public void cerrarConexion() throws SQLException{
-		if(conexion != null){
-			conexion.close();
-		}
-	}
+	
 
-	
 	
 }
