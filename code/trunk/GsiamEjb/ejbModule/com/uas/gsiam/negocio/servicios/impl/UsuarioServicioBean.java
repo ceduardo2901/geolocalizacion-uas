@@ -13,7 +13,7 @@ import com.uas.gsiam.persistencia.AbstractFactory;
 /**
  * Session Bean implementation class UsuarioServicio
  */
-@Stateless(mappedName = "usuario-ejb")
+@Stateless(name = "UsuarioServicio", mappedName = "Usuario-UsuarioServicio")
 @LocalBean
 public class UsuarioServicioBean implements UsuarioServicio {
 
