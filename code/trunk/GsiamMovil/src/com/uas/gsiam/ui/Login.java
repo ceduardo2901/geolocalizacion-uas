@@ -6,6 +6,9 @@ import java.util.regex.Pattern;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.uas.gsiam.negocio.Usuario;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.facebook.android.Facebook;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
 public class Login extends Activity {
 

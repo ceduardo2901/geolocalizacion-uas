@@ -9,14 +9,13 @@ import java.util.Map;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.uas.gsiam.negocio.Usuario;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
 public class LoginServicio extends Activity {
 
