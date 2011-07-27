@@ -5,11 +5,14 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="lib/jackson-core-asl-1.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.8.1.jar"/>
-	<classpathentry kind="lib" path="lib/spring-android-auth-1.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="lib/spring-android-core-1.0.0.M3.jar"/>
-	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M3.jar"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/GsiamWeb"/>
 	<classpathentry kind="src" path="FaceBook_Android_src"/>
+	<classpathentry kind="lib" path="lib/spring-android-auth-1.0.0.M4.jar"/>
+	<classpathentry kind="lib" path="lib/spring-android-core-1.0.0.M4.jar"/>
+	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GsiamEjb"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Usuario/.m2/repository/org/springframework/social/spring-social-core/1.0.0.RC1/spring-social-core-1.0.0.RC1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Usuario/.m2/repository/org/springframework/social/spring-social-facebook/1.0.0.RC1/spring-social-facebook-1.0.0.RC1.jar"/>
+	<classpathentry kind="lib" path="C:/Documents and Settings/Usuario/.m2/repository/org/springframework/security/spring-security-crypto/3.1.0.CI-SNAPSHOT/spring-security-crypto-3.1.0.CI-20110721.122922-87.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
