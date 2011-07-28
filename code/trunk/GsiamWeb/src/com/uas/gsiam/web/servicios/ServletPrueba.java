@@ -21,8 +21,7 @@ import com.uas.gsiam.web.delegate.UsuarioDelegate;
 public class ServletPrueba extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	@EJB(beanName="UsuarioServicio")
-	private UsuarioServicio usuario;
+	
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,19 +36,13 @@ public class ServletPrueba extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//UsuarioDelegate delegate = new UsuarioDelegate();
+		UsuarioDelegate delegate = new UsuarioDelegate();
 		
 		UsuarioDTO user = new UsuarioDTO();
-		user.setEmail("mloure@lala.com");
-		user.setPassword("lala");
-		//user = delegate.login("mloure@lala.com", "lala");
+
 		
-		try {
-			user = usuario.login(user);
-		} catch (UsuarioNoExisteExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		user = delegate.login("mloure@lala.com", "lala");
+		
 		
 		System.out.println(user.getEmail());
 		
