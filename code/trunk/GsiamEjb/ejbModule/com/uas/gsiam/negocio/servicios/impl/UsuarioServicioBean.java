@@ -2,7 +2,6 @@ package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -13,8 +12,7 @@ import com.uas.gsiam.persistencia.AbstractFactory;
 /**
  * Session Bean implementation class UsuarioServicio
  */
-@Stateless(name = "UsuarioServicio", mappedName = "Usuario-UsuarioServicio")
-@LocalBean
+@Stateless(name="UsuarioServicio")
 public class UsuarioServicioBean implements UsuarioServicio {
 
     /**
