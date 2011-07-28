@@ -2,7 +2,7 @@ package com.uas.gsiam.web.servicios;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
-import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
 /**
