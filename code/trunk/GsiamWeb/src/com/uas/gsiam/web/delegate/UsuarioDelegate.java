@@ -1,26 +1,21 @@
 package com.uas.gsiam.web.delegate;
 
-import com.uas.gsiam.web.sl.ServiceLocator;
+import javax.ejb.EJB;
+
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 
 public class UsuarioDelegate {
 	
+	
+	@EJB(beanName="UsuarioServicio")
 	private UsuarioServicio servicioUsuario;
 
     public UsuarioDelegate() {
-        initialLoadBean();
+       
     }
 
-    public void initialLoadBean() {
-        try {
-            this.servicioUsuario =
-                    (UsuarioServicio)ServiceLocator.getBean(UsuarioServicio.SERVICE_ADDRESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public UsuarioDTO login(String email, String pass) {
     	
