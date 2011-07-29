@@ -1,7 +1,6 @@
 package com.uas.gsiam.persistencia;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
@@ -11,10 +10,6 @@ import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
  * Factory de DAOs
  */
 public abstract class AbstractFactory {
-	
-	//TODO tener una lcase Constantes???
-	private static final String archivo = "com.uas.obligatorio.negocio.utiles.configuracion";
-	private static ResourceBundle rb = ResourceBundle.getBundle(archivo);
 	
 	
 	
@@ -27,7 +22,7 @@ public abstract class AbstractFactory {
 	 * @throws ClassNotFoundException
 	 */
 	public static AbstractFactory getInstance() throws IOException,InstantiationException, IllegalAccessException,ClassNotFoundException {
-		return (AbstractFactory) Class.forName(rb.getString("postgresql")).newInstance();
+		return (AbstractFactory) Class.forName("com.uas.gsiam.persistencia.postgresql.PostgreSqlFactory").newInstance();
 	}
 	
 
@@ -37,6 +32,11 @@ public abstract class AbstractFactory {
 	 */
 	public abstract IUsuarioDAO getUsuarioDAO();
 	
+	
+	/**
+	 * Metodo abstracto que retorna la interfaz
+	 * @return Interfaz del SitioDAO
+	 */
 	public abstract ISitioDAO getSitioDAO();
 	
 }
