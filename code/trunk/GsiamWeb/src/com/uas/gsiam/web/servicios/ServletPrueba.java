@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
 /**
@@ -36,16 +35,9 @@ public class ServletPrueba extends HttpServlet {
 
 		UsuarioDelegate delegate = new UsuarioDelegate();
 		
-		UsuarioDTO user = new UsuarioDTO();
-
+	    delegate.crearUsuario("m@gmail.com", "123", "Pedro");
 		
-		user = delegate.login("mloure@lala.com", "lala");
-		
-		
-		System.out.println(user.getEmail());
-		
-		
-		
+	
 	}
 
 	
