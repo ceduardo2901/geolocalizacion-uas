@@ -3,8 +3,6 @@
 	<name>Gsiam</name>
 	<comment></comment>
 	<projects>
-		<project>GsiamEjb</project>
-		<project>GsiamWeb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
