@@ -12,7 +12,6 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 import com.uas.gsiam.negocio.servicios.impl.UsuarioServicioBean;
-import com.uas.gsiam.web.AircraftTypes;
 
 @Path("/usuario")
 public class Login {
