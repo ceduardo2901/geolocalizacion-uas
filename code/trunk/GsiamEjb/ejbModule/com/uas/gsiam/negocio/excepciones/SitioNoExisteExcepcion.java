@@ -1,11 +1,11 @@
 package com.uas.gsiam.negocio.excepciones;
 
-public class UsuarioNoExisteExcepcion extends Exception{
+public class SitioNoExisteExcepcion extends Exception{
 
 	
 	private String mensaje;
 
-	public UsuarioNoExisteExcepcion(String mensaje){
+	public SitioNoExisteExcepcion(String mensaje){
 		super(mensaje);
 	}
 
@@ -16,6 +16,4 @@ public class UsuarioNoExisteExcepcion extends Exception{
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-	
-	
 }
