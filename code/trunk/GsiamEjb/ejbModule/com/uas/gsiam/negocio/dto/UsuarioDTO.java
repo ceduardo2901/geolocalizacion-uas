@@ -10,6 +10,10 @@ public class UsuarioDTO implements Serializable{
 
 	// TODO: Como almacenamos la foto del usuario??
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
 	private String email;

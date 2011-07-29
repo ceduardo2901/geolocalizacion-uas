@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class SitioDTO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String idSitio;
 	private String nombre;
 	private String direccion;
