@@ -4,6 +4,7 @@ import com.uas.gsiam.web.sl.ServiceLocator;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
+import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
 
 public class UsuarioDelegate {
 	
@@ -38,6 +39,17 @@ public class UsuarioDelegate {
 		return usuario;
     }
 	
+    public void crearUsuario(String email, String pass, String nombre) {
+    	
+    	UsuarioDTO userDTO = new UsuarioDTO();
+		userDTO.setEmail(email);
+		userDTO.setNombre(nombre);
+		userDTO.setPassword(pass);
 	
+		servicioUsuario.crearUsuario(userDTO);
+		
+}
+    
+    
 	
 }
