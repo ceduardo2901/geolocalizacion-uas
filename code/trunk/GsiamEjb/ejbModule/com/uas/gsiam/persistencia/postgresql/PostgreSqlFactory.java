@@ -7,16 +7,12 @@ import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
 
 
 /**
- *	Clase que que hereda de AbstractFactory y crea los DAOs para mysql  
+ *	Clase que que hereda de AbstractFactory y crea los DAOs para postgresql  
  */
 
 public class PostgreSqlFactory extends AbstractFactory{
 	
-	
-	/**
-	 * Crea un nuevo ClienteDAOMySql
-	 */
-	@Override
+
 	public IUsuarioDAO getUsuarioDAO() {
 		return new UsuarioDAO();
 	}

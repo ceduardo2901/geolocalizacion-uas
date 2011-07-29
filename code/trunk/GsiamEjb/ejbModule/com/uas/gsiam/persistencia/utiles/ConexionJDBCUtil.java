@@ -15,19 +15,15 @@ public class ConexionJDBCUtil {
 	
 	private static DataSource dt;
 	
-	public static void create() {
-		
-	try {
+	
+	static {
+		try {
 			
-			
-			System.out.println("ACA ESTOY");
 			
 			Context ctx = new InitialContext();
 			dt = (DataSource) ctx.lookup("java:DS_Postgresql");
 			
-			System.out.println("ACA ESTOY TERMIONE");
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		

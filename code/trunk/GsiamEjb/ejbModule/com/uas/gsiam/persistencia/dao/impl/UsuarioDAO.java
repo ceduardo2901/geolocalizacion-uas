@@ -21,7 +21,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 		UsuarioDTO usuarioRetorno = null;
-		
+				
 		try {
 			
 			String sqlLogin = "SELECT * FROM t_usuario u " +
@@ -44,6 +44,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				
 			rs.close();
 			ps.close();
+			
 			
 		} catch (SQLException e) {
 			throw new UsuarioNoExisteExcepcion(e.getMessage());
@@ -98,16 +99,17 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 		try {
 			
-			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_fecha_nacimiento) " +
-					                 "VALUES (?, ?, ?, ?)";
+			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
+					                 "VALUES (?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
 			
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
+		//	ps.setDate(4, usuario.getFechaNacimiento());
 			
-			//ps.setDate(4, usuario.getFechaNacimiento());
+			ps.executeUpdate();
 			/*	
 			ResultSet rsid = ps.executeQuery();
 			rsid.next();
