@@ -1,10 +1,14 @@
 package com.uas.gsiam.negocio.servicios.impl;
 
+import java.io.IOException;
+
 import javax.ejb.Stateless;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
+import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
+import com.uas.gsiam.persistencia.AbstractFactory;
 
 @Stateless(name="SitioServicio")
 public class SitioServicioBean implements SitioServicio{
@@ -16,8 +20,24 @@ public class SitioServicioBean implements SitioServicio{
     }
 	
 	@Override
-	public void agregarSitio(SitioDTO sitio) throws SitioNoExisteExcepcion {
+	public void agregarSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion {
 		
+		
+		try {
+			AbstractFactory.getInstance().getSitioDAO().agregarSitio(sitioInteres);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
