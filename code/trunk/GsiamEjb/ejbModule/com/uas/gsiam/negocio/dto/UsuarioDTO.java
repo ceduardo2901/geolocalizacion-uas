@@ -1,11 +1,12 @@
 package com.uas.gsiam.negocio.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
 
 	// TODO: Como almacenamos la foto del usuario??
 

@@ -4,13 +4,14 @@ import javax.ejb.Remote;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
+import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 
 @Remote
 public interface SitioServicio {
 
-	void agregarSitio(SitioDTO sitio) throws SitioNoExisteExcepcion;
+	void agregarSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion;
 	
 	void eliminarSitio(String idSitio) throws SitioNoExisteExcepcion;
 	
-	void modificarSitio(SitioDTO sitio) throws SitioNoExisteExcepcion;
+	void modificarSitio(SitioDTO sitioInteres) throws SitioNoExisteExcepcion;
 }
