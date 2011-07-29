@@ -29,6 +29,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 			user = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
 			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
