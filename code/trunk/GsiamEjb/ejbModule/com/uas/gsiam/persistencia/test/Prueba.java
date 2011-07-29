@@ -22,7 +22,7 @@ public class Prueba {
 		
 // Login...
 		
-		UsuarioDTO Utest;
+/*		UsuarioDTO Utest;
 		try {
 			Utest = dao.login(userDTO);
 			System.out.println("user id: " + Utest.getId());
@@ -35,15 +35,15 @@ public class Prueba {
 		
 		
 		
-
+*/
 		
 // Create...
-		/*
-		int cant = dao.crearUsuario(userDTO);
 		
-		System.out.println("cant: " + cant);
+		dao.crearUsuario(userDTO);
 		
-		*/
+	
+		
+		
 		
 		
 // Exist...
