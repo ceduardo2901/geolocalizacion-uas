@@ -36,5 +36,10 @@
 			<type>2</type>
 			<locationURI>_android_FaceBook_Android_58558216/src</locationURI>
 		</link>
+		<link>
+			<name>src-2</name>
+			<type>2</type>
+			<location>E:/workspaceA/FaceBook_Android/src</location>
+		</link>
 	</linkedResources>
 </projectDescription>
