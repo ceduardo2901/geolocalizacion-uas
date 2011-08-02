@@ -7,7 +7,7 @@
     <string name="entrar">Entrar</string>
     <string name="url">http://10.0.2.2:8080/GsiamWeb/rest</string>
     <string name="regEX">^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$</string>
-    <string name="facebook_app_id">238530112837045</string>
+    <string name="facebook_app_id">264847263529970</string>
     <string name="facebook_app_secret">4f6c3e260c3a24ba530c87f23d74950e</string>
     <string name="facebook_description">facebook description</string>
     <string name="facebook_oauth_callback_url">https://www.facebook.com/connect/login_success.html</string>
