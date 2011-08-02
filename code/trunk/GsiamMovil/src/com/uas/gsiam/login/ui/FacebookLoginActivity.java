@@ -19,15 +19,15 @@ import com.facebook.android.Util;
 
 public class FacebookLoginActivity extends Activity {
 
-	protected Facebook facebook = new Facebook("238530112837045");
+	protected Facebook facebook;
 	private static final String[] PERMISSIONS =
         new String[] {"publish_stream", "read_stream", "offline_access"};
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		facebook.authorize(this, PERMISSIONS,new DialogListener() {
+		facebook = new Facebook(getString(R.string.facebook_app_id));
+		facebook.authorize(this,PERMISSIONS,new DialogListener() {
 			@Override
 			public void onComplete(Bundle values) {
 				
@@ -71,15 +71,7 @@ public class FacebookLoginActivity extends Activity {
 
 		facebook.authorizeCallback(requestCode, resultCode, data);
 		
-		try {
-			facebook.logout(this);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 	}
 }
