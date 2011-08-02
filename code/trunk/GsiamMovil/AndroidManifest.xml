@@ -6,9 +6,9 @@
       android:installLocation="auto">
     
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name="com.uas.gsiam.login.ui.MainApplication">
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
         
-        <activity android:label="@string/app_name" android:name="com.uas.gsiam.login.ui.FacebookLoginActivity">
+        <activity android:label="@string/app_name" android:name="FacebookLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
