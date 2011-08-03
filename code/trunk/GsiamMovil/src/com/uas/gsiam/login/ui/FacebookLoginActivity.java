@@ -1,67 +1,35 @@
 package com.uas.gsiam.login.ui;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
-import com.facebook.android.Util;
+import com.uas.gsiam.principal.ui.MainActivity;
+import com.uas.gsiam.utils.SessionEvents;
+import com.uas.gsiam.utils.SessionEvents.AuthListener;
+import com.uas.gsiam.utils.SessionStore;
 
 public class FacebookLoginActivity extends Activity {
 
 	protected Facebook facebook;
-	private static final String[] PERMISSIONS =
-        new String[] {"publish_stream", "read_stream", "offline_access"};
+	private static String[] PERMISSIONS;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		//setContentView(R.layout.login);
+		
+		PERMISSIONS = getResources().getStringArray(R.array.permissions);
 		facebook = new Facebook(getString(R.string.facebook_app_id));
-		facebook.authorize(this,PERMISSIONS,new DialogListener() {
-			@Override
-			public void onComplete(Bundle values) {
-				
-				try {
-					JSONObject objects = Util.parseJson(facebook.request("me/friends"));
-					Log.i("prueba", objects.toString());
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (FacebookError e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-
-			@Override
-			public void onFacebookError(FacebookError error) {
-			}
-
-			@Override
-			public void onError(DialogError e) {
-			}
-
-			@Override
-			public void onCancel() {
-			}
-		});
+		boolean session = SessionStore.restore(facebook, this);
+		SessionEvents.addAuthListener(new LoginListener());
+		
+		if(session){
+			facebook.authorize(this, PERMISSIONS, new LoginDialogListener());
+		}
 
 	}
 
@@ -70,8 +38,45 @@ public class FacebookLoginActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		facebook.authorizeCallback(requestCode, resultCode, data);
+
+	}
+	
+	private class LoginDialogListener implements DialogListener{
+
+		@Override
+		public void onComplete(Bundle values) {
+			SessionEvents.onLoginSuccess();
+			
+		}
+
+		@Override
+		public void onFacebookError(FacebookError e) {
+			SessionEvents.onLoginError(e.getMessage());
+        }
+        
+        public void onError(DialogError error) {
+            SessionEvents.onLoginError(error.getMessage());
+        }
+
+        public void onCancel() {
+            SessionEvents.onLoginError("Action Canceled");
+        }
 		
-		
-		
+	}
+	
+	private class LoginListener implements AuthListener{
+
+		@Override
+		public void onAuthSucceed() {
+			SessionStore.save(facebook, getApplicationContext());
+			Intent intentMainAct = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(intentMainAct);
+		}
+
+		@Override
+		public void onAuthFail(String error) {
+			
+			
+		}
 	}
 }
