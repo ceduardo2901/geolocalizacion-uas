@@ -34,10 +34,10 @@ public class FacebookLoginActivity extends Activity {
 		facebook = new Facebook(getString(R.string.facebook_app_id));
 		boolean session = SessionStore.restore(facebook, this);
 		SessionEvents.addAuthListener(new LoginListener());
-		
-		if(session){
+		SessionStore.clear(this);
+		//if(session){
 			facebook.authorize(this, PERMISSIONS, new LoginDialogListener());
-		}
+		//}
 
 	}
 	
@@ -94,7 +94,7 @@ public class FacebookLoginActivity extends Activity {
 
 		@Override
 		public void onAuthSucceed() {
-			SessionStore.save(facebook, getApplicationContext());
+			//SessionStore.save(facebook, getApplicationContext());
 			succeed();
 						
 		}

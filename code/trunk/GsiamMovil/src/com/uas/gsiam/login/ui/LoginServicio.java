@@ -21,7 +21,7 @@ import com.uas.gsiam.principal.ui.MainActivity;
 
 public class LoginServicio extends Activity {
 
-	private static String url = "http://10.0.2.2:8080/GsiamWeb/usuario/login?token=";
+	private static String url = "http://10.0.2.2:8080/GsiamWeb/usuario/login/{token}";
 	private RestTemplate restTemp;
 	private static final String TAG = "HttpGetActivity";
 	protected String token;
@@ -86,12 +86,13 @@ public class LoginServicio extends Activity {
 
 		@Override
 		protected UsuarioDTO doInBackground(Void... params) {
+			
 			try {
 				restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("token", token);
-				url = url+token;
-				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class);
+				//url = url+token;
+				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
 				return user;
 			} catch (Exception e) {
