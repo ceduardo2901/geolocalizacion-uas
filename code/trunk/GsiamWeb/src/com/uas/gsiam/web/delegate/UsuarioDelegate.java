@@ -1,5 +1,7 @@
 package com.uas.gsiam.web.delegate;
 
+import javax.ejb.EJBContext;
+
 import com.uas.gsiam.web.sl.ServiceLocator;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -8,9 +10,10 @@ import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 public class UsuarioDelegate {
 	
 	private UsuarioServicio servicioUsuario;
-
+	
     public UsuarioDelegate() {
         initialLoadBean();
+        
     }
 
     public void initialLoadBean() {
@@ -22,11 +25,11 @@ public class UsuarioDelegate {
         }
     }
 
-    public UsuarioDTO login(String email, String pass) {
+    public UsuarioDTO login(String token) {
     	
     		 UsuarioDTO usuario = new UsuarioDTO();
-    		 usuario.setEmail(email);
-    		 usuario.setPassword(pass);
+    		 usuario.setToken(token);
+    		 
 
     	try {
     		 usuario = servicioUsuario.login(usuario);
