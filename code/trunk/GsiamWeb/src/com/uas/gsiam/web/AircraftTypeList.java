@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/aircrafts")
+
 public class AircraftTypeList {
 
 	 static final List<AircraftTypes> aircraftTypes = new LinkedList<AircraftTypes>();
@@ -20,6 +21,7 @@ public class AircraftTypeList {
 	    }
 
 	    @GET @Produces({MediaType.APPLICATION_JSON})
+	    
 	    public List<AircraftTypes> getAircraftTypes() {
 	        return aircraftTypes;
 	    }

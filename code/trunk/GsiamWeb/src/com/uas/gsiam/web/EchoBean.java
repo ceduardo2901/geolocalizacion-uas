@@ -1,8 +1,9 @@
 package com.uas.gsiam.web;
 
+import java.awt.event.ActionEvent;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
 
 @ManagedBean(name = "echoBean")
 @SessionScoped
