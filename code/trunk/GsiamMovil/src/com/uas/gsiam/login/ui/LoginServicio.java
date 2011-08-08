@@ -92,9 +92,9 @@ public class LoginServicio extends Activity {
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("token", token);
 				//url = url+token;
-				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
+				//UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
-				return user;
+				//return user;
 			} catch (Exception e) {
 				logException(e);
 			}

@@ -19,4 +19,7 @@
 		<item>offline_access</item>
 		<item>user_location</item>
 	</string-array>
+	<string name="sitios">Sitios</string>
+	<string name="amigos">Amigos</string>
+	<string name="perfil">Perfil</string>
 </resources>
