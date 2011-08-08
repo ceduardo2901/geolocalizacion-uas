@@ -21,6 +21,7 @@
          
         </activity>
         <activity android:name="com.uas.gsiam.principal.ui.MainActivity"></activity>
-        <activity android:name="LoginServicio"></activity>	
+        <activity android:name="LoginServicio"></activity>
+        <activity android:name="com.uas.gsiam.sitios.ui.SitioActivity"></activity>	
     </application>
 </manifest>
