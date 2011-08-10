@@ -1,6 +1,7 @@
 package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.Stateless;
 
@@ -51,6 +52,27 @@ public class SitioServicioBean implements SitioServicio{
 	public void modificarSitio(SitioDTO sitio) throws SitioNoExisteExcepcion {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
+		List<SitioDTO> sitios=null;
+		try {
+			sitios = AbstractFactory.getInstance().getSitioDAO().obtenerSitios(sitio);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sitios;
 	}
 
 }

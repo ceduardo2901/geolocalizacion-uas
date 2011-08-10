@@ -1,5 +1,7 @@
 package com.uas.gsiam.negocio.servicios;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -16,4 +18,6 @@ public interface SitioServicio {
 	void eliminarSitio(String idSitio) throws SitioNoExisteExcepcion;
 	
 	void modificarSitio(SitioDTO sitioInteres) throws SitioNoExisteExcepcion;
+	
+	List<SitioDTO> obtenerSitios(SitioDTO sitio);
 }
