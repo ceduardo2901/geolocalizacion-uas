@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+
 public class UsuarioDTO implements Serializable{
 
 	// TODO: Como almacenamos la foto del usuario??
@@ -18,7 +18,17 @@ public class UsuarioDTO implements Serializable{
 	private String nombre;
 	private String email;
 	private String password;
+	
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	private Date fechaNacimiento;
+	private String token;
 
 	public UsuarioDTO() {
 

@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import javax.ejb.Stateless;
 
+import com.restfb.Connection;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.types.User;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
@@ -26,7 +30,10 @@ public class UsuarioServicioBean implements UsuarioServicio {
     public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		UsuarioDTO user=null;
 		try {
-			
+			//FacebookTemplate facebook = new FacebookTemplate(usuario.getToken());
+			//List<String> friends = facebook.friendOperations().getFriendIds();
+		//	FacebookClient facebook = new DefaultFacebookClient(usuario.getToken());
+			//Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
 			user = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
 			
 			
