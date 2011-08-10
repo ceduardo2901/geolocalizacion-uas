@@ -10,7 +10,9 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.DefaultWebRequestor;
 import com.restfb.FacebookClient;
 import com.restfb.WebRequestor;
+import com.restfb.types.NamedFacebookType;
 import com.restfb.types.User;
+import com.restfb.util.StringUtils;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
@@ -33,6 +35,8 @@ public class Login {
 		
 		FacebookClient facebook = new DefaultFacebookClient(token);
 		User yo = facebook.fetchObject("me", User.class);
+		
+		
 		
 		Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
 		
