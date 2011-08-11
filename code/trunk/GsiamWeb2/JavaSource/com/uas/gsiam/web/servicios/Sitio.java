@@ -26,7 +26,7 @@ public class Sitio {
 	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
 		System.out.println(sitios.size());
-		return null;
+		return sitios;
 	}
 }
 
