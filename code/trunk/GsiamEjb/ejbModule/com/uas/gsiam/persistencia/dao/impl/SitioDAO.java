@@ -3,6 +3,7 @@ package com.uas.gsiam.persistencia.dao.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.postgis.Geometry;
@@ -50,6 +51,7 @@ public class SitioDAO implements ISitioDAO {
 	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
 		PreparedStatement ps;
 		SitioDTO resultado = null;
+		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		
 		String sql = "select the_geom from americas_south_america_uruguay_poi "
 				+ "where the_geom && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
@@ -61,8 +63,13 @@ public class SitioDAO implements ISitioDAO {
 //			ps.setDouble(2, sitio.getLon());
 			PGgeometry geom;
 			ResultSet rs = ps.executeQuery();
+			//System.out.println(rs.);
 			while (rs.next()) {
 				geom = (PGgeometry) rs.getObject(1);
+				//.out.println(geom.getValue());
+				resultado = new SitioDTO();
+				resultado.setDireccion(geom.getValue());
+				sitios.add(resultado);
 			}
 
 			rs.close();
@@ -72,7 +79,7 @@ public class SitioDAO implements ISitioDAO {
 			e.printStackTrace();
 		}
 
-		return null;
+		return sitios;
 	}
 
 }

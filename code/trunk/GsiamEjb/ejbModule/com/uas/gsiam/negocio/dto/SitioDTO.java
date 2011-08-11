@@ -2,6 +2,9 @@ package com.uas.gsiam.negocio.dto;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class SitioDTO implements Serializable{
 
 	/**
