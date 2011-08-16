@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.principal.ui.MainActivity;
-import com.uas.gsiam.sitios.utils.ConstantesSitios;
 import com.uas.gsiam.sitios.utils.ListaSitios;
 
 public class SitiosServicio extends Activity {
