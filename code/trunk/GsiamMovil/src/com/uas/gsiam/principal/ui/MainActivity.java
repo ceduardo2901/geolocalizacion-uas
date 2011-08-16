@@ -2,6 +2,7 @@ package com.uas.gsiam.principal.ui;
 
 import com.uas.gsiam.login.ui.R;
 import com.uas.gsiam.sitios.ui.SitioActivity;
+import com.uas.gsiam.sitios.ui.SitiosServicio;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,7 +31,7 @@ public class MainActivity extends Activity {
 
 	
 	private void sitiosActivity(){
-		Intent sitioIntent = new Intent(this,SitioActivity.class);
+		Intent sitioIntent = new Intent(this,SitiosServicio.class);
 		startActivity(sitioIntent);
 	}
 		
