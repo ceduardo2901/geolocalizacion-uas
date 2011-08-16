@@ -25,17 +25,14 @@ public class UsuarioDelegate {
         }
     }
 
-    public UsuarioDTO login(String token) {
+    public UsuarioDTO login(UsuarioDTO usuario) {
     	
-    		 UsuarioDTO usuario = new UsuarioDTO();
-    		 usuario.setToken(token);
     		 
-
     	try {
     		 usuario = servicioUsuario.login(usuario);
 			
 		} catch (UsuarioNoExisteExcepcion e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return usuario;
