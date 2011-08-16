@@ -13,4 +13,8 @@ public interface UsuarioServicio {
 
 	public void crearUsuario (UsuarioDTO usuario);
 	
+	public void modificarUsuario (UsuarioDTO usuario);
+	
+	public void eliminarUsuario (UsuarioDTO usuario);
+	
 }
