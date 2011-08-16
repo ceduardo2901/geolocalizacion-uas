@@ -21,7 +21,7 @@ import com.uas.gsiam.principal.ui.MainActivity;
 
 public class LoginServicio extends Activity {
 
-	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuario/login?email={email}&pass={pass}";
+	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuario/login/{email}/{pass}";
 	private RestTemplate restTemp;
 	private static final String TAG = "HttpGetActivity";
 	protected String email;
@@ -36,9 +36,20 @@ public class LoginServicio extends Activity {
             Bundle bundle = this.getIntent().getExtras();
             this.email = bundle.getString("email");
             this.pass = bundle.getString("pass");
-            restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+            
 
     }
+	
+	public void onResume(){
+		super.onResume();
+		new DownloadStatesTask(email, pass).execute();
+	}
+	
+	public void actividadPrincipal(){
+		Intent actividadPrincipal = new Intent();
+		actividadPrincipal.setClass(this, MainActivity.class);
+		startActivity(actividadPrincipal);
+	}
 	
 	private void showLoadingProgressDialog() {
 		progressDialog = ProgressDialog.show(this, "",
@@ -62,9 +73,12 @@ public class LoginServicio extends Activity {
 	// Private classes
 	// ***************************************
 	private class DownloadStatesTask extends AsyncTask<Void, Void, UsuarioDTO> {
+		private String email;
+		private String pass;
 		
-		
-		public DownloadStatesTask() {
+		public DownloadStatesTask(String email, String pass) {
+			this.email=email;
+			this.pass=pass;
 			
 		}
 
@@ -77,11 +91,11 @@ public class LoginServicio extends Activity {
 		@Override
 		protected UsuarioDTO doInBackground(Void... params) {
 			
-
+            	restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("email", email);
 				parms.put("pass", pass);
-				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
+				//UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
 				return null;
 			
@@ -91,10 +105,8 @@ public class LoginServicio extends Activity {
 		protected void onPostExecute(UsuarioDTO usuario) {
 			// hide the progress indicator when the network request is complete
 			dismissProgressDialog();
-			Intent actividadPrincipal = new Intent(getApplicationContext(),MainActivity.class);
-			startActivity(actividadPrincipal);
-			// return the list of states
-			// refreshStates(usuario);
+			actividadPrincipal();
+			
 		}
 	}
 
