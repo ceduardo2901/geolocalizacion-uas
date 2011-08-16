@@ -18,21 +18,15 @@ public class Login {
 	}
 	
 	@GET
-	@Path("/login/{token}")
+	@Path("/login/{pass}/{email}")
 	@Produces("application/json")
-    public UsuarioDTO login(@PathParam("token") String token) {
+    public UsuarioDTO login(@PathParam("pass") String pass, @PathParam("email") String email) {
 		UsuarioDTO user = new UsuarioDTO();
-		user.setToken(token);
-//		WebRequestor d = new  DefaultWebRequestor();
-//		
-//		FacebookClient facebook = new DefaultFacebookClient(token);
-//		User yo = facebook.fetchObject("me", User.class);
-//		
-//		
-//		
-//		Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
+		user.setEmail(email);
+		user.setPassword(pass);
+
 		
-			user = servicio.login(token);
+		user = servicio.login(user);
 		 
 		
 		System.out.println(user.getEmail());
