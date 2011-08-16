@@ -22,9 +22,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.principal.ui.MainActivity;
+import com.uas.gsiam.sitios.utils.ConstantesSitios;
 import com.uas.gsiam.sitios.utils.ListaSitios;
 
-public class SitiosServicio extends Activity {
+public class SitiosServicio extends Activity implements LocationListener {
 
 	private static String url = "http://10.0.2.2:8080/GsiamWeb2/sitios/{lat}/{lon}";
 	private RestTemplate restTemp;
@@ -39,7 +40,7 @@ public class SitiosServicio extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle bundle = this.getIntent().getExtras();
-		
+
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		// this.loc = bundle.getParcelable("ubicacionActual");
@@ -60,33 +61,29 @@ public class SitiosServicio extends Activity {
 
 	public void onResume() {
 		super.onResume();
-		// ILastLocationFinder locationFinder =
-		// PlatformSpecificImplementationFactory.getLastLocationFinder(this);
-		// loc =
-		// locationFinder.getLastBestLocation(ConstantesSitios.MAX_DISTANCE,
-		// System.currentTimeMillis()-ConstantesSitios.MAX_TIME);
+
 		loc = locationManager
 				.getLastKnownLocation(locationManager.GPS_PROVIDER);
-		new DownloadStatesTask(loc.getLatitude(), loc.getLongitude());
+
 		startListening();
-		
+		actualizarSitios();
 
 	}
 
 	private void startListening() {
-//		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-//				0, this);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+				0, this);
 	}
 
 	private void stopListening() {
-//		if (locationManager != null)
-//			locationManager.removeUpdates(this);
+		if (locationManager != null)
+			locationManager.removeUpdates(this);
 	}
 
 	private void actualizarSitios() {
-		if(loc != null){
-			new DownloadStatesTask(loc.getLatitude(), loc.getLongitude());
-		}
+
+		new DownloadStatesTask(loc).execute();
+
 	}
 
 	protected Location getLastBestLocation(int minDistance, long minTime) {
@@ -143,50 +140,77 @@ public class SitiosServicio extends Activity {
 	private class DownloadStatesTask extends AsyncTask<Void, Void, ListaSitios> {
 		private Double latitud;
 		private Double longitud;
+		private Location location;
 
-		public DownloadStatesTask(){
-			
-		}
-		
-		public DownloadStatesTask(Double lat, Double lon) {
-			latitud = lat;
-			longitud = lon;
+		public DownloadStatesTask(Location location) {
+			if (location != null) {
+				latitud = location.getLatitude();
+				longitud = location.getLongitude();
+				this.location = location;
+			}
 
 		}
 
 		@Override
 		protected void onPreExecute() {
 			// before the network request begins, show a progress indicator
+
 			showLoadingProgressDialog();
+
 		}
 
 		@Override
 		protected ListaSitios doInBackground(Void... params) {
 			ListaSitios sitios = null;
-			restTemp = new RestTemplate(
-					new HttpComponentsClientHttpRequestFactory());
+			if (location != null) {
+				restTemp = new RestTemplate(
+						new HttpComponentsClientHttpRequestFactory());
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("lat", latitud.toString());
 				parms.put("lon", longitud.toString());
 				// parms.put("lat", "-34.8948244");
 				// parms.put("lon", "-56.1195473");
 				sitios = restTemp.getForObject(url, ListaSitios.class, parms);
+			}
 
-				return sitios;
-			
+			return sitios;
+
 		}
 
 		@Override
 		protected void onPostExecute(ListaSitios sitios) {
 			// hide the progress indicator when the network request is complete
-			dismissProgressDialog();
-			Intent intentMainAct = new Intent(getApplicationContext(),
-					MainActivity.class);
-			startActivity(intentMainAct);
-			// return the list of states
-			// refreshStates(usuario);
+			if (loc != null) {
+				dismissProgressDialog();
+				Intent intentMainAct = new Intent(getApplicationContext(),
+						MainActivity.class);
+				startActivity(intentMainAct);
+			}
 		}
 	}
 
-	
+	@Override
+	public void onLocationChanged(Location location) {
+		this.loc = location;
+		actualizarSitios();
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
