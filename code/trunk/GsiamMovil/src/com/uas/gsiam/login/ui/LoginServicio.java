@@ -34,8 +34,8 @@ public class LoginServicio extends Activity {
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Bundle bundle = this.getIntent().getExtras();
-            this.email = bundle.getString("postalCode");
-            this.pass = bundle.getString("countryCode");
+            this.email = bundle.getString("email");
+            this.pass = bundle.getString("pass");
             restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 
     }
@@ -83,7 +83,7 @@ public class LoginServicio extends Activity {
 				parms.put("pass", pass);
 				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
-				return user;
+				return null;
 			
 		}
 

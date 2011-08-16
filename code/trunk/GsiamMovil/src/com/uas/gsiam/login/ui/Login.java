@@ -56,6 +56,7 @@ public class Login extends Activity {
 
 			Intent intent = new Intent();
 			intent.setClass(this, LoginServicio.class);
+			intent.putExtras(bundle);
 			startActivity(intent);
 		}
 	}
