@@ -21,11 +21,11 @@ import com.uas.gsiam.principal.ui.MainActivity;
 
 public class LoginServicio extends Activity {
 
-	private static String url = "http://10.0.2.2:8080/GsiamWeb/usuario/login/{token}";
+	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuario/login?email={email}&pass={pass}";
 	private RestTemplate restTemp;
 	private static final String TAG = "HttpGetActivity";
-	protected String token;
-	
+	protected String email;
+	protected String pass;
 	
 	private ProgressDialog progressDialog;
 	
@@ -34,20 +34,10 @@ public class LoginServicio extends Activity {
     public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Bundle bundle = this.getIntent().getExtras();
-            this.token = bundle.getString("token");
-            
-            
-            
-            
+            this.email = bundle.getString("postalCode");
+            this.pass = bundle.getString("countryCode");
+            restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 
-    }
-	
-	@Override
-    public void onStart() {
-            super.onStart();
-            
-            // when this activity starts, initiate an asynchronous HTTP GET request
-            new DownloadStatesTask(token).execute();
     }
 	
 	private void showLoadingProgressDialog() {
@@ -72,10 +62,10 @@ public class LoginServicio extends Activity {
 	// Private classes
 	// ***************************************
 	private class DownloadStatesTask extends AsyncTask<Void, Void, UsuarioDTO> {
-		private String token;
 		
-		public DownloadStatesTask(String token) {
-			this.token = token;
+		
+		public DownloadStatesTask() {
+			
 		}
 
 		@Override
@@ -87,27 +77,22 @@ public class LoginServicio extends Activity {
 		@Override
 		protected UsuarioDTO doInBackground(Void... params) {
 			
-			try {
-				restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-				Map<String, String> parms = new HashMap<String, String>();
-				parms.put("token", token);
-				//url = url+token;
-				//UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
-				
-				//return user;
-			} catch (Exception e) {
-				logException(e);
-			}
 
-			return null;
+				Map<String, String> parms = new HashMap<String, String>();
+				parms.put("email", email);
+				parms.put("pass", pass);
+				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
+				
+				return user;
+			
 		}
 
 		@Override
 		protected void onPostExecute(UsuarioDTO usuario) {
 			// hide the progress indicator when the network request is complete
 			dismissProgressDialog();
-			Intent intentMainAct = new Intent(getApplicationContext(), MainActivity.class);
-			startActivity(intentMainAct);
+			Intent actividadPrincipal = new Intent(getApplicationContext(),MainActivity.class);
+			startActivity(actividadPrincipal);
 			// return the list of states
 			// refreshStates(usuario);
 		}
