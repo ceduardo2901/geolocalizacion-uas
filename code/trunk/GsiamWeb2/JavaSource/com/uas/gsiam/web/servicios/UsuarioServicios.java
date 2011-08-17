@@ -1,5 +1,6 @@
 package com.uas.gsiam.web.servicios;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -37,6 +38,8 @@ public class UsuarioServicios {
 	
 	@POST
 	@Path("/agregar/{usuarioDto}")
+	@Produces("application/json")
+	@Consumes("application/json")
     public void crearUsuario(@PathParam("usuarioDto") UsuarioDTO usuario) {
 		
 		
