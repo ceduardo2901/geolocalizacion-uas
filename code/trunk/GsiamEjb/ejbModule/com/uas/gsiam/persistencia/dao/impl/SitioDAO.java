@@ -49,13 +49,13 @@ public class SitioDAO implements ISitioDAO {
 
 	@Override
 	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
-		PreparedStatement ps;
+		PreparedStatement ps=null;
 		SitioDTO resultado = null;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		
-		String sql = "select the_geom from americas_south_america_uruguay_poi "
+		String sql = "select * from americas_south_america_uruguay_poi "
 				+ "where the_geom && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
-				+ "and Distance(the_geom,GeomFromText('POINT(-58.3068 -33.12082)', -1)) < 100";
+				+ "and Distance(the_geom,GeomFromText('POINT(-58.3068 -33.12082)', -1)) < 2";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
@@ -65,18 +65,28 @@ public class SitioDAO implements ISitioDAO {
 			ResultSet rs = ps.executeQuery();
 			//System.out.println(rs.);
 			while (rs.next()) {
-				geom = (PGgeometry) rs.getObject(1);
-				//.out.println(geom.getValue());
+				geom = (PGgeometry) rs.getObject(4);
+				
 				resultado = new SitioDTO();
-				resultado.setDireccion(geom.getValue());
+				//resultado.setDireccion(geom.getGeometry().getValue());
+				resultado.setLat(geom.getGeometry().getFirstPoint().getY());
+				resultado.setLon(geom.getGeometry().getFirstPoint().getX());
+				resultado.setIdSitio(rs.getString(1));
+				resultado.setNombre(rs.getString(3));
 				sitios.add(resultado);
 			}
-
-			rs.close();
-			ps.close();
+			//ConexionJDBCUtil.cerrarConexion();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return sitios;

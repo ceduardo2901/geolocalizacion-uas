@@ -4,20 +4,16 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class SitioDTO implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 	private String idSitio;
 	private String nombre;
 	private String direccion;
 	private Double lon;
 	private Double lat;
 	
-	
+		
 	public Double getLon() {
 		return lon;
 	}
