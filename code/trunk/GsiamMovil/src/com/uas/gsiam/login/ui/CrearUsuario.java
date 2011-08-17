@@ -1,8 +1,5 @@
 package com.uas.gsiam.login.ui;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,36 +11,66 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.principal.ui.MainActivity;
 
-public class LoginServicio extends Activity {
+import com.uas.gsiam.utils.Util;
 
-	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuarios/login/{email}/{pass}";
-	private RestTemplate restTemp;
-	private static final String TAG = "HttpGetActivity";
+public class CrearUsuario extends Activity {
+
 	protected String email;
 	protected String pass;
-	
+	protected String nombre;
+
+	protected EditText nombreTxt;
+	protected EditText emailTxt;
+	protected EditText passTxt;
+	protected Button registrarseBtn;
+
+	private UsuarioDTO user;
 	private ProgressDialog progressDialog;
 	
-	
-	@Override
-    public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            Bundle bundle = this.getIntent().getExtras();
-            this.email = bundle.getString("email");
-            this.pass = bundle.getString("pass");
-            
+	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuarios/agregar?usuarioDto={usuarioDto}";
+	private RestTemplate restTemp;
 
-    }
 	
-	public void onResume(){
-		super.onResume();
-		new DownloadStatesTask(email, pass).execute();
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.crearusuario);
+		
+		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
+		emailTxt = (EditText) findViewById(R.id.emailTxt);
+		passTxt = (EditText) findViewById(R.id.passTxt);
+		registrarseBtn = (Button) findViewById(R.id.crearUsuarioBtn);
+		
+
 	}
+
+	
+	public void crearUsuario(View v) {
+		
+		nombre = nombreTxt.getText().toString().trim();
+		email = emailTxt.getText().toString().trim();
+		pass = passTxt.getText().toString().trim();
+	
+		if (!Util.validaMail(email)) {
+			Toast.makeText(v.getContext(), "El email es invalido",
+					Toast.LENGTH_LONG).show();
+		} else {
+				
+			 new DownloadStatesTask(user).execute();
+
+		}
+	}
+
+	
 	
 	public void actividadPrincipal(){
 		Intent actividadPrincipal = new Intent();
@@ -63,22 +90,15 @@ public class LoginServicio extends Activity {
 		}
 	}
 
-	private void logException(Exception e) {
-		Log.e(TAG, e.getMessage(), e);
-		Writer result = new StringWriter();
-		e.printStackTrace(new PrintWriter(result));
-	}
 
 	// ***************************************
 	// Private classes
 	// ***************************************
 	private class DownloadStatesTask extends AsyncTask<Void, Void, UsuarioDTO> {
-		private String email;
-		private String pass;
+		private UsuarioDTO usuario;
 		
-		public DownloadStatesTask(String email, String pass) {
-			this.email=email;
-			this.pass=pass;
+		public DownloadStatesTask(UsuarioDTO usuario) {
+			this.usuario=usuario;
 			
 		}
 
@@ -92,12 +112,11 @@ public class LoginServicio extends Activity {
 		protected UsuarioDTO doInBackground(Void... params) {
 			
             	restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-				Map<String, String> parms = new HashMap<String, String>();
-				parms.put("email", email);
-				parms.put("pass", pass);
-				//UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
+				Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
+				parms.put("usuario", usuario);
+				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
-				return null;
+				return user;
 			
 		}
 
@@ -110,7 +129,7 @@ public class LoginServicio extends Activity {
 		}
 	}
 
-	
+
 	
 	
 }

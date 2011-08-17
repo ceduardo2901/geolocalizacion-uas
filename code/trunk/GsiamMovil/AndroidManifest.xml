@@ -11,13 +11,13 @@
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         
-        <activity android:name="com.uas.gsiam.principal.ui.MainActivity">
-
-        </activity>
-        <activity android:name="LoginServicio"></activity>
-        <activity android:name="com.uas.gsiam.sitios.ui.SitioActivity"></activity>
-        <activity android:name="com.uas.gsiam.sitios.ui.SitiosServicio"></activity>
+        <activity android:name="com.uas.gsiam.principal.ui.MainActivity"/>
+        <activity android:name="LoginServicio"/>
+        <activity android:name="com.uas.gsiam.sitios.ui.SitioActivity"/>
+        <activity android:name="com.uas.gsiam.sitios.ui.SitiosServicio"/>
+        <activity android:name="CrearUsuario"/>
         <activity android:name="Login">
+       
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

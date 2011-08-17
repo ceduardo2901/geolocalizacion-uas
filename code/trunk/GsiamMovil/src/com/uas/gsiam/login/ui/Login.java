@@ -61,4 +61,18 @@ public class Login extends Activity {
 		}
 	}
 
+	
+	
+	public void btnRegistrarse(View v) {
+	
+		Intent intent = new Intent();
+		intent.setClass(this, CrearUsuario.class);
+		startActivity(intent);
+		
+	}
+	
+	
+	
+	
+	
 }
