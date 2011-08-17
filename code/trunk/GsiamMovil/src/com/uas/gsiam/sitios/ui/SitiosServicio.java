@@ -3,11 +3,15 @@ package com.uas.gsiam.sitios.ui;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
@@ -22,7 +26,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.principal.ui.MainActivity;
-import com.uas.gsiam.sitios.utils.ConstantesSitios;
 import com.uas.gsiam.sitios.utils.ListaSitios;
 
 public class SitiosServicio extends Activity implements LocationListener {
@@ -165,6 +168,7 @@ public class SitiosServicio extends Activity implements LocationListener {
 			if (location != null) {
 				restTemp = new RestTemplate(
 						new HttpComponentsClientHttpRequestFactory());
+							
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("lat", latitud.toString());
 				parms.put("lon", longitud.toString());
