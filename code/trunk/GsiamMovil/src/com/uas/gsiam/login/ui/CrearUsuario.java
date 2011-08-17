@@ -35,7 +35,7 @@ public class CrearUsuario extends Activity {
 	private UsuarioDTO user;
 	private ProgressDialog progressDialog;
 	
-	private static final String url = "http://10.0.2.2:8080/GsiamWeb/rest/usuarios/agregar?usuarioDto={usuarioDto}";
+	private static final String url = "http://10.0.2.2:8080/GsiamWeb2/rest/usuarios/agregar?usuarioDto={usuarioDto}";
 	private RestTemplate restTemp;
 
 	
