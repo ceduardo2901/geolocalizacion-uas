@@ -15,8 +15,6 @@ import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
 
 public class UsuarioDAO implements IUsuarioDAO {
 	
-	//TODO Ver como manejamos las conexiones y el abstract factory.
-	
 	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		
 		PreparedStatement ps;
