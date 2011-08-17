@@ -11,7 +11,7 @@ public class GsiamRestApplication extends Application{
 	private Set<Class<?>> empty = new HashSet();
 
 	public GsiamRestApplication() {
-		this.singletons.add(new Login());
+		this.singletons.add(new UsuarioServicios());
 		this.singletons.add(new Sitio());
 	}
 

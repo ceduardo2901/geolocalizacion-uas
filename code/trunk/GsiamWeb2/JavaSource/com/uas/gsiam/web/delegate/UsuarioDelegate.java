@@ -38,14 +38,9 @@ public class UsuarioDelegate {
 		return usuario;
     }
 	
-    public void crearUsuario(String email, String pass, String nombre) {
-    	
-    	UsuarioDTO userDTO = new UsuarioDTO();
-		userDTO.setEmail(email);
-		userDTO.setNombre(nombre);
-		userDTO.setPassword(pass);
-	
-		servicioUsuario.crearUsuario(userDTO);
+    public void crearUsuario(UsuarioDTO usuario) {
+    		
+		servicioUsuario.crearUsuario(usuario);
 		
 }
     

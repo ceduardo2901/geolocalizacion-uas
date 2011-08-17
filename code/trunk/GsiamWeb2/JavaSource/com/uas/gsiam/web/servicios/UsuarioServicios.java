@@ -1,6 +1,7 @@
 package com.uas.gsiam.web.servicios;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -8,12 +9,12 @@ import javax.ws.rs.Produces;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
-@Path("/usuario")
-public class Login {
+@Path("/usuarios")
+public class UsuarioServicios {
 	
 	private UsuarioDelegate servicio;
 	
-	public Login(){
+	public UsuarioServicios(){
 		servicio = new UsuarioDelegate();
 	}
 	
@@ -32,4 +33,18 @@ public class Login {
 		System.out.println(user.getEmail());
 		return user;
     }
+	
+	
+	@POST
+	@Path("/agregar/{usuarioDto}")
+    public void crearUsuario(@PathParam("usuarioDto") UsuarioDTO usuario) {
+		
+		
+		servicio.crearUsuario(usuario);
+		 
+		
+    }
+	
+	
+	
 }
