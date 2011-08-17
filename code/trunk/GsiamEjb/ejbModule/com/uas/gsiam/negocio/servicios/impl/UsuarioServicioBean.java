@@ -28,8 +28,8 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		try {
 			//FacebookTemplate facebook = new FacebookTemplate(usuario.getToken());
 			//List<String> friends = facebook.friendOperations().getFriendIds();
-		//	FacebookClient facebook = new DefaultFacebookClient(usuario.getToken());
-			//Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
+//			FacebookClient facebook = new DefaultFacebookClient(usuario.getToken());
+//			Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
 			user = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
 			
 			
