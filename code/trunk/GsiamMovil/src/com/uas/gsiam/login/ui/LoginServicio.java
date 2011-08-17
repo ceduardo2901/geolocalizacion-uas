@@ -21,7 +21,7 @@ import com.uas.gsiam.principal.ui.MainActivity;
 
 public class LoginServicio extends Activity {
 
-	private static final String url = "http://10.0.2.2:8080/GsiamWeb2/rest/usuarios/login/{email}/{pass}";
+	private static final String url = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
 	private RestTemplate restTemp;
 	private static final String TAG = "HttpGetActivity";
 	protected String email;

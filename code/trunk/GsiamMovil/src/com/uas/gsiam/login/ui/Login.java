@@ -1,7 +1,5 @@
 package com.uas.gsiam.login.ui;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.Util;
 
 public class Login extends Activity {
 
@@ -22,8 +21,6 @@ public class Login extends Activity {
 	protected EditText passTxt;
 	protected Button login;
 
-	private static String regEx;
-
 	private UsuarioDTO user;
 
 	@Override
@@ -31,22 +28,20 @@ public class Login extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
-		regEx = this.getString(R.string.regEX);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
 
 		passTxt = (EditText) findViewById(R.id.passTxt);
 		login = (Button) findViewById(R.id.entrarBtn);
-		
-		
-		
+
 
 	}
 
+	
 	public void btnValidarEmail(View v) {
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
-		Matcher match = Pattern.compile(regEx).matcher(email);
-		if (!match.matches()) {
+	
+		if (!Util.validaMail(email)) {
 			Toast.makeText(v.getContext(), "El email es invalido",
 					Toast.LENGTH_LONG).show();
 		} else {
