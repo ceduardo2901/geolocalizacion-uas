@@ -1,37 +1,33 @@
 package com.uas.gsiam.sitios.ui;
 
-import java.io.Serializable;
 
 
-public class SitioMovilDTO implements Serializable{
+public class SitioMovilDTO {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String idSitio;
-	private String nombre;
-	private String direccion;
-	private Double lon;
-	private Double lat;
+	
+	public String idSitio;
+	public String nombre;
+	public String direccion;
+	public String lon;
+	public String lat;
 	
 	
-	public Double getLon() {
+	public String getLon() {
 		return lon;
 	}
 
 
-	public void setLon(Double lon) {
+	public void setLon(String lon) {
 		this.lon = lon;
 	}
 
 
-	public Double getLat() {
+	public String getLat() {
 		return lat;
 	}
 
 
-	public void setLat(Double lat) {
+	public void setLat(String lat) {
 		this.lat = lat;
 	}
 

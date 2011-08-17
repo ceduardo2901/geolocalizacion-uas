@@ -6,17 +6,20 @@ public class ListaSitios  {
 
 	private SitioMovilDTO[] sitios;
 
+	
 	ListaSitios() {
 
 	}
 
-	public SitioMovilDTO[] getAircraftTypes() {
+	public SitioMovilDTO[] getSitios() {
 		return sitios;
 	}
 
-	public void setAircraftTypes(SitioMovilDTO[] sitios) {
+	public void setSitios(SitioMovilDTO[] sitios) {
 		this.sitios = sitios;
 	}
+
+	
 
 	
 }
