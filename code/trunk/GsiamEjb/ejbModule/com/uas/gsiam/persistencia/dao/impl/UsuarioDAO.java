@@ -184,4 +184,67 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
+	//TODO Deberiamos pasar solo el id del usuario?? o esta bien pasar todo el objeto??
+	
+	public void crearContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo){
+		
+		PreparedStatement ps;
+		
+		try {
+			
+			String sqlCrearContacto = "INSERT INTO t_contacto (con_id_usuario, con_id_amigo, con_fecha_solicitud, con_flag_aprobado) " +
+					                  "VALUES (?, ?, ?, ?)";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearContacto);
+			
+			java.util.Date today = new java.util.Date();
+			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+
+			
+			ps.setInt(1, usuario.getId());
+			ps.setInt(2, usuarioAmigo.getId());
+			ps.setDate(3, sqlToday);
+			ps.setBoolean(4, false);
+			
+			ps.executeUpdate();
+						
+			ps.close();
+ 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// TODO Ver si vale la pena poner fecha de aprobacion
+	public void aprobarContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo){
+		
+		PreparedStatement ps;
+		
+		try {
+			
+			String sqlAprobarContacto = "UPDATE t_contacto SET con_flag_aprobado = ? " +
+					                     "WHERE con_id_usuario = ? AND con_id_amigo = ?";
+		
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlAprobarContacto);
+					
+			ps.setInt(1, usuario.getId());
+			ps.setInt(2, usuarioAmigo.getId());
+			ps.setBoolean(3, true);
+			
+			ps.executeUpdate();
+						
+			ps.close();
+ 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
 }
