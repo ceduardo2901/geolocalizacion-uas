@@ -15,6 +15,7 @@ import javax.mail.internet.*;
 public class MailUtil {
 	
 	//TODO Poner esto en un archivo...
+	//TODO el destinatario puede ser un arreglo y se le manda a esos.. nose si servira...
 	private static String EMAIL_GSIAM = "gsiam.notificacion@gmail.com";
 	private static String PASS_GSIAM = "gsiam.2011";
 	
