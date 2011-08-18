@@ -21,7 +21,7 @@ public class Login extends Activity {
 	protected EditText passTxt;
 	protected Button login;
 
-	private UsuarioDTO user;
+	//private UsuarioDTO user;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

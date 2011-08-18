@@ -3,15 +3,13 @@ package com.uas.gsiam.sitios.ui;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.Activity;
@@ -164,20 +162,25 @@ public class SitiosServicio extends Activity implements LocationListener {
 
 		@Override
 		protected ListaSitios doInBackground(Void... params) {
-			ListaSitios sitios = null;
+			//ListaSitios sitios = null;
+			//String sitios;
 			if (location != null) {
 				restTemp = new RestTemplate(
 						new HttpComponentsClientHttpRequestFactory());
-							
+				List<HttpMessageConverter<?>> messageConverters = restTemp.getMessageConverters();
+				
+				messageConverters.add(new MappingJacksonHttpMessageConverter());			
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("lat", latitud.toString());
 				parms.put("lon", longitud.toString());
 				// parms.put("lat", "-34.8948244");
 				// parms.put("lon", "-56.1195473");
-				sitios = restTemp.getForObject(url, ListaSitios.class, parms);
+				SitioMovilDTO[] sitios = restTemp.getForObject(url, SitioMovilDTO[].class, parms);
+				
+				System.out.println(sitios.length);
 			}
 
-			return sitios;
+			return null;
 
 		}
 

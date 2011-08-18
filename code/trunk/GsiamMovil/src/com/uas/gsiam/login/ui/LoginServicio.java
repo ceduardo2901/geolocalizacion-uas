@@ -95,9 +95,9 @@ public class LoginServicio extends Activity {
 				Map<String, String> parms = new HashMap<String, String>();
 				parms.put("email", email);
 				parms.put("pass", pass);
-				//UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
+				UsuarioDTO user = restTemp.getForObject(url, UsuarioDTO.class,parms);
 				
-				return null;
+				return user;
 			
 		}
 
