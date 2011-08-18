@@ -17,4 +17,10 @@ public interface IUsuarioDAO {
 	public void modificarUsuario(UsuarioDTO usuario);
 	
 	public void eliminarUsuario(UsuarioDTO usuario);
+	
+	public void crearContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo);
+	
+	public void aprobarContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo);
+	
+	
 }
