@@ -59,11 +59,10 @@ public class SitioDAO implements ISitioDAO {
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
-//			ps.setDouble(1, sitio.getLat());
-//			ps.setDouble(2, sitio.getLon());
+
 			PGgeometry geom;
 			ResultSet rs = ps.executeQuery();
-			//System.out.println(rs.);
+			
 			while (rs.next()) {
 				geom = (PGgeometry) rs.getObject(4);
 				
@@ -75,7 +74,8 @@ public class SitioDAO implements ISitioDAO {
 				resultado.setNombre(rs.getString(3));
 				sitios.add(resultado);
 			}
-			//ConexionJDBCUtil.cerrarConexion();
+			rs.close();
+			ps.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
