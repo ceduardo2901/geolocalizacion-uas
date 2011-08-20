@@ -62,16 +62,16 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
 			
 		} catch (IOException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CPOMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 			
 		} catch (InstantiationException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CPOMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 			
 		} catch (IllegalAccessException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CPOMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 			
 		} catch (ClassNotFoundException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CPOMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		}
 			
 	}
