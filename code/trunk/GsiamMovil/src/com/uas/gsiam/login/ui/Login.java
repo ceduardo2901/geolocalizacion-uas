@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.LoginServicio;
 import com.uas.gsiam.utils.Util;
 
 public class Login extends Activity {
@@ -49,10 +50,9 @@ public class Login extends Activity {
 			bundle.putString("email", email);
 			bundle.putString("pass", pass);
 
-			Intent intent = new Intent();
-			intent.setClass(this, LoginServicio.class);
+			Intent intent = new Intent(this,LoginServicio.class);
 			intent.putExtras(bundle);
-			startActivity(intent);
+			startService(intent);
 		}
 	}
 
