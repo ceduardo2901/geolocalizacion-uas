@@ -1,11 +1,10 @@
 package com.uas.gsiam.web.delegate;
 
-import javax.ejb.EJBContext;
-
-import com.uas.gsiam.web.sl.ServiceLocator;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
+import com.uas.gsiam.web.sl.ServiceLocator;
 
 public class UsuarioDelegate {
 	
@@ -40,7 +39,12 @@ public class UsuarioDelegate {
 	
     public void crearUsuario(UsuarioDTO usuario) {
     		
-		servicioUsuario.crearUsuario(usuario);
+		try {
+			servicioUsuario.crearUsuario(usuario);
+		} catch (UsuarioExcepcion e) {
+			
+			e.printStackTrace();
+		}
 		
 }
     

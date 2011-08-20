@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.hibernate.annotations.AccessType;
+
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.web.delegate.SitioDelegate;
 
@@ -22,6 +24,7 @@ public class Sitio {
 
 	@GET
 	@Path("/{lat}/{lon}")
+	
 	@Produces("application/json")
 	public List<ServicioSitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
 		List<ServicioSitioDTO> listaSitios = new ArrayList<ServicioSitioDTO>();
@@ -29,6 +32,7 @@ public class Sitio {
 		for(SitioDTO sitio : sitios){
 			listaSitios.add(new ServicioSitioDTO(sitio));
 		}
+		
 		System.out.println(sitios.size());
 		return listaSitios;
 	}

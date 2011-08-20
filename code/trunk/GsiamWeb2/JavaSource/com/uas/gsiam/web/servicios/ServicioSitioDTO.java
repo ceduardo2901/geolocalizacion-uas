@@ -9,7 +9,7 @@ public class ServicioSitioDTO {
 
 	public String idSitio;
 	public String nombre;
-	public String direccion;
+	//public String direccion;
 	public String lon;
 	public String lat;
 
@@ -20,7 +20,7 @@ public class ServicioSitioDTO {
 	public ServicioSitioDTO(SitioDTO sitio) {
 		this.idSitio = sitio.getIdSitio();
 		this.nombre = sitio.getNombre();
-		this.direccion = sitio.getDireccion();
+		//this.direccion = sitio.getDireccion();
 		this.lat = sitio.getLat().toString();
 		this.lon = sitio.getLon().toString();
 	}
@@ -57,11 +57,11 @@ public class ServicioSitioDTO {
 		this.nombre = nombre;
 	}
 
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+//	public String getDireccion() {
+//		return direccion;
+//	}
+//
+//	public void setDireccion(String direccion) {
+//		this.direccion = direccion;
+//	}
 }
