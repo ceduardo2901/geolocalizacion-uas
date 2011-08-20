@@ -175,9 +175,9 @@ public class SitiosServicio extends Activity implements LocationListener {
 				parms.put("lon", longitud.toString());
 				// parms.put("lat", "-34.8948244");
 				// parms.put("lon", "-56.1195473");
-				SitioMovilDTO[] sitios = restTemp.getForObject(url, SitioMovilDTO[].class, parms);
+				String sitios = restTemp.getForObject(url, String.class, parms);
 				
-				System.out.println(sitios.length);
+				System.out.println(sitios);
 			}
 
 			return null;
