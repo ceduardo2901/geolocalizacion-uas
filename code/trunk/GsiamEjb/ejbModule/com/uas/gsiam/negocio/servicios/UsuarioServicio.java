@@ -1,7 +1,10 @@
 package com.uas.gsiam.negocio.servicios;
+
 import javax.ejb.Remote;
 
+import com.uas.gsiam.negocio.dto.SolicitudContacto;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 
 @Remote
@@ -11,10 +14,12 @@ public interface UsuarioServicio {
 	
 	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
 
-	public void crearUsuario (UsuarioDTO usuario);
-	
-	public void modificarUsuario (UsuarioDTO usuario);
-	
-	public void eliminarUsuario (UsuarioDTO usuario);
-	
+	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
+		
+	public void modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
+		
+	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
+		
+	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;	
+		
 }
