@@ -7,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
+
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
@@ -37,10 +39,10 @@ public class UsuarioServicios {
 	
 	
 	@POST
-	@Path("/agregar/{usuarioDto}")
+	@Path("/agregar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public void crearUsuario(@PathParam("usuarioDto") UsuarioDTO usuario) {
+    public void crearUsuario(@BadgerFish UsuarioDTO usuario) {
 		
 		
 		servicio.crearUsuario(usuario);
