@@ -1,6 +1,7 @@
 package com.uas.gsiam.persistencia.dao.impl;
 
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -185,14 +186,15 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	//TODO Deberiamos pasar solo el id del usuario?? o esta bien pasar todo el objeto??
+	//TODO Deberiamos pasar el objeto SolicitudContacto??
 	
-	public void crearContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo){
+	public void crearContacto(int usuarioSolicitante, int idUsuarioAprobador){
 		
 		PreparedStatement ps;
 		
 		try {
 			
-			String sqlCrearContacto = "INSERT INTO t_contacto (con_id_usuario, con_id_amigo, con_fecha_solicitud, con_flag_aprobado) " +
+			String sqlCrearContacto = "INSERT INTO t_contacto (con_id_usuario_sol, con_id_usuario_apr, con_fecha_solicitud, con_fecha_aprobacion) " +
 					                  "VALUES (?, ?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearContacto);
@@ -201,10 +203,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			java.sql.Date sqlToday = new java.sql.Date(today.getTime());
 
 			
-			ps.setInt(1, usuario.getId());
-			ps.setInt(2, usuarioAmigo.getId());
+			ps.setInt(1, usuarioSolicitante);
+			ps.setInt(2, idUsuarioAprobador);
 			ps.setDate(3, sqlToday);
-			ps.setBoolean(4, false);
+			ps.setDate(4, null);
 			
 			ps.executeUpdate();
 						
@@ -218,21 +220,21 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	// TODO Ver si vale la pena poner fecha de aprobacion
-	public void aprobarContacto(UsuarioDTO usuario, UsuarioDTO usuarioAmigo){
+	public void modificarFechaAprobacionContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador, Date FechaAprovacion){
 		
 		PreparedStatement ps;
 		
 		try {
 			
-			String sqlAprobarContacto = "UPDATE t_contacto SET con_flag_aprobado = ? " +
-					                     "WHERE con_id_usuario = ? AND con_id_amigo = ?";
+			String sqlAprobarContacto = "UPDATE t_contacto SET con_fecha_aprobacion = ? " +
+					                    "WHERE con_id_usuario_sol = ? AND con_id_usuario_apr = ?";
 		
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlAprobarContacto);
 					
-			ps.setInt(1, usuario.getId());
-			ps.setInt(2, usuarioAmigo.getId());
-			ps.setBoolean(3, true);
+			ps.setDate(1, FechaAprovacion);
+			ps.setInt(2, usuarioSolicitante.getId());
+			ps.setInt(3, usuarioAprobador.getId());
 			
 			ps.executeUpdate();
 						
@@ -246,5 +248,28 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
+	// TODO : Ver como resolver cuando uno se elimina una amistad ya estando aprobada....
+	public void eliminarContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador){
+		
+		PreparedStatement ps;
+		
+		try {
+			
+			String sqlEliminarContacto = "DELETE t_contacto WHERE con_id_usuario_sol=? AND con_id_usuario_apr = ?";
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlEliminarContacto);
+			
+			ps.setInt(1, usuarioSolicitante.getId());
+			ps.setInt(1, usuarioAprobador.getId());
+			
+			ps.close();
+ 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+		
+	}
 	
 }
