@@ -15,11 +15,19 @@ public class Constantes {
 	// The maximum time that should pass before the user gets a location update.
 	public static long MAX_TIME = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
 	
-	public static String LOGIN_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
-	
-	
-	
-	
 	public final static String REGEX_EMAIL = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+	
+	// Servicios
+	public static String LOGIN_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
+	public static String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/rest/usuarios/agregar?usuarioDto={usuarioDto}";
+	
+	
+	// Mensajes 
+	public static String MSG_ESPERA_GENERICO = "Cargando. Por favor espere..."; 
+	
+	public static String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
+	
+	
+	
 	
 }

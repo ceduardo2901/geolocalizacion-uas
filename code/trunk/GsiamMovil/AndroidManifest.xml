@@ -14,7 +14,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".SitioActivity"/>
         <activity android:name="com.uas.gsiam.servicios.SitiosServicio"/>
-        <activity android:name="CrearUsuario"/>
+        <activity android:name=".CrearUsuarioActivity"/>
         <activity android:name=".Login">
        
         <intent-filter>
@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <service android:name="com.uas.gsiam.servicios.LoginServicio"></service>
+        <service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"></service>
         	
     </application>
 </manifest>
