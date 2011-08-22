@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.principal.ui.MainActivity;
 import com.uas.gsiam.servicios.LoginServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
@@ -92,6 +93,9 @@ public class Login extends Activity {
 	    public void onReceive(Context context, Intent intent) {
 	    	Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 	    	dismissProgressDialog();
+	    	Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
+			
+			startActivity(actividadPrincipal);
 	    }
 	  };
 	
