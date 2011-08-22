@@ -44,6 +44,10 @@ public class LoginServicio extends IntentService{
 		parms.put("email", email);
 		parms.put("pass", pass);
 		UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
+		Intent intentLogin = new Intent(Constantes.LOGIN_FILTRO_ACTION);
+		Bundle datos = new Bundle();
+		
+		sendBroadcast(intentLogin);
 		
 	}
 
