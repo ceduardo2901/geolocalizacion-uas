@@ -14,13 +14,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-public class LoginServicio extends IntentService{
 
-	protected static String TAG = "LoginServicio";
+public class CrearUsuarioServicio extends IntentService{
+
+	protected static String TAG = "CrearUsuarioServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
 	
-	public LoginServicio() {
+	public CrearUsuarioServicio() {
 		super(TAG);
 		
 	}
@@ -35,14 +36,22 @@ public class LoginServicio extends IntentService{
 		
 		Bundle bundle = intent.getExtras();
          
-        String pass = bundle.getString("pass");
+		String nombre = bundle.getString("nombre");
+		String pass = bundle.getString("pass");
 		String email = bundle.getString("email"); 
 		
+		UsuarioDTO usuario = new UsuarioDTO();
+		usuario.setNombre(nombre);
+		usuario.setEmail(email);
+		usuario.setPassword(pass);
 		
-		Map<String, String> parms = new HashMap<String, String>();
-		parms.put("email", email);
-		parms.put("pass", pass);
-		UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
+		
+		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
+		parms.put("usuario", usuario);
+		
+		String respuesta = restTemp.getForObject(Constantes.CREAR_USUARIO_SERVICE_URL, String.class, parms);
+		
+		
 		
 		Intent intentLogin = new Intent(Constantes.LOGIN_FILTRO_ACTION);
 		Bundle datos = new Bundle();
