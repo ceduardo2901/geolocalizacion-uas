@@ -1,6 +1,7 @@
 package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.ejb.Stateless;
 
@@ -29,10 +30,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
     public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		UsuarioDTO user=null;
 		try {
-			//FacebookTemplate facebook = new FacebookTemplate(usuario.getToken());
-			//List<String> friends = facebook.friendOperations().getFriendIds();
-//			FacebookClient facebook = new DefaultFacebookClient(usuario.getToken());
-//			Connection<User> myFriends = facebook.fetchConnection("me/friends", User.class);
+			
 			user = AbstractFactory.getInstance().getUsuarioDAO().login(usuario);
 			
 			
@@ -55,88 +53,125 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
+	public String crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
 		
 		try {
 			
-			AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
+			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())){
+				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
+			}
+			else{
+				AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
+			}
+			
+			return Constantes.RETURN_OK;
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 			
 		} catch (InstantiationException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
 			
 		} catch (IllegalAccessException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
 			
 		} catch (ClassNotFoundException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
-		}
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
+		} 
 			
 	}
-	
+	//TODO : deberiamos escribir todos los errores en un log
     
-	public void modificarUsuario (UsuarioDTO usuario) {
+	public String modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion {
 		
 		try {
-			AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
+			
+			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())){
+				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
+			}
+			else{
+				AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
+			}
+			
+			return Constantes.RETURN_OK;
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_MODIFICAR_USUARIO);
+			
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_MODIFICAR_USUARIO);
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			throw new UsuarioExcepcion(Constantes.ERROR_MODIFICAR_USUARIO);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_MODIFICAR_USUARIO);
+		} 
 	
 	}
 	
-	public void eliminarUsuario (UsuarioDTO usuario) {
+	
+	public String eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
 			
 		try {
+			
 			AbstractFactory.getInstance().getUsuarioDAO().eliminarUsuario(usuario);
+			
+			return Constantes.RETURN_OK;
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
 		}
 	
 	}
 	
 	
 	
-	public void crearSolicitudContacto (SolicitudContacto solicitud) {	
+	public String crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion{	
 		
 		//TODO :  deberia chequear que no exista la solicitud del otro usuario
 			
 		try {
+			
 			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud.getIdUsuarioSolicitante(), solicitud.getIdUsuarioAprobador());
+			
+			//TODO : Falta enviar mail al amigo!!!
+			
+			return Constantes.RETURN_OK;
+			
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_CONTACTO);
+			
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_CONTACTO);
+			
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_CONTACTO);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_CONTACTO);
 		}
 			
 	}

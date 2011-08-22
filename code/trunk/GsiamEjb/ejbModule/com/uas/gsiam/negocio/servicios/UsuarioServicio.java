@@ -14,12 +14,12 @@ public interface UsuarioServicio {
 	
 	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
 
-	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
+	public String crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		
-	public void modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
+	public String modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		
-	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
+	public String eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
 		
-	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;	
+	public String crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;	
 		
 }
