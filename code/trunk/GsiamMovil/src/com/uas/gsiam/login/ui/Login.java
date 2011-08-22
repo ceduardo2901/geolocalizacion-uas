@@ -2,8 +2,15 @@ package com.uas.gsiam.login.ui;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,16 +18,20 @@ import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.LoginServicio;
+import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
 public class Login extends Activity {
 
+	protected static String TAG="Login";
 	protected String email;
 	protected String pass;
 
 	protected EditText emailTxt;
 	protected EditText passTxt;
 	protected Button login;
+	protected IntentFilter loginFiltro;
+	private ProgressDialog progressDialog;
 
 	//private UsuarioDTO user;
 
@@ -33,12 +44,19 @@ public class Login extends Activity {
 
 		passTxt = (EditText) findViewById(R.id.passTxt);
 		login = (Button) findViewById(R.id.entrarBtn);
-
+		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
+	
+	 protected void onResume() {
+		 super.onResume();
+		 
+		registerReceiver(prueba, loginFiltro);
+	 }
 
 	
 	public void btnValidarEmail(View v) {
+		
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
 	
@@ -53,6 +71,8 @@ public class Login extends Activity {
 			Intent intent = new Intent(this,LoginServicio.class);
 			intent.putExtras(bundle);
 			startService(intent);
+			
+			showLoadingProgressDialog();
 		}
 	}
 
@@ -67,7 +87,26 @@ public class Login extends Activity {
 	}
 	
 	
+	protected BroadcastReceiver prueba = new BroadcastReceiver() {
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	    	Log.i(TAG, "mensaje de prueba estoy aca !!!!");
+	    	dismissProgressDialog();
+	    }
+	  };
 	
+	
+	  private void showLoadingProgressDialog() {
+			progressDialog = ProgressDialog.show(this, "",
+					"Loading. Please wait...", true);
+		}
+
+		private void dismissProgressDialog() {
+			if (progressDialog != null) {
+
+				progressDialog.dismiss();
+			}
+		}
 	
 	
 }

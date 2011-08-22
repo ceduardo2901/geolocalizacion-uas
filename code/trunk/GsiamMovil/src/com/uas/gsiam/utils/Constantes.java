@@ -7,6 +7,7 @@ public class Constantes {
 	// radio por defecto.
 	public static int RADIO = 150;
 	public static String SHARED_PREFERENCE_FILE = "SHARED_PREFERENCE_FILE";
+	public static String LOGIN_FILTRO_ACTION = "com.gsiam.places.LOGIN_FILTRO_ACTION";
 	public static boolean SUPPORTS_GINGERBREAD = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD;
 	public static boolean SUPPORTS_FROYO = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO;
 	// The maximum distance the user should travel between location updates.
