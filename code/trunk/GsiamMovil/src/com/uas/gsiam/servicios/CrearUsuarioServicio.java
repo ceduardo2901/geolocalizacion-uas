@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
@@ -13,6 +15,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 
 public class CrearUsuarioServicio extends IntentService{
@@ -29,29 +32,30 @@ public class CrearUsuarioServicio extends IntentService{
 	public void onCreate(){
 		super.onCreate();
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		//b CommonsClientHttpRequestFactory
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
 		Bundle bundle = intent.getExtras();
-         
-		String nombre = bundle.getString("nombre");
-		String pass = bundle.getString("pass");
-		String email = bundle.getString("email"); 
 		
-		UsuarioDTO usuario = new UsuarioDTO();
-		usuario.setNombre(nombre);
-		usuario.setEmail(email);
-		usuario.setPassword(pass);
-		
+		UsuarioDTO usuario = (UsuarioDTO) bundle.getSerializable("usuario");
 		
 		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
-		parms.put("usuario", usuario);
+		parms.put("usuarioDto", usuario);
 		
-		String respuesta = restTemp.getForObject(Constantes.CREAR_USUARIO_SERVICE_URL, String.class, parms);
+		Log.i(TAG, "lalalalala");
 		
+		try{
 		
+			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);
+			Log.i(TAG, "respuesta:"+respuesta);
+			
+		}catch (RestClientException e){
+			Log.i(TAG, "error");
+		}
+		Log.i(TAG, "lalala");
 		
 		Intent intentLogin = new Intent(Constantes.LOGIN_FILTRO_ACTION);
 		Bundle datos = new Bundle();

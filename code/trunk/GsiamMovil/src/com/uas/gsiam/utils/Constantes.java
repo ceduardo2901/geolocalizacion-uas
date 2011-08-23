@@ -19,7 +19,7 @@ public class Constantes {
 	
 	// Servicios
 	public static String LOGIN_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
-	public static String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/rest/usuarios/agregar?usuarioDto={usuarioDto}";
+	public static String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/agregar";
 	
 	
 	// Mensajes 

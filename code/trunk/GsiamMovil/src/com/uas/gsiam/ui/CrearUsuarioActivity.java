@@ -57,11 +57,16 @@ public class CrearUsuarioActivity extends Activity {
 					Toast.LENGTH_LONG).show();
 		} else {
 				
+			
+			UsuarioDTO usuario = new UsuarioDTO();
+			usuario.setNombre(nombre);
+			usuario.setEmail(email);
+			usuario.setPassword(pass);
+			
+			
 			Bundle bundle = new Bundle();
-			bundle.putString("nombre", nombre);
-			bundle.putString("email", email);
-			bundle.putString("pass", pass);
-			// TODO : se podra mandar el usuarioDTO por el bundle???
+			bundle.putSerializable("usuario", usuario);
+			
 
 			Intent intent = new Intent(this,CrearUsuarioServicio.class);
 			intent.putExtras(bundle);
