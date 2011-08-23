@@ -35,7 +35,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
-				usuarioRetorno.setFechaNacimiento(rs.getDate("usu_fecha_nacimiento"));
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(usuario.getEmail());
 				usuarioRetorno.setPassword(usuario.getPassword());
@@ -59,24 +58,36 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 		boolean existe = false;
+		
+		try{
+
+			String sqlExisteUsuario = "SELECT COUNT(*) FROM t_usuario u " +
+	        						  "WHERE u.usu_mail = ?";
 			
-		String sqlExisteUsuario = "SELECT COUNT(*) FROM t_usuario u " +
-        						  "WHERE u.usu_mail = ?";
-		
-		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteUsuario);
-		
-		ps.setString(1, mail);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		rs.next();
-		if (rs.getInt(1) == 1)
-			 existe = true;
-		 
-		 rs.close();
-		 ps.close();
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteUsuario);
 			
-	
+			ps.setString(1, mail);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			rs.next();
+			if (rs.getInt(1) == 1)
+				 existe = true;
+			
+			rs.close();
+		    ps.close();
+		
+		}finally{
+			
+			try
+			   {
+				if (ConexionJDBCUtil.getConexion() != null)
+					ConexionJDBCUtil.getConexion().close();
+			   }
+			   catch (Throwable ignored)
+			   {}
+
+		}
 		
 		return existe;		
 		
@@ -91,20 +102,34 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public void crearUsuario(UsuarioDTO usuario) throws SQLException{
 		
 		PreparedStatement ps;
-	
 		
-		String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
-				                 "VALUES (?, ?, ?)";
+		try{
 		
-		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
+			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
+					                 "VALUES (?, ?, ?)";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
+			
+			ps.setString(1, usuario.getNombre());
+			ps.setString(2, usuario.getEmail());
+			ps.setString(3, usuario.getPassword());
+			
+			ps.executeUpdate();
+			ps.close();
+			
+		}finally{
+			
+			try
+			   {
+				if (ConexionJDBCUtil.getConexion() != null)
+					ConexionJDBCUtil.getConexion().close();
+			   }
+			   catch (Throwable ignored)
+			   {}
+
+
+		}
 		
-		ps.setString(1, usuario.getNombre());
-		ps.setString(2, usuario.getEmail());
-		ps.setString(3, usuario.getPassword());
-	//	ps.setDate(4, usuario.getFechaNacimiento());
-		
-		ps.executeUpdate();
-		ps.close();
 		
 	}
 	
@@ -130,7 +155,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 		//ps.setDate(4, usuario.getFechaNacimiento());
 		
 		ps.setInt(5, usuario.getId());
-			
+		ps.executeUpdate();
+		
 		ps.close();
  
 			
