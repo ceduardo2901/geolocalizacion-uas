@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="GsiamWeb2">
-        <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/JavaSource"/>
         <property name="context-root" value="GsiamWeb2"/>
         <property name="java-output-path" value="/GsiamWeb2/WebContent/WEB-INF/classes"/>
