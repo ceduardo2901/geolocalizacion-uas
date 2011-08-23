@@ -84,7 +84,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	//TODO : deberiamos escribir todos los errores en un log
     
-	public String modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion {
+	public void modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion {
 		
 		try {
 			
@@ -95,7 +95,6 @@ public class UsuarioServicioBean implements UsuarioServicio {
 				AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
 			}
 			
-			return Constantes.RETURN_OK;
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -116,13 +115,12 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public String eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
+	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
 			
 		try {
 			
 			AbstractFactory.getInstance().getUsuarioDAO().eliminarUsuario(usuario);
 			
-			return Constantes.RETURN_OK;
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -144,7 +142,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	
 	
 	
-	public String crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion{	
+	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion{	
 		
 		//TODO :  deberia chequear que no exista la solicitud del otro usuario
 			
@@ -154,7 +152,6 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 			//TODO : Falta enviar mail al amigo!!!
 			
-			return Constantes.RETURN_OK;
 			
 			
 		} catch (IOException e) {
