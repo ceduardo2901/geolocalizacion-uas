@@ -22,14 +22,14 @@ public class UsuarioServicios {
 	}
 	
 	@GET
-	@Path("/login/{pass}/{email}")
+	@Path("/login/{email}/{pass}")
 	@Produces("application/json")
-    public UsuarioDTO login(@PathParam("pass") String pass, @PathParam("email") String email) {
+    public UsuarioDTO login(@PathParam("email") String email, @PathParam("pass") String pass) {
 		UsuarioDTO user = new UsuarioDTO();
 		user.setEmail(email);
 		user.setPassword(pass);
 
-		
+		System.out.println(user.getEmail());
 		user = servicio.login(user);
 		 
 		
