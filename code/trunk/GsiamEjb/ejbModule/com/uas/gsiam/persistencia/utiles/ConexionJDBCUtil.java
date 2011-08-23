@@ -23,7 +23,7 @@ public class ConexionJDBCUtil {
 			Context ctx = new InitialContext();
 			dt = (DataSource) ctx.lookup("java:DS_Postgresql");
 			
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		
