@@ -53,11 +53,9 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public String crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
+	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
 		
 		try {
-			
-			System.out.println("Llegue al ejb!!!!!");
 			
 			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())){
 				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
@@ -66,9 +64,6 @@ public class UsuarioServicioBean implements UsuarioServicio {
 				AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
 			}
 			
-			System.out.println("Sali del ejb!!!!!");
-			
-			return Constantes.RETURN_OK;
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);

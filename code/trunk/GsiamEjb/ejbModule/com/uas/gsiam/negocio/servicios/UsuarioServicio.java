@@ -14,7 +14,7 @@ public interface UsuarioServicio {
 	
 	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
 
-	public String crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
+	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		
 	public String modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		

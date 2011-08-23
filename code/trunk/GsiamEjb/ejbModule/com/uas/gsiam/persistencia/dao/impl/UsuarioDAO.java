@@ -79,14 +79,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		}finally{
 			
-			try
-			   {
 				if (ConexionJDBCUtil.getConexion() != null)
 					ConexionJDBCUtil.getConexion().close();
-			   }
-			   catch (Throwable ignored)
-			   {}
-
+	
 		}
 		
 		return existe;		
@@ -119,14 +114,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 		}finally{
 			
-			try
-			   {
 				if (ConexionJDBCUtil.getConexion() != null)
 					ConexionJDBCUtil.getConexion().close();
-			   }
-			   catch (Throwable ignored)
-			   {}
-
 
 		}
 		
@@ -159,8 +148,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		ps.close();
  
-			
-		
+
 		
 	}
 	
