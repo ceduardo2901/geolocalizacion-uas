@@ -37,16 +37,13 @@ public class UsuarioDelegate {
 		return usuario;
     }
 	
-    public void crearUsuario(UsuarioDTO usuario) {
+    
+    
+    public void crearUsuario(UsuarioDTO usuario) throws UsuarioExcepcion {
     		
-		try {
-			servicioUsuario.crearUsuario(usuario);
-		} catch (UsuarioExcepcion e) {
-			
-			e.printStackTrace();
-		}
+		servicioUsuario.crearUsuario(usuario);
 		
-}
+	}
     
     
 	
