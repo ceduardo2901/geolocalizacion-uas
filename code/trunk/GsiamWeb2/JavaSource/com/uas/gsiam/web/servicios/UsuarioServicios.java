@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
+import com.uas.gsiam.persistencia.utiles.Constantes;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
 
 @Path("/usuarios")
@@ -42,14 +44,28 @@ public class UsuarioServicios {
 	@Path("/agregar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public void crearUsuario(@BadgerFish UsuarioDTO usuario) {
+    public String crearUsuario(@BadgerFish UsuarioDTO usuario) {
 		
 		
-		servicio.crearUsuario(usuario);
+    try {
+			
+    	System.out.println("Llegue al servicio!!!!!");
+    	
+			servicio.crearUsuario(usuario);
+			
+		System.out.println("Termine el servicio!!!!!");
+		
+		return Constantes.RETURN_OK;
+			
+		} catch (UsuarioExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
 		 
 		
     }
-	
-	
+		 
 	
 }
