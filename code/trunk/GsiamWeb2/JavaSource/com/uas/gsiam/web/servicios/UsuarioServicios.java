@@ -49,17 +49,11 @@ public class UsuarioServicios {
 		
     try {
 			
-    	System.out.println("Llegue al servicio!!!!!");
-    	
-			servicio.crearUsuario(usuario);
-			
-		System.out.println("Termine el servicio!!!!!");
+		servicio.crearUsuario(usuario);
 		
 		return Constantes.RETURN_OK;
 			
 		} catch (UsuarioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return null;
 		}
 		
