@@ -41,12 +41,7 @@ public class UsuarioDelegate {
     
     public void crearUsuario(UsuarioDTO usuario) throws UsuarioExcepcion {
     		
-    	System.out.println("Llegue al delegate!!!!!");
-    	
-		String lal = servicioUsuario.crearUsuario(usuario);
-		
-		
-		System.out.println("Sali del delegate!!!!!" + lal);
+    	servicioUsuario.crearUsuario(usuario);
 		
 	}
     
