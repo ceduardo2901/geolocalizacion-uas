@@ -8,9 +8,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 
-import com.facebook.android.Util;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -33,6 +33,7 @@ public class CrearUsuarioServicio extends IntentService{
 	public void onCreate(){
 		super.onCreate();
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		// new CommonsClientHttpRequestFactory()
 	}
 
 	@Override
@@ -49,17 +50,12 @@ public class CrearUsuarioServicio extends IntentService{
 		
 			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);
 			
-			if (respuesta.equals(Constantes.RETURN_OK)){
-				Util.showAlert(this, "Aviso", "El usuario se ha creado exitosamente");
-			}
-			else{
-				Util.showAlert(this, "Aviso", respuesta);
-			}
+			bundle.putString("respuesta", respuesta);
 			
 			
 		}catch (RestClientException e){
-			Log.i(TAG, "error");
-			Util.showAlert(this, "Error", "Lo sentimos, el servidor no se encuentra disponible");
+			Log.i(TAG, "Error: " + e.getMessage());
+			Util.showAlertDialog(this, "Error", "Lo sentimos, el servidor no se encuentra disponible");
 		}
 	
 		

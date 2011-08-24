@@ -45,7 +45,7 @@ public class Util {
 	
 	
 	
-	public static void showDialogConfirm (Context contexto, String titulo, String mensaje) {
+	public static void showAlertDialogConfirm (Context contexto, String titulo, String mensaje) {
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
 		
@@ -69,7 +69,7 @@ public class Util {
 		
 	}
 	
-	public static void showDialog (Context contexto, String titulo, String mensaje){
+	public static void showAlertDialog (Context contexto, String titulo, String mensaje){
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);  
 		dialog.setTitle(titulo);  

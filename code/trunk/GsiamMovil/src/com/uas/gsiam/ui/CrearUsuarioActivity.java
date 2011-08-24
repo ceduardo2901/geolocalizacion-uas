@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,10 +29,10 @@ public class CrearUsuarioActivity extends Activity {
 	protected EditText emailTxt;
 	protected EditText passTxt;
 	protected Button registrarseBtn;
-
+	protected IntentFilter crearUsuarioFiltro;
 	private ProgressDialog progressDialog;
 	
-
+	protected static String TAG = "CrearUsuarioActivity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,16 @@ public class CrearUsuarioActivity extends Activity {
 		passTxt = (EditText) findViewById(R.id.passTxt);
 		registrarseBtn = (Button) findViewById(R.id.crearUsuarioBtn);
 		
+		crearUsuarioFiltro = new IntentFilter(Constantes.CREAR_USUARIO_FILTRO_ACTION);
 
 	}
 
-	
+	protected void onResume() {
+		 super.onResume();
+		 
+		registerReceiver(receiverCrearUsuario, crearUsuarioFiltro);
+	 }
+	 
 	public void crearUsuario(View v) {
 		
 		nombre = nombreTxt.getText().toString().trim();
@@ -71,35 +79,37 @@ public class CrearUsuarioActivity extends Activity {
 			Intent intent = new Intent(this,CrearUsuarioServicio.class);
 			intent.putExtras(bundle);
 			startService(intent);
-			
-			showLoadingProgressDialog();
+			Util.showProgressDialog(this, progressDialog, Constantes.MSG_ESPERA_GENERICO);
 
 		}
 	}
 
 	
 	
-	protected BroadcastReceiver prueba = new BroadcastReceiver() {
+	protected BroadcastReceiver receiverCrearUsuario = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	dismissProgressDialog();
-	    	Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
+	    	
+	    	Bundle bundle = intent.getExtras();
 			
-			startActivity(actividadPrincipal);
+			String respuesta = bundle.getString("respuesta");
+			
+			Util.dismissProgressDialog(progressDialog);
+			
+	    	if (respuesta.equals(Constantes.RETURN_OK)){
+				Util.showAlertDialog(context, "Aviso", "El usuario se ha creado exitosamente");
+				
+				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(actividadPrincipal);
+			}
+			else{
+				Util.showAlertDialog(context, "Aviso", respuesta);
+			}
+	    	
+			
 	    }
 	  };
 	
-	private void showLoadingProgressDialog() {
-		progressDialog = ProgressDialog.show(this, "",
-				Constantes.MSG_ESPERA_GENERICO, true);
-	}
-
-	private void dismissProgressDialog() {
-		if (progressDialog != null) {
-
-			progressDialog.dismiss();
-		}
-	}
 
 	
 }
