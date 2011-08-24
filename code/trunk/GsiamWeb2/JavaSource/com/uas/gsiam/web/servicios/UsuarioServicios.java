@@ -54,7 +54,7 @@ public class UsuarioServicios {
 		return Constantes.RETURN_OK;
 			
 		} catch (UsuarioExcepcion e) {
-			return null;
+			return e.getMensaje();
 		}
 		
 		 
