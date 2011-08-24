@@ -51,7 +51,7 @@ public class CrearUsuarioServicio extends IntentService{
 			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);
 			
 			bundle.putString("respuesta", respuesta);
-			
+			intent.putExtras(bundle);
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
