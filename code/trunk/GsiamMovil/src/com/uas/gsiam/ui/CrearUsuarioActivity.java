@@ -98,7 +98,6 @@ public class CrearUsuarioActivity extends Activity {
 			
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
 				Util.showAlertDialog(context, "Aviso", "El usuario se ha creado exitosamente");
-				
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
 			}
