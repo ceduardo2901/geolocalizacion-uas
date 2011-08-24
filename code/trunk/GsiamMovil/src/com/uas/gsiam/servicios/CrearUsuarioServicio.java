@@ -50,8 +50,9 @@ public class CrearUsuarioServicio extends IntentService{
 		
 			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);
 			
-			bundle.putString("respuesta", respuesta);
-			intent.putExtras(bundle);
+			Bundle bundleRespuesta = new Bundle();
+			bundleRespuesta.putString("respuesta", respuesta);
+			intent.putExtras(bundleRespuesta);
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
@@ -59,8 +60,8 @@ public class CrearUsuarioServicio extends IntentService{
 		}
 	
 		
-		Intent intentLogin = new Intent(Constantes.CREAR_USUARIO_FILTRO_ACTION);
-		sendBroadcast(intentLogin);
+		Intent intentCrearUsuario = new Intent(Constantes.CREAR_USUARIO_FILTRO_ACTION);
+		sendBroadcast(intentCrearUsuario);
 		
 	}
 
