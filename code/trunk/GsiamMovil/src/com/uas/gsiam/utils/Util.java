@@ -45,7 +45,7 @@ public class Util {
 	
 	
 	
-	public static void mostrarDialogConfirm (Context contexto, String titulo, String mensaje) {
+	public static void showDialogConfirm (Context contexto, String titulo, String mensaje) {
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
 		
@@ -69,7 +69,7 @@ public class Util {
 		
 	}
 	
-	public static void mostrarDialog (Context contexto, String titulo, String mensaje){
+	public static void showDialog (Context contexto, String titulo, String mensaje){
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);  
 		dialog.setTitle(titulo);  
@@ -80,7 +80,7 @@ public class Util {
 	}
 	   	
 	
-	public static void mostrarToast(Context contexto, String mensaje){
+	public static void showToast(Context contexto, String mensaje){
 		
 		Toast.makeText(contexto, mensaje,
 				Toast.LENGTH_LONG).show();
