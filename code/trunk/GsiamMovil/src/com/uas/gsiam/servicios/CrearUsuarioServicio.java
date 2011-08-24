@@ -48,19 +48,17 @@ public class CrearUsuarioServicio extends IntentService{
 		
 		try{
 		
-			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);
-			
-			Bundle bundleRespuesta = new Bundle();
-			bundleRespuesta.putString("respuesta", respuesta);
-			intent.putExtras(bundleRespuesta);
+			String respuesta = restTemp.postForObject(Constantes.CREAR_USUARIO_SERVICE_URL, usuario, String.class);	
+			bundle.putString("respuesta", respuesta);
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
-			Util.showAlertDialog(this, "Error", "Lo sentimos, el servidor no se encuentra disponible");
+			bundle.putString("respuesta", e.getMessage());
 		}
 	
 		
 		Intent intentCrearUsuario = new Intent(Constantes.CREAR_USUARIO_FILTRO_ACTION);
+		intentCrearUsuario.putExtras(bundle);
 		sendBroadcast(intentCrearUsuario);
 		
 	}
