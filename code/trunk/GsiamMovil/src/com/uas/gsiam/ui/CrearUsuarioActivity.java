@@ -36,6 +36,7 @@ public class CrearUsuarioActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.i(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.crearusuario);
 		
@@ -50,12 +51,12 @@ public class CrearUsuarioActivity extends Activity {
 
 	protected void onResume() {
 		 super.onResume();
-		 
+		 Log.i(TAG, "onResume");
 		registerReceiver(receiverCrearUsuario, crearUsuarioFiltro);
 	 }
 	 
 	public void crearUsuario(View v) {
-		
+		Log.i(TAG, "crearUsuario");
 		nombre = nombreTxt.getText().toString().trim();
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
@@ -89,17 +90,17 @@ public class CrearUsuarioActivity extends Activity {
 	protected BroadcastReceiver receiverCrearUsuario = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	
+	    	Log.i(TAG, "onReceive");
 	    	Bundle bundle = intent.getExtras();
-			
 			String respuesta = bundle.getString("respuesta");
 			
 			Util.dismissProgressDialog(progressDialog);
 			
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
-				Util.showAlertDialog(context, "Aviso", "El usuario se ha creado exitosamente");
+	    		Util.showAlertDialogOk(context, "Aviso", "El usuario se ha creado exitosamente");
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
+				
 			}
 			else{
 				Util.showAlertDialog(context, "Aviso", respuesta);

@@ -69,6 +69,25 @@ public class Util {
 		
 	}
 	
+	public static void showAlertDialogOk (Context contexto, String titulo, String mensaje) {
+		
+		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
+		
+		dialog.setTitle(titulo); 
+		dialog.setMessage(mensaje);
+		dialog.setCancelable(false);
+		dialog.setIcon(android.R.drawable.ic_dialog_info);  
+		dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+		    	   
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   dialog.cancel();
+		           }
+		       });
+		dialog.show(); 
+		
+		
+	}
+	
 	public static void showAlertDialog (Context contexto, String titulo, String mensaje){
 		
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);  
