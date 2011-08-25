@@ -1,5 +1,7 @@
 package com.uas.gsiam.negocio.servicios;
 
+import java.util.ArrayList;
+
 import javax.ejb.Remote;
 
 import com.uas.gsiam.negocio.dto.SolicitudContacto;
@@ -20,6 +22,8 @@ public interface UsuarioServicio {
 		
 	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
 		
-	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;	
+	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;
+	
+	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion;
 		
 }
