@@ -1,19 +1,16 @@
 package com.uas.gsiam.persistencia.dao.impl;
 
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 import com.uas.gsiam.negocio.dto.SolicitudContacto;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
-
 
 
 public class UsuarioDAO implements IUsuarioDAO {
@@ -203,7 +200,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 
-	public void modificarFechaAprobacionContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador, Date FechaAprovacion) throws SQLException{
+	public void aprobarSolicitudContacto(SolicitudContacto solicitud) throws SQLException{
 		
 		PreparedStatement ps;
 
@@ -213,9 +210,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlAprobarContacto);
 				
-		ps.setDate(1, FechaAprovacion);
-		ps.setInt(2, usuarioSolicitante.getId());
-		ps.setInt(3, usuarioAprobador.getId());
+		ps.setDate(1, solicitud.getFechaAprobacion());
+		ps.setInt(2, solicitud.getIdUsuarioSolicitante());
+		ps.setInt(3, solicitud.getIdUsuarioAprobador());
 		
 		ps.executeUpdate();
 					
@@ -225,8 +222,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	// TODO : Ver como resolver cuando uno se elimina una amistad ya estando aprobada....
-	public void eliminarContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador) throws SQLException{
+	// TODO : Ver como resolver cuando uno se elimina una amistad ya estando aprobada.... en caso que lo implementemos
+	public void eliminarSolicitudContacto(SolicitudContacto solicitud) throws SQLException{
 		
 		PreparedStatement ps;
 			
@@ -234,8 +231,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlEliminarContacto);
 			
-		ps.setInt(1, usuarioSolicitante.getId());
-		ps.setInt(1, usuarioAprobador.getId());
+		ps.setInt(1, solicitud.getIdUsuarioSolicitante());
+		ps.setInt(1, solicitud.getIdUsuarioAprobador());
 		
 		ps.close();
 

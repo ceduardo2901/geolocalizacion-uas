@@ -1,6 +1,5 @@
 package com.uas.gsiam.persistencia.dao;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,7 +11,6 @@ import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 
 public interface IUsuarioDAO {
 
-	
 	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
 	
 	public boolean existeUsuario(String mail) throws SQLException;
@@ -25,9 +23,9 @@ public interface IUsuarioDAO {
 	
 	public void crearContacto(SolicitudContacto solicitud) throws SQLException;
 	
-	public void modificarFechaAprobacionContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador, Date FechaAprovacion) throws SQLException;
+	public void aprobarSolicitudContacto(SolicitudContacto solicitud) throws SQLException;
 	
-	public void eliminarContacto(UsuarioDTO usuarioSolicitante, UsuarioDTO usuarioAprobador) throws SQLException;
+	public void eliminarSolicitudContacto(SolicitudContacto solicitud) throws SQLException;
 	
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException;
 	
