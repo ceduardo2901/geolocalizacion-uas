@@ -1,20 +1,11 @@
 package com.uas.gsiam.ui;
 
-import com.uas.gsiam.servicios.SitiosServicio;
-import com.uas.gsiam.ui.R;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -30,7 +21,7 @@ public class MainActivity extends Activity {
 
 	
 	private void sitiosActivity(){
-		Intent sitioIntent = new Intent(this,SitiosServicio.class);
+		Intent sitioIntent = new Intent(this,SitioActivity.class);
 		startActivity(sitioIntent);
 	}
 		

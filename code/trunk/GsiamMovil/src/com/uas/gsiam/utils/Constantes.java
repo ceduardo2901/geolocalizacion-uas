@@ -25,6 +25,8 @@ public class Constantes {
 	public static final String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/agregar";
 	public static final String CREAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.CREAR_USUARIO_FILTRO_ACTION";
 	
+	public static final String SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/{lat}/{lon}";
+	public static String SITIO_FILTRO_ACTION = "com.gsiam.places.SITIO_FILTRO_ACTION";
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Cargando. Por favor espere..."; 
 	
