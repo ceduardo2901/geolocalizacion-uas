@@ -232,7 +232,29 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	
+	public ArrayList<UsuarioDTO> getContactos (UsuarioDTO usuario) throws UsuarioExcepcion{	
+		
+		try {
+			
+			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesContactosPendientes(usuario);
+			
+		} catch (IOException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
+		} catch (InstantiationException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_CONTACTOS);
+			
+		} catch (IllegalAccessException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_CONTACTOS);
+			
+		} catch (ClassNotFoundException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_CONTACTOS);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_CONTACTOS);
+		}
+			
+	}
 	
     
 }
