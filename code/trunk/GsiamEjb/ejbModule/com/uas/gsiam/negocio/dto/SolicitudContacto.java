@@ -9,7 +9,9 @@ public class SolicitudContacto {
 	private int idUsuarioSolicitante;
 	private int idUsuarioAprobador;
 	private Date fechaSolicitud;
-	private Date fechaAprovacion;
+	private Date fechaAprobacion;
+	
+	
 	public int getIdUsuarioSolicitante() {
 		return idUsuarioSolicitante;
 	}
@@ -28,11 +30,11 @@ public class SolicitudContacto {
 	public void setFechaSolicitud(Date fechaSolicitud) {
 		this.fechaSolicitud = fechaSolicitud;
 	}
-	public Date getFechaAprovacion() {
-		return fechaAprovacion;
+	public Date getFechaAprobacion() {
+		return fechaAprobacion;
 	}
-	public void setFechaAprovacion(Date fechaAprovacion) {
-		this.fechaAprovacion = fechaAprovacion;
+	public void setFechaAprobacion(Date fechaAprobacion) {
+		this.fechaAprobacion = fechaAprobacion;
 	}
 	 
 	

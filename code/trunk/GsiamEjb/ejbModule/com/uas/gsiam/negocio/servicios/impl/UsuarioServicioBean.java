@@ -152,6 +152,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud);
 			
 			//TODO : Falta enviar mail al amigo!!!
+			//TODO : ver como solucionamos lo de las notificaciones.
 			
 			
 			
@@ -173,6 +174,37 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 	}
 	
+	
+	public void responderSolicitudContacto (SolicitudContacto solicitud, boolean respuesta) throws UsuarioExcepcion {
+		
+		try {
+			
+			if (respuesta){
+				// Se acepta la solicitud
+				AbstractFactory.getInstance().getUsuarioDAO().aprobarSolicitudContacto(solicitud);
+			}
+			else{
+				// Se rechaza la solicitud
+				AbstractFactory.getInstance().getUsuarioDAO().eliminarSolicitudContacto(solicitud);
+			}
+			
+		} catch (IOException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RESPONDER_SOLICITUD);
+			
+		} catch (InstantiationException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RESPONDER_SOLICITUD);
+			
+		} catch (IllegalAccessException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RESPONDER_SOLICITUD);
+			
+		} catch (ClassNotFoundException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RESPONDER_SOLICITUD);
+		}
+		
+	}
 	
 	
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion{	
@@ -198,6 +230,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		}
 			
 	}
+	
 	
 	
 	
