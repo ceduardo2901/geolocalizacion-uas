@@ -12,7 +12,7 @@ public class GsiamRestApplication extends Application{
 
 	public GsiamRestApplication() {
 		this.singletons.add(new UsuarioServicios());
-		this.singletons.add(new Sitio());
+		this.singletons.add(new SitioServicios());
 	}
 
 	public Set<Class<?>> getClasses()
