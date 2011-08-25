@@ -2,6 +2,7 @@ package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 
@@ -148,7 +149,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 		try {
 			
-			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud.getIdUsuarioSolicitante(), solicitud.getIdUsuarioAprobador());
+			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud);
 			
 			//TODO : Falta enviar mail al amigo!!!
 			
@@ -174,6 +175,29 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	
 	
 	
+	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion{	
+			
+		try {
+			
+			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesContactosPendientes(usuario);
+			
+		} catch (IOException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
+		} catch (InstantiationException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (IllegalAccessException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (ClassNotFoundException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+		}
+			
+	}
 	
 	
 	

@@ -5,8 +5,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
+import com.uas.gsiam.negocio.dto.SolicitudContacto;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
@@ -132,7 +134,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 	
-		String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ?, usu_fecha_nacimiento = ? " +
+		String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ? " +
 				                 "WHERE usu_id = ?";
 		
 
@@ -141,9 +143,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ps.setString(1, usuario.getNombre());
 		ps.setString(2, usuario.getEmail());
 		ps.setString(3, usuario.getPassword());
-		//ps.setDate(4, usuario.getFechaNacimiento());
-		
-		ps.setInt(5, usuario.getId());
+		ps.setInt(4, usuario.getId());
 		ps.executeUpdate();
 		
 		ps.close();
@@ -175,7 +175,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	//TODO Deberiamos pasar solo el id del usuario?? o esta bien pasar todo el objeto??
 	//TODO Deberiamos pasar el objeto SolicitudContacto??
 	
-	public void crearContacto(int usuarioSolicitante, int idUsuarioAprobador) throws SQLException{
+	public void crearContacto(SolicitudContacto solicitud) throws SQLException{
 		
 		PreparedStatement ps;
 			
@@ -188,8 +188,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 		java.sql.Date sqlToday = new java.sql.Date(today.getTime());
 
 		
-		ps.setInt(1, usuarioSolicitante);
-		ps.setInt(2, idUsuarioAprobador);
+		ps.setInt(1, solicitud.getIdUsuarioSolicitante());
+		ps.setInt(2, solicitud.getIdUsuarioAprobador());
 		ps.setDate(3, sqlToday);
 		ps.setDate(4, null);
 		
@@ -238,9 +238,62 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ps.setInt(1, usuarioAprobador.getId());
 		
 		ps.close();
- 
-		
-		
+
 	}
+	
+	
+	
+	
+	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException{
+		
+		PreparedStatement ps;
+		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
+				
+		try{
+			
+			String sqlSolicitudesUsuarios = "SELECT u.* FROM t_contacto c, t_usuario u " +
+											"WHERE c.con_id_usuario_apr = ? AND " +
+											"u.usu_id = c.con_id_usuario_sol AND " +
+											"c.con_fecha_aprobacion is null";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlSolicitudesUsuarios);
+	
+			ps.setInt(1, usuario.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				UsuarioDTO usuarioRetorno = new UsuarioDTO();
+				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
+				usuarioRetorno.setId(rs.getInt("usu_id"));
+				usuarioRetorno.setEmail(rs.getString("usu_mail"));
+				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				
+				listaUsuarios.add(usuarioRetorno);
+				
+				
+			}
+				
+			rs.close();
+			ps.close();
+				
+			
+			return listaUsuarios;	
+		
+		
+		}finally{
+			
+			if (ConexionJDBCUtil.getConexion() != null)
+				ConexionJDBCUtil.getConexion().close();
+
+	}
+			
+		
+}
+	
+	
+	
+	
+	
 	
 }
