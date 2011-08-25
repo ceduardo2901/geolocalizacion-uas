@@ -29,4 +29,6 @@ public interface IUsuarioDAO {
 	
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException;
 	
+	public ArrayList<UsuarioDTO> getContactos(UsuarioDTO usuario) throws SQLException;
+	
 }

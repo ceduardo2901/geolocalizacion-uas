@@ -283,10 +283,60 @@ public class UsuarioDAO implements IUsuarioDAO {
 			if (ConexionJDBCUtil.getConexion() != null)
 				ConexionJDBCUtil.getConexion().close();
 
-	}
+		}
 			
 		
-}
+	}
+
+
+
+	public ArrayList<UsuarioDTO> getContactos(UsuarioDTO usuario) throws SQLException {
+	
+		PreparedStatement ps;
+		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
+				
+		try{
+			
+			String sqlContactos = "SELECT csol.con_id_usuario_sol id_usu FROM t_contacto csol " +
+								  "WHERE csol.con_id_usuario_apr = ? AND csol.con_fecha_aprobacion is not null " +
+								  "UNION " +
+								  "SELECT capr.con_id_usuario_apr id_usu FROM t_contacto capr " +
+								  "WHERE capr.con_id_usuario_sol = ? AND capr.con_fecha_aprobacion is not null ";
+			
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlContactos);
+	
+			ps.setInt(1, usuario.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				UsuarioDTO usuarioRetorno = new UsuarioDTO();
+				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
+				usuarioRetorno.setId(rs.getInt("usu_id"));
+				usuarioRetorno.setEmail(rs.getString("usu_mail"));
+				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				
+				listaUsuarios.add(usuarioRetorno);
+				
+				
+			}
+				
+			rs.close();
+			ps.close();
+				
+			
+			return listaUsuarios;	
+		
+		
+		}finally{
+			
+			if (ConexionJDBCUtil.getConexion() != null)
+				ConexionJDBCUtil.getConexion().close();
+
+		}
+		
+	}
 	
 	
 	
