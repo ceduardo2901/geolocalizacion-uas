@@ -1,8 +1,6 @@
 package com.uas.gsiam.ui;
 
 
-import org.springframework.util.StringUtils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;

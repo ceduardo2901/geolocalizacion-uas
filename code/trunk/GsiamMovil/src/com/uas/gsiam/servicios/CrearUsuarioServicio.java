@@ -52,7 +52,7 @@ public class CrearUsuarioServicio extends IntentService{
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", e.getMessage());
+			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
 		}
 	
 		

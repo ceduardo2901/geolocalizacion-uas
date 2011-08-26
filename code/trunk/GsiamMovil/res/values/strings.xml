@@ -4,7 +4,7 @@
     <string name="app_name">GsiamMovil</string>
     <string name="email">Email</string>
     <string name="pass">Contraseña</string>
-    <string name="entrar">Entrar</string>
+    <string name="BtnLogin">Entrar</string>
     <string name="facebook_app_id">264847263529970</string>
     <string name="facebook_app_secret">4f6c3e260c3a24ba530c87f23d74950e</string>
     <string name="facebook_description">facebook description</string>
@@ -14,7 +14,7 @@
 	<string name="sitios">Sitios</string>
 	<string name="amigos">Amigos</string>
 	<string name="perfil">Perfil</string>
-	<string name="Registrarse">Registrarse</string>
+	<string name="BtnRegistrarse">Registrarse</string>
 	<string name="Nombre">Nombre</string>
 	 <string-array name="permissions">
         <item>publish_stream</item>

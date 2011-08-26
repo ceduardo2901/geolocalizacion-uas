@@ -36,8 +36,8 @@
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:paddingTop="10px">
 			<LinearLayout android:id="@+id/linearLayout1" android:layout_width="wrap_content" android:layout_height="wrap_content">
-				<Button android:onClick="btnValidarEmail" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/entrar" android:id="@+id/entrarBtn"></Button>
-				<Button android:onClick="btnRegistrarse" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/Registrarse" android:id="@+id/button1"></Button>
+				<Button android:onClick="btnValidarEmail" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/BtnLogin" android:id="@+id/entrarBtn"></Button>
+				<Button android:onClick="btnRegistrarse" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/BtnRegistrarse" android:id="@+id/button1"></Button>
 			</LinearLayout>
 		</TableRow>
 		
