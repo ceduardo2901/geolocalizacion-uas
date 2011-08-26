@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class Util {
 	
+	private static volatile ProgressDialog progressDialog;
 
 	public static boolean validaMail (String email){
 		
@@ -27,15 +28,16 @@ public class Util {
 	
 	
 	
-	public static void showProgressDialog(Context context, ProgressDialog progressDialog, String mensaje) {
-		
+	public static void showProgressDialog(Context context, String mensaje) {
+		synchronized (Util.class) {
 		progressDialog = ProgressDialog.show(context, "",
 				mensaje, true);
+		}
 	}
 
 	
 	
-	public static void dismissProgressDialog(ProgressDialog progressDialog) {
+	public static void dismissProgressDialog() {
 		
 		if (progressDialog != null) {
 
