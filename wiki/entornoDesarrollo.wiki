@@ -5,21 +5,21 @@
 = Entorno de desarrollo a utilizar en G-SIAM =
 
 
- Instalar java 1.6 update 25
+ Instalar java 1.6 update 26
 
- Instalar eclipse classic 3.6.2 (Helio)
+ Instalar eclipse jee 3.7 (Indigo)
 
  Instalar el SDK de Android y plataforma Android 2.3.4 (agregar al path de windows tools/ y platform-tools/)
   
- Instalar wtp (web tool plataform)
-
- Instalar plugin para eclipse ADT 10.0.1
+ Instalar plugin para eclipse ADT 12.0.0
 
  Instalar subeclipse 1.6
 
  Instalar postgres 9.0 
 
  Instalar postgis 
+
+Bajar del repositorio los proyectos GsiamEjb, GsiamWeb2 y GsiamMovil
 
      
  
