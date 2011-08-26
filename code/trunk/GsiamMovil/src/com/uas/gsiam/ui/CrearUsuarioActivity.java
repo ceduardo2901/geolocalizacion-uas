@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.CrearUsuarioServicio;
@@ -67,8 +66,8 @@ public class CrearUsuarioActivity extends Activity {
 		pass = passTxt.getText().toString().trim();
 	
 		if (!Util.validaMail(email)) {
-			Toast.makeText(v.getContext(), Constantes.MSG_ERROR_MAIL,
-					Toast.LENGTH_LONG).show();
+			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
+					
 		} else {
 				
 			
