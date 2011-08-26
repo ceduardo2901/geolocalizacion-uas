@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	private Button sitiosButton;
+	
+	protected TextView nombreTxt;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 		sitiosButton = (Button) findViewById(R.id.sitios_button);
 		sitiosButton.setOnClickListener(sitioOnListener);
+		nombreTxt =  (TextView)findViewById(R.id.textNombre);
+		nombreTxt.setText("Bienvenido Josesito");
+		
 	}
 
 	

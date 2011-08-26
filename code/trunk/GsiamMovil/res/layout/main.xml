@@ -6,6 +6,10 @@
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:layout_gravity="center">
+		<TextView android:layout_width="wrap_content" 
+				  android:layout_height="wrap_content" 
+				  android:text="TextView" 
+				  android:id="@+id/textNombre"/>
 		<TextView android:text="@string/app_name"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:layout_gravity="center" android:layout_marginBottom="25dip"
