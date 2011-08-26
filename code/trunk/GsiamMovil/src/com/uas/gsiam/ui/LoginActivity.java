@@ -20,7 +20,7 @@ import com.uas.gsiam.servicios.LoginServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class Login extends Activity {
+public class LoginActivity extends Activity {
 
 	protected static String TAG="Login";
 	protected String email;
