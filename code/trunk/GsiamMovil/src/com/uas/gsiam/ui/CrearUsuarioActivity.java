@@ -30,7 +30,7 @@ public class CrearUsuarioActivity extends Activity {
 	protected EditText passTxt;
 	protected Button registrarseBtn;
 	protected IntentFilter crearUsuarioFiltro;
-	private ProgressDialog progressDialog;
+	protected ProgressDialog progressDialog;
 	
 	protected static String TAG = "CrearUsuarioActivity";
 
@@ -54,6 +54,11 @@ public class CrearUsuarioActivity extends Activity {
 		 Log.i(TAG, "onResume");
 		registerReceiver(receiverCrearUsuario, crearUsuarioFiltro);
 	 }
+	
+	protected void onPause(){
+		super.onPause();
+		unregisterReceiver(receiverCrearUsuario);
+	}
 	 
 	public void crearUsuario(View v) {
 		Log.i(TAG, "crearUsuario");
@@ -80,7 +85,8 @@ public class CrearUsuarioActivity extends Activity {
 			Intent intent = new Intent(this,CrearUsuarioServicio.class);
 			intent.putExtras(bundle);
 			startService(intent);
-			Util.showProgressDialog(this, progressDialog, Constantes.MSG_ESPERA_GENERICO);
+			
+			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 
 		}
 	}
@@ -93,11 +99,11 @@ public class CrearUsuarioActivity extends Activity {
 	    	Log.i(TAG, "onReceive");
 	    	Bundle bundle = intent.getExtras();
 			String respuesta = bundle.getString("respuesta");
-			
-			Util.dismissProgressDialog(progressDialog);
+		
+			Util.dismissProgressDialog();
 			
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
-	    		Util.showAlertDialogOk(context, "Aviso", "El usuario se ha creado exitosamente");
+	    		Util.showToast(context, "El usuario se ha creado exitosamente");
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
 				
@@ -109,7 +115,6 @@ public class CrearUsuarioActivity extends Activity {
 			
 	    }
 	  };
-	
-
+  
 	
 }

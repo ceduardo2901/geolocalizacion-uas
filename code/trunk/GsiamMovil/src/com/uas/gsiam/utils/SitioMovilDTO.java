@@ -1,22 +1,29 @@
 package com.uas.gsiam.utils;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class SitioMovilDTO {
 
-	@JsonProperty
+
+public class SitioMovilDTO implements Parcelable{
+
+
 	public String idSitio;
-	@JsonProperty
+	
 	public String nombre;
-	//public String direccion;
-	@JsonProperty
+	
+	public String direccion;
+	
 	public String lon;
-	@JsonProperty
+	
 	public String lat;
 	
+		
 	
 	public String getLon() {
 		return lon;
@@ -63,14 +70,32 @@ public class SitioMovilDTO {
 	}
 
 
-//	public String getDireccion() {
-//		return direccion;
-//	}
-//
-//
-//	public void setDireccion(String direccion) {
-//		this.direccion = direccion;
-//	}
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(idSitio);
+		dest.writeString(nombre);
+		dest.writeString(direccion);
+		dest.writeString(lon);
+		dest.writeString(lat);
+		
+	}
 	
 	
 	

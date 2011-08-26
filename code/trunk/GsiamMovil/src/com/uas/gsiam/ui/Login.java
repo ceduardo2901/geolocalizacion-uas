@@ -1,6 +1,8 @@
 package com.uas.gsiam.ui;
 
 
+import org.springframework.util.StringUtils;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -89,9 +91,15 @@ public class Login extends Activity {
 	    public void onReceive(Context context, Intent intent) {
 	    	Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 	    	dismissProgressDialog();
-	    	Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
-			
-			startActivity(actividadPrincipal);
+	    	String error = intent.getStringExtra("error");
+	    	if(error != null){
+	    		Util.showToast(context, error);
+	    	}else{
+	    		Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
+				
+				startActivity(actividadPrincipal);
+	    	}
+	    	
 	    }
 	  };
 	

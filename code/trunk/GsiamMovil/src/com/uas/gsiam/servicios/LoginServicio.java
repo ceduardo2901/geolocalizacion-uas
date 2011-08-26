@@ -3,7 +3,10 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.protocol.HTTP;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -27,6 +30,7 @@ public class LoginServicio extends IntentService{
 	
 	public void onCreate(){
 		super.onCreate();
+		
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 	}
 
@@ -37,17 +41,27 @@ public class LoginServicio extends IntentService{
          
         String pass = bundle.getString("pass");
 		String email = bundle.getString("email"); 
-		
-		
-		Map<String, String> parms = new HashMap<String, String>();
-		parms.put("email", email);
-		parms.put("pass", pass);
-		UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
-		
 		Intent intentLogin = new Intent(Constantes.LOGIN_FILTRO_ACTION);
-		Bundle datos = new Bundle();
+		try{
+			
+			Map<String, String> parms = new HashMap<String, String>();
+			parms.put("email", email);
+			parms.put("pass", pass);
+			UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
+			
+			
+			Bundle datos = new Bundle();
+			
+			sendBroadcast(intentLogin);
+			
+		}catch (RestClientException e) {
+			Bundle mensajeError = new Bundle();
+			//mensajeError.putString("error", e.getMessage());
+			intentLogin.putExtra("error", e.getCause());
+			sendBroadcast(intentLogin);
+		}
 		
-		sendBroadcast(intentLogin);
+		
 		
 	}
 
