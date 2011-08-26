@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class Util {
 	
-	private static volatile ProgressDialog progressDialog;
+	private static ProgressDialog progressDialog;
 
 	public static boolean validaMail (String email){
 		

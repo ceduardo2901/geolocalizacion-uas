@@ -35,7 +35,7 @@ public class CrearUsuarioActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i(TAG, "onCreate");
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.crearusuario);
 		
@@ -50,8 +50,7 @@ public class CrearUsuarioActivity extends Activity {
 
 	protected void onResume() {
 		 super.onResume();
-		 Log.i(TAG, "onResume");
-		registerReceiver(receiverCrearUsuario, crearUsuarioFiltro);
+		 registerReceiver(receiverCrearUsuario, crearUsuarioFiltro);
 	 }
 	
 	protected void onPause(){
@@ -60,7 +59,7 @@ public class CrearUsuarioActivity extends Activity {
 	}
 	 
 	public void crearUsuario(View v) {
-		Log.i(TAG, "crearUsuario");
+		
 		nombre = nombreTxt.getText().toString().trim();
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
@@ -68,19 +67,17 @@ public class CrearUsuarioActivity extends Activity {
 		if (!Util.validaMail(email)) {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
 					
-		} else {
-				
+		} 
+		else {
 			
 			UsuarioDTO usuario = new UsuarioDTO();
 			usuario.setNombre(nombre);
 			usuario.setEmail(email);
 			usuario.setPassword(pass);
 			
-			
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("usuario", usuario);
 			
-
 			Intent intent = new Intent(this,CrearUsuarioServicio.class);
 			intent.putExtras(bundle);
 			startService(intent);
@@ -102,13 +99,14 @@ public class CrearUsuarioActivity extends Activity {
 			Util.dismissProgressDialog();
 			
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
-	    		Util.showToast(context, "El usuario se ha creado exitosamente");
+	    		
+	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
 				
 			}
 			else{
-				Util.showAlertDialog(context, "Aviso", respuesta);
+				Util.showToast(context, respuesta);
 			}
 	    	
 			
