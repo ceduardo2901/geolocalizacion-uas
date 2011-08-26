@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.Util;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -33,7 +32,7 @@ public class CrearUsuarioServicio extends IntentService{
 	public void onCreate(){
 		super.onCreate();
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-		// new CommonsClientHttpRequestFactory()
+
 	}
 
 	@Override
