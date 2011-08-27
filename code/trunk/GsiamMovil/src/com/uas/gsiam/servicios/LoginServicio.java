@@ -50,7 +50,8 @@ public class LoginServicio extends IntentService{
 			UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
 			
 			
-			Bundle datos = new Bundle();
+			bundle.putSerializable("usuario", user);
+			intentLogin.putExtra("usuario",bundle);
 			
 			sendBroadcast(intentLogin);
 			
