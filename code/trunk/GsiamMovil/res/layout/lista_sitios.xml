@@ -11,6 +11,10 @@
     
 <ListView android:id="@+id/LstOpciones" 
 	android:layout_width="fill_parent" 
-	android:layout_height="wrap_content" />
+	android:layout_height="wrap_content"/>
+<RelativeLayout android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:layout_height="wrap_content">
+    <ProgressBar android:layout_width="wrap_content" android:id="@+id/progressBar1" style="?android:attr/progressBarStyleSmall" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+</RelativeLayout>
+
 
 </LinearLayout>

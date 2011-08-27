@@ -25,15 +25,33 @@ public class SitiosAdapter extends ArrayAdapter<SitioMovilDTO> {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		SitioMovilDTO sitioMovil = sitiosDTO.get(position);
-		LayoutInflater inflater = context.getLayoutInflater();
-		View item = inflater.inflate(R.layout.sitios, null);
-
-		TextView lblTitulo = (TextView) item.findViewById(R.id.LblNombre);
-		lblTitulo.setText(sitioMovil.getNombre());
-
-		TextView lblSubtitulo = (TextView) item.findViewById(R.id.LblDireccion);
-		lblSubtitulo.setText(sitioMovil.getDireccion());
+		View item = convertView;
+		ViewHolder holder;
+		
+		if (item == null) {
+			LayoutInflater inflater = context.getLayoutInflater();
+			item = inflater.inflate(R.layout.sitios, null);
+			
+			holder = new ViewHolder();
+			holder.Nombre = (TextView) item.findViewById(R.id.LblNombre);
+			holder.Direccion = (TextView) item.findViewById(R.id.LblDireccion);
+			
+			item.setTag(holder);
+			
+		}else{
+			holder = (ViewHolder) item.getTag();
+				
+		}
+		
+		
+		holder.Nombre.setText(sitioMovil.getNombre());
+		holder.Direccion.setText(sitioMovil.getDireccion());
 
 		return item;
 	}
+	
+	static class ViewHolder {
+		TextView Nombre;
+		TextView Direccion;
+		}
 }

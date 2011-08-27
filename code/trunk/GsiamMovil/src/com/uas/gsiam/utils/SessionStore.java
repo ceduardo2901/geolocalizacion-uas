@@ -9,29 +9,26 @@ import android.content.SharedPreferences.Editor;
 
 public class SessionStore {
     
-    private static final String TOKEN = "access_token";
-    private static final String EXPIRES = "expires_in";
-    private static final String KEY = "gsiam-session";
+    private static final String TOKEN = "email";
+    //private static final String KEY = "gsiam-session";
     
-    public static boolean save(UsuarioDTO usuario, Context context) {
+    public static boolean save(String email, Context context) {
         Editor editor =
-            context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
-        editor.putString(TOKEN, usuario.getEmail());
-        editor.putString(EXPIRES, usuario.getPassword());
+            context.getSharedPreferences(Constantes.SHARED_PREFERENCE_FILE, Context.MODE_PRIVATE).edit();
+        editor.putString(TOKEN, email);
         return editor.commit();
     }
 
-    public static boolean restore(UsuarioDTO usuario, Context context) {
+    public static String restore(Context context) {
         SharedPreferences savedSession =
-            context.getSharedPreferences(KEY, Context.MODE_PRIVATE);
-        usuario.setEmail(savedSession.getString(TOKEN, null));
-        usuario.setPassword(savedSession.getString(EXPIRES, null));
-        return true;
+            context.getSharedPreferences(Constantes.SHARED_PREFERENCE_FILE, Context.MODE_PRIVATE);
+        return (savedSession.getString(TOKEN, null));
+        
     }
 
     public static void clear(Context context) {
         Editor editor = 
-            context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
+            context.getSharedPreferences(Constantes.SHARED_PREFERENCE_FILE, Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.commit();
     }

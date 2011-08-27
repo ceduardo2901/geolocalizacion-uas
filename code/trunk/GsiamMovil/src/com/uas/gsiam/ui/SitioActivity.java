@@ -21,6 +21,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.uas.gsiam.servicios.SitioServicio;
@@ -44,7 +47,7 @@ public class SitioActivity extends Activity implements LocationListener {
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
-
+		
 	}
 
 	public void onStart() {
@@ -95,11 +98,7 @@ public class SitioActivity extends Activity implements LocationListener {
 				mostrarSitios();
 			}
 
-			// Intent actividadPrincipal = new Intent(getApplicationContext(),
-			// MainActivity.class);
-
-			// startActivity(actividadPrincipal);
-
+	
 		}
 	};
 	
@@ -111,14 +110,11 @@ public class SitioActivity extends Activity implements LocationListener {
 			sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
 			
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG, e.getMessage());
 		}
 		listaSitios = Arrays.asList(sitiosParse);
 		
@@ -130,8 +126,24 @@ public class SitioActivity extends Activity implements LocationListener {
 				sitios);
 		ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
 		lstOpciones.setAdapter(adaptador);
+		lstOpciones.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				Intent sitioDetalleIntent = new Intent(getApplicationContext(),SitioDetalleActivity.class);
+				sitioDetalleIntent.putExtra("nombre", sitios.get(position).getNombre());
+				sitioDetalleIntent.putExtra("direccion", sitios.get(position).getDireccion());
+				
+				startActivity(sitioDetalleIntent);
+				
+			}
+		});
 	}
 
+	
+	
 	private void startListening() {
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
 				0, this);
