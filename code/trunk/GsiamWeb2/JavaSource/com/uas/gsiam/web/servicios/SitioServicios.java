@@ -31,7 +31,6 @@ public class SitioServicios {
 		for(SitioDTO sitio : sitios){
 			listaSitios.add(new ServicioSitioDTO(sitio));
 		}
-		
 		System.out.println(sitios.size());
 		
 		return listaSitios;
