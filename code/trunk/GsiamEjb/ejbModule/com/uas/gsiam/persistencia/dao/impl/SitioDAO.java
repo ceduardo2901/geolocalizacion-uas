@@ -55,7 +55,7 @@ public class SitioDAO implements ISitioDAO {
 		
 		String sql = "select * from americas_south_america_uruguay_poi "
 				+ "where the_geom && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
-				+ "and Distance(the_geom,GeomFromText('POINT(-58.3068 -33.12082)', -1)) < 2";
+				+ "and Distance(the_geom,GeomFromText('POINT(-58.3068 -33.12082)', -1)) < 1";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
