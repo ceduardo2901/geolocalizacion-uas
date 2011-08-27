@@ -22,4 +22,7 @@
 		<item>offline_access</item>
 		<item>user_location</item>
 	</string-array>
+	<string name="cerrarSesion">Cerrar Sesion</string>
+	<string name="publicar">Publicar</string>
+	
 </resources>
