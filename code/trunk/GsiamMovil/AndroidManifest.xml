@@ -10,7 +10,7 @@
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
 
 		<activity android:name=".MainActivity" />
-		<activity android:name=".SitioActivity">
+		<activity android:name=".SitiosActivity">
 
 
 		</activity>
@@ -26,6 +26,7 @@
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"></service>
 		<service android:name="com.uas.gsiam.servicios.SitioServicio"></service>
 		<activity android:name="SitioDetalleActivity"></activity>
+		<activity android:name="AgregarSitioActivity"></activity>
 
 	</application>
 </manifest>

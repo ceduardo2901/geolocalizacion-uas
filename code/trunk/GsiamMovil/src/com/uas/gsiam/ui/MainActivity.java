@@ -24,15 +24,16 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		sitiosButton = (Button) findViewById(R.id.sitios_button);
-		sitiosButton.setOnClickListener(sitioOnListener);
 		nombreTxt =  (TextView)findViewById(R.id.textNombre);
 		nombreTxt.setText("Bienvenido Josesito");
+		sitiosButton = (Button) findViewById(R.id.sitios_button);
+		sitiosButton.setOnClickListener(sitioOnListener);
+		
 		
 	}
 
 	private void sitiosActivity() {
-		Intent sitioIntent = new Intent(this, SitioActivity.class);
+		Intent sitioIntent = new Intent(this, SitiosActivity.class);
 		startActivity(sitioIntent);
 	}
 

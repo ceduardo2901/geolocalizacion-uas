@@ -47,7 +47,7 @@ public class LoginActivity extends Activity {
 			actividadPrincipal();
 		}
 		passTxt = (EditText) findViewById(R.id.passTxt);
-		login = (Button) findViewById(R.id.entrarBtn);
+		//login = (Button) findViewById(R.id.entrarBtn);
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
