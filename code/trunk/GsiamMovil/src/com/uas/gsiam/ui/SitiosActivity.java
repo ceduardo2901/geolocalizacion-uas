@@ -1,8 +1,6 @@
 package com.uas.gsiam.ui;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +9,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,17 +18,21 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SitioMovilDTO;
 import com.uas.gsiam.utils.Util;
 
-public class SitioActivity extends Activity implements LocationListener {
+public class SitiosActivity extends Activity implements LocationListener {
 
 	protected static final String TAG = "SitioActivity";
 	protected LocationManager locationManager;
@@ -39,6 +40,8 @@ public class SitioActivity extends Activity implements LocationListener {
 	protected IntentFilter sitioAccion;
 	protected SitiosAdapter adapter;
 	protected List<SitioMovilDTO> sitios;
+	protected Location loc;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class SitioActivity extends Activity implements LocationListener {
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
+		
+		
 		
 	}
 
@@ -59,10 +64,11 @@ public class SitioActivity extends Activity implements LocationListener {
 		super.onResume();
 		registerReceiver(sitiosReceiver, sitioAccion);
 		// Obtengo la ultima posicion conocida
-		Location lastKnownLocation = getLastBestLocation(
+		
+		loc = getLastBestLocation(
 				Constantes.MAX_DISTANCE, System.currentTimeMillis()
 						- Constantes.MAX_TIME);
-		actualizarSitios(lastKnownLocation);
+		actualizarSitios(loc);
 		startListening();
 
 	}
@@ -80,6 +86,31 @@ public class SitioActivity extends Activity implements LocationListener {
 		unregisterReceiver(sitiosReceiver);
 		stopListening();
 		
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.sitios_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.agregarSitioId:
+			
+			Intent agregarSitioIntent = new Intent(this,AgregarSitioActivity.class);
+			agregarSitioIntent.putExtra("ubicacion", loc);
+			startActivity(agregarSitioIntent);
+			break;
+
+		default:
+			return super.onOptionsItemSelected(item);
+
+		}
+		return true;
 	}
 
 	/**
@@ -194,7 +225,8 @@ public class SitioActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		actualizarSitios(location);
+		this.loc = location;
+		actualizarSitios(loc);
 
 	}
 
