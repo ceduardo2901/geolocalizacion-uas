@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
@@ -48,7 +49,7 @@ public class SitioServicios {
 	@Path("/agregar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public String crearSitio(@BadgerFish SitioDTO sitio) {
+    public Response crearSitio(@BadgerFish SitioDTO sitio) {
 		
 		try {
 			servicio.crearSitio(sitio);
@@ -56,10 +57,11 @@ public class SitioServicios {
 		
 			e.printStackTrace();
 		} catch (SitioExcepcion e) {
+			return Response.status(500).build();
 			
-			return Constantes.ERROR_CREAR_SITIO;
 		}
-		return Constantes.RETURN_OK;
+		return Response.ok().build();
+		
 	}
 }
 
