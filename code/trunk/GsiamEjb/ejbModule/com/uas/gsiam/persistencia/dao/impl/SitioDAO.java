@@ -8,15 +8,18 @@ import java.util.List;
 
 import org.postgis.Geometry;
 import org.postgis.PGgeometry;
+import org.postgis.Point;
 import org.postgresql.geometric.PGpolygon;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
+import com.uas.gsiam.persistencia.utiles.Constantes;
 
 public class SitioDAO implements ISitioDAO {
 
@@ -29,9 +32,21 @@ public class SitioDAO implements ISitioDAO {
 
 	@Override
 	public void agregarSitio(SitioDTO sitioInteres)
-			throws SitioYaExisteExcepcion {
-		// TODO Auto-generated method stub
-
+			throws SitioYaExisteExcepcion, SitioExcepcion {
+		
+		PreparedStatement ps=null;
+		Point punto = new Point(sitioInteres.getLat(),sitioInteres.getLon());
+		String sqlCrearSitio = "INSERT INTO t_sitio (sit_nombre,sit_punto,sit_direccion) VALUES (?,?,?,?)";
+		
+		try {
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
+			ps.setString(1, sitioInteres.getNombre());
+			ps.setObject(2, punto);
+			ps.setString(3, sitioInteres.getDireccion());
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+		}
+		
 	}
 
 	@Override

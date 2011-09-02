@@ -6,10 +6,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
+import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
+import com.uas.gsiam.persistencia.utiles.Constantes;
 
 @Stateless(name="SitioServicio")
 public class SitioServicioBean implements SitioServicio{
@@ -21,23 +24,22 @@ public class SitioServicioBean implements SitioServicio{
     }
 	
 	@Override
-	public void agregarSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion {
+	public void crearSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion, SitioExcepcion {
 		
 		
 		try {
 			AbstractFactory.getInstance().getSitioDAO().agregarSitio(sitioInteres);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+			
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+			
 		}
 		
 	}
