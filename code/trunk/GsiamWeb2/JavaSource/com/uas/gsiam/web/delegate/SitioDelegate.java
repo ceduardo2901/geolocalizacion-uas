@@ -3,6 +3,8 @@ package com.uas.gsiam.web.delegate;
 import java.util.List;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
+import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.web.sl.ServiceLocator;
 
@@ -28,6 +30,11 @@ public class SitioDelegate {
 	   sitio.setLat(new Double(lat));
 	   sitio.setLon(new Double(lon));
 	   return servicioSitio.obtenerSitios(sitio);
+   }
+   
+   public void crearSitio(SitioDTO sitio) throws SitioYaExisteExcepcion, SitioExcepcion {
+	   
+	    servicioSitio.crearSitio(sitio);
    }
     
     

@@ -3,14 +3,22 @@ package com.uas.gsiam.web.servicios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
+
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
+import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
+import com.uas.gsiam.persistencia.utiles.Constantes;
 import com.uas.gsiam.web.delegate.SitioDelegate;
 
 @Path("/sitios")
@@ -34,6 +42,24 @@ public class SitioServicios {
 		System.out.println(sitios.size());
 		
 		return listaSitios;
+	}
+	
+	@POST
+	@Path("/agregar")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public String crearSitio(@BadgerFish SitioDTO sitio) {
+		
+		try {
+			servicio.crearSitio(sitio);
+		} catch (SitioYaExisteExcepcion e) {
+		
+			e.printStackTrace();
+		} catch (SitioExcepcion e) {
+			
+			return Constantes.ERROR_CREAR_SITIO;
+		}
+		return Constantes.RETURN_OK;
 	}
 }
 
