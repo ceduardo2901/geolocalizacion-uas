@@ -17,7 +17,9 @@ public class Constantes {
 	public static String ERROR_YA_EXISTE_USUARIO = "El mail ingresado ya existe, ingrese otro";
 	public static String ERROR_LOGIN = "Error al intentar ingrear a la aplicacion";
 	
-	
+	// Mensajes de error sitios
+	public static String ERROR_CREAR_SITIO = "Error al intentar crear el sitio";
 	
 
+	
 }
