@@ -101,7 +101,7 @@ public class SitiosActivity extends Activity implements LocationListener {
 		switch (item.getItemId()) {
 		case R.id.agregarSitioId:
 			
-			Intent agregarSitioIntent = new Intent(this,AgregarSitioActivity.class);
+			Intent agregarSitioIntent = new Intent(this,CrearSitioActivity.class);
 			agregarSitioIntent.putExtra("ubicacion", loc);
 			startActivity(agregarSitioIntent);
 			break;

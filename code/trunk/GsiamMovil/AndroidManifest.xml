@@ -26,7 +26,8 @@
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"></service>
 		<service android:name="com.uas.gsiam.servicios.SitioServicio"></service>
 		<activity android:name="SitioDetalleActivity"></activity>
-		<activity android:name="AgregarSitioActivity"></activity>
+		<activity android:name=".CrearSitioActivity"></activity>
+		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"></service>
 
 	</application>
 </manifest>

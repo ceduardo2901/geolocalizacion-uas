@@ -35,6 +35,6 @@
 			android:layout_height="wrap_content"></TableRow>
 			
 	</TableLayout>
-	<Button android:text="@string/agregar" android:id="@+id/btnAgregarSitioId" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	<Button android:text="@string/agregar" android:id="@+id/btnAgregarSitioId" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="crearSitio"/>
 
 </LinearLayout>
