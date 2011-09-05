@@ -8,7 +8,7 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-
+		<uses-library android:name="com.google.android.maps" />
 		<activity android:name=".MainActivity" />
 		<activity android:name=".SitiosActivity">
 
@@ -28,6 +28,7 @@
 		<activity android:name="SitioDetalleActivity"></activity>
 		<activity android:name=".CrearSitioActivity"></activity>
 		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"></service>
+		<activity android:name=".MostrarMapaActivity"></activity>
 
 	</application>
 </manifest>

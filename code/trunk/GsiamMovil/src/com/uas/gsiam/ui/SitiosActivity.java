@@ -166,6 +166,7 @@ public class SitiosActivity extends Activity implements LocationListener {
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),SitioDetalleActivity.class);
 				sitioDetalleIntent.putExtra("nombre", sitios.get(position).getNombre());
 				sitioDetalleIntent.putExtra("direccion", sitios.get(position).getDireccion());
+				sitioDetalleIntent.putExtra("loc", loc);
 				
 				startActivity(sitioDetalleIntent);
 				
