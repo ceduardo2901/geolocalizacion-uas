@@ -31,8 +31,9 @@ public class MostrarMapaActivity extends MapActivity{
 	
 	protected void onResume(){
 		super.onResume();
-		loc = getIntent().getParcelableExtra("ubicacion");
-		mostrarMapa(loc);
+		Double lat = getIntent().getDoubleExtra("lat", 0);
+		Double lon = getIntent().getDoubleExtra("lon", 0);
+		mostrarMapa(lat,lon);
 	}
 	
 	
@@ -42,14 +43,14 @@ public class MostrarMapaActivity extends MapActivity{
 		return false;
 	}
 	
-	private void mostrarMapa(Location loc) {
+	private void mostrarMapa(Double lat, Double lon) {
 
 		if (mapa == null)
 			mapa = (MapView) findViewById(R.id.mapaId);
 		MapController mapControl = mapa.getController();
 		geoPoint = new GeoPoint(
-				(int) (loc.getLatitude()*1000000),
-				(int) (loc.getLongitude()*1000000));
+				(int) (lat*1000000),
+				(int) (lon*1000000));
 		mapa.setBuiltInZoomControls(true);
 		
 		mapControl.setZoom(15);
@@ -66,7 +67,7 @@ public class MostrarMapaActivity extends MapActivity{
 		overlays.clear();
 		
 		overlays.add(myposOverlay);
-		myposOverlay.setLocation(loc);
+		myposOverlay.setLocation(lat,lon);
 		mapa.setClickable(true);
 		mapControl.setCenter(geoPoint);
 		

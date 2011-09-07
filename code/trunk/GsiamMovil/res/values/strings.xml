@@ -16,6 +16,8 @@
 	<string name="perfil">Perfil</string>
 	<string name="BtnRegistrarse">Registrarse</string>
 	<string name="Nombre">Nombre</string>
+	<string name="compartirFacebook">Compartir en Facebook</string>
+	
 	 <string-array name="permissions">
         <item>publish_stream</item>
         <item>read_stream</item>

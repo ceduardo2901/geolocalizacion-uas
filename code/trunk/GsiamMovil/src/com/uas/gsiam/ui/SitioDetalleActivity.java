@@ -17,6 +17,8 @@ public class SitioDetalleActivity extends Activity{
 	protected TextView txtNombre;
 	protected TextView txtDireccion;
 	protected Location loc;
+	private Double lat;
+	private Double lon;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,9 @@ public class SitioDetalleActivity extends Activity{
 		
 		txtNombre.setText(intent.getStringExtra("nombre"));
 		txtDireccion.setText(intent.getStringExtra("direccion"));
-		loc = intent.getParcelableExtra("loc");
+		lat = new Double(intent.getStringExtra("lat"));
+		lon = new Double(intent.getStringExtra("lon"));
+		
 		
 	}
 	
@@ -37,10 +41,19 @@ public class SitioDetalleActivity extends Activity{
 		
 		
 		Bundle bundle = new Bundle();
-		bundle.putParcelable("ubicacion", loc);
-		
+		bundle.putDouble("lat", lat);
+		bundle.putDouble("lon", lon);
 		Intent intent = new Intent(this,MostrarMapaActivity.class);
 		intent.putExtras(bundle);
+		startActivity(intent);
+		
+	}
+	
+	public void publicar(View v) {
+		
+		
+		Intent intent = new Intent(this,PublicarActivity.class);
+		
 		startActivity(intent);
 		
 	}

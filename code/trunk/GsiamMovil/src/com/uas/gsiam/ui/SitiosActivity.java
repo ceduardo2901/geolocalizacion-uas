@@ -162,11 +162,12 @@ public class SitiosActivity extends Activity implements LocationListener {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+				SitioMovilDTO sitio = sitios.get(position);
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),SitioDetalleActivity.class);
 				sitioDetalleIntent.putExtra("nombre", sitios.get(position).getNombre());
 				sitioDetalleIntent.putExtra("direccion", sitios.get(position).getDireccion());
-				sitioDetalleIntent.putExtra("loc", loc);
+				sitioDetalleIntent.putExtra("lat", sitio.getLat());
+				sitioDetalleIntent.putExtra("lon", sitio.getLon());
 				
 				startActivity(sitioDetalleIntent);
 				

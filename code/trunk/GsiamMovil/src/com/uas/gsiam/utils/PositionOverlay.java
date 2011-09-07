@@ -15,10 +15,18 @@ public class PositionOverlay extends Overlay{
 
 	private final int mRadius = 5;
 	private Location location;
+	private Double lat;
+	private Double lon;
 	private String nombre;
 
 	public void setLocation(Location loc) {
 		location = loc;
+
+	}
+	
+	public void setLocation(Double lat, double lon) {
+		this.lat = lat;
+		this.lon = lon;
 
 	}
 	
@@ -28,9 +36,17 @@ public class PositionOverlay extends Overlay{
 
 	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		GeoPoint geoPoint = new GeoPoint(
+		GeoPoint geoPoint;
+		if(location != null){
+			geoPoint = new GeoPoint(
 				(int) (location.getLatitude() * 1000000),
 				(int) (location.getLongitude() * 1000000));
+		}else{
+			geoPoint = new GeoPoint(
+					(int) (lat * 1000000),
+					(int) (lon * 1000000));
+		}
+			
 		Point point = new Point();
 		Projection projection = mapView.getProjection();
 		projection.toPixels(geoPoint, point);
