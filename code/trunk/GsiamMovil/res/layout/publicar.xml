@@ -1,27 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/txtComentarioId" android:inputType="textMultiLine" android:lines="4">
-        <requestFocus></requestFocus>
-    </EditText>
-    
-    <RatingBar android:id="@+id/puntajeId" android:layout_width="wrap_content" android:layout_height="wrap_content" android:numStars="5"
-        android:rating="2.25"/>
-    
-    <TableLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/tableLayout1">
-        <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <TextView android:layout_width="wrap_content" android:text="@string/compartirFacebook" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
-            <CheckBox android:layout_width="wrap_content" android:id="@+id/cheBoxFaceBook" android:layout_height="wrap_content" android:text=""/>
-        </TableRow>
-        <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
-        <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
-        <TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content" android:layout_height="wrap_content">
-        
-        </TableRow>
-    </TableLayout>
-    <Button android:text="@string/publicar" android:id="@+id/btnPubId" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<EditText android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:id="@+id/txtComentarioId"
+		android:inputType="textMultiLine" android:lines="4">
+		<requestFocus></requestFocus>
+	</EditText>
+
+	<RatingBar android:id="@+id/puntajeId" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" style="?android:attr/ratingBarStyle"
+		android:numStars="5" />
+
+	<TableLayout android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:id="@+id/tableLayout1">
+		<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<TextView android:layout_width="wrap_content" android:text="@string/compartirFacebook"
+				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
+				android:layout_height="wrap_content"></TextView>
+			<CheckBox android:layout_width="wrap_content" android:id="@+id/cheBoxFaceBook"
+				android:layout_height="wrap_content" android:text="" />
+		</TableRow>
+		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TableRow>
+		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TableRow>
+		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+		</TableRow>
+	</TableLayout>
+	<Button android:text="@string/publicar" android:id="@+id/btnPubId"
+		android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="publicar"/>
+
 </LinearLayout>
