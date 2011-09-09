@@ -14,6 +14,9 @@
 	<string name="sitios">Sitios</string>
 	<string name="amigos">Amigos</string>
 	<string name="perfil">Perfil</string>
+	<string name="avatar">Avatar</string>
+	<string name="BtnEditarPerfil">Editar Perfil</string>
+	<string name="BtnEliminarPerfil">Cerrar Cuenta</string>
 	<string name="BtnRegistrarse">Registrarse</string>
 	<string name="Nombre">Nombre</string>
 	<string name="compartirFacebook">Compartir en Facebook</string>
