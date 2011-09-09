@@ -1,11 +1,14 @@
 package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.ejb.Stateless;
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
@@ -75,6 +78,23 @@ public class SitioServicioBean implements SitioServicio{
 			e.printStackTrace();
 		}
 		return sitios;
+	}
+
+	@Override
+	public void crearPublicacion(PublicacionDTO publicacion)
+			throws PublicacionExcepcion {
+		
+		try {
+			AbstractFactory.getInstance().getPublicacionDAO().crearPublicacion(publicacion);
+		} catch (IOException e) {
+			throw new PublicacionExcepcion(Constantes.ERROR_COMUNICACION_BD);
+		} catch (InstantiationException e) {
+			throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
+		} catch (IllegalAccessException e) {
+			throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
+		} catch (ClassNotFoundException e) {
+			throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
+		}
 	}
 
 }
