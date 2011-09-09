@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 
 import android.app.IntentService;
@@ -49,7 +50,9 @@ public class LoginServicio extends IntentService{
 			parms.put("pass", pass);
 			UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
 			
-			
+			ApplicationController app = ((ApplicationController)getApplicationContext());
+			app.setUserLogin(user);
+
 			bundle.putSerializable("usuario", user);
 			intentLogin.putExtra("usuario",bundle);
 			
