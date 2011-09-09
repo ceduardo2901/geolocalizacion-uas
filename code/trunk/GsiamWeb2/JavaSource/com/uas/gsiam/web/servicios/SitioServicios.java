@@ -15,8 +15,10 @@ import javax.ws.rs.core.Response.Status;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.persistencia.utiles.Constantes;
@@ -63,5 +65,22 @@ public class SitioServicios {
 		return Response.ok().build();
 		
 	}
+	
+	@POST
+	@Path("/publicar")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public Response publicar(@BadgerFish PublicacionDTO publicacion) {
+		
+		try {
+			servicio.crearPublicacion(publicacion);
+		} catch (PublicacionExcepcion e) {
+			return Response.status(500).build();
+			
+		}
+		return Response.ok().build();
+		
+	}
+	
 }
 

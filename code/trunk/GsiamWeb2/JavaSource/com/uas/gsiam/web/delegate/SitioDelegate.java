@@ -2,7 +2,9 @@ package com.uas.gsiam.web.delegate;
 
 import java.util.List;
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
@@ -36,7 +38,13 @@ public class SitioDelegate {
 	   
 	    servicioSitio.crearSitio(sitio);
    }
+   
+   public void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion {
+	   
+	    servicioSitio.crearPublicacion(publicacion);
+  }
     
+   
     
 	
 }
