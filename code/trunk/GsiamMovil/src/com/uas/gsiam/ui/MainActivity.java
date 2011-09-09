@@ -16,6 +16,8 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private Button sitiosButton;
+	private Button perfilButton;
+	
 
 		
 	protected TextView nombreTxt;
@@ -26,16 +28,17 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 		nombreTxt =  (TextView)findViewById(R.id.textNombre);
 		nombreTxt.setText("Bienvenido Josesito");
+		
 		sitiosButton = (Button) findViewById(R.id.sitios_button);
-		sitiosButton.setOnClickListener(sitioOnListener);
+		sitiosButton.setOnClickListener(botonListener);
+		
+		perfilButton = (Button) findViewById(R.id.perfil_button);
+		perfilButton.setOnClickListener(botonListener);
 		
 		
 	}
 
-	private void sitiosActivity() {
-		Intent sitioIntent = new Intent(this, SitiosActivity.class);
-		startActivity(sitioIntent);
-	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,16 +64,30 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	private OnClickListener sitioOnListener = new OnClickListener() {
+	private OnClickListener botonListener = new OnClickListener() {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.sitios_button:
 				sitiosActivity();
 				break;
+			case R.id.perfil_button:
+				perfilActivity();
+				break;
 
-			}
-
+		}
+			
 		}
 	};
 
+	
+	private void sitiosActivity() {
+		Intent sitioIntent = new Intent(this, SitiosActivity.class);
+		startActivity(sitioIntent);
+	}
+	
+	private void perfilActivity() {
+		Intent perfilIntent = new Intent(this, PerfilActivity.class);
+		startActivity(perfilIntent);
+	}
+	
 }
