@@ -30,6 +30,7 @@
 		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"></service>
 		<activity android:name=".MostrarMapaActivity"></activity>
 		<activity android:name="PublicarActivity"></activity>
+		<service android:name="com.uas.gsiam.servicios.PublicarServicio"></service>
 
 	</application>
 </manifest>
