@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
@@ -21,4 +23,6 @@ public interface SitioServicio {
 	void modificarSitio(SitioDTO sitioInteres) throws SitioNoExisteExcepcion;
 	
 	List<SitioDTO> obtenerSitios(SitioDTO sitio);
+	
+	void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion;
 }

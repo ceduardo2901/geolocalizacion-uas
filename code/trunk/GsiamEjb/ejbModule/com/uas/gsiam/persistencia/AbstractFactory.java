@@ -3,6 +3,7 @@ package com.uas.gsiam.persistencia;
 import java.io.IOException;
 
 
+import com.uas.gsiam.persistencia.dao.IPublicacionDAO;
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
 
@@ -38,5 +39,12 @@ public abstract class AbstractFactory {
 	 * @return Interfaz del SitioDAO
 	 */
 	public abstract ISitioDAO getSitioDAO();
+	
+	
+	/**
+	 * Metodo abstracto que retorna la interfaz
+	 * @return Interfaz del PublicacionDAO
+	 */
+	public abstract IPublicacionDAO getPublicacionDAO();
 	
 }
