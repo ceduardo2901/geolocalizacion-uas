@@ -3,6 +3,7 @@
 	<name>GsiamMovil</name>
 	<comment></comment>
 	<projects>
+		<project>GsiamEjb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
