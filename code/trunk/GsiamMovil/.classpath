@@ -7,9 +7,9 @@
 	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.8.1.jar"/>
 	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/GsiamEjb"/>
-	<classpathentry kind="src" path="FaceBook_Android_src"/>
 	<classpathentry kind="lib" path="lib/spring-android-auth-1.0.0.M4.jar"/>
 	<classpathentry kind="lib" path="lib/spring-android-core-1.0.0.M4.jar"/>
 	<classpathentry kind="lib" path="lib/spring-android-rest-template-1.0.0.M4.jar"/>
+	<classpathentry kind="src" path="FaceBook_Android_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
