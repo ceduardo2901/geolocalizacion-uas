@@ -165,6 +165,7 @@ public class SitiosActivity extends Activity implements LocationListener {
 				SitioMovilDTO sitio = sitios.get(position);
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),SitioDetalleActivity.class);
 				sitioDetalleIntent.putExtra("nombre", sitios.get(position).getNombre());
+				sitioDetalleIntent.putExtra("sitioId", sitios.get(position).getIdSitio());
 				sitioDetalleIntent.putExtra("direccion", sitios.get(position).getDireccion());
 				sitioDetalleIntent.putExtra("lat", sitio.getLat());
 				sitioDetalleIntent.putExtra("lon", sitio.getLon());
@@ -246,7 +247,7 @@ public class SitiosActivity extends Activity implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
+		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
 
 	}
 

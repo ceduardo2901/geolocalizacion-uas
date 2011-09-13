@@ -1,15 +1,32 @@
 package com.uas.gsiam.ui;
 
-import com.facebook.android.AsyncFacebookRunner;
-import com.facebook.android.Facebook;
-
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+
+import com.facebook.android.AsyncFacebookRunner;
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.Facebook.DialogListener;
+import com.facebook.android.FacebookError;
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.CrearSitioServicio;
+import com.uas.gsiam.servicios.PublicarServicio;
+import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.SessionEvents;
+import com.uas.gsiam.utils.Util;
+import com.uas.gsiam.utils.SessionEvents.AuthListener;
 
 public class PublicarActivity extends Activity implements OnRatingBarChangeListener{
 
@@ -18,6 +35,11 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	private CheckBox comentarFaceBook;
 	private RatingBar puntaje;
 	private AsyncFacebookRunner mAsyncRunner;
+	private Facebook facebook;
+	private IntentFilter publicarFiltro;
+	private String sitioId;
+	private UsuarioDTO usuario;
+	private ApplicationController app;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +52,49 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 		
 		puntaje.setOnRatingBarChangeListener(this);
 		
+		publicarFiltro = new IntentFilter(Constantes.CREAR_SITIO_FILTRO_ACTION);
+		
+		 app = ((ApplicationController)getApplicationContext());
+	    
+		
 	}
+	
+	protected void onResume(){
+		super.onResume();
+		registerReceiver(receiverPublicar, publicarFiltro);
+		
+		sitioId = getIntent().getStringExtra("sitioId");
+		usuario = app.getUserLogin();
+	}
+	
+	protected void onPause(){
+		super.onPause();
+		unregisterReceiver(receiverPublicar);
+	}
+	
+	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
+	    @Override
+	    public void onReceive(Context context, Intent intent) {
+	    	Log.i(TAG, "onReceive");
+	    	Bundle bundle = intent.getExtras();
+			String respuesta = bundle.getString("respuesta");
+		
+			Util.dismissProgressDialog();
+			
+	    	if (respuesta.equals(Constantes.RETURN_OK)){
+	    		
+	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
+				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
+				startActivity(actividadPrincipal);
+				
+			}
+			else{
+				Util.showToast(context, respuesta);
+			}
+	    	
+			
+	    }
+	  };
 
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -41,14 +105,61 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	
 	
 	public void publicar(View v) {
-		
+		PublicacionDTO publicar = new PublicacionDTO();
+		publicar.setComentario(comentario.getText().toString());
+		publicar.setIdSitio(new Integer(sitioId));
+		publicar.setIdUsuario(usuario.getId());
+		publicar.setPuntaje(puntaje.getRating());
+		Bundle publicacion = new Bundle();
+		publicacion.putSerializable("publicacion", publicar);
+		Intent intent = new Intent(this,PublicarServicio.class);
+		intent.putExtras(publicacion);
+		startService(intent);
 		if(comentarFaceBook.isChecked()){
-			Facebook facebook = new Facebook(getString(R.string.facebook_app_id));
+			facebook = new Facebook(getString(R.string.facebook_app_id));
+			facebook.authorize(this ,new FaceBookDialog());
 			mAsyncRunner = new AsyncFacebookRunner(facebook);
+			
+			//SessionEvents.addAuthListener(new SampleAuthListener());
 			
 		}
 		
 		
 	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        facebook.authorizeCallback(requestCode, resultCode, data);
+    }
+	
+	public class FaceBookDialog implements DialogListener {
+
+		@Override
+		public void onComplete(Bundle values) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onFacebookError(FacebookError e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onError(DialogError e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onCancel() {
+			// TODO Auto-generated method stub
+			
+		}
+
+        
+    }
 	
 }

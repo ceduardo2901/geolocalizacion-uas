@@ -19,6 +19,7 @@ public class SitioDetalleActivity extends Activity{
 	protected Location loc;
 	private Double lat;
 	private Double lon;
+	private String sitioId;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class SitioDetalleActivity extends Activity{
 		txtDireccion.setText(intent.getStringExtra("direccion"));
 		lat = new Double(intent.getStringExtra("lat"));
 		lon = new Double(intent.getStringExtra("lon"));
-		
+		sitioId = intent.getStringExtra("sitioId");
 	}
 	
 	public void mostarMapa(View v) {
@@ -60,7 +61,7 @@ public class SitioDetalleActivity extends Activity{
 		
 		
 		Intent intent = new Intent(this,PublicarActivity.class);
-		
+		intent.putExtra("sitioId", sitioId);
 		startActivity(intent);
 		
 	}
