@@ -60,6 +60,28 @@ public class UsuarioServicios {
 		 
 		
     }
+		
+	
+	@POST
+	@Path("/editar")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public String editarUsuario(@BadgerFish UsuarioDTO usuario) {
+		
+		
+    try {
+			
+		servicio.modificarUsuario(usuario);
+		
+		return Constantes.RETURN_OK;
+			
+		} catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+		}
+		
 		 
+		
+    }
+	
 	
 }

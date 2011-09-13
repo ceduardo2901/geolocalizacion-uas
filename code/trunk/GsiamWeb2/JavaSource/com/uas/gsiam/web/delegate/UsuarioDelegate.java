@@ -45,6 +45,10 @@ public class UsuarioDelegate {
 		
 	}
     
-    
+    public void modificarUsuario(UsuarioDTO usuario) throws UsuarioExcepcion {
+		
+    	servicioUsuario.modificarUsuario(usuario);
+		
+	}
 	
 }
