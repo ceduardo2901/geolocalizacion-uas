@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.uas.gsiam.ui" android:versionCode="1" android:versionName="1.0"
-	android:installLocation="auto">
+	android:installLocation="auto" >
 
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	
+	<uses-library android:name="com.google.android.maps" />
 	
 	<application android:icon="@drawable/logo" 
 				 android:label="@string/app_name" 
+				 android:debuggable="true"
 				 android:name="com.uas.gsiam.utils.ApplicationController">
-	             
-	<uses-library android:name="com.google.android.maps" />	
-		<activity android:name=".MainActivity" />
-		<activity android:name=".SitiosActivity"/>
-
-		<activity android:name=".PerfilActivity"/>
-		
-		<activity android:name=".CrearUsuarioActivity" />
+	  
+	 <uses-library android:name="com.google.android.maps" />	
 		<activity android:name=".LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -27,15 +23,23 @@
 			</intent-filter>
 
 		</activity>
-		<service android:name="com.uas.gsiam.servicios.LoginServicio"></service>
-		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"></service>
-		<service android:name="com.uas.gsiam.servicios.SitioServicio"></service>
-		<activity android:name="SitioDetalleActivity"></activity>
-		<activity android:name=".CrearSitioActivity"></activity>
-		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"></service>
-		<activity android:name=".MostrarMapaActivity"></activity>
-		<activity android:name="PublicarActivity"></activity>
-		<service android:name="com.uas.gsiam.servicios.PublicarServicio"></service>
+		
+		<activity android:name=".MainActivity" />
+		<activity android:name=".SitiosActivity"/>
+		<activity android:name=".PerfilActivity"/>
+		<activity android:name=".EditarUsuarioActivity"/>
+		<activity android:name=".CrearUsuarioActivity" />
+		<activity android:name="SitioDetalleActivity"/>
+		<activity android:name=".CrearSitioActivity"/>
+		<activity android:name=".MostrarMapaActivity"/>
+		<activity android:name="PublicarActivity"/>
+		
+		<service android:name="com.uas.gsiam.servicios.LoginServicio"/>
+		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"/>
+		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio"/>
+		<service android:name="com.uas.gsiam.servicios.SitioServicio"/>
+		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"/>
+		<service android:name="com.uas.gsiam.servicios.PublicarServicio"/>
 
 	</application>
 </manifest>
