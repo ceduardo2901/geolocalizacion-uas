@@ -1,10 +1,7 @@
 package com.uas.gsiam.negocio.dto;
 
+
 import java.io.Serializable;
-import java.util.Date;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
 
 
 public class UsuarioDTO implements Serializable{
@@ -17,17 +14,15 @@ public class UsuarioDTO implements Serializable{
 	private String nombre;
 	private String email;
 	private String password;
+	private byte [] avatar;
 	
-	public String getToken() {
-		return token;
+	public byte[] getAvatar() {
+		return avatar;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
-
-
-	private String token;
 
 	public UsuarioDTO() {
 
