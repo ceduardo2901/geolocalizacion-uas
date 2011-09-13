@@ -1,7 +1,6 @@
 package com.uas.gsiam.utils;
 
-import com.facebook.android.Facebook;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;

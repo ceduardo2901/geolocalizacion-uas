@@ -1,5 +1,7 @@
 package com.uas.gsiam.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +9,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.Toast;
 
 public class Util {
@@ -108,4 +113,31 @@ public class Util {
 		
 	}
 
+	
+	public static byte[] BitmapToArray(BitmapDrawable drawable) throws IOException {
+
+		Bitmap bitmap = drawable.getBitmap();
+		int size = bitmap.getWidth() * bitmap.getHeight() * 4;
+		ByteArrayOutputStream out = new ByteArrayOutputStream(size);
+
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+		out.flush();
+		out.close();
+		return out.toByteArray();
+
+	}		
+	
+	
+	public static Bitmap ArrayToBitmap(byte[] byteArray) {
+
+		
+		return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+
+	}	
+	
+	
+	
+	
+	
 }

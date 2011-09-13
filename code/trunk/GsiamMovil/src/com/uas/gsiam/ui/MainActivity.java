@@ -1,5 +1,7 @@
 package com.uas.gsiam.ui;
 
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.SessionStore;
 
 import android.app.Activity;
@@ -19,15 +21,15 @@ public class MainActivity extends Activity {
 	private Button perfilButton;
 	
 
-		
+	protected UsuarioDTO user;
 	protected TextView nombreTxt;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
 		nombreTxt =  (TextView)findViewById(R.id.textNombre);
-		nombreTxt.setText("Bienvenido Josesito");
 		
 		sitiosButton = (Button) findViewById(R.id.sitios_button);
 		sitiosButton.setOnClickListener(botonListener);
@@ -35,6 +37,10 @@ public class MainActivity extends Activity {
 		perfilButton = (Button) findViewById(R.id.perfil_button);
 		perfilButton.setOnClickListener(botonListener);
 		
+		ApplicationController app = ((ApplicationController)getApplicationContext());
+		user = app.getUserLogin();
+		
+		nombreTxt.setText("Bienvenido: " + user.getNombre());
 		
 	}
 
