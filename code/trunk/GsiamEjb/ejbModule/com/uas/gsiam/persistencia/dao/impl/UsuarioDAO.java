@@ -89,7 +89,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	// TODO Falta poner el tipo de la foto del usuario...
 	/*
 	 * Metodo que crea al usuario
 	 */
@@ -125,7 +124,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	
 	// TODO Definir donde se encripta el password. 
-	// TODO Falta poner el tipo de la foto del usuario...
 	/*
 	 * Metodo que modifica al usuario
 	 */
@@ -142,7 +140,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ps.setString(1, usuario.getNombre());
 		ps.setString(2, usuario.getEmail());
 		ps.setString(3, usuario.getPassword());
-		ps.setString(3, usuario.getPassword());
+		ps.setString(4, usuario.getPassword());
 		ps.setBytes(5, usuario.getAvatar());
 		ps.executeUpdate();
 		
