@@ -39,10 +39,11 @@ public class LoginActivity extends Activity {
 		user = new UsuarioDTO();
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
 		
-		email = SessionStore.restore(this);
+	/*	email = SessionStore.restore(this);
 		if (email != null) {
 			actividadPrincipal();
 		}
+		*/
 		passTxt = (EditText) findViewById(R.id.passTxt);
 		//login = (Button) findViewById(R.id.entrarBtn);
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);

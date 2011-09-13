@@ -18,12 +18,18 @@ public class Constantes {
 	
 	public static final String RETURN_OK = "ok";
 	
+	public static final int REQUEST_CAMERA = 1;
+	public static final int REQUEST_SELECT_PHOTO = 2;
+	
 	// Servicios
 	public static final String LOGIN_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
 	public static final String LOGIN_FILTRO_ACTION = "com.gsiam.places.LOGIN_FILTRO_ACTION";
 	
 	public static final String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/agregar";
 	public static final String CREAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.CREAR_USUARIO_FILTRO_ACTION";
+	
+	public static final String EDITAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/editar";
+	public static final String EDITAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.EDITAR_USUARIO_FILTRO_ACTION";
 	
 	public static final String SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/{lat}/{lon}";
 	public static final String SITIO_FILTRO_ACTION = "com.gsiam.places.SITIO_FILTRO_ACTION";
