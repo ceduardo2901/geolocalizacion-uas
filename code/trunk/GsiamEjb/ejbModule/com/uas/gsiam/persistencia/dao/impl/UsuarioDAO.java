@@ -132,7 +132,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		PreparedStatement ps;
 	
 		String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ?, usu_avatar = ? " +
-				                 "WHERE usu_id = ?";
+				                     "WHERE usu_id = ?";
 		
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlModificarUsuario);
@@ -140,8 +140,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ps.setString(1, usuario.getNombre());
 		ps.setString(2, usuario.getEmail());
 		ps.setString(3, usuario.getPassword());
-		ps.setString(4, usuario.getPassword());
-		ps.setBytes(5, usuario.getAvatar());
+		ps.setBytes(4, usuario.getAvatar());
+		ps.setInt(5, usuario.getId());
+		
 		ps.executeUpdate();
 		
 		ps.close();
