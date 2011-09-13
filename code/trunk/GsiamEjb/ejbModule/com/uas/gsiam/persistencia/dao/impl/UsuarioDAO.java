@@ -37,6 +37,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(usuario.getEmail());
 				usuarioRetorno.setPassword(usuario.getPassword());
+				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
 				
 			}
 				
@@ -88,7 +89,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	// TODO Definir donde se encripta el password. 
 	// TODO Falta poner el tipo de la foto del usuario...
 	/*
 	 * Metodo que crea al usuario
@@ -99,14 +99,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		try{
 		
-			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password) " +
-					                 "VALUES (?, ?, ?)";
+			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_avatar) " +
+					                 "VALUES (?, ?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
 			
 			ps.setString(1, usuario.getNombre());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
+			ps.setBytes(4, usuario.getAvatar());
+
 			
 			ps.executeUpdate();
 			ps.close();
@@ -131,7 +133,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 	
-		String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ? " +
+		String sqlModificarUsuario = "UPDATE t_usuario SET usu_nombre = ?, usu_mail = ?, usu_password = ?, usu_avatar = ? " +
 				                 "WHERE usu_id = ?";
 		
 
@@ -140,7 +142,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ps.setString(1, usuario.getNombre());
 		ps.setString(2, usuario.getEmail());
 		ps.setString(3, usuario.getPassword());
-		ps.setInt(4, usuario.getId());
+		ps.setString(3, usuario.getPassword());
+		ps.setBytes(5, usuario.getAvatar());
 		ps.executeUpdate();
 		
 		ps.close();
