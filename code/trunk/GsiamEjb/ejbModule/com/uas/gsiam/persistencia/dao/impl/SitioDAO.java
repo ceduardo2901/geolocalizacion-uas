@@ -99,9 +99,9 @@ public class SitioDAO implements ISitioDAO {
 				sitio.getLon());
 		PGgeometry pgeom = new PGgeometry(punto);
 
-		String sql = "select * from americas_south_america_uruguay_poi "
-				+ "where the_geom && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
-				+ "and Distance(the_geom,GeomFromText(?, -1)) < ?";
+		String sql = "select * from t_sitio "
+				+ "where sit_punto && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
+				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ?";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
@@ -111,14 +111,15 @@ public class SitioDAO implements ISitioDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				geom = (PGgeometry) rs.getObject(4);
+				geom = (PGgeometry) rs.getObject(2);
 
 				resultado = new SitioDTO();
 				// resultado.setDireccion(geom.getGeometry().getValue());
 				resultado.setLat(geom.getGeometry().getFirstPoint().getY());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getX());
-				resultado.setIdSitio(rs.getString(1));
-				resultado.setNombre(rs.getString(3));
+				resultado.setIdSitio(rs.getString(6));
+				resultado.setNombre(rs.getString(1));
+				resultado.setDireccion(rs.getString(5));
 				sitios.add(resultado);
 			}
 			rs.close();

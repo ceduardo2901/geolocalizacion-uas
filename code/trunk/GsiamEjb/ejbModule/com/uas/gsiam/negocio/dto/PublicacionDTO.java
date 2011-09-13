@@ -1,15 +1,25 @@
 package com.uas.gsiam.negocio.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PublicacionDTO {
+public class PublicacionDTO implements Serializable{
 
 	private String idPublicacion;
 	private String comentario;
-	private String idUsuario;
-	private String idSitio;
+	private Integer idUsuario;
+	private Integer idSitio;
 	private Date fecha;
+	private Float puntaje;
 	
+	public Float getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Float puntaje) {
+		this.puntaje = puntaje;
+	}
+
 	public PublicacionDTO(){
 		
 	}
@@ -34,16 +44,16 @@ public class PublicacionDTO {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
-	public String getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	public String getIdSitio() {
+	public Integer getIdSitio() {
 		return idSitio;
 	}
-	public void setIdSitio(String idSitio) {
+	public void setIdSitio(Integer idSitio) {
 		this.idSitio = idSitio;
 	}
 	
