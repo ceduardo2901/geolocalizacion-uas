@@ -24,16 +24,23 @@ public class SitioDetalleActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sitio_detalle);
-		Intent intent = getIntent();
+		
 		
 		txtNombre = (TextView) findViewById(R.id.txtSitioNombreId);
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
+		
+		
+		
+	}
+	
+	public void onResume(){
+		super.onResume();
+		Intent intent = getIntent();
 		
 		txtNombre.setText(intent.getStringExtra("nombre"));
 		txtDireccion.setText(intent.getStringExtra("direccion"));
 		lat = new Double(intent.getStringExtra("lat"));
 		lon = new Double(intent.getStringExtra("lon"));
-		
 		
 	}
 	
@@ -43,9 +50,9 @@ public class SitioDetalleActivity extends Activity{
 		Bundle bundle = new Bundle();
 		bundle.putDouble("lat", lat);
 		bundle.putDouble("lon", lon);
-		Intent intent = new Intent(this,MostrarMapaActivity.class);
-		intent.putExtras(bundle);
-		startActivity(intent);
+		Intent intentMostrarMapa = new Intent(this,MostrarMapaActivity.class);
+		intentMostrarMapa.putExtras(bundle);
+		startActivity(intentMostrarMapa);
 		
 	}
 	
