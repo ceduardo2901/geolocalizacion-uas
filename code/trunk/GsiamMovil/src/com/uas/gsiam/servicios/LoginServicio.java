@@ -3,9 +3,7 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.protocol.HTTP;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 

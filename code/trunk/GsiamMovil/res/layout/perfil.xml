@@ -5,8 +5,7 @@
 	android:orientation="horizontal">
 	
 	<LinearLayout android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:layout_gravity="center">
+		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="center">
 	
 	
 	<TableLayout android:id="@+id/tableLayout1" 
@@ -22,7 +21,10 @@
 					  android:layout_height="wrap_content" 
 					  android:layout_width="wrap_content" 
 					  android:id="@+id/textView1"/>
-			<ImageView android:layout_width="wrap_content" android:src="@drawable/icon" android:layout_height="wrap_content" android:id="@+id/imageView1"></ImageView>
+					  
+			<ImageView android:layout_width="80px"
+            		   android:layout_height="80px" 
+			           android:id="@+id/avatar"/>
 		 
 		</TableRow>	
 			
@@ -72,13 +74,13 @@
 		<TableRow android:id="@+id/tableRow4" 
 			      android:layout_width="wrap_content" 
 			      android:layout_height="wrap_content">
-			<Button android:id="@+id/editarPerfiloBtn" 
+			<Button android:id="@+id/editarPerfilBtn" 
 			 	    android:text="@string/BtnEditarPerfil"
 			 	    android:layout_width="wrap_content" 
 			 	    android:layout_height="wrap_content"
-			 	    android:onClick=""/>
+			 	    android:onClick="editarPerfil"/>
 			 	    
-			<Button android:id="@+id/eliminarPerfiloBtn" 
+			<Button android:id="@+id/eliminarPerfilBtn" 
 			 	    android:text="@string/BtnEliminarPerfil"
 			 	    android:layout_width="wrap_content" 
 			 	    android:layout_height="wrap_content"
