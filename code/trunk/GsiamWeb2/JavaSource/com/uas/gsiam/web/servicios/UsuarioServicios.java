@@ -67,19 +67,20 @@ public class UsuarioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
     public String editarUsuario(@BadgerFish UsuarioDTO usuario) {
-		
-		
-    try {
-			
-		servicio.modificarUsuario(usuario);
-		
-		return Constantes.RETURN_OK;
-			
+
+
+		try {
+
+			servicio.modificarUsuario(usuario);
+
+			return Constantes.RETURN_OK;
+
 		} catch (UsuarioExcepcion e) {
 			return e.getMensaje();
+		} catch (Exception e) {
+			return e.getMessage();
 		}
-		
-		 
+//TODO Esta bien agarrar el exception aca??
 		
     }
 	
