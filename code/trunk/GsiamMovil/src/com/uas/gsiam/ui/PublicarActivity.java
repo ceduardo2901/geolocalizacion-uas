@@ -52,7 +52,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 		
 		puntaje.setOnRatingBarChangeListener(this);
 		
-		publicarFiltro = new IntentFilter(Constantes.CREAR_SITIO_FILTRO_ACTION);
+		publicarFiltro = new IntentFilter(Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 		
 		 app = ((ApplicationController)getApplicationContext());
 	    
@@ -80,21 +80,33 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 			String respuesta = bundle.getString("respuesta");
 		
 			Util.dismissProgressDialog();
-			
-	    	if (respuesta.equals(Constantes.RETURN_OK)){
-	    		
-	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
-				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
-				startActivity(actividadPrincipal);
-				
-			}
-			else{
-				Util.showToast(context, respuesta);
-			}
+			comentarFacebook();
+//	    	if (respuesta.equals(Constantes.RETURN_OK)){
+//	    		
+//	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
+//				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
+//				startActivity(actividadPrincipal);
+//				
+//			}
+//			else{
+//				Util.showToast(context, respuesta);
+//			}
 	    	
 			
 	    }
 	  };
+	  
+	private void comentarFacebook() {
+		if(comentarFaceBook.isChecked()){
+			facebook = new Facebook(getString(R.string.facebook_app_id));
+			
+			facebook.authorize(this, getResources().getStringArray(R.array.permissions) ,new FaceBookDialog());
+			mAsyncRunner = new AsyncFacebookRunner(facebook);
+			
+			//SessionEvents.addAuthListener(new SampleAuthListener());
+			
+		}
+	}
 
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -115,17 +127,29 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 		Intent intent = new Intent(this,PublicarServicio.class);
 		intent.putExtras(publicacion);
 		startService(intent);
-		if(comentarFaceBook.isChecked()){
-			facebook = new Facebook(getString(R.string.facebook_app_id));
-			facebook.authorize(this ,new FaceBookDialog());
-			mAsyncRunner = new AsyncFacebookRunner(facebook);
-			
-			//SessionEvents.addAuthListener(new SampleAuthListener());
-			
-		}
-		
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+				
 		
 	}
+	
+	public void postOnWall(String msg) {
+        Log.d("Tests", "Testing graph API wall post");
+         try {
+                String response = facebook.request("me");
+                Bundle parameters = new Bundle();
+                parameters.putString("message", msg);
+                parameters.putString("description", "test test test");
+                response = facebook.request("me/feed", parameters, 
+                        "POST");
+                Log.d("Tests", "got response: " + response);
+                if (response == null || response.equals("") || 
+                        response.equals("false")) {
+                   Log.v("Error", "Blank response");
+                }
+         } catch(Exception e) {
+             e.printStackTrace();
+         }
+    }
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode,
@@ -137,19 +161,19 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 
 		@Override
 		public void onComplete(Bundle values) {
-			// TODO Auto-generated method stub
+			postOnWall(comentario.getText().toString());
 			
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e) {
-			// TODO Auto-generated method stub
+			Log.e(TAG, "Error al autenticase en facebook");
 			
 		}
 
 		@Override
 		public void onError(DialogError e) {
-			// TODO Auto-generated method stub
+			Log.e(TAG, "Error al autenticase en facebook");
 			
 		}
 
