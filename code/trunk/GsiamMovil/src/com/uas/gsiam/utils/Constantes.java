@@ -41,7 +41,7 @@ public class Constantes {
 	public static final String CREAR_PUBLICACION_FILTRO_ACTION = "com.gsiam.places.CREAR_PUBLICACION_FILTRO_ACTION";
 	
 	// Mensajes 
-	public static final String MSG_ESPERA_GENERICO = "Cargando. Por favor espere..."; 
+	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor. Por favor espere..."; 
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
 	public static final String MSG_ERROR_SERVIDOR = "Error al intentar acceder al servidor";
