@@ -15,6 +15,8 @@ public interface IUsuarioDAO {
 	
 	public boolean existeUsuario(String mail) throws SQLException;
 	
+	public UsuarioDTO getUsuario(int id) throws SQLException;
+	
 	public void crearUsuario(UsuarioDTO usuario) throws SQLException;
 		
 	public void modificarUsuario(UsuarioDTO usuario) throws SQLException;
