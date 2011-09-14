@@ -43,6 +43,7 @@ public class Constantes {
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor. Por favor espere..."; 
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
+	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
 	public static final String MSG_ERROR_SERVIDOR = "Error al intentar acceder al servidor";
 	
