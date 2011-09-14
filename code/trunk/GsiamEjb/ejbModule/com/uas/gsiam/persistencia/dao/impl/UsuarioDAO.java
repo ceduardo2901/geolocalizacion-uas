@@ -89,6 +89,47 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
+
+	public UsuarioDTO getUsuario(int id) throws SQLException{
+		
+		PreparedStatement ps;
+		UsuarioDTO usuarioRetorno = null;
+		
+		try{
+
+			String sqlGetUsuario = "SELECT * FROM t_usuario u " +
+	        						  "WHERE u.usu_id = ?";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlGetUsuario);
+			
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				usuarioRetorno = new UsuarioDTO();
+				usuarioRetorno.setId(rs.getInt("usu_id"));
+				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
+				usuarioRetorno.setEmail(rs.getString("usu_mail"));
+				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
+				
+			}
+				
+			rs.close();
+			ps.close();
+			
+		
+		}finally{
+			
+				if (ConexionJDBCUtil.getConexion() != null)
+					ConexionJDBCUtil.getConexion().close();
+	
+		}
+		
+		return usuarioRetorno;		
+		
+	}
+	
 	/*
 	 * Metodo que crea al usuario
 	 */

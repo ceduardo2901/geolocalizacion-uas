@@ -89,11 +89,25 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		
 		try {
 			
-			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())){
-				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
-			}
-			else{
-				AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
+			UsuarioDTO userBD = AbstractFactory.getInstance().getUsuarioDAO().getUsuario(usuario.getId());
+			
+			if (userBD != null){
+				
+				if(userBD.getEmail().equalsIgnoreCase(usuario.getEmail())){
+					
+					AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
+				}
+				else{
+					
+					if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())){
+						throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
+					}
+					else{
+						AbstractFactory.getInstance().getUsuarioDAO().modificarUsuario(usuario);
+					}
+				}
+				
+				
 			}
 			
 			
