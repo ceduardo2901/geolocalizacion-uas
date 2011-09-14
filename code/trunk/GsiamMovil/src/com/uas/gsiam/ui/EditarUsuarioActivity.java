@@ -46,7 +46,7 @@ public class EditarUsuarioActivity extends Activity {
 	protected String email;
 	protected String nombre;
 	protected Byte [] array;
-	protected UsuarioDTO user;
+	protected UsuarioDTO userLogin;
 
 	protected EditText nombreTxt;
 	protected EditText emailTxt;
@@ -76,14 +76,14 @@ public class EditarUsuarioActivity extends Activity {
 		avatar = (ImageView) findViewById(R.id.avatar);
 		
 		ApplicationController app = ((ApplicationController)getApplicationContext());
-	    user = app.getUserLogin();
+		userLogin = app.getUserLogin();
 	    
-	    nombreTxt.setText(user.getNombre());
-	    emailTxt.setText(user.getEmail());
+	    nombreTxt.setText(userLogin.getNombre());
+	    emailTxt.setText(userLogin.getEmail());
 	  
 	    
-	    if (user.getAvatar() != null)
-	    	avatar.setImageBitmap(Util.ArrayToBitmap(user.getAvatar()));
+	    if (userLogin.getAvatar() != null)
+	    	avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
 	    
 	    editarPerfilFiltro = new IntentFilter(Constantes.EDITAR_USUARIO_FILTRO_ACTION);
 		
@@ -234,8 +234,8 @@ public class EditarUsuarioActivity extends Activity {
 			usuario.setNombre(nombre);
 			usuario.setEmail(email);
 			
-			usuario.setPassword(user.getPassword());
-			usuario.setId(user.getId());
+			usuario.setPassword(userLogin.getPassword());
+			usuario.setId(userLogin.getId());
 			
 			Drawable drawable= avatar.getDrawable();
 			
@@ -278,8 +278,9 @@ public class EditarUsuarioActivity extends Activity {
 	    		
 	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
 	    		
+	    		UsuarioDTO usuarioEditado = (UsuarioDTO) bundle.getSerializable("usuario");
 	    		ApplicationController app = ((ApplicationController)getApplicationContext());
-				app.setUserLogin(user);
+				app.setUserLogin(usuarioEditado);
 	    		
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
