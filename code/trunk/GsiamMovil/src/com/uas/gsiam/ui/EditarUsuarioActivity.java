@@ -276,7 +276,7 @@ public class EditarUsuarioActivity extends Activity {
 			
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
 	    		
-	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
+	    		Util.showToast(context, Constantes.MSG_USUARIO_EDITADO_OK);
 	    		
 	    		UsuarioDTO usuarioEditado = (UsuarioDTO) bundle.getSerializable("usuario");
 	    		ApplicationController app = ((ApplicationController)getApplicationContext());
