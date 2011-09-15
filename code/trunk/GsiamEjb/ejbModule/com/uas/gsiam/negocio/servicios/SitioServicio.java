@@ -18,7 +18,7 @@ public interface SitioServicio {
 	
 	void crearSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion, SitioExcepcion;
 	
-	void eliminarSitio(String idSitio) throws SitioNoExisteExcepcion;
+	void eliminarSitio(Integer idSitio) throws SitioExcepcion;
 	
 	void modificarSitio(SitioDTO sitioInteres) throws SitioNoExisteExcepcion;
 	

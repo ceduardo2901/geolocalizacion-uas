@@ -19,7 +19,7 @@ public class Constantes {
 	
 	// Mensajes de error sitios
 	public static String ERROR_CREAR_SITIO = "Error al intentar crear el sitio";
-	
+	public static String ERROR_ELIMINAR_SITIO = "Error al intentar eliminar el sitio";
 	
 	// Mensajes de error publicacion
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
