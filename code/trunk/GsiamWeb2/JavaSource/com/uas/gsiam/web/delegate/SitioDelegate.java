@@ -6,6 +6,7 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
+import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.web.sl.ServiceLocator;
@@ -38,6 +39,11 @@ public class SitioDelegate {
 	   
 	    servicioSitio.crearSitio(sitio);
    }
+   
+   public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
+	   
+	    servicioSitio.eliminarSitio(idSitio);
+  }
    
    public void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion {
 	   
