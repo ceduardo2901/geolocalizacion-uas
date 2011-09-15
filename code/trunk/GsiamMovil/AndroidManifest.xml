@@ -39,6 +39,7 @@
 		<service android:name="com.uas.gsiam.servicios.SitioServicio"/>
 		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"/>
 		<service android:name="com.uas.gsiam.servicios.PublicarServicio"/>
+		<service android:name="com.uas.gsiam.servicios.EliminarSitioServicio"></service>
 
 	</application>
 </manifest>
