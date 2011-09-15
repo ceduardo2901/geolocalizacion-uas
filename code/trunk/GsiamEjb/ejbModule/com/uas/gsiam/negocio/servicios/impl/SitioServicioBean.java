@@ -48,8 +48,18 @@ public class SitioServicioBean implements SitioServicio{
 	}
 
 	@Override
-	public void eliminarSitio(String idSitio) throws SitioNoExisteExcepcion {
-		// TODO Auto-generated method stub
+	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
+		try {
+			AbstractFactory.getInstance().getSitioDAO().eliminarSitio(idSitio);
+		} catch (IOException e) {
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+		} catch (InstantiationException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		} catch (IllegalAccessException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		} catch (ClassNotFoundException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		}
 		
 	}
 

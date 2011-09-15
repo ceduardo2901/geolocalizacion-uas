@@ -78,8 +78,44 @@ public class SitioDAO implements ISitioDAO {
 	}
 
 	@Override
-	public void eliminarSitio(String idSitio) throws SitioNoExisteExcepcion {
-		// TODO Auto-generated method stub
+	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
+		try {
+			PreparedStatement ps = null;
+			eliminarPublicacionesPorSitio(idSitio);
+			String sqlCrearSitio = "DELETE FROM t_sitio WHERE sit_id = ?";
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
+			
+			ps.setInt(1, idSitio);
+						
+			ps.execute();
+			
+			ps.close();			
+			
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		}
+
+	}
+	
+	
+	private void eliminarPublicacionesPorSitio(Integer idSitio) throws SitioExcepcion {
+		try {
+			PreparedStatement ps = null;
+
+			String sqlCrearSitio = "DELETE FROM t_publicacion WHERE pub_id_sitio = ?";
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
+			
+			ps.setInt(1, idSitio);
+						
+			ps.execute();
+			
+			ps.close();			
+			
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		}
 
 	}
 
