@@ -8,6 +8,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -73,6 +74,25 @@ public class SitioServicios {
 		
 		try {
 			servicio.eliminarSitio(new Integer(sitio));
+		}  catch (SitioExcepcion e) {
+			return Response.status(500).build();
+			
+		}
+		
+		return Response.ok().build();
+		
+		
+	}
+	
+	@PUT
+	@Path("/modificar")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public Response modificarSitio(@BadgerFish SitioDTO sitio) {
+			
+		
+		try {
+			servicio.modificarSitio(sitio);
 		}  catch (SitioExcepcion e) {
 			return Response.status(500).build();
 			

@@ -45,6 +45,11 @@ public class SitioDelegate {
 	    servicioSitio.eliminarSitio(idSitio);
   }
    
+   public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
+	   
+	    servicioSitio.modificarSitio(sitio);
+ }
+   
    public void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion {
 	   
 	    servicioSitio.crearPublicacion(publicacion);
