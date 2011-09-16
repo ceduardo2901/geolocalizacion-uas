@@ -120,10 +120,30 @@ public class SitioDAO implements ISitioDAO {
 	}
 
 	@Override
-	public void modificarSitio(SitioDTO sitioInteres)
-			throws SitioNoExisteExcepcion {
-		// TODO Auto-generated method stub
+	public void modificarSitio(SitioDTO sitio)
+			throws SitioExcepcion {
+		
+		try{
+		PreparedStatement ps = null;
 
+		Point punto = new Point(sitio.getLat(),
+				sitio.getLon());
+		PGgeometry geom = new PGgeometry(punto);
+		
+		String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=?)";
+
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
+
+		
+		ps.setString(1, sitio.getNombre());
+		ps.setString(2, sitio.getDireccion());
+		ps.setObject(3, geom);
+
+		ps.execute();
+	} catch (SQLException e) {
+		throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+	}
+		
 	}
 
 	@Override
