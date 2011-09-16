@@ -198,37 +198,14 @@ public class SitiosActivity extends Activity implements LocationListener, OnItem
 			}
 		});
 		lstOpciones.setOnItemLongClickListener(this);
-//		lstOpciones.setOnItemLongClickListener(new OnItemLongClickListener() {
-//
-//			@Override
-//			public boolean onItemLongClick(AdapterView<?> parent, View view,
-//					int position, long id) {
-//				final CharSequence[] items = {"Modificar", "Eliminar"};
-//				AlertDialog.Builder builder = new AlertDialog.Builder();
-//				builder.setTitle("Seleccionar una acción");
-//				builder.setItems(items, new DialogInterface.OnClickListener() {
-//				    public void onClick(DialogInterface dialog, int item) {
-//				        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
-//				        
-//				        if (item == 0){
-//				        	//getCamara();
-//				        }
-//				        else{
-//				        	
-//				        	//getGaleria();
-//				        }
-//				    }
-//				});
-//				AlertDialog alert = builder.create();
-//				alert.show();
-//				
-//				return false;
-//			}
-//		});
+
 	}
 
 
 	private void actualizarSitio(SitioMovilDTO sitio){
+		Intent intentModificar = new Intent(this, ModificarSitioActivity.class);
+		intentModificar.putExtra("sitio", sitio);
+		startActivity(intentModificar);
 		
 	}
 	
