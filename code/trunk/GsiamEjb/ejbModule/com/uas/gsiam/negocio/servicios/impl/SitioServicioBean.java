@@ -64,9 +64,19 @@ public class SitioServicioBean implements SitioServicio{
 	}
 
 	@Override
-	public void modificarSitio(SitioDTO sitio) throws SitioNoExisteExcepcion {
-		// TODO Auto-generated method stub
+	public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
 		
+		try {
+			AbstractFactory.getInstance().getSitioDAO().modificarSitio(sitio);
+		} catch (IOException e) {
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+		} catch (InstantiationException e) {
+			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		} catch (IllegalAccessException e) {
+			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		} catch (ClassNotFoundException e) {
+			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		}
 	}
 
 	@Override

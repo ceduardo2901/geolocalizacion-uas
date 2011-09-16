@@ -20,7 +20,7 @@ public interface SitioServicio {
 	
 	void eliminarSitio(Integer idSitio) throws SitioExcepcion;
 	
-	void modificarSitio(SitioDTO sitioInteres) throws SitioNoExisteExcepcion;
+	void modificarSitio(SitioDTO sitioInteres) throws SitioExcepcion;
 	
 	List<SitioDTO> obtenerSitios(SitioDTO sitio);
 	
