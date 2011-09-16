@@ -40,6 +40,9 @@ public class Constantes {
 	public static final String ELIMINAR_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/eliminar/{sitio}";
 	public static final String ELIMINAR_SITIO_FILTRO_ACTION = "com.gsiam.places.ELIMINAR_SITIO_FILTRO_ACTION";
 	
+	public static final String MODIFICAR_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/modificar";
+	public static final String MODIFICAR_SITIO_FILTRO_ACTION = "com.gsiam.places.MODIFICAR_SITIO_FILTRO_ACTION";
+	
 	public static final String CREAR_PUBLICACION_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/publicar";
 	public static final String CREAR_PUBLICACION_FILTRO_ACTION = "com.gsiam.places.CREAR_PUBLICACION_FILTRO_ACTION";
 	
