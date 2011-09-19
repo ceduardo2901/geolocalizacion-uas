@@ -130,7 +130,7 @@ public class SitioDAO implements ISitioDAO {
 				sitio.getLon());
 		PGgeometry geom = new PGgeometry(punto);
 		
-		String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=?)";
+		String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=? where sit_id=?";
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
@@ -138,6 +138,7 @@ public class SitioDAO implements ISitioDAO {
 		ps.setString(1, sitio.getNombre());
 		ps.setString(2, sitio.getDireccion());
 		ps.setObject(3, geom);
+		ps.setInt(4, new Integer(sitio.getIdSitio()));
 
 		ps.execute();
 	} catch (SQLException e) {
@@ -156,7 +157,7 @@ public class SitioDAO implements ISitioDAO {
 		PGgeometry pgeom = new PGgeometry(punto);
 
 		String sql = "select * from t_sitio "
-				+ "where sit_punto && 'BOX3D(-55.2068 -30.11082, -61.6068 -36.62082)'::box3d "
+				+ "where sit_punto && 'BOX3D(-30.11082 -57.2068, -35.101934 -55.349121)'::box3d "
 				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ?";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
@@ -171,8 +172,8 @@ public class SitioDAO implements ISitioDAO {
 
 				resultado = new SitioDTO();
 				// resultado.setDireccion(geom.getGeometry().getValue());
-				resultado.setLat(geom.getGeometry().getFirstPoint().getY());
-				resultado.setLon(geom.getGeometry().getFirstPoint().getX());
+				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
+				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 				resultado.setIdSitio(rs.getString(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
