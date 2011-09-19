@@ -13,71 +13,80 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable.Creator;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-public class ModificarSitioActivity extends Activity{
+public class ModificarSitioActivity extends Activity {
 
 	protected static String TAG = "ModificarSitioActivity";
 	protected EditText nombre;
 	protected EditText direccion;
 	protected SitioMovilDTO sitio;
 	protected IntentFilter filtroModificarSitio;
-	
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.modificar_sitio);
 		nombre = (EditText) findViewById(R.id.txtNombreId);
 		direccion = (EditText) findViewById(R.id.txtDireccionId);
-	
-		filtroModificarSitio = new IntentFilter(Constantes.MODIFICAR_SITIO_FILTRO_ACTION);
+
+		filtroModificarSitio = new IntentFilter(
+				Constantes.MODIFICAR_SITIO_FILTRO_ACTION);
 	}
-	
-	public void onResume(){
+
+	public void onResume() {
 		super.onResume();
-		
-		sitio = (SitioMovilDTO) getIntent().getSerializableExtra("sitio");
-				
+
+		sitio = getIntent().getParcelableExtra("sitio");
+
 		nombre.setText(sitio.getNombre());
 		direccion.setText(sitio.getDireccion());
-		
+
 		registerReceiver(modificarSitioReceiver, filtroModificarSitio);
 	}
-	
-	
-	public void onPause(){
+
+	public void onPause() {
 		super.onPause();
+		unregisterReceiver(modificarSitioReceiver);
 	}
-	
+
 	public void btnModificar(View v) {
-		Intent intentModificarSitio = new Intent(this, ModificarSitioServicio.class);
+
+		Intent intentModificarSitio = new Intent(this,
+				ModificarSitioServicio.class);
+		sitio.setNombre(nombre.getText().toString());
+		sitio.setDireccion(direccion.getText().toString());
 		intentModificarSitio.putExtra("sitio", sitio);
 		startService(intentModificarSitio);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
-		
+
 	}
-	
+
+	private void mostarSitios() {
+		Intent intentMostarSitios = new Intent(this, SitiosActivity.class);
+		startActivity(intentMostarSitios);
+	}
+
 	protected BroadcastReceiver modificarSitioReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
 			String error = intent.getStringExtra("error");
-			Bundle bundle = intent.getBundleExtra("usuario");
-			//user = (UsuarioDTO) bundle.getSerializable("usuario");
+
 			if (error != null) {
 				Util.showToast(context, error);
 			} else {
-//				if (user != null) {
-//					SessionStore.save(email, getApplicationContext());
-//					actividadPrincipal();
-//				}
+
+				mostarSitios();
+
 			}
 
 		}
 	};
-	
+
 }
