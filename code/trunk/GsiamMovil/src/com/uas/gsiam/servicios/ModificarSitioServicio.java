@@ -40,7 +40,7 @@ public class ModificarSitioServicio extends IntentService {
 
 		Bundle bundle = intent.getExtras();
 
-		SitioMovilDTO sitio = (SitioMovilDTO) bundle.getSerializable("sitio");
+		SitioMovilDTO sitio = (SitioMovilDTO) bundle.getParcelable("sitio");
 
 		Map<String, SitioMovilDTO> parms = new HashMap<String, SitioMovilDTO>();
 		parms.put("sitioDto", sitio);
@@ -52,7 +52,7 @@ public class ModificarSitioServicio extends IntentService {
 
 		} catch (RestClientException e) {
 			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
+			bundle.putString("error", Constantes.MSG_ERROR_SERVIDOR);
 		}
 
 		Intent intentModificarSitio = new Intent(

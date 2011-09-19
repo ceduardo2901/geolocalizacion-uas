@@ -80,16 +80,16 @@ public class CrearSitioActivity extends Activity{
 		
 			Util.dismissProgressDialog();
 			
-	    	if (respuesta.equals(Constantes.RETURN_OK)){
+	    	if (respuesta != null){
 	    		
-	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
-				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
-				startActivity(actividadPrincipal);
+	    		Util.showToast(context, respuesta);
+//				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
+//				startActivity(actividadPrincipal);
 				
 			}
-			else{
-				Util.showToast(context, respuesta);
-			}
+//			else{
+//				Util.showToast(context, respuesta);
+//			}
 	    	
 			
 	    }

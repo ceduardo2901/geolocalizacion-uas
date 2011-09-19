@@ -51,7 +51,7 @@ public class MostrarMapaActivity extends MapActivity{
 		geoPoint = new GeoPoint(
 				(int) (lat*1000000),
 				(int) (lon*1000000));
-		mapa.setBuiltInZoomControls(true);
+		mapa.setBuiltInZoomControls(true);		
 		
 		mapControl.setZoom(15);
 		mapControl.animateTo(geoPoint);
