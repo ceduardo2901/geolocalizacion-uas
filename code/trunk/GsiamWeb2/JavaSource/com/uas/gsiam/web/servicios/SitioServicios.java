@@ -12,10 +12,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
+import org.jboss.security.xacml.core.model.context.StatusType;
 
+import com.sun.xml.ws.encoding.ContentType;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
@@ -58,10 +62,10 @@ public class SitioServicios {
 		
 			e.printStackTrace();
 		} catch (SitioExcepcion e) {
-			return Response.status(500).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 			
 		}
-		return Response.ok().build();
+		return Response.status(200).type(MediaType.APPLICATION_JSON).build();
 		
 	}
 	
