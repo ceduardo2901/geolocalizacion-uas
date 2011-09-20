@@ -156,15 +156,18 @@ public class SitioDAO implements ISitioDAO {
 				sitio.getLon());
 		PGgeometry pgeom = new PGgeometry(punto);
 
-		String sql = "select * from t_sitio "
+		String sql = "select *, Distance(sit_punto,GeomFromText(?, -1)) as dis " +
+					"from t_sitio "
 				+ "where sit_punto && 'BOX3D(-30.11082 -57.2068, -35.101934 -55.349121)'::box3d "
-				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ?";
+				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ? " +
+				" order by dis";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
 			PGgeometry geom;
 			ps.setObject(1, pgeom);
-			ps.setInt(2, 30);
+			ps.setObject(2, pgeom);
+			ps.setInt(3, 2);
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
@@ -177,6 +180,7 @@ public class SitioDAO implements ISitioDAO {
 				resultado.setIdSitio(rs.getString(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
+				
 				sitios.add(resultado);
 			}
 			rs.close();
