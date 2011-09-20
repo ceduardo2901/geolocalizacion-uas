@@ -23,15 +23,19 @@
 				android:layout_height="wrap_content" android:text="" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
-			android:layout_height="wrap_content"></TableRow>
-		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
-			android:layout_height="wrap_content"></TableRow>
+			android:layout_height="wrap_content">
+			<TableLayout android:id="@+id/tableLayout2" android:layout_width="wrap_content" android:layout_height="wrap_content">
+				<Button android:layout_height="wrap_content" android:onClick="publicar" android:text="@string/publicar" android:layout_width="wrap_content" android:id="@+id/btnPubId"></Button>
+				<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
+				<TableRow android:id="@+id/tableRow8" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
+			</TableLayout>
+			<Button android:layout_height="wrap_content" android:onClick="compartir" android:text="@string/compartir" android:layout_width="wrap_content" android:id="@+id/btnCompId"></Button>
+		</TableRow>
+		
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 
 		</TableRow>
 	</TableLayout>
-	<Button android:text="@string/publicar" android:id="@+id/btnPubId"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="publicar"/>
 
 </LinearLayout>

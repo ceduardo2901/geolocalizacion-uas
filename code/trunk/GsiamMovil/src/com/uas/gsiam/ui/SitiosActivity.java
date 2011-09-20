@@ -177,7 +177,7 @@ public class SitiosActivity extends Activity implements LocationListener, OnItem
 
 	public void mostrarSitios() {
 		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitios,
-				sitios);
+				sitios, loc);
 		ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
 		lstOpciones.setAdapter(adaptador);
 		lstOpciones.setOnItemClickListener(new OnItemClickListener() {
@@ -192,7 +192,7 @@ public class SitiosActivity extends Activity implements LocationListener, OnItem
 				sitioDetalleIntent.putExtra("direccion", sitios.get(position).getDireccion());
 				sitioDetalleIntent.putExtra("lat", sitio.getLat());
 				sitioDetalleIntent.putExtra("lon", sitio.getLon());
-				
+				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);
 				
 			}
