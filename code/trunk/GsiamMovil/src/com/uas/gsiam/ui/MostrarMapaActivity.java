@@ -3,6 +3,7 @@ package com.uas.gsiam.ui;
 import java.util.List;
 
 import android.content.Intent;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -18,6 +19,8 @@ public class MostrarMapaActivity extends MapActivity{
 	
 	private MapView mapa;
 	private GeoPoint geoPoint;
+	private GeoPoint geoPointUbicacion;
+	private PositionOverlay sitioPosOverlay;
 	private PositionOverlay myposOverlay;
 	private Location loc;
 	
@@ -33,7 +36,10 @@ public class MostrarMapaActivity extends MapActivity{
 		super.onResume();
 		Double lat = getIntent().getDoubleExtra("lat", 0);
 		Double lon = getIntent().getDoubleExtra("lon", 0);
+		loc = getIntent().getParcelableExtra("ubicacion");
 		mostrarMapa(lat,lon);
+		
+		
 	}
 	
 	
@@ -51,25 +57,32 @@ public class MostrarMapaActivity extends MapActivity{
 		geoPoint = new GeoPoint(
 				(int) (lat*1000000),
 				(int) (lon*1000000));
+		geoPointUbicacion = new GeoPoint(
+				(int) (loc.getLatitude()*1000000),
+				(int) (loc.getLongitude()*1000000));
 		mapa.setBuiltInZoomControls(true);		
 		
 		mapControl.setZoom(15);
-		mapControl.animateTo(geoPoint);
-		mapControl.setCenter(geoPoint);
-		
-
-		if (myposOverlay == null)
-			myposOverlay = new PositionOverlay();
+		//mapControl.animateTo(geoPoint);
 			
+
+		if (sitioPosOverlay == null && myposOverlay == null){
+			sitioPosOverlay = new PositionOverlay();
+			myposOverlay = new PositionOverlay();
+		}
 		else
 			mapa.removeAllViews();
 		final List<Overlay> overlays = mapa.getOverlays();
 		overlays.clear();
 		
+		overlays.add(sitioPosOverlay);
 		overlays.add(myposOverlay);
-		myposOverlay.setLocation(lat,lon);
+		sitioPosOverlay.setLocation(lat,lon);
+		myposOverlay.setLocation(loc);
+		myposOverlay.setNombre("Usted esta Aqui");
+		
 		mapa.setClickable(true);
-		mapControl.setCenter(geoPoint);
+		mapControl.setCenter(geoPointUbicacion);
 		
 	}
 

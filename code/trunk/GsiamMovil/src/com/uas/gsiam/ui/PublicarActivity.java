@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -40,6 +41,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	private String sitioId;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
+	private static final int RESULT = 1001;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,21 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 		
 	}
 	
+	public void compartir(View v) {
+//		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+//		sendIntent.putExtra(Intent.EXTRA_TEXT, "email text");
+//		sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+//		sendIntent.setType("message/rfc822");
+//		startActivity(Intent.createChooser(sendIntent, "Title:"));
+		
+		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
+		compartirIntent.setType("plain/text");
+		startActivity(Intent.createChooser(compartirIntent, "Title:"));
+		//startActivityForResult(compartirIntent,RESULT);
+	}
+	
+	
+	
 	public void postOnWall(String msg) {
         Log.d("Tests", "Testing graph API wall post");
          try {
@@ -154,7 +171,12 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	@Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-        facebook.authorizeCallback(requestCode, resultCode, data);
+		if(resultCode == 1001){
+			Util.showToast(this, "Se envio el mensaje");
+		}else{
+			facebook.authorizeCallback(requestCode, resultCode, data);
+		}
+        
     }
 	
 	public class FaceBookDialog implements DialogListener {

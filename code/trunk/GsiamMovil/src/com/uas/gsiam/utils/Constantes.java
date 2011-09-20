@@ -6,6 +6,7 @@ public class Constantes {
 
 	// radio por defecto.
 	public static final int RADIO = 150;
+	public static String METROS = "metros";
 	public static final String SHARED_PREFERENCE_FILE = "SHARED_PREFERENCE_FILE";
 	public static final boolean SUPPORTS_GINGERBREAD = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD;
 	public static final boolean SUPPORTS_FROYO = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO;

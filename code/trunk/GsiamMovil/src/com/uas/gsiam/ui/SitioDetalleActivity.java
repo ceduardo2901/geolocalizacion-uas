@@ -1,5 +1,7 @@
 package com.uas.gsiam.ui;
 
+import java.security.Provider;
+
 import com.uas.gsiam.servicios.CrearSitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
@@ -43,6 +45,9 @@ public class SitioDetalleActivity extends Activity{
 		lat = new Double(intent.getStringExtra("lat"));
 		lon = new Double(intent.getStringExtra("lon"));
 		sitioId = intent.getStringExtra("sitioId");
+		loc = intent.getParcelableExtra("ubicacion");
+		
+		
 	}
 	
 	public void mostarMapa(View v) {
@@ -53,6 +58,7 @@ public class SitioDetalleActivity extends Activity{
 		bundle.putDouble("lon", lon);
 		Intent intentMostrarMapa = new Intent(this,MostrarMapaActivity.class);
 		intentMostrarMapa.putExtras(bundle);
+		intentMostrarMapa.putExtra("ubicacion", loc);
 		startActivity(intentMostrarMapa);
 		
 	}
