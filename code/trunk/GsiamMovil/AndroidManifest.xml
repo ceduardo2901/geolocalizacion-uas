@@ -35,6 +35,11 @@
 		<activity android:name=".MostrarMapaActivity"/>
 		<activity android:name="PublicarActivity"/>
 		
+		<activity android:name=".AmigosTabActivity"/>
+		<activity android:name="AmigosTab1" android:label="11111"></activity>
+		<activity android:name="AmigosTab2" android:label="22222"></activity>
+		<activity android:name="AmigosTab3" android:label="33333"></activity>
+		
 		<service android:name="com.uas.gsiam.servicios.LoginServicio"/>
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"/>
 		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio"/>
