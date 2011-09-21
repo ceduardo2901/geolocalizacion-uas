@@ -26,6 +26,7 @@ import com.uas.gsiam.servicios.PublicarServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SessionEvents;
+import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.SessionEvents.AuthListener;
 
@@ -42,6 +43,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	private UsuarioDTO usuario;
 	private ApplicationController app;
 	private static final int RESULT = 1001;
+	private String nombre;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 		registerReceiver(receiverPublicar, publicarFiltro);
 		
 		sitioId = getIntent().getStringExtra("sitioId");
+		nombre = getIntent().getStringExtra("nombre");
 		usuario = app.getUserLogin();
 	}
 	
@@ -100,10 +103,15 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	  
 	private void comentarFacebook() {
 		if(comentarFaceBook.isChecked()){
-			facebook = new Facebook(getString(R.string.facebook_app_id));
 			
-			facebook.authorize(this, getResources().getStringArray(R.array.permissions) ,new FaceBookDialog());
-			mAsyncRunner = new AsyncFacebookRunner(facebook);
+			facebook = new Facebook(getString(R.string.facebook_app_id));
+			SessionStore.restore(facebook, this);
+			if(!facebook.isSessionValid()){
+				facebook.authorize(this, getResources().getStringArray(R.array.permissions) ,new FaceBookDialog());
+			}else{
+				postOnWall(comentario.getText().toString());
+			}
+			
 			
 			//SessionEvents.addAuthListener(new SampleAuthListener());
 			
@@ -135,16 +143,13 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	}
 	
 	public void compartir(View v) {
-//		Intent sendIntent = new Intent(Intent.ACTION_SEND);
-//		sendIntent.putExtra(Intent.EXTRA_TEXT, "email text");
-//		sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-//		sendIntent.setType("message/rfc822");
-//		startActivity(Intent.createChooser(sendIntent, "Title:"));
 		
 		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
 		compartirIntent.setType("plain/text");
-		startActivity(Intent.createChooser(compartirIntent, "Title:"));
-		//startActivityForResult(compartirIntent,RESULT);
+		compartirIntent.putExtra(Intent.EXTRA_TEXT, "Mira el sitio " + nombre +" en Gsiam");  		
+		
+		startActivityForResult(Intent.createChooser(compartirIntent, "Title:"), RESULT);
+		
 	}
 	
 	
@@ -171,7 +176,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 	@Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-		if(resultCode == 1001){
+		if(requestCode == 1001){
 			Util.showToast(this, "Se envio el mensaje");
 		}else{
 			facebook.authorizeCallback(requestCode, resultCode, data);
@@ -183,6 +188,7 @@ public class PublicarActivity extends Activity implements OnRatingBarChangeListe
 
 		@Override
 		public void onComplete(Bundle values) {
+			SessionStore.save(facebook, getApplicationContext());
 			postOnWall(comentario.getText().toString());
 			
 		}

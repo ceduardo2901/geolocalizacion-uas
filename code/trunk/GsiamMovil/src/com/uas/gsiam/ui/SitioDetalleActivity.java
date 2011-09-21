@@ -68,6 +68,8 @@ public class SitioDetalleActivity extends Activity{
 		
 		Intent intent = new Intent(this,PublicarActivity.class);
 		intent.putExtra("sitioId", sitioId);
+		intent.putExtra("nombre", txtNombre.getText().toString());
+
 		startActivity(intent);
 		
 	}

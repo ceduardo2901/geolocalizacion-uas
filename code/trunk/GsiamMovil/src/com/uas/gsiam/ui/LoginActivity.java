@@ -117,7 +117,7 @@ public class LoginActivity extends Activity {
 				Util.showToast(context, error);
 			} else {
 				if (user != null) {
-					SessionStore.save(email, getApplicationContext());
+					//SessionStore.save(email, getApplicationContext());
 					actividadPrincipal();
 				}
 			}
