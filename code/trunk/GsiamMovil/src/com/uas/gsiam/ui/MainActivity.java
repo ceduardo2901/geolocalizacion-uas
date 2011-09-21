@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 
 	private Button sitiosButton;
 	private Button perfilButton;
+	private Button amigosButton;
 	
 
 	protected UsuarioDTO user;
@@ -36,6 +37,9 @@ public class MainActivity extends Activity {
 		
 		perfilButton = (Button) findViewById(R.id.perfil_button);
 		perfilButton.setOnClickListener(botonListener);
+		
+		amigosButton = (Button) findViewById(R.id.amigos_button);
+		amigosButton.setOnClickListener(botonListener);
 		
 		ApplicationController app = ((ApplicationController)getApplicationContext());
 		user = app.getUserLogin();
@@ -79,7 +83,9 @@ public class MainActivity extends Activity {
 			case R.id.perfil_button:
 				perfilActivity();
 				break;
-
+			case R.id.amigos_button:
+				amigosActivity();
+				break;
 		}
 			
 		}
@@ -96,4 +102,8 @@ public class MainActivity extends Activity {
 		startActivity(perfilIntent);
 	}
 	
+	private void amigosActivity() {
+		Intent amigosIntent = new Intent(this, AmigosTabActivity.class);
+		startActivity(amigosIntent);
+	}
 }
