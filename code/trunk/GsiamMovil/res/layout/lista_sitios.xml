@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-	<TableLayout android:id="@+id/tableLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
-	<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-	<EditText android:layout_height="wrap_content" android:id="@+id/editText1" android:layout_width="229dp">
-		<requestFocus></requestFocus>
-	</EditText>
-	
-	<ImageButton android:background="@drawable/icon" android:layout_width="wrap_content"
-  		android:layout_height="wrap_content" android:id="@+id/buscarIdBtn"/>
-	</TableRow>
-	</TableLayout>
-	<TextView android:layout_height="wrap_content" android:text="Selecciona una opción:" android:layout_width="fill_parent"></TextView>
-	<ListView android:id="@+id/LstOpciones" android:layout_width="fill_parent"
+
+	<TextView android:layout_height="wrap_content" android:text="Selecciona una opción:"
+		android:layout_width="fill_parent" />
+	<ListView android:id="@id/android:list" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+</RelativeLayout>
