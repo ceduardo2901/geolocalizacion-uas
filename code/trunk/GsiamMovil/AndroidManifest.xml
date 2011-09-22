@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="com.uas.gsiam.ui" android:versionCode="1" android:versionName="1.0"
-	android:installLocation="auto" >
+	android:installLocation="auto">
 
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-<uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-<uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-		
-	<application android:icon="@drawable/logo" 
-				 android:label="@string/app_name" 
-				 android:debuggable="true"
-				 android:name="com.uas.gsiam.utils.ApplicationController">
-	  
-	 <uses-library android:name="com.google.android.maps" />	
+	<uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+	<uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
+
+	<application android:icon="@drawable/logo" android:label="@string/app_name"
+		android:debuggable="true" android:name="com.uas.gsiam.utils.ApplicationController">
+
+		<uses-library android:name="com.google.android.maps" />
 		<activity android:name=".LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -24,28 +22,35 @@
 			</intent-filter>
 
 		</activity>
-		
+
 		<activity android:name=".MainActivity" />
-		<activity android:name=".SitiosActivity"/>
-		<activity android:name=".PerfilActivity"/>
-		<activity android:name=".EditarUsuarioActivity"/>
+		<activity android:name=".SitiosActivity" android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH"/>
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<meta-data android:name="android.app.searchable"
+                   android:resource="@xml/searchable"/>
+		</activity>
+		<activity android:name=".PerfilActivity" />
+		<activity android:name=".EditarUsuarioActivity" />
 		<activity android:name=".CrearUsuarioActivity" />
-		<activity android:name="SitioDetalleActivity"/>
-		<activity android:name=".CrearSitioActivity"/>
-		<activity android:name=".MostrarMapaActivity"/>
-		<activity android:name="PublicarActivity"/>
-		
-		<activity android:name=".AmigosTabActivity"/>
+		<activity android:name="SitioDetalleActivity" />
+		<activity android:name=".CrearSitioActivity" />
+		<activity android:name=".MostrarMapaActivity" />
+		<activity android:name="PublicarActivity" />
+
+		<activity android:name=".AmigosTabActivity" />
 		<activity android:name="AmigosTab1" android:label="11111"></activity>
 		<activity android:name="AmigosTab2" android:label="22222"></activity>
 		<activity android:name="AmigosTab3" android:label="33333"></activity>
-		
-		<service android:name="com.uas.gsiam.servicios.LoginServicio"/>
-		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio"/>
-		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio"/>
-		<service android:name="com.uas.gsiam.servicios.SitioServicio"/>
-		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio"/>
-		<service android:name="com.uas.gsiam.servicios.PublicarServicio"/>
+
+		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
+		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
+		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio" />
+		<service android:name="com.uas.gsiam.servicios.SitioServicio" />
+		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio" />
+		<service android:name="com.uas.gsiam.servicios.PublicarServicio" />
 		<service android:name="com.uas.gsiam.servicios.EliminarSitioServicio"></service>
 		<activity android:name="ModificarSitioActivity"></activity>
 		<service android:name="com.uas.gsiam.servicios.ModificarSitioServicio"></service>
