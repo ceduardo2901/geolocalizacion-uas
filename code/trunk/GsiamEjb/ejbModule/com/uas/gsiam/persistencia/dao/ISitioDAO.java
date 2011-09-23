@@ -11,7 +11,7 @@ public interface ISitioDAO {
 	
 	List<SitioDTO> obtenerSitios(SitioDTO sitio);
 
-	void buscarSitio(SitioDTO sitioInteres)throws SitioNoExisteExcepcion;
+	List<SitioDTO> buscarSitio(SitioDTO sitioInteres)throws SitioExcepcion;
 	
 	void agregarSitio(SitioDTO sitioInteres)throws SitioYaExisteExcepcion, SitioExcepcion;
 	

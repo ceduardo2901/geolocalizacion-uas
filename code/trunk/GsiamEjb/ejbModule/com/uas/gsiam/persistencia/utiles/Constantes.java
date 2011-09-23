@@ -5,6 +5,7 @@ public class Constantes {
 	
 	public static String RETURN_OK = "ok";
 	
+	
 	// Mensajes de Error
 	public static String ERROR_COMUNICACION_BD = "Error al comunicarse con la Base de Datos";
 	public static String ERROR_CREAR_USUARIO = "Error al intentar crear el usuario";
@@ -21,6 +22,7 @@ public class Constantes {
 	public static String ERROR_CREAR_SITIO = "Error al intentar crear el sitio";
 	public static String ERROR_ELIMINAR_SITIO = "Error al intentar eliminar el sitio";
 	public static String ERROR_MODIFICAR_SITIO = "Error al intentar modificar el sitio";
+	public static String ERROR_BUSCAR_SITIO = "Error al buscar el sitio";
 	
 	// Mensajes de error publicacion
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
