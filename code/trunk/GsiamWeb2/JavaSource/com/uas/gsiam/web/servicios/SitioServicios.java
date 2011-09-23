@@ -50,6 +50,23 @@ public class SitioServicios {
 		return listaSitios;
 	}
 	
+	@GET
+	@Path("/{nombre}")
+	@Produces("application/json")
+	public List<SitioDTO> buscarSitios(@PathParam ("nombre") String nombre){
+		
+		List<SitioDTO> sitios=null;
+		try {
+			sitios = servicio.buscarSitios(nombre);
+		} catch (SitioExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return sitios;
+	}
+	
 	@POST
 	@Path("/agregar")
 	@Produces("application/json")

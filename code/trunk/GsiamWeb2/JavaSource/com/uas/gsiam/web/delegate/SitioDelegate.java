@@ -35,6 +35,13 @@ public class SitioDelegate {
 	   return servicioSitio.obtenerSitios(sitio);
    }
    
+   public List<SitioDTO> buscarSitios(String nombre) throws SitioExcepcion{
+	   SitioDTO sitio = new SitioDTO();
+	   sitio.setNombre(nombre);
+	   
+	   return servicioSitio.buscarSitios(sitio);
+   }
+   
    public void crearSitio(SitioDTO sitio) throws SitioYaExisteExcepcion, SitioExcepcion {
 	   
 	    servicioSitio.crearSitio(sitio);
