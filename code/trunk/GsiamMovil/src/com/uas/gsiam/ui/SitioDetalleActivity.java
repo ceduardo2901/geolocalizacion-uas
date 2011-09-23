@@ -42,8 +42,8 @@ public class SitioDetalleActivity extends Activity{
 		
 		txtNombre.setText(intent.getStringExtra("nombre"));
 		txtDireccion.setText(intent.getStringExtra("direccion"));
-		lat = new Double(intent.getStringExtra("lat"));
-		lon = new Double(intent.getStringExtra("lon"));
+		lat = intent.getDoubleExtra("lat", 0);
+		lon = intent.getDoubleExtra("lon", 0);
 		sitioId = intent.getStringExtra("sitioId");
 		loc = intent.getParcelableExtra("ubicacion");
 		

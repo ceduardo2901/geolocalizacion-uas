@@ -2,12 +2,16 @@ package com.uas.gsiam.servicios;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ser.ArraySerializers;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -20,6 +24,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SitioMovilDTO;
 
@@ -49,27 +54,51 @@ public class SitioServicio extends IntentService {
 
 		Bundle bundle = intent.getExtras();
 
-		Double lat = bundle.getDouble("lat");
-		Double lon = bundle.getDouble("lon");
+		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
+		
+//		Double lat = bundle.getDouble("lat");
+//		Double lon = bundle.getDouble("lon");
+		
+		SitioDTO[] respuesta=null;
+		
 		try {
+			if(sitio.getLat() != null && sitio.getLon() != null){
 			Map<String, Double> parms = new HashMap<String, Double>();
 
-			parms.put("lat", lat);
-			parms.put("lon", lon);
+			parms.put("lat", sitio.getLat());
+			parms.put("lon", sitio.getLon());
 
-			String respuesta = restTemp
+			respuesta = restTemp
 					.getForObject(Constantes.SITIOS_SERVICE_URL,
-							String.class, parms);
-			
+							SitioDTO[].class, parms);
+			}else{
+				Map<String, String> parms = new HashMap<String, String>();
+
+				parms.put("nombre", sitio.getNombre());
+				
+
+				respuesta = restTemp
+						.getForObject(Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
+								SitioDTO[].class, parms);
+			}
 				
 			Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
-			//bundle.putParcelable("sitios", respuesta[1]);
-			intentSitio.putExtra("sitios", respuesta);
+			bundle.putSerializable("sitios", getArrayList(respuesta));
+			
+			intentSitio.putExtras(bundle);
 			sendBroadcast(intentSitio);
 		} catch (RestClientException e) {
 			Log.e(TAG, "Error al llamar servicio");
 		}
 
+	}
+	
+	public ArrayList<SitioDTO> getArrayList(SitioDTO[] sitios){
+		ArrayList<SitioDTO> lista = new ArrayList<SitioDTO>();
+		for(SitioDTO sitio : sitios){
+			lista.add(sitio);
+		}
+		return lista;
 	}
 
 }

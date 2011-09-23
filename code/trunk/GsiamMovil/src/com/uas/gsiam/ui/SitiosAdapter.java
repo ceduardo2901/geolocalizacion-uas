@@ -10,17 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SitioMovilDTO;
 
-public class SitiosAdapter extends ArrayAdapter<SitioMovilDTO> {
+public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
 	Activity context;
-	private List<SitioMovilDTO> sitiosDTO;
+	private List<SitioDTO> sitiosDTO;
 	private Location loc;
 
 	public SitiosAdapter(Activity context, int resource,
-			List<SitioMovilDTO> objects, Location loc) {
+			List<SitioDTO> objects, Location loc) {
 		super(context, resource, objects);
 		this.context = context;
 		sitiosDTO = objects;
@@ -28,7 +29,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioMovilDTO> {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		SitioMovilDTO sitioMovil = sitiosDTO.get(position);
+		SitioDTO sitioMovil = sitiosDTO.get(position);
 		Location locSitio = new Location("");
 		locSitio.setLatitude(new Double(sitioMovil.getLat()));
 		locSitio.setLongitude(new Double(sitioMovil.getLon()));
