@@ -23,18 +23,53 @@ import com.uas.gsiam.persistencia.utiles.Constantes;
 public class SitioDAO implements ISitioDAO {
 
 	@Override
-	public void buscarSitio(SitioDTO sitioInteres)
-			throws SitioNoExisteExcepcion {
-		// TODO Auto-generated method stub
-
+	public List<SitioDTO> buscarSitio(SitioDTO sitioInteres)
+			throws SitioExcepcion {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		SitioDTO resultado;
+		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
+		String sqlExisteSitio = "SELECT * FROM t_sitio WHERE UPPER(sit_nombre) like ?";
+		
+		try {
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteSitio);
+			ps.setString(1, "%"+sitioInteres.getNombre().toUpperCase()+"%");
+			rs = ps.executeQuery();
+			PGgeometry geom;
+			while (rs.next()) {
+				resultado = new SitioDTO();
+				geom = (PGgeometry) rs.getObject(2);
+				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
+				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
+				resultado.setIdSitio(rs.getString(6));
+				resultado.setNombre(rs.getString(1));
+				resultado.setDireccion(rs.getString(5));
+				
+				sitios.add(resultado);
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+		}finally{
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return sitios;
 	}
 
 	@Override
 	public void agregarSitio(SitioDTO sitioInteres)
 			throws SitioYaExisteExcepcion, SitioExcepcion {
+		PreparedStatement ps = null;
 		try {
-			PreparedStatement ps = null;
-
+			
 			Point punto = new Point(sitioInteres.getLat(),
 					sitioInteres.getLon());
 			PGgeometry geom = new PGgeometry(punto);
@@ -44,7 +79,7 @@ public class SitioDAO implements ISitioDAO {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
 			
-			ps.setString(1, sitioInteres.getNombre());
+			ps.setString(1, sitioInteres.getNombre().toUpperCase());
 			ps.setObject(2, geom);
 			ps.setInt(3, 1);
 			ps.setString(4, sitioInteres.getDireccion());
@@ -52,6 +87,13 @@ public class SitioDAO implements ISitioDAO {
 			ps.execute();
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+		}finally{
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -174,7 +216,7 @@ public class SitioDAO implements ISitioDAO {
 				geom = (PGgeometry) rs.getObject(2);
 
 				resultado = new SitioDTO();
-				// resultado.setDireccion(geom.getGeometry().getValue());
+				
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 				resultado.setIdSitio(rs.getString(6));

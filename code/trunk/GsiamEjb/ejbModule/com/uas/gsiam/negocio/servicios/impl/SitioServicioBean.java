@@ -117,4 +117,24 @@ public class SitioServicioBean implements SitioServicio{
 		}
 	}
 
+	@Override
+	public List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion {
+		List<SitioDTO> sitios=null;
+		
+		try {
+			sitios = AbstractFactory.getInstance().getSitioDAO().buscarSitio(sitio);
+		} catch (IOException e) {
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+		} catch (InstantiationException e) {
+			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
+		} catch (IllegalAccessException e) {
+			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
+		} catch (ClassNotFoundException e) {
+			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
+		}
+		
+		return sitios;
+		
+	}
+
 }

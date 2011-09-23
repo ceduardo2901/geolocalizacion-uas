@@ -24,5 +24,7 @@ public interface SitioServicio {
 	
 	List<SitioDTO> obtenerSitios(SitioDTO sitio);
 	
+	List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion;
+	
 	void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion;
 }
