@@ -7,7 +7,7 @@ import com.uas.gsiam.negocio.dto.SitioDTO;
 @XmlRootElement
 public class ServicioSitioDTO {
 
-	public String idSitio;
+	public Integer idSitio;
 	public String nombre;
 	public String direccion;
 	public String lon;
@@ -41,11 +41,11 @@ public class ServicioSitioDTO {
 		this.lat = lat;
 	}
 
-	public String getIdSitio() {
+	public Integer getIdSitio() {
 		return idSitio;
 	}
 
-	public void setIdSitio(String idSitio) {
+	public void setIdSitio(Integer idSitio) {
 		this.idSitio = idSitio;
 	}
 
