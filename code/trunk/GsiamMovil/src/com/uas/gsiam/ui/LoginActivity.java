@@ -26,7 +26,7 @@ public class LoginActivity extends Activity {
 
 	protected EditText emailTxt;
 	protected EditText passTxt;
-	protected Button login;
+	//protected Button login;
 	protected IntentFilter loginFiltro;
 
 	protected UsuarioDTO user;
@@ -37,14 +37,15 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 		user = new UsuarioDTO();
-		emailTxt = (EditText) findViewById(R.id.emailTxt);
+		this.passTxt = (EditText) findViewById(R.id.passTxt);
+		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
 		
 	/*	email = SessionStore.restore(this);
 		if (email != null) {
 			actividadPrincipal();
 		}
 		*/
-		passTxt = (EditText) findViewById(R.id.passTxt);
+		
 		//login = (Button) findViewById(R.id.entrarBtn);
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 

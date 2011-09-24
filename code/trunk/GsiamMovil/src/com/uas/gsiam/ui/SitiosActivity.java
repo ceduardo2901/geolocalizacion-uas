@@ -8,16 +8,12 @@ import java.util.List;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.deser.ArrayDeserializer;
-import org.codehaus.jackson.map.deser.ArrayDeserializers;
-import org.codehaus.jackson.map.type.ArrayType;
-import org.codehaus.jackson.type.JavaType;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +22,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +38,7 @@ import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SitioMovilDTO;
+import com.uas.gsiam.utils.SitiosAdapter;
 import com.uas.gsiam.utils.Util;
 
 public class SitiosActivity extends ListActivity implements LocationListener,
@@ -59,16 +57,52 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(android.R.id.list);
+		// setContentView(android.R.id.list);
 		lw = getListView();
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
-		
-		handleIntent(getIntent());
-		
+		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			buildAlertMessageNoGps();
+		}
+		// handleIntent(getIntent());
+
+	}
+
+	private void launchGPSOptions() {
+		final ComponentName toLaunch = new ComponentName(
+				"com.android.settings", "com.android.settings.SecuritySettings");
+		final Intent intent = new Intent(
+				Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		intent.setComponent(toLaunch);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivityForResult(intent, 0);
+	}
+
+	private void buildAlertMessageNoGps() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(
+				Constantes.MSG_GPS_DISABLE)
+				.setCancelable(false)
+				.setPositiveButton(Constantes.MSG_ACEPTAR,
+						new DialogInterface.OnClickListener() {
+							public void onClick(
+									@SuppressWarnings("unused") final DialogInterface dialog,
+									@SuppressWarnings("unused") final int id) {
+								launchGPSOptions();
+							}
+						})
+				.setNegativeButton(Constantes.MSG_CANCELAR, new DialogInterface.OnClickListener() {
+					public void onClick(final DialogInterface dialog,
+							@SuppressWarnings("unused") final int id) {
+						dialog.cancel();
+					}
+				});
+		final AlertDialog alert = builder.create();
+		alert.show();
 	}
 
 	@Override
@@ -83,18 +117,18 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 			buscarSitio(query);
 		}
 	}
-	
-	private void buscarSitio(String query){
+
+	private void buscarSitio(String query) {
 		Log.i(TAG, "Estoy en la busqueda");
 		SitioDTO sitio = new SitioDTO();
 		sitio.setNombre(query);
 		Intent intentBuscarSitio = new Intent(this, SitioServicio.class);
 		intentBuscarSitio.putExtra("sitio", sitio);
-		
+
 		startService(intentBuscarSitio);
-		
+
 		Util.showToast(this, Constantes.MSG_ESPERA_GENERICO);
-		
+
 	}
 
 	public void onStart() {
@@ -110,10 +144,10 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		loc = getLastBestLocation(Constantes.MAX_DISTANCE,
 				System.currentTimeMillis() - Constantes.MAX_TIME);
 		if (!Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-			
+
 			actualizarSitios(loc);
 		}
-		
+
 		startListening();
 
 	}
@@ -153,7 +187,7 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 			startActivity(agregarSitioIntent);
 			break;
 		case R.id.buscarSitioId:
-			//String query = getIntent().getStringExtra(SearchManager.QUERY);
+			// String query = getIntent().getStringExtra(SearchManager.QUERY);
 			startSearch(null, false, null, false);
 			break;
 		default:
@@ -172,8 +206,9 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
 			Bundle b = intent.getExtras();
-			ArrayList<SitioDTO> sitios =  (ArrayList<SitioDTO>) b.getSerializable("sitios");
-						
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
+					.getSerializable("sitios");
+
 			if (sitios != null) {
 				setSitios(sitios);
 				mostrarSitios();
@@ -198,33 +233,33 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		}
 	};
 
-	public List<SitioMovilDTO> parseSitios(String sitios) {
-		ObjectMapper mapper = new ObjectMapper();
-		SitioMovilDTO[] sitiosParse = null;
-		List<SitioMovilDTO> listaSitios;
-		try {
-			sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
-
-		} catch (JsonParseException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (JsonMappingException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		listaSitios = Arrays.asList(sitiosParse);
-
-		return listaSitios;
-	}
+//	public List<SitioMovilDTO> parseSitios(String sitios) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		SitioMovilDTO[] sitiosParse = null;
+//		List<SitioMovilDTO> listaSitios;
+//		try {
+//			sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
+//
+//		} catch (JsonParseException e) {
+//			Log.e(TAG, e.getMessage());
+//		} catch (JsonMappingException e) {
+//			Log.e(TAG, e.getMessage());
+//		} catch (IOException e) {
+//			Log.e(TAG, e.getMessage());
+//		}
+//		listaSitios = Arrays.asList(sitiosParse);
+//
+//		return listaSitios;
+//	}
 
 	public void mostrarSitios() {
-		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitios,
+		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
-		//ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
+		// ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
 		this.setListAdapter(adaptador);
-		
-		//lstOpciones.setAdapter(adaptador);
-		
+
+		// lstOpciones.setAdapter(adaptador);
+
 		lw.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -233,14 +268,15 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 				SitioDTO sitio = sitios.get(position);
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),
 						SitioDetalleActivity.class);
-				sitioDetalleIntent.putExtra("nombre", sitios.get(position)
-						.getNombre());
-				sitioDetalleIntent.putExtra("sitioId", sitios.get(position)
-						.getIdSitio());
-				sitioDetalleIntent.putExtra("direccion", sitios.get(position)
-						.getDireccion());
-				sitioDetalleIntent.putExtra("lat", sitio.getLat());
-				sitioDetalleIntent.putExtra("lon", sitio.getLon());
+//				sitioDetalleIntent.putExtra("nombre", sitios.get(position)
+//						.getNombre());
+//				sitioDetalleIntent.putExtra("sitioId", sitios.get(position)
+//						.getIdSitio());
+//				sitioDetalleIntent.putExtra("direccion", sitios.get(position)
+//						.getDireccion());
+//				sitioDetalleIntent.putExtra("lat", sitio.getLat());
+//				sitioDetalleIntent.putExtra("lon", sitio.getLon());
+				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
 				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);
 
@@ -257,7 +293,7 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 
 	}
 
-	private void eliminarSitio(String sitioId) {
+	private void eliminarSitio(Integer sitioId) {
 		Intent intent = new Intent(this, EliminarSitioServicio.class);
 		intent.putExtra("sitio", sitioId);
 		startService(intent);
@@ -280,13 +316,13 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 			SitioDTO sitio = new SitioDTO();
 			sitio.setLat(loc.getLatitude());
 			sitio.setLon(loc.getLongitude());
-			
+
 			bundle.putDouble("lat", loc.getLatitude());
 			bundle.putDouble("lon", loc.getLongitude());
-			
+
 			Intent intent = new Intent(this, SitioServicio.class);
 			intent.putExtra("sitio", sitio);
-			//intent.putExtras(bundle);
+			// intent.putExtras(bundle);
 			startService(intent);
 
 		}
@@ -327,7 +363,6 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras) {
-		
 
 	}
 
@@ -368,6 +403,5 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		return false;
 
 	}
-	
 
 }
