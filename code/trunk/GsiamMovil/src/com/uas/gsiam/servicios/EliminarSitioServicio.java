@@ -36,13 +36,10 @@ public class EliminarSitioServicio extends IntentService{
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-	    String sitio = intent.getStringExtra("sitio");
+	    Integer sitio = intent.getIntExtra("sitio",0);
 		 
 		Intent intentEliminarSitio = new Intent(Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 		try{
-			
-			Map<String, String> parms = new HashMap<String, String>();
-			parms.put("sitio", sitio);
 			
 			restTemp.delete(Constantes.ELIMINAR_SITIOS_SERVICE_URL, sitio);
 		

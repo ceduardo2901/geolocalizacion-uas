@@ -1,4 +1,4 @@
-package com.uas.gsiam.ui;
+package com.uas.gsiam.utils;
 
 import java.util.List;
 
@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitioMovilDTO;
+import com.uas.gsiam.ui.R;
+import com.uas.gsiam.ui.R.id;
+import com.uas.gsiam.ui.R.layout;
 
 public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
@@ -39,12 +42,13 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		
 		if (item == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			item = inflater.inflate(R.layout.sitios, null);
+			item = inflater.inflate(R.layout.sitio, null);
 			
 			holder = new ViewHolder();
 			holder.Nombre = (TextView) item.findViewById(R.id.LblNombre);
 			holder.Direccion = (TextView) item.findViewById(R.id.LblDireccion);
 			holder.distancia = (TextView) item.findViewById(R.id.LblDistancia);
+			holder.rating = (RatingBar) item.findViewById(R.id.puntajeSitioId);
 			item.setTag(holder);
 			
 		}else{
@@ -56,12 +60,26 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		holder.Nombre.setText(sitioMovil.getNombre());
 		holder.Direccion.setText(sitioMovil.getDireccion());
 		holder.distancia.setText(distancia.intValue() +" "+Constantes.METROS);
+		holder.rating.setRating(obtenerPromedioPuntaje(sitioMovil));
 		return item;
+	}
+	
+	private Float obtenerPromedioPuntaje(SitioDTO sitio){
+		Float promedio = new Float(0);
+		
+		if(!sitio.getPublicaciones().isEmpty()){
+			for(PublicacionDTO pub : sitio.getPublicaciones()){
+				promedio = promedio + pub.getPuntaje();
+			}
+		}
+		
+		return promedio/sitio.getPublicaciones().size();
 	}
 	
 	static class ViewHolder {
 		TextView Nombre;
 		TextView Direccion;
 		TextView distancia;
+		RatingBar rating;
 		}
 }

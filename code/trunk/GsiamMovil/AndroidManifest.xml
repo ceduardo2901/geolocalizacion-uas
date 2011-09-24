@@ -15,7 +15,7 @@
 		android:debuggable="true" android:name="com.uas.gsiam.utils.ApplicationController">
 
 		<uses-library android:name="com.google.android.maps" />
-		<activity android:name=".LoginActivity">
+		<activity android:name="LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -23,8 +23,8 @@
 
 		</activity>
 
-		<activity android:name=".MainActivity" />
-		<activity android:name=".SitiosActivity" android:launchMode="singleTop">
+		<activity android:name="MainActivity"/>
+		<activity android:launchMode="singleTop" android:name="SitiosActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.SEARCH"/>
 				<category android:name="android.intent.category.DEFAULT" />
@@ -32,18 +32,18 @@
 			<meta-data android:name="android.app.searchable"
                    android:resource="@xml/searchable"/>
 		</activity>
-		<activity android:name=".PerfilActivity"/>
-		<activity android:name=".EditarUsuarioActivity"/>
-		<activity android:name=".CrearUsuarioActivity"/>
-		<activity android:name=".SitioDetalleActivity"/>
-		<activity android:name=".CrearSitioActivity"/>
-		<activity android:name=".MostrarMapaActivity"/>
-		<activity android:name=".PublicarActivity"/>
-		<activity android:name=".ModificarSitioActivity"/>
-		<activity android:name=".AmigosTabActivity"/>
-		<activity android:name=".MisAmigosTab"/>
-		<activity android:name=".BuscarAmigosTab"/>
-		<activity android:name=".InvitarAmigosTab"/>
+		<activity android:name="PerfilActivity"/>
+		<activity android:name="EditarUsuarioActivity"/>
+		<activity android:name="CrearUsuarioActivity"/>
+		<activity android:name="SitioDetalleActivity"/>
+		<activity android:name="CrearSitioActivity"/>
+		<activity android:name="MostrarMapaActivity"/>
+		<activity android:name="PublicarActivity"/>
+		<activity android:name="ModificarSitioActivity"/>
+		<activity android:name="AmigosTabActivity"/>
+		<activity android:name="MisAmigosTab"/>
+		<activity android:name="BuscarAmigosTab"/>
+		<activity android:name="InvitarAmigosTab"/>
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
