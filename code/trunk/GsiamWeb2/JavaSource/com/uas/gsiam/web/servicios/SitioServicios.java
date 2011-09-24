@@ -39,15 +39,15 @@ public class SitioServicios {
 	@GET
 	@Path("/{lat}/{lon}")
 	@Produces("application/json")
-	public List<ServicioSitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
-		List<ServicioSitioDTO> listaSitios = new ArrayList<ServicioSitioDTO>();
+	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
+		List<SitioDTO> listaSitios = new ArrayList<SitioDTO>();
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
-		for(SitioDTO sitio : sitios){
-			listaSitios.add(new ServicioSitioDTO(sitio));
-		}
+//		for(SitioDTO sitio : sitios){
+//			listaSitios.add(new ServicioSitioDTO(sitio));
+//		}
 		System.out.println(sitios.size());
 		
-		return listaSitios;
+		return sitios;
 	}
 	
 	@GET
