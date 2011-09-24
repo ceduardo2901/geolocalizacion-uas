@@ -5,9 +5,10 @@ import java.util.Date;
 
 public class PublicacionDTO implements Serializable{
 
-	private String idPublicacion;
+	private Integer idPublicacion;
 	private String comentario;
 	private Integer idUsuario;
+	private String nombreUsuario;
 	private Integer idSitio;
 	private Date fecha;
 	private Float puntaje;
@@ -32,10 +33,10 @@ public class PublicacionDTO implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public String getIdPublicacion() {
+	public Integer getIdPublicacion() {
 		return idPublicacion;
 	}
-	public void setIdPublicacion(String idPublicacion) {
+	public void setIdPublicacion(Integer idPublicacion) {
 		this.idPublicacion = idPublicacion;
 	}
 	public String getComentario() {
@@ -55,6 +56,14 @@ public class PublicacionDTO implements Serializable{
 	}
 	public void setIdSitio(Integer idSitio) {
 		this.idSitio = idSitio;
+	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 	
 	

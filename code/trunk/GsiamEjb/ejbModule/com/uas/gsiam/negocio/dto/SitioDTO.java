@@ -1,17 +1,20 @@
 package com.uas.gsiam.negocio.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 public class SitioDTO implements Serializable{
 
 	
-	private String idSitio;
+	private Integer idSitio;
 	private String nombre;
 	private String direccion;
 	private Double lon;
 	private Double lat;
+	private ArrayList<PublicacionDTO> publicaciones;
 	
 		
 	public Double getLon() {
@@ -39,12 +42,12 @@ public class SitioDTO implements Serializable{
 	}
 
 
-	public String getIdSitio() {
+	public Integer getIdSitio() {
 		return idSitio;
 	}
 
 
-	public void setIdSitio(String idSitio) {
+	public void setIdSitio(Integer idSitio) {
 		this.idSitio = idSitio;
 	}
 
@@ -66,6 +69,16 @@ public class SitioDTO implements Serializable{
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+
+	public ArrayList<PublicacionDTO> getPublicaciones() {
+		return publicaciones;
+	}
+
+
+	public void setPublicaciones(ArrayList<PublicacionDTO> publicaciones) {
+		this.publicaciones = publicaciones;
 	}
 	
 	
