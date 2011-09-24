@@ -12,6 +12,7 @@ import org.postgis.Point;
 import org.postgresql.PGConnection;
 import org.postgresql.PGStatement;
 
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
@@ -30,11 +31,12 @@ public class SitioDAO implements ISitioDAO {
 		SitioDTO resultado;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		String sqlExisteSitio = "SELECT * FROM t_sitio WHERE UPPER(sit_nombre) like ?";
-		
+
 		try {
-			
-			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteSitio);
-			ps.setString(1, "%"+sitioInteres.getNombre().toUpperCase()+"%");
+
+			ps = ConexionJDBCUtil.getConexion()
+					.prepareStatement(sqlExisteSitio);
+			ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase() + "%");
 			rs = ps.executeQuery();
 			PGgeometry geom;
 			while (rs.next()) {
@@ -42,22 +44,21 @@ public class SitioDAO implements ISitioDAO {
 				geom = (PGgeometry) rs.getObject(2);
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
-				resultado.setIdSitio(rs.getString(6));
+				resultado.setIdSitio(rs.getInt(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
-				
+
 				sitios.add(resultado);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
-		}finally{
+		} finally {
 			try {
 				rs.close();
 				ps.close();
 			} catch (SQLException e) {
-				
+
 				e.printStackTrace();
 			}
 		}
@@ -69,7 +70,7 @@ public class SitioDAO implements ISitioDAO {
 			throws SitioYaExisteExcepcion, SitioExcepcion {
 		PreparedStatement ps = null;
 		try {
-			
+
 			Point punto = new Point(sitioInteres.getLat(),
 					sitioInteres.getLon());
 			PGgeometry geom = new PGgeometry(punto);
@@ -78,7 +79,6 @@ public class SitioDAO implements ISitioDAO {
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
-			
 			ps.setString(1, sitioInteres.getNombre().toUpperCase());
 			ps.setObject(2, geom);
 			ps.setInt(3, 1);
@@ -87,7 +87,7 @@ public class SitioDAO implements ISitioDAO {
 			ps.execute();
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
-		}finally{
+		} finally {
 			try {
 				ps.close();
 			} catch (SQLException e) {
@@ -97,24 +97,24 @@ public class SitioDAO implements ISitioDAO {
 		}
 
 	}
-	
-	private void existeSitio(SitioDTO sitio){
+
+	private void existeSitio(SitioDTO sitio) {
 		PreparedStatement ps = null;
 
-		Point punto = new Point(sitio.getLat(),
-				sitio.getLon());
+		Point punto = new Point(sitio.getLat(), sitio.getLon());
 		PGgeometry geom = new PGgeometry(punto);
-		
+
 		String sqlExisteSitio = "SELECT * FROM t_sitio WHERE sit_punto=?";
-		
+
 		try {
-			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteSitio);
+			ps = ConexionJDBCUtil.getConexion()
+					.prepareStatement(sqlExisteSitio);
 			ps.setObject(1, geom);
 			ResultSet rs = ps.executeQuery();
-			
+
 			rs.next();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
@@ -127,82 +127,113 @@ public class SitioDAO implements ISitioDAO {
 			String sqlCrearSitio = "DELETE FROM t_sitio WHERE sit_id = ?";
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
-			
+
 			ps.setInt(1, idSitio);
-						
+
 			ps.execute();
-			
-			ps.close();			
-			
+
+			ps.close();
+
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
 
 	}
-	
-	
-	private void eliminarPublicacionesPorSitio(Integer idSitio) throws SitioExcepcion {
+
+	private void eliminarPublicacionesPorSitio(Integer idSitio)
+			throws SitioExcepcion {
 		try {
 			PreparedStatement ps = null;
 
 			String sqlCrearSitio = "DELETE FROM t_publicacion WHERE pub_id_sitio = ?";
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
-			
+
 			ps.setInt(1, idSitio);
-						
+
 			ps.execute();
-			
-			ps.close();			
-			
+
+			ps.close();
+
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
 
 	}
 
-	@Override
-	public void modificarSitio(SitioDTO sitio)
-			throws SitioExcepcion {
-		
-		try{
+	private ArrayList<PublicacionDTO> obtenerPublicacionPorSitio(Integer idSitio)
+			throws SQLException {
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<PublicacionDTO> publicaciones = new ArrayList<PublicacionDTO>();
+		PublicacionDTO publicacion;
 
-		Point punto = new Point(sitio.getLat(),
-				sitio.getLon());
-		PGgeometry geom = new PGgeometry(punto);
-		
-		String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=? where sit_id=?";
+		String sqlCrearSitio = "SELECT * FROM t_publicacion p, t_usuario u WHERE p.pub_id_usuario=u.usu_id and pub_id_sitio = ?";
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
-		
-		ps.setString(1, sitio.getNombre());
-		ps.setString(2, sitio.getDireccion());
-		ps.setObject(3, geom);
-		ps.setInt(4, new Integer(sitio.getIdSitio()));
+		ps.setInt(1, idSitio);
+		rs = ps.executeQuery();
+		if (rs != null) {
+			while (rs.next()) {
+				publicacion = new PublicacionDTO();
+				publicacion.setComentario(rs.getString(2));
+				publicacion.setFecha(rs.getDate(1));
+				publicacion.setIdPublicacion(rs.getInt(6));
+				publicacion.setIdSitio(idSitio);
+				publicacion.setIdUsuario(rs.getInt(4));
+				publicacion.setPuntaje(rs.getFloat(7));
+				publicacion.setNombreUsuario(rs.getString(8));
+				publicaciones.add(publicacion);
+			}
+		}
 
-		ps.execute();
-	} catch (SQLException e) {
-		throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		ps.close();
+
+		rs.close();
+
+		return publicaciones;
 	}
-		
+
+	@Override
+	public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
+
+		try {
+			PreparedStatement ps = null;
+
+			Point punto = new Point(sitio.getLat(), sitio.getLon());
+			PGgeometry geom = new PGgeometry(punto);
+
+			String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=? where sit_id=?";
+
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
+
+			ps.setString(1, sitio.getNombre());
+			ps.setString(2, sitio.getDireccion());
+			ps.setObject(3, geom);
+			ps.setInt(4, new Integer(sitio.getIdSitio()));
+
+			ps.execute();
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		}
+
 	}
 
 	@Override
 	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
 		PreparedStatement ps = null;
 		SitioDTO resultado = null;
+		ResultSet rs = null;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
-		Point punto = new Point(sitio.getLat(),
-				sitio.getLon());
+		Point punto = new Point(sitio.getLat(), sitio.getLon());
 		PGgeometry pgeom = new PGgeometry(punto);
 
-		String sql = "select *, Distance(sit_punto,GeomFromText(?, -1)) as dis " +
-					"from t_sitio "
+		String sql = "select *, Distance(sit_punto,GeomFromText(?, -1)) as dis "
+				+ "from t_sitio "
 				+ "where sit_punto && 'BOX3D(-30.11082 -57.2068, -35.101934 -55.349121)'::box3d "
-				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ? " +
-				" order by dis";
+				+ "and Distance(sit_punto,GeomFromText(?, -1)) < ? "
+				+ " order by dis";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
@@ -210,23 +241,22 @@ public class SitioDAO implements ISitioDAO {
 			ps.setObject(1, pgeom);
 			ps.setObject(2, pgeom);
 			ps.setInt(3, 2);
-			ResultSet rs = ps.executeQuery();
-			
+			rs = ps.executeQuery();
+
 			while (rs.next()) {
 				geom = (PGgeometry) rs.getObject(2);
 
 				resultado = new SitioDTO();
-				
+
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
-				resultado.setIdSitio(rs.getString(6));
+				resultado.setIdSitio(rs.getInt(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
-				
+				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
+						.getIdSitio()));
 				sitios.add(resultado);
 			}
-			rs.close();
-			ps.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -234,6 +264,7 @@ public class SitioDAO implements ISitioDAO {
 		} finally {
 			try {
 				ps.close();
+				rs.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
