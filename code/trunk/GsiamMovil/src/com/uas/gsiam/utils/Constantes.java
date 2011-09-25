@@ -48,6 +48,10 @@ public class Constantes {
 	public static final String CREAR_PUBLICACION_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/publicar";
 	public static final String CREAR_PUBLICACION_FILTRO_ACTION = "com.gsiam.places.CREAR_PUBLICACION_FILTRO_ACTION";
 	
+	public static final String GET_AMIGOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/amigos/{id}";
+	public static final String GET_AMIGOS_FILTRO_ACTION = "com.gsiam.places.GET_AMIGOS_FILTRO_ACTION";
+	
+	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor. Por favor espere..."; 
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
