@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:orientation="vertical" android:background="@color/fondo">
+	android:orientation="vertical" android:background="@color/fondo"
+	android:scrollbars="horizontal">
 
 	<TextView android:id="@+id/LblNombre" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textStyle="bold"
-		android:textSize="18px" />
+		android:textSize="16px" android:textColor="@color/fuente" />
 
 	<TextView android:id="@+id/LblDireccion" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textStyle="normal"
-		android:textSize="10px" />
+		android:textSize="10px" android:textColor="@color/fuente" />
 
 	<TextView android:id="@+id/LblDistancia" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:textStyle="normal"
-		android:textSize="10px" />
+		android:textSize="10px" android:textColor="@color/fuente" />
 
 	<RatingBar android:id="@+id/puntajeSitioId"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 		style="?android:attr/ratingBarStyleSmall" android:numStars="5"
-		android:isIndicator="true"/>
+		android:isIndicator="true" />
 </LinearLayout>

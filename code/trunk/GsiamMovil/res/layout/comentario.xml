@@ -9,11 +9,11 @@
 			android:layout_height="wrap_content">
 			<TextView android:layout_width="wrap_content" android:id="@+id/userId"
 				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:layout_height="wrap_content" android:textStyle="italic" />
+				android:layout_height="wrap_content" android:textStyle="italic" android:paddingRight="10dp"/>
 			
 			<TextView android:layout_width="wrap_content" android:id="@+id/fechaId"
 				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content" android:paddingLeft="10dp"/>
 
 
 		</TableRow>

@@ -58,6 +58,11 @@ public class SitioDetalleActivity extends Activity {
 		}
 
 	}
+	
+	public void onPause(){
+		super.onPause();
+		
+	}
 
 	public void mostarMapa(View v) {
 
