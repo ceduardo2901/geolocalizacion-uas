@@ -84,8 +84,7 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 
 	private void buildAlertMessageNoGps() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(
-				Constantes.MSG_GPS_DISABLE)
+		builder.setMessage(Constantes.MSG_GPS_DISABLE)
 				.setCancelable(false)
 				.setPositiveButton(Constantes.MSG_ACEPTAR,
 						new DialogInterface.OnClickListener() {
@@ -95,12 +94,13 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 								launchGPSOptions();
 							}
 						})
-				.setNegativeButton(Constantes.MSG_CANCELAR, new DialogInterface.OnClickListener() {
-					public void onClick(final DialogInterface dialog,
-							@SuppressWarnings("unused") final int id) {
-						dialog.cancel();
-					}
-				});
+				.setNegativeButton(Constantes.MSG_CANCELAR,
+						new DialogInterface.OnClickListener() {
+							public void onClick(final DialogInterface dialog,
+									@SuppressWarnings("unused") final int id) {
+								dialog.cancel();
+							}
+						});
 		final AlertDialog alert = builder.create();
 		alert.show();
 	}
@@ -233,32 +233,30 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		}
 	};
 
-//	public List<SitioMovilDTO> parseSitios(String sitios) {
-//		ObjectMapper mapper = new ObjectMapper();
-//		SitioMovilDTO[] sitiosParse = null;
-//		List<SitioMovilDTO> listaSitios;
-//		try {
-//			sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
-//
-//		} catch (JsonParseException e) {
-//			Log.e(TAG, e.getMessage());
-//		} catch (JsonMappingException e) {
-//			Log.e(TAG, e.getMessage());
-//		} catch (IOException e) {
-//			Log.e(TAG, e.getMessage());
-//		}
-//		listaSitios = Arrays.asList(sitiosParse);
-//
-//		return listaSitios;
-//	}
+	// public List<SitioMovilDTO> parseSitios(String sitios) {
+	// ObjectMapper mapper = new ObjectMapper();
+	// SitioMovilDTO[] sitiosParse = null;
+	// List<SitioMovilDTO> listaSitios;
+	// try {
+	// sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
+	//
+	// } catch (JsonParseException e) {
+	// Log.e(TAG, e.getMessage());
+	// } catch (JsonMappingException e) {
+	// Log.e(TAG, e.getMessage());
+	// } catch (IOException e) {
+	// Log.e(TAG, e.getMessage());
+	// }
+	// listaSitios = Arrays.asList(sitiosParse);
+	//
+	// return listaSitios;
+	// }
 
 	public void mostrarSitios() {
 		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
-		// ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
-		this.setListAdapter(adaptador);
 
-		// lstOpciones.setAdapter(adaptador);
+		this.setListAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
 
@@ -268,14 +266,6 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 				SitioDTO sitio = sitios.get(position);
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),
 						SitioDetalleActivity.class);
-//				sitioDetalleIntent.putExtra("nombre", sitios.get(position)
-//						.getNombre());
-//				sitioDetalleIntent.putExtra("sitioId", sitios.get(position)
-//						.getIdSitio());
-//				sitioDetalleIntent.putExtra("direccion", sitios.get(position)
-//						.getDireccion());
-//				sitioDetalleIntent.putExtra("lat", sitio.getLat());
-//				sitioDetalleIntent.putExtra("lon", sitio.getLon());
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
 				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);
