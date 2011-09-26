@@ -306,6 +306,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(rs.getString("usu_mail"));
 				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
 				
 				listaUsuarios.add(usuarioRetorno);
 				
@@ -337,17 +338,20 @@ public class UsuarioDAO implements IUsuarioDAO {
 		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
 				
 		try{
-			/*
-			String sqlContactos = "SELECT csol.con_id_usuario_sol id_usu FROM t_contacto csol " +
+			
+			String sqlContactos = "SELECT * FROM t_usuario " +
+								  "WHERE usu_id IN (" +
+							      "SELECT csol.con_id_usuario_sol id_usu FROM t_contacto csol " +
 								  "WHERE csol.con_id_usuario_apr = ? AND csol.con_fecha_aprobacion is not null " +
 								  "UNION " +
 								  "SELECT capr.con_id_usuario_apr id_usu FROM t_contacto capr " +
-								  "WHERE capr.con_id_usuario_sol = ? AND capr.con_fecha_aprobacion is not null ";
+								  "WHERE capr.con_id_usuario_sol = ? AND capr.con_fecha_aprobacion is not null) ";
 			
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlContactos);
 	
 			ps.setInt(1, idUsuario);
+			ps.setInt(2, idUsuario);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
@@ -357,6 +361,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(rs.getString("usu_mail"));
 				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
 				
 				listaUsuarios.add(usuarioRetorno);
 				
@@ -365,14 +370,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				
 			rs.close();
 			ps.close();
-				*/
-			
-			UsuarioDTO userDTO = new UsuarioDTO();
-			userDTO.setEmail("pepe@gmail.com");
-			userDTO.setNombre("Pedro Petero");
-			userDTO.setPassword("pass");
-			
-			listaUsuarios.add(userDTO);
+				
 			
 			return listaUsuarios;	
 		
