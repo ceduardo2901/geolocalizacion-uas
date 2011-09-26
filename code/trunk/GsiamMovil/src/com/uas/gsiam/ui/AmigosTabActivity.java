@@ -4,7 +4,6 @@ package com.uas.gsiam.ui;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.TabHost;
@@ -64,7 +63,7 @@ public class AmigosTabActivity extends TabActivity{
     	Intent intent = new Intent(this, MisAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_SCHEDULED);
-        spec.setIndicator("martin 1");
+        spec.setIndicator("Mis Amigos");
         spec.setContent(intent);
 
         mTabHost.addTab(spec);
@@ -80,7 +79,7 @@ public class AmigosTabActivity extends TabActivity{
     	Intent intent = new Intent(this, BuscarAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_CREATE);
-        spec.setIndicator("martin 2");
+        spec.setIndicator("Buscar Usuarios");
         spec.setContent(intent);
 
         mTabHost.addTab(spec);
@@ -96,7 +95,7 @@ public class AmigosTabActivity extends TabActivity{
     	Intent intent = new Intent(this, InvitarAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_OPTIONS);
-        spec.setIndicator("martin 3");
+        spec.setIndicator("Invitar Amigos");
         spec.setContent(intent);
 
         mTabHost.addTab(spec);

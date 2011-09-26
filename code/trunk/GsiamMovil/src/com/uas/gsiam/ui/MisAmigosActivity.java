@@ -61,12 +61,8 @@ public class MisAmigosActivity extends ListActivity{
 	protected BroadcastReceiver receiverGetAmigos = new BroadcastReceiver() {
 		@Override
 	    public void onReceive(Context context, Intent intent) {
-	    	Log.i(TAG, "llalalalal onReceive");
-	    	
-	    	
+	    		
 	    	Bundle bundle = intent.getExtras();
-			
-	    	
 			misAmigos = (ArrayList<UsuarioDTO>) bundle.getSerializable("lista");
 		
 	    	Log.i(TAG, "mi lista}11111111 = "+misAmigos.size());

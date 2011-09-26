@@ -31,7 +31,6 @@ public class GetAmigosServicio extends IntentService{
 	}
 	
 	public void onCreate(){
-		Log.i(TAG, "Estoy en el servicio iupiii!!!!!!");
 		super.onCreate();
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 
@@ -52,12 +51,8 @@ public class GetAmigosServicio extends IntentService{
 		
 			UsuarioDTO[] respuesta = restTemp.getForObject(Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class, parms);
 			
-			Log.i(TAG, "Respuesta: " + respuesta.length);
-			Log.i(TAG, "Respuesta2: " + respuesta.length);
-			
 			bundle.putSerializable("lista", getArrayList(respuesta));
 			
-			Log.i(TAG, "Despues del put!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
