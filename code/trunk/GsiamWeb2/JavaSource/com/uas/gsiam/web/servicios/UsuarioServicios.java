@@ -94,19 +94,29 @@ public class UsuarioServicios {
 	@Produces("application/json")
 	public List<UsuarioDTO> getAmigos(@PathParam ("id") int id){
 			
-		System.out.println("Legue!!!!!! lalalalalalalalalla");
-		System.out.println("Legue!!!!!! lalalalalalalalalla --- id="+id);
+		
 		List<UsuarioDTO> listaAmigos = new ArrayList<UsuarioDTO>();
-		/*
-			listaAmigos = servicio.getAmigos(id);
-*/
-			UsuarioDTO userDTO = new UsuarioDTO();
-			userDTO.setEmail("pepe@gmail.com");
-			userDTO.setNombre("Pedro Petero");
-			userDTO.setPassword("pass");
+		
+			try {
+				listaAmigos = servicio.getAmigos(id);
+			} catch (UsuarioExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+					
+			/*
+			for (int i = 0; i < 15; i++) {
 			
-			listaAmigos.add(userDTO);
-			
+				UsuarioDTO userDTO = new UsuarioDTO();
+				userDTO.setEmail("pepe@gmail.com");
+				userDTO.setNombre("Pedro Petero" + i);
+				userDTO.setPassword("pass");
+				
+				listaAmigos.add(userDTO);
+				
+			}
+			*/
 
 			System.out.println(listaAmigos.size());
 
