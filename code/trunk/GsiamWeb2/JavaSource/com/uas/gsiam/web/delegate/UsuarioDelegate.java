@@ -1,5 +1,7 @@
 package com.uas.gsiam.web.delegate;
 
+import java.util.List;
+
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -50,5 +52,10 @@ public class UsuarioDelegate {
     	servicioUsuario.modificarUsuario(usuario);
 		
 	}
+    
+    public List<UsuarioDTO> getAmigos(int idUsuario) throws UsuarioExcepcion{
+    	
+    	return servicioUsuario.getContactos(idUsuario);
+    }
 	
 }
