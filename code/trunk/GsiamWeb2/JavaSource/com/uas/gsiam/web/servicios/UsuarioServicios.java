@@ -1,5 +1,8 @@
 package com.uas.gsiam.web.servicios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +12,7 @@ import javax.ws.rs.Produces;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.persistencia.utiles.Constantes;
@@ -83,6 +87,32 @@ public class UsuarioServicios {
 //TODO Esta bien agarrar el exception aca??
 		
     }
+	
+	
+	@GET
+	@Path("/amigos/{id}")
+	@Produces("application/json")
+	public List<UsuarioDTO> getAmigos(@PathParam ("id") int id){
+			
+		System.out.println("Legue!!!!!! lalalalalalalalalla");
+		System.out.println("Legue!!!!!! lalalalalalalalalla --- id="+id);
+		List<UsuarioDTO> listaAmigos = new ArrayList<UsuarioDTO>();
+		/*
+			listaAmigos = servicio.getAmigos(id);
+*/
+			UsuarioDTO userDTO = new UsuarioDTO();
+			userDTO.setEmail("pepe@gmail.com");
+			userDTO.setNombre("Pedro Petero");
+			userDTO.setPassword("pass");
+			
+			listaAmigos.add(userDTO);
+			
+
+			System.out.println(listaAmigos.size());
+
+			return listaAmigos;
+		
+	}
 	
 	
 }
