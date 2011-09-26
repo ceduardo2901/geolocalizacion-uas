@@ -36,7 +36,7 @@ public class MisAmigosActivity extends ListActivity{
 		  super.onCreate(savedInstanceState);
 	//	  setContentView(R.layout.mis_amigos_tab);
 		  lv = getListView();
-
+		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  Intent intent = new Intent(this,GetAmigosServicio.class);
 		  startService(intent);
 		  
@@ -63,7 +63,7 @@ public class MisAmigosActivity extends ListActivity{
 	    public void onReceive(Context context, Intent intent) {
 	    	Log.i(TAG, "llalalalal onReceive");
 	    	
-	    	/*
+	    	
 	    	Bundle bundle = intent.getExtras();
 			
 	    	
@@ -78,7 +78,7 @@ public class MisAmigosActivity extends ListActivity{
 			Util.dismissProgressDialog();
 			
 	    	
-	    	*/
+	    	
 			
 	    }
 	  };
@@ -106,7 +106,7 @@ public class MisAmigosActivity extends ListActivity{
 				}
 			});
 			
-		//	lv.setOnItemLongClickListener(this);
+	//		lv.setOnItemLongClickListener(this);
 			
 
 		}
