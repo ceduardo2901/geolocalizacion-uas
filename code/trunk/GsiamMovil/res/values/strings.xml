@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+   <string-array name="permissions">
+        <item>publish_stream</item>
+        <item>read_stream</item>
+		<item>offline_access</item>
+		<item>user_location</item>
+	</string-array>
     <string name="hello">Hello World!</string>
     <string name="app_name">GsiamMovil</string>
     <string name="email">Email</string>
@@ -20,13 +26,7 @@
 	<string name="BtnRegistrarse">Registrarse</string>
 	<string name="Nombre">Nombre</string>
 	<string name="compartirFacebook">Compartir en Facebook</string>
-	
-	 <string-array name="permissions">
-        <item>publish_stream</item>
-        <item>read_stream</item>
-		<item>offline_access</item>
-		<item>user_location</item>
-	</string-array>
+	<string name="listaVacia">No se han encontrado registros</string>
 	<string name="cerrarSesion">Cerrar Sesion</string>
 	<string name="agregarSitio">Agregar Sitio</string>
 	<string name="buscar">Buscar</string>
