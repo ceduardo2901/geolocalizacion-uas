@@ -37,7 +37,7 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 			item = inflater.inflate(R.layout.usuario_item, null);
 
 			holder = new ViewHolder();
-	//		holder.icono = (ImageView) item.findViewById(R.id.LblIcono);
+			holder.icono = (ImageView) item.findViewById(R.id.LblIcono);
 			holder.nombre = (TextView) item.findViewById(R.id.LblNombre);
 			holder.email = (TextView) item.findViewById(R.id.LblMail);
 			item.setTag(holder);
@@ -47,7 +47,9 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 
 		}
 
-	//	holder.icono.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
+		if (usuario.getAvatar() != null)
+			holder.icono.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
+		
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
 		return item;
@@ -55,7 +57,7 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 	
 		
 	static class ViewHolder {
-	//	ImageView icono;
+		ImageView icono;
 		TextView nombre;
 		TextView email;
 	}
