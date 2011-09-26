@@ -246,11 +246,11 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public ArrayList<UsuarioDTO> getContactos (UsuarioDTO usuario) throws UsuarioExcepcion{	
+	public ArrayList<UsuarioDTO> getContactos (int idUsuario) throws UsuarioExcepcion{	
 		
 		try {
 			
-			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesContactosPendientes(usuario);
+			return AbstractFactory.getInstance().getUsuarioDAO().getContactos(idUsuario);
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);

@@ -212,9 +212,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
-	//TODO Deberiamos pasar solo el id del usuario?? o esta bien pasar todo el objeto??
-	//TODO Deberiamos pasar el objeto SolicitudContacto??
-	
+
 	public void crearContacto(SolicitudContacto solicitud) throws SQLException{
 		
 		PreparedStatement ps;
@@ -333,13 +331,13 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 
 
-	public ArrayList<UsuarioDTO> getContactos(UsuarioDTO usuario) throws SQLException {
+	public ArrayList<UsuarioDTO> getContactos(int idUsuario) throws SQLException {
 	
 		PreparedStatement ps;
 		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
 				
 		try{
-			
+			/*
 			String sqlContactos = "SELECT csol.con_id_usuario_sol id_usu FROM t_contacto csol " +
 								  "WHERE csol.con_id_usuario_apr = ? AND csol.con_fecha_aprobacion is not null " +
 								  "UNION " +
@@ -349,7 +347,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlContactos);
 	
-			ps.setInt(1, usuario.getId());
+			ps.setInt(1, idUsuario);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
@@ -367,7 +365,14 @@ public class UsuarioDAO implements IUsuarioDAO {
 				
 			rs.close();
 			ps.close();
-				
+				*/
+			
+			UsuarioDTO userDTO = new UsuarioDTO();
+			userDTO.setEmail("pepe@gmail.com");
+			userDTO.setNombre("Pedro Petero");
+			userDTO.setPassword("pass");
+			
+			listaUsuarios.add(userDTO);
 			
 			return listaUsuarios;	
 		
