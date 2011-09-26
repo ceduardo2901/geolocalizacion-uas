@@ -49,13 +49,19 @@ public class AmigosTabActivity extends TabActivity{
         editor.commit();
     } 
     
+    
+    protected void onResume(){
+		super.onResume();
+	
+	}
+    
 	/*
 	 * Pestaña 1
 	 */
      
     private void añadirTab1() {
     	
-    	Intent intent = new Intent(this, AmigosTab1.class);
+    	Intent intent = new Intent(this, MisAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_SCHEDULED);
         spec.setIndicator("martin 1");
@@ -71,7 +77,7 @@ public class AmigosTabActivity extends TabActivity{
     
     private void añadirTab2() {
     	
-    	Intent intent = new Intent(this, AmigosTab2.class);
+    	Intent intent = new Intent(this, BuscarAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_CREATE);
         spec.setIndicator("martin 2");
@@ -87,7 +93,7 @@ public class AmigosTabActivity extends TabActivity{
     
     private void añadirTab3() {
     	
-    	Intent intent = new Intent(this, AmigosTab3.class);
+    	Intent intent = new Intent(this, InvitarAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_OPTIONS);
         spec.setIndicator("martin 3");
@@ -98,11 +104,6 @@ public class AmigosTabActivity extends TabActivity{
     }
     
     
-    ///////////////////////////////////////
-    
-    
-    
-    
-    //////////////////////////////////////////
+   
     
 }
