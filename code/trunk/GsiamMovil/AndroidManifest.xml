@@ -41,9 +41,9 @@
 		<activity android:name="PublicarActivity"/>
 		<activity android:name="ModificarSitioActivity"/>
 		<activity android:name="AmigosTabActivity"/>
-		<activity android:name="MisAmigosTab"/>
-		<activity android:name="BuscarAmigosTab"/>
-		<activity android:name="InvitarAmigosTab"/>
+		<activity android:name="MisAmigosActivity"/>
+		<activity android:name="BuscarAmigosActivity"/>
+		<activity android:name="InvitarAmigosActivity"/>
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
