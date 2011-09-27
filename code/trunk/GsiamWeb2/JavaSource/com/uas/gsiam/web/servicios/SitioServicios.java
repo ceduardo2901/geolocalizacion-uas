@@ -42,11 +42,7 @@ public class SitioServicios {
 	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
 		List<SitioDTO> listaSitios = new ArrayList<SitioDTO>();
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
-//		for(SitioDTO sitio : sitios){
-//			listaSitios.add(new ServicioSitioDTO(sitio));
-//		}
 		System.out.println(sitios.size());
-		
 		return sitios;
 	}
 	
