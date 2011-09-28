@@ -39,4 +39,5 @@
 	<string name="agregar">Agregar</string>
 	<string name="modificar">Modificar</string>
 	<string name="nombreHit">Nombre del Sitio</string>
+	<string name="categoria">Categoria</string>
 </resources>
