@@ -1,17 +1,9 @@
 package com.uas.gsiam.servicios;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ser.ArraySerializers;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +18,7 @@ import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitioMovilDTO;
+import com.uas.gsiam.utils.Util;
 
 public class SitioServicio extends IntentService {
 
@@ -78,7 +70,7 @@ public class SitioServicio extends IntentService {
 			}
 
 			Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
-			bundle.putSerializable("sitios", getArrayList(respuesta));
+			bundle.putSerializable("sitios", Util.getArrayListSitioDTO(respuesta));
 
 			intentSitio.putExtras(bundle);
 			sendBroadcast(intentSitio);
@@ -88,12 +80,6 @@ public class SitioServicio extends IntentService {
 
 	}
 
-	public ArrayList<SitioDTO> getArrayList(SitioDTO[] sitios) {
-		ArrayList<SitioDTO> lista = new ArrayList<SitioDTO>();
-		for (SitioDTO sitio : sitios) {
-			lista.add(sitio);
-		}
-		return lista;
-	}
+	
 
 }
