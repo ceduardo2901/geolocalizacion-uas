@@ -1,6 +1,5 @@
 package com.uas.gsiam.servicios;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +16,7 @@ import android.util.Log;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 
 public class GetAmigosServicio extends IntentService{
@@ -51,7 +51,7 @@ public class GetAmigosServicio extends IntentService{
 		
 			UsuarioDTO[] respuesta = restTemp.getForObject(Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class, parms);
 			
-			bundle.putSerializable("lista", getArrayList(respuesta));
+			bundle.putSerializable("lista", Util.getArrayListUsuarioDTO(respuesta));
 			
 			
 		}catch (RestClientException e){
@@ -64,17 +64,6 @@ public class GetAmigosServicio extends IntentService{
 		sendBroadcast(intentGetAmigos);
 		
 	}
-	
-	
-	public ArrayList<UsuarioDTO> getArrayList(UsuarioDTO[] usuarios){
-        ArrayList<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
-        for(UsuarioDTO usuario : usuarios){
-                lista.add(usuario);
-        }
-        return lista;
-}
-	
-	
 	
 	
 
