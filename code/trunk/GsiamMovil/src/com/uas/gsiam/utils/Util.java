@@ -2,8 +2,12 @@ package com.uas.gsiam.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -130,14 +134,25 @@ public class Util {
 	
 	public static Bitmap ArrayToBitmap(byte[] byteArray) {
 
-		
 		return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
 
 	}	
 	
 	
+	public static ArrayList<UsuarioDTO> getArrayListUsuarioDTO(UsuarioDTO[] usuarios){
+        ArrayList<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
+        for(UsuarioDTO usuario : usuarios){
+                lista.add(usuario);
+        }
+        return lista;
+	}
 	
-	
+	public static ArrayList<SitioDTO> getArrayListSitioDTO(SitioDTO[] sitios) {
+		ArrayList<SitioDTO> lista = new ArrayList<SitioDTO>();
+		for (SitioDTO sitio : sitios) {
+			lista.add(sitio);
+		}
+		return lista;
+	}
 	
 }
