@@ -82,7 +82,7 @@ public class SitioDAO implements ISitioDAO {
 
 			ps.setString(1, sitioInteres.getNombre().toUpperCase());
 			ps.setObject(2, geom);
-			ps.setInt(3, 1);
+			ps.setInt(3, sitioInteres.getCategoria().getIdCategoria());
 			ps.setString(4, sitioInteres.getDireccion());
 
 			ps.execute();
