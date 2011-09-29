@@ -23,33 +23,40 @@ public class Constantes {
 	public static final int REQUEST_SELECT_PHOTO = 2;
 	
 	// Servicios
-	public static final String LOGIN_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/login/{email}/{pass}";
+	
+	//TODO poner esto en un archivo de configuracion
+	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	
+	public static final String LOGIN_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/login/{email}/{pass}";
 	public static final String LOGIN_FILTRO_ACTION = "com.gsiam.places.LOGIN_FILTRO_ACTION";
 	
-	public static final String CREAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/agregar";
+	public static final String CREAR_USUARIO_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregar";
 	public static final String CREAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.CREAR_USUARIO_FILTRO_ACTION";
 	
-	public static final String EDITAR_USUARIO_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/editar";
+	public static final String EDITAR_USUARIO_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/editar";
 	public static final String EDITAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.EDITAR_USUARIO_FILTRO_ACTION";
 	
-	public static final String SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/{lat}/{lon}";
-	public static final String BUSQUEDA_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/{nombre}";
+	public static final String SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/{lat}/{lon}";
+	public static final String BUSQUEDA_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "http://10.0.2.2:8080/GsiamWeb2/sitios/{nombre}";
 	public static final String SITIO_FILTRO_ACTION = "com.gsiam.places.SITIO_FILTRO_ACTION";
 	
-	public static final String CREAR_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/agregar";
+	public static final String CREAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/agregar";
 	public static final String CREAR_SITIO_FILTRO_ACTION = "com.gsiam.places.CREAR_SITIO_FILTRO_ACTION";
 	
-	public static final String ELIMINAR_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/eliminar/{sitio}";
+	public static final String ELIMINAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/eliminar/{sitio}";
 	public static final String ELIMINAR_SITIO_FILTRO_ACTION = "com.gsiam.places.ELIMINAR_SITIO_FILTRO_ACTION";
 	
-	public static final String MODIFICAR_SITIOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/modificar";
+	public static final String MODIFICAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/modificar";
 	public static final String MODIFICAR_SITIO_FILTRO_ACTION = "com.gsiam.places.MODIFICAR_SITIO_FILTRO_ACTION";
 	
-	public static final String CREAR_PUBLICACION_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/sitios/publicar";
+	public static final String CREAR_PUBLICACION_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/publicar";
 	public static final String CREAR_PUBLICACION_FILTRO_ACTION = "com.gsiam.places.CREAR_PUBLICACION_FILTRO_ACTION";
 	
-	public static final String GET_AMIGOS_SERVICE_URL = "http://10.0.2.2:8080/GsiamWeb2/usuarios/amigos/{id}";
+	public static final String GET_AMIGOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/amigos/{id}";
 	public static final String GET_AMIGOS_FILTRO_ACTION = "com.gsiam.places.GET_AMIGOS_FILTRO_ACTION";
+	
+	public static final String GET_USUARIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/usuarios/{nombre}";
+	public static final String GET_USUARIOS_FILTRO_ACTION = "com.gsiam.places.GET_USUARIOS_FILTRO_ACTION";
 	
 	
 	// Mensajes 
