@@ -10,29 +10,38 @@
 			android:layout_height="wrap_content">
 
 			<EditText android:layout_height="wrap_content" android:id="@+id/txtNombreId"
-				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/Nombre"/>
+				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/Nombre" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
-			
+
 			<EditText android:layout_height="wrap_content" android:id="@+id/txtDireccionId"
-				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/direccion"/>
+				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/direccion" />
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 
-			
+
 			<EditText android:inputType="number" android:id="@+id/txtTelefonoId"
 				android:layout_width="0dp" android:layout_weight="1"
 				android:layout_height="wrap_content" android:hint="@string/telefono">
-				<requestFocus></requestFocus>
+				
 			</EditText>
 		</TableRow>
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
-		<Button android:text="@string/categoria" android:id="@+id/btnCategoriaSitioId"
-		android:onClick="mostarCategoria" android:layout_weight="1" android:layout_width="0dp"/>	
+
+			<Button android:text="@string/categoria" android:id="@+id/btnCategoriaSitioId"
+				android:onClick="mostarCategoria" android:layout_weight="1"
+				android:layout_width="0dp" />	
+				
+			<EditText android:cursorVisible="false"  android:focusable="false" android:enabled="true" android:id="@+id/txtCategoriaId"
+				android:layout_width="0dp" android:layout_weight="1" 
+				android:layout_height="wrap_content" android:hint="@string/categoria">
+				
+			</EditText>
+			
 		</TableRow>
 
 	</TableLayout>
