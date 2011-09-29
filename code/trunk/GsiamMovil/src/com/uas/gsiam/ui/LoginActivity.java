@@ -8,14 +8,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.LoginServicio;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
 
 public class LoginActivity extends Activity {
@@ -88,7 +86,7 @@ public class LoginActivity extends Activity {
 			intent.putExtras(bundle);
 			startService(intent);
 
-			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+			Util.showProgressDialog(this, Constantes.MSG_ESPERA_INICIANDO_SESION);
 		}
 	}
 
