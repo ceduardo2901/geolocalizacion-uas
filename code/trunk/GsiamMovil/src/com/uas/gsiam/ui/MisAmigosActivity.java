@@ -40,7 +40,7 @@ public class MisAmigosActivity extends ListActivity{
 		  Intent intent = new Intent(this,GetAmigosServicio.class);
 		  startService(intent);
 		  
-		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		  
 		}
 	
