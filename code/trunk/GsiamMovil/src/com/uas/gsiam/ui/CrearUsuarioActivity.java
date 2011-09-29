@@ -44,7 +44,7 @@ public class CrearUsuarioActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.crearusuario);
+		setContentView(R.layout.crear_usuario);
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
