@@ -1,30 +1,30 @@
 package com.uas.gsiam.utils;
 
+import greendroid.app.GDApplication;
+import android.content.Intent;
+
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.ui.MainActivity;
 
-import android.app.Application;
+public class ApplicationController extends GDApplication {
 
-public class ApplicationController extends Application {
-	
-	
 	private UsuarioDTO userLogin;
 
+	public Class<?> getHomeActivityClass() {
+		return MainActivity.class;
+	}
+
 	@Override
-	public void onCreate() {
-	    super.onCreate();
-	    //Do Application initialization over here
-    }
-    
+	public Intent getMainApplicationIntent() {
+		return new Intent(Intent.ACTION_DEFAULT);
+	}
+
 	public UsuarioDTO getUserLogin() {
 		return userLogin;
 	}
 
-
 	public void setUserLogin(UsuarioDTO userLogin) {
 		this.userLogin = userLogin;
 	}
-
-	
-	
 
 }
