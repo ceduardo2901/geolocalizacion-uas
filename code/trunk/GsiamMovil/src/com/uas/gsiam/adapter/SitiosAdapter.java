@@ -1,4 +1,4 @@
-package com.uas.gsiam.utils;
+package com.uas.gsiam.adapter;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.ui.R;
+import com.uas.gsiam.utils.Constantes;
 
 public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 

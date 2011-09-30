@@ -3,6 +3,10 @@ package com.uas.gsiam.ui;
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
+import greendroid.widget.QuickAction;
+import greendroid.widget.QuickActionBar;
+import greendroid.widget.QuickActionWidget;
+import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +33,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitiosAdapter;
 import com.uas.gsiam.utils.Util;
 
 public class SitiosActivity extends GDActivity implements LocationListener,
@@ -42,6 +47,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	private final int BUSCAR = 1;
 	private final int ACTUALIZAR = 0;
+	private final int FILTRAR = 2;
 	protected static final String TAG = "SitioActivity";
 	protected LocationManager locationManager;
 	protected LocationListener locationListener;
@@ -51,6 +57,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	protected List<SitioDTO> sitios;
 	protected Location loc;
 	protected ListView lw;
+	private QuickActionWidget quickActions;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,14 +71,44 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			buildAlertMessageNoGps();
+		} else {
+			// TODO poner aca despues obtener la ubicacion
 		}
-
+		loc = getLastBestLocation(Constantes.MAX_DISTANCE,
+				System.currentTimeMillis() - Constantes.MAX_TIME);
 		inicializarActionBar();
+		initQuickActionBar();
+		actualizarSitios(loc);
+
 	}
 
 	private void inicializarActionBar() {
+		addActionBarItem(Type.List, FILTRAR);
 		addActionBarItem(Type.Search, BUSCAR);
 		addActionBarItem(Type.Refresh, ACTUALIZAR);
+
+		setTitle(R.string.app_name);
+	}
+
+	private void initQuickActionBar() {
+		quickActions = new QuickActionBar(this);
+		quickActions.addQuickAction(new QuickAction(this,
+				R.drawable.facebook_icon, "Categorias"));
+		quickActions.addQuickAction(new QuickAction(this,
+				R.drawable.avatardefault, "Ranking"));
+		quickActions.addQuickAction(new QuickAction(this, R.drawable.logo,
+				"Comentarios"));
+		quickActions
+				.setOnQuickActionClickListener(new OnQuickActionClickListener() {
+
+					@Override
+					public void onQuickActionClicked(QuickActionWidget widget,
+							int position) {
+						// TODO Auto-generated method stub
+
+					}
+
+				});
 	}
 
 	private void launchGPSOptions() {
@@ -128,7 +165,13 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			startSearch(null, false, null, false);
 			break;
 		case ACTUALIZAR:
+			loc = getLastBestLocation(Constantes.MAX_DISTANCE,
+					System.currentTimeMillis() - Constantes.MAX_TIME);
+			actualizarSitios(loc);
 
+			break;
+		case FILTRAR:
+			quickActions.show(item.getItemView());
 			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
@@ -161,12 +204,11 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		registerReceiver(sitiosReceiver, sitioAccion);
 		registerReceiver(eliminarSitioReceiver, intentEliminarSitio);
 		// Obtengo la ultima posicion conocida
-		loc = getLastBestLocation(Constantes.MAX_DISTANCE,
-				System.currentTimeMillis() - Constantes.MAX_TIME);
-		if (!Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
 
-			actualizarSitios(loc);
-		}
+		// if (!Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+		//
+		//
+		// }
 
 		startListening();
 

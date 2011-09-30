@@ -1,4 +1,4 @@
-package com.uas.gsiam.utils;
+package com.uas.gsiam.adapter;
 
 import java.util.Date;
 import java.util.List;
