@@ -42,7 +42,10 @@
 		<activity android:name="ModificarSitioActivity"/>
 		<activity android:name="AmigosTabActivity"/>
 		<activity android:name="MisAmigosActivity"/>
-		<activity android:name="BuscarAmigosActivity"/>
+
+		<activity android:launchMode="singleTop" android:name="BuscarAmigosActivity"/>
+		
+		
 		<activity android:name="InvitarAmigosActivity"/>
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
