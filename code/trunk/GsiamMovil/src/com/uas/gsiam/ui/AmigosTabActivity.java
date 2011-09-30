@@ -23,7 +23,7 @@ public class AmigosTabActivity extends TabActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.amigos);
-        
+        //asshole
         mTabHost = getTabHost();       
       
         añadirTab1();

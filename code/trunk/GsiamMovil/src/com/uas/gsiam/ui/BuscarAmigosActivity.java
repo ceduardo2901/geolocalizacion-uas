@@ -9,5 +9,7 @@ public class BuscarAmigosActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.buscar_amigos_tab);
+		//no hay nada
+		
 	}
 }
