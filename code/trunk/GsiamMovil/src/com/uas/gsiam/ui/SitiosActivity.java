@@ -1,16 +1,13 @@
 package com.uas.gsiam.ui;
 
-import java.io.IOException;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -37,13 +34,14 @@ import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitioMovilDTO;
 import com.uas.gsiam.utils.SitiosAdapter;
 import com.uas.gsiam.utils.Util;
 
-public class SitiosActivity extends ListActivity implements LocationListener,
+public class SitiosActivity extends GDActivity implements LocationListener,
 		OnItemLongClickListener {
 
+	private final int BUSCAR = 1;
+	private final int ACTUALIZAR = 0;
 	protected static final String TAG = "SitioActivity";
 	protected LocationManager locationManager;
 	protected LocationListener locationListener;
@@ -57,8 +55,8 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// setContentView(android.R.id.list);
-		lw = getListView();
+		setActionBarContentView(R.layout.lista_sitios);
+		lw = (ListView) findViewById(R.id.listaSitios);
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
@@ -67,8 +65,13 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			buildAlertMessageNoGps();
 		}
-		// handleIntent(getIntent());
 
+		inicializarActionBar();
+	}
+
+	private void inicializarActionBar() {
+		addActionBarItem(Type.Search, BUSCAR);
+		addActionBarItem(Type.Refresh, ACTUALIZAR);
 	}
 
 	private void launchGPSOptions() {
@@ -116,6 +119,23 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 			String query = intent.getStringExtra(SearchManager.QUERY);
 			buscarSitio(query);
 		}
+	}
+
+	@Override
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+		case BUSCAR:
+			startSearch(null, false, null, false);
+			break;
+		case ACTUALIZAR:
+
+			break;
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+		}
+
+		return true;
+
 	}
 
 	private void buscarSitio(String query) {
@@ -233,30 +253,12 @@ public class SitiosActivity extends ListActivity implements LocationListener,
 		}
 	};
 
-	// public List<SitioMovilDTO> parseSitios(String sitios) {
-	// ObjectMapper mapper = new ObjectMapper();
-	// SitioMovilDTO[] sitiosParse = null;
-	// List<SitioMovilDTO> listaSitios;
-	// try {
-	// sitiosParse = mapper.readValue(sitios, SitioMovilDTO[].class);
-	//
-	// } catch (JsonParseException e) {
-	// Log.e(TAG, e.getMessage());
-	// } catch (JsonMappingException e) {
-	// Log.e(TAG, e.getMessage());
-	// } catch (IOException e) {
-	// Log.e(TAG, e.getMessage());
-	// }
-	// listaSitios = Arrays.asList(sitiosParse);
-	//
-	// return listaSitios;
-	// }
-
 	public void mostrarSitios() {
+
 		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
 
-		this.setListAdapter(adaptador);
+		lw.setAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
 
