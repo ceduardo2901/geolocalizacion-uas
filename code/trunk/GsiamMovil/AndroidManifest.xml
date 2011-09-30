@@ -43,7 +43,7 @@
 		<activity android:name="AmigosTabActivity"/>
 		<activity android:name="MisAmigosActivity"/>
 
-		<activity android:launchMode="singleTop" android:name="BuscarAmigosActivity"/>
+		<activity android:name="BuscarAmigosActivity"/>
 		
 		
 		<activity android:name="InvitarAmigosActivity"/>
