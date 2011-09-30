@@ -29,9 +29,10 @@ public class SitioDAO implements ISitioDAO {
 			throws SitioExcepcion {
 		ResultSet rs = null;
 		PreparedStatement ps = null;
+		CategoriaDTO categoria;
 		SitioDTO resultado;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
-		String sqlExisteSitio = "SELECT * FROM t_sitio WHERE UPPER(sit_nombre) like ?";
+		String sqlExisteSitio = "SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id and UPPER(s.sit_nombre) like ?";
 
 		try {
 
@@ -42,13 +43,18 @@ public class SitioDAO implements ISitioDAO {
 			PGgeometry geom;
 			while (rs.next()) {
 				resultado = new SitioDTO();
+				categoria = new CategoriaDTO();
 				geom = (PGgeometry) rs.getObject(2);
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 				resultado.setIdSitio(rs.getInt(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
-
+				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
+						.getIdSitio()));
+				categoria.setIdCategoria(rs.getInt(7));
+				categoria.setDescripcion(rs.getString(8));
+				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 			}
 
