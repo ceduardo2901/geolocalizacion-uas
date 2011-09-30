@@ -52,6 +52,7 @@ public class MisAmigosActivity extends ListActivity{
 	
 	protected void onPause(){
 		super.onPause();
+		//pendejo
 		unregisterReceiver(receiverGetAmigos);
 	}
 	 
