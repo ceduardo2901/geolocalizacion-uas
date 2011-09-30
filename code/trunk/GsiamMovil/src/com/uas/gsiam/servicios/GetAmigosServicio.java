@@ -18,53 +18,53 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-
-public class GetAmigosServicio extends IntentService{
+public class GetAmigosServicio extends IntentService {
 
 	protected static String TAG = "GetAmigosServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
-	
+
 	public GetAmigosServicio() {
 		super(TAG);
-		
+
 	}
-	
-	public void onCreate(){
+
+	public void onCreate() {
 		super.onCreate();
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		restTemp = new RestTemplate(
+				new HttpComponentsClientHttpRequestFactory());
 
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
+
 		Bundle bundle = new Bundle();
-		
-		ApplicationController app = ((ApplicationController)getApplicationContext());
-	    UsuarioDTO user = app.getUserLogin();
-		
+
+		ApplicationController app = ((ApplicationController) getApplicationContext());
+		UsuarioDTO user = app.getUserLogin();
+
 		Map<String, Integer> parms = new HashMap<String, Integer>();
 		parms.put("id", user.getId());
-		
-		try{
-		
-			UsuarioDTO[] respuesta = restTemp.getForObject(Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class, parms);
-			
-			bundle.putSerializable("lista", Util.getArrayListUsuarioDTO(respuesta));
-			
-			
-		}catch (RestClientException e){
+
+		try {
+
+			UsuarioDTO[] respuesta = restTemp.getForObject(
+					Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class,
+					parms);
+
+			bundle.putSerializable("lista",
+					Util.getArrayListUsuarioDTO(respuesta));
+
+		} catch (RestClientException e) {
 			Log.i(TAG, "Error: " + e.getMessage());
 			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
 		}
-	
+
 		Intent intentGetAmigos = new Intent(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		intentGetAmigos.putExtras(bundle);
 		sendBroadcast(intentGetAmigos);
-		
+
 	}
-	
-	
 
 }
