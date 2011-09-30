@@ -37,7 +37,7 @@ public class CrearSitioActivity extends Activity{
 	private Integer index;
 	protected IntentFilter crearSitioFiltro;
 	
-	private ArrayList<CategoriaIconoMenu> listCategorias = new ArrayList<CategoriaIconoMenu>();
+	//private ArrayList<CategoriaIconoMenu> listCategorias = new ArrayList<CategoriaIconoMenu>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
