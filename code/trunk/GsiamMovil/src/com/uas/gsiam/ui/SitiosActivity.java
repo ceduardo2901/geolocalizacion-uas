@@ -96,19 +96,51 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				R.drawable.facebook_icon, "Categorias"));
 		quickActions.addQuickAction(new QuickAction(this,
 				R.drawable.avatardefault, "Ranking"));
-		quickActions.addQuickAction(new QuickAction(this, R.drawable.logo,
-				"Comentarios"));
 		quickActions
 				.setOnQuickActionClickListener(new OnQuickActionClickListener() {
 
 					@Override
 					public void onQuickActionClicked(QuickActionWidget widget,
 							int position) {
-						// TODO Auto-generated method stub
+
+						switch (position) {
+						case 0:
+							mostarCategoria();
+							break;
+						case 1:
+							break;
+						
+						}
 
 					}
 
 				});
+	}
+
+	public void mostarCategoria() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final String[] categorias = getResources().getStringArray(
+				R.array.listNames);
+		builder.setItems(categorias, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialoginterface, int i) {
+				//setSitios();
+				mostrarSitios(filtrarPorCategoria(i+1));
+			}
+		});
+		builder.show();
+	}
+	
+	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria){
+		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
+		if(!sitios.isEmpty()){
+			for(SitioDTO s : sitios){
+				if(s.getCategoria().getIdCategoria() == categoria.intValue()){
+					sitiosFiltro.add(s);
+				}
+			}
+		}
+		return sitiosFiltro;
 	}
 
 	private void launchGPSOptions() {
@@ -273,7 +305,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 			if (sitios != null) {
 				setSitios(sitios);
-				mostrarSitios();
+				mostrarSitios(sitios);
 			}
 
 		}
@@ -295,7 +327,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		}
 	};
 
-	public void mostrarSitios() {
+	public void mostrarSitios(final ArrayList<SitioDTO> sitios) {
 
 		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
