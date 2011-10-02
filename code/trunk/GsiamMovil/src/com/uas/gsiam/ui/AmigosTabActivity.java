@@ -19,6 +19,7 @@ public class AmigosTabActivity extends TabActivity {
 
     private TabHost mTabHost;
     protected static String TAG = "AmigosTabActivity";
+    protected static boolean registroMisAmigosService = false;
     private static final String TAG_MIS_AMIGOS = "Amigos";
     private static final String TAG_AGREGAR_AMIGOS = "Agregar";
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
@@ -38,7 +39,11 @@ public class AmigosTabActivity extends TabActivity {
         // Al abrir la aplicacion restauramos la última pestaña activada
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
-        mTabHost.setCurrentTab(currentTab);   
+        mTabHost.setCurrentTab(currentTab);
+        
+        if (mTabHost.getCurrentTabTag().equalsIgnoreCase(TAG_MIS_AMIGOS)){
+			iniciarServicioMisAmigos();
+		}
         
         mTabHost.setOnTabChangedListener(new OnTabChangeListener(){
         	@Override
@@ -46,16 +51,20 @@ public class AmigosTabActivity extends TabActivity {
         		Log.d(this.getClass().getName(), ">>>>>>>>>>>>>>>>>>>>>>>fffff> tabId: " + tabId);
         		
         		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
-        			
-        			Intent intent = new Intent(mTabHost.getContext() ,GetAmigosServicio.class);
-        			 startService(intent);
-        			  
-        			  Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
+        			iniciarServicioMisAmigos();
         		}
         		
         		
         	}
         	});
+    }
+    
+    public void iniciarServicioMisAmigos(){
+    	Log.i(TAG, "elegi la uno!!! llamo al serv");
+		Intent intent = new Intent(mTabHost.getContext() ,GetAmigosServicio.class);
+		startService(intent);
+		  
+		Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
     }
     
     @Override
@@ -68,14 +77,9 @@ public class AmigosTabActivity extends TabActivity {
         int currentTab = mTabHost.getCurrentTab();
         editor.putInt(PREF_STICKY_TAB, currentTab);
         editor.commit();
-        Log.i(TAG, "en el onpause ");
     } 
     
     
-    protected void onResume(){
-		super.onResume();
-		Log.i(TAG, "en el onResume ");
-	}
     
 	/*
 	 * Pestaña 1

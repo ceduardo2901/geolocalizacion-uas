@@ -1,5 +1,7 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
+
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.SessionStore;
@@ -15,7 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  {
 
 	private Button sitiosButton;
 	private Button perfilButton;
@@ -30,6 +32,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+
 		nombreTxt =  (TextView)findViewById(R.id.textNombre);
 		
 		sitiosButton = (Button) findViewById(R.id.sitios_button);

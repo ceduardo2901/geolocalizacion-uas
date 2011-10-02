@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.uas.gsiam.adapter.UsuarioAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -49,6 +50,9 @@ public class AgregarAmigosActivity extends ListActivity{
 
 		if (nombre.isEmpty()) {
 			Util.showToast(v.getContext(), "Debe ingresar un nombre");
+		
+			
+			
 		} else {
 
 
