@@ -1,6 +1,10 @@
 package com.uas.gsiam.ui;
 
 
+import com.uas.gsiam.servicios.GetAmigosServicio;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +44,16 @@ public class AmigosTabActivity extends TabActivity {
         	@Override
         	public void onTabChanged(String tabId) {
         		Log.d(this.getClass().getName(), ">>>>>>>>>>>>>>>>>>>>>>>fffff> tabId: " + tabId);
+        		
+        		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
+        			
+        			Intent intent = new Intent(mTabHost.getContext() ,GetAmigosServicio.class);
+        			 startService(intent);
+        			  
+        			  Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
+        		}
+        		
+        		
         	}
         	});
     }

@@ -37,6 +37,7 @@ public class MisAmigosActivity extends ListActivity{
 	//	  setContentView(R.layout.mis_amigos_tab);
 		  lv = getListView();
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
+	
 		  Intent intent = new Intent(this,GetAmigosServicio.class);
 		  startService(intent);
 		  
