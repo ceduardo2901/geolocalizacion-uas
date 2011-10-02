@@ -63,7 +63,7 @@ public class GetAmigosServicio extends IntentService {
 
 		Intent intentGetAmigos = new Intent(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		intentGetAmigos.putExtras(bundle);
-		sendBroadcast(intentGetAmigos);
+		this.sendBroadcast(intentGetAmigos);
 
 	}
 
