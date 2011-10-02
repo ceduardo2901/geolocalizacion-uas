@@ -35,20 +35,29 @@ public class MisAmigosActivity extends ListActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 	//	  setContentView(R.layout.mis_amigos_tab);
+		  Log.i(TAG, "en el onCreate");
 		  lv = getListView();
+		  
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
-	
-		  Intent intent = new Intent(this,GetAmigosServicio.class);
+		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
+		  AmigosTabActivity.registroMisAmigosService = true;
+		  
+	/*	  Intent intent = new Intent(this,GetAmigosServicio.class);
 		  startService(intent);
 		  
 		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
-		  
+		*/  
 		}
 	
 	
 	protected void onResume() {
 		 super.onResume();
-		 this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
+		 
+		 if (!AmigosTabActivity.registroMisAmigosService){
+			  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
+			
+		 }
+			 
 		 
 		 Log.i(TAG, "en el onresume REGISTRO");
 	 }
@@ -56,7 +65,7 @@ public class MisAmigosActivity extends ListActivity{
 	protected void onPause(){
 		super.onPause();
 		this.unregisterReceiver(receiverGetAmigos);
-		
+		AmigosTabActivity.registroMisAmigosService = false;
 		Log.i(TAG, "en el onpause SACO");
 	}
 	 
