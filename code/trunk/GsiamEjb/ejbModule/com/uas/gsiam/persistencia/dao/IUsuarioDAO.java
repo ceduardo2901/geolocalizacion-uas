@@ -17,6 +17,8 @@ public interface IUsuarioDAO {
 	
 	public UsuarioDTO getUsuario(int id) throws SQLException;
 	
+	public ArrayList<UsuarioDTO> getUsuarios(String nombre) throws SQLException;
+	
 	public void crearUsuario(UsuarioDTO usuario) throws SQLException;
 		
 	public void modificarUsuario(UsuarioDTO usuario) throws SQLException;
@@ -32,5 +34,7 @@ public interface IUsuarioDAO {
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException;
 	
 	public ArrayList<UsuarioDTO> getContactos(int idUsuario) throws SQLException;
+	
+	
 	
 }

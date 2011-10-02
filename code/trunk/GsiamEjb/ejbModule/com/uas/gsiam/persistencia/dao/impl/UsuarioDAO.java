@@ -130,6 +130,58 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
+	/**
+	 * Retorna todos los usuarios cuyo nombre contiene el nombre ingresado por parametro
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<UsuarioDTO> getUsuarios(String nombre) throws SQLException{
+		
+		PreparedStatement ps;
+		ArrayList<UsuarioDTO> listaRetorno = new ArrayList<UsuarioDTO>();
+		
+		try{
+
+			String sqlGetUsuarios = "SELECT * FROM t_usuario u " +
+	        						"WHERE UPPER(u.usu_nombre) like ? " +
+	        						"ORDER BY u.usu_nombre";
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlGetUsuarios);
+			
+
+			ps.setString(1, "%" + nombre.toUpperCase() +"%");
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				
+				UsuarioDTO usuario = new UsuarioDTO();
+				usuario.setId(rs.getInt("usu_id"));
+				usuario.setNombre(rs.getString("usu_nombre"));	
+				usuario.setEmail(rs.getString("usu_mail"));
+				usuario.setPassword(rs.getString("usu_password"));
+				usuario.setAvatar(rs.getBytes("usu_avatar"));
+				
+				listaRetorno.add(usuario);
+			}
+				
+			rs.close();
+			ps.close();
+			
+		
+		}finally{
+			
+				if (ConexionJDBCUtil.getConexion() != null)
+					ConexionJDBCUtil.getConexion().close();
+	
+		}
+		
+		return listaRetorno;		
+		
+	}
+	
+	
 	/*
 	 * Metodo que crea al usuario
 	 */
@@ -345,7 +397,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 								  "WHERE csol.con_id_usuario_apr = ? AND csol.con_fecha_aprobacion is not null " +
 								  "UNION " +
 								  "SELECT capr.con_id_usuario_apr id_usu FROM t_contacto capr " +
-								  "WHERE capr.con_id_usuario_sol = ? AND capr.con_fecha_aprobacion is not null) ";
+								  "WHERE capr.con_id_usuario_sol = ? AND capr.con_fecha_aprobacion is not null) " +
+								  "ORDER BY usu_nombre";
 			
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlContactos);

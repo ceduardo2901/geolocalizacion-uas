@@ -29,5 +29,7 @@ public interface UsuarioServicio {
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion;
 	
 	public ArrayList<UsuarioDTO> getContactos (int idUsuario) throws UsuarioExcepcion;
+	
+	public ArrayList<UsuarioDTO> getUsuarios (String nombre) throws UsuarioExcepcion;
 		
 }
