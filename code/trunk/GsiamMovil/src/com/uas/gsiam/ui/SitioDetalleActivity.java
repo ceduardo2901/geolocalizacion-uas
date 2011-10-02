@@ -4,9 +4,9 @@ import java.security.Provider;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.CrearSitioServicio;
-import com.uas.gsiam.utils.ComentarioAdapter;
+import com.uas.gsiam.adapter.ComentarioAdapter;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitiosAdapter;
+import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.utils.Util;
 
 import android.app.Activity;

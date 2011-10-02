@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.LoginServicio;
@@ -38,13 +37,7 @@ public class LoginActivity extends Activity {
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
 		
-	/*	email = SessionStore.restore(this);
-		if (email != null) {
-			actividadPrincipal();
-		}
-		*/
-		
-		//login = (Button) findViewById(R.id.entrarBtn);
+
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
@@ -75,8 +68,9 @@ public class LoginActivity extends Activity {
 		pass = passTxt.getText().toString().trim();
 
 		if (!Util.validaMail(email)) {
-			Toast.makeText(v.getContext(), Constantes.MSG_ERROR_MAIL,
-					Toast.LENGTH_LONG).show();
+			
+			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
+			
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString("email", email);

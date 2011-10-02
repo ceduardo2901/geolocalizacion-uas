@@ -20,7 +20,6 @@ import android.widget.EditText;
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.CrearSitioServicio;
-import com.uas.gsiam.utils.CategoriaIconoMenu;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -89,9 +88,9 @@ public class CrearSitioActivity extends Activity{
 	}
 	
 	
-	public void mostarCategoria(View v) {
+/*	public void mostarCategoria(View v) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] categorias = getResources().getStringArray(R.array.listNames);
+	//	final String[] categorias = getResources().getStringArray(R.array.listNames);
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
@@ -102,7 +101,7 @@ public class CrearSitioActivity extends Activity{
 		});
 		builder.show();
 	}
-	
+	*/
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
