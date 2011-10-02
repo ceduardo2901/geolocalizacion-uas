@@ -58,4 +58,10 @@ public class UsuarioDelegate {
     	return servicioUsuario.getContactos(idUsuario);
     }
 	
+    
+    public List<UsuarioDTO> getUsuarios(String nombre) throws UsuarioExcepcion{
+    	
+    	return servicioUsuario.getUsuarios(nombre);
+    }
+    
 }
