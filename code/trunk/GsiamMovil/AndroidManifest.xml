@@ -43,10 +43,7 @@
 		<activity android:name="ModificarSitioActivity" />
 		<activity android:name="AmigosTabActivity" />
 		<activity android:name="MisAmigosActivity" />
-
-		<activity android:name="BuscarAmigosActivity" />
-
-
+		<activity android:name="AgregarAmigosActivity" />
 		<activity android:name="InvitarAmigosActivity" />
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
@@ -57,6 +54,7 @@
 		<service android:name="com.uas.gsiam.servicios.PublicarServicio" />
 		<service android:name="com.uas.gsiam.servicios.EliminarSitioServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetAmigosServicio" />
+		<service android:name="com.uas.gsiam.servicios.GetUsuariosServicio" />
 		<service android:name="com.uas.gsiam.servicios.ModificarSitioServicio" />
 
 	</application>
