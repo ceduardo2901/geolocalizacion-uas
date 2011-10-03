@@ -16,7 +16,7 @@
 		<TextView android:layout_width="fill_parent"
 			android:layout_weight="1" android:layout_height="wrap_content"
 			android:text="@string/email" android:id="@+id/emailLbl"
-			android:textStyle="bold" android:textColor="#000000"/>
+			android:textColor="#000000"/>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/emailTxt"
 			android:inputType="textEmailAddress">
@@ -25,7 +25,7 @@
 		<TextView android:layout_width="fill_parent"
 			android:layout_weight="1" android:text="@string/pass" android:id="@+id/passLbl"
 			android:layout_height="match_parent" android:layout_marginTop="15dp" 
-			android:textStyle="bold" android:textColor="#000000"/>
+			android:textColor="#000000"/>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/passTxt"
 			android:inputType="textPassword">
@@ -43,10 +43,10 @@
 				android:layout_height="wrap_content" android:text="¿No tienes cuenta?"
 				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
 				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"
-				android:textStyle="bold" android:textColor="#000000"></TextView>
+				android:textColor="#000000"></TextView>
 			<Button android:id="@+id/button1" android:text="@string/BtnRegistrarse"
 				android:onClick="btnRegistrarse" android:layout_gravity="right"
-				android:layout_width="100dp" android:layout_height="wrap_content"></Button>
+				android:layout_width="100dp" android:layout_height="wrap_content" android:layout_marginTop="10dp"></Button>
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>
