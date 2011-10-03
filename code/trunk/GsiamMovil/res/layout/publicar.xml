@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent" >
 	<EditText android:layout_width="match_parent"
 		android:layout_height="wrap_content" android:id="@+id/txtComentarioId"
 		android:inputType="textMultiLine" android:lines="4">
@@ -18,20 +18,25 @@
 			android:layout_height="wrap_content">
 			<TextView android:layout_width="wrap_content" android:text="@string/compartirFacebook"
 				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
-				android:layout_height="wrap_content"></TextView>
+				android:layout_height="wrap_content"/>
 			<CheckBox android:layout_width="wrap_content" android:id="@+id/cheBoxFaceBook"
 				android:layout_height="wrap_content" android:text="" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
-			<TableLayout android:id="@+id/tableLayout2" android:layout_width="wrap_content" android:layout_height="wrap_content">
-				<Button android:layout_height="wrap_content" android:onClick="publicar" android:text="@string/publicar" android:layout_width="wrap_content" android:id="@+id/btnPubId"></Button>
-				<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
-				<TableRow android:id="@+id/tableRow8" android:layout_width="wrap_content" android:layout_height="wrap_content"></TableRow>
+			<TableLayout android:id="@+id/tableLayout2"
+				android:layout_width="wrap_content" android:layout_height="wrap_content">
+				<Button android:layout_height="wrap_content" android:onClick="publicar"
+					android:text="@string/publicar" android:layout_width="wrap_content"
+					android:id="@+id/btnPubId" android:ellipsize="start"/>
+				<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+					android:layout_height="wrap_content"></TableRow>
+				<TableRow android:id="@+id/tableRow8" android:layout_width="wrap_content"
+					android:layout_height="wrap_content"></TableRow>
 			</TableLayout>
-			<Button android:layout_height="wrap_content" android:onClick="compartir" android:text="@string/compartir" android:layout_width="wrap_content" android:id="@+id/btnCompId"></Button>
+
 		</TableRow>
-		
+
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 

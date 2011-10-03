@@ -1,5 +1,9 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBar;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
 import java.security.Provider;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -17,7 +21,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SitioDetalleActivity extends Activity {
+import com.uas.gsiam.adapter.ComentarioAdapter;
+import com.uas.gsiam.negocio.dto.SitioDTO;
+
+public class SitioDetalleActivity extends GDActivity {
 
 	protected static final String TAG = "SitioDetalleActivity";
 	protected TextView txtNombre;
@@ -28,15 +35,36 @@ public class SitioDetalleActivity extends Activity {
 	private Integer sitioId;
 	private ListView listComentarios;
 	private SitioDTO sitio;
+	private static final int MAPA = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.sitio_detalle);
+		setActionBarContentView(R.layout.sitio_detalle);
 
 		txtNombre = (TextView) findViewById(R.id.txtSitioNombreId);
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
 		listComentarios = (ListView) findViewById(R.id.listComentariosId);
+		inicializarBarra();
+	}
+
+	private void inicializarBarra() {
+		addActionBarItem(Type.Locate, MAPA);
+		setTitle(R.string.app_name);
+	}
+	
+	@Override
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+		case MAPA:
+			mostarMapa();
+			break;
+		
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+		}
+
+		return true;
 
 	}
 
@@ -58,13 +86,13 @@ public class SitioDetalleActivity extends Activity {
 		}
 
 	}
-	
-	public void onPause(){
+
+	public void onPause() {
 		super.onPause();
-		
+
 	}
 
-	public void mostarMapa(View v) {
+	public void mostarMapa() {
 
 		Bundle bundle = new Bundle();
 		bundle.putDouble("lat", sitio.getLat());
