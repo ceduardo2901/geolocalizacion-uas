@@ -1,12 +1,14 @@
 package com.uas.gsiam.ui;
 
-import android.app.Activity;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.QuickActionWidget;
+import greendroid.widget.ActionBarItem.Type;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.Contacts;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -21,19 +23,17 @@ import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.servicios.CrearSitioServicio;
 import com.uas.gsiam.servicios.PublicarServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SessionEvents;
 import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
-import com.uas.gsiam.utils.SessionEvents.AuthListener;
 
-public class PublicarActivity extends Activity implements
+public class PublicarActivity extends GDActivity implements
 		OnRatingBarChangeListener {
 
 	protected static final String TAG = "PublicarActivity";
+	private static final int COMPARTIR = 1;
 	private EditText comentario;
 	private CheckBox comentarFaceBook;
 	private RatingBar puntaje;
@@ -45,11 +45,12 @@ public class PublicarActivity extends Activity implements
 	private ApplicationController app;
 	private static final int RESULT = 1001;
 	private String nombre;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.publicar);
+		setActionBarContentView(R.layout.publicar);
 
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
@@ -61,8 +62,37 @@ public class PublicarActivity extends Activity implements
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
 		app = ((ApplicationController) getApplicationContext());
+		
+		inicializarActionBar();
+		
 
 	}
+
+	
+
+	private void inicializarActionBar() {
+		addActionBarItem(Type.Share, COMPARTIR);
+		
+		setTitle(R.string.app_name);
+		
+	}
+	
+	
+	@Override
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+		case COMPARTIR:
+			compartir();
+			break;
+		
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+		}
+
+		return true;
+
+	}
+	
 
 	protected void onResume() {
 		super.onResume();
@@ -131,7 +161,7 @@ public class PublicarActivity extends Activity implements
 
 	}
 
-	public void compartir(View v) {
+	public void compartir() {
 
 		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
 		compartirIntent.setType("plain/text");

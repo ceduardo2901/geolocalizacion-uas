@@ -11,6 +11,7 @@ import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -36,6 +37,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.uas.gsiam.adapter.SitiosAdapter;
+import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
@@ -63,7 +65,9 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.lista_sitios);
+
 		lw = (ListView) findViewById(R.id.listaSitios);
+
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
@@ -108,8 +112,9 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 							mostarCategoria();
 							break;
 						case 1:
+							mostrarRaiting();
 							break;
-						
+
 						}
 
 					}
@@ -117,30 +122,73 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				});
 	}
 
+	private void mostrarRaiting() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final String[] puntajes = getResources().getStringArray(
+				R.array.rating);
+		
+		builder.setItems(puntajes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialoginterface, int i) {
+				// setSitios();
+				mostrarSitios(filtrarPorCategoria(i + 1));
+			}
+		});
+		builder.show();
+
+	}
+
 	public void mostarCategoria() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String[] categorias = getResources().getStringArray(
 				R.array.listNames);
+		builder.setTitle(R.string.categoria);
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				//setSitios();
-				mostrarSitios(filtrarPorCategoria(i+1));
+				// setSitios();
+				mostrarSitios(filtrarPorCategoria(i + 1));
 			}
 		});
 		builder.show();
 	}
-	
-	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria){
+
+	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
-		if(!sitios.isEmpty()){
-			for(SitioDTO s : sitios){
-				if(s.getCategoria().getIdCategoria() == categoria.intValue()){
+		if (!sitios.isEmpty()) {
+			for (SitioDTO s : sitios) {
+				if (s.getCategoria().getIdCategoria() == categoria.intValue()) {
 					sitiosFiltro.add(s);
 				}
 			}
 		}
 		return sitiosFiltro;
+	}
+
+	private ArrayList<SitioDTO> filtrarPorRating(Integer rating) {
+		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
+		if (!sitios.isEmpty()) {
+			for (SitioDTO s : sitios) {
+
+				if (getPromedioPuntaje(s).equals(rating)) {
+					sitiosFiltro.add(s);
+				}
+			}
+		}
+		return sitiosFiltro;
+	}
+
+	private Float getPromedioPuntaje(SitioDTO s) {
+		Float result = new Float(0);
+		if (!s.getPublicaciones().isEmpty()) {
+			for (PublicacionDTO p : s.getPublicaciones()) {
+				result = result + p.getPuntaje();
+			}
+
+			return result / s.getPublicaciones().size();
+		}
+
+		return result;
 	}
 
 	private void launchGPSOptions() {

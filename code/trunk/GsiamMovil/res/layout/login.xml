@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:background="@color/background" android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="#AAC1E2" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal">
 	<LinearLayout android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="center">
-	
-	
-    <TextView android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView2" android:layout_width="match_parent" android:layout_height="58dp" android:text="GSIAM" android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
-    <TextView android:layout_width="fill_parent" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/email" android:id="@+id/emailLbl"></TextView>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/emailTxt" android:inputType="textEmailAddress">
-    <requestFocus></requestFocus></EditText>
-    <TextView android:layout_width="fill_parent" android:layout_weight="1" android:text="@string/pass" android:id="@+id/passLbl" android:layout_height="match_parent" android:layout_marginTop="15dp"></TextView>
-    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/passTxt" android:inputType="textPassword">
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:layout_gravity="center">
 
-    </EditText>
-    <Button android:layout_height="wrap_content" android:id="@+id/entrarBtn" android:text="@string/BtnLogin" android:onClick="btnValidarEmail" android:gravity="center_vertical|center_horizontal|center" android:layout_gravity="right" android:layout_width="100dp" android:layout_marginTop="10dp"></Button>
-    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_gravity="right" android:layout_width="wrap_content" android:layout_marginTop="15dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="¿No tienes cuenta?" android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge" android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"></TextView>
-        <Button android:id="@+id/button1" android:text="@string/BtnRegistrarse" android:onClick="btnRegistrarse" android:layout_gravity="right" android:layout_width="100dp" android:layout_height="wrap_content"></Button>
-    </LinearLayout>
-</LinearLayout>
+
+		<TextView android:textAppearance="?android:attr/textAppearanceLarge"
+			android:id="@+id/textView2" android:layout_width="match_parent"
+			android:layout_height="58dp" android:text="GSIAM"
+			android:layout_gravity="center_vertical|center_horizontal|center"></TextView>
+		<TextView android:layout_width="fill_parent"
+			android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/email" android:id="@+id/emailLbl"
+			android:textColor="@color/fondo" />
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/emailTxt"
+			android:inputType="textEmailAddress">
+			<requestFocus></requestFocus>
+		</EditText>
+		<TextView android:layout_width="fill_parent"
+			android:layout_weight="1" android:text="@string/pass" android:id="@+id/passLbl"
+			android:layout_height="match_parent" android:layout_marginTop="15dp"
+			android:textColor="@color/fondo" />
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/passTxt"
+			android:inputType="textPassword">
+
+		</EditText>
+		<Button android:layout_height="wrap_content" android:id="@+id/entrarBtn"
+			android:text="@string/BtnLogin" android:onClick="btnValidarEmail"
+			android:gravity="center_vertical|center_horizontal|center"
+			android:layout_gravity="right" android:layout_width="100dp"
+			android:layout_marginTop="10dp"></Button>
+		<LinearLayout android:layout_height="wrap_content"
+			android:id="@+id/linearLayout1" android:layout_gravity="right"
+			android:layout_width="wrap_content" android:layout_marginTop="15dp">
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="¿No tienes cuenta?"
+				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
+				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"></TextView>
+			<Button android:id="@+id/button1" android:text="@string/BtnRegistrarse"
+				android:onClick="btnRegistrarse" android:layout_gravity="right"
+				android:layout_width="100dp" android:layout_height="wrap_content"></Button>
+		</LinearLayout>
+	</LinearLayout>
 </LinearLayout>
