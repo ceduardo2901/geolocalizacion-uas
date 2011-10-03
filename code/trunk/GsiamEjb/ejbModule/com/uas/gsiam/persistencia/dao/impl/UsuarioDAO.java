@@ -267,6 +267,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	public void crearContacto(SolicitudContacto solicitud) throws SQLException{
 		
+		System.out.println("LLEGUE AL DAO LALALALALALALA");
+		
 		PreparedStatement ps;
 			
 		String sqlCrearContacto = "INSERT INTO t_contacto (con_id_usuario_sol, con_id_usuario_apr, con_fecha_solicitud, con_fecha_aprobacion) " +
