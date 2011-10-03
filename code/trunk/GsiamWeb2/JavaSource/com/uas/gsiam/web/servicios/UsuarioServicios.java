@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
+import com.uas.gsiam.negocio.dto.SolicitudContacto;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.persistencia.utiles.Constantes;
@@ -132,5 +133,33 @@ public class UsuarioServicios {
 			return listaUsuarios;
 		
 	}
+	
+	
+	
+	@POST
+	@Path("/agregarsolicitud/{ids}/{ida}")
+	@Produces("application/json")
+    public String creaSolicitudContacto(@PathParam ("ids") int idSolicitante, @PathParam ("ida") int idAprobador) {
+		
+		
+    try {
+			
+        SolicitudContacto solicitud = new SolicitudContacto();
+        solicitud.setIdUsuarioSolicitante(idSolicitante);
+        solicitud.setIdUsuarioAprobador(idAprobador);
+        
+		servicio.crearSolicitudContacto(solicitud);
+		
+		return Constantes.RETURN_OK;
+			
+		} catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+		}
+		
+		 
+		
+    }
+	
+	
 	
 }
