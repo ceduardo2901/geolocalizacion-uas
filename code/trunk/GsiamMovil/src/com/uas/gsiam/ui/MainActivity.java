@@ -1,12 +1,7 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.utils.ApplicationController;
-import com.uas.gsiam.utils.SessionStore;
-
-import android.app.Activity;
+import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,41 +12,47 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity  {
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.SessionStore;
+
+public class MainActivity extends GDActivity {
 
 	private Button sitiosButton;
 	private Button perfilButton;
 	private Button amigosButton;
-	
 
 	protected UsuarioDTO user;
 	protected TextView nombreTxt;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		
 
-		nombreTxt =  (TextView)findViewById(R.id.textNombre);
-		
+		setActionBarContentView(R.layout.main);
+
+		nombreTxt = (TextView) findViewById(R.id.textNombre);
+
 		sitiosButton = (Button) findViewById(R.id.sitios_button);
 		sitiosButton.setOnClickListener(botonListener);
-		
+
 		perfilButton = (Button) findViewById(R.id.perfil_button);
 		perfilButton.setOnClickListener(botonListener);
-		
+
 		amigosButton = (Button) findViewById(R.id.amigos_button);
 		amigosButton.setOnClickListener(botonListener);
-		
-		ApplicationController app = ((ApplicationController)getApplicationContext());
+
+		ApplicationController app = ((ApplicationController) getApplicationContext());
 		user = app.getUserLogin();
-		
+
 		nombreTxt.setText("Bienvenido: " + user.getNombre());
-		
+		inicializarBar();
 	}
 
-	
+	private void inicializarBar() {
+		
+		setTitle(R.string.app_name);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,7 +67,7 @@ public class MainActivity extends Activity  {
 		switch (item.getItemId()) {
 		case R.id.cerrarSesionId:
 			SessionStore.clear(this);
-			Intent loginIntent = new Intent(this,LoginActivity.class);
+			Intent loginIntent = new Intent(this, LoginActivity.class);
 			startActivity(loginIntent);
 			break;
 
@@ -89,22 +90,21 @@ public class MainActivity extends Activity  {
 			case R.id.amigos_button:
 				amigosActivity();
 				break;
-		}
-			
+			}
+
 		}
 	};
 
-	
 	private void sitiosActivity() {
 		Intent sitioIntent = new Intent(this, SitiosActivity.class);
 		startActivity(sitioIntent);
 	}
-	
+
 	private void perfilActivity() {
 		Intent perfilIntent = new Intent(this, PerfilActivity.class);
 		startActivity(perfilIntent);
 	}
-	
+
 	private void amigosActivity() {
 		Intent amigosIntent = new Intent(this, AmigosTabActivity.class);
 		startActivity(amigosIntent);
