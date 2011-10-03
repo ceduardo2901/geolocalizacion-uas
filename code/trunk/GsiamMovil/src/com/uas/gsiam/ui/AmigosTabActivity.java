@@ -48,7 +48,6 @@ public class AmigosTabActivity extends TabActivity {
         mTabHost.setOnTabChangedListener(new OnTabChangeListener(){
         	@Override
         	public void onTabChanged(String tabId) {
-        		Log.d(this.getClass().getName(), ">>>>>>>>>>>>>>>>>>>>>>>fffff> tabId: " + tabId);
         		
         		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
         			iniciarServicioMisAmigos();

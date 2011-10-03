@@ -2,10 +2,12 @@ package com.uas.gsiam.ui;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -15,15 +17,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.uas.gsiam.adapter.UsuarioAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.CrearSitioServicio;
+import com.uas.gsiam.servicios.CrearSolicitudAmistadServicio;
 import com.uas.gsiam.servicios.GetUsuariosServicio;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class AgregarAmigosActivity extends ListActivity{
+public class AgregarAmigosActivity extends ListActivity implements OnItemClickListener{
 
 	
 	protected IntentFilter buscarUsuariosFiltro;
@@ -40,7 +44,10 @@ public class AgregarAmigosActivity extends ListActivity{
 		setContentView(R.layout.agregar_amigos_tab);
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		lv = getListView();
+		lv.setOnItemClickListener(this);
+
 		buscarUsuariosFiltro = new IntentFilter(Constantes.GET_USUARIOS_FILTRO_ACTION);
+		
 	}
 	
 	
@@ -82,9 +89,7 @@ public class AgregarAmigosActivity extends ListActivity{
 		
 	}
 	 
-	
-	
-	
+
 	protected BroadcastReceiver receiverGetUsuarios = new BroadcastReceiver() {
 		@Override
 	    public void onReceive(Context context, Intent intent) {
@@ -94,47 +99,67 @@ public class AgregarAmigosActivity extends ListActivity{
 		
 	    	Log.i(TAG, "mi lista}11111111 = "+usuarios.size());
 	    	
-	    	
 	    	mostrarUsuarios();
 
-	    	
-			Util.dismissProgressDialog();
-			
-	    	
-	    	
+			Util.dismissProgressDialog();	    	
 			
 	    }
 	  };
 	
-	
-	
+
 	
 	  public void mostrarUsuarios() {
 		  
 			UsuarioAdapter adaptador = new UsuarioAdapter(this, R.layout.usuario_item, usuarios);
-			this.setListAdapter(adaptador);
-			lv.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					UsuarioDTO usuario = usuarios.get(position);
-					
-					Log.i(TAG, "Seleccione: "+ usuario.getNombre());
-					
-				/*	Intent sitioDetalleIntent = new Intent(getApplicationContext(),
-							SitioDetalleActivity.class);
-					sitioDetalleIntent.putExtra("sitio", sitios.get(position));
-					sitioDetalleIntent.putExtra("ubicacion", loc);
-					startActivity(sitioDetalleIntent);
-*/
-				}
-			});
+			setListAdapter(adaptador);
 			
-	//		lv.setOnItemLongClickListener(this);
 			
-
 		}
+	  
+	  @Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+		  
 	
+			final UsuarioDTO usuarioSeleccionado = usuarios.get(position);
+			
+			Log.i(TAG, "Seleccione: "+ usuarioSeleccionado.getNombre());
+			
+			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			
+			dialog.setTitle("Envio de Solicitud"); 
+			dialog.setMessage("¿Esta seguro que desea enviarle una solicitud de amitad a "+ usuarioSeleccionado.getNombre() + "?");
+			dialog.setCancelable(false);
+			dialog.setIcon(android.R.drawable.ic_dialog_info);  
+			dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+			    	   
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   
+			        	   ApplicationController app = ((ApplicationController)getApplicationContext());
+			        	   
+			        	   Bundle bundle = new Bundle();
+			       		   bundle.putInt("idSolicitante", app.getUserLogin().getId());
+			       		   bundle.putInt("idAprobador", usuarioSeleccionado.getId());
+			        	   
+			        	   Intent intent = new Intent(getApplicationContext(),CrearSolicitudAmistadServicio.class);
+			       		   intent.putExtras(bundle);
+			       		   startService(intent);
+			       		
+			       		   Util.showProgressDialog(getApplicationContext(), Constantes.MSG_ESPERA_GENERICO);
+			        	   
+			        	   
+			        	   dialog.cancel();
+			           }
+			       });
+			dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			           public void onClick(DialogInterface dialog, int id) {
+			                dialog.cancel();
+			           }
+			       });
+			dialog.show();
+			
+			
+		}
+	  
+	  
 	
 }

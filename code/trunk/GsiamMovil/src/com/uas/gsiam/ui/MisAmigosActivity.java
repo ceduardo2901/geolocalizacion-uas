@@ -17,11 +17,10 @@ import android.widget.ListView;
 
 import com.uas.gsiam.adapter.UsuarioAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.servicios.GetAmigosServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class MisAmigosActivity extends ListActivity{
+public class MisAmigosActivity extends ListActivity implements OnItemClickListener{
 
 	
 	protected IntentFilter misAmigosFiltro;
@@ -34,9 +33,9 @@ public class MisAmigosActivity extends ListActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
-	//	  setContentView(R.layout.mis_amigos_tab);
-		  Log.i(TAG, "en el onCreate");
+		  setContentView(R.layout.mis_amigos_tab);
 		  lv = getListView();
+		  lv.setOnItemClickListener(this);
 		  
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
@@ -58,15 +57,13 @@ public class MisAmigosActivity extends ListActivity{
 			
 		 }
 			 
-		 
-		 Log.i(TAG, "en el onresume REGISTRO");
 	 }
 	
 	protected void onPause(){
 		super.onPause();
 		this.unregisterReceiver(receiverGetAmigos);
 		AmigosTabActivity.registroMisAmigosService = false;
-		Log.i(TAG, "en el onpause SACO");
+		
 	}
 	 
 	
@@ -80,15 +77,10 @@ public class MisAmigosActivity extends ListActivity{
 			misAmigos = (ArrayList<UsuarioDTO>) bundle.getSerializable("lista");
 		
 	    	Log.i(TAG, "mi lista}11111111 = "+misAmigos.size());
-	    	
-	    	
+	    	    	
 	    	mostrarAmigos();
-
-	    	
+	
 			Util.dismissProgressDialog();
-			
-	    	
-	    	
 			
 	    }
 	  };
@@ -97,28 +89,20 @@ public class MisAmigosActivity extends ListActivity{
 	  public void mostrarAmigos() {
 		  
 			UsuarioAdapter adaptador = new UsuarioAdapter(this, R.layout.usuario_item, misAmigos);
-			this.setListAdapter(adaptador);
-			lv.setOnItemClickListener(new OnItemClickListener() {
-
-				@Override
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					UsuarioDTO usuario = misAmigos.get(position);
-					
-					Log.i(TAG, "Seleccione: "+ usuario.getNombre());
-					
-				/*	Intent sitioDetalleIntent = new Intent(getApplicationContext(),
-							SitioDetalleActivity.class);
-					sitioDetalleIntent.putExtra("sitio", sitios.get(position));
-					sitioDetalleIntent.putExtra("ubicacion", loc);
-					startActivity(sitioDetalleIntent);
-*/
-				}
-			});
+			lv.setAdapter(adaptador);
+	
 			
-	//		lv.setOnItemLongClickListener(this);
-			
-
 		}
 	
+	  @Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+		  
+		  
+			UsuarioDTO usuario = misAmigos.get(position);
+			
+			Log.i(TAG, "Seleccione: "+ usuario.getNombre());
+			
+			
+		}
+	  
 }
