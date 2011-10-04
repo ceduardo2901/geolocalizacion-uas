@@ -8,6 +8,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
 
@@ -40,14 +41,16 @@ public class CrearSolicitudAmistadServicio extends IntentService{
 		
 		Bundle bundle = intent.getExtras();
 		
-		UsuarioDTO usuario = (UsuarioDTO) bundle.getSerializable("usuario");
-		
-		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
-		parms.put("usuarioDto", usuario);
+		int idSolicitante = (int) bundle.getInt("idSolicitante");
+		int idAprobador = (int) bundle.getInt("idAprobador");
+
+		Map<String, Integer> parms = new HashMap<String, Integer>();
+		parms.put("idSolicitante", idSolicitante);
+		parms.put("idAprobador", idAprobador);
 		
 		try{
-		
-			String respuesta = restTemp.postForObject(Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL, usuario, String.class);	
+			String respuesta = restTemp.getForObject(Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL, String.class, parms);
+				
 			bundle.putString("respuesta", respuesta);
 			
 		}catch (RestClientException e){

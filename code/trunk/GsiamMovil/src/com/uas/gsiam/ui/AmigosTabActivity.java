@@ -8,12 +8,14 @@ import com.uas.gsiam.utils.Util;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 
 public class AmigosTabActivity extends TabActivity {
 
@@ -23,6 +25,7 @@ public class AmigosTabActivity extends TabActivity {
     private static final String TAG_MIS_AMIGOS = "Amigos";
     private static final String TAG_AGREGAR_AMIGOS = "Agregar";
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
+    private static final String TAG_SOLICITUDES = "Solicitudes";
     private static final String PREF_STICKY_TAB = "stickyTab";
 	
     /** Called when the activity is first created. */
@@ -34,7 +37,8 @@ public class AmigosTabActivity extends TabActivity {
       
         añadirTab1();
         añadirTab2();
-        añadirTab3();        
+        añadirTab3();
+        añadirTab4(); 
         
         // Al abrir la aplicacion restauramos la última pestaña activada
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -92,6 +96,13 @@ public class AmigosTabActivity extends TabActivity {
     	Intent intent = new Intent(this, MisAmigosActivity.class);
     	
         TabSpec spec = mTabHost.newTabSpec(TAG_MIS_AMIGOS);
+   /*     TextView tab1 = null;
+        tab1 = new TextView(this);
+        tab1.setText("Mis Amigos");
+        tab1.setGravity(android.view.Gravity.CENTER);
+        tab1.setTextColor(R.color.fondo);
+        spec.setIndicator(tab1);
+        */
         spec.setIndicator("Mis Amigos");
         spec.setContent(intent);
 
@@ -131,7 +142,21 @@ public class AmigosTabActivity extends TabActivity {
   
     }
    
+    /*
+	 * Pestaña 4
+	 */
+    
+    private void añadirTab4() {
+    	
+    	Intent intent = new Intent(this, InvitarAmigosActivity.class);
+    	
+        TabSpec spec = mTabHost.newTabSpec(TAG_SOLICITUDES);
+        spec.setIndicator("Solicitudes");
+        spec.setContent(intent);
 
+        mTabHost.addTab(spec);
+  
+    }
 	
     
 }

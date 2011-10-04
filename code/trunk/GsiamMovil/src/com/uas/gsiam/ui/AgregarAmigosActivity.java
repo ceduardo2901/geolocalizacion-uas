@@ -31,6 +31,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 	
 	protected IntentFilter buscarUsuariosFiltro;
+	protected IntentFilter enviarSolicitudFiltro;
 	protected ProgressDialog progressDialog;
 	protected ListView lv;
 	protected ArrayList<UsuarioDTO> usuarios;
@@ -47,6 +48,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		lv.setOnItemClickListener(this);
 
 		buscarUsuariosFiltro = new IntentFilter(Constantes.GET_USUARIOS_FILTRO_ACTION);
+		enviarSolicitudFiltro = new IntentFilter(Constantes.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION);
 		
 	}
 	
@@ -80,12 +82,14 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	protected void onResume() {
 		 super.onResume();
 		 this.registerReceiver(receiverGetUsuarios, buscarUsuariosFiltro);
+		 this.registerReceiver(receiverEnviarSolicitud, enviarSolicitudFiltro);
 		 
 	 }
 	
 	protected void onPause(){
 		super.onPause();
 		this.unregisterReceiver(receiverGetUsuarios);
+		this.unregisterReceiver(receiverEnviarSolicitud);
 		
 	}
 	 
@@ -107,6 +111,15 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  };
 	
 
+	  protected BroadcastReceiver receiverEnviarSolicitud = new BroadcastReceiver() {
+			@Override
+		    public void onReceive(Context context, Intent intent) {
+		    		
+		    	
+				Util.dismissProgressDialog();	    	
+				
+		    }
+		  };
 	
 	  public void mostrarUsuarios() {
 		  
@@ -126,31 +139,21 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			
 			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 			
-			dialog.setTitle("Envio de Solicitud"); 
-			dialog.setMessage("¿Esta seguro que desea enviarle una solicitud de amitad a "+ usuarioSeleccionado.getNombre() + "?");
+			dialog.setTitle("Solicitud de Amistad"); 
+			dialog.setMessage("Enviar solicitud de amitad a "+ usuarioSeleccionado.getNombre() + "?");
 			dialog.setCancelable(false);
 			dialog.setIcon(android.R.drawable.ic_dialog_info);  
-			dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+			dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
 			    	   
 			           public void onClick(DialogInterface dialog, int id) {
 			        	   
-			        	   ApplicationController app = ((ApplicationController)getApplicationContext());
 			        	   
-			        	   Bundle bundle = new Bundle();
-			       		   bundle.putInt("idSolicitante", app.getUserLogin().getId());
-			       		   bundle.putInt("idAprobador", usuarioSeleccionado.getId());
-			        	   
-			        	   Intent intent = new Intent(getApplicationContext(),CrearSolicitudAmistadServicio.class);
-			       		   intent.putExtras(bundle);
-			       		   startService(intent);
-			       		
-			       		   Util.showProgressDialog(getApplicationContext(), Constantes.MSG_ESPERA_GENERICO);
-			        	   
+			        	   agergarAmigo(usuarioSeleccionado.getId());
 			        	   
 			        	   dialog.cancel();
 			           }
 			       });
-			dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
 			           public void onClick(DialogInterface dialog, int id) {
 			                dialog.cancel();
 			           }
@@ -160,6 +163,22 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			
 		}
 	  
+	  
+	  public void agergarAmigo(int idUsuarioSeleccionado){
+		  
+		  ApplicationController app = ((ApplicationController)getApplicationContext());
+
+		  Bundle bundle = new Bundle();
+		  bundle.putInt("idSolicitante", app.getUserLogin().getId());
+		  bundle.putInt("idAprobador", idUsuarioSeleccionado);
+
+		  Intent intent = new Intent(getApplicationContext(),CrearSolicitudAmistadServicio.class);
+		  intent.putExtras(bundle);
+		  startService(intent);
+
+		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_SOLICITUD);
+
+	  }
 	  
 	
 }
