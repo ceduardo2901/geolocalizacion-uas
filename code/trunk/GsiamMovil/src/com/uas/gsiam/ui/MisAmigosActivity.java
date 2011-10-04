@@ -40,6 +40,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
 		  AmigosTabActivity.registroMisAmigosService = true;
+		  Log.i(TAG, "***** REGSITRO oncreate");
 		  
 	/*	  Intent intent = new Intent(this,GetAmigosServicio.class);
 		  startService(intent);
@@ -54,7 +55,8 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		 
 		 if (!AmigosTabActivity.registroMisAmigosService){
 			  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-			
+			  AmigosTabActivity.registroMisAmigosService = true;
+			  Log.i(TAG, "***** REGSITRO onResume");
 		 }
 			 
 	 }
@@ -63,7 +65,8 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		super.onPause();
 		this.unregisterReceiver(receiverGetAmigos);
 		AmigosTabActivity.registroMisAmigosService = false;
-		
+		Log.i(TAG, "***** SACO onPause");
+		Util.dismissProgressDialog();
 	}
 	 
 	
