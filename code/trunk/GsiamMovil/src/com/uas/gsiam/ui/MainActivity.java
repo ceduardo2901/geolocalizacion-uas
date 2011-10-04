@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -18,7 +19,7 @@ import com.uas.gsiam.utils.SessionStore;
 
 public class MainActivity extends GDActivity {
 
-	private Button sitiosButton;
+	private ImageButton sitiosButton;
 	private Button perfilButton;
 	private Button amigosButton;
 
@@ -33,7 +34,7 @@ public class MainActivity extends GDActivity {
 
 		nombreTxt = (TextView) findViewById(R.id.textNombre);
 
-		sitiosButton = (Button) findViewById(R.id.sitios_button);
+		sitiosButton = (ImageButton) findViewById(R.id.sitios_button);
 		sitiosButton.setOnClickListener(botonListener);
 
 		perfilButton = (Button) findViewById(R.id.perfil_button);

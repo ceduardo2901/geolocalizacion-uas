@@ -1,8 +1,10 @@
 package com.uas.gsiam.utils;
 
+import greendroid.image.ImageLoader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.graphics.Point;
 import android.graphics.RectF;
 import android.location.Location;
@@ -68,6 +70,7 @@ public class PositionOverlay extends Overlay {
 //					* mRadius, point.x + 60, point.y + mRadius);
 //			canvas.drawRoundRect(backRect, 5, 5, backPaint);
 			canvas.drawText(text, point.x + 2 * mRadius, point.y, paint);
+			
 			canvas.drawPoint(point.x, point.y, paint);
 		} 
 

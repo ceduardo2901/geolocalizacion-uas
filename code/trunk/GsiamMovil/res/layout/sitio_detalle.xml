@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent" android:background="@color/fondo">
 	<TableLayout android:layout_width="match_parent"
 		android:id="@+id/tableLayout1" android:layout_height="wrap_content">
 		<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 			<TextView android:layout_width="wrap_content" android:id="@+id/txtSitioNombreId"
 				android:textAppearance="?android:attr/textAppearanceLarge"
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content" android:textColor="@color/fuente" />
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 			<TextView android:id="@+id/txtSitioDireccionId"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="@color/fuente" />
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 			<TextView android:id="@+id/txtSitioPuntajeId"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="@color/fuente" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 
 			<TextView android:id="@+id/txtSitioTelefonoId"
-				android:layout_width="wrap_content" android:layout_height="wrap_content" />
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="@color/fuente" />
 		</TableRow>
 
 		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
@@ -40,22 +43,27 @@
 			android:layout_height="wrap_content">
 			<Button android:text="@string/publicar" android:id="@+id/btnPublicarId"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:onClick="publicar"/>
-			
+				android:onClick="publicar" />
+
 		</TableRow>
 
 	</TableLayout>
 
-	<TextView android:text="@string/comentarios" android:layout_width="wrap_content"
-		android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceMedium"
-		android:layout_height="wrap_content" />
+	<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:src="@android:drawable/divider_horizontal_dark"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:scaleType="fitXY" android:paddingLeft="5dp"
+		android:paddingRight="5dp" android:paddingBottom="5dp"
+		android:paddingTop="5dp" />
+
+	<TextView android:text="@string/comentarios"
+		android:layout_width="wrap_content" android:id="@+id/textView1"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_height="wrap_content" android:textColor="@color/fuente" />
 
 	<ListView android:layout_width="match_parent" android:id="@+id/listComentariosId"
 		android:layout_height="wrap_content" android:divider="@color/fuente"
 		android:scrollingCache="true" android:overScrollMode="ifContentScrolls" />
-
-
-
 
 
 </LinearLayout>

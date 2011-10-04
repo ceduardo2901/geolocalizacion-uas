@@ -11,7 +11,6 @@ import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -34,7 +33,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -100,6 +98,8 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				R.drawable.facebook_icon, "Categorias"));
 		quickActions.addQuickAction(new QuickAction(this,
 				R.drawable.avatardefault, "Ranking"));
+		quickActions.addQuickAction(new QuickAction(this,
+				R.drawable.avatardefault, "Sitios"));
 		quickActions
 				.setOnQuickActionClickListener(new OnQuickActionClickListener() {
 
@@ -115,6 +115,10 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 							mostrarRaiting();
 							break;
 
+						case 2:
+							mostrarSitios(getSitios());
+							break;
+
 						}
 
 					}
@@ -124,8 +128,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	private void mostrarRaiting() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] puntajes = getResources().getStringArray(
-				R.array.rating);
+		final String[] puntajes = getResources().getStringArray(R.array.rating);
 		builder.setTitle(R.string.rating);
 		builder.setItems(puntajes, new DialogInterface.OnClickListener() {
 			@Override
@@ -168,11 +171,11 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	private ArrayList<SitioDTO> filtrarPorRating(Integer rating) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
 		if (!sitios.isEmpty()) {
-			if(rating == 1){
+			if (rating == 1) {
 				rating = 0;
 			}
 			for (SitioDTO s : sitios) {
-				
+
 				if (getPromedioPuntaje(s).intValue() == rating) {
 					sitiosFiltro.add(s);
 				}
@@ -188,7 +191,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				result = result + p.getPuntaje();
 			}
 			result = result / s.getPublicaciones().size();
-			
+
 		}
 
 		return result.intValue();
@@ -331,7 +334,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			agregarSitioIntent.putExtra("ubicacion", loc);
 			startActivity(agregarSitioIntent);
 			break;
-		
+
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -346,7 +349,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
-			
+
 			Bundle b = intent.getExtras();
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
 					.getSerializable("sitios");
@@ -375,7 +378,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		}
 	};
 
-	public void mostrarSitios(final ArrayList<SitioDTO> sitios) {
+	public void mostrarSitios(final List<SitioDTO> sitios) {
 
 		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
@@ -426,7 +429,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	private void actualizarSitios(Location loc) {
 		if (loc != null) {
-			
+
 			Bundle bundle = new Bundle();
 			SitioDTO sitio = new SitioDTO();
 			sitio.setLat(loc.getLatitude());
