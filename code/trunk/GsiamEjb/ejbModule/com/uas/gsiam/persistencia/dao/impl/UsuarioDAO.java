@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.uas.gsiam.negocio.dto.SolicitudContacto;
+import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.IUsuarioDAO;
@@ -265,7 +265,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 
-	public void crearContacto(SolicitudContacto solicitud) throws SQLException{
+	public void crearContacto(SolicitudContactoDTO solicitud) throws SQLException{
 		
 		System.out.println("LLEGUE AL DAO LALALALALALALA");
 		
@@ -295,7 +295,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 
-	public void aprobarSolicitudContacto(SolicitudContacto solicitud) throws SQLException{
+	public void aprobarSolicitudContacto(SolicitudContactoDTO solicitud) throws SQLException{
 		
 		PreparedStatement ps;
 
@@ -318,7 +318,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	
 	// TODO : Ver como resolver cuando uno se elimina una amistad ya estando aprobada.... en caso que lo implementemos
-	public void eliminarSolicitudContacto(SolicitudContacto solicitud) throws SQLException{
+	public void eliminarSolicitudContacto(SolicitudContactoDTO solicitud) throws SQLException{
 		
 		PreparedStatement ps;
 			

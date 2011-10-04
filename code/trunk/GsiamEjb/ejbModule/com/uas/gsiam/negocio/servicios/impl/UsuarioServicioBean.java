@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 
-import com.uas.gsiam.negocio.dto.SolicitudContacto;
+import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -157,7 +157,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	
 	
 	
-	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion{	
+	public void crearSolicitudContacto (SolicitudContactoDTO solicitud) throws UsuarioExcepcion{	
 		
 		//TODO :  deberia chequear que no exista la solicitud del otro usuario
 			
@@ -189,7 +189,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public void responderSolicitudContacto (SolicitudContacto solicitud, boolean respuesta) throws UsuarioExcepcion {
+	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, boolean respuesta) throws UsuarioExcepcion {
 		
 		try {
 			
@@ -275,6 +275,13 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		
 		try {
 		
+			ArrayList<UsuarioDTO> lista = AbstractFactory.getInstance().getUsuarioDAO().getUsuarios(nombre);
+			
+			
+			
+			
+			
+			
 		return AbstractFactory.getInstance().getUsuarioDAO().getUsuarios(nombre);
 		
 		} catch (IOException e) {
