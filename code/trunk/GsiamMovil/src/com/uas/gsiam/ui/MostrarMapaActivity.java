@@ -1,20 +1,19 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDMapActivity;
+
 import java.util.List;
 
-import android.content.Intent;
-import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.uas.gsiam.utils.PositionOverlay;
 
-public class MostrarMapaActivity extends MapActivity{
+public class MostrarMapaActivity extends GDMapActivity{
 
 	
 	private MapView mapa;
@@ -27,9 +26,15 @@ public class MostrarMapaActivity extends MapActivity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mostrar_mapa);
+		setActionBarContentView(R.layout.mostrar_mapa);
 		mapa = (MapView) findViewById(R.id.mapaId);
+		inicializarBar();
 		
+	}
+	
+	private void inicializarBar() {
+		
+		setTitle(R.string.app_name);
 	}
 	
 	protected void onResume(){
