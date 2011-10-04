@@ -11,6 +11,7 @@ import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -19,6 +20,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -29,9 +32,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.uas.gsiam.adapter.SitiosAdapter;
@@ -39,6 +44,7 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
+import com.uas.gsiam.ui.R.drawable;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -65,12 +71,13 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		setActionBarContentView(R.layout.lista_sitios);
 
 		lw = (ListView) findViewById(R.id.listaSitios);
-
+		
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			buildAlertMessageNoGps();
 		} else {
@@ -81,6 +88,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		inicializarActionBar();
 		initQuickActionBar();
 		actualizarSitios(loc);
+		
 
 	}
 
@@ -149,7 +157,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				// setSitios();
+				
 				mostrarSitios(filtrarPorCategoria(i + 1));
 			}
 		});
@@ -254,7 +262,13 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			loc = getLastBestLocation(Constantes.MAX_DISTANCE,
 					System.currentTimeMillis() - Constantes.MAX_TIME);
 			actualizarSitios(loc);
-
+			ActionBarItem itemActualizar = getActionBar().getItem(ACTUALIZAR);
+			ImageButton itemButton = (ImageButton) itemActualizar.getItemView();
+			Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.gd_action_bar_refresh);
+			
+			itemButton.setAnimation(AnimationUtils.loadAnimation(this, R.drawable.gd_action_bar_refresh));
+			
+			
 			break;
 		case FILTRAR:
 			quickActions.show(item.getItemView());
@@ -275,7 +289,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		intentBuscarSitio.putExtra("sitio", sitio);
 
 		startService(intentBuscarSitio);
-
+		
 		Util.showToast(this, Constantes.MSG_ESPERA_GENERICO);
 
 	}
@@ -289,12 +303,6 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		super.onResume();
 		registerReceiver(sitiosReceiver, sitioAccion);
 		registerReceiver(eliminarSitioReceiver, intentEliminarSitio);
-		// Obtengo la ultima posicion conocida
-
-		// if (!Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-		//
-		//
-		// }
 
 		startListening();
 
@@ -442,7 +450,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			intent.putExtra("sitio", sitio);
 			// intent.putExtras(bundle);
 			startService(intent);
-			Util.showToast(this, Constantes.MSG_ESPERA_BUSCANDO);
+			
 		}
 	}
 
