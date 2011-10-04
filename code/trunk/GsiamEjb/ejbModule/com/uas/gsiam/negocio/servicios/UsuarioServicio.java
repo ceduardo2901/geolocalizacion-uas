@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Remote;
 
-import com.uas.gsiam.negocio.dto.SolicitudContacto;
+import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -22,9 +22,9 @@ public interface UsuarioServicio {
 		
 	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
 		
-	public void crearSolicitudContacto (SolicitudContacto solicitud) throws UsuarioExcepcion;
+	public void crearSolicitudContacto (SolicitudContactoDTO solicitud) throws UsuarioExcepcion;
 	
-	public void responderSolicitudContacto (SolicitudContacto solicitud, boolean respuesta) throws UsuarioExcepcion;
+	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, boolean respuesta) throws UsuarioExcepcion;
 	
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion;
 	

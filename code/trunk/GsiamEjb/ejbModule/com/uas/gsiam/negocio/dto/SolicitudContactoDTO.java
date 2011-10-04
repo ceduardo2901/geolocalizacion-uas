@@ -1,10 +1,10 @@
 package com.uas.gsiam.negocio.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class SolicitudContacto {
+public class SolicitudContactoDTO implements Serializable{
 
-	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	private int idUsuarioSolicitante;
 	private int idUsuarioAprobador;
