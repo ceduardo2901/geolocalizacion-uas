@@ -89,7 +89,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 	}
 	
 	
-	private Float obtenerPromedioPuntaje(SitioDTO sitio){
+	private Integer obtenerPromedioPuntaje(SitioDTO sitio){
 		Float promedio = new Float(0);
 		
 		if(!sitio.getPublicaciones().isEmpty()){
@@ -97,8 +97,8 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 				promedio = promedio + pub.getPuntaje();
 			}
 		}
-		
-		return promedio/sitio.getPublicaciones().size();
+		promedio = promedio / sitio.getPublicaciones().size();
+		return promedio.intValue();
 	}
 	
 	static class ViewHolder {

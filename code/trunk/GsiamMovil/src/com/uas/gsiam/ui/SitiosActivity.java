@@ -126,12 +126,12 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String[] puntajes = getResources().getStringArray(
 				R.array.rating);
-		
+		builder.setTitle(R.string.rating);
 		builder.setItems(puntajes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 				// setSitios();
-				mostrarSitios(filtrarPorCategoria(i + 1));
+				mostrarSitios(filtrarPorRating(i + 1));
 			}
 		});
 		builder.show();
@@ -168,9 +168,12 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	private ArrayList<SitioDTO> filtrarPorRating(Integer rating) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
 		if (!sitios.isEmpty()) {
+			if(rating == 1){
+				rating = 0;
+			}
 			for (SitioDTO s : sitios) {
-
-				if (getPromedioPuntaje(s).equals(rating)) {
+				
+				if (getPromedioPuntaje(s).intValue() == rating) {
 					sitiosFiltro.add(s);
 				}
 			}
@@ -178,17 +181,17 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		return sitiosFiltro;
 	}
 
-	private Float getPromedioPuntaje(SitioDTO s) {
+	private Integer getPromedioPuntaje(SitioDTO s) {
 		Float result = new Float(0);
 		if (!s.getPublicaciones().isEmpty()) {
 			for (PublicacionDTO p : s.getPublicaciones()) {
 				result = result + p.getPuntaje();
 			}
-
-			return result / s.getPublicaciones().size();
+			result = result / s.getPublicaciones().size();
+			
 		}
 
-		return result;
+		return result.intValue();
 	}
 
 	private void launchGPSOptions() {
@@ -328,10 +331,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			agregarSitioIntent.putExtra("ubicacion", loc);
 			startActivity(agregarSitioIntent);
 			break;
-		case R.id.buscarSitioId:
-			// String query = getIntent().getStringExtra(SearchManager.QUERY);
-			startSearch(null, false, null, false);
-			break;
+		
 		default:
 			return super.onOptionsItemSelected(item);
 
@@ -346,7 +346,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
-			Util.dismissProgressDialog();
+			
 			Bundle b = intent.getExtras();
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
 					.getSerializable("sitios");
@@ -355,7 +355,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 				setSitios(sitios);
 				mostrarSitios(sitios);
 			}
-
+			Util.dismissProgressDialog();
 		}
 	};
 
@@ -426,6 +426,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	private void actualizarSitios(Location loc) {
 		if (loc != null) {
+			
 			Bundle bundle = new Bundle();
 			SitioDTO sitio = new SitioDTO();
 			sitio.setLat(loc.getLatitude());
@@ -438,7 +439,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			intent.putExtra("sitio", sitio);
 			// intent.putExtras(bundle);
 			startService(intent);
-
+			Util.showToast(this, Constantes.MSG_ESPERA_BUSCANDO);
 		}
 	}
 
