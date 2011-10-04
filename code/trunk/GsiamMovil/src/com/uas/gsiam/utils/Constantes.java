@@ -58,7 +58,7 @@ public class Constantes {
 	public static final String GET_USUARIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/usuarios/{nombre}";
 	public static final String GET_USUARIOS_FILTRO_ACTION = "com.gsiam.places.GET_USUARIOS_FILTRO_ACTION";
 	
-	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud/{ids}/{ida}";
+	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud/{idSolicitante}/{idAprobador}";
 	public static final String CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
 	
@@ -66,6 +66,7 @@ public class Constantes {
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
 	public static final String MSG_ESPERA_INICIANDO_SESION = "Iniciando sesion, por favor espere...";
 	public static final String MSG_ESPERA_BUSCANDO = "Buscando, por favor espere...";
+	public static final String MSG_ESPERA_ENVIANDO_SOLICITUD = "Enviando solicitud, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
