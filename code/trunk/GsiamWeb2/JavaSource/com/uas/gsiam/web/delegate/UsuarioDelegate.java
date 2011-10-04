@@ -2,7 +2,7 @@ package com.uas.gsiam.web.delegate;
 
 import java.util.List;
 
-import com.uas.gsiam.negocio.dto.SolicitudContacto;
+import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -66,7 +66,7 @@ public class UsuarioDelegate {
     }
     
     
-    public void crearSolicitudContacto(SolicitudContacto solicitud) throws UsuarioExcepcion{
+    public void crearSolicitudContacto(SolicitudContactoDTO solicitud) throws UsuarioExcepcion{
     	
     	servicioUsuario.crearSolicitudContacto(solicitud);
     }
