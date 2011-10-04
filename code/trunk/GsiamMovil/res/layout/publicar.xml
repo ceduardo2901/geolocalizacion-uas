@@ -10,7 +10,7 @@
 
 	<RatingBar android:id="@+id/puntajeId" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" style="?android:attr/ratingBarStyle"
-		android:numStars="5" />
+		android:numStars="5" android:stepSize="1" android:progress="1"/>
 
 	<TableLayout android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:id="@+id/tableLayout1">
