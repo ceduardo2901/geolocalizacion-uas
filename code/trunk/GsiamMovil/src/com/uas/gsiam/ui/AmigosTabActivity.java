@@ -42,6 +42,7 @@ public class AmigosTabActivity extends TabActivity {
         mTabHost.setCurrentTab(currentTab);
         
         if (mTabHost.getCurrentTabTag().equalsIgnoreCase(TAG_MIS_AMIGOS)){
+        	
 			iniciarServicioMisAmigos();
 		}
         
@@ -50,6 +51,7 @@ public class AmigosTabActivity extends TabActivity {
         	public void onTabChanged(String tabId) {
         		
         		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
+        			
         			iniciarServicioMisAmigos();
         		}
         		
@@ -59,11 +61,12 @@ public class AmigosTabActivity extends TabActivity {
     }
     
     public void iniciarServicioMisAmigos(){
-    	Log.i(TAG, "elegi la uno!!! llamo al serv");
+    	Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
+    	Log.i(TAG, "**** elegi la uno!!! llamo al serv");
 		Intent intent = new Intent(mTabHost.getContext() ,GetAmigosServicio.class);
 		startService(intent);
 		  
-		Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
+		
     }
     
     @Override
