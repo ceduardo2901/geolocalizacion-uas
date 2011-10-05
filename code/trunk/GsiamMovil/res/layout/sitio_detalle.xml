@@ -45,6 +45,10 @@
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:onClick="publicar" />
 
+			<Button android:text="@string/comoIr" android:id="@+id/btnComoIrId"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:onClick="comoIr" />
+
 		</TableRow>
 
 	</TableLayout>
