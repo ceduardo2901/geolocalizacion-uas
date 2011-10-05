@@ -3,10 +3,13 @@ package com.uas.gsiam.ui;
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
+import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.QuickAction;
 import greendroid.widget.QuickActionBar;
 import greendroid.widget.QuickActionWidget;
 import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
+import greendroid.widget.item.ProgressItem;
+import greendroid.widget.itemview.ProgressItemView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,8 +40,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -52,8 +58,8 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		OnItemLongClickListener {
 
 	private final int BUSCAR = 1;
-	private final int ACTUALIZAR = 0;
-	private final int FILTRAR = 2;
+	private final int ACTUALIZAR = 2;
+	private final int FILTRAR = 0;
 	protected static final String TAG = "SitioActivity";
 	protected LocationManager locationManager;
 	protected LocationListener locationListener;
@@ -71,7 +77,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		setActionBarContentView(R.layout.lista_sitios);
 
 		lw = (ListView) findViewById(R.id.listaSitios);
-		
+
 		locationManager = (LocationManager) this
 				.getSystemService(Context.LOCATION_SERVICE);
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
@@ -88,7 +94,6 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		inicializarActionBar();
 		initQuickActionBar();
 		actualizarSitios(loc);
-		
 
 	}
 
@@ -157,7 +162,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				
+
 				mostrarSitios(filtrarPorCategoria(i + 1));
 			}
 		});
@@ -262,12 +267,6 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			loc = getLastBestLocation(Constantes.MAX_DISTANCE,
 					System.currentTimeMillis() - Constantes.MAX_TIME);
 			actualizarSitios(loc);
-			ActionBarItem itemActualizar = getActionBar().getItem(ACTUALIZAR);
-			ImageButton itemButton = (ImageButton) itemActualizar.getItemView();
-			Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.gd_action_bar_refresh);
-			
-			itemButton.setAnimation(AnimationUtils.loadAnimation(this, R.drawable.gd_action_bar_refresh));
-			
 			
 			break;
 		case FILTRAR:
@@ -289,7 +288,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		intentBuscarSitio.putExtra("sitio", sitio);
 
 		startService(intentBuscarSitio);
-		
+
 		Util.showToast(this, Constantes.MSG_ESPERA_GENERICO);
 
 	}
@@ -361,12 +360,16 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			Bundle b = intent.getExtras();
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
 					.getSerializable("sitios");
-
+			
 			if (sitios != null) {
 				setSitios(sitios);
 				mostrarSitios(sitios);
 			}
 			Util.dismissProgressDialog();
+			
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(ACTUALIZAR);
+			loaderActionBarItem.setLoading(false);
+			
 		}
 	};
 
@@ -450,7 +453,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			intent.putExtra("sitio", sitio);
 			// intent.putExtras(bundle);
 			startService(intent);
-			
+
 		}
 	}
 
