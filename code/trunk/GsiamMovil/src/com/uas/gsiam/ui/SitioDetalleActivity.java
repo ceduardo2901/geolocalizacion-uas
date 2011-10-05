@@ -16,6 +16,7 @@ import com.uas.gsiam.utils.Util;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -52,14 +53,14 @@ public class SitioDetalleActivity extends GDActivity {
 		addActionBarItem(Type.Locate, MAPA);
 		setTitle(R.string.app_name);
 	}
-	
+
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
 		case MAPA:
 			mostarMapa();
 			break;
-		
+
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
@@ -90,6 +91,13 @@ public class SitioDetalleActivity extends GDActivity {
 	public void onPause() {
 		super.onPause();
 
+	}
+
+	public void comoIr(View v) {
+		String uri = "http://maps.google.com/maps?saddr="+loc.getLatitude()+","+loc.getLongitude()+"&daddr="+sitio.getLat()+","+sitio.getLon();
+		Intent navigation = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+
+		startActivity(navigation);
 	}
 
 	public void mostarMapa() {
