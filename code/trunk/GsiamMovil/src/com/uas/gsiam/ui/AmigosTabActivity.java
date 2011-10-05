@@ -1,25 +1,23 @@
 package com.uas.gsiam.ui;
 
 
-import com.uas.gsiam.servicios.GetAmigosServicio;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.Util;
-
-import android.app.TabActivity;
+import greendroid.app.GDTabActivity;
+import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
-import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
 
-public class AmigosTabActivity extends TabActivity {
+import com.uas.gsiam.servicios.GetAmigosServicio;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
-    private TabHost mTabHost;
+public class AmigosTabActivity extends GDTabActivity {
+
+
     protected static String TAG = "AmigosTabActivity";
     protected static boolean registroMisAmigosService = false;
     private static final String TAG_MIS_AMIGOS = "Amigos";
@@ -27,14 +25,24 @@ public class AmigosTabActivity extends TabActivity {
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
     private static final String TAG_SOLICITUDES = "Solicitudes";
     private static final String PREF_STICKY_TAB = "stickyTab";
+    
+    private static TabHost mTabHost;
+    
+    private final int BUSCAR = 1;
+	private final int ACTUALIZAR = 0;
+	private final int FILTRAR = 2;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.amigos);
+        
+         
         mTabHost = getTabHost();       
       
+        inicializarActionBar();
+        
         añadirTab1();
         añadirTab2();
         añadirTab3();
@@ -46,14 +54,14 @@ public class AmigosTabActivity extends TabActivity {
         mTabHost.setCurrentTab(currentTab);
         
         if (mTabHost.getCurrentTabTag().equalsIgnoreCase(TAG_MIS_AMIGOS)){
-        	
+        	Log.i(TAG, "**** click");
 			iniciarServicioMisAmigos();
 		}
         
         mTabHost.setOnTabChangedListener(new OnTabChangeListener(){
         	@Override
         	public void onTabChanged(String tabId) {
-        		
+        		Log.i(TAG, "**** click "+tabId);
         		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
         			
         			iniciarServicioMisAmigos();
@@ -94,19 +102,8 @@ public class AmigosTabActivity extends TabActivity {
     private void añadirTab1() {
     	
     	Intent intent = new Intent(this, MisAmigosActivity.class);
+    	addTab(TAG_MIS_AMIGOS, "Amigos", intent);
     	
-        TabSpec spec = mTabHost.newTabSpec(TAG_MIS_AMIGOS);
-   /*     TextView tab1 = null;
-        tab1 = new TextView(this);
-        tab1.setText("Mis Amigos");
-        tab1.setGravity(android.view.Gravity.CENTER);
-        tab1.setTextColor(R.color.fondo);
-        spec.setIndicator(tab1);
-        */
-        spec.setIndicator("Mis Amigos");
-        spec.setContent(intent);
-
-        mTabHost.addTab(spec);
   
     }
     
@@ -117,12 +114,7 @@ public class AmigosTabActivity extends TabActivity {
     private void añadirTab2() {
     	
     	Intent intent = new Intent(this, AgregarAmigosActivity.class);
-    	
-        TabSpec spec = mTabHost.newTabSpec(TAG_AGREGAR_AMIGOS);
-        spec.setIndicator("Agregar Amigos");
-        spec.setContent(intent);
-
-        mTabHost.addTab(spec);
+    	addTab(TAG_AGREGAR_AMIGOS, "Agregar", intent);
   
     }
     
@@ -133,12 +125,8 @@ public class AmigosTabActivity extends TabActivity {
     private void añadirTab3() {
     	
     	Intent intent = new Intent(this, InvitarAmigosActivity.class);
-    	
-        TabSpec spec = mTabHost.newTabSpec(TAG_INVITAR_AMIGOS);
-        spec.setIndicator("Invitar Amigos");
-        spec.setContent(intent);
-
-        mTabHost.addTab(spec);
+    	addTab(TAG_INVITAR_AMIGOS, "Invitar", intent);
+  
   
     }
    
@@ -149,14 +137,18 @@ public class AmigosTabActivity extends TabActivity {
     private void añadirTab4() {
     	
     	Intent intent = new Intent(this, InvitarAmigosActivity.class);
-    	
-        TabSpec spec = mTabHost.newTabSpec(TAG_SOLICITUDES);
-        spec.setIndicator("Solicitudes");
-        spec.setContent(intent);
-
-        mTabHost.addTab(spec);
-  
+    	addTab(TAG_SOLICITUDES, "Solicitudes", intent);
+          
     }
+	
+	private void inicializarActionBar() {
+		addActionBarItem(Type.List, FILTRAR);
+		addActionBarItem(Type.Search, BUSCAR);
+		addActionBarItem(Type.Refresh, ACTUALIZAR);
+
+		setTitle(R.string.app_name);
+	}
+
 	
     
 }

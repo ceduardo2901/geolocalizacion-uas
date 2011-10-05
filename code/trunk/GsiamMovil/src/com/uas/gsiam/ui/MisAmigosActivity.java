@@ -39,7 +39,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		  
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-		  AmigosTabActivity.registroMisAmigosService = true;
+		  AmigosTabActivity.registroMisAmigosService = true; 
 		  Log.i(TAG, "***** REGSITRO oncreate");
 		  
 	/*	  Intent intent = new Intent(this,GetAmigosServicio.class);
