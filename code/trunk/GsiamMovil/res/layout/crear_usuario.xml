@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@color/fondo" android:layout_height="fill_parent"
+	android:background="#AAC1E2" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal">
-
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:layout_gravity="center">
-
-		<EditText android:id="@+id/nombreTxt" android:inputType="textPersonName"
-			android:layout_height="wrap_content" android:layout_width="fill_parent"
-			android:hint="@string/Nombre">
-			<requestFocus />
+		
+		<TextView android:layout_width="fill_parent" android:text="@string/Nombre"
+			android:layout_height="wrap_content" android:id="@+id/textView1" android:layout_weight="1" 
+			android:textColor="@color/fuente"></TextView>
+			
+			
+		<EditText android:layout_height="wrap_content"
+			android:id="@+id/nombreTxt" android:inputType="textPersonName" android:layout_width="match_parent">
+			<requestFocus></requestFocus>
+			</EditText>
+			
+			
+		<TextView android:layout_width="fill_parent" android:text="@string/email"
+			android:layout_height="wrap_content" android:id="@+id/emailLbl" android:layout_weight="1" 
+			android:textColor="@color/fuente"></TextView>
+			
+			
+		
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/emailTxt"
+			android:inputType="textEmailAddress">
 		</EditText>
-
-		<EditText android:id="@+id/passTxt" android:layout_width="match_parent"
-			android:layout_height="wrap_content" android:inputType="textPassword"
-			android:hint="@string/pass" />
-
-		<EditText android:id="@+id/emailTxt" android:inputType="textEmailAddress"
-			android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:hint="@string/email" />
-
-
-
-		<LinearLayout android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:orientation="vertical"
-			android:id="@+id/linearLayout2">
-		</LinearLayout>
-
-		<Button android:id="@+id/crearUsuarioBtn" android:text="@string/BtnRegistrarse"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:onClick="crearUsuario" />
-
+		<TextView android:layout_width="fill_parent" android:text="@string/pass" android:textColor="@color/fuente"
+			android:layout_height="wrap_content" android:id="@+id/passLbl" android:layout_weight="1" ></TextView>
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/passTxt"
+			android:inputType="textPassword"></EditText>
+			
+		<Button android:id="@+id/crearUsuarioBtn" android:layout_height="wrap_content" 
+		    android:text="@string/BtnRegistrarse" android:onClick="crearUsuario"
+			android:gravity="center_vertical|center_horizontal|center" 
+			android:layout_gravity="right" android:layout_width="100dp"
+			android:layout_marginTop="10dp"></Button>
+			
+			
+			
 	</LinearLayout>
 </LinearLayout>
