@@ -10,7 +10,7 @@
 		<TextView android:layout_width="fill_parent" android:id="@+id/textView1" android:textColor="@color/fuente" android:layout_height="wrap_content" android:text="@string/avatar" android:layout_marginTop="10dp" android:layout_weight="1"></TextView>
 		<LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout3" android:layout_marginTop="10dp" android:layout_width="fill_parent" android:orientation="horizontal" android:layout_weight="1">
 			<ImageView android:layout_height="150px" android:layout_width="150px" android:id="@+id/avatar" android:layout_gravity="center"></ImageView>
-			<Button android:layout_width="wrap_content" android:layout_gravity="right|center_vertical" android:layout_height="wrap_content" android:text="Cambiar" android:onClick="cambiarAvatar" android:id="@+id/cambiarAvatarBtn"></Button>
+			<Button android:layout_width="wrap_content" android:layout_gravity="right|center_vertical" android:layout_height="wrap_content" android:text="Cambiar" android:onClick="cambiarAvatar" android:id="@+id/cambiarAvatarBtn" android:layout_marginLeft="40dp"></Button>
 		</LinearLayout>
 		<TextView android:id="@+id/textView1" android:layout_width="fill_parent"
 			android:text="@string/Nombre" android:textColor="@color/fuente" android:layout_weight="1"

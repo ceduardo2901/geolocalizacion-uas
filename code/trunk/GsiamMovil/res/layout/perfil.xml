@@ -22,9 +22,7 @@
 					  android:layout_width="wrap_content" 
 					  android:id="@+id/textView1"/>
 					  
-			<ImageView android:layout_width="80px"
-            		   android:layout_height="80px" 
-			           android:id="@+id/avatar"/>
+			<ImageView android:id="@+id/avatar" android:layout_height="150px" android:layout_width="150px"/>
 		 
 		</TableRow>	
 			
