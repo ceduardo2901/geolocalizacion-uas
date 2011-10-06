@@ -48,11 +48,12 @@ public class LoginServicio extends IntentService{
 			parms.put("pass", pass);
 			UsuarioDTO user = restTemp.getForObject(Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class,parms);
 			
-			ApplicationController app = ((ApplicationController)getApplicationContext());
-			app.setUserLogin(user);
-
-			bundle.putSerializable("usuario", user);
-			intentLogin.putExtra("usuario",bundle);
+			if(user.getEmail() != null){
+				ApplicationController app = ((ApplicationController)getApplicationContext());
+				app.setUserLogin(user);
+			}
+				bundle.putSerializable("usuario", user);
+				intentLogin.putExtra("usuario",bundle);
 			
 			sendBroadcast(intentLogin);
 			

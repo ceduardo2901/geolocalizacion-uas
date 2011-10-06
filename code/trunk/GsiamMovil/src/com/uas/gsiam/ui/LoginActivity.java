@@ -109,9 +109,11 @@ public class LoginActivity extends Activity {
 			if (error != null) {
 				Util.showToast(context, error);
 			} else {
-				if (user != null) {
+				if (user.getEmail() != null) {
 					//SessionStore.save(email, getApplicationContext());
 					actividadPrincipal();
+				}else{
+					Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
 				}
 			}
 
