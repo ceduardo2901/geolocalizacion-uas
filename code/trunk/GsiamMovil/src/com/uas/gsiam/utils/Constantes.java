@@ -74,6 +74,7 @@ public class Constantes {
 	public static final String MSG_GPS_DISABLE = "Por favor habilite su gps para continuar";
 	public static final String MSG_ACEPTAR = "Aceptar";
 	public static final String MSG_CANCELAR = "Cancelar";
+	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
 	
 	
 	
