@@ -66,6 +66,7 @@ public class Constantes {
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
 	public static final String MSG_ESPERA_INICIANDO_SESION = "Iniciando sesion, por favor espere...";
 	public static final String MSG_ESPERA_BUSCANDO = "Buscando, por favor espere...";
+	public static final String MSG_ESPERA_ACTUALIZANDO = "Actualizando Datos, por favor espere...";
 	public static final String MSG_ESPERA_ENVIANDO_SOLICITUD = "Enviando solicitud, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
