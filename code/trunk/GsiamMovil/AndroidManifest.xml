@@ -45,6 +45,7 @@
 		<activity android:name="MisAmigosActivity" />
 		<activity android:name="AgregarAmigosActivity" />
 		<activity android:name="InvitarAmigosActivity" />
+		<activity android:name="SolicitudesActivity" />
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
