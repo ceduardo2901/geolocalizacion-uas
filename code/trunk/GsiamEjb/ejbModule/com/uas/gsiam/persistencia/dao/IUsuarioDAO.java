@@ -31,7 +31,9 @@ public interface IUsuarioDAO {
 	
 	public void eliminarSolicitudContacto(SolicitudContactoDTO solicitud) throws SQLException;
 	
-	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException;
+	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes(UsuarioDTO usuario) throws SQLException;
+	
+	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes(UsuarioDTO usuario) throws SQLException;
 	
 	public ArrayList<UsuarioDTO> getContactos(int idUsuario) throws SQLException;
 	

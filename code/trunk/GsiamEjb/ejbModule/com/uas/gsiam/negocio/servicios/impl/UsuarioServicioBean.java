@@ -225,7 +225,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 		try {
 			
-			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesContactosPendientes(usuario);
+			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesRecibidasPendientes(usuario);
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);

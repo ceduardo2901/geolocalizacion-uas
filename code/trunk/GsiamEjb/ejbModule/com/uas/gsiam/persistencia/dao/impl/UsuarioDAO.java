@@ -336,7 +336,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	
 	
-	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes(UsuarioDTO usuario) throws SQLException{
+	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes(UsuarioDTO usuario) throws SQLException{
 		
 		PreparedStatement ps;
 		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
@@ -385,6 +385,57 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 
+	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes(UsuarioDTO usuario) throws SQLException{
+		
+		PreparedStatement ps;
+		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
+				
+		try{
+			
+			String sqlSolicitudesUsuarios = "SELECT u.* FROM t_contacto c, t_usuario u " +
+											"WHERE c.con_id_usuario_sol = ? AND " +
+											"u.usu_id = c.con_id_usuario_apr AND " +
+											"c.con_fecha_aprobacion is null";
+
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlSolicitudesUsuarios);
+	
+			ps.setInt(1, usuario.getId());
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				UsuarioDTO usuarioRetorno = new UsuarioDTO();
+				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
+				usuarioRetorno.setId(rs.getInt("usu_id"));
+				usuarioRetorno.setEmail(rs.getString("usu_mail"));
+				usuarioRetorno.setPassword(rs.getString("usu_password"));
+				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
+				
+				listaUsuarios.add(usuarioRetorno);
+				
+				
+			}
+				
+			rs.close();
+			ps.close();
+				
+			
+			return listaUsuarios;	
+		
+		
+		}finally{
+			
+			if (ConexionJDBCUtil.getConexion() != null)
+				ConexionJDBCUtil.getConexion().close();
+
+		}
+			
+		
+	}
+
+	
+	
 
 	public ArrayList<UsuarioDTO> getContactos(int idUsuario) throws SQLException {
 	
@@ -438,8 +489,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		
 	}
-	
-	
+
 	
 	
 	
