@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<style name="Theme.Mytheme" parent="@style/Theme.GreenDroid.NoTitleBar">
-	
+       
+        <item name="gdActionBarBackground">@color/actionbar_background</item>
 	</style>    
 </resources>
