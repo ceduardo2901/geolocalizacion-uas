@@ -67,7 +67,7 @@ public class EditarUsuarioActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.editarperfil);
+		setContentView(R.layout.editar_perfil);
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);

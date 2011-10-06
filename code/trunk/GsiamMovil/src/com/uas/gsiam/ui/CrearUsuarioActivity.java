@@ -1,8 +1,11 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
+
 import java.io.IOException;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +25,7 @@ import com.uas.gsiam.servicios.CrearUsuarioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class CrearUsuarioActivity extends Activity {
+public class CrearUsuarioActivity extends GDActivity {
 
 	protected String email;
 	protected String pass;
@@ -44,7 +47,10 @@ public class CrearUsuarioActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.crear_usuario);
+		
+		setActionBarContentView(R.layout.crear_usuario);
+		
+		inicializarActionBar();
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
@@ -135,6 +141,16 @@ public class CrearUsuarioActivity extends Activity {
 			
 	    }
 	  };
-  
+	  
+	  
+	  private void inicializarActionBar() {
+			addActionBarItem(Type.Trashcan, 0);
+	/*		addActionBarItem(Type.Search, BUSCAR);
+			addActionBarItem(Type.Refresh, ACTUALIZAR);
+*/
+			setTitle("GSIAM - Registrarse");
+		}
+	  
+	  
 
 }
