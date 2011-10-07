@@ -15,7 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.uas.gsiam.adapter.UsuarioAdapter;
+import com.uas.gsiam.adapter.AmigoAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
@@ -91,7 +91,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 	
 	  public void mostrarAmigos() {
 		  
-			UsuarioAdapter adaptador = new UsuarioAdapter(this, R.layout.usuario_item, misAmigos);
+			AmigoAdapter adaptador = new AmigoAdapter(this, R.layout.usuario_item, misAmigos);
 			lv.setAdapter(adaptador);
 	
 			

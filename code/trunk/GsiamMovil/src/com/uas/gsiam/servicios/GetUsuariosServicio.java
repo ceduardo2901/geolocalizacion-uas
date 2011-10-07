@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -39,10 +40,12 @@ public class GetUsuariosServicio extends IntentService{
 	protected void onHandleIntent(Intent intent) {
 		
 		Bundle bundle = intent.getExtras();
-		
 		String nombre = bundle.getString("nombre");
+		ApplicationController app = ((ApplicationController) getApplicationContext());
+		UsuarioDTO user = app.getUserLogin();
 		
 		Map<String, String> parms = new HashMap<String, String>();
+		parms.put("id", String.valueOf(user.getId()));
 		parms.put("nombre", nombre);
 		
 		try{

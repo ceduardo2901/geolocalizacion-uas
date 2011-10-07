@@ -14,12 +14,12 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.R;
 import com.uas.gsiam.utils.Util;
 
-public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
+public class AmigoAdapter extends ArrayAdapter<UsuarioDTO> {
 
 	Activity context;
 	private List<UsuarioDTO> usuarios;
 
-	public UsuarioAdapter(Activity context, int resource,
+	public AmigoAdapter(Activity context, int resource,
 			List<UsuarioDTO> objects) {
 		super(context, resource, objects);
 		this.context = context;
@@ -34,13 +34,12 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 
 		if (item == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			item = inflater.inflate(R.layout.usuario_item, null);
+			item = inflater.inflate(R.layout.amigo_item, null);
 
 			holder = new ViewHolder();
 			holder.icono = (ImageView) item.findViewById(R.id.LblIcono);
 			holder.nombre = (TextView) item.findViewById(R.id.LblNombre);
 			holder.email = (TextView) item.findViewById(R.id.LblMail);
-			holder.solicitudFlag = (ImageView) item.findViewById(R.id.LblSolicitud);
 			item.setTag(holder);
 
 		} else {
@@ -53,11 +52,6 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 		
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
-		
-		if (usuario.isSolicitudEnviada())
-			holder.solicitudFlag.setVisibility(View.VISIBLE);
-		else
-			holder.solicitudFlag.setVisibility(View.INVISIBLE);
 		return item;
 	}
 	
@@ -66,7 +60,6 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 		ImageView icono;
 		TextView nombre;
 		TextView email;
-		ImageView solicitudFlag;
 	}
 
 }
