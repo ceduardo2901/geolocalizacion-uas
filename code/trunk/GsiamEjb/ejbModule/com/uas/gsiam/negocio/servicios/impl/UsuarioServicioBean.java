@@ -3,6 +3,7 @@ package com.uas.gsiam.negocio.servicios.impl;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.ejb.Stateless;
 
@@ -221,11 +222,11 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (UsuarioDTO usuario) throws UsuarioExcepcion{	
+	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (int id) throws UsuarioExcepcion{	
 			
 		try {
 			
-			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesRecibidasPendientes(usuario);
+			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesRecibidasPendientes(id);
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -246,7 +247,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public ArrayList<UsuarioDTO> getContactos (int idUsuario) throws UsuarioExcepcion{	
+	public ArrayList<UsuarioDTO> getAmigos (int idUsuario) throws UsuarioExcepcion{	
 		
 		try {
 			
@@ -271,18 +272,11 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 
 
-	public ArrayList<UsuarioDTO> getUsuarios(String nombre) throws UsuarioExcepcion {
+	public ArrayList<UsuarioDTO> getUsuarios(int id, String nombre) throws UsuarioExcepcion {
 		
 		try {
 		
-			ArrayList<UsuarioDTO> lista = AbstractFactory.getInstance().getUsuarioDAO().getUsuarios(nombre);
-			
-			
-			
-			
-			
-			
-		return AbstractFactory.getInstance().getUsuarioDAO().getUsuarios(nombre);
+			return AbstractFactory.getInstance().getUsuarioDAO().getUsuarios(id, nombre);
 		
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -300,6 +294,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_USUARIOS);
 		}
 	}
+
 	
     
 }

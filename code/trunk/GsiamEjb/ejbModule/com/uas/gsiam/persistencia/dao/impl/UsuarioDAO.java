@@ -131,26 +131,45 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	/**
-	 * Retorna todos los usuarios cuyo nombre contiene el nombre ingresado por parametro
+	 * Retorna todos los usuarios cuyo nombre contiene el nombre ingresado por parametro que no sean amigos del id ingresado.
 	 * @param id
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<UsuarioDTO> getUsuarios(String nombre) throws SQLException{
+	public ArrayList<UsuarioDTO> getUsuarios(int id, String nombre) throws SQLException{
 		
 		PreparedStatement ps;
 		ArrayList<UsuarioDTO> listaRetorno = new ArrayList<UsuarioDTO>();
 		
 		try{
 
-			String sqlGetUsuarios = "SELECT * FROM t_usuario u " +
-	        						"WHERE UPPER(u.usu_nombre) like ? " +
-	        						"ORDER BY u.usu_nombre";
-			
-			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlGetUsuarios);
+			String sqlUsuariosNoAmigos = "SELECT *  " +
+											"FROM (SELECT *  " + 
+											"FROM t_usuario u  " + 
+											"WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND " + 
+											"u.usu_id NOT IN (SELECT CASE " + 
+											"WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
+											"WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
+											"END " +
+											"FROM t_contacto c " + 
+											"WHERE (c.con_id_usuario_sol = ? OR c.con_id_usuario_apr = ?) AND " + 
+											"c.con_fecha_aprobacion is not null) " +
+											"ORDER BY u.usu_nombre) todos LEFT OUTER JOIN  (SELECT c.con_id_usuario_apr id " +
+											"FROM t_contacto c  " + 
+											"WHERE c.con_id_usuario_sol = ? AND  " + 
+											"c.con_fecha_aprobacion is null) soli ON (soli.id = todos.usu_id)";
 			
 
+			
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlUsuariosNoAmigos);
+			
 			ps.setString(1, "%" + nombre.toUpperCase() +"%");
+			ps.setInt(2, id);
+			ps.setInt(3, id);
+			ps.setInt(4, id);
+			ps.setInt(5, id);
+			ps.setInt(6, id);
+			ps.setInt(7, id);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
@@ -162,6 +181,13 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuario.setEmail(rs.getString("usu_mail"));
 				usuario.setPassword(rs.getString("usu_password"));
 				usuario.setAvatar(rs.getBytes("usu_avatar"));
+				int test = rs.getInt("id"); 
+				if (test != 0){
+					usuario.setSolicitudEnviada(true);
+				}else{
+					usuario.setSolicitudEnviada(false);
+				}
+				
 				
 				listaRetorno.add(usuario);
 			}
@@ -336,7 +362,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	
 	
-	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes(UsuarioDTO usuario) throws SQLException{
+	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes(int idUsuario) throws SQLException{
 		
 		PreparedStatement ps;
 		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
@@ -350,7 +376,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlSolicitudesUsuarios);
 	
-			ps.setInt(1, usuario.getId());
+			ps.setInt(1, idUsuario);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
@@ -385,7 +411,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 
-	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes(UsuarioDTO usuario) throws SQLException{
+	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes(int idUsuario) throws SQLException{
 		
 		PreparedStatement ps;
 		ArrayList<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
@@ -400,7 +426,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlSolicitudesUsuarios);
 	
-			ps.setInt(1, usuario.getId());
+			ps.setInt(1, idUsuario);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
