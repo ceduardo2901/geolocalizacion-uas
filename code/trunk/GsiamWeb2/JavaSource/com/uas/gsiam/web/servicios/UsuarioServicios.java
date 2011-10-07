@@ -113,15 +113,15 @@ public class UsuarioServicios {
 	
 	
 	@GET
-	@Path("/usuarios/{nombre}")
+	@Path("/usuarios/{id}/{nombre}")
 	@Produces("application/json")
-	public List<UsuarioDTO> getUsuarios(@PathParam ("nombre") String nombre){
+	public List<UsuarioDTO> getUsuarios(@PathParam ("id") String id, @PathParam ("nombre") String nombre){
 			
 		
 		List<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
 		
 			try {
-				listaUsuarios = servicio.getUsuarios(nombre);
+				listaUsuarios = servicio.getUsuarios(Integer.parseInt(id), nombre);
 			} catch (UsuarioExcepcion e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
