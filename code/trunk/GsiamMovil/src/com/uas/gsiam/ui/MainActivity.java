@@ -52,6 +52,7 @@ public class MainActivity extends GDActivity {
 
 	private void inicializarBar() {
 		
+		addActionBarItem(Type.Trashcan, 0);
 		setTitle(R.string.app_name);
 	}
 

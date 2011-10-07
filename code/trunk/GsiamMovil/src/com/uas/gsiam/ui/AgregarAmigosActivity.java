@@ -1,8 +1,5 @@
 package com.uas.gsiam.ui;
 
-import greendroid.widget.ActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
-
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -23,7 +20,6 @@ import android.widget.ListView;
 
 import com.uas.gsiam.adapter.UsuarioAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.servicios.CrearSitioServicio;
 import com.uas.gsiam.servicios.CrearSolicitudAmistadServicio;
 import com.uas.gsiam.servicios.GetUsuariosServicio;
 import com.uas.gsiam.utils.ApplicationController;
@@ -117,13 +113,23 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  protected BroadcastReceiver receiverEnviarSolicitud = new BroadcastReceiver() {
 			@Override
 		    public void onReceive(Context context, Intent intent) {
-		    		
-		    	
-				Util.dismissProgressDialog();	    	
+
+				Util.dismissProgressDialog();
+				Bundle bundle = intent.getExtras();
+				String respuesta = bundle.getString("respuesta");
 				
+				if (respuesta.equals(Constantes.RETURN_OK)){
+		    		
+					Util.showToast(context, Constantes.MSG_SOLICITUD_CREADA_OK);
+					
+				}
+				else{
+					Util.showToast(context, respuesta);
+				}	
 		    }
 		  };
 	
+		  
 	  public void mostrarUsuarios() {
 		  
 			UsuarioAdapter adaptador = new UsuarioAdapter(this, R.layout.usuario_item, usuarios);
@@ -135,39 +141,70 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  @Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 		  
-	
-			final UsuarioDTO usuarioSeleccionado = usuarios.get(position);
+		    final int pos = position;
+			final UsuarioDTO usuarioSeleccionado = usuarios.get(pos);
 			
 			Log.i(TAG, "Seleccione: "+ usuarioSeleccionado.getNombre());
 			
-			AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+			if (usuarioSeleccionado.isSolicitudEnviada()){
+				
+				AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+				
+				dialog.setTitle("Solicitud de Amistad"); 
+				dialog.setMessage("La solicitud ya ha sido enviada a "+ usuarioSeleccionado.getNombre());
+				dialog.setCancelable(false);
+				dialog.setIcon(android.R.drawable.ic_dialog_alert);  
+				dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				    	   
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   
+				        	   dialog.cancel();
+				           }
+				       });
+				
+				dialog.show();
+				
+			}
+			else{
+				
+				AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+				
+				dialog.setTitle("Solicitud de Amistad"); 
+				dialog.setMessage("Enviar solicitud de amitad a "+ usuarioSeleccionado.getNombre() + "?");
+				dialog.setCancelable(false);
+				dialog.setIcon(android.R.drawable.ic_dialog_info);  
+				dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				    	   
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   
+				        	   
+				        	   enviarSolicitud(usuarioSeleccionado.getId());
+				        	   
+				        	   usuarioSeleccionado.setSolicitudEnviada(true);
+				        	   
+				        	   usuarios.set(pos, usuarioSeleccionado);
+				        	   
+				        	   mostrarUsuarios();
+				        	   
+				        	   dialog.cancel();
+				           }
+				       });
+				dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				                dialog.cancel();
+				           }
+				       });
+				dialog.show();
+				
+				
+			}
 			
-			dialog.setTitle("Solicitud de Amistad"); 
-			dialog.setMessage("Enviar solicitud de amitad a "+ usuarioSeleccionado.getNombre() + "?");
-			dialog.setCancelable(false);
-			dialog.setIcon(android.R.drawable.ic_dialog_info);  
-			dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-			    	   
-			           public void onClick(DialogInterface dialog, int id) {
-			        	   
-			        	   
-			        	   agergarAmigo(usuarioSeleccionado.getId());
-			        	   
-			        	   dialog.cancel();
-			           }
-			       });
-			dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-			           public void onClick(DialogInterface dialog, int id) {
-			                dialog.cancel();
-			           }
-			       });
-			dialog.show();
-			
+				
 			
 		}
 	  
 	  
-	  public void agergarAmigo(int idUsuarioSeleccionado){
+	  public void enviarSolicitud(int idUsuarioSeleccionado){
 		  
 		  ApplicationController app = ((ApplicationController)getApplicationContext());
 

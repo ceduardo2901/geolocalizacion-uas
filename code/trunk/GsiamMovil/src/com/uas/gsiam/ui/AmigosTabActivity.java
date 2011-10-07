@@ -146,10 +146,9 @@ public class AmigosTabActivity extends GDTabActivity {
 	
 	private void inicializarActionBar() {
 	
-		addActionBarItem(Type.Search, BUSCAR);
+		addActionBarItem(Type.Refresh, ACTUALIZAR);
+		addActionBarItem(Type.Refresh, ACTUALIZAR);
 		
-		
-
 		setTitle("GSIAM - Amigos");
 	}
 	
