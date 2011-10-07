@@ -56,13 +56,13 @@ public class UsuarioDelegate {
     
     public List<UsuarioDTO> getAmigos(int idUsuario) throws UsuarioExcepcion{
     	
-    	return servicioUsuario.getContactos(idUsuario);
+    	return servicioUsuario.getAmigos(idUsuario);
     }
 	
     
-    public List<UsuarioDTO> getUsuarios(String nombre) throws UsuarioExcepcion{
+    public List<UsuarioDTO> getUsuarios(int id, String nombre) throws UsuarioExcepcion{
     	
-    	return servicioUsuario.getUsuarios(nombre);
+    	return servicioUsuario.getUsuarios(id, nombre);
     }
     
     
