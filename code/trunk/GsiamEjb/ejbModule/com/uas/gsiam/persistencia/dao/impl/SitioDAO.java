@@ -82,14 +82,16 @@ public class SitioDAO implements ISitioDAO {
 					sitioInteres.getLon());
 			PGgeometry geom = new PGgeometry(punto);
 
-			String sqlCrearSitio = "INSERT INTO t_sitio (sit_nombre,sit_punto,sit_id_categoria,sit_direccion) VALUES (?,?,?,?)";
+			String sqlCrearSitio = "INSERT INTO t_sitio (sit_nombre,sit_punto,sit_id_categoria,sit_direccion,sit_telefono,sit_web) VALUES (?,?,?,?,?,?)";
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
-			ps.setString(1, sitioInteres.getNombre().toUpperCase());
+			ps.setString(1, sitioInteres.getNombre());
 			ps.setObject(2, geom);
 			ps.setInt(3, sitioInteres.getCategoria().getIdCategoria());
 			ps.setString(4, sitioInteres.getDireccion());
+			ps.setString(5, sitioInteres.getTelefono());
+			ps.setString(6, sitioInteres.getWeb());
 
 			ps.execute();
 		} catch (SQLException e) {
@@ -262,10 +264,12 @@ public class SitioDAO implements ISitioDAO {
 				resultado.setIdSitio(rs.getInt(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
+				resultado.setTelefono(rs.getString(7));
+				resultado.setWeb(rs.getString(8));
 				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 						.getIdSitio()));
-				categoria.setIdCategoria(rs.getInt(7));
-				categoria.setDescripcion(rs.getString(8));
+				categoria.setIdCategoria(rs.getInt(9));
+				categoria.setDescripcion(rs.getString(10));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 			}

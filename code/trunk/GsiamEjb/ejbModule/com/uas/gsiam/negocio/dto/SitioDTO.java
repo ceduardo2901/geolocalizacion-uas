@@ -15,6 +15,7 @@ public class SitioDTO implements Serializable{
 	private Double lon;
 	private Double lat;
 	private String telefono;
+	private String web;
 	private CategoriaDTO categoria;
 	private ArrayList<PublicacionDTO> publicaciones;
 	
@@ -101,6 +102,16 @@ public class SitioDTO implements Serializable{
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+
+	public String getWeb() {
+		return web;
+	}
+
+
+	public void setWeb(String web) {
+		this.web = web;
 	}
 	
 
