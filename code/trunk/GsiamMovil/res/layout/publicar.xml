@@ -4,13 +4,13 @@
 	android:layout_height="match_parent" android:background="@color/fondo">
 	<EditText android:layout_width="match_parent"
 		android:layout_height="wrap_content" android:id="@+id/txtComentarioId"
-		android:inputType="textMultiLine" android:lines="4" >
+		android:inputType="textMultiLine" android:lines="4">
 		<requestFocus></requestFocus>
 	</EditText>
 
 	<RatingBar android:id="@+id/puntajeId" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" style="?android:attr/ratingBarStyle"
-		android:numStars="5" android:stepSize="1" android:progress="1"/>
+		android:numStars="5" android:stepSize="1" android:progress="1" />
 
 	<TableLayout android:layout_height="wrap_content"
 		android:layout_width="match_parent" android:id="@+id/tableLayout1">
@@ -18,22 +18,23 @@
 			android:layout_height="wrap_content">
 			<TextView android:layout_width="wrap_content" android:text="@string/compartirFacebook"
 				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
-				android:layout_height="wrap_content" android:textColor="@color/fuente"/>
+				android:layout_height="wrap_content" android:textColor="@color/fuente" />
 			<CheckBox android:layout_width="wrap_content" android:id="@+id/cheBoxFaceBook"
 				android:layout_height="wrap_content" android:text="" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
-			<TableLayout android:id="@+id/tableLayout2"
-				android:layout_width="wrap_content" android:layout_height="wrap_content">
-				<Button android:layout_height="wrap_content" android:onClick="publicar"
-					android:text="@string/publicar" android:layout_width="wrap_content"
-					android:id="@+id/btnPubId" android:ellipsize="start"/>
-				<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
-					android:layout_height="wrap_content"></TableRow>
-				<TableRow android:id="@+id/tableRow8" android:layout_width="wrap_content"
-					android:layout_height="wrap_content"></TableRow>
-			</TableLayout>
+
+
+			<Button android:layout_height="wrap_content" android:onClick="publicar"
+				android:text="@string/publicar" android:layout_width="wrap_content"
+				android:id="@+id/btnPubId" android:ellipsize="start" />
+			<Button android:layout_height="wrap_content" android:onClick="cargarFoto"
+				android:text="@string/foto" android:layout_width="wrap_content"
+				android:id="@+id/btnFotoId" android:ellipsize="start" />
+
+
+
 
 		</TableRow>
 
@@ -42,5 +43,12 @@
 
 		</TableRow>
 	</TableLayout>
-
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/linearLayout3" android:layout_marginTop="10dp"
+		android:layout_width="fill_parent" android:orientation="horizontal"
+		android:layout_weight="1" android:gravity="center_horizontal">
+		<ImageView android:layout_height="150px"
+			android:layout_width="150px" android:id="@+id/fotoPubId"
+			android:layout_gravity="center" />
+	</LinearLayout>
 </LinearLayout>

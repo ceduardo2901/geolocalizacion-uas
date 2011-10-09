@@ -1,8 +1,7 @@
 package com.uas.gsiam.ui;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem.Type;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +22,7 @@ import com.uas.gsiam.servicios.CrearSitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class CrearSitioActivity extends Activity{
+public class CrearSitioActivity extends GDActivity{
 
 	private static final String TAG = "CrearSitioActivity";
 	private EditText nombreSitioTxt;
@@ -41,8 +40,7 @@ public class CrearSitioActivity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.agregar_sitio);
-		
+		setActionBarContentView(R.layout.agregar_sitio);
 		nombreSitioTxt = (EditText) findViewById(R.id.txtNombreId);
 		direccionSitioTxt = (EditText) findViewById(R.id.txtDireccionId);
 		telefonoSitioTxt = (EditText) findViewById(R.id.txtTelefonoId);
@@ -52,7 +50,12 @@ public class CrearSitioActivity extends Activity{
 		crearSitioFiltro = new IntentFilter(Constantes.CREAR_SITIO_FILTRO_ACTION);
 		Resources res = getResources();
 		
+		inicializarBarra();
+	}
+	
+	private void inicializarBarra() {
 		
+		setTitle(R.string.app_name);
 	}
 	
 	protected void onResume(){
@@ -88,9 +91,9 @@ public class CrearSitioActivity extends Activity{
 	}
 	
 	
-/*	public void mostarCategoria(View v) {
+	public void mostarCategoria(View v) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	//	final String[] categorias = getResources().getStringArray(R.array.listNames);
+		final String[] categorias = getResources().getStringArray(R.array.listNames);
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
@@ -101,7 +104,7 @@ public class CrearSitioActivity extends Activity{
 		});
 		builder.show();
 	}
-	*/
+	
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
