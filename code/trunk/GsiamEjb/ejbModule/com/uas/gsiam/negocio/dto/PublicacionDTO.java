@@ -12,6 +12,7 @@ public class PublicacionDTO implements Serializable{
 	private Integer idSitio;
 	private Date fecha;
 	private Float puntaje;
+	private byte [] foto;
 	
 	public Float getPuntaje() {
 		return puntaje;
@@ -64,6 +65,14 @@ public class PublicacionDTO implements Serializable{
 
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 	
 	

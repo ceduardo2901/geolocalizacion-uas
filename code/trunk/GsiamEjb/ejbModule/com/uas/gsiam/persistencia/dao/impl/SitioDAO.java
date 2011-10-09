@@ -186,6 +186,7 @@ public class SitioDAO implements ISitioDAO {
 				publicacion = new PublicacionDTO();
 				publicacion.setComentario(rs.getString(2));
 				publicacion.setFecha(rs.getDate(1));
+				publicacion.setFoto(rs.getBytes(3));
 				publicacion.setIdPublicacion(rs.getInt(6));
 				publicacion.setIdSitio(idSitio);
 				publicacion.setIdUsuario(rs.getInt(4));

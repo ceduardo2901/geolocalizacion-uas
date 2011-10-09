@@ -18,17 +18,18 @@ public class PublicacionDAO implements IPublicacionDAO {
 
 		PreparedStatement ps;
 
-		String sqlCrearUsuario = "INSERT INTO t_publicacion (pub_fecha, pub_comentario, pub_id_usuario, pub_id_sitio, pub_puntaje) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sqlCrearUsuario = "INSERT INTO t_publicacion (pub_fecha, pub_comentario, pub_foto ,pub_id_usuario, pub_id_sitio, pub_puntaje) "
+				+ "VALUES (?, ?, ? ,?, ?, ?)";
 
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(
 					sqlCrearUsuario);
 			ps.setDate(1, new Date(publicacion.getFecha().getTime()));
 			ps.setString(2, publicacion.getComentario());
-			ps.setInt(3, publicacion.getIdUsuario().intValue());
-			ps.setInt(4, publicacion.getIdSitio());
-			ps.setFloat(5, publicacion.getPuntaje());
+			ps.setBytes(3, publicacion.getFoto());
+			ps.setInt(4, publicacion.getIdUsuario().intValue());
+			ps.setInt(5, publicacion.getIdSitio());
+			ps.setFloat(6, publicacion.getPuntaje());
 			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
