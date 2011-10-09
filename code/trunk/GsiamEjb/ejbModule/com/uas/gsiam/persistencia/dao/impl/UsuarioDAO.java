@@ -143,24 +143,31 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		try{
 
-			String sqlUsuariosNoAmigos = "SELECT *  " +
-											"FROM (SELECT *  " + 
-											"FROM t_usuario u  " + 
-											"WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND " + 
-											"u.usu_id NOT IN (SELECT CASE " + 
-											"WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
-											"WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
-											"END " +
-											"FROM t_contacto c " + 
-											"WHERE (c.con_id_usuario_sol = ? OR c.con_id_usuario_apr = ?) AND " + 
-											"c.con_fecha_aprobacion is not null) " +
-											"ORDER BY u.usu_nombre) todos LEFT OUTER JOIN  (SELECT c.con_id_usuario_apr id " +
-											"FROM t_contacto c  " + 
-											"WHERE c.con_id_usuario_sol = ? AND  " + 
-											"c.con_fecha_aprobacion is null) soli ON (soli.id = todos.usu_id)";
+			String sqlUsuariosNoAmigos = "SELECT todos.*, soli.flag " +
+									    "FROM (SELECT * " + 
+										  "FROM t_usuario u " + 
+										  "WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND " + 
+											"u.usu_id NOT IN (SELECT CASE  " +
+													 "WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
+													 "WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
+													 "END " +
+													 "FROM t_contacto c " + 
+													 "WHERE (c.con_id_usuario_sol = ? OR c.con_id_usuario_apr = ?) AND " + 
+														"c.con_fecha_aprobacion is not null)) todos  " +
+										"LEFT OUTER JOIN  (SELECT CASE " +
+													 "WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
+													 "WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
+												         "END id, " +
+												         "CASE " +
+													 "WHEN c.con_id_usuario_sol = ? THEN 1 " +
+													 "WHEN c.con_id_usuario_apr = ? THEN 2 " +
+												         "END flag , c.* " +
+													"FROM t_contacto c  " +
+													"WHERE (c.con_id_usuario_sol = ? OR c.con_id_usuario_apr = ?) AND " +
+													"c.con_fecha_aprobacion is null) soli ON (soli.id = todos.usu_id) " +
+									  "ORDER BY todos.usu_nombre ";
 			
-
-			
+	
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlUsuariosNoAmigos);
 			
 			ps.setString(1, "%" + nombre.toUpperCase() +"%");
@@ -170,6 +177,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.setInt(5, id);
 			ps.setInt(6, id);
 			ps.setInt(7, id);
+			ps.setInt(8, id);
+			ps.setInt(9, id);
+			ps.setInt(10, id);
+			ps.setInt(11, id);
+			ps.setInt(12, id);
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
@@ -181,11 +193,20 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuario.setEmail(rs.getString("usu_mail"));
 				usuario.setPassword(rs.getString("usu_password"));
 				usuario.setAvatar(rs.getBytes("usu_avatar"));
-				int test = rs.getInt("id"); 
-				if (test != 0){
+				
+				switch (rs.getInt("flag")) {
+				case 1:
 					usuario.setSolicitudEnviada(true);
-				}else{
+					usuario.setSolicitudRecibida(false);
+					break;
+				case 2:
 					usuario.setSolicitudEnviada(false);
+					usuario.setSolicitudRecibida(true);
+					break;
+				default:
+					usuario.setSolicitudEnviada(false);
+					usuario.setSolicitudRecibida(false);
+					break;
 				}
 				
 				

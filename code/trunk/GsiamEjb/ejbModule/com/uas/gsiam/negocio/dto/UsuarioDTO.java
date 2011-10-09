@@ -16,7 +16,16 @@ public class UsuarioDTO implements Serializable{
 	private String password;
 	private byte [] avatar;
 	private boolean solicitudEnviada;
+	private boolean solicitudRecibida;
 	
+	public boolean isSolicitudRecibida() {
+		return solicitudRecibida;
+	}
+
+	public void setSolicitudRecibida(boolean solicitudRecibida) {
+		this.solicitudRecibida = solicitudRecibida;
+	}
+
 	public boolean isSolicitudEnviada() {
 		return solicitudEnviada;
 	}
