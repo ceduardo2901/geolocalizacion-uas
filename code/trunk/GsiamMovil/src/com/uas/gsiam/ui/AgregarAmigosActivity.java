@@ -169,17 +169,24 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				
 				AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 				
-				dialog.setTitle("lala"); 
-				dialog.setMessage("La solicitud ya ha sido enviada a "+ usuarioSeleccionado.getNombre());
+				dialog.setTitle("Solicitud de Amistad Pendiente"); 
+				dialog.setMessage(usuarioSeleccionado.getNombre() +" quiere ser tu amigo");
 				dialog.setCancelable(false);
 				dialog.setIcon(android.R.drawable.ic_dialog_alert);  
-				dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				dialog.setPositiveButton("Confirmar Amistad", new DialogInterface.OnClickListener() {
 				    	   
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   
 				        	   dialog.cancel();
 				           }
 				       });
+				dialog.setPositiveButton("Eliminar Solicitud", new DialogInterface.OnClickListener() {
+			    	   
+			           public void onClick(DialogInterface dialog, int id) {
+			        	   
+			        	   dialog.cancel();
+			           }
+			       });
 				
 				dialog.show();
 			}

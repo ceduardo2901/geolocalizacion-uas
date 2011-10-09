@@ -8,6 +8,8 @@
 	<FrameLayout android:id="@id/gd_segmented_content_view"
 		android:layout_width="fill_parent" android:layout_height="0dp"
 		android:layout_weight="1.0" android:foreground="@drawable/gd_shadow_top" />
-
+<ListView android:id="@id/android:list" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:divider="#FFFFFF" android:dividerHeight="2px" />
 
 </greendroid.widget.SegmentedHost>

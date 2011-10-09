@@ -61,6 +61,9 @@ public class Constantes {
 	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud/{idSolicitante}/{idAprobador}";
 	public static final String CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
+	public static final String GET_SOLICITUDES_RECIBIDAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/solrecibidas/{id}";
+	public static final String GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION = "com.gsiam.places.GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION";
+	
 	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
