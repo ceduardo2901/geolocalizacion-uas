@@ -77,6 +77,8 @@ public class Constantes {
 	public static final String MSG_ACEPTAR = "Aceptar";
 	public static final String MSG_CANCELAR = "Cancelar";
 	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
+	public static final String MSG_MENSAJE_ENVIADO = "El mensaje se envio correctamente";
+	public static final String MSG_PUBLICACION_CREADA = "La publicacion se creo correctamente";
 	
 	
 	

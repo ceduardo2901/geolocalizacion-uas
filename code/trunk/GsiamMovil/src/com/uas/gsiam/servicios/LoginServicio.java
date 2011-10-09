@@ -55,12 +55,14 @@ public class LoginServicio extends IntentService{
 				bundle.putSerializable("usuario", user);
 				intentLogin.putExtra("usuario",bundle);
 			
-			sendBroadcast(intentLogin);
+			
 			
 		}catch (RestClientException e) {
-			Bundle mensajeError = new Bundle();
-			//mensajeError.putString("error", e.getMessage());
-			intentLogin.putExtra("error", e.getCause());
+			
+			bundle.putString("error", e.getCause().getMessage());
+			intentLogin.putExtras(bundle);
+			
+		}finally{
 			sendBroadcast(intentLogin);
 		}
 		

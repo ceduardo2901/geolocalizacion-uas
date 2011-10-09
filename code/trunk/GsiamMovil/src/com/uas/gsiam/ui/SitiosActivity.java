@@ -8,13 +8,10 @@ import greendroid.widget.QuickAction;
 import greendroid.widget.QuickActionBar;
 import greendroid.widget.QuickActionWidget;
 import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
-import greendroid.widget.item.ProgressItem;
-import greendroid.widget.itemview.ProgressItemView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -23,9 +20,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -36,21 +30,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
-import com.uas.gsiam.ui.R.drawable;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -70,6 +59,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	protected Location loc;
 	protected ListView lw;
 	private QuickActionWidget quickActions;
+	private SitiosAdapter adaptador;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -391,9 +381,10 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	public void mostrarSitios(final List<SitioDTO> sitios) {
 
-		SitiosAdapter adaptador = new SitiosAdapter(this, R.layout.sitio,
+		adaptador = new SitiosAdapter(this, R.layout.sitio,
 				sitios, loc);
 
+		//lw.setAdapter(adaptador);
 		lw.setAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
