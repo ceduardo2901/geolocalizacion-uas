@@ -20,11 +20,27 @@
 		</TableRow>
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
+			<TextView android:id="@+id/txtSitioTelefonoId"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="@color/fuente" android:inputType="phone"
+				android:linksClickable="true" android:clickable="true" android:autoLink="phone"/>
+
+		</TableRow>
+		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<TextView android:id="@+id/txtSitioWebId"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:textColor="@color/fuente" android:linksClickable="true"
+				android:clickable="true" android:inputType="textUri" android:autoLink="web"/>
+
+		</TableRow>
+		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
 			<TextView android:id="@+id/txtSitioPuntajeId"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:textColor="@color/fuente" />
 		</TableRow>
-		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
+		<TableRow android:id="@+id/tableRow6" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 
 			<TextView android:id="@+id/txtSitioTelefonoId"
@@ -32,18 +48,18 @@
 				android:textColor="@color/fuente" />
 		</TableRow>
 
-		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+		<TableRow android:id="@+id/tableRow7" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 		</TableRow>
 	</TableLayout>
 
 
-	<TextView android:text="@string/fotos"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textColor="@color/fuente" />
-	<Gallery android:persistentDrawingCache="all" xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/gallery" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:scrollbars="vertical" />
+	<TextView android:text="@string/fotos" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:textColor="@color/fuente" />
+	<Gallery android:persistentDrawingCache="all"
+		xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/gallery"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:scrollbars="vertical" />
 
 
 	<TableLayout android:id="@+id/tableLayout2"

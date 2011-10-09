@@ -25,9 +25,17 @@
 
 			<EditText android:inputType="number" android:id="@+id/txtTelefonoId"
 				android:layout_width="0dp" android:layout_weight="1"
-				android:layout_height="wrap_content" android:hint="@string/telefono">
-				
-			</EditText>
+				android:layout_height="wrap_content" android:hint="@string/telefono"/>
+						
+		</TableRow>
+		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+
+			<EditText android:inputType="textWebEditText" android:id="@+id/txtWebId"
+				android:layout_width="0dp" android:layout_weight="1"
+				android:layout_height="wrap_content" android:hint="@string/web"/>
+						
 		</TableRow>
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">

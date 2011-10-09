@@ -28,6 +28,7 @@ public class CrearSitioActivity extends GDActivity{
 	private EditText nombreSitioTxt;
 	private EditText direccionSitioTxt;
 	private EditText telefonoSitioTxt;
+	private EditText webTxt;
 	private EditText categoriaSitioTxt;
 	private Button crearSitioBtn;
 	private SitioDTO sitioDto;
@@ -46,6 +47,7 @@ public class CrearSitioActivity extends GDActivity{
 		telefonoSitioTxt = (EditText) findViewById(R.id.txtTelefonoId);
 		crearSitioBtn = (Button) findViewById(R.id.btnAgregarSitioId);
 		categoriaSitioTxt = (EditText) findViewById(R.id.txtCategoriaId);
+		webTxt = (EditText) findViewById(R.id.txtWebId);
 		sitioDto = new SitioDTO();
 		crearSitioFiltro = new IntentFilter(Constantes.CREAR_SITIO_FILTRO_ACTION);
 		Resources res = getResources();
@@ -74,9 +76,10 @@ public class CrearSitioActivity extends GDActivity{
 		sitioDto.setDireccion(direccionSitioTxt.getText().toString());
 		sitioDto.setNombre(nombreSitioTxt.getText().toString());
 		sitioDto.setTelefono(telefonoSitioTxt.getText().toString());
+		sitioDto.setWeb(webTxt.getText().toString());
 		CategoriaDTO categoria = new CategoriaDTO();
 		categoria.setDescripcion(categoriaSitioTxt.getText().toString());
-		categoria.setIdCategoria(index);
+		categoria.setIdCategoria(index++);
 		sitioDto.setLat(loc.getLatitude());
 		sitioDto.setLon(loc.getLongitude());
 		sitioDto.setCategoria(categoria);
@@ -94,6 +97,7 @@ public class CrearSitioActivity extends GDActivity{
 	public void mostarCategoria(View v) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String[] categorias = getResources().getStringArray(R.array.listNames);
+		builder.setTitle(R.string.categoria);
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
