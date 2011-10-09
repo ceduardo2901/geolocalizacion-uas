@@ -24,9 +24,9 @@
 		android:layout_height="wrap_content" android:layout_marginLeft="10dp" 
 			android:textColor="@color/email" />
 	</LinearLayout>
-    <ImageView android:id="@+id/LblSolicitud" android:src="@android:drawable/checkbox_on_background" android:layout_gravity="right|center" 
+    <ImageView android:id="@+id/LblSolicitud" android:layout_gravity="right|center" 
     android:layout_marginRight="10dp" android:layout_height="25dp" android:layout_width="25dp"></ImageView>
-       
+    
 </LinearLayout>
 
 

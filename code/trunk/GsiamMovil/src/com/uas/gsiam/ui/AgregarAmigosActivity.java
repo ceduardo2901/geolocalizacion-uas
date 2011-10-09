@@ -165,6 +165,24 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				dialog.show();
 				
 			}
+			else if(usuarioSeleccionado.isSolicitudRecibida()){
+				
+				AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+				
+				dialog.setTitle("lala"); 
+				dialog.setMessage("La solicitud ya ha sido enviada a "+ usuarioSeleccionado.getNombre());
+				dialog.setCancelable(false);
+				dialog.setIcon(android.R.drawable.ic_dialog_alert);  
+				dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				    	   
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   
+				        	   dialog.cancel();
+				           }
+				       });
+				
+				dialog.show();
+			}
 			else{
 				
 				AlertDialog.Builder dialog = new AlertDialog.Builder(this);

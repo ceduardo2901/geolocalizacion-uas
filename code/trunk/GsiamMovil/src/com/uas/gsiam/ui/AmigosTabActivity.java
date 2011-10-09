@@ -127,9 +127,8 @@ public class AmigosTabActivity extends GDTabActivity {
     
     private void añadirTab3() {
     	
-    	Intent intent = new Intent(this, InvitarAmigosActivity.class);
-    	addTab(TAG_INVITAR_AMIGOS, "Invitar", intent);
-  
+    	Intent intent = new Intent(this, SolicitudesActivity.class);
+    	addTab(TAG_SOLICITUDES, "Solicitudes", intent);
   
     }
    
@@ -139,8 +138,8 @@ public class AmigosTabActivity extends GDTabActivity {
     
     private void añadirTab4() {
     	
-    	Intent intent = new Intent(this, SolicitudesActivity.class);
-    	addTab(TAG_SOLICITUDES, "Solicitudes", intent);
+    	Intent intent = new Intent(this, InvitarAmigosActivity.class);
+    	addTab(TAG_INVITAR_AMIGOS, "Invitar", intent);
           
     }
 	

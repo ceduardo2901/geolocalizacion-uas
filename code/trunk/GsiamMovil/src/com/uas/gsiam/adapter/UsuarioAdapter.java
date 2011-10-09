@@ -54,10 +54,20 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
 		
-		if (usuario.isSolicitudEnviada())
+		
+		if (usuario.isSolicitudEnviada()){
 			holder.solicitudFlag.setVisibility(View.VISIBLE);
+			holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_ff);
+		}
 		else
-			holder.solicitudFlag.setVisibility(View.INVISIBLE);
+			if (usuario.isSolicitudRecibida()){
+				holder.solicitudFlag.setVisibility(View.VISIBLE);
+				holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_rew);
+			}
+			
+			else 			
+				 holder.solicitudFlag.setVisibility(View.INVISIBLE);
+		
 		return item;
 	}
 	
