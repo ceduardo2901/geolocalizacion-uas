@@ -1,6 +1,7 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
+import greendroid.image.ImageLoader;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 
@@ -14,7 +15,10 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
@@ -26,11 +30,13 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Util;
 
-public class SitioDetalleActivity extends GDActivity {
+public class SitioDetalleActivity extends GDActivity implements OnItemClickListener{
 
 	protected static final String TAG = "SitioDetalleActivity";
 	protected TextView txtNombre;
 	protected TextView txtDireccion;
+	protected TextView txtTelefono;
+	protected TextView txtWeb;
 	protected Location loc;
 	private Double lat;
 	private Double lon;
@@ -38,19 +44,39 @@ public class SitioDetalleActivity extends GDActivity {
 	private ListView listComentarios;
 	private SitioDTO sitio;
 	private static final int MAPA = 1;
-	private Gallery fotos;
+	private Gallery galeria;
+	private List<byte[]> fotos;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.sitio_detalle);
-		fotos = (Gallery) findViewById(R.id.gallery);
+		galeria = (Gallery) findViewById(R.id.gallery);
+		fotos = new ArrayList<byte[]>();
+
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
-		fotos.setAdapter(new FotosAdapter(this));
+		cargarFotos(sitio.getPublicaciones());
+		galeria.setAdapter(new FotosAdapter(this));
 		txtNombre = (TextView) findViewById(R.id.txtSitioNombreId);
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
+		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
+		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
 		listComentarios = (ListView) findViewById(R.id.listComentariosId);
+		
 		inicializarBarra();
+		
+		galeria.setOnItemClickListener(this);
+
+	}
+
+	private void cargarFotos(List<PublicacionDTO> publicaciones) {
+		if (!publicaciones.isEmpty()) {
+			for (PublicacionDTO p : publicaciones) {
+				if (p.getFoto() != null) {
+					fotos.add(p.getFoto());
+				}
+			}
+		}
 	}
 
 	public SitioDTO getSitio() {
@@ -88,7 +114,9 @@ public class SitioDetalleActivity extends GDActivity {
 
 		txtNombre.setText(sitio.getNombre());
 		txtDireccion.setText(sitio.getDireccion());
-
+		txtTelefono.setText(sitio.getTelefono());
+		txtWeb.setText(sitio.getWeb());
+		
 		loc = intent.getParcelableExtra("ubicacion");
 
 		if (!sitio.getPublicaciones().isEmpty()) {
@@ -98,6 +126,14 @@ public class SitioDetalleActivity extends GDActivity {
 			listComentarios.setAdapter(adaptador);
 		}
 
+	}
+
+	public List<byte[]> getFotos() {
+		return fotos;
+	}
+
+	public void setFotos(List<byte[]> fotos) {
+		this.fotos = fotos;
 	}
 
 	public void onPause() {
@@ -139,9 +175,8 @@ public class SitioDetalleActivity extends GDActivity {
 	private class FotosAdapter extends BaseAdapter {
 		int mGalleryItemBackground;
 		private Context mContext;
-		private List<PublicacionDTO> publicaciones;
-		private List<byte[]> fotos = new ArrayList<byte[]>(); 
-				
+		private List<byte[]> fotos = new ArrayList<byte[]>();
+
 		public FotosAdapter(Context c) {
 			this.mContext = c;
 			TypedArray attr = mContext
@@ -150,19 +185,8 @@ public class SitioDetalleActivity extends GDActivity {
 					R.styleable.fotosPublicacion_android_galleryItemBackground,
 					0);
 			attr.recycle();
-			this.publicaciones = getSitio().getPublicaciones();
-			cargarFotos();
-		
-		}
-		
-		private void cargarFotos(){
-			if(!publicaciones.isEmpty()){
-				for(PublicacionDTO p : publicaciones){
-					if(p.getFoto() != null){
-						fotos.add(p.getFoto());
-					}
-				}
-			}
+			this.fotos = getFotos();
+
 		}
 
 		@Override
@@ -189,7 +213,7 @@ public class SitioDetalleActivity extends GDActivity {
 			ImageView imgView = new ImageView(mContext);
 
 			imgView.setImageBitmap(Util.ArrayToBitmap(fotos.get(position)));
-			// Fixing width & height for image to display
+
 			imgView.setLayoutParams(new Gallery.LayoutParams(80, 70));
 			imgView.setScaleType(ImageView.ScaleType.FIT_XY);
 			imgView.setBackgroundResource(mGalleryItemBackground);
@@ -198,5 +222,15 @@ public class SitioDetalleActivity extends GDActivity {
 		}
 
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent abrirFoto = new Intent(Intent.ACTION_VIEW);
+		
+		startActivity(abrirFoto);
+	}
+
+	
 
 }
