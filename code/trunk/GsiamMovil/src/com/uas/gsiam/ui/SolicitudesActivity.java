@@ -1,17 +1,21 @@
 package com.uas.gsiam.ui;
 
+import com.uas.gsiam.adapter.AmigoAdapter;
 import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.adapter.UsuarioAdapter;
 
 import greendroid.widget.SegmentedAdapter;
+import greendroid.widget.SegmentedBar;
 import greendroid.widget.SegmentedHost;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView.OnItemClickListener;
@@ -21,11 +25,11 @@ import android.widget.TextView;
 
 
 
-public class SolicitudesActivity extends Activity{
+public class SolicitudesActivity extends ListActivity{
 
 	private final Handler mHandler = new Handler();
     private PeopleSegmentedAdapter mAdapter;
-  
+    protected ListView lv;
     
     static final String[] PAISES = new String[] {
         "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra",
@@ -40,30 +44,27 @@ public class SolicitudesActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        	/* 
-        	ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, PAISES);
-        	 
-        	lv = (ListView)findViewById(R.id.listaSolicitudes);
-        	 
-        	lv.setAdapter(adaptador);
-        */
-
+         lv = getListView();
+   		  //   lv.setOnItemClickListener(this);
         
         setContentView(R.layout.solicitudes_amigos_tab);
- 
+        
         
         SegmentedHost segmentedHost = (SegmentedHost) findViewById(R.id.segmented_host);
  
+       
+        
+        
         mAdapter = new PeopleSegmentedAdapter();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mAdapter.mReverse = true;
                 mAdapter.notifyDataSetChanged();
-            }
+            } 
         }, 4000);
  
-        segmentedHost.setAdapter(mAdapter);
+        segmentedHost.setAdapter(mAdapter); 
     }
  
     private class PeopleSegmentedAdapter extends SegmentedAdapter {
@@ -73,6 +74,8 @@ public class SolicitudesActivity extends Activity{
         @Override
         public View getView(int position, ViewGroup parent) {
  
+        	Log.i("TAG", "***** estoy en el view "+ position);
+        	/*
             TextView textView = new TextView(SolicitudesActivity.this);
             textView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
             textView.setGravity(Gravity.CENTER);
@@ -86,8 +89,27 @@ public class SolicitudesActivity extends Activity{
             // getSegmentTitle will do it automatically
             textView.setText("lalala" + getSegmentTitle(position));
             
- 
+           
             return textView;
+            
+        	*/
+        	
+        	
+        	 final int color = getColor(mReverse ? ((getCount() - 1) - position) : position);
+        	 ArrayAdapter<String> adaptador;
+        	 
+	    	if (color == Color.BLUE){
+	    		adaptador = new ArrayAdapter<String>(lv.getContext(), android.R.layout.simple_list_item_1, PAISES);
+	    	}
+	    	else{
+	    		adaptador = new ArrayAdapter<String>(lv.getContext(), android.R.layout.simple_list_item_1, COLORES);
+	    	}
+        	
+	    	lv.setAdapter(adaptador);
+	    	
+        	return lv;
+        	
+        	
         }
  
         @Override
@@ -117,7 +139,7 @@ public class SolicitudesActivity extends Activity{
                     return Color.YELLOW;
                
             }
-            return Color.TRANSPARENT;
+            return (Integer) null;
         }
         
         

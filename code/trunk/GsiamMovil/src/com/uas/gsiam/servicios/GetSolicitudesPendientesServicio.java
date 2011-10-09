@@ -17,12 +17,13 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class GetAmigosServicio extends IntentService {
+public class GetSolicitudesPendientesServicio extends IntentService {
 
-	protected static String TAG = "GetAmigosServicio";
+	protected static String TAG = "GetSolicitudesPendientesServicio";
+	
 	protected RestTemplate restTemp;
 
-	public GetAmigosServicio() {
+	public GetSolicitudesPendientesServicio() {
 		super(TAG);
 
 	}
@@ -48,7 +49,7 @@ public class GetAmigosServicio extends IntentService {
 		try {
 
 			UsuarioDTO[] respuesta = restTemp.getForObject(
-					Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class,
+					Constantes.GET_SOLICITUDES_RECIBIDAS_SERVICE_URL, UsuarioDTO[].class,
 					parms);
 
 			bundle.putSerializable("lista",
@@ -59,9 +60,9 @@ public class GetAmigosServicio extends IntentService {
 			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
 		}
 
-		Intent intentGetAmigos = new Intent(Constantes.GET_AMIGOS_FILTRO_ACTION);
-		intentGetAmigos.putExtras(bundle);
-		this.sendBroadcast(intentGetAmigos);
+		Intent intentGetSolRecibidas = new Intent(Constantes.GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION);
+		intentGetSolRecibidas.putExtras(bundle);
+		this.sendBroadcast(intentGetSolRecibidas);
 
 	}
 
