@@ -130,8 +130,8 @@ public class CrearUsuarioActivity extends GDActivity {
 	    	if (respuesta.equals(Constantes.RETURN_OK)){
 	    		
 	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
-				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(actividadPrincipal);
+				Intent actividadLogin = new Intent(getApplicationContext(), LoginActivity.class);
+				startActivity(actividadLogin);
 				
 			}
 			else{

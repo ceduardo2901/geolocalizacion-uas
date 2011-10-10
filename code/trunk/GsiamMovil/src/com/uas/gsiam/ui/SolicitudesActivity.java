@@ -6,6 +6,7 @@ import com.uas.gsiam.adapter.UsuarioAdapter;
 
 import greendroid.widget.SegmentedAdapter;
 import greendroid.widget.SegmentedBar;
+import greendroid.widget.SegmentedBar.OnSegmentChangeListener;
 import greendroid.widget.SegmentedHost;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -52,7 +53,17 @@ public class SolicitudesActivity extends ListActivity{
         
         SegmentedHost segmentedHost = (SegmentedHost) findViewById(R.id.segmented_host);
  
-       
+        segmentedHost.getSegmentedBar().setOnSegmentChangeListener(new OnSegmentChangeListener() {
+            
+            @Override
+            public void onSegmentChange(int index, boolean clicked) {
+                    Log.i("TAG", "***** cambio el segemento");
+                    Log.i("TAG", "***** index:"+index);
+                    Log.i("TAG", "***** clicked:"+clicked);
+                    
+                    
+            }
+    });
         
         
         mAdapter = new PeopleSegmentedAdapter();

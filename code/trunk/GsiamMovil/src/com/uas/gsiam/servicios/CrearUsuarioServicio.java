@@ -1,27 +1,21 @@
 package com.uas.gsiam.servicios;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import android.app.IntentService;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
-
-import android.app.IntentService;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
 
 
 public class CrearUsuarioServicio extends IntentService{
 
 	protected static String TAG = "CrearUsuarioServicio";
-	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
 	
 	public CrearUsuarioServicio() {
@@ -42,8 +36,6 @@ public class CrearUsuarioServicio extends IntentService{
 		
 		UsuarioDTO usuario = (UsuarioDTO) bundle.getSerializable("usuario");
 		
-		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
-		parms.put("usuarioDto", usuario);
 		
 		try{
 		
