@@ -91,6 +91,7 @@ public class Constantes {
 	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
 	public static final String MSG_MENSAJE_ENVIADO = "El mensaje se envio correctamente";
 	public static final String MSG_PUBLICACION_CREADA = "La publicacion se creo correctamente";
+	public static final String MSG_NO_EXISTEN_SITIOS = "No se encontraron sitios cercanos a su ubicacion";
 	
 	
 	
