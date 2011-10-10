@@ -58,6 +58,7 @@
 		<service android:name="com.uas.gsiam.servicios.GetUsuariosServicio" />
 		<service android:name="com.uas.gsiam.servicios.ModificarSitioServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearSolicitudAmistadServicio" />
+		<activity android:name="VisorImagenes"></activity>
 
 	</application>
 </manifest>

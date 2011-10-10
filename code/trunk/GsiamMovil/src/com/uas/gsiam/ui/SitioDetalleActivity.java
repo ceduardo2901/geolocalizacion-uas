@@ -11,11 +11,12 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore.Images;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -45,7 +46,7 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 	private SitioDTO sitio;
 	private static final int MAPA = 1;
 	private Gallery galeria;
-	private List<byte[]> fotos;
+	private ArrayList<byte[]> fotos;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -128,11 +129,11 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 
 	}
 
-	public List<byte[]> getFotos() {
+	public ArrayList<byte[]> getFotos() {
 		return fotos;
 	}
 
-	public void setFotos(List<byte[]> fotos) {
+	public void setFotos(ArrayList<byte[]> fotos) {
 		this.fotos = fotos;
 	}
 
@@ -226,9 +227,13 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Intent abrirFoto = new Intent(Intent.ACTION_VIEW);
+	
+		Intent intentVisor = new Intent(this, VisorImagenes.class);
+		intentVisor.putExtra("fotos", getFotos());
+		intentVisor.putExtra("indice", position);
+		startActivity(intentVisor);
 		
-		startActivity(abrirFoto);
+		
 	}
 
 	
