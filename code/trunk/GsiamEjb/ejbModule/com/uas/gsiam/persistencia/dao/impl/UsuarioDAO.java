@@ -299,7 +299,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 					
-		String sqlModificarUsuario = "DELETE t_usuario WHERE usu_id = ?";
+		String sqlModificarUsuario = "DELETE FROM t_usuario WHERE usu_id = ?";
 		// TODO Ver como se eliminar los contactos del mismo
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlModificarUsuario);
@@ -313,8 +313,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 
 	public void crearContacto(SolicitudContactoDTO solicitud) throws SQLException{
-		
-		System.out.println("LLEGUE AL DAO LALALALALALALA");
 		
 		PreparedStatement ps;
 			
@@ -336,8 +334,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 					
 		ps.close();
  
-			
-	
 		
 	}
 	
@@ -352,7 +348,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlAprobarContacto);
 				
-		ps.setDate(1, solicitud.getFechaAprobacion());
+		java.util.Date today = new java.util.Date();
+		java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+		
+		ps.setDate(1, sqlToday);
 		ps.setInt(2, solicitud.getIdUsuarioSolicitante());
 		ps.setInt(3, solicitud.getIdUsuarioAprobador());
 		
@@ -369,12 +368,14 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		PreparedStatement ps;
 			
-		String sqlEliminarContacto = "DELETE t_contacto WHERE con_id_usuario_sol=? AND con_id_usuario_apr = ?";
+		String sqlEliminarContacto = "DELETE FROM t_contacto WHERE con_id_usuario_sol=? AND con_id_usuario_apr = ?";
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlEliminarContacto);
 			
 		ps.setInt(1, solicitud.getIdUsuarioSolicitante());
-		ps.setInt(1, solicitud.getIdUsuarioAprobador());
+		ps.setInt(2, solicitud.getIdUsuarioAprobador());
+		
+		ps.executeUpdate();
 		
 		ps.close();
 

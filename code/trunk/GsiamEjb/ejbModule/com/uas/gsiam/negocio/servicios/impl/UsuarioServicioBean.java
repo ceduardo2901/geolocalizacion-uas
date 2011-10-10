@@ -3,7 +3,6 @@ package com.uas.gsiam.negocio.servicios.impl;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.ejb.Stateless;
 
@@ -190,11 +189,11 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, boolean respuesta) throws UsuarioExcepcion {
+	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, int accion) throws UsuarioExcepcion {
 		
 		try {
 			
-			if (respuesta){
+			if (accion == Constantes.ACEPTAR_SOLICITUD){
 				// Se acepta la solicitud
 				AbstractFactory.getInstance().getUsuarioDAO().aprobarSolicitudContacto(solicitud);
 			}

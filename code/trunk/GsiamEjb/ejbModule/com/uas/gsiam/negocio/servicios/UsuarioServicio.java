@@ -24,7 +24,7 @@ public interface UsuarioServicio {
 		
 	public void crearSolicitudContacto (SolicitudContactoDTO solicitud) throws UsuarioExcepcion;
 	
-	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, boolean respuesta) throws UsuarioExcepcion;
+	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, int accion) throws UsuarioExcepcion;
 	
 	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (int id) throws UsuarioExcepcion;
 	
