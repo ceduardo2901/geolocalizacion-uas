@@ -46,6 +46,7 @@
 		<activity android:name="AgregarAmigosActivity" />
 		<activity android:name="InvitarAmigosActivity" />
 		<activity android:name="SolicitudesActivity" />
+		<activity android:name="VisorImagenes" />
 
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
@@ -58,7 +59,8 @@
 		<service android:name="com.uas.gsiam.servicios.GetUsuariosServicio" />
 		<service android:name="com.uas.gsiam.servicios.ModificarSitioServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearSolicitudAmistadServicio" />
-		<activity android:name="VisorImagenes"></activity>
+		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
+		
 
 	</application>
 </manifest>
