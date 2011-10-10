@@ -11,6 +11,7 @@ import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle.Control;
 
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -24,6 +25,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
@@ -257,7 +259,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			loc = getLastBestLocation(Constantes.MAX_DISTANCE,
 					System.currentTimeMillis() - Constantes.MAX_TIME);
 			actualizarSitios(loc);
-			
+
 			break;
 		case FILTRAR:
 			quickActions.show(item.getItemView());
@@ -350,18 +352,29 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			Bundle b = intent.getExtras();
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
 					.getSerializable("sitios");
-			
+
 			if (sitios != null) {
 				setSitios(sitios);
 				mostrarSitios(sitios);
 			}
 			Util.dismissProgressDialog();
-			
-			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(ACTUALIZAR);
+
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar()
+					.getItem(ACTUALIZAR);
 			loaderActionBarItem.setLoading(false);
-			
+
+			if (sitios.size() == 0) {
+
+				mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
+
+			}
+
 		}
 	};
+
+	public void mostrarMensaje(String mensaje) {
+		Util.showToast(this, mensaje);
+	}
 
 	/**
 	 * 
@@ -381,10 +394,9 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 	public void mostrarSitios(final List<SitioDTO> sitios) {
 
-		adaptador = new SitiosAdapter(this, R.layout.sitio,
-				sitios, loc);
+		adaptador = new SitiosAdapter(this, R.layout.sitio, sitios, loc);
 
-		//lw.setAdapter(adaptador);
+		// lw.setAdapter(adaptador);
 		lw.setAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
