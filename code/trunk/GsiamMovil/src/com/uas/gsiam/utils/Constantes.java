@@ -22,6 +22,9 @@ public class Constantes {
 	public static final int REQUEST_CAMERA = 1;
 	public static final int REQUEST_SELECT_PHOTO = 2;
 	
+	public static final int ACEPTAR_SOLICITUD = 0;
+	public static final int RECHAZAR_SOLICITUD = 1;
+	
 	// Servicios
 	
 	//TODO poner esto en un archivo de configuracion
@@ -58,12 +61,15 @@ public class Constantes {
 	public static final String GET_USUARIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/usuarios/{id}/{nombre}";
 	public static final String GET_USUARIOS_FILTRO_ACTION = "com.gsiam.places.GET_USUARIOS_FILTRO_ACTION";
 	
-	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud/{idSolicitante}/{idAprobador}";
+	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud";
 	public static final String CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
 	public static final String GET_SOLICITUDES_RECIBIDAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/solrecibidas/{id}";
 	public static final String GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION = "com.gsiam.places.GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION";
 	
+	public static final String ACEPTAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/aceptarsolicitud";
+	public static final String RECHAZAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/rechazarsolicitud";
+	public static final String RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
@@ -71,8 +77,11 @@ public class Constantes {
 	public static final String MSG_ESPERA_BUSCANDO = "Buscando, por favor espere...";
 	public static final String MSG_ESPERA_ACTUALIZANDO = "Actualizando Datos, por favor espere...";
 	public static final String MSG_ESPERA_ENVIANDO_SOLICITUD = "Enviando solicitud, por favor espere...";
-	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha creado exitosamente";
+	public static final String MSG_ESPERA_ACEPTANDO_SOLICITUD = "Aceptando solicitud, por favor espere...";
+	public static final String MSG_ESPERA_RECHAZANDO_SOLICITUD = "Rechazando solicitud, por favor espere...";
+	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha \ncreado exitosamente";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
+	public static final String MSG_SOLICITUD_RESPONDIDA_OK = "La solicitud se aprobo/rechazo correctamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
 	public static final String MSG_ERROR_SERVIDOR = "Error al intentar acceder al servidor";
