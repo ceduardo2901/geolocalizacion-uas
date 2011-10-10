@@ -50,7 +50,6 @@ public class UsuarioServicios {
 	@Consumes("application/json")
     public String crearUsuario(@BadgerFish UsuarioDTO usuario) {
 		
-		
     try {
 			
 		servicio.crearUsuario(usuario);
@@ -59,9 +58,7 @@ public class UsuarioServicios {
 			
 		} catch (UsuarioExcepcion e) {
 			return e.getMensaje();
-		}
-		
-		 
+		} 
 		
     }
 		
@@ -135,21 +132,14 @@ public class UsuarioServicios {
 	}
 	
 	
-	
-	@GET
-	@Path("/agregarsolicitud/{idSolicitante}/{idAprobador}")
+	@POST
+	@Path("/agregarsolicitud")
 	@Produces("application/json")
-    public String creaSolicitudContacto(@PathParam ("idSolicitante") int idSolicitante, @PathParam ("idAprobador") int idAprobador) {
-		
+	@Consumes("application/json")
+    public String crearSolicitudContacto(@BadgerFish SolicitudContactoDTO solicitud) {
 		
     try {
-    	
-    	System.out.println("LLEGUE AL SERVICIO!!!!!!");
-			
-        SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
-        solicitud.setIdUsuarioSolicitante(idSolicitante);
-        solicitud.setIdUsuarioAprobador(idAprobador);
-        
+            	
 		servicio.crearSolicitudContacto(solicitud);
 		
 		return Constantes.RETURN_OK;
@@ -159,9 +149,43 @@ public class UsuarioServicios {
 		}
 		
 		 
-		
     }
 	
 	
+	@POST
+	@Path("/aceptarsolicitud")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public String aceptarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
+		
+    try {
+    	
+    		servicio.responderSolicitudContacto(solicitud, Constantes.ACEPTAR_SOLICITUD);
+    	
+		return Constantes.RETURN_OK;
+			
+		} catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+		} 
+		
+    }
+	
+	@POST
+	@Path("/rechazarsolicitud")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public String rechazarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
+		
+    try {
+    	
+    		servicio.responderSolicitudContacto(solicitud, Constantes.RECHAZAR_SOLICITUD);
+    	
+		return Constantes.RETURN_OK;
+			
+		} catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+		} 
+		
+    }
 	
 }

@@ -71,4 +71,12 @@ public class UsuarioDelegate {
     	servicioUsuario.crearSolicitudContacto(solicitud);
     }
     
+    
+   public void responderSolicitudContacto(SolicitudContactoDTO solicitud, int accion) throws UsuarioExcepcion{
+    	
+    	servicioUsuario.responderSolicitudContacto(solicitud, accion);
+    }
+    
+    
+    
 }
