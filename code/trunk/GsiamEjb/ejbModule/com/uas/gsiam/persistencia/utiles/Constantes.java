@@ -5,6 +5,9 @@ public class Constantes {
 	
 	public static String RETURN_OK = "ok";
 	
+	public static final int ACEPTAR_SOLICITUD = 0;
+	public static final int RECHAZAR_SOLICITUD = 1;
+	
 	
 	// Mensajes de Error
 	public static String ERROR_COMUNICACION_BD = "Error al comunicarse con la Base de Datos";
