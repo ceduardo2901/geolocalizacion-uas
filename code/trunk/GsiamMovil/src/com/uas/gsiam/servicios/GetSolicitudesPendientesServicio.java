@@ -52,15 +52,20 @@ public class GetSolicitudesPendientesServicio extends IntentService {
 					Constantes.GET_SOLICITUDES_RECIBIDAS_SERVICE_URL, UsuarioDTO[].class,
 					parms);
 
-			bundle.putSerializable("lista",
-					Util.getArrayListUsuarioDTO(respuesta));
+			bundle.putSerializable("listaRecibidas", Util.getArrayListUsuarioDTO(respuesta));
+			
+			        respuesta = restTemp.getForObject(
+					Constantes.GET_SOLICITUDES_ENVIADAS_SERVICE_URL, UsuarioDTO[].class,
+					parms);
+			
+			bundle.putSerializable("listaEnviadas", Util.getArrayListUsuarioDTO(respuesta));
 
 		} catch (RestClientException e) {
 			Log.i(TAG, "Error: " + e.getMessage());
 			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
 		}
 
-		Intent intentGetSolRecibidas = new Intent(Constantes.GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION);
+		Intent intentGetSolRecibidas = new Intent(Constantes.GET_SOLICITUDES_FILTRO_ACTION);
 		intentGetSolRecibidas.putExtras(bundle);
 		this.sendBroadcast(intentGetSolRecibidas);
 

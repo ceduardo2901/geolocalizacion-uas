@@ -1,55 +1,63 @@
 package com.uas.gsiam.ui;
 
-import com.uas.gsiam.adapter.AmigoAdapter;
-import com.uas.gsiam.adapter.SitiosAdapter;
-import com.uas.gsiam.adapter.UsuarioAdapter;
+import java.util.ArrayList;
 
 import greendroid.widget.SegmentedAdapter;
-import greendroid.widget.SegmentedBar;
 import greendroid.widget.SegmentedBar.OnSegmentChangeListener;
 import greendroid.widget.SegmentedHost;
 import android.app.Activity;
 import android.app.ListActivity;
-import android.graphics.Color;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.uas.gsiam.adapter.UsuarioAdapter;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.GetSolicitudesPendientesServicio;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 
 
-public class SolicitudesActivity extends ListActivity{
+public class SolicitudesActivity extends ListActivity implements OnItemClickListener{
 
 	private final Handler mHandler = new Handler();
-    private PeopleSegmentedAdapter mAdapter;
+    private SolicitudesSegmentedAdapter mAdapter;
     protected ListView lv;
-    
-    static final String[] PAISES = new String[] {
-        "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra",
-        "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina"};
-    
-    static final String[] COLORES = new String[] {
-        "ROjo", "Celeste", "Azukl", "Blanco", "Rosa",
-        "Amarillo"};
+    private int vista;
+    protected IntentFilter solicitudesFiltro;
+    public static ArrayList<UsuarioDTO> usuariosSolicitudesEnviadas;
+    public static ArrayList<UsuarioDTO> usuariosSolicitudesRecibidas;
+  
     
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-         lv = getListView();
-   		  //   lv.setOnItemClickListener(this);
-        
+        lv = getListView();
         setContentView(R.layout.solicitudes_amigos_tab);
+        Bundle bundle = new Bundle();
         
+        solicitudesFiltro = new IntentFilter(Constantes.GET_SOLICITUDES_FILTRO_ACTION);
+      
+        Intent intentCargarSolicitudes = new Intent(getApplicationContext(),GetSolicitudesPendientesServicio.class);
+        intentCargarSolicitudes.putExtras(bundle);
+		startService(intentCargarSolicitudes);
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACTUALIZANDO);
+        	
+        
+   		lv.setOnItemClickListener(this);
+
         
         SegmentedHost segmentedHost = (SegmentedHost) findViewById(R.id.segmented_host);
  
@@ -57,68 +65,118 @@ public class SolicitudesActivity extends ListActivity{
             
             @Override
             public void onSegmentChange(int index, boolean clicked) {
-                    Log.i("TAG", "***** cambio el segemento");
+            	    Log.i("TAG", "************************************");
+            	    Log.i("TAG", "***** cambio el segemento");
                     Log.i("TAG", "***** index:"+index);
                     Log.i("TAG", "***** clicked:"+clicked);
+                    Log.i("TAG", "************************************");
                     
-                    
+                    if (clicked){
+
+                    	vista = index;
+
+                    	if (index == 0 ){
+
+                    		mostrarSolicitudesRecibidas();
+
+                    	}
+                    	else{
+
+                    		mostrarSolicitudesEnviadas();
+                    	}
+
+                    }
+
             }
     });
         
         
-        mAdapter = new PeopleSegmentedAdapter();
+        mAdapter = new SolicitudesSegmentedAdapter();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.mReverse = true;
                 mAdapter.notifyDataSetChanged();
             } 
-        }, 4000);
+        }, 1000);
  
         segmentedHost.setAdapter(mAdapter); 
     }
  
-    private class PeopleSegmentedAdapter extends SegmentedAdapter {
+    
+    
+    protected void onResume() {
+		 super.onResume();
+		 this.registerReceiver(receiverSolicitudes, solicitudesFiltro);
+		 Log.i("TAG", "registro el servicio");
+	 }
+	
+	protected void onPause(){
+		super.onPause();
+		this.unregisterReceiver(receiverSolicitudes);
+		Log.i("TAG", "saco el servicio");
+	}
+    
+	
+	protected BroadcastReceiver receiverSolicitudes = new BroadcastReceiver() {
+		@Override
+	    public void onReceive(Context context, Intent intent) {
+	    		
+	    	Bundle bundle = intent.getExtras();
+			usuariosSolicitudesEnviadas = (ArrayList<UsuarioDTO>) bundle.getSerializable("listaEnviadas");
+			usuariosSolicitudesRecibidas = (ArrayList<UsuarioDTO>) bundle.getSerializable("listaRecibidas");
+	    	    	
+			mostrarSolicitudesEnviadas();
+			mostrarSolicitudesRecibidas();
+	
+			Util.dismissProgressDialog();
+			
+	    }
+	  };
+    
+	  public void mostrarSolicitudesEnviadas() {
+		  
+		  UsuarioAdapter adaptador = new UsuarioAdapter((Activity) lv.getContext(), R.layout.usuario_item, usuariosSolicitudesEnviadas);
+		  lv.setAdapter(adaptador);
+         	 	
+	  }
+			
+	  
+	  public void mostrarSolicitudesRecibidas() {
+		  
+		  UsuarioAdapter adaptador = new UsuarioAdapter((Activity) lv.getContext(), R.layout.usuario_item, usuariosSolicitudesRecibidas);
+			lv.setAdapter(adaptador);
+	
+			
+		}
+    
+    @Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+	  
+	  
+		if (vista == 0){
+			
+			UsuarioDTO usuario = MisAmigosActivity.misAmigos.get(position);
+			
+			Log.i("lala", "Seleccione: "+ usuario.getNombre());
+			
+		}
+    	
+    	
+		
+	}
+    
+    
+    
+    private class SolicitudesSegmentedAdapter extends SegmentedAdapter {
  
-        public boolean mReverse = false;
  
         @Override
         public View getView(int position, ViewGroup parent) {
  
-        	Log.i("TAG", "***** estoy en el view "+ position);
-        	/*
-            TextView textView = new TextView(SolicitudesActivity.this);
-            textView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-            textView.setGravity(Gravity.CENTER);
- 
-            final int color = getColor(mReverse ? ((getCount() - 1) - position) : position);
-            textView.setBackgroundColor(color);
-            //textView.setTextColor(ColorUtils.negativeColor(color));
-            textView.setTextColor(Color.RED);
-            
-            // It's not necessary to compute the "reversed" position as the
-            // getSegmentTitle will do it automatically
-            textView.setText("lalala" + getSegmentTitle(position));
-            
-           
-            return textView;
-            
-        	*/
-        	
-        	
-        	 final int color = getColor(mReverse ? ((getCount() - 1) - position) : position);
-        	 ArrayAdapter<String> adaptador;
-        	 
-	    	if (color == Color.BLUE){
-	    		adaptador = new ArrayAdapter<String>(lv.getContext(), android.R.layout.simple_list_item_1, PAISES);
-	    	}
-	    	else{
-	    		adaptador = new ArrayAdapter<String>(lv.getContext(), android.R.layout.simple_list_item_1, COLORES);
-	    	}
-        	
-	    	lv.setAdapter(adaptador);
+        	Log.i("TAG", "***** estoy en el getView :"+ position);
 	    	
         	return lv;
+        	
         	
         	
         }
@@ -127,11 +185,12 @@ public class SolicitudesActivity extends ListActivity{
         public int getCount() {
             return 2;
         }
+        
  
         @Override
         public String getSegmentTitle(int position) {
  
-            switch (mReverse ? ((getCount() - 1) - position) : position) {
+            switch (position) {
                 case 0:
                     return "Pendientes";
                 case 1:
@@ -141,21 +200,7 @@ public class SolicitudesActivity extends ListActivity{
  
             return null;
         }
- 
-        private int getColor(int position) {
-            switch (position) {
-                case 0:
-                    return Color.BLUE;
-                case 1:
-                    return Color.YELLOW;
-               
-            }
-            return (Integer) null;
-        }
-        
-        
-        
-        
+    
         
         
     }
