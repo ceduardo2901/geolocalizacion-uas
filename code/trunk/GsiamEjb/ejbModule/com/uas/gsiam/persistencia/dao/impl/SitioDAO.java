@@ -11,6 +11,8 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 import org.postgresql.PGConnection;
 import org.postgresql.PGStatement;
+import org.postgresql.core.types.PGDouble;
+import org.postgresql.geometric.PGbox;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -239,26 +241,27 @@ public class SitioDAO implements ISitioDAO {
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		Point punto = new Point(sitio.getLat(), sitio.getLon());
 		PGgeometry pgeom = new PGgeometry(punto);
-
-		String sql = "select s.*, c.*, Distance(sit_punto,GeomFromText(?, -1)) as dis "
+		
+		String sql = "select s.*, c.* "
 				+ "from t_sitio s, t_categoria c "
-				+ "where s.sit_id_categoria=c.cat_id and s.sit_punto && 'BOX3D(-30.11082 -57.2068, -35.101934 -55.349121)'::box3d "
-				+ "and Distance(s.sit_punto,GeomFromText(?, -1)) < ? "
-				+ " order by dis";
+				+ "where s.sit_id_categoria=c.cat_id "
+				+ "and ST_DWithin(s.sit_punto,GeomFromText(?),?)"
+				+ " order by ST_Distance(sit_punto,GeomFromText(?))";
 		try {
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
-
+			
 			PGgeometry geom;
 			ps.setObject(1, pgeom);
-			ps.setObject(2, pgeom);
-			ps.setInt(3, 2);
+			ps.setDouble(2, 0.01);
+			ps.setObject(3, pgeom);
+			
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				geom = (PGgeometry) rs.getObject(2);
 				categoria = new CategoriaDTO();
 				resultado = new SitioDTO();
-
+				
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 				resultado.setIdSitio(rs.getInt(6));
