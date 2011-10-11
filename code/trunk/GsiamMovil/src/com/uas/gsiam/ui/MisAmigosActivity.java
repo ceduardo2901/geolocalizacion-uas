@@ -26,7 +26,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 	protected IntentFilter misAmigosFiltro;
 	protected ProgressDialog progressDialog;
 	protected ListView lv;
-	protected ArrayList<UsuarioDTO> misAmigos;
+	public static ArrayList<UsuarioDTO> misAmigos;
 	
 	protected static String TAG = "MisAmigosActivity";
 	

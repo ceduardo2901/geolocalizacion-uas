@@ -13,6 +13,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.uas.gsiam.servicios.GetAmigosServicio;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -33,6 +34,8 @@ public class AmigosTabActivity extends GDTabActivity {
     private final int BUSCAR = 1;
     private final int FILTRAR = 2;
     private final int FRIENDS = 3;
+    
+    protected ApplicationController app;
 	
     /** Called when the activity is first created. */
     @Override

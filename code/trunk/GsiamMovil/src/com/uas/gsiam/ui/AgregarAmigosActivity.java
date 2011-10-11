@@ -37,7 +37,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	protected IntentFilter responderSolicitudFiltro;
 	protected ProgressDialog progressDialog;
 	protected ListView lv;
-	protected ArrayList<UsuarioDTO> usuarios;
+	public static ArrayList<UsuarioDTO> usuarios;
 	protected EditText nombreTxt;
 	protected ApplicationController app;
 	
