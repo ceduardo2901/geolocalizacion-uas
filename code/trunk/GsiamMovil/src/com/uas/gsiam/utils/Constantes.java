@@ -64,8 +64,10 @@ public class Constantes {
 	public static final String CREAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/agregarsolicitud";
 	public static final String CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
-	public static final String GET_SOLICITUDES_RECIBIDAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/solrecibidas/{id}";
-	public static final String GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION = "com.gsiam.places.GET_SOLICITUDES_RECIBIDAS_FILTRO_ACTION";
+	public static final String GET_SOLICITUDES_RECIBIDAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/solicitudesrecibidas/{id}";
+	public static final String GET_SOLICITUDES_ENVIADAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/solicitudesenviadas/{id}";
+	
+	public static final String GET_SOLICITUDES_FILTRO_ACTION = "com.gsiam.places.GET_SOLICITUDES_FILTRO_ACTION";
 	
 	public static final String ACEPTAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/aceptarsolicitud";
 	public static final String RECHAZAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/rechazarsolicitud";
