@@ -125,8 +125,6 @@ public class UsuarioServicios {
 			}
 			//TODO definir como enviar el error en caso de
 
-			System.out.println(listaUsuarios.size());
-
 			return listaUsuarios;
 		
 	}
@@ -187,5 +185,45 @@ public class UsuarioServicios {
 		} 
 		
     }
+	
+	
+	
+	@GET
+	@Path("/solicitudesenviadas/{id}")
+	@Produces("application/json")
+	public List<UsuarioDTO> getSolicitudesEnviadasPendientes(@PathParam ("id") int id){
+			
+		
+		List<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
+		
+			try {
+				listaUsuarios = servicio.getSolicitudesEnviadasPendientes(id);
+			} catch (UsuarioExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return listaUsuarios;
+		
+	}
+	
+	@GET
+	@Path("/solicitudesrecibidas/{id}")
+	@Produces("application/json")
+	public List<UsuarioDTO> getSolicitudesRecibidasPendientes(@PathParam ("id") int id){
+			
+		
+		List<UsuarioDTO> listaUsuarios = new ArrayList<UsuarioDTO>();
+		
+			try {
+				listaUsuarios = servicio.getSolicitudesRecibidasPendientes(id);
+			} catch (UsuarioExcepcion e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return listaUsuarios;
+		
+	}
 	
 }
