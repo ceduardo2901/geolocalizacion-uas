@@ -20,6 +20,7 @@
 					  android:textAppearance="?android:attr/textAppearanceLarge" 
 					  android:layout_height="wrap_content" 
 					  android:layout_width="wrap_content" 
+					  android:textColor="@color/fuente"
 					  android:id="@+id/textView1"/>
 					  
 			<ImageView android:id="@+id/avatar" android:layout_height="150px" android:layout_width="150px"/>
@@ -33,11 +34,13 @@
 				  
 			<TextView android:text="@string/Nombre" 
 			          android:textAppearance="?android:attr/textAppearanceLarge" 
+			          android:textColor="@color/fuente"
 					  android:layout_height="wrap_content" 
 					  android:layout_width="wrap_content" 
 					  android:id="@+id/textView1"/>
 			
 			<TextView android:text="TextView" android:id="@+id/nombreTxt" 
+					  android:textColor="@color/fuente"
 					  android:layout_width="wrap_content" 
 					  android:layout_height="wrap_content"></TextView>
 					  
@@ -49,12 +52,14 @@
 				  
 			<TextView android:id="@+id/emailLbl" 
 			android:textAppearance="?android:attr/textAppearanceLarge" 
+			android:textColor="@color/fuente"
 					  android:layout_height="wrap_content"
 					  android:layout_width="fill_parent" 
 					  android:text="@string/email"/>
 					  
 			<TextView android:text="TextView" 
 					  android:id="@+id/emailTxt" 
+					  android:textColor="@color/fuente"
 					  android:layout_width="wrap_content" 
 					  android:layout_height="wrap_content"></TextView>
 					  
