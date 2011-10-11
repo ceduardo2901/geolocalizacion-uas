@@ -221,7 +221,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (int id) throws UsuarioExcepcion{	
+	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes (int id) throws UsuarioExcepcion{	
 			
 		try {
 			
@@ -245,6 +245,29 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 	}
 	
+	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes (int id) throws UsuarioExcepcion{	
+		
+		try {
+			
+			return AbstractFactory.getInstance().getUsuarioDAO().getSolicitudesEnviadasPendientes(id);
+			
+		} catch (IOException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
+		} catch (InstantiationException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (IllegalAccessException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (ClassNotFoundException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_RECUPERAR_SOLICITUDES);
+		}
+			
+	}
 	
 	public ArrayList<UsuarioDTO> getAmigos (int idUsuario) throws UsuarioExcepcion{	
 		

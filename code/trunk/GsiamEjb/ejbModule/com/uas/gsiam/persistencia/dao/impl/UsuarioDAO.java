@@ -410,6 +410,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuarioRetorno.setPassword(rs.getString("usu_password"));
 				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
 				
+				usuarioRetorno.setSolicitudEnviada(false);
+				usuarioRetorno.setSolicitudRecibida(true);
+				
 				listaUsuarios.add(usuarioRetorno);
 				
 				
@@ -459,6 +462,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usuarioRetorno.setEmail(rs.getString("usu_mail"));
 				usuarioRetorno.setPassword(rs.getString("usu_password"));
 				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
+				
+				usuarioRetorno.setSolicitudEnviada(true);
+				usuarioRetorno.setSolicitudRecibida(false);
 				
 				listaUsuarios.add(usuarioRetorno);
 				

@@ -26,7 +26,9 @@ public interface UsuarioServicio {
 	
 	public void responderSolicitudContacto (SolicitudContactoDTO solicitud, int accion) throws UsuarioExcepcion;
 	
-	public ArrayList<UsuarioDTO> getSolicitudesContactosPendientes (int id) throws UsuarioExcepcion;
+	public ArrayList<UsuarioDTO> getSolicitudesEnviadasPendientes (int id) throws UsuarioExcepcion;
+	
+	public ArrayList<UsuarioDTO> getSolicitudesRecibidasPendientes (int id) throws UsuarioExcepcion;
 	
 	public ArrayList<UsuarioDTO> getAmigos (int idUsuario) throws UsuarioExcepcion;
 	
