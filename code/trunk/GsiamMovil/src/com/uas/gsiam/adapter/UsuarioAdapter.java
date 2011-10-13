@@ -57,12 +57,16 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 		
 		if (usuario.isSolicitudEnviada()){
 			holder.solicitudFlag.setVisibility(View.VISIBLE);
-			holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_ff);
+		//	holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_ff);
+			holder.solicitudFlag.setImageResource(R.drawable.ic_menu_forward);
+			
 		}
 		else
 			if (usuario.isSolicitudRecibida()){
 				holder.solicitudFlag.setVisibility(View.VISIBLE);
-				holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_rew);
+			//	holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_rew);
+				holder.solicitudFlag.setImageResource(R.drawable.ic_menu_back);
+				
 			}
 			
 			else 			
