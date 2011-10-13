@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -13,6 +15,7 @@ import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
 import com.uas.gsiam.persistencia.utiles.Constantes;
+import com.uas.gsiam.persistencia.utiles.EnviarMail;
 
 /**
  * Session Bean implementation class UsuarioServicio
@@ -165,10 +168,10 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud);
 			
-			//TODO : Falta enviar mail al amigo!!!
-			//TODO : ver como solucionamos lo de las notificaciones.
-			
-			
+			// Envio el mail en paralelo
+			EnviarMail mail = new EnviarMail("emailDestinatario", "asunto", "cuerpo");
+            new Thread(mail).start();
+
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
