@@ -3,6 +3,7 @@ package com.uas.gsiam.ui;
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ public class MainActivity extends GDActivity {
 
 	protected UsuarioDTO user;
 	protected TextView nombreTxt;
+	protected TextView textAplicacion;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,10 @@ public class MainActivity extends GDActivity {
 		setActionBarContentView(R.layout.main);
 
 		nombreTxt = (TextView) findViewById(R.id.textNombre);
-
+		textAplicacion = (TextView) findViewById(R.id.textAplicacion);
+		Drawable img = getResources().getDrawable(R.drawable.logo);
+		img.setBounds( 0, 0, 35, 35 );
+		textAplicacion.setCompoundDrawables( img, null, null, null );
 		sitiosButton = (ImageButton) findViewById(R.id.sitios_button);
 		sitiosButton.setOnClickListener(botonListener);
 
