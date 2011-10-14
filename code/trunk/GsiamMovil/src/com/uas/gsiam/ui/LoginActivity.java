@@ -5,10 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.LoginServicio;
@@ -23,6 +25,7 @@ public class LoginActivity extends Activity {
 
 	protected EditText emailTxt;
 	protected EditText passTxt;
+	protected TextView textAplicacion;
 	//protected Button login;
 	protected IntentFilter loginFiltro;
 
@@ -37,7 +40,10 @@ public class LoginActivity extends Activity {
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
 		
-
+		textAplicacion = (TextView) findViewById(R.id.textAplicacion);
+		Drawable img = getResources().getDrawable(R.drawable.logo);
+		img.setBounds( 0, 0, 35, 35 );
+		textAplicacion.setCompoundDrawables( img, null, null, null );
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}

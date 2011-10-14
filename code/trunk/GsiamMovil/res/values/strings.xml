@@ -12,7 +12,7 @@
 		
 	</string-array>
     <string name="hello">Hello World!</string>
-    <string name="app_name">Gsiam</string>
+    <string name="app_name">GSIAM</string>
     <string name="email">Email</string>
     <string name="pass">Contraseña</string>
     <string name="BtnLogin">Entrar</string>
