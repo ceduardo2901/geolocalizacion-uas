@@ -11,6 +11,8 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,12 +24,13 @@ import com.uas.gsiam.servicios.CrearSitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class CrearSitioActivity extends GDActivity{
+public class CrearSitioActivity extends GDActivity implements TextWatcher {
 
 	private static final String TAG = "CrearSitioActivity";
 	private EditText nombreSitioTxt;
 	private EditText direccionSitioTxt;
 	private EditText telefonoSitioTxt;
+
 	private EditText webTxt;
 	private EditText categoriaSitioTxt;
 	private Button crearSitioBtn;
@@ -35,9 +38,10 @@ public class CrearSitioActivity extends GDActivity{
 	private Location loc;
 	private Integer index;
 	protected IntentFilter crearSitioFiltro;
-	
-	//private ArrayList<CategoriaIconoMenu> listCategorias = new ArrayList<CategoriaIconoMenu>();
-	
+
+	// private ArrayList<CategoriaIconoMenu> listCategorias = new
+	// ArrayList<CategoriaIconoMenu>();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,29 +53,32 @@ public class CrearSitioActivity extends GDActivity{
 		categoriaSitioTxt = (EditText) findViewById(R.id.txtCategoriaId);
 		webTxt = (EditText) findViewById(R.id.txtWebId);
 		sitioDto = new SitioDTO();
-		crearSitioFiltro = new IntentFilter(Constantes.CREAR_SITIO_FILTRO_ACTION);
-		Resources res = getResources();
-		
+		crearSitioFiltro = new IntentFilter(
+				Constantes.CREAR_SITIO_FILTRO_ACTION);
+		nombreSitioTxt.addTextChangedListener(this);
+		direccionSitioTxt.addTextChangedListener(this);
+		categoriaSitioTxt.addTextChangedListener(this);
+		crearSitioBtn.setEnabled(false);
 		inicializarBarra();
 	}
-	
+
 	private void inicializarBarra() {
-		
+
 		setTitle(R.string.app_name);
 	}
-	
-	protected void onResume(){
+
+	protected void onResume() {
 		super.onResume();
 		Bundle bundle = getIntent().getExtras();
 		registerReceiver(receiverCrearSitio, crearSitioFiltro);
 		loc = bundle.getParcelable("ubicacion");
 	}
-	
-	protected void onPause(){
+
+	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverCrearSitio);
 	}
-	
+
 	public void crearSitio(View v) {
 		sitioDto.setDireccion(direccionSitioTxt.getText().toString());
 		sitioDto.setNombre(nombreSitioTxt.getText().toString());
@@ -79,57 +86,87 @@ public class CrearSitioActivity extends GDActivity{
 		sitioDto.setWeb(webTxt.getText().toString());
 		CategoriaDTO categoria = new CategoriaDTO();
 		categoria.setDescripcion(categoriaSitioTxt.getText().toString());
-		categoria.setIdCategoria(index++);
+		index++;
+		categoria.setIdCategoria(index);
 		sitioDto.setLat(loc.getLatitude());
 		sitioDto.setLon(loc.getLongitude());
 		sitioDto.setCategoria(categoria);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("sitio", sitioDto);
-		
-		Intent intent = new Intent(this,CrearSitioServicio.class);
+
+		Intent intent = new Intent(this, CrearSitioServicio.class);
 		intent.putExtras(bundle);
 		startService(intent);
-		
+
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
-	
-	
+
 	public void mostarCategoria(View v) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] categorias = getResources().getStringArray(R.array.listNames);
+		final String[] categorias = getResources().getStringArray(
+				R.array.listNames);
 		builder.setTitle(R.string.categoria);
 		builder.setItems(categorias, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 				index = i;
 				categoriaSitioTxt.setText(categorias[i]);
-				
+
 			}
 		});
 		builder.show();
 	}
-	
+
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
-	    @Override
-	    public void onReceive(Context context, Intent intent) {
-	    	Log.i(TAG, "onReceive");
-	    	Bundle bundle = intent.getExtras();
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.i(TAG, "onReceive");
+			Bundle bundle = intent.getExtras();
 			String respuesta = bundle.getString("respuesta");
-		
+
 			Util.dismissProgressDialog();
-			
-	    	if (respuesta != null){
-	    		
-	    		Util.showToast(context, respuesta);
-//				Intent actividadPrincipal = new Intent(getApplicationContext(), SitiosActivity.class);
-//				startActivity(actividadPrincipal);
-				
+
+			if (!respuesta.isEmpty()) {
+
+				Util.showToast(context, respuesta);
+				// Intent actividadPrincipal = new
+				// Intent(getApplicationContext(), SitiosActivity.class);
+				// startActivity(actividadPrincipal);
+
 			}
-//			else{
-//				Util.showToast(context, respuesta);
-//			}
-	    	
-			
-	    }
-	  };
+			 else{
+				 Util.showToast(context, Constantes.MSG_SITIO_CREADO);
+			 }
+
+		}
+	};
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+		if (!nombreSitioTxt.getText().toString().isEmpty()
+				&& !direccionSitioTxt.getText().toString().isEmpty()
+				&& !categoriaSitioTxt.getText().toString().isEmpty() && s.length() != 0) {
+			crearSitioBtn.setEnabled(true);
+		} else {
+			crearSitioBtn.setEnabled(false);
+		}
+
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+
+		// if(!nombreSitioTxt.getText().toString().isEmpty()){
+		// crearSitioBtn.setEnabled(true);
+		// }
+
+	}
 }
