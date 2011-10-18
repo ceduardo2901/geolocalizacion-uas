@@ -20,7 +20,12 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.excepciones.RuntimeApplicationException;
 import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
+import com.uas.gsiam.persistencia.utiles.Constantes;
+import com.uas.gsiam.persistencia.utiles.email.EmailTemplate;
+import com.uas.gsiam.persistencia.utiles.email.EmailTemplateFactory;
+import com.uas.gsiam.persistencia.utiles.email.EmailSender;
 
 public class Prueba {
 
@@ -28,119 +33,27 @@ public class Prueba {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-/*
-		System.out.println("#### Arranca la cosa.....");
+
 		
-		UsuarioDTO userDTO = new UsuarioDTO();
-		userDTO.setEmail("pepe@gmail.com");
-		userDTO.setNombre("Pedro Petero");
-		userDTO.setPassword("pass");
-		UsuarioDAO dao = new UsuarioDAO();
-		
-		
-// Login...
-		
-/*		UsuarioDTO Utest;
+		EmailTemplate template;
 		try {
-			Utest = dao.login(userDTO);
-			System.out.println("user id: " + Utest.getId());
-			System.out.println("user nombre: " + Utest.getNombre());
-			System.out.println("user fecha: " + Utest.getFechaNacimiento());
-		} catch (UsuarioNoExisteExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-*/
-		
+			template = EmailTemplateFactory.createEmailTemplate("mailTemplates/solicitud.vm");
+			template.put("p_nombre_aprobador", "carlitos");
+			template.put("p_nombre_solicitante", "josesito");
 
-		
-		
-		
-// Exist...
-		/*
-		if (dao.existeUsuario(userDTO))
-			System.out.println("existe");
-		else
-			System.out.println("no existe");
-		
-		System.out.println("#### Termina la cosa.....");
-		*/
-		
-		
-	//////////////////////////////////
+			EmailSender mail = new EmailSender();
+			mail.setTemplate(template);
 
-		
-		try {
-	/*	
-		Properties props = new Properties();
-		props.setProperty("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.port","587");
-		props.setProperty("mail.smtp.user", "gsiam.notificacion@gmail.com");
-		props.setProperty("mail.smtp.auth", "true");
-		props.setProperty("mail.smtp.starttls.enable", "true");
-	     
-		Session session = Session.getDefaultInstance(props);
-		MimeMessage message = new MimeMessage(session);
-		
-		message.setFrom(new InternetAddress("gsiam.notificacion@gmail.com"));
-		
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress("mloure@gmail.com"));
-		
-		message.setSubject("Hola");
-		message.setText("Mensajito con Java Mail<br>" + "<b>de</b> los <i>buenos</i>." + "poque si", "ISO-8859-1","html");
-
-		Transport t = session.getTransport("smtp");
-		t.connect("gsiam.notificacion@gmail.com","gsiam.2011");
-		t.sendMessage(message,message.getAllRecipients());
-		t.close();
-	    
-		*/
-		
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.starttls.enable", "true");
-		props.setProperty("mail.smtp.port","587");
-		props.setProperty("mail.smtp.user", "gsiam.notificacion@gmail.com");
-		props.setProperty("mail.smtp.auth", "true");
-
-		Session session = Session.getDefaultInstance(props, null);
+			mail.setEmailDestinatario("mloure@gmail.com");
+			mail.setSubject("esta es una prueba lalala");
 			
-		BodyPart texto = new MimeBodyPart();
-		texto.setText("cuerpo");
-		
-		BodyPart adjunto = new MimeBodyPart();
-		adjunto.setDataHandler(new DataHandler(new FileDataSource("E:/futbol.PNG")));
-		adjunto.setFileName("nombre del Archivo");
 
-		MimeMultipart multiParte = new MimeMultipart();
-		multiParte.addBodyPart(texto);
-		multiParte.addBodyPart(adjunto);
-
-		MimeMessage message = new MimeMessage(session);
-		message.setFrom(new InternetAddress("gsiam.notificacion@gmail.com"));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress("mloure@gmail.com"));
-		message.setSubject("asunto");
-		message.setContent(multiParte);
-		
-		Transport t = session.getTransport("smtp");
-		t.connect("gsiam.notificacion@gmail.com", "gsiam.2011");
-		t.sendMessage(message,message.getAllRecipients());
-		t.close();
-		
-		
-		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
+			new Thread(mail).start();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//////////////////////////////////
-
 	}
-
+	
+	
 }

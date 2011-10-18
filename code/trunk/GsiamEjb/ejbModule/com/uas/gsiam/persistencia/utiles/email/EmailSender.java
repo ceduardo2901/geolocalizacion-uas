@@ -1,4 +1,4 @@
-package com.uas.gsiam.persistencia.utiles;
+package com.uas.gsiam.persistencia.utiles.email;
 
 import java.util.Properties;
 
@@ -8,11 +8,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 
-
-public class EnviarMail implements Runnable{
+public class EmailSender implements Runnable{
 	
 	//TODO Poner esto en un archivo...
 	private static final String EMAIL_GSIAM = "gsiam.notificacion@gmail.com";
@@ -20,17 +21,45 @@ public class EnviarMail implements Runnable{
 	private static final String HOST = "smtp.gmail.com";
 	private static final String PORT = "587";
 	
+	private EmailTemplate template;
 	private String emailDestinatario;
-	private String asunto;
-	private String cuerpo;
+	private String subject;
 	
 	
-	public EnviarMail(String emailDestinatario,String asunto, String cuerpo) {
+	public EmailSender() {
 		
+	}
+
+
+	public EmailTemplate getTemplate() {
+		return template;
+	}
+
+
+	public void setTemplate(EmailTemplate template) {
+		this.template = template;
+	}
+	
+	public String getEmailDestinatario() {
+		return emailDestinatario;
+	}
+
+
+
+	public void setEmailDestinatario(String emailDestinatario) {
 		this.emailDestinatario = emailDestinatario;
-		this.asunto = asunto;
-		this.cuerpo = cuerpo;
-		
+	}
+
+
+
+	public String getSubject() {
+		return subject;
+	}
+
+
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 
@@ -39,6 +68,7 @@ public class EnviarMail implements Runnable{
 	public void run() {
 		
 		try {
+			
 			Properties props = new Properties();
 			props.setProperty("mail.smtp.host", HOST);
 			props.setProperty("mail.smtp.port", PORT);
@@ -48,16 +78,24 @@ public class EnviarMail implements Runnable{
 
 			Session session = Session.getDefaultInstance(props);
 			MimeMessage message = new MimeMessage(session);
-
+			
 			message.setFrom(new InternetAddress(EMAIL_GSIAM));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailDestinatario));		
-			message.setSubject(asunto);
-			message.setText(cuerpo);
+			message.setSubject(subject);
+			
+			
+			MimeBodyPart mbp = new MimeBodyPart();
+			mbp.setContent(template.toString(), "text/html");
+			MimeMultipart multipart = new MimeMultipart(); 
+			multipart.addBodyPart(mbp);
+
+			message.setContent(multipart);
 
 			Transport t = session.getTransport("smtp");
 			t.connect(EMAIL_GSIAM, PASS_GSIAM);
 			t.sendMessage(message,message.getAllRecipients());
 			t.close();
+
 
 			//TODO QUe hacemos con estas excepciones?
 		} catch (AddressException e) {
