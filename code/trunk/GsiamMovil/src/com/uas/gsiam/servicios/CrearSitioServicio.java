@@ -3,8 +3,12 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -44,14 +48,15 @@ public class CrearSitioServicio extends IntentService{
 		parms.put("sitioDto", sitio);
 		
 		try{
-		
+			
 			String respuesta = restTemp.postForObject(Constantes.CREAR_SITIOS_SERVICE_URL, sitio, String.class);
 			
-			bundle.putString("respuesta", respuesta);
+			 
+			bundle.putString("respuesta", "respuesta");
 			
 		}catch (RestClientException e){
 			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", e.getMessage());
+			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
 		}
 	
 		

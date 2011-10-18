@@ -4,6 +4,7 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -63,7 +64,7 @@ public class SitioServicio extends IntentService {
 				Map<String, String> parms = new HashMap<String, String>();
 
 				parms.put("nombre", sitio.getNombre());
-
+ 
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
 						SitioDTO[].class, parms);
