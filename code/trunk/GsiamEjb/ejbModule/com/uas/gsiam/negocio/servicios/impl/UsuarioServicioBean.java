@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -15,7 +13,9 @@ import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
 import com.uas.gsiam.persistencia.utiles.Constantes;
-import com.uas.gsiam.persistencia.utiles.EnviarMail;
+import com.uas.gsiam.persistencia.utiles.email.EmailSender;
+import com.uas.gsiam.persistencia.utiles.email.EmailTemplate;
+import com.uas.gsiam.persistencia.utiles.email.EmailTemplateFactory;
 
 /**
  * Session Bean implementation class UsuarioServicio
@@ -169,9 +169,29 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			AbstractFactory.getInstance().getUsuarioDAO().crearContacto(solicitud);
 			
 			// Envio el mail en paralelo
-			EnviarMail mail = new EnviarMail("emailDestinatario", "asunto", "cuerpo");
-            new Thread(mail).start();
+			
+			UsuarioDTO uSol = AbstractFactory.getInstance().getUsuarioDAO().getUsuario(solicitud.getIdUsuarioSolicitante());
+			UsuarioDTO uApr = AbstractFactory.getInstance().getUsuarioDAO().getUsuario(solicitud.getIdUsuarioAprobador());
+			
+			try {
+				EmailTemplate template = EmailTemplateFactory.createEmailTemplate("mailTemplates/solicitud.vm");
+				template.put("p_nombre_aprobador", "carlitos");
+				template.put("p_nombre_solicitante", "josesito");
 
+				EmailSender mail = new EmailSender();
+				mail.setTemplate(template);
+
+				mail.setEmailDestinatario(uApr.getEmail());
+				mail.setSubject(uSol.getNombre() + Constantes.EMAIL_SUBJECT_SOLICITUD_AMISTAD);
+				
+
+				new Thread(mail).start();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);

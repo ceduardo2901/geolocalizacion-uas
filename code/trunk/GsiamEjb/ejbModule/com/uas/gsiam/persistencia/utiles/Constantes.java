@@ -31,5 +31,29 @@ public class Constantes {
 	// Mensajes de error publicacion
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
 
+	// Mensajes para el envio de mail
+	public static String EMAIL_SUBJECT_SOLICITUD_AMISTAD = " te quiere agergar como amigo";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
