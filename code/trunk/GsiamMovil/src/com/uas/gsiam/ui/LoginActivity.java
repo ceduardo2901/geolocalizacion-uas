@@ -40,11 +40,11 @@ public class LoginActivity extends Activity {
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
 		
-		textAplicacion = (TextView) findViewById(R.id.textAplicacion);
+	/*	textAplicacion = (TextView) findViewById(R.id.textAplicacion);
 		Drawable img = getResources().getDrawable(R.drawable.logo);
 		img.setBounds( 0, 0, 35, 35 );
 		textAplicacion.setCompoundDrawables( img, null, null, null );
-		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
+	*/	loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
 
