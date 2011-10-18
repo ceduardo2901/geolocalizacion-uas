@@ -14,12 +14,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
-import org.jboss.security.xacml.core.model.context.StatusType;
 
-import com.sun.xml.ws.encoding.ContentType;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
@@ -68,17 +67,21 @@ public class SitioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
     public Response crearSitio(@BadgerFish SitioDTO sitio) {
-		
+		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.crearSitio(sitio);
+			builder.status(Status.OK);			
 		} catch (SitioYaExisteExcepcion e) {
 		
 			e.printStackTrace();
 		} catch (SitioExcepcion e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			System.out.println("prueba de error");
+			//throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			//return Response.status(Status.INTERNAL_SERVER_ERROR);
 			
 		}
-		return Response.status(200).type(MediaType.APPLICATION_JSON).build();
+		return builder.type(MediaType.APPLICATION_JSON).build();//status(Status.INTERNAL_SERVER_ERROR).build();
+		//return Response.status(200).build().toString();
 		
 	}
 	
