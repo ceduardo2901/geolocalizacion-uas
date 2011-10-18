@@ -288,6 +288,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				        	   
 				        	   enviarSolicitud(usuarioSeleccionado.getId());
 				        	   
+				        	   //TODO que pasa cuando da error el servicio...
 				        	   usuarioSeleccionado.setSolicitudEnviada(true);
 				        	   usuarios.set(pos, usuarioSeleccionado);
 				        	   mostrarUsuarios();
