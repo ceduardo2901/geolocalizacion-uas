@@ -187,8 +187,8 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 				new Thread(mail).start();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				throw new UsuarioExcepcion(e.getMessage());
 			}
 			
 			
