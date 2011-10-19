@@ -61,6 +61,7 @@
 		<service android:name="com.uas.gsiam.servicios.CrearSolicitudAmistadServicio" />
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
+		<activity android:name="Preferencias"></activity>
 		
 
 	</application>

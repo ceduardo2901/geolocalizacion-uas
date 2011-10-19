@@ -4,6 +4,7 @@ import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,7 @@ public class MainActivity extends GDActivity {
 	private ImageButton sitiosButton;
 	private Button perfilButton;
 	private Button amigosButton;
-
+	private Button confButton;
 	protected UsuarioDTO user;
 	protected TextView nombreTxt;
 	protected TextView textAplicacion;
@@ -42,6 +43,9 @@ public class MainActivity extends GDActivity {
 
 		amigosButton = (Button) findViewById(R.id.amigos_button);
 		amigosButton.setOnClickListener(botonListener);
+		
+		confButton = (Button) findViewById(R.id.preferencias_button);
+		confButton.setOnClickListener(botonListener);
 
 		ApplicationController app = ((ApplicationController) getApplicationContext());
 		user = app.getUserLogin();
@@ -92,6 +96,9 @@ public class MainActivity extends GDActivity {
 			case R.id.amigos_button:
 				amigosActivity();
 				break;
+			case R.id.preferencias_button:
+				preferenciasActivity();
+				break;
 			}
 
 		}
@@ -100,6 +107,12 @@ public class MainActivity extends GDActivity {
 	private void sitiosActivity() {
 		Intent sitioIntent = new Intent(this, SitiosActivity.class);
 		startActivity(sitioIntent);
+		
+	}
+	
+	private void preferenciasActivity() {
+		Intent preferenciasIntent = new Intent(this, Preferencias.class);
+		startActivity(preferenciasIntent);
 	}
 
 	private void perfilActivity() {
