@@ -71,12 +71,12 @@
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingLeft="20px">
 
-				<Button android:layout_width="wrap_content"
+				<Button android:layout_width="wrap_content" android:id="@+id/preferencias_button"
 					android:layout_height="wrap_content" android:background="@drawable/save" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
-					android:textStyle="bold" android:textColor="@color/fuente" android:text="Opciones" />
+					android:textStyle="bold" android:textColor="@color/fuente" android:text="Configuracion" />
 			</LinearLayout>
 
 		</TableRow>
