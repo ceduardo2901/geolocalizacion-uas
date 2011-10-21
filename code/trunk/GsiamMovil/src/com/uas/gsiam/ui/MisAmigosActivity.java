@@ -1,5 +1,12 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
+import greendroid.app.GDListActivity;
+import greendroid.app.GDTabActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.LoaderActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
+
 import java.util.ArrayList;
 
 import android.app.ListActivity;
@@ -17,6 +24,7 @@ import android.widget.ListView;
 
 import com.uas.gsiam.adapter.AmigoAdapter;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.GetAmigosServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -28,43 +36,51 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 	protected ListView lv;
 	public static ArrayList<UsuarioDTO> misAmigos;
 	
+	 
+	
 	protected static String TAG = "MisAmigosActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
+		  
+		  Log.i(TAG, "***** estoy en el onCreate");
 		  setContentView(R.layout.mis_amigos_tab);
 		  lv = getListView();
 		  lv.setOnItemClickListener(this);
 		  
+		  
+		  
+		  
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-		  AmigosTabActivity.registroMisAmigosService = true; 
+	//	  AmigosTabActivity.registroMisAmigosService = true; 
 		  Log.i(TAG, "***** REGSITRO oncreate");
 		  
-	/*	  Intent intent = new Intent(this,GetAmigosServicio.class);
-		  startService(intent);
 		  
 		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
-		*/  
+		  Intent intent = new Intent(this ,GetAmigosServicio.class);
+		  startService(intent);
+		  
+		  
 		}
 	
 	
 	protected void onResume() {
 		 super.onResume();
-		 
-		 if (!AmigosTabActivity.registroMisAmigosService){
+		 this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
+	/*	 if (!AmigosTabActivity.registroMisAmigosService){
 			  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
 			  AmigosTabActivity.registroMisAmigosService = true;
 			  Log.i(TAG, "***** REGSITRO onResume");
-		 }
+		 }*/
 			 
 	 }
 	
 	protected void onPause(){
 		super.onPause();
 		this.unregisterReceiver(receiverGetAmigos);
-		AmigosTabActivity.registroMisAmigosService = false;
+	//	AmigosTabActivity.registroMisAmigosService = false;  
 		Log.i(TAG, "***** SACO onPause");
 		Util.dismissProgressDialog();
 	}
@@ -84,6 +100,10 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 	    	mostrarAmigos();
 	
 			Util.dismissProgressDialog();
+			
+			GDTabActivity padre = (GDTabActivity) getParent();
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+			loaderActionBarItem.setLoading(false);
 			
 	    }
 	  };
@@ -107,5 +127,6 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 			
 			
 		}
+	  
 	  
 }
