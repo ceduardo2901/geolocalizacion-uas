@@ -11,7 +11,7 @@
 			
 		<TextView android:layout_width="fill_parent" android:text="@string/email"
 			android:layout_height="wrap_content" android:id="@+id/emailLbl"
-			android:layout_weight="1" android:textColor="@color/fuente" android:layout_marginTop="15dp"></TextView>
+			android:layout_weight="1" android:layout_marginTop="15dp"></TextView>
 
 
 
@@ -22,21 +22,23 @@
 		
 		
 		<Button android:id="@+id/crearUsuarioBtn"
-			android:layout_height="wrap_content" android:text="@string/BtnRegistrarse"
+			android:layout_height="wrap_content" android:text="@string/BtnInvitar"
 			android:gravity="center_vertical|center_horizontal|center"
-			android:layout_gravity="right" android:layout_width="100dp" android:layout_marginTop="15dp"></Button>
+			android:layout_gravity="right" android:layout_width="100dp" android:layout_marginTop="15dp"/>
 
 		<LinearLayout android:layout_height="wrap_content"
 			android:id="@+id/linearLayout1" android:layout_gravity="right"
 			android:layout_width="wrap_content" android:layout_marginTop="15dp">
+			
 			<TextView android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:text="Amigos de Facebook"
 				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
-				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"
-				android:textColor="@color/fuente"></TextView>
-			<Button android:id="@+id/button1" android:text="@string/BtnRegistrarse"
+				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"/>
+				
+			<Button android:id="@+id/button1" android:text="@string/BtnInvitar"
 				android:onClick="btnRegistrarse" android:layout_gravity="right"
-				android:layout_width="100dp" android:layout_height="wrap_content" android:layout_marginTop="10dp"></Button>
+				android:layout_width="100dp" android:layout_height="wrap_content" 
+				android:layout_marginTop="10dp"/>
 		</LinearLayout>
 			
 	</LinearLayout>
