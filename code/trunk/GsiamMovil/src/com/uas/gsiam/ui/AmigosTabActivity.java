@@ -4,6 +4,7 @@ package com.uas.gsiam.ui;
 import greendroid.app.GDTabActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
+import greendroid.widget.LoaderActionBarItem;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 
 import com.uas.gsiam.servicios.GetAmigosServicio;
+import com.uas.gsiam.servicios.GetSolicitudesPendientesServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
@@ -21,7 +23,7 @@ public class AmigosTabActivity extends GDTabActivity {
 
 
     protected static String TAG = "AmigosTabActivity";
-    protected static boolean registroMisAmigosService = false;
+ //   protected static boolean registroMisAmigosService = false;
     private static final String TAG_MIS_AMIGOS = "Amigos";
     private static final String TAG_AGREGAR_AMIGOS = "Agregar";
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
@@ -30,12 +32,9 @@ public class AmigosTabActivity extends GDTabActivity {
     
     private static TabHost mTabHost;
     
-    private final int ACTUALIZAR = 0;
-    private final int BUSCAR = 1;
-    private final int FILTRAR = 2;
-    private final int FRIENDS = 3;
+    protected static final int ACTUALIZAR = 0;
     
-    protected ApplicationController app;
+    private String tabClick;
 	
     /** Called when the activity is first created. */
     @Override
@@ -47,9 +46,8 @@ public class AmigosTabActivity extends GDTabActivity {
         mTabHost = getTabHost();       
       
         
-        
-        añadirTab1();
         añadirTab2();
+        añadirTab1();
         añadirTab3();
         añadirTab4(); 
         
@@ -57,36 +55,40 @@ public class AmigosTabActivity extends GDTabActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
         mTabHost.setCurrentTab(currentTab);
+        Log.i(TAG, "**** currentTab =  "+ currentTab);
+        tabClick = mTabHost.getCurrentTabTag();
         
-        if (mTabHost.getCurrentTabTag().equalsIgnoreCase(TAG_MIS_AMIGOS)){
+   /*     if (mTabHost.getCurrentTabTag().equalsIgnoreCase(TAG_MIS_AMIGOS)){
         	Log.i(TAG, "**** click");
         	Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_BUSCANDO);
 			iniciarServicioMisAmigos();
 			
 		}
-        
+     */   
         mTabHost.setOnTabChangedListener(new OnTabChangeListener(){
         	@Override
         	public void onTabChanged(String tabId) {
         		Log.i(TAG, "**** click "+tabId);
-        		if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
+        		
+        		tabClick = tabId;
+                
+        		
+        	/*	if (tabId.equalsIgnoreCase(TAG_MIS_AMIGOS)){
         			Util.showProgressDialog(mTabHost.getContext(), Constantes.MSG_ESPERA_ACTUALIZANDO);
         			iniciarServicioMisAmigos();
         		}
-        		
+        		*/
         		
         	}
         	});
     }
     
-    public void iniciarServicioMisAmigos(){
+  /*  public void iniciarServicioMisAmigos(){
     	Log.i(TAG, "**** elegi la uno!!! llamo al serv");
 		Intent intent = new Intent(mTabHost.getContext() ,GetAmigosServicio.class);
 		startService(intent);
-		  
-		
-    }
-    
+    } 
+    */
     @Override
     protected void onPause() {
         super.onPause();
@@ -148,42 +150,41 @@ public class AmigosTabActivity extends GDTabActivity {
 	
 	private void inicializarActionBar() {
 	
-		addActionBarItem(Type.Refresh, ACTUALIZAR);
-		addActionBarItem(Type.Refresh, ACTUALIZAR);
-		
-		setTitle("GSIAM - Amigos");
+		getActionBar().addItem(Type.Refresh, ACTUALIZAR);
+		getActionBar().setTitle("GSIAM - Amigos");
 	}
-	
-	
 	
 	
 
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
-		case BUSCAR:
-			Util.showToast(this, "BUSCAR");
-			break;
+		
 		case ACTUALIZAR:
-			Util.showToast(this, "ACTUALIZAR");
+			
+			if (tabClick.equalsIgnoreCase(TAG_MIS_AMIGOS)){
+				Util.showToast(this, "TAG_MIS_AMIGOS");
+				actualizarAmigos();
+				
+			}
+			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
+				Util.showToast(this, "TAG_AGREGAR_AMIGOS");
+				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+				loaderActionBarItem.setLoading(false);
+			}
+			if (tabClick.equalsIgnoreCase(TAG_SOLICITUDES)){
+				Util.showToast(this, "TAG_SOLICITUDES");
+				actualizarSolicitudes();
+		    	
+			}
+			if (tabClick.equalsIgnoreCase(TAG_INVITAR_AMIGOS)){
+				Util.showToast(this, "TAG_INVITAR_AMIGOS");
+				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+				loaderActionBarItem.setLoading(false);
+			}
 			
 			break;
-		case FILTRAR:
-			Util.showToast(this, "FILTRAR");
-			break;
-		case FRIENDS:
-			Util.showToast(this, "FRIENDS");
-			break;	
-		case 4:
-			Util.showToast(this, "FRIENDS");
-			break;	
-		case 5:
-			Util.showToast(this, "FRIENDS");
-			break;	
-		case 6:
-			Util.showToast(this, "FRIENDS");
-			break;	
-
+		
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
@@ -191,5 +192,19 @@ public class AmigosTabActivity extends GDTabActivity {
 		return true;
 
 	}
+	
+	
+	private void actualizarAmigos(){
+		Intent intent = new Intent(this,GetAmigosServicio.class);
+		startService(intent);
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACTUALIZANDO);
+	}
+	
+	private void actualizarSolicitudes(){
+		Intent intentCargarSolicitudes = new Intent(this,GetSolicitudesPendientesServicio.class);
+    	startService(intentCargarSolicitudes);
+    	Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACTUALIZANDO);
+	}
+	
     
 }

@@ -67,10 +67,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		if (nombre.isEmpty()) {
 			Util.showToast(v.getContext(), "Debe ingresar un nombre");
 		
-			
-			
 		} else {
-
 
 			Bundle bundle = new Bundle();
 			bundle.putString("nombre", nombre);
@@ -83,6 +80,9 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		}
 
 	}
+	
+	
+	
 	
 	
 	
@@ -165,7 +165,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		  
 			UsuarioAdapter adaptador = new UsuarioAdapter(this, R.layout.usuario_item, usuarios);
 			setListAdapter(adaptador);
-			
 			
 		}
 	  
@@ -342,8 +341,14 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		  Intent intentAceptarSolicitud = new Intent(getApplicationContext(),ResponderSolicitudServicio.class);
 		  intentAceptarSolicitud.putExtras(bundle);
 		  startService(intentAceptarSolicitud);
-
-		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACEPTANDO_SOLICITUD);
+		  
+		  if (accion == Constantes.ACEPTAR_SOLICITUD){
+			  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACEPTANDO_SOLICITUD);
+		  }
+		  else{
+			  Util.showProgressDialog(this, Constantes.MSG_ESPERA_RECHAZANDO_SOLICITUD);
+		  }
+		 
 
 	  }
 	  
