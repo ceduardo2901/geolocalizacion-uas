@@ -31,6 +31,7 @@
 	<string name="BtnEditarPerfil">Editar Perfil</string>
 	<string name="BtnEliminarPerfil">Cerrar Cuenta</string>
 	<string name="BtnRegistrarse">Registrarse</string>
+	<string name="BtnInvitar">Invitar</string>
 	<string name="Nombre">Nombre</string>
 	<string name="compartirFacebook">Compartir en Facebook</string>
 	<string name="listaVacia">No se han encontrado registros</string>
