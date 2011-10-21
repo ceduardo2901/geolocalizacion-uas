@@ -183,7 +183,6 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 				mail.setEmailDestinatario(uApr.getEmail());
 				mail.setSubject(uSol.getNombre() + Constantes.EMAIL_SUBJECT_SOLICITUD_AMISTAD);
-				
 
 				new Thread(mail).start();
 			} catch (Exception e) {
