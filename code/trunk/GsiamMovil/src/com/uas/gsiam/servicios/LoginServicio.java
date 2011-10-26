@@ -15,6 +15,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 
 public class LoginServicio extends IntentService{
 
@@ -58,9 +59,11 @@ public class LoginServicio extends IntentService{
 			
 			
 		}catch (RestClientException e) {
-			
-			bundle.putString("error", e.getCause().getMessage());
-			intentLogin.putExtras(bundle);
+//			Bundle b = new Bundle();
+//			b.putString("error", e.getCause().getMessage());
+//			//bundle.putString("error", e.getCause().getMessage());
+//			intentLogin.putExtra("errorLogin", e.getCause().getMessage());
+			Log.e(TAG, e.getCause().getMessage());
 			
 		}finally{
 			sendBroadcast(intentLogin);

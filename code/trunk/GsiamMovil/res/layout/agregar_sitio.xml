@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:background="@color/fondo">
+	android:background="@color/fondo" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:orientation="vertical"
+	android:weightSum="1">
 
 	<TableLayout android:layout_height="wrap_content"
-		android:id="@+id/tableLayout1" android:layout_width="match_parent">
+		android:id="@+id/tableLayout1" android:layout_width="match_parent"
+		android:stretchColumns="0,0,0,0,0,0" >
 
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content" android:paddingBottom="0px" android:layout_marginBottom="0dp">
 
-			<EditText android:layout_height="wrap_content" android:id="@+id/txtNombreId"
-				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/Nombre" />
+			<EditText android:id="@+id/txtNombreId" android:hint="@string/Nombre"
+				android:layout_height="match_parent" android:layout_width="match_parent"
+				android:layout_weight="1" />
 		</TableRow>
 		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content" android:paddingTop="0dp">
 
 			<EditText android:layout_height="wrap_content" android:id="@+id/txtDireccionId"
-				android:layout_weight="1" android:layout_width="0dp" android:hint="@string/direccion" />
+				android:layout_weight="1" android:hint="@string/direccion"
+				android:layout_width="match_parent" android:layout_gravity="top" />
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content" >
 
 
 			<EditText android:inputType="number" android:id="@+id/txtTelefonoId"
 				android:layout_width="0dp" android:layout_weight="1"
-				android:layout_height="wrap_content" android:hint="@string/telefono"/>
-						
+				android:layout_height="wrap_content" android:hint="@string/telefono" />
+
 		</TableRow>
 		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
@@ -34,27 +38,44 @@
 
 			<EditText android:inputType="textWebEditText" android:id="@+id/txtWebId"
 				android:layout_width="0dp" android:layout_weight="1"
-				android:layout_height="wrap_content" android:hint="@string/web"/>
-						
+				android:layout_height="wrap_content" android:hint="@string/web" />
+
 		</TableRow>
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 
 			<Button android:text="@string/categoria" android:id="@+id/btnCategoriaSitioId"
 				android:onClick="mostarCategoria" android:layout_weight="1"
-				android:layout_width="0dp" />	
-				
-			<EditText android:cursorVisible="false"  android:focusable="false" android:enabled="true" android:id="@+id/txtCategoriaId"
-				android:layout_width="0dp" android:layout_weight="1" 
-				android:layout_height="wrap_content" android:hint="@string/categoria">
-				
-			</EditText>
-			
-		</TableRow>
+				android:layout_width="0dp" />
 
+			<EditText android:cursorVisible="false" android:focusable="false"
+				android:enabled="true" android:id="@+id/txtCategoriaId"
+				android:layout_width="0dp" android:layout_weight="1"
+				android:layout_height="wrap_content" android:hint="@string/categoria">
+
+			</EditText>
+
+		</TableRow>
+		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<Button android:ellipsize="start" android:text="@string/agregar"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:onClick="crearSitio" android:id="@+id/btnAgregarSitioId" />
+		</TableRow>
+		
 	</TableLayout>
-	<Button android:text="@string/agregar" android:id="@+id/btnAgregarSitioId"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:onClick="crearSitio" android:ellipsize="start" />
+
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+		<view class="com.google.android.maps.MapView" android:id="@+id/crearSitioMapaId"
+			android:apiKey="0VISs42MeYw2RgEDnjSvRzAFt28ngxfZ8UxxZkg"
+			android:clickable="true" android:focusableInTouchMode="true"
+			android:layout_height="fill_parent" android:layout_width="fill_parent" />
+
+		
+
+	</LinearLayout>
+
 
 </LinearLayout>

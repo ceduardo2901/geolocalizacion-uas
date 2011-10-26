@@ -67,6 +67,7 @@ public class PublicarActivity extends GDActivity implements
 	private static final int RESULT = 1001;
 	private String nombre;
 	private ImageView fotoPub;
+	private String APP_ID;
 
 	protected String path = "";
 
@@ -80,7 +81,7 @@ public class PublicarActivity extends GDActivity implements
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
 		fotoPub = (ImageView) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
-
+		APP_ID = getString(R.string.facebook_app_id);
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
@@ -132,9 +133,7 @@ public class PublicarActivity extends GDActivity implements
 			Log.i(TAG, "onReceive");
 			Bundle bundle = intent.getExtras();
 			String respuesta = bundle.getString("respuesta");
-
 			
-			comentarFacebook();
 			Util.dismissProgressDialog();
 			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
 		}
@@ -143,8 +142,10 @@ public class PublicarActivity extends GDActivity implements
 	private void comentarFacebook() {
 		if (comentarFaceBook.isChecked()) {
 
-			facebook = new Facebook(getString(R.string.facebook_app_id));
-			SessionStore.restore(facebook, this);
+			facebook = new Facebook(APP_ID);
+			mAsyncRunner = new AsyncFacebookRunner(facebook);
+			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
+			
 			if (!facebook.isSessionValid()) {
 				facebook.authorize(this,
 						getResources().getStringArray(R.array.permissions),
@@ -176,20 +177,25 @@ public class PublicarActivity extends GDActivity implements
 		
 		byte[] arrayBytes = null;
 		try {
-			arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+			if(drawable != null){
+				arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+				publicar.setFoto(arrayBytes);
+				
+			}
+			
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 			e.printStackTrace();
 		}
-		if(fotoPub.getDrawable() != null){
-			publicar.setFoto(arrayBytes);
-		}
+		
 		Bundle publicacion = new Bundle();
 		publicacion.putSerializable("publicacion", publicar);
 		Intent intent = new Intent(this, PublicarServicio.class);
 		intent.putExtras(publicacion);
-		startService(intent);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+		comentarFacebook();
+		startService(intent);
+		
 
 	}
 
@@ -258,17 +264,30 @@ public class PublicarActivity extends GDActivity implements
 	public void postOnWall(String msg) {
 		Log.d("Tests", "Testing graph API wall post");
 		try {
-			String response = facebook.request("me");
+			String response;
+			
 			Bundle parameters = new Bundle();
-			parameters.putString("message", msg);
-			parameters.putString("description", "test test test");
-			response = facebook.request("me/feed", parameters, "POST");
-			Log.d("Tests", "got response: " + response);
-			if (response == null || response.equals("")
-					|| response.equals("false")) {
-				Log.v("Error", "Blank response");
+			if(fotoPub.getDrawable() != null){
+				
+				parameters.putByteArray("picture", Util.BitmapToArray((BitmapDrawable)fotoPub.getDrawable()));
+				parameters.putString("caption", msg);
+				response = facebook.request("me/photos", parameters, "POST");
+				
+			}else{
+				parameters.putString("message", msg);
+				parameters.putString("description", "test test test");
+				
+				response = facebook.request("me/feed", parameters, "POST");
 			}
+			
+			
+			
+			if(response == null){
+				Log.i(TAG, "error al comentar en facebook");
+			}
+		
 		} catch (Exception e) {
+			Log.v("Error", "Blank response");
 			e.printStackTrace();
 		}
 	}
@@ -341,7 +360,7 @@ public class PublicarActivity extends GDActivity implements
 
 		@Override
 		public void onComplete(Bundle values) {
-			SessionStore.save(facebook, getApplicationContext());
+			SessionStore.save(facebook, getApplicationContext(),APP_ID);
 			postOnWall(comentario.getText().toString());
 
 		}

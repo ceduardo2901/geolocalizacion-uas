@@ -72,7 +72,7 @@ public class MainActivity extends GDActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.cerrarSesionId:
-			SessionStore.clear(this);
+			//SessionStore.clear(this);
 			Intent loginIntent = new Intent(this, LoginActivity.class);
 			startActivity(loginIntent);
 			break;
