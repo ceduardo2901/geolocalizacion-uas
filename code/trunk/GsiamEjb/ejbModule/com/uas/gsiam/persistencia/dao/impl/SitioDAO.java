@@ -52,10 +52,12 @@ public class SitioDAO implements ISitioDAO {
 				resultado.setIdSitio(rs.getInt(6));
 				resultado.setNombre(rs.getString(1));
 				resultado.setDireccion(rs.getString(5));
+				resultado.setTelefono(rs.getString(7));
+				resultado.setWeb(rs.getString(8));
 				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 						.getIdSitio()));
-				categoria.setIdCategoria(rs.getInt(7));
-				categoria.setDescripcion(rs.getString(8));
+				categoria.setIdCategoria(rs.getInt(9));
+				categoria.setDescripcion(rs.getString(10));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 			}
