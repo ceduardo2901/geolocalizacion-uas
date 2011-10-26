@@ -42,6 +42,7 @@
 		<activity android:name="PublicarActivity" />
 		<activity android:name="ModificarSitioActivity" />
 		<activity android:name="AmigosTabActivity" />
+		<activity android:name="AmigosTabActivity2" />
 		<activity android:name="MisAmigosActivity" />
 		<activity android:name="AgregarAmigosActivity" />
 		<activity android:name="InvitarAmigosActivity" />
