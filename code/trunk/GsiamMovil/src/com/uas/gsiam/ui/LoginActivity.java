@@ -26,12 +26,11 @@ public class LoginActivity extends Activity {
 	protected EditText emailTxt;
 	protected EditText passTxt;
 	protected TextView textAplicacion;
-	//protected Button login;
+	// protected Button login;
 	protected IntentFilter loginFiltro;
 
 	protected UsuarioDTO user;
 
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,25 +38,25 @@ public class LoginActivity extends Activity {
 		user = new UsuarioDTO();
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
-		
-	/*	textAplicacion = (TextView) findViewById(R.id.textAplicacion);
-		Drawable img = getResources().getDrawable(R.drawable.logo);
-		img.setBounds( 0, 0, 35, 35 );
-		textAplicacion.setCompoundDrawables( img, null, null, null );
-	*/	loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
+
+		/*
+		 * textAplicacion = (TextView) findViewById(R.id.textAplicacion);
+		 * Drawable img = getResources().getDrawable(R.drawable.logo);
+		 * img.setBounds( 0, 0, 35, 35 ); textAplicacion.setCompoundDrawables(
+		 * img, null, null, null );
+		 */loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
 
-	protected void onStart(){
+	protected void onStart() {
 		super.onStart();
-		
+
 	}
-	
+
 	protected void onResume() {
 		super.onResume();
 
 		registerReceiver(loginReceiver, loginFiltro);
-		
 
 	}
 
@@ -74,9 +73,9 @@ public class LoginActivity extends Activity {
 		pass = passTxt.getText().toString().trim();
 
 		if (!Util.validaMail(email)) {
-			
+
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
-			
+
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString("email", email);
@@ -86,7 +85,8 @@ public class LoginActivity extends Activity {
 			intent.putExtras(bundle);
 			startService(intent);
 
-			Util.showProgressDialog(this, Constantes.MSG_ESPERA_INICIANDO_SESION);
+			Util.showProgressDialog(this,
+					Constantes.MSG_ESPERA_INICIANDO_SESION);
 		}
 	}
 
@@ -109,18 +109,17 @@ public class LoginActivity extends Activity {
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
-			Bundle bundleError = intent.getExtras();
-			String error = bundleError.getString("error");
-			
-			if (error != null) {
-				Util.showToast(context, error);
+			// Bundle bundleError = intent.getExtras();
+			Bundle bundle = intent.getBundleExtra("usuario");
+
+			if (bundle == null) {
+				Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
 			} else {
-				Bundle bundle = intent.getBundleExtra("usuario");
 				user = (UsuarioDTO) bundle.getSerializable("usuario");
 				if (user.getEmail() != null) {
-					//SessionStore.save(email, getApplicationContext());
+					// SessionStore.save(email, getApplicationContext());
 					actividadPrincipal();
-				}else{
+				} else {
 					Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
 				}
 			}

@@ -12,9 +12,9 @@ public class SessionStore {
     
 	private static final String TOKEN = "access_token";
     private static final String EXPIRES = "expires_in";
-    private static final String KEY = "facebook-session";
+    //private static final String KEY = ;
     
-    public static boolean save(Facebook session, Context context) {
+    public static boolean save(Facebook session, Context context, final String KEY) {
         Editor editor =
             context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
         editor.putString(TOKEN, session.getAccessToken());
@@ -22,7 +22,7 @@ public class SessionStore {
         return editor.commit();
     }
 
-    public static boolean restore(Facebook session, Context context) {
+    public static boolean restore(Facebook session, Context context, final String KEY) {
         SharedPreferences savedSession =
             context.getSharedPreferences(KEY, Context.MODE_PRIVATE);
         session.setAccessToken(savedSession.getString(TOKEN, null));
@@ -30,7 +30,7 @@ public class SessionStore {
         return session.isSessionValid();
     }
 
-    public static void clear(Context context) {
+    public static void clear(Context context, final String KEY) {
         Editor editor = 
             context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
         editor.clear();
