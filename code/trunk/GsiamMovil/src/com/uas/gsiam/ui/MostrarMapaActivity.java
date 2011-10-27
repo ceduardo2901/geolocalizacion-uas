@@ -4,6 +4,7 @@ import greendroid.app.GDMapActivity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.PositionOverlay;
 
 public class MostrarMapaActivity extends GDMapActivity{
@@ -30,8 +32,16 @@ public class MostrarMapaActivity extends GDMapActivity{
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.mostrar_mapa);
 		mapa = (MapView) findViewById(R.id.mapaId);
-		Double lat = getIntent().getDoubleExtra("lat", 0);
-		Double lon = getIntent().getDoubleExtra("lon", 0);
+		Intent intent = getIntent();
+		
+		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
+		Double lat = new Double(0);
+		Double lon = new Double(0);
+		if(sitio != null){
+			lat = sitio.getLat();
+			lon = sitio.getLon();
+		}
+		
 		loc = getIntent().getParcelableExtra("ubicacion");
 		mostrarMapa(lat,lon);
 		
@@ -79,20 +89,6 @@ public class MostrarMapaActivity extends GDMapActivity{
 		BasicItemizedOverlay sitioOverlay = new BasicItemizedOverlay(getResources().getDrawable(R.drawable.gd_map_pin_base));
 		miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, null, null));
 		sitioOverlay.addOverlay(new OverlayItem(geoPoint, null, null));
-//		if (sitioPosOverlay == null && myposOverlay == null){
-//			sitioPosOverlay = new PositionOverlay();
-//			myposOverlay = new PositionOverlay();
-//		}
-//		else
-//			mapa.removeAllViews();
-//		final List<Overlay> overlays = mapa.getOverlays();
-//		overlays.clear();
-//		
-//		overlays.add(sitioPosOverlay);
-//		overlays.add(myposOverlay);
-//		sitioPosOverlay.setLocation(lat,lon);
-//		myposOverlay.setLocation(loc);
-//		myposOverlay.setNombre("Usted esta Aqui");
 		
 		mapa.setClickable(true);
 		mapControl.setCenter(geoPointUbicacion);

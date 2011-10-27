@@ -406,7 +406,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 					int position, long id) {
 				SitioDTO sitio = sitios.get(position);
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),
-						SitioDetalleActivity.class);
+						SitioTabActivity.class);
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
 				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);

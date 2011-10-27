@@ -73,9 +73,9 @@
 			android:layout_width="match_parent" android:layout_height="wrap_content">
 			<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
-				<Button android:text="@string/publicar" android:id="@+id/btnPublicarId"
+				<!--  <Button android:text="@string/publicar" android:id="@+id/btnPublicarId"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:onClick="publicar" />
+					android:onClick="publicar" />-->
 
 				<Button android:text="@string/comoIr" android:id="@+id/btnComoIrId"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
