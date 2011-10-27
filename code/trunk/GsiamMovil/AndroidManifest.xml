@@ -63,6 +63,7 @@
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<activity android:name="Preferencias"></activity>
+		<activity android:name="SitioTabActivity"></activity>
 		
 
 	</application>

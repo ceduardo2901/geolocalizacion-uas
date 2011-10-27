@@ -1,21 +1,18 @@
 package com.uas.gsiam.ui;
 
-import greendroid.app.GDActivity;
-import greendroid.image.ImageLoader;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore.Images;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,7 +28,7 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Util;
 
-public class SitioDetalleActivity extends GDActivity implements OnItemClickListener{
+public class SitioDetalleActivity extends Activity implements OnItemClickListener{
 
 	protected static final String TAG = "SitioDetalleActivity";
 	protected TextView txtNombre;
@@ -51,7 +48,8 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBarContentView(R.layout.sitio_detalle);
+		//setActionBarContentView(R.layout.sitio_detalle);
+		setContentView(R.layout.sitio_detalle);
 		galeria = (Gallery) findViewById(R.id.gallery);
 		fotos = new ArrayList<byte[]>();
 
@@ -64,7 +62,7 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
 		listComentarios = (ListView) findViewById(R.id.listComentariosId);
 		
-		inicializarBarra();
+		//inicializarBarra();
 		
 		galeria.setOnItemClickListener(this);
 
@@ -88,25 +86,25 @@ public class SitioDetalleActivity extends GDActivity implements OnItemClickListe
 		this.sitio = sitio;
 	}
 
-	private void inicializarBarra() {
-		addActionBarItem(Type.Locate, MAPA);
-		setTitle(R.string.app_name);
-	}
+//	private void inicializarBarra() {
+//		addActionBarItem(Type.Locate, MAPA);
+//		setTitle(R.string.app_name);
+//	}
 
-	@Override
-	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-		switch (item.getItemId()) {
-		case MAPA:
-			mostarMapa();
-			break;
-
-		default:
-			return super.onHandleActionBarItemClick(item, position);
-		}
-
-		return true;
-
-	}
+//	@Override
+//	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+//		switch (item.getItemId()) {
+//		case MAPA:
+//			mostarMapa();
+//			break;
+//
+//		default:
+//			return super.onHandleActionBarItemClick(item, position);
+//		}
+//
+//		return true;
+//
+//	}
 
 	public void onResume() {
 		super.onResume();
