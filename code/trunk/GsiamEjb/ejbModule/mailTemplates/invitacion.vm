@@ -1,0 +1,14 @@
+<html> 
+<body> 
+<p>Hola, </p><br> 
+<p>${p_nombre} quiere invitarte a que conoscas la red de G-SIAM.</p> 
+<br>
+<p>Para poder ser parte de esta nueva red solo tienes que bajar la aplicación android desde tu android market</p> 
+<br>
+<p>
+Gracias,<br>
+El equipo de <b>GSIAM</b>
+</p>	
+
+</body> 
+</html>
