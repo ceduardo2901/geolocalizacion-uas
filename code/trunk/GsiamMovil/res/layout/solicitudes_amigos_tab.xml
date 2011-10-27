@@ -7,11 +7,11 @@
 		android:layout_height="wrap_content" />
 	<FrameLayout android:id="@id/gd_segmented_content_view"
 		android:layout_width="fill_parent" android:layout_height="0dp"
-		android:layout_weight="1.0" android:foreground="@drawable/gd_shadow_top">
+		android:layout_weight="1" android:foreground="@drawable/gd_shadow_top"> 
 
-   
-
-
+<LinearLayout
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
 <ListView android:id="@id/android:list" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:divider="#FFFFFF" android:dividerHeight="4px" />
@@ -19,6 +19,7 @@
 	<TextView android:id="@android:id/empty" android:layout_width="match_parent"
 		android:layout_height="match_parent" android:text="@string/listaVacia"
 		 />		
+		 </LinearLayout>
 	</FrameLayout>	
 
 </greendroid.widget.SegmentedHost>
