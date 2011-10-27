@@ -226,4 +226,30 @@ public class UsuarioServicios {
 		
 	}
 	
+	
+	@GET
+	@Path("/invitar/{direcciones}/{nombre}")
+	@Produces("application/json")
+	public String enviarInvitaciones(@PathParam ("direcciones") String direcciones, @PathParam ("nombre") String nombre){
+
+
+		try {
+			
+			// TODO: Solucion parche, ver como hacemos cuando venga una lista..
+			ArrayList<String> dir = new ArrayList<String>();
+			dir.add(direcciones);
+
+			servicio.enviarInvitaciones(dir, nombre);
+			return "ok";
+
+		} catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+		}
+
+
+	}
+	
+	
+	
+	
 }
