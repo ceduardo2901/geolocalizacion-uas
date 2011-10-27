@@ -1,5 +1,6 @@
 package com.uas.gsiam.persistencia.utiles.email;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -22,7 +23,7 @@ public class EmailSender implements Runnable{
 	private static final String PORT = "587";
 	
 	private EmailTemplate template;
-	private String emailDestinatario;
+	private ArrayList<String> listEmailDestinatario;
 	private String subject;
 	
 	
@@ -40,14 +41,15 @@ public class EmailSender implements Runnable{
 		this.template = template;
 	}
 	
-	public String getEmailDestinatario() {
-		return emailDestinatario;
+	public ArrayList<String> getListEmailDestinatario() {
+		
+		return listEmailDestinatario;
 	}
 
 
 
-	public void setEmailDestinatario(String emailDestinatario) {
-		this.emailDestinatario = emailDestinatario;
+	public void setListEmailDestinatario(ArrayList<String> listEmailDestinatario) {
+		this.listEmailDestinatario = listEmailDestinatario;
 	}
 
 
@@ -80,7 +82,11 @@ public class EmailSender implements Runnable{
 			MimeMessage message = new MimeMessage(session);
 			
 			message.setFrom(new InternetAddress(EMAIL_GSIAM));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailDestinatario));		
+			
+			for (String iterable_element : listEmailDestinatario) {
+				message.addRecipient(Message.RecipientType.BCC, new InternetAddress(iterable_element));
+			} 
+			
 			message.setSubject(subject);
 			
 			
