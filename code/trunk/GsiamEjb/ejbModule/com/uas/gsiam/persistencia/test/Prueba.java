@@ -1,31 +1,10 @@
 package com.uas.gsiam.persistencia.test;
 
-import java.util.Properties;
+import java.util.ArrayList;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.SendFailedException;
-import javax.mail.Session;
-import javax.mail.Store;
-import javax.mail.Transport;
-import javax.mail.URLName;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.negocio.excepciones.RuntimeApplicationException;
-import com.uas.gsiam.persistencia.dao.impl.UsuarioDAO;
-import com.uas.gsiam.persistencia.utiles.Constantes;
+import com.uas.gsiam.persistencia.utiles.email.EmailSender;
 import com.uas.gsiam.persistencia.utiles.email.EmailTemplate;
 import com.uas.gsiam.persistencia.utiles.email.EmailTemplateFactory;
-import com.uas.gsiam.persistencia.utiles.email.EmailSender;
 
 public class Prueba {
 
@@ -34,7 +13,7 @@ public class Prueba {
 	 */
 	public static void main(String[] args) {
 
-		
+	
 		EmailTemplate template;
 		try {
 			template = EmailTemplateFactory.createEmailTemplate("mailTemplates/solicitud.vm");
@@ -44,7 +23,11 @@ public class Prueba {
 			EmailSender mail = new EmailSender();
 			mail.setTemplate(template);
 
-			mail.setEmailDestinatario("mloure@gmail.com");
+			ArrayList<String> lista = new ArrayList<String>();
+			lista.add("mloure@gmail.com");
+			lista.add("peludens@hotmail.com");
+			
+			mail.setListEmailDestinatario(lista);
 			mail.setSubject("esta es una prueba lalala");
 			
 
@@ -53,7 +36,12 @@ public class Prueba {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+	
+		
+		
+		
+		
+		
 	}
-	
-	
 }
