@@ -175,13 +175,16 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 			try {
 				EmailTemplate template = EmailTemplateFactory.createEmailTemplate("mailTemplates/solicitud.vm");
-				template.put("p_nombre_aprobador", "carlitos");
-				template.put("p_nombre_solicitante", "josesito");
+				template.put("p_nombre_aprobador", uApr.getNombre());
+				template.put("p_nombre_solicitante", uSol.getNombre());
 
 				EmailSender mail = new EmailSender();
 				mail.setTemplate(template);
 
-				mail.setEmailDestinatario(uApr.getEmail());
+				ArrayList<String> direcciones = new ArrayList<String>();
+				direcciones.add(uApr.getEmail());
+				mail.setListEmailDestinatario(direcciones);
+				
 				mail.setSubject(uSol.getNombre() + Constantes.EMAIL_SUBJECT_SOLICITUD_AMISTAD);
 
 				new Thread(mail).start();
@@ -340,5 +343,30 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 
 	
-    
+	public void enviarInvitaciones (ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion {
+		
+		//TODO: deberiamos fijarnos si el mail ingresado ya pertenece a GSIAM???? par evitar spam
+
+		try {
+			EmailTemplate template = EmailTemplateFactory.createEmailTemplate("mailTemplates/invitacion.vm");
+			template.put("p_nombre", nombre);
+
+			EmailSender mail = new EmailSender();
+			mail.setTemplate(template);
+
+			mail.setListEmailDestinatario(direcciones);
+			
+			mail.setSubject(nombre + Constantes.EMAIL_SUBJECT_INVITACION);
+
+			new Thread(mail).start();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UsuarioExcepcion(e.getMessage());
+		}
+		
+		
+	}
+	
+	
 }

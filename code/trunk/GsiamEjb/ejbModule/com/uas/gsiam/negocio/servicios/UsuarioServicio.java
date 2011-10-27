@@ -33,5 +33,7 @@ public interface UsuarioServicio {
 	public ArrayList<UsuarioDTO> getAmigos (int idUsuario) throws UsuarioExcepcion;
 	
 	public ArrayList<UsuarioDTO> getUsuarios (int id, String nombre) throws UsuarioExcepcion;
+	
+	public void enviarInvitaciones (ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion;
 		
 }

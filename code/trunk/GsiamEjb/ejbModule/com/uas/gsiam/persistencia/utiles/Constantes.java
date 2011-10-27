@@ -32,7 +32,9 @@ public class Constantes {
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
 
 	// Mensajes para el envio de mail
-	public static String EMAIL_SUBJECT_SOLICITUD_AMISTAD = " te quiere agergar como amigo";
+	public static String EMAIL_SUBJECT_SOLICITUD_AMISTAD = " te quiere agregar como amigo";
+	public static String EMAIL_SUBJECT_INVITACION = " quiere que pertenezcas a la red GSIAM";
+	
 	
 	
 	
