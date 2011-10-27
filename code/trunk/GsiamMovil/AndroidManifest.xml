@@ -62,6 +62,7 @@
 		<service android:name="com.uas.gsiam.servicios.CrearSolicitudAmistadServicio" />
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
+		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
 		<activity android:name="Preferencias"></activity>
 		<activity android:name="SitioTabActivity"></activity>
 		
