@@ -73,6 +73,10 @@ public class Constantes {
 	public static final String RECHAZAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/rechazarsolicitud";
 	public static final String RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
+	public static final String ENVIAR_INVITACIONES_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/invitar/{direcciones}/{nombre}";
+	public static final String ENVIAR_INVITACIONES_FILTRO_ACTION = "com.gsiam.places.ENVIAR_INVITACIONES_FILTRO_ACTION";
+	
+	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
 	public static final String MSG_ESPERA_INICIANDO_SESION = "Iniciando sesion, por favor espere...";
@@ -81,6 +85,7 @@ public class Constantes {
 	public static final String MSG_ESPERA_ENVIANDO_SOLICITUD = "Enviando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_ACEPTANDO_SOLICITUD = "Aceptando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_RECHAZANDO_SOLICITUD = "Rechazando solicitud, por favor espere...";
+	public static final String MSG_ESPERA_ENVIANDO_INVITACION = "Enviando invitaciones, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha \ncreado exitosamente";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
 	public static final String MSG_SOLICITUD_RESPONDIDA_OK = "La solicitud se aprobo/rechazo correctamente";
@@ -95,7 +100,7 @@ public class Constantes {
 	public static final String MSG_PUBLICACION_CREADA = "La publicacion se creo correctamente";
 	public static final String MSG_NO_EXISTEN_SITIOS = "No se encontraron sitios cercanos a su ubicacion";
 	public static final String MSG_SITIO_CREADO = "El Sitio se creo correctamente";
-	
+	public static final String MSG_INVITACIONES_OK = "Invitacion enviada existosamente";
 	
 	
 }
