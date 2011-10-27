@@ -45,6 +45,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     protected ListView lv;
     private int vista;
     protected IntentFilter solicitudesFiltro;
+    protected IntentFilter responderSolicitudFiltro;
     public static ArrayList<UsuarioDTO> usuariosSolicitudesEnviadas;
     public static ArrayList<UsuarioDTO> usuariosSolicitudesRecibidas;
     protected ApplicationController app;
@@ -61,6 +62,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
         setContentView(R.layout.solicitudes_amigos_tab);
  
         solicitudesFiltro = new IntentFilter(Constantes.GET_SOLICITUDES_FILTRO_ACTION);
+        responderSolicitudFiltro = new IntentFilter(Constantes.RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION);
       
         Intent intentCargarSolicitudes = new Intent(getApplicationContext(),GetSolicitudesPendientesServicio.class);
 		startService(intentCargarSolicitudes);
@@ -117,12 +119,14 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     protected void onResume() {
 		 super.onResume();
 		 this.registerReceiver(receiverSolicitudes, solicitudesFiltro);
+		 this.registerReceiver(receiverResponderSolicitud, responderSolicitudFiltro);
 		 Log.i(TAG, "registro el servicio");
 	 }
 	
 	protected void onPause(){
 		super.onPause();
 		this.unregisterReceiver(receiverSolicitudes);
+		this.unregisterReceiver(receiverResponderSolicitud);
 		Log.i(TAG, "saco el servicio");
 	}
     
@@ -150,6 +154,26 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 	    }
 	  };
     
+	  
+	  protected BroadcastReceiver receiverResponderSolicitud = new BroadcastReceiver() {
+			@Override
+		    public void onReceive(Context context, Intent intent) {
+
+				Util.dismissProgressDialog();
+				Bundle bundle = intent.getExtras();
+				String respuesta = bundle.getString("respuesta");
+				
+				if (respuesta.equals(Constantes.RETURN_OK)){
+		    		
+					Util.showToast(context, Constantes.MSG_SOLICITUD_RESPONDIDA_OK);
+					
+				}
+				else{
+					Util.showToast(context, respuesta);
+				}	
+		    }
+		  };
+	  
 	  public void mostrarSolicitudesEnviadas() {
 		  
 		  UsuarioAdapter adaptador = new UsuarioAdapter((Activity) lv.getContext(), R.layout.usuario_item, usuariosSolicitudesEnviadas);
