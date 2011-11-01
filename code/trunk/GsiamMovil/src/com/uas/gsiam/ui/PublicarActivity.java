@@ -43,6 +43,7 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.PublicarServicio;
 import com.uas.gsiam.utils.ApplicationController;
@@ -61,7 +62,7 @@ public class PublicarActivity extends Activity implements
 	private AsyncFacebookRunner mAsyncRunner;
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
-	private Integer sitioId;
+	private SitioDTO sitio;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
 	private static final int RESULT = 1001;
@@ -83,6 +84,8 @@ public class PublicarActivity extends Activity implements
 		fotoPub = (ImageView) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
+		facebook = new Facebook(APP_ID);
+		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
@@ -118,8 +121,8 @@ public class PublicarActivity extends Activity implements
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
 
-		sitioId = getIntent().getIntExtra("sitioId", 0);
-		nombre = getIntent().getStringExtra("nombre");
+		//sitioId = getIntent().getIntExtra("sitioId", 0);
+		//nombre = getIntent().getStringExtra("nombre");
 		usuario = app.getUserLogin();
 	}
 
@@ -143,7 +146,7 @@ public class PublicarActivity extends Activity implements
 	private void comentarFacebook() {
 		if (comentarFaceBook.isChecked()) {
 
-			facebook = new Facebook(APP_ID);
+			
 			mAsyncRunner = new AsyncFacebookRunner(facebook);
 			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
 			
@@ -170,7 +173,7 @@ public class PublicarActivity extends Activity implements
 	public void publicar(View v) {
 		PublicacionDTO publicar = new PublicacionDTO();
 		publicar.setComentario(comentario.getText().toString());
-		publicar.setIdSitio(new Integer(sitioId));
+		publicar.setIdSitio(sitio.getIdSitio());
 		publicar.setIdUsuario(usuario.getId());
 		publicar.setPuntaje(puntaje.getRating());
 		

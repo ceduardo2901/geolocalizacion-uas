@@ -69,6 +69,15 @@ public class InvitarAmigosActivity extends Activity {
 	}
 	
 	
+	public void btnInvitarAmigosFacebook(View v) {
+
+		
+		Intent intent = new Intent(this, ListaAmigosFacebook.class);
+		startActivity(intent);
+		
+	}
+	
+	
 	protected BroadcastReceiver receiverEnviarInvitaciones = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {

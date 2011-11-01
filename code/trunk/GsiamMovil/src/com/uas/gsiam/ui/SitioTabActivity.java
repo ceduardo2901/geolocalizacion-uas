@@ -1,10 +1,21 @@
 package com.uas.gsiam.ui;
 
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
+
 import greendroid.app.GDTabActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -21,10 +32,12 @@ public class SitioTabActivity extends GDTabActivity {
 
 	private static TabHost mTabHost;
 
-	protected static final int ACTUALIZAR = 0;
-	protected static final int MAPA = 1;
-	protected static final int COMPARTIR = 2;
-	protected Intent intent;
+	private static final int ACTUALIZAR = 0;
+	private static final int MAPA = 1;
+	private static final int COMPARTIR = 2;
+	private static final int RESULT = 1;
+	private Intent intent;
+	private SitioDTO sitio;
 
 	private String tabClick;
 
@@ -37,8 +50,8 @@ public class SitioTabActivity extends GDTabActivity {
 		inicializarActionBar();
 		mTabHost = getTabHost();
 		intent = getIntent();
-		
-		//añadirTab2(intent);
+		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
+		// añadirTab2(intent);
 		añadirTab1(intent);
 		añadirTab3(intent);
 
@@ -71,23 +84,51 @@ public class SitioTabActivity extends GDTabActivity {
 		addActionBarItem(Type.Share, COMPARTIR);
 		getActionBar().setTitle("GSIAM - Sitio");
 	}
-	
-	public void agregar(){
+
+	public void agregar() {
 		getActionBar().addItem(Type.Share, 2);
 	}
-	
+
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
 		case MAPA:
 			mostarMapa();
 			break;
-
+		case COMPARTIR:
+			compartir();
+			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
 
 		return true;
+
+	}
+
+	private void compartir() {
+		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
+		compartirIntent.setType("plain/text");
+		compartirIntent.putExtra(Intent.EXTRA_TEXT,
+				"Mira el sitio " + sitio.getNombre() + " en Gsiam");
+
+		startActivityForResult(Intent.createChooser(compartirIntent, "Title:"),
+				RESULT);
+
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (resultCode) {
+		case RESULT:
+			Util.showToast(this, Constantes.MSG_MENSAJE_ENVIADO);
+			break;
+
+		default:
+			break;
+
+		}
 
 	}
 
@@ -108,7 +149,7 @@ public class SitioTabActivity extends GDTabActivity {
 	private void mostarMapa() {
 		intent.setClass(this, MostrarMapaActivity.class);
 		startActivity(intent);
-		//addTab(TAG_SITIO_MAPA, "Mapa", intent);
+		// addTab(TAG_SITIO_MAPA, "Mapa", intent);
 
 	}
 

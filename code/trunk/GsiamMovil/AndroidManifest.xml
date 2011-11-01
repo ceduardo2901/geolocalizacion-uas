@@ -50,7 +50,7 @@
 		<activity android:name="VisorImagenes" />
 		<activity android:name="Preferencias"/>
 		<activity android:name="SitioTabActivity"/>
-		
+		<activity android:name="ListaAmigosFacebook"></activity>
 		
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
@@ -66,8 +66,7 @@
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
-		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />
-		
+		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />				
 
 	</application>
 </manifest>
