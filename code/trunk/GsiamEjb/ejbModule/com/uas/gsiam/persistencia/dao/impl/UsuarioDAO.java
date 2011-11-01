@@ -546,15 +546,31 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.setInt(1, idUsuario);
 			ps.setInt(2, idUsuario);
 			
+			UsuarioDTO usuarioRetorno;
+			PosicionUsuarioDTO posicion;
+			PGgeometry geom;
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
 				
-				UsuarioDTO usuarioRetorno = new UsuarioDTO();
+				usuarioRetorno = new UsuarioDTO();
 				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(rs.getString("usu_mail"));
 				usuarioRetorno.setPassword(rs.getString("usu_password"));
 				usuarioRetorno.setAvatar(rs.getBytes("usu_avatar"));
+				
+				geom = (PGgeometry) rs.getObject("usu_ubicacion");
+				
+				if (geom != null){
+					posicion = new PosicionUsuarioDTO();
+					posicion.setLat(geom.getGeometry().getFirstPoint().getX());
+					posicion.setLon(geom.getGeometry().getFirstPoint().getY());
+					posicion.setFechaActualizacion(rs.getDate("usu_ubicacion_fecha"));
+					posicion.setIdUsuario(rs.getInt("usu_id"));
+					usuarioRetorno.setPosicion(posicion);
+				}
+				
+				
 				
 				listaUsuarios.add(usuarioRetorno);
 				
@@ -563,6 +579,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				
 			rs.close();
 			ps.close();
+				
 				
 			
 			return listaUsuarios;	
