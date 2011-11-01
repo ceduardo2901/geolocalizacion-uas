@@ -4,7 +4,6 @@ import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
-import com.uas.gsiam.utils.SessionStore;
 
 public class MainActivity extends GDActivity {
 
