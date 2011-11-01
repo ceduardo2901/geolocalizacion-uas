@@ -15,7 +15,6 @@ import android.widget.TabHost.OnTabChangeListener;
 
 import com.uas.gsiam.servicios.GetAmigosServicio;
 import com.uas.gsiam.servicios.GetSolicitudesPendientesServicio;
-import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -33,6 +32,7 @@ public class AmigosTabActivity extends GDTabActivity {
     private static TabHost mTabHost;
     
     protected static final int ACTUALIZAR = 0;
+    protected static final int RADAR = 1;
     
     private String tabClick;
 	
@@ -151,6 +151,7 @@ public class AmigosTabActivity extends GDTabActivity {
 	private void inicializarActionBar() {
 	
 		getActionBar().addItem(Type.Refresh, ACTUALIZAR);
+		getActionBar().addItem(Type.Locate, RADAR);
 		getActionBar().setTitle("GSIAM - Amigos");
 	}
 	
@@ -185,6 +186,27 @@ public class AmigosTabActivity extends GDTabActivity {
 			
 			break;
 		
+			
+		case RADAR:
+			
+			if (tabClick.equalsIgnoreCase(TAG_MIS_AMIGOS)){
+				Util.showToast(this, "TAG_MIS_AMIGOS");
+				radarAmigos();
+				
+			}
+			//TODO: ver que hacer cuando esta en las pestañas de abajo... 
+			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
+				Util.showToast(this, "TAG_AGREGAR_AMIGOS");
+			}
+			if (tabClick.equalsIgnoreCase(TAG_SOLICITUDES)){
+				Util.showToast(this, "TAG_SOLICITUDES");
+			}
+			if (tabClick.equalsIgnoreCase(TAG_INVITAR_AMIGOS)){
+				Util.showToast(this, "TAG_INVITAR_AMIGOS");
+			}
+			
+			break;
+			
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
@@ -206,5 +228,9 @@ public class AmigosTabActivity extends GDTabActivity {
     	Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACTUALIZANDO);
 	}
 	
+	private void radarAmigos(){
+		Intent radarIntent = new Intent(this, RadarActivity.class);
+		startActivity(radarIntent);
+	}
     
 }
