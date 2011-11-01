@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 public class Util {
@@ -138,6 +139,12 @@ public class Util {
 
 	}	
 	
+	public static Drawable BitmapToDrawable(Bitmap bitmap){
+
+		return new BitmapDrawable(bitmap);
+
+	}
+	
 	
 	public static ArrayList<UsuarioDTO> getArrayListUsuarioDTO(UsuarioDTO[] usuarios){
         ArrayList<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
@@ -154,5 +161,25 @@ public class Util {
 		}
 		return lista;
 	}
+
+	
+	
+	public static Bitmap getResizedBitmap(Bitmap bitmap, int width, int height) {
+
+	    final int bitmapWidth = bitmap.getWidth();
+	    final int bitmapHeight = bitmap.getHeight();
+
+	    final float scale = Math.min((float) width / (float) bitmapWidth,
+	        (float) height / (float) bitmapHeight);
+
+	    final int scaledWidth = (int) (bitmapWidth * scale);
+	    final int scaledHeight = (int) (bitmapHeight * scale);
+
+	    final Bitmap decored = Bitmap.createScaledBitmap(bitmap, scaledWidth,
+	        scaledHeight, true);
+
+	    return decored;
+	  }
+	
 	
 }
