@@ -17,7 +17,16 @@ public class UsuarioDTO implements Serializable{
 	private byte [] avatar;
 	private boolean solicitudEnviada;
 	private boolean solicitudRecibida;
+	private PosicionUsuarioDTO posicion;
 	
+	public PosicionUsuarioDTO getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(PosicionUsuarioDTO posicion) {
+		this.posicion = posicion;
+	}
+
 	public boolean isSolicitudRecibida() {
 		return solicitudRecibida;
 	}
