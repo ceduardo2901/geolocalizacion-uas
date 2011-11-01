@@ -76,6 +76,8 @@ public class Constantes {
 	public static final String ENVIAR_INVITACIONES_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/invitar/{direcciones}/{nombre}";
 	public static final String ENVIAR_INVITACIONES_FILTRO_ACTION = "com.gsiam.places.ENVIAR_INVITACIONES_FILTRO_ACTION";
 	
+	public static final String ACTUALIZAR_POSICION_USUARIO_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/actualizarPosicion";
+	public static final String ACTUALIZAR_POSICION_USUARIO_FILTRO_ACTION = "com.gsiam.places.ACTUALIZAR_POSICION_USUARIO_FILTRO_ACTION";
 	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 

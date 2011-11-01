@@ -13,7 +13,6 @@ import com.uas.gsiam.utils.Constantes;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,7 +20,6 @@ import android.util.Log;
 public class EditarUsuarioServicio extends IntentService{
 
 	protected static String TAG = "EditarUsuarioServicio";
-	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
 	
 	public EditarUsuarioServicio() {

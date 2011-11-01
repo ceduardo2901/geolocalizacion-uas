@@ -3,18 +3,12 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
+
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
 
 import android.app.IntentService;
