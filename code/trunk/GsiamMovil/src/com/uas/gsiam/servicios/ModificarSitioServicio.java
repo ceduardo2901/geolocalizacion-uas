@@ -13,9 +13,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SitioMovilDTO;
 
 public class ModificarSitioServicio extends IntentService {
 
@@ -40,9 +39,9 @@ public class ModificarSitioServicio extends IntentService {
 
 		Bundle bundle = intent.getExtras();
 
-		SitioMovilDTO sitio = (SitioMovilDTO) bundle.getParcelable("sitio");
+		SitioDTO sitio = (SitioDTO) bundle.getParcelable("sitio");
 
-		Map<String, SitioMovilDTO> parms = new HashMap<String, SitioMovilDTO>();
+		Map<String, SitioDTO> parms = new HashMap<String, SitioDTO>();
 		parms.put("sitioDto", sitio);
 
 		try {

@@ -1,10 +1,8 @@
 package com.uas.gsiam.ui;
 
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.ModificarSitioServicio;
 import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.SessionStore;
-import com.uas.gsiam.utils.SitioMovilDTO;
 import com.uas.gsiam.utils.Util;
 
 import android.app.Activity;
@@ -13,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable.Creator;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +20,7 @@ public class ModificarSitioActivity extends Activity {
 	protected static String TAG = "ModificarSitioActivity";
 	protected EditText nombre;
 	protected EditText direccion;
-	protected SitioMovilDTO sitio;
+	protected SitioDTO sitio;
 	protected IntentFilter filtroModificarSitio;
 
 	@Override
@@ -41,7 +37,7 @@ public class ModificarSitioActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 
-		sitio = getIntent().getParcelableExtra("sitio");
+		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 
 		nombre.setText(sitio.getNombre());
 		direccion.setText(sitio.getDireccion());
