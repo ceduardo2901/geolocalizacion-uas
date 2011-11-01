@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Remote;
 
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
@@ -35,5 +36,7 @@ public interface UsuarioServicio {
 	public ArrayList<UsuarioDTO> getUsuarios (int id, String nombre) throws UsuarioExcepcion;
 	
 	public void enviarInvitaciones (ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion;
+	
+	public void actualizarPosicionUsuario (PosicionUsuarioDTO posUsuario) throws UsuarioExcepcion;
 		
 }

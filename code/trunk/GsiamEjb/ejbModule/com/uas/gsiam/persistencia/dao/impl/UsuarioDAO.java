@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.postgis.PGgeometry;
+import org.postgis.Point;
+
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -263,7 +267,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	// TODO Definir donde se encripta el password. 
 	/*
 	 * Metodo que modifica al usuario
 	 */
@@ -292,6 +295,36 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
+	public void actualizarPosicionUsuario(PosicionUsuarioDTO posUsuario) throws SQLException{
+		
+		PreparedStatement ps;
+	
+		String sqlActualizarPocision = "UPDATE t_usuario SET usu_ubicacion = ?, usu_ubicacion_fecha = ? " +
+				                       "WHERE usu_id = ?";
+		
+
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlActualizarPocision);
+		
+		Point punto = new Point(posUsuario.getLat(), posUsuario.getLon());
+		PGgeometry geom = new PGgeometry(punto);
+
+		java.util.Date hoy = new java.util.Date();
+		java.sql.Date sqlHoy = new java.sql.Date(hoy.getTime());
+		
+		ps.setObject(1, geom);
+		ps.setDate(2, sqlHoy);
+		ps.setInt(3, posUsuario.getIdUsuario());
+		
+		ps.executeUpdate();
+		
+		ps.close();
+
+		
+	}
+	
+	
+	
+	// TODO : ver si esto va...
 	/*
 	 * Metodo que elimina usuario
 	 */
@@ -321,13 +354,13 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearContacto);
 		
-		java.util.Date today = new java.util.Date();
-		java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+		java.util.Date hoy = new java.util.Date();
+		java.sql.Date sqlHoy = new java.sql.Date(hoy.getTime());
 
 		
 		ps.setInt(1, solicitud.getIdUsuarioSolicitante());
 		ps.setInt(2, solicitud.getIdUsuarioAprobador());
-		ps.setDate(3, sqlToday);
+		ps.setDate(3, sqlHoy);
 		ps.setDate(4, null);
 		
 		ps.executeUpdate();
@@ -348,10 +381,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlAprobarContacto);
 				
-		java.util.Date today = new java.util.Date();
-		java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+		java.util.Date hoy = new java.util.Date();
+		java.sql.Date sqlHoy = new java.sql.Date(hoy.getTime());
 		
-		ps.setDate(1, sqlToday);
+		ps.setDate(1, sqlHoy);
 		ps.setInt(2, solicitud.getIdUsuarioSolicitante());
 		ps.setInt(3, solicitud.getIdUsuarioAprobador());
 		

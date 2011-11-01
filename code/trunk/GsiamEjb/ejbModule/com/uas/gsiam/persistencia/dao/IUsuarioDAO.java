@@ -3,6 +3,7 @@ package com.uas.gsiam.persistencia.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
@@ -37,6 +38,6 @@ public interface IUsuarioDAO {
 	
 	public ArrayList<UsuarioDTO> getContactos(int idUsuario) throws SQLException;
 	
-	
+	public void actualizarPosicionUsuario(PosicionUsuarioDTO posUsuario) throws SQLException;
 	
 }

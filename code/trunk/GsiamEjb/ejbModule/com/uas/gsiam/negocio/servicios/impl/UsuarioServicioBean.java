@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
@@ -367,6 +368,33 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		
 		
 	}
+	
+	
+	public void actualizarPosicionUsuario (PosicionUsuarioDTO posUsuario) throws UsuarioExcepcion {
+		
+		try {
+			
+			AbstractFactory.getInstance().getUsuarioDAO().actualizarPosicionUsuario(posUsuario);
+	
+	
+		} catch (IOException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+			
+		} catch (InstantiationException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_ACTUALIZAR_UBICACION);
+			
+		} catch (IllegalAccessException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_ACTUALIZAR_UBICACION);
+			
+		} catch (ClassNotFoundException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_ACTUALIZAR_UBICACION);
+			
+		} catch (SQLException e) {
+			throw new UsuarioExcepcion(Constantes.ERROR_ACTUALIZAR_UBICACION);
+		} 
+	
+	}
+	
 	
 	
 }
