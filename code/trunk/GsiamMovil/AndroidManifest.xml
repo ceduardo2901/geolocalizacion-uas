@@ -48,7 +48,10 @@
 		<activity android:name="InvitarAmigosActivity" />
 		<activity android:name="SolicitudesActivity" />
 		<activity android:name="VisorImagenes" />
-
+		<activity android:name="Preferencias"/>
+		<activity android:name="SitioTabActivity"/>
+		
+		
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
 		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio" />
@@ -63,8 +66,7 @@
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
-		<activity android:name="Preferencias"></activity>
-		<activity android:name="SitioTabActivity"></activity>
+		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />
 		
 
 	</application>
