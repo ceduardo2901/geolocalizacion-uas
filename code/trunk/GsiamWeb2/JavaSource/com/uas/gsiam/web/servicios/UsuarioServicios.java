@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
@@ -240,7 +241,7 @@ public class UsuarioServicios {
 			dir.add(direcciones);
 
 			servicio.enviarInvitaciones(dir, nombre);
-			return "ok";
+			return Constantes.RETURN_OK;
 
 		} catch (UsuarioExcepcion e) {
 			return e.getMensaje();
@@ -249,7 +250,23 @@ public class UsuarioServicios {
 
 	}
 	
-	
+	@POST
+	@Path("/actualizarPosicion")
+	@Produces("application/json")
+	@Consumes("application/json")
+    public String actualizarPosicionUsuario(@BadgerFish PosicionUsuarioDTO posUsuario) {
+			
+		try {
+			servicio.actualizarPosicionUsuario(posUsuario);
+			
+			return Constantes.RETURN_OK;
+			
+		}  catch (UsuarioExcepcion e) {
+			return e.getMensaje();
+			
+		}
+		
+	}
 	
 	
 }
