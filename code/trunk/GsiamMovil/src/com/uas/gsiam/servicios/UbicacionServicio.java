@@ -35,7 +35,6 @@ public class UbicacionServicio extends IntentService implements LocationListener
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 		
 		loc = PosicionGPS.getPosicion(this);
