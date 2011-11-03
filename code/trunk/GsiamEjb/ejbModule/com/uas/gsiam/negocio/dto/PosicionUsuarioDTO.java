@@ -2,6 +2,7 @@ package com.uas.gsiam.negocio.dto;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PosicionUsuarioDTO implements Serializable{
 
@@ -10,7 +11,7 @@ public class PosicionUsuarioDTO implements Serializable{
 	private int idUsuario;
 	private Double lon;
 	private Double lat;
-	private Date fechaActualizacion;
+	private Timestamp fechaActualizacion;
 	
 	
 	public int getIdUsuario() {
@@ -31,10 +32,10 @@ public class PosicionUsuarioDTO implements Serializable{
 	public void setLat(Double lat) {
 		this.lat = lat;
 	}
-	public Date getFechaActualizacion() {
+	public Timestamp getFechaActualizacion() {
 		return fechaActualizacion;
 	}
-	public void setFechaActualizacion(Date fechaActualizacion) {
+	public void setFechaActualizacion(Timestamp fechaActualizacion) {
 		this.fechaActualizacion = fechaActualizacion;
 	}
 	
