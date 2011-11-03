@@ -462,7 +462,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	@Override
 	public void onLocationChanged(Location location) {
 		this.loc = location;
-		//actualizarSitios(loc);
+		actualizarSitios(loc);
 
 	}
 
