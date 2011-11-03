@@ -8,22 +8,20 @@ import android.location.LocationManager;
 
 public class PosicionGPS {
 
-	
 	protected static Location loc;
 	protected static LocationManager locationManager;
-	
-	
-	public static Location getPosicion (Context contexto){
-		
-		locationManager = (LocationManager) contexto.getSystemService(Context.LOCATION_SERVICE);
+
+	public static Location getPosicion(Context contexto) {
+
+		locationManager = (LocationManager) contexto
+				.getSystemService(Context.LOCATION_SERVICE);
 		loc = getLastBestLocation(Constantes.MAX_DISTANCE,
 				System.currentTimeMillis() - Constantes.MAX_TIME);
-		
+
 		return loc;
-		
+
 	}
-	
-	
+
 	private static Location getLastBestLocation(int minDistance, long minTime) {
 		Location bestResult = null;
 		float bestAccuracy = Float.MAX_VALUE;
@@ -49,7 +47,9 @@ public class PosicionGPS {
 		}
 		return bestResult;
 	}
-	
-	
-	
+
+	public static LocationManager getLocationManager() {
+		return locationManager;
+	}
+
 }

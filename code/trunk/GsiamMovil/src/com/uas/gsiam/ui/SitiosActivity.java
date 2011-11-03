@@ -43,6 +43,7 @@ import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.PosicionGPS;
 import com.uas.gsiam.utils.Util;
 
 public class SitiosActivity extends GDActivity implements LocationListener,
@@ -69,9 +70,9 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		setActionBarContentView(R.layout.lista_sitios);
 
 		lw = (ListView) findViewById(R.id.listaSitios);
+		loc = PosicionGPS.getPosicion(getApplicationContext());
 
-		locationManager = (LocationManager) this
-				.getSystemService(Context.LOCATION_SERVICE);
+		locationManager = PosicionGPS.getLocationManager();
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
@@ -81,8 +82,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		} else {
 			// TODO poner aca despues obtener la ubicacion
 		}
-		loc = getLastBestLocation(Constantes.MAX_DISTANCE,
-				System.currentTimeMillis() - Constantes.MAX_TIME);
+
 		inicializarActionBar();
 		initQuickActionBar();
 		actualizarSitios(loc);
@@ -256,8 +256,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			startSearch(null, false, null, false);
 			break;
 		case ACTUALIZAR:
-			loc = getLastBestLocation(Constantes.MAX_DISTANCE,
-					System.currentTimeMillis() - Constantes.MAX_TIME);
+			loc = PosicionGPS.getPosicion(getApplicationContext());
 			actualizarSitios(loc);
 
 			break;
@@ -460,36 +459,10 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		}
 	}
 
-	protected Location getLastBestLocation(int minDistance, long minTime) {
-		Location bestResult = null;
-		float bestAccuracy = Float.MAX_VALUE;
-		long bestTime = Long.MIN_VALUE;
-
-		List<String> matchingProviders = locationManager.getAllProviders();
-		for (String provider : matchingProviders) {
-			Location location = locationManager.getLastKnownLocation(provider);
-			if (location != null) {
-				float accuracy = location.getAccuracy();
-				long time = location.getTime();
-
-				if ((time > minTime && accuracy < bestAccuracy)) {
-					bestResult = location;
-					bestAccuracy = accuracy;
-					bestTime = time;
-				} else if (time < minTime && bestAccuracy == Float.MAX_VALUE
-						&& time > bestTime) {
-					bestResult = location;
-					bestTime = time;
-				}
-			}
-		}
-		return bestResult;
-	}
-
 	@Override
 	public void onLocationChanged(Location location) {
 		this.loc = location;
-		actualizarSitios(loc);
+		//actualizarSitios(loc);
 
 	}
 
