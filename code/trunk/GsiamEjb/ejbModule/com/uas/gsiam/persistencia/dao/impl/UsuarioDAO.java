@@ -309,10 +309,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 		PGgeometry geom = new PGgeometry(punto);
 
 		java.util.Date hoy = new java.util.Date();
-		java.sql.Date sqlHoy = new java.sql.Date(hoy.getTime());
+		java.sql.Timestamp sqlHoy = new java.sql.Timestamp(hoy.getTime());
 		
 		ps.setObject(1, geom);
-		ps.setDate(2, sqlHoy);
+		ps.setTimestamp(2, sqlHoy);
 		ps.setInt(3, posUsuario.getIdUsuario());
 		
 		ps.executeUpdate();
@@ -565,7 +565,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 					posicion = new PosicionUsuarioDTO();
 					posicion.setLat(geom.getGeometry().getFirstPoint().getX());
 					posicion.setLon(geom.getGeometry().getFirstPoint().getY());
-					posicion.setFechaActualizacion(rs.getDate("usu_ubicacion_fecha"));
+					
+					posicion.setFechaActualizacion(rs.getTimestamp("usu_ubicacion_fecha"));
 					posicion.setIdUsuario(rs.getInt("usu_id"));
 					usuarioRetorno.setPosicion(posicion);
 				}
