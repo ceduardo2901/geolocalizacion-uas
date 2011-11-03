@@ -69,7 +69,7 @@ public class MostrarMapaActivity extends GDMapActivity{
 	}
 	
 	private void mostrarMapa(Double lat, Double lon) {
-
+		
 		if (mapa == null)
 			mapa = (MapView) findViewById(R.id.mapaId);
 		MapController mapControl = mapa.getController();
