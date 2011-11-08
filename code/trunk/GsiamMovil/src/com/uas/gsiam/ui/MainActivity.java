@@ -2,8 +2,13 @@ package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,8 +18,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.maps.MyLocationOverlay;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.ActualizarPosicionServicio;
 import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.PosicionGPS;
 
 public class MainActivity extends GDActivity {
 
@@ -25,6 +33,7 @@ public class MainActivity extends GDActivity {
 	protected UsuarioDTO user;
 	protected TextView nombreTxt;
 	protected TextView textAplicacion;
+	private SharedPreferences preferencias;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +50,7 @@ public class MainActivity extends GDActivity {
 
 		amigosButton = (Button) findViewById(R.id.amigos_button);
 		amigosButton.setOnClickListener(botonListener);
-		
+
 		confButton = (Button) findViewById(R.id.preferencias_button);
 		confButton.setOnClickListener(botonListener);
 
@@ -50,12 +59,51 @@ public class MainActivity extends GDActivity {
 
 		nombreTxt.setText("Bienvenido: " + user.getNombre());
 		inicializarBar();
+
+		actualizarPosicion();
+	}
+
+	private void actualizarPosicion() {
+		preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean compartirUbicacion = preferencias.getBoolean("compUbicacionId",
+				false);
+		Intent intent = new Intent(this, ActualizarPosicionServicio.class);
+		Location loc = PosicionGPS.getPosicion(this);
+		//MyLocationOverlay d = new MyLocationOverlay(this, null);
+		//d.getMyLocation();
+		if (compartirUbicacion) {
+			if (!isMyServiceRunning()) {
+				startService(intent);
+			}
+
+		} else {
+			if (isMyServiceRunning()) {
+				stopService(intent);
+			}
+		}
+	}
+
+	private boolean isMyServiceRunning() {
+		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		for (RunningServiceInfo service : manager
+				.getRunningServices(Integer.MAX_VALUE)) {
+			if ("com.uas.gsiam.servicios.ActualizarPosicionServicio"
+					.equals(service.service.getClassName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void onResume() {
+		super.onResume();
+		actualizarPosicion();
 	}
 
 	private void inicializarBar() {
-		
+
 		addActionBarItem(Type.Help, 0);
-	
+
 	}
 
 	@Override
@@ -70,9 +118,14 @@ public class MainActivity extends GDActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.cerrarSesionId:
-			//SessionStore.clear(this);
+			// SessionStore.clear(this);
+			if(isMyServiceRunning()){
+				Intent intent = new Intent(this, ActualizarPosicionServicio.class);
+				stopService(intent);
+			}
 			Intent loginIntent = new Intent(this, LoginActivity.class);
 			startActivity(loginIntent);
+			
 			break;
 
 		default:
@@ -105,9 +158,9 @@ public class MainActivity extends GDActivity {
 	private void sitiosActivity() {
 		Intent sitioIntent = new Intent(this, SitiosActivity.class);
 		startActivity(sitioIntent);
-		
+
 	}
-	
+
 	private void preferenciasActivity() {
 		Intent preferenciasIntent = new Intent(this, Preferencias.class);
 		startActivity(preferenciasIntent);
