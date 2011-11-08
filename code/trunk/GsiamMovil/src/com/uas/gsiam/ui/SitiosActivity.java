@@ -73,6 +73,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		loc = PosicionGPS.getPosicion(getApplicationContext());
 
 		locationManager = PosicionGPS.getLocationManager();
+		
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
