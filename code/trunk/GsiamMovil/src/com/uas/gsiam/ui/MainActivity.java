@@ -18,10 +18,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.maps.MyLocationOverlay;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.ActualizarPosicionServicio;
 import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.LocationHelper;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 import com.uas.gsiam.utils.PosicionGPS;
 
 public class MainActivity extends GDActivity {
@@ -34,6 +35,7 @@ public class MainActivity extends GDActivity {
 	protected TextView nombreTxt;
 	protected TextView textAplicacion;
 	private SharedPreferences preferencias;
+	private Location currentLocation;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,9 +70,12 @@ public class MainActivity extends GDActivity {
 		boolean compartirUbicacion = preferencias.getBoolean("compUbicacionId",
 				false);
 		Intent intent = new Intent(this, ActualizarPosicionServicio.class);
-		Location loc = PosicionGPS.getPosicion(this);
-		//MyLocationOverlay d = new MyLocationOverlay(this, null);
-		//d.getMyLocation();
+		
+		LocationHelper h = new LocationHelper();
+		boolean result = h.getLocation(this, locationResult);
+		if(result){
+			intent.putExtra("loc", currentLocation);
+		}
 		if (compartirUbicacion) {
 			if (!isMyServiceRunning()) {
 				startService(intent);
@@ -82,6 +87,17 @@ public class MainActivity extends GDActivity {
 			}
 		}
 	}
+	
+	public LocationResult locationResult = new LocationResult()
+	{
+	    
+
+		@Override
+	    public void obtenerUbicacion(final Location location)
+	    {
+	        currentLocation = location;
+	    }
+	};
 
 	private boolean isMyServiceRunning() {
 		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);

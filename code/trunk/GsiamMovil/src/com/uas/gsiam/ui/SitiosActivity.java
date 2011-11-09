@@ -43,10 +43,12 @@ import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.PosicionGPS;
 import com.uas.gsiam.utils.Util;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
-public class SitiosActivity extends GDActivity implements LocationListener,
+public class SitiosActivity extends GDActivity implements
 		OnItemLongClickListener {
 
 	private final int BUSCAR = 1;
@@ -63,6 +65,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 	protected ListView lw;
 	private QuickActionWidget quickActions;
 	private SitiosAdapter adaptador;
+	private LocationHelper locHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,15 +73,14 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		setActionBarContentView(R.layout.lista_sitios);
 
 		lw = (ListView) findViewById(R.id.listaSitios);
-		loc = PosicionGPS.getPosicion(getApplicationContext());
-
-		locationManager = PosicionGPS.getLocationManager();
+		locHelper = new LocationHelper();
+		boolean result = locHelper.getLocation(this, locationResult);
 		
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
-		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+		if (loc == null) {
 			buildAlertMessageNoGps();
 		} else {
 			// TODO poner aca despues obtener la ubicacion
@@ -257,7 +259,8 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 			startSearch(null, false, null, false);
 			break;
 		case ACTUALIZAR:
-			loc = PosicionGPS.getPosicion(getApplicationContext());
+			//loc = PosicionGPS.getPosicion(getApplicationContext());
+			locHelper.getLocation(this, locationResult);
 			actualizarSitios(loc);
 
 			break;
@@ -295,7 +298,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		registerReceiver(sitiosReceiver, sitioAccion);
 		registerReceiver(eliminarSitioReceiver, intentEliminarSitio);
 
-		startListening();
+		//startListening();
 
 	}
 
@@ -311,7 +314,7 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		super.onPause();
 		unregisterReceiver(sitiosReceiver);
 		unregisterReceiver(eliminarSitioReceiver);
-		stopListening();
+		//stopListening();
 
 	}
 
@@ -431,15 +434,15 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
 
-	private void startListening() {
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-				0, this);
-	}
-
-	private void stopListening() {
-		if (locationManager != null)
-			locationManager.removeUpdates(this);
-	}
+//	private void startListening() {
+//		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+//				0, this);
+//	}
+//
+//	private void stopListening() {
+//		if (locationManager != null)
+//			locationManager.removeUpdates(this);
+//	}
 
 	private void actualizarSitios(Location loc) {
 		if (loc != null) {
@@ -459,30 +462,41 @@ public class SitiosActivity extends GDActivity implements LocationListener,
 
 		}
 	}
+	
+	public LocationResult locationResult = new LocationResult()
+	{
+	    
 
-	@Override
-	public void onLocationChanged(Location location) {
-		this.loc = location;
-		actualizarSitios(loc);
+		@Override
+	    public void obtenerUbicacion(final Location location)
+	    {
+	        loc = location;
+	    }
+	};
 
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
-
-	}
+//	@Override
+//	public void onLocationChanged(Location location) {
+//		this.loc = location;
+//		actualizarSitios(loc);
+//
+//	}
+//
+//	@Override
+//	public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//	}
+//
+//	@Override
+//	public void onProviderEnabled(String provider) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public void onProviderDisabled(String provider) {
+//		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
+//
+//	}
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
