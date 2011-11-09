@@ -9,18 +9,18 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
-import com.uas.gsiam.utils.ApplicationController;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.PosicionGPS;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.PosicionGPS;
 
 public class ActualizarPosicionServicio extends Service {
 
@@ -42,13 +42,21 @@ public class ActualizarPosicionServicio extends Service {
 		super.onCreate();
 		Log.i(TAG, "onCreate");
 		ctx = this;
+
 		restTemp = new RestTemplate(
 				new HttpComponentsClientHttpRequestFactory());
-		loc = PosicionGPS.getPosicion(this);
+
 		app = ((ApplicationController) getApplicationContext());
-		if (loc != null) {
-			startService();
-		}
+//		if (loc != null) {
+//			startService();
+//		}
+	}
+
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
+		loc = intent.getParcelableExtra("loc");
+		startService();
+		return startId;
 	}
 
 	private void startService() {
@@ -86,7 +94,7 @@ public class ActualizarPosicionServicio extends Service {
 	public void onDestroy() {
 		Log.i(TAG, "onDestroy");
 		super.onDestroy();
-		if(timer != null){
+		if (timer != null) {
 			timer.cancel();
 		}
 
