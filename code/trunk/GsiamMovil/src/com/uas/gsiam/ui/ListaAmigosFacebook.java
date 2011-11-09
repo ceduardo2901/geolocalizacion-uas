@@ -189,7 +189,11 @@ public class ListaAmigosFacebook extends Activity {
 
 		@Override
 		public int getCount() {
-			return jsonArray.length();
+			if(jsonArray != null)
+				return jsonArray.length();
+			else{
+				return 0;
+			}
 		}
 
 		@Override
