@@ -19,14 +19,14 @@
 
 		<TableRow android:layout_weight="1" android:gravity="center"
 			android:paddingLeft="20px" android:paddingRight="20px"
-			android:paddingBottom="10px">
+			android:paddingBottom="10px" android:paddingTop="10px">
 			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
-				android:gravity="center" android:paddingRight="20px">
+				android:gravity="center" android:paddingRight="20px" android:paddingTop="20px">
 				<ImageButton android:layout_width="wrap_content"
 					android:id="@+id/sitios_button" android:layout_height="wrap_content"
-					android:background="@drawable/nuevo"
+					android:background="@drawable/search_globe"
 					android:clickable="true" />
 
 				<TextView android:layout_width="fill_parent"
@@ -37,10 +37,10 @@
 			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
-				android:gravity="center" android:paddingLeft="20px">
+				android:gravity="center" android:paddingLeft="20px" android:paddingTop="20px">
 
 				<Button android:layout_width="wrap_content" android:id="@+id/amigos_button"
-					android:layout_height="wrap_content" android:background="@drawable/calendar" />
+					android:layout_height="wrap_content" android:background="@drawable/male_female_users" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -52,14 +52,13 @@
 
 		<TableRow android:layout_weight="1" android:gravity="center"
 			android:paddingLeft="20px" android:paddingRight="20px"
-			android:paddingTop="20px" android:paddingBottom="10px">
+			android:paddingTop="20px" android:paddingBottom="30px">
 
 			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
-				android:gravity="center" android:paddingRight="20px">
-				<Button android:layout_width="wrap_content" android:id="@+id/perfil_button"
-					android:layout_height="wrap_content" android:background="@drawable/users" android:padding="20px" />
+				android:gravity="center" android:paddingRight="20px" android:paddingBottom="20px">
+				<Button android:padding="20px" android:layout_width="wrap_content" android:background="@drawable/id_card" android:id="@+id/perfil_button" android:layout_height="wrap_content"></Button>
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -69,10 +68,10 @@
 			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
-				android:gravity="center" android:paddingLeft="20px">
+				android:gravity="center" android:paddingLeft="20px" android:paddingBottom="20px">
 
 				<Button android:layout_width="wrap_content" android:id="@+id/preferencias_button"
-					android:layout_height="wrap_content" android:background="@drawable/save" />
+					android:layout_height="wrap_content" android:background="@drawable/tools" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
