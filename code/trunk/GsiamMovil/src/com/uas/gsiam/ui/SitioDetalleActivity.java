@@ -39,7 +39,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	private Double lat;
 	private Double lon;
 	private Integer sitioId;
-	private ListView listComentarios;
+	//private ListView listComentarios;
 	private SitioDTO sitio;
 	private static final int MAPA = 1;
 	private Gallery galeria;
@@ -60,7 +60,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
 		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
-		listComentarios = (ListView) findViewById(R.id.listComentariosId);
+		//listComentarios = (ListView) findViewById(R.id.listComentariosId);
 		
 		//inicializarBarra();
 		
@@ -118,12 +118,12 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		
 		loc = intent.getParcelableExtra("ubicacion");
 
-		if (!sitio.getPublicaciones().isEmpty()) {
-			ComentarioAdapter adaptador = new ComentarioAdapter(this,
-					R.layout.comentario, sitio.getPublicaciones());
-			// ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
-			listComentarios.setAdapter(adaptador);
-		}
+//		if (!sitio.getPublicaciones().isEmpty()) {
+//			ComentarioAdapter adaptador = new ComentarioAdapter(this,
+//					R.layout.comentario, sitio.getPublicaciones());
+//			// ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
+//			listComentarios.setAdapter(adaptador);
+//		}
 
 	}
 

@@ -68,7 +68,8 @@
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
 		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />
-		<service android:name="com.uas.gsiam.servicios.ActualizarPosicionServicio"></service>				
+		<service android:name="com.uas.gsiam.servicios.ActualizarPosicionServicio"></service>
+		<activity android:name="ComentarioTabActivity"></activity>				
 
 	</application>
 </manifest>
