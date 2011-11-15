@@ -1,5 +1,6 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 
@@ -11,7 +12,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -51,7 +51,7 @@ import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
 
-public class PublicarActivity extends Activity implements
+public class PublicarActivity extends GDActivity implements
 		OnRatingBarChangeListener {
 
 	protected static final String TAG = "PublicarActivity";
@@ -69,13 +69,14 @@ public class PublicarActivity extends Activity implements
 	private String nombre;
 	private ImageView fotoPub;
 	private String APP_ID;
+	//private ListView listComentarios;
 
 	protected String path = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setActionBarContentView(R.layout.publicar);
+		setActionBarContentView(R.layout.publicar);
 		setContentView(R.layout.publicar);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
@@ -90,32 +91,31 @@ public class PublicarActivity extends Activity implements
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
 		app = ((ApplicationController) getApplicationContext());
-			
-		//inicializarActionBar();
+
 
 	}
 
-//	private void inicializarActionBar() {
-//		addActionBarItem(Type.Share, COMPARTIR);
-//
-//		setTitle(R.string.app_name);
-//
-//	}
-//
-//	@Override
-//	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-//		switch (item.getItemId()) {
-//		case COMPARTIR:
-//			compartir();
-//			break;
-//
-//		default:
-//			return super.onHandleActionBarItemClick(item, position);
-//		}
-//
-//		return true;
-//
-//	}
+	private void inicializarActionBar() {
+		addActionBarItem(Type.Share, COMPARTIR);
+
+		setTitle(R.string.app_name);
+
+	}
+
+	@Override
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+		case COMPARTIR:
+			compartir();
+			break;
+
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+		}
+
+		return true;
+
+	}
 
 	protected void onResume() {
 		super.onResume();
@@ -124,6 +124,8 @@ public class PublicarActivity extends Activity implements
 		//sitioId = getIntent().getIntExtra("sitioId", 0);
 		//nombre = getIntent().getStringExtra("nombre");
 		usuario = app.getUserLogin();
+		
+		
 	}
 
 	protected void onPause() {

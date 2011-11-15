@@ -27,7 +27,7 @@ public class SitioTabActivity extends GDTabActivity {
 	// protected static boolean registroMisAmigosService = false;
 	private static final String TAG_SITIO_DETALLE = "Sitio";
 	private static final String TAG_SITIO_MAPA = "Mapa";
-	private static final String TAG_SITIO_PUBLICAR = "Publicar";
+	private static final String TAG_SITIO_COMENTARIO = "Comentario";
 	private static final String PREF_STICKY_TAB = "stickyTab";
 
 	private static TabHost mTabHost;
@@ -158,8 +158,8 @@ public class SitioTabActivity extends GDTabActivity {
 	 */
 
 	private void añadirTab3(Intent intent) {
-		intent.setClass(this, PublicarActivity.class);
-		addTab(TAG_SITIO_PUBLICAR, "Publicar", intent);
+		intent.setClass(this, ComentarioTabActivity.class);
+		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
 	}
 
