@@ -46,6 +46,7 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.PublicarServicio;
+import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SessionStore;
@@ -69,6 +70,9 @@ public class PublicarActivity extends GDActivity implements
 	private String nombre;
 	private ImageView fotoPub;
 	private String APP_ID;
+	private PublicacionDTO publicar;
+	private static final Integer PUBLICACION_OK = 200;
+	private static final Integer ERROR_PUBLICACION = 501;
 	//private ListView listComentarios;
 
 	protected String path = "";
@@ -77,7 +81,7 @@ public class PublicarActivity extends GDActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.publicar);
-		setContentView(R.layout.publicar);
+		//setContentView(R.layout.publicar);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
@@ -142,10 +146,27 @@ public class PublicarActivity extends GDActivity implements
 			
 			Util.dismissProgressDialog();
 			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
+			volver();
 		}
 	};
+	
+	private void actualizarSitio(){
+		Intent intent = new Intent(this, SitioServicio.class);
+		intent.putExtra("sitio", sitio);
+		startService(intent);
+		
+	}
 
+	private void volver(){
+		setResult(RESULT_OK);
+		Intent volver = new Intent(this, SitioTabActivity.class);
+		sitio.getPublicaciones().add(publicar);
+		volver.putExtra("sitio", sitio);
+		startActivity(volver);
+	}
+	
 	private void comentarFacebook() {
+		setResult(RESULT_OK);
 		if (comentarFaceBook.isChecked()) {
 
 			
@@ -173,7 +194,7 @@ public class PublicarActivity extends GDActivity implements
 	}
 
 	public void publicar(View v) {
-		PublicacionDTO publicar = new PublicacionDTO();
+		publicar = new PublicacionDTO();
 		publicar.setComentario(comentario.getText().toString());
 		publicar.setIdSitio(sitio.getIdSitio());
 		publicar.setIdUsuario(usuario.getId());
