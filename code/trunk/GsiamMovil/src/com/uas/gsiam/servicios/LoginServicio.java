@@ -7,9 +7,12 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.CategoriasUtil;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -52,6 +55,17 @@ public class LoginServicio extends IntentService{
 			if(user.getEmail() != null){
 				ApplicationController app = ((ApplicationController)getApplicationContext());
 				app.setUserLogin(user);
+				
+				///////////////////////////////////////////////////
+				// Cargo las categorias
+				//TODO Ver como hacer al iniciar la aplicacion y no en el login		
+				
+				CategoriaDTO[] respuesta = restTemp.getForObject(
+						Constantes.GET_CATEGORIAS_SERVICE_URL, CategoriaDTO[].class);
+
+				CategoriasUtil.cargarCategorias(this, Util.getArrayListCategoriaDTO(respuesta));
+				/////////////////////////////////////////////////
+				
 			}
 				bundle.putSerializable("usuario", user);
 				intentLogin.putExtra("usuario",bundle);
