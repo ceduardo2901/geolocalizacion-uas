@@ -41,18 +41,20 @@ public class SitioServicios {
 	@Produces("application/json")
 	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
-		System.out.println(sitios.size());
+		
 		return sitios;
 	}
 	
+		
 	@GET
-	@Path("/{nombre}")
+	@Path("/sitio")
 	@Produces("application/json")
-	public List<SitioDTO> buscarSitios(@PathParam ("nombre") String nombre){
+	@Consumes("application/json")
+	public List<SitioDTO> buscarSitios(@BadgerFish SitioDTO sitio){
 		
 		List<SitioDTO> sitios=null;
 		try {
-			sitios = servicio.buscarSitios(nombre);
+			sitios = servicio.buscarSitios(sitio);
 		} catch (SitioExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
