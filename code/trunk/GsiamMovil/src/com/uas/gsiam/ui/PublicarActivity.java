@@ -63,6 +63,7 @@ public class PublicarActivity extends GDActivity implements
 	private AsyncFacebookRunner mAsyncRunner;
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
+	private IntentFilter ActualizarSitioFiltro;
 	private SitioDTO sitio;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
@@ -93,6 +94,7 @@ public class PublicarActivity extends GDActivity implements
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
+		
 
 		app = ((ApplicationController) getApplicationContext());
 
@@ -124,9 +126,8 @@ public class PublicarActivity extends GDActivity implements
 	protected void onResume() {
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
-
-		//sitioId = getIntent().getIntExtra("sitioId", 0);
-		//nombre = getIntent().getStringExtra("nombre");
+		registerReceiver(receiverPublicar, publicarFiltro);
+		
 		usuario = app.getUserLogin();
 		
 		
@@ -152,16 +153,18 @@ public class PublicarActivity extends GDActivity implements
 	
 	private void actualizarSitio(){
 		Intent intent = new Intent(this, SitioServicio.class);
-		intent.putExtra("sitio", sitio);
+		SitioDTO sitioUpdate = new SitioDTO();
+		sitioUpdate.setIdSitio(sitio.getIdSitio());
+		intent.putExtra("sitio", sitioUpdate);
 		startService(intent);
 		
 	}
 
 	private void volver(){
 		setResult(RESULT_OK);
-		Intent volver = new Intent(this, SitioTabActivity.class);
-		sitio.getPublicaciones().add(publicar);
-		volver.putExtra("sitio", sitio);
+		Intent volver = new Intent(this, ComentarioTabActivity.class);
+//		sitio.getPublicaciones().add(publicar);
+//		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
 	

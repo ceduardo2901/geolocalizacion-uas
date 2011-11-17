@@ -14,12 +14,14 @@ public class ComentarioTabActivity extends Activity {
 	protected static final String TAG = "ComentarioTabActivity";
 	private ListView listComentarios;
 	private SitioDTO sitio;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.comentarios);
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
+		
 		listComentarios = (ListView) findViewById(R.id.listComentariosId);
 		if (!sitio.getPublicaciones().isEmpty()) {
 			ComentarioAdapter adaptador = new ComentarioAdapter(this,
@@ -33,16 +35,20 @@ public class ComentarioTabActivity extends Activity {
 		super.onResume();
 	}
 	
+	
+	
+	
+	
 	public void publicar(View v) {
 		Intent intent = new Intent(this, PublicarActivity.class);
 		intent.putExtra("sitio", sitio);
-		startActivityForResult(intent, 1);
+		startActivity(intent);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		
 	}
+	
 }

@@ -61,9 +61,9 @@ public class SitioServicio extends IntentService {
 				respuesta = restTemp.getForObject(
 						Constantes.SITIOS_SERVICE_URL, SitioDTO[].class, parms);
 			} else {
-				Map<String, String> parms = new HashMap<String, String>();
+				Map<String, SitioDTO> parms = new HashMap<String, SitioDTO>();
 
-				parms.put("nombre", sitio.getNombre());
+				parms.put("sitio", sitio);
  
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
