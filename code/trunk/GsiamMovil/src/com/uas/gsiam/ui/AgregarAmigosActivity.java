@@ -176,6 +176,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			final Context appContext = this;
 			
 			Log.i(TAG, "Seleccione: "+ usuarioSeleccionado.getNombre());
+			Log.i(TAG, "Seleccione: "+ usuarioSeleccionado.getId());
 			
 			if (usuarioSeleccionado.isSolicitudEnviada()){
 				

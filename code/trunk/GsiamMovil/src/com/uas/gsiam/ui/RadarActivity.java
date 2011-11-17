@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,12 +23,13 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.PosicionGPS;
 import com.uas.gsiam.utils.Util;
 
-public class RadarActivity extends GDMapActivity{
+public class RadarActivity extends GDMapActivity implements LocationListener{
 
 	protected static final String TAG = "RadarActivity";
 	private MapView mapa;
 	private GeoPoint geoPointUbicacion;
 	private Location loc;
+	protected LocationManager locationManager;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class RadarActivity extends GDMapActivity{
 		
 		
 		loc = PosicionGPS.getPosicion(getApplicationContext());
+		locationManager = PosicionGPS.getLocationManager();
 		mostrarMapa(MisAmigosActivity.misAmigos);
 		
 		inicializarBar();
@@ -164,6 +168,30 @@ public class RadarActivity extends GDMapActivity{
 			
             return true;
         }
+		
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		this.loc = location;
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
 		
 	}
 
