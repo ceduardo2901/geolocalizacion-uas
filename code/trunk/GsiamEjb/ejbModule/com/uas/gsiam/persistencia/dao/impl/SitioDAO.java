@@ -1,6 +1,5 @@
 package com.uas.gsiam.persistencia.dao.impl;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,16 +8,11 @@ import java.util.List;
 
 import org.postgis.PGgeometry;
 import org.postgis.Point;
-import org.postgresql.PGConnection;
-import org.postgresql.PGStatement;
-import org.postgresql.core.types.PGDouble;
-import org.postgresql.geometric.PGbox;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
-import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
@@ -294,5 +288,58 @@ public class SitioDAO implements ISitioDAO {
 
 		return sitios;
 	}
+	
+	
+	
+	
+	public ArrayList<CategoriaDTO> getCategorias() throws SQLException{
+		
+		PreparedStatement ps;
+		ArrayList<CategoriaDTO> listaRetorno = new ArrayList<CategoriaDTO>();
+		
+		try{
+
+			String sqlCategorias = "SELECT * "+
+								   "FROM t_categoria cat, t_grupo_categoria grupo "+
+								   "WHERE cat.cat_grp_id = grupo.grp_cat_id "+
+								   "ORDER BY cat.cat_grp_id";
+ 
+			
+	
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCategorias);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()){
+				
+				
+				CategoriaDTO categoria = new CategoriaDTO();
+				
+				categoria.setIdCategoria(rs.getInt("cat_id"));
+				categoria.setDescripcion(rs.getString("cat_descripcion"));
+				categoria.setImagen(rs.getString("cat_imagen"));
+				
+				categoria.setIdGrupo(rs.getInt("grp_cat_id"));
+				categoria.setDescripcionGrupo(rs.getString("grp_cat_descripcion"));
+				categoria.setImagenGrupo(rs.getString("grp_cat_imagen"));
+				
+				listaRetorno.add(categoria);
+			}
+				
+			rs.close();
+			ps.close();
+			
+		
+		}finally{
+			
+				if (ConexionJDBCUtil.getConexion() != null)
+					ConexionJDBCUtil.getConexion().close();
+	
+		}
+		
+		return listaRetorno;		
+		
+	}
+	
+	
 
 }
