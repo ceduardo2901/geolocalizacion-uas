@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,6 +15,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
+
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
+import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
 public class Util {
 	
@@ -162,7 +163,13 @@ public class Util {
 		return lista;
 	}
 
-	
+	public static ArrayList<CategoriaDTO> getArrayListCategoriaDTO(CategoriaDTO[] categorias){
+        ArrayList<CategoriaDTO> lista = new ArrayList<CategoriaDTO>();
+        for(CategoriaDTO categoria : categorias){
+                lista.add(categoria);
+        }
+        return lista;
+	}
 	
 	public static Bitmap getResizedBitmap(Bitmap bitmap, int width, int height) {
 
@@ -181,5 +188,11 @@ public class Util {
 	    return decored;
 	  }
 	
+	
+	public static int getDrawableIdFromString(Context context, String name){
+		
+		return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+		
+	}
 	
 }
