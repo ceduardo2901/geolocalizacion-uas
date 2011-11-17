@@ -24,7 +24,7 @@ public class Constantes {
 	
 	public static final int ACEPTAR_SOLICITUD = 0;
 	public static final int RECHAZAR_SOLICITUD = 1;
-	
+		
 	// Servicios
 	
 	//TODO poner esto en un archivo de configuracion
@@ -78,6 +78,10 @@ public class Constantes {
 	
 	public static final String ACTUALIZAR_POSICION_USUARIO_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/actualizarPosicion";
 	public static final String ACTUALIZAR_POSICION_USUARIO_FILTRO_ACTION = "com.gsiam.places.ACTUALIZAR_POSICION_USUARIO_FILTRO_ACTION";
+	
+	public static final String GET_CATEGORIAS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/categorias";
+	public static final String GET_CATEGORIAS_FILTRO_ACTION = "com.gsiam.places.GET_CATEGORIAS_FILTRO_ACTION";
+	
 	
 	// Mensajes 
 	public static final String MSG_ESPERA_GENERICO = "Conectando con el servidor, por favor espere..."; 
