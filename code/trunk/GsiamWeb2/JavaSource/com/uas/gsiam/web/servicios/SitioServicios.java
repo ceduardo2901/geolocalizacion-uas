@@ -39,130 +39,121 @@ public class SitioServicios {
 	@GET
 	@Path("/{lat}/{lon}")
 	@Produces("application/json")
-	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
+	public List<SitioDTO> getSitios(@PathParam("lat") String lat,
+			@PathParam("lon") String lon) {
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
-		
+
 		return sitios;
 	}
-	
-		
+
 	@GET
 	@Path("/sitio")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public List<SitioDTO> buscarSitios(@BadgerFish SitioDTO sitio){
-		
-		List<SitioDTO> sitios=null;
+	public List<SitioDTO> buscarSitios(@BadgerFish SitioDTO sitio) {
+
+		List<SitioDTO> sitios = null;
 		try {
 			sitios = servicio.buscarSitios(sitio);
 		} catch (SitioExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return sitios;
 	}
-	
+
 	@POST
 	@Path("/agregar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public Response crearSitio(@BadgerFish SitioDTO sitio) {
+	public Response crearSitio(@BadgerFish SitioDTO sitio) {
 		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.crearSitio(sitio);
-			builder.status(Status.OK);			
+			builder.status(Status.OK);
 		} catch (SitioYaExisteExcepcion e) {
-		
+
 			e.printStackTrace();
 		} catch (SitioExcepcion e) {
 			System.out.println("prueba de error");
-			//throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-			//return Response.status(Status.INTERNAL_SERVER_ERROR);
-			
+			// throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			// return Response.status(Status.INTERNAL_SERVER_ERROR);
+
 		}
-		return builder.type(MediaType.APPLICATION_JSON).build();//status(Status.INTERNAL_SERVER_ERROR).build();
-		//return Response.status(200).build().toString();
-		
+		return builder.type(MediaType.APPLICATION_JSON).build();// status(Status.INTERNAL_SERVER_ERROR).build();
+		// return Response.status(200).build().toString();
+
 	}
-	
+
 	@DELETE
 	@Path("/eliminar/{sitio}")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public Response eliminarSitio(@PathParam ("sitio") String sitio) {
-			
-		
+	public Response eliminarSitio(@PathParam("sitio") String sitio) {
+
 		try {
 			servicio.eliminarSitio(new Integer(sitio));
-		}  catch (SitioExcepcion e) {
+		} catch (SitioExcepcion e) {
 			return Response.status(500).build();
-			
+
 		}
-		
+
 		return Response.ok().build();
-		
-		
+
 	}
-	
+
 	@PUT
 	@Path("/modificar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public Response modificarSitio(@BadgerFish SitioDTO sitio) {
-			
-		
+	public Response modificarSitio(@BadgerFish SitioDTO sitio) {
+
 		try {
 			servicio.modificarSitio(sitio);
-		}  catch (SitioExcepcion e) {
+		} catch (SitioExcepcion e) {
 			return Response.status(500).build();
-			
+
 		}
-		
+
 		return Response.ok().build();
-		
-		
+
 	}
-	
+
 	@POST
 	@Path("/publicar")
 	@Produces("application/json")
 	@Consumes("application/json")
-    public Response publicar(@BadgerFish PublicacionDTO publicacion) {
-		
+	public Response publicar(@BadgerFish PublicacionDTO publicacion) {
+
 		try {
 			publicacion.setFecha(new Date());
 			servicio.crearPublicacion(publicacion);
 		} catch (PublicacionExcepcion e) {
 			return Response.status(500).build();
-			
+
 		}
 		return Response.ok().build();
-		
+
 	}
-	
-	
+
 	@GET
 	@Path("/categorias")
 	@Produces("application/json")
-	public ArrayList<CategoriaDTO> getCategorias(){
-		
+	public ArrayList<CategoriaDTO> getCategorias() {
+
 		ArrayList<CategoriaDTO> listaCategorias = null;
-		
+
 		try {
 			listaCategorias = servicio.getCategorias();
-			
+
 		} catch (SitioExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return listaCategorias;
-		
-	}
-	
-	
-	
-}
 
+		return listaCategorias;
+
+	}
+
+}

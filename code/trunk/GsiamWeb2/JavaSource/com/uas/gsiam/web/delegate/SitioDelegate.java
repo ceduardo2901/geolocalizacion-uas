@@ -22,28 +22,27 @@ public class SitioDelegate {
 
 	public void initialLoadBean() {
 		try {
-			this.servicioSitio =
-					(SitioServicio)ServiceLocator.getBean(SitioServicio.SERVICE_ADDRESS);
+			this.servicioSitio = (SitioServicio) ServiceLocator
+					.getBean(SitioServicio.SERVICE_ADDRESS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<SitioDTO> getSitios(String lat, String lon){
+	public List<SitioDTO> getSitios(String lat, String lon) {
 		SitioDTO sitio = new SitioDTO();
 		sitio.setLat(new Double(lat));
 		sitio.setLon(new Double(lon));
 		return servicioSitio.obtenerSitios(sitio);
 	}
 
-	public List<SitioDTO> buscarSitios(String nombre) throws SitioExcepcion{
-		SitioDTO sitio = new SitioDTO();
-		sitio.setNombre(nombre);
+	public List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion {
 
 		return servicioSitio.buscarSitios(sitio);
 	}
 
-	public void crearSitio(SitioDTO sitio) throws SitioYaExisteExcepcion, SitioExcepcion {
+	public void crearSitio(SitioDTO sitio) throws SitioYaExisteExcepcion,
+			SitioExcepcion {
 
 		servicioSitio.crearSitio(sitio);
 	}
@@ -58,15 +57,15 @@ public class SitioDelegate {
 		servicioSitio.modificarSitio(sitio);
 	}
 
-	public void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion {
+	public void crearPublicacion(PublicacionDTO publicacion)
+			throws PublicacionExcepcion {
 
 		servicioSitio.crearPublicacion(publicacion);
 	}
 
-	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion{
+	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion {
 
 		return servicioSitio.getCategorias();
 	}
-
 
 }
