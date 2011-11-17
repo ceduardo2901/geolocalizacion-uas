@@ -2,17 +2,17 @@ package com.uas.gsiam.negocio.servicios.impl;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
-import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
-import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
 import com.uas.gsiam.persistencia.utiles.Constantes;
@@ -134,6 +134,27 @@ public class SitioServicioBean implements SitioServicio{
 		}
 		
 		return sitios;
+		
+	}
+	
+	@Override
+	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion{
+		
+		try {
+			
+			return AbstractFactory.getInstance().getSitioDAO().getCategorias();
+			
+		} catch (IOException e) {
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+		} catch (InstantiationException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
+		} catch (IllegalAccessException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
+		} catch (ClassNotFoundException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
+		} 
 		
 	}
 

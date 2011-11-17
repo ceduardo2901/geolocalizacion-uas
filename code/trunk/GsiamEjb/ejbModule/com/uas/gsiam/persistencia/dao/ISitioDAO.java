@@ -1,10 +1,12 @@
 package com.uas.gsiam.persistencia.dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
-import com.uas.gsiam.negocio.excepciones.SitioNoExisteExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 
 public interface ISitioDAO {
@@ -18,4 +20,6 @@ public interface ISitioDAO {
 	void eliminarSitio(Integer idSitio) throws SitioExcepcion;
 	
 	void modificarSitio(SitioDTO sitioInteres) throws SitioExcepcion;
+	
+	ArrayList<CategoriaDTO> getCategorias() throws SQLException;
 }

@@ -28,6 +28,7 @@ public class Constantes {
 	public static String ERROR_ELIMINAR_SITIO = "Error al intentar eliminar el sitio";
 	public static String ERROR_MODIFICAR_SITIO = "Error al intentar modificar el sitio";
 	public static String ERROR_BUSCAR_SITIO = "Error al buscar el sitio";
+	public static String ERROR_CARGAR_CATEGORIAS = "Error al cargar las categorias";
 	
 	// Mensajes de error publicacion
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
