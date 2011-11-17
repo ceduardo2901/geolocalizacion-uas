@@ -3,15 +3,21 @@ package com.uas.gsiam.ui;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
 import greendroid.app.GDTabActivity;
 import greendroid.widget.ActionBarItem;
+import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +35,7 @@ public class SitioTabActivity extends GDTabActivity {
 	private static final String TAG_SITIO_MAPA = "Mapa";
 	private static final String TAG_SITIO_COMENTARIO = "Comentario";
 	private static final String PREF_STICKY_TAB = "stickyTab";
+	protected IntentFilter sitioAccion;
 
 	private static TabHost mTabHost;
 
@@ -62,6 +69,7 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost.setCurrentTab(currentTab);
 		Log.i(TAG, "**** currentTab =  " + currentTab);
 		tabClick = mTabHost.getCurrentTabTag();
+		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 	}
 
 	@Override
@@ -75,7 +83,42 @@ public class SitioTabActivity extends GDTabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(PREF_STICKY_TAB, currentTab);
 		editor.commit();
+		unregisterReceiver(sitiosReceiver);
 	}
+	
+	protected void OnResume() {
+		super.onResume();
+		registerReceiver(sitiosReceiver, sitioAccion);
+	}
+	
+	
+	protected BroadcastReceiver sitiosReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
+
+			Bundle b = intent.getExtras();
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
+					.getSerializable("sitios");
+
+			if (sitios != null) {
+				sitio = sitios.get(0);
+				
+			}
+			Util.dismissProgressDialog();
+
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar()
+					.getItem(ACTUALIZAR);
+			loaderActionBarItem.setLoading(false);
+
+			if (sitios.size() == 0) {
+
+				Util.showToast(getApplicationContext(), Constantes.MSG_NO_EXISTEN_SITIOS);
+
+			}
+
+		}
+	};
 
 	private void inicializarActionBar() {
 
@@ -98,11 +141,24 @@ public class SitioTabActivity extends GDTabActivity {
 		case COMPARTIR:
 			compartir();
 			break;
+		case ACTUALIZAR:
+			compartir();
+			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 		}
 
 		return true;
+
+	}
+	
+	private void actualizar() {
+		Intent intent = new Intent(this, SitioServicio.class);
+		SitioDTO sitioUpdate = new SitioDTO();
+		sitioUpdate.setIdSitio(sitio.getIdSitio());
+		intent.putExtra("sitio", sitioUpdate);
+		
+		startService(intent);
 
 	}
 
