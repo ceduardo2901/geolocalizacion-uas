@@ -10,8 +10,9 @@ import greendroid.widget.QuickActionWidget;
 import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.ResourceBundle.Control;
+import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.SearchManager;
@@ -19,13 +20,13 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
@@ -35,13 +36,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.TextView;
 
+import com.uas.gsiam.adapter.CategoriaAdapter;
 import com.uas.gsiam.adapter.SitiosAdapter;
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.SitioServicio;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.PosicionGPS;
@@ -56,7 +65,6 @@ public class SitiosActivity extends GDActivity implements
 	private final int FILTRAR = 0;
 	protected static final String TAG = "SitioActivity";
 	protected LocationManager locationManager;
-	protected LocationListener locationListener;
 	protected IntentFilter sitioAccion;
 	protected IntentFilter intentEliminarSitio;
 	protected SitiosAdapter adapter;
@@ -149,8 +157,14 @@ public class SitiosActivity extends GDActivity implements
 
 	}
 
+	private AlertDialog dialog = null;
+	
 	public void mostarCategoria() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	
+	//	Intent mostrarCategoriasIntent = new Intent(this, ListaCategoriasActivity.class);
+	//	startActivity(mostrarCategoriasIntent);
+		
+	/*	AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String[] categorias = getResources().getStringArray(
 				R.array.listNames);
 		builder.setTitle(R.string.categoria);
@@ -158,12 +172,74 @@ public class SitiosActivity extends GDActivity implements
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 
-				mostrarSitios(filtrarPorCategoria(i + 1));
+			//	mostrarSitios(filtrarPorCategoria(i + 1));
+				mostrarRaiting();
 			}
 		});
 		builder.show();
+		
+		*/
+		
+				
+		ExpandableListView myList = new ExpandableListView(this);
+		myList.setDividerHeight(2);
+		ApplicationController app = ((ApplicationController) getApplicationContext());
+		ArrayList<HashMap<String, Object>> gruposCategorias = app.getGruposCategorias();
+		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app.getSubCategorias();
+		
+		 CategoriaAdapter adaptador = new CategoriaAdapter(this,
+				    gruposCategorias,
+	        		android.R.layout.simple_expandable_list_item_1,
+	        		new String[] {  },     // the name of the field data
+	        		new int[] { android.R.id.text1 }, // the text field to populate with the field data
+	        		subCategorias,
+	        		0,
+	        		null,
+	        		new int[] {});
+		
+		myList.setAdapter(adaptador);
+		
+		myList.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				
+				@SuppressWarnings("unchecked")
+				Map<String,Object> map  = (Map<String, Object>) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
+				
+				 CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
+					
+				
+				Util.showToast(getApplicationContext(),"getDescripcionGrupo:" + categoriaSeleccionada.getDescripcionGrupo() + 
+						                               "\ngetDescripcion:" + categoriaSeleccionada.getDescripcion());
+
+		       
+		        if (dialog != null){
+		        	dialog.dismiss();
+		        	mostrarSitios(filtrarPorCategoria(categoriaSeleccionada.getIdCategoria()));
+					mostrarRaiting();
+		        }
+		        	
+		        
+				return true;
+			}
+		});	
+				
+		 
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Selecione Categoria");
+		builder.setView(myList);
+		
+		dialog = builder.create();
+		dialog.show();
+		
+
 	}
 
+	
+	
+	
 	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
 		if (!sitios.isEmpty()) {

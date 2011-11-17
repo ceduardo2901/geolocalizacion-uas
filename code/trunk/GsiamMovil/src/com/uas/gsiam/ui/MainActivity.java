@@ -23,7 +23,6 @@ import com.uas.gsiam.servicios.ActualizarPosicionServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
-import com.uas.gsiam.utils.PosicionGPS;
 
 public class MainActivity extends GDActivity {
 
