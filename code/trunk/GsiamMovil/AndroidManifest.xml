@@ -52,6 +52,7 @@
 		<activity android:name="SitioTabActivity"/>
 		<activity android:name="ListaAmigosFacebook"/>
 		<activity android:name="RadarActivity" />
+		<activity android:name="ComentarioTabActivity"/>		
 		
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
@@ -68,8 +69,8 @@
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
 		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />
-		<service android:name="com.uas.gsiam.servicios.ActualizarPosicionServicio"></service>
-		<activity android:name="ComentarioTabActivity"></activity>				
+		<service android:name="com.uas.gsiam.servicios.ActualizarPosicionServicio"/>
+				
 
 	</application>
 </manifest>
