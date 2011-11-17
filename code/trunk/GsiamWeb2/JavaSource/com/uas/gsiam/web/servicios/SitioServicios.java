@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
+import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
@@ -39,7 +40,6 @@ public class SitioServicios {
 	@Path("/{lat}/{lon}")
 	@Produces("application/json")
 	public List<SitioDTO> getSitios(@PathParam ("lat") String lat, @PathParam ("lon") String lon){
-		List<SitioDTO> listaSitios = new ArrayList<SitioDTO>();
 		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
 		System.out.println(sitios.size());
 		return sitios;
@@ -139,6 +139,28 @@ public class SitioServicios {
 		return Response.ok().build();
 		
 	}
+	
+	
+	@GET
+	@Path("/categorias")
+	@Produces("application/json")
+	public ArrayList<CategoriaDTO> getCategorias(){
+		
+		ArrayList<CategoriaDTO> listaCategorias = null;
+		
+		try {
+			listaCategorias = servicio.getCategorias();
+			
+		} catch (SitioExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaCategorias;
+		
+	}
+	
+	
 	
 }
 
