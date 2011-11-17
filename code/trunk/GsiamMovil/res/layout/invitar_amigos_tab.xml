@@ -25,7 +25,7 @@
 			android:layout_height="wrap_content" android:text="@string/BtnInvitar"
 			android:gravity="center_vertical|center_horizontal|center"
 			android:onClick="enviarInvitacion"
-			android:layout_gravity="right" android:layout_width="100dp" android:layout_marginTop="15dp"/>
+			android:layout_gravity="right" android:layout_marginTop="15dp" android:layout_width="85dp"/>
 
 		<LinearLayout android:layout_height="wrap_content"
 			android:id="@+id/linearLayout1" android:layout_gravity="right"
@@ -38,8 +38,8 @@
 				
 			<Button android:id="@+id/button1" android:text="@string/BtnInvitar"
 				android:onClick="btnInvitarAmigosFacebook" android:layout_gravity="right"
-				android:layout_width="100dp" android:layout_height="wrap_content" 
-				android:layout_marginTop="10dp"/>
+				android:layout_height="wrap_content" 
+				android:layout_marginTop="10dp" android:layout_width="85dp"/>
 		</LinearLayout>
 			
 	</LinearLayout>
