@@ -28,13 +28,23 @@ public class SitioDAO implements ISitioDAO {
 		CategoriaDTO categoria;
 		SitioDTO resultado;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
-		String sqlExisteSitio = "SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id and UPPER(s.sit_nombre) like ?";
-
+		
+		StringBuilder sqlExisteSitio = new StringBuilder("SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
+		if(sitioInteres.getIdSitio().doubleValue() > 0){
+			sqlExisteSitio.append("and s.sit_id=?");
+		}
+		if(!sitioInteres.getNombre().isEmpty()){
+			sqlExisteSitio.append("and s.sit_nombre=?");
+		}
 		try {
 
 			ps = ConexionJDBCUtil.getConexion()
-					.prepareStatement(sqlExisteSitio);
-			ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase() + "%");
+					.prepareStatement(sqlExisteSitio.toString());
+			if(!sitioInteres.getNombre().isEmpty()){
+				ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase() + "%");
+			}else{
+				ps.setInt(1, sitioInteres.getIdSitio());
+			}
 			rs = ps.executeQuery();
 			PGgeometry geom;
 			while (rs.next()) {
