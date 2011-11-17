@@ -1,35 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:background="@color/fondo">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@color/fondo">
 
-	<ScrollView android:background="@color/fondo"
-		android:layout_width="fill_parent" android:layout_height="fill_parent">
-		<LinearLayout android:orientation="vertical"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:background="@color/fondo">
-			  
-			<LinearLayout android:orientation="vertical"
-				android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:background="@color/fondo">
 
-				<TextView android:text="@string/comentarios"
-					android:layout_width="wrap_content" android:id="@+id/textView1"
-					android:textAppearance="?android:attr/textAppearanceMedium"
-					android:layout_height="wrap_content" android:textColor="@color/fuente" />
+	<!--  <TextView android:text="@string/comentarios"
+		android:layout_width="wrap_content" android:id="@+id/comentarioId"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_height="wrap_content" android:textColor="@color/fuente" />-->
 
-				<ListView android:layout_width="match_parent" android:id="@+id/listComentariosId"
-					android:layout_height="wrap_content" android:divider="@color/fuente"
-					android:scrollbars="none" />
-			</LinearLayout>
-			<LinearLayout android:orientation="vertical"
-				android:layout_width="fill_parent" android:layout_height="fill_parent"
-				android:background="@color/fondo">
-				<Button android:id="@+id/publicarBtnId" android:layout_width="match_parent"
-					android:layout_height="match_parent" android:onClick="publicar"
-					android:text="@string/publicar" />
-			</LinearLayout>
-		</LinearLayout>
-	</ScrollView>
-</LinearLayout>
+	<ListView android:layout_width="fill_parent" android:id="@+id/listComentariosId"
+		android:divider="@color/fuente" android:scrollbars="vertical"
+		android:layout_height="fill_parent" />
+
+
+	
+
+	<Button android:id="@+id/publicarBtnId" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:onClick="publicar"
+		android:text="@string/publicar" 
+		android:layout_alignBottom="@+id/listComentariosId" />
+	
+</RelativeLayout>
