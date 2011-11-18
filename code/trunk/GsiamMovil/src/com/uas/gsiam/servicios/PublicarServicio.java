@@ -47,6 +47,7 @@ public class PublicarServicio extends IntentService{
 			
 			
 			String respuesta = restTemp.postForObject(Constantes.CREAR_PUBLICACION_SERVICE_URL, publicacion, String.class);	
+						
 			bundle.putString("respuesta", respuesta);
 			
 			

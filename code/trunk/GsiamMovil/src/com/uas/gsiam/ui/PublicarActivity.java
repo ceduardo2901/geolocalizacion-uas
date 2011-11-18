@@ -10,7 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -63,6 +65,7 @@ public class PublicarActivity extends GDActivity implements
 	private AsyncFacebookRunner mAsyncRunner;
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
+	
 	private IntentFilter ActualizarSitioFiltro;
 	private SitioDTO sitio;
 	private UsuarioDTO usuario;
@@ -94,7 +97,7 @@ public class PublicarActivity extends GDActivity implements
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
-		
+		ActualizarSitioFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 
 		app = ((ApplicationController) getApplicationContext());
 
@@ -126,7 +129,7 @@ public class PublicarActivity extends GDActivity implements
 	protected void onResume() {
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
-		registerReceiver(receiverPublicar, publicarFiltro);
+		registerReceiver(receiverActualizarSitio, ActualizarSitioFiltro);
 		
 		usuario = app.getUserLogin();
 		
@@ -136,6 +139,7 @@ public class PublicarActivity extends GDActivity implements
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverPublicar);
+		unregisterReceiver(receiverActualizarSitio);
 	}
 
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
@@ -144,10 +148,32 @@ public class PublicarActivity extends GDActivity implements
 			Log.i(TAG, "onReceive");
 			Bundle bundle = intent.getExtras();
 			String respuesta = bundle.getString("respuesta");
+			actualizarSitio();
 			
+			
+			
+		}
+	};
+	
+	protected BroadcastReceiver receiverActualizarSitio = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Log.i(TAG, "onReceive");
+			Bundle bundle = intent.getExtras();
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
+			if(!sitios.isEmpty()){
+				
+				SitioDTO sitio = sitios.get(0);
+				if(sitio != null){
+					setSitio(sitio);
+				}
+				
+				
+			}
 			Util.dismissProgressDialog();
 			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
 			volver();
+			
 		}
 	};
 	
@@ -163,8 +189,8 @@ public class PublicarActivity extends GDActivity implements
 	private void volver(){
 		setResult(RESULT_OK);
 		Intent volver = new Intent(this, ComentarioTabActivity.class);
-//		sitio.getPublicaciones().add(publicar);
-//		volver.putExtra("sitio", sitio);
+		
+		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
 	
@@ -320,6 +346,14 @@ public class PublicarActivity extends GDActivity implements
 			Log.v("Error", "Blank response");
 			e.printStackTrace();
 		}
+	}
+
+	public SitioDTO getSitio() {
+		return sitio;
+	}
+
+	public void setSitio(SitioDTO sitio) {
+		this.sitio = sitio;
 	}
 
 	@Override

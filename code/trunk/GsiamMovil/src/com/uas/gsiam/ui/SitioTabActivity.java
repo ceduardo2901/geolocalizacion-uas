@@ -142,7 +142,7 @@ public class SitioTabActivity extends GDTabActivity {
 			compartir();
 			break;
 		case ACTUALIZAR:
-			compartir();
+			actualizar();
 			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
