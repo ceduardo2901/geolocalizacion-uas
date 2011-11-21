@@ -26,7 +26,7 @@
 				android:gravity="center" android:paddingRight="20px" android:paddingTop="20px">
 				<ImageButton android:layout_width="wrap_content"
 					android:id="@+id/sitios_button" android:layout_height="wrap_content"
-					android:background="@drawable/search_globe"
+					android:background="@drawable/sitios"
 					android:clickable="true" />
 
 				<TextView android:layout_width="fill_parent"
@@ -40,7 +40,7 @@
 				android:gravity="center" android:paddingLeft="20px" android:paddingTop="20px">
 
 				<Button android:layout_width="wrap_content" android:id="@+id/amigos_button"
-					android:layout_height="wrap_content" android:background="@drawable/male_female_users" />
+					android:layout_height="wrap_content" android:background="@drawable/amigos" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -58,7 +58,7 @@
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingRight="20px" android:paddingBottom="20px">
-				<Button android:padding="20px" android:layout_width="wrap_content" android:background="@drawable/id_card" android:id="@+id/perfil_button" android:layout_height="wrap_content"></Button>
+				<Button android:padding="20px" android:layout_width="wrap_content" android:background="@drawable/perfil" android:id="@+id/perfil_button" android:layout_height="wrap_content"></Button>
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -71,7 +71,7 @@
 				android:gravity="center" android:paddingLeft="20px" android:paddingBottom="20px">
 
 				<Button android:layout_width="wrap_content" android:id="@+id/preferencias_button"
-					android:layout_height="wrap_content" android:background="@drawable/tools" />
+					android:layout_height="wrap_content" android:background="@drawable/configuracion" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
