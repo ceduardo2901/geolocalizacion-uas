@@ -312,7 +312,7 @@ public class SitioDAO implements ISitioDAO {
 			String sqlCategorias = "SELECT * "+
 								   "FROM t_categoria cat, t_grupo_categoria grupo "+
 								   "WHERE cat.cat_grp_id = grupo.grp_cat_id "+
-								   "ORDER BY cat.cat_grp_id";
+								   "ORDER BY cat.cat_grp_id, cat.cat_descripcion";
  
 			
 	
