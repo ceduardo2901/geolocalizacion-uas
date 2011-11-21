@@ -50,7 +50,7 @@ public class CategoriaAdapter extends SimpleExpandableListAdapter {
 		
 		// imagen por defecto
 		if (idImagen == 0){
-			idImagen = Util.getDrawableIdFromString(contexto, "save");
+			idImagen = Util.getDrawableIdFromString(contexto, "logo");
 		}
 		
 		((ImageView)v.findViewById(R.id.imagen)).setImageResource(idImagen);
@@ -82,7 +82,7 @@ public class CategoriaAdapter extends SimpleExpandableListAdapter {
 			
 			// imagen por defecto
 			if (idImagen == 0){
-				idImagen = Util.getDrawableIdFromString(contexto, "calendar");
+				idImagen = Util.getDrawableIdFromString(contexto, "logo");
 			}
 			
 			((ImageView)v.findViewById(R.id.imagen)).setImageResource(idImagen);
