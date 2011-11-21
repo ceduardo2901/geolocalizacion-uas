@@ -4,7 +4,9 @@ import greendroid.app.GDMapActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -27,8 +29,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ExpandableListView.OnChildClickListener;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -36,9 +40,11 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import com.google.android.maps.Projection;
+import com.uas.gsiam.adapter.CategoriaAdapter;
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.CrearSitioServicio;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
@@ -143,7 +149,10 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
 
+	private AlertDialog dialog = null;
+	
 	public void mostarCategoria(View v) {
+		/*
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final String[] categorias = getResources().getStringArray(
 				R.array.listNames);
@@ -157,6 +166,62 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 			}
 		});
 		builder.show();
+		*/
+		
+		ExpandableListView myList = new ExpandableListView(this);
+		myList.setDividerHeight(2);
+		ApplicationController app = ((ApplicationController) getApplicationContext());
+		ArrayList<HashMap<String, Object>> gruposCategorias = app.getGruposCategorias();
+		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app.getSubCategorias();
+		
+		 CategoriaAdapter adaptador = new CategoriaAdapter(this,
+				    gruposCategorias,
+	        		android.R.layout.simple_expandable_list_item_1,
+	        		new String[] {  },     // the name of the field data
+	        		new int[] { android.R.id.text1 }, // the text field to populate with the field data
+	        		subCategorias,
+	        		0,
+	        		null,
+	        		new int[] {});
+		
+		myList.setAdapter(adaptador);
+		
+		myList.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				
+				@SuppressWarnings("unchecked")
+				Map<String,Object> map  = (Map<String, Object>) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
+				
+				 CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
+					
+				
+				Util.showToast(getApplicationContext(),"getDescripcionGrupo:" + categoriaSeleccionada.getDescripcionGrupo() + 
+						                               "\ngetDescripcion:" + categoriaSeleccionada.getDescripcion());
+
+		       
+		        if (dialog != null){
+		        	dialog.dismiss();
+		        	categoriaSitioTxt.setText(categoriaSeleccionada.getDescripcion());
+		        }
+		        	
+		        
+				return true;
+			}
+		});	
+				
+		 
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Selecione Categoria");
+		builder.setView(myList);
+		
+		dialog = builder.create();
+		dialog.show();
+		
+		
+		
 	}
 
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
