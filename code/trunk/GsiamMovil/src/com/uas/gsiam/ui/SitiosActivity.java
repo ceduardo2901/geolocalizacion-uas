@@ -111,11 +111,11 @@ public class SitiosActivity extends GDActivity implements
 	private void initQuickActionBar() {
 		quickActions = new QuickActionBar(this);
 		quickActions.addQuickAction(new QuickAction(this,
-				R.drawable.facebook_icon, "Categorias"));
+				R.drawable.filtro_categorias, "Categorias"));
 		quickActions.addQuickAction(new QuickAction(this,
-				R.drawable.avatardefault, "Ranking"));
+				R.drawable.filtro_ranking, "Ranking"));
 		quickActions.addQuickAction(new QuickAction(this,
-				R.drawable.avatardefault, "Sitios"));
+				R.drawable.filtro_todos, "Todos"));
 		quickActions
 				.setOnQuickActionClickListener(new OnQuickActionClickListener() {
 
