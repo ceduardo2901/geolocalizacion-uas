@@ -83,12 +83,12 @@ public class SitioTabActivity extends GDTabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(PREF_STICKY_TAB, currentTab);
 		editor.commit();
-		unregisterReceiver(sitiosReceiver);
+		//unregisterReceiver(sitiosReceiver);
 	}
 	
 	protected void OnResume() {
 		super.onResume();
-		registerReceiver(sitiosReceiver, sitioAccion);
+		//registerReceiver(sitiosReceiver, sitioAccion);
 	}
 	
 	
