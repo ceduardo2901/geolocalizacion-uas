@@ -50,18 +50,18 @@ public class SitioDAO implements ISitioDAO {
 			while (rs.next()) {
 				resultado = new SitioDTO();
 				categoria = new CategoriaDTO();
-				geom = (PGgeometry) rs.getObject(2);
+				geom = (PGgeometry) rs.getObject("sit_punto");
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
-				resultado.setIdSitio(rs.getInt(6));
-				resultado.setNombre(rs.getString(1));
-				resultado.setDireccion(rs.getString(5));
-				resultado.setTelefono(rs.getString(7));
-				resultado.setWeb(rs.getString(8));
+				resultado.setIdSitio(rs.getInt("sit_id"));
+				resultado.setNombre(rs.getString("sit_nombre"));
+				resultado.setDireccion(rs.getString("sit_direccion"));
+				resultado.setTelefono(rs.getString("sit_telefono"));
+				resultado.setWeb(rs.getString("sit_web"));
 				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 						.getIdSitio()));
-				categoria.setIdCategoria(rs.getInt(9));
-				categoria.setDescripcion(rs.getString(10));
+				categoria.setIdCategoria(rs.getInt("cat_id"));
+				categoria.setDescripcion(rs.getString("cat_descripcion"));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 			}
@@ -115,6 +115,7 @@ public class SitioDAO implements ISitioDAO {
 
 	}
 
+	/*
 	private void existeSitio(SitioDTO sitio) {
 		PreparedStatement ps = null;
 
@@ -135,7 +136,8 @@ public class SitioDAO implements ISitioDAO {
 			e.printStackTrace();
 		}
 	}
-
+*/
+	
 	@Override
 	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
 		try {
@@ -194,14 +196,14 @@ public class SitioDAO implements ISitioDAO {
 		if (rs != null) {
 			while (rs.next()) {
 				publicacion = new PublicacionDTO();
-				publicacion.setComentario(rs.getString(2));
-				publicacion.setFecha(rs.getDate(1));
-				publicacion.setFoto(rs.getBytes(3));
-				publicacion.setIdPublicacion(rs.getInt(6));
+				publicacion.setComentario(rs.getString("pub_comentario"));
+				publicacion.setFecha(rs.getDate("pub_fecha"));
+				publicacion.setFoto(rs.getBytes("pub_foto"));
+				publicacion.setIdPublicacion(rs.getInt("pub_id"));
 				publicacion.setIdSitio(idSitio);
-				publicacion.setIdUsuario(rs.getInt(4));
-				publicacion.setPuntaje(rs.getFloat(7));
-				publicacion.setNombreUsuario(rs.getString(8));
+				publicacion.setIdUsuario(rs.getInt("pub_id_usuario"));
+				publicacion.setPuntaje(rs.getFloat("pub_puntaje"));
+				publicacion.setNombreUsuario(rs.getString("usu_nombre"));
 				publicaciones.add(publicacion);
 			}
 		}
@@ -264,23 +266,24 @@ public class SitioDAO implements ISitioDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				geom = (PGgeometry) rs.getObject(2);
+				
 				categoria = new CategoriaDTO();
 				resultado = new SitioDTO();
-				
+				geom = (PGgeometry) rs.getObject("sit_punto");
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
-				resultado.setIdSitio(rs.getInt(6));
-				resultado.setNombre(rs.getString(1));
-				resultado.setDireccion(rs.getString(5));
-				resultado.setTelefono(rs.getString(7));
-				resultado.setWeb(rs.getString(8));
+				resultado.setIdSitio(rs.getInt("sit_id"));
+				resultado.setNombre(rs.getString("sit_nombre"));
+				resultado.setDireccion(rs.getString("sit_direccion"));
+				resultado.setTelefono(rs.getString("sit_telefono"));
+				resultado.setWeb(rs.getString("sit_web"));
 				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 						.getIdSitio()));
-				categoria.setIdCategoria(rs.getInt(9));
-				categoria.setDescripcion(rs.getString(10));
+				categoria.setIdCategoria(rs.getInt("cat_id"));
+				categoria.setDescripcion(rs.getString("cat_descripcion"));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
+				
 			}
 
 		} catch (SQLException e) {
