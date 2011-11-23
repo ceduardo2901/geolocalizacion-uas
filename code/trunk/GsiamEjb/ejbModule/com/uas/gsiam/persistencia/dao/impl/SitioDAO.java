@@ -34,7 +34,7 @@ public class SitioDAO implements ISitioDAO {
 			sqlExisteSitio.append("and s.sit_id=?");
 		}
 		if(!sitioInteres.getNombre().isEmpty()){
-			sqlExisteSitio.append("and s.sit_nombre=?");
+			sqlExisteSitio.append("and upper(s.sit_nombre) like ?");
 		}
 		try {
 
