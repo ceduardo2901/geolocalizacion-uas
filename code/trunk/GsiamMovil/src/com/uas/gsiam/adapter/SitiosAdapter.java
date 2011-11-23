@@ -3,9 +3,6 @@ package com.uas.gsiam.adapter;
 import java.util.List;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +16,7 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.ui.R;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
@@ -60,7 +58,17 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 				
 		}
 		
-		holder.icono.setImageBitmap(obtenerIcono(sitioMovil.getCategoria().getIdCategoria()));
+		
+		
+		int idImagen = Util.getDrawableIdFromString(context, sitioMovil.getCategoria().getDescripcion());
+		
+		// imagen por defecto
+		if (idImagen == 0){
+			idImagen = Util.getDrawableIdFromString(context, "logo");
+		}
+		
+		holder.icono.setImageResource(idImagen);
+			
 		holder.Nombre.setText(sitioMovil.getNombre());
 		holder.Direccion.setText(sitioMovil.getDireccion());
 		holder.distancia.setText(distancia.intValue() +" "+Constantes.METROS);
@@ -68,27 +76,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		return item;
 	}
 	
-	private Bitmap obtenerIcono(Integer categoriaId){
-		Bitmap bitmap=null;
-		switch (categoriaId) {
-		case 1:
-			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_cafe);  	
-			break;
-			
-		case 2:
-			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_restaurant);  	
-			break;
-
-		default:
-			bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.avatardefault);  	
-			break;
-		}
 		
-		return bitmap;
-		
-	}
-	
-	
 	private Integer obtenerPromedioPuntaje(SitioDTO sitio){
 		Float promedio = new Float(0);
 		
