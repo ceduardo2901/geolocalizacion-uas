@@ -360,7 +360,7 @@ public class SitiosActivity extends GDActivity implements
 
 		startService(intentBuscarSitio);
 
-		Util.showToast(this, Constantes.MSG_ESPERA_GENERICO);
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 
 	}
 

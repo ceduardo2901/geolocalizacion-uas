@@ -40,7 +40,7 @@ public class Constantes {
 	public static final String EDITAR_USUARIO_FILTRO_ACTION = "com.gsiam.places.EDITAR_USUARIO_FILTRO_ACTION";
 	
 	public static final String SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/{lat}/{lon}";
-	public static final String BUSQUEDA_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/sitio";
+	public static final String BUSQUEDA_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/sitio/{id}/{nombre}";
 	public static final String SITIO_FILTRO_ACTION = "com.gsiam.places.SITIO_FILTRO_ACTION";
 	
 	public static final String CREAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/sitios/agregar";

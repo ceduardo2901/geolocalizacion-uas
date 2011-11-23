@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -61,9 +62,18 @@ public class SitioServicio extends IntentService {
 				respuesta = restTemp.getForObject(
 						Constantes.SITIOS_SERVICE_URL, SitioDTO[].class, parms);
 			} else {
-				Map<String, SitioDTO> parms = new HashMap<String, SitioDTO>();
-
-				parms.put("sitio", sitio);
+				Map<String, String> parms = new HashMap<String, String>();
+				
+				if(sitio.getIdSitio() != null){
+					parms.put("id", String.valueOf(sitio.getIdSitio()));
+				}else{
+					parms.put("id", "0");
+				}
+				if(sitio.getNombre() != null){
+					parms.put("nombre", sitio.getNombre());
+				}else{
+					parms.put("nombre", "");
+				}
  
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
