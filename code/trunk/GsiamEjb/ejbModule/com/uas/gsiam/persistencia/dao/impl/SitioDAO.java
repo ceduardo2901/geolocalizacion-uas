@@ -62,6 +62,7 @@ public class SitioDAO implements ISitioDAO {
 						.getIdSitio()));
 				categoria.setIdCategoria(rs.getInt("cat_id"));
 				categoria.setDescripcion(rs.getString("cat_descripcion"));
+				categoria.setImagen(rs.getString("cat_imagen"));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 			}
@@ -281,6 +282,7 @@ public class SitioDAO implements ISitioDAO {
 						.getIdSitio()));
 				categoria.setIdCategoria(rs.getInt("cat_id"));
 				categoria.setDescripcion(rs.getString("cat_descripcion"));
+				categoria.setImagen(rs.getString("cat_imagen"));
 				resultado.setCategoria(categoria);
 				sitios.add(resultado);
 				
