@@ -60,7 +60,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		
 		
 		
-		int idImagen = Util.getDrawableIdFromString(context, sitioMovil.getCategoria().getDescripcion());
+		int idImagen = Util.getDrawableIdFromString(context, sitioMovil.getCategoria().getImagen());
 		
 		// imagen por defecto
 		if (idImagen == 0){
