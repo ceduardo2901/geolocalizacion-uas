@@ -65,14 +65,15 @@ public class SitioServicio extends IntentService {
 				Map<String, String> parms = new HashMap<String, String>();
 				
 				if(sitio.getIdSitio() != null){
-					parms.put("id", String.valueOf(sitio.getIdSitio()));
+					String id = String.valueOf(sitio.getIdSitio());
+					parms.put("id", id);
 				}else{
 					parms.put("id", "0");
 				}
 				if(sitio.getNombre() != null){
 					parms.put("nombre", sitio.getNombre());
 				}else{
-					parms.put("nombre", "");
+					parms.put("nombre", " ");
 				}
  
 				respuesta = restTemp.getForObject(
