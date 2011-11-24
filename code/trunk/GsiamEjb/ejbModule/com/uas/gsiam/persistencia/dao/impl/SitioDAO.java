@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
 
@@ -33,14 +34,18 @@ public class SitioDAO implements ISitioDAO {
 		if(sitioInteres.getIdSitio().doubleValue() > 0){
 			sqlExisteSitio.append("and s.sit_id=?");
 		}
-		if(!sitioInteres.getNombre().isEmpty()){
-			sqlExisteSitio.append("and upper(s.sit_nombre) like ?");
+		
+		if(sitioInteres.getNombre() != null){
+			String nombre = sitioInteres.getNombre();
+			if(!nombre.equals(" ")){		
+				sqlExisteSitio.append("and upper(s.sit_nombre) like ?");
+			}
 		}
 		try {
 
 			ps = ConexionJDBCUtil.getConexion()
 					.prepareStatement(sqlExisteSitio.toString());
-			if(!sitioInteres.getNombre().isEmpty()){
+			if(sitioInteres.getNombre() != null){
 				ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase() + "%");
 			}else{
 				ps.setInt(1, sitioInteres.getIdSitio());
