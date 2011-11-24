@@ -96,11 +96,7 @@ public class ComentarioTabActivity extends Activity {
 		startActivity(intent);
 	}
 	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-	}
+	
 
 	public SitioDTO getSitio() {
 		return sitio;

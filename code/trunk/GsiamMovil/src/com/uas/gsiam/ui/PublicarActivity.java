@@ -129,7 +129,7 @@ public class PublicarActivity extends GDActivity implements
 	protected void onResume() {
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
-		registerReceiver(receiverActualizarSitio, ActualizarSitioFiltro);
+		//registerReceiver(receiverActualizarSitio, ActualizarSitioFiltro);
 		
 		usuario = app.getUserLogin();
 		
@@ -139,7 +139,7 @@ public class PublicarActivity extends GDActivity implements
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverPublicar);
-		unregisterReceiver(receiverActualizarSitio);
+		//unregisterReceiver(receiverActualizarSitio);
 	}
 
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
@@ -148,43 +148,47 @@ public class PublicarActivity extends GDActivity implements
 			Log.i(TAG, "onReceive");
 			Bundle bundle = intent.getExtras();
 			String respuesta = bundle.getString("respuesta");
-			actualizarSitio();
 			
-			
-			
-		}
-	};
-	
-	protected BroadcastReceiver receiverActualizarSitio = new BroadcastReceiver() {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.i(TAG, "onReceive");
-			Bundle bundle = intent.getExtras();
-			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
-			if(!sitios.isEmpty()){
-				
-				SitioDTO sitio = sitios.get(0);
-				if(sitio != null){
-					setSitio(sitio);
-				}
-				
-				
-			}
 			Util.dismissProgressDialog();
 			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
-			volver();
+			
+			//actualizarSitio();
+			
+			
 			
 		}
 	};
 	
-	private void actualizarSitio(){
-		Intent intent = new Intent(this, SitioServicio.class);
-		SitioDTO sitioUpdate = new SitioDTO();
-		sitioUpdate.setIdSitio(sitio.getIdSitio());
-		intent.putExtra("sitio", sitioUpdate);
-		startService(intent);
-		
-	}
+//	protected BroadcastReceiver receiverActualizarSitio = new BroadcastReceiver() {
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//			Log.i(TAG, "onReceive");
+//			Bundle bundle = intent.getExtras();
+//			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
+//			if(!sitios.isEmpty()){
+//				
+//				SitioDTO sitio = sitios.get(0);
+//				if(sitio != null){
+//					setSitio(sitio);
+//				}
+//				
+//				
+//			}
+//			Util.dismissProgressDialog();
+//			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
+//			volver();
+//			
+//		}
+//	};
+	
+//	private void actualizarSitio(){
+//		Intent intent = new Intent(this, SitioServicio.class);
+//		SitioDTO sitioUpdate = new SitioDTO();
+//		sitioUpdate.setIdSitio(sitio.getIdSitio());
+//		intent.putExtra("sitio", sitioUpdate);
+//		startService(intent);
+//		
+//	}
 
 	private void volver(){
 		setResult(RESULT_OK);
