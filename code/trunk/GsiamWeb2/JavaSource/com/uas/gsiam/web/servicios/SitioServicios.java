@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.commons.lang.StringUtils;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
@@ -47,11 +48,17 @@ public class SitioServicios {
 	}
 
 	@GET
-	@Path("/sitio")
+	@Path("/sitio/{id}/{nombre}")
 	@Produces("application/json")
-	@Consumes("application/json")
-	public List<SitioDTO> buscarSitios(@BadgerFish SitioDTO sitio) {
-
+	public List<SitioDTO> buscarSitios(@PathParam("id") String id,
+			@PathParam("nombre") String nombre) {
+		SitioDTO sitio = new SitioDTO();
+		if (!id.isEmpty()) {
+			sitio.setIdSitio(Integer.valueOf(id));
+		}
+		if (!nombre.isEmpty() && !nombre.equals(" ")) {
+			sitio.setNombre(nombre);
+		}
 		List<SitioDTO> sitios = null;
 		try {
 			sitios = servicio.buscarSitios(sitio);
