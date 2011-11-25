@@ -18,11 +18,12 @@
         android:layout_height="fill_parent" >
 
 	<TextView android:id="@+id/LblNombre" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:gravity="center" android:layout_marginLeft="10dp"  />
+		android:layout_height="wrap_content" android:gravity="center" android:layout_marginLeft="10dp" 
+		android:textColor="@color/fuente" />
 
 	<TextView android:id="@+id/LblMail" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:layout_marginLeft="10dp" 
-			android:textColor="@color/email" />
+		android:textColor="@color/email" />
 	</LinearLayout>   
 </LinearLayout>
 

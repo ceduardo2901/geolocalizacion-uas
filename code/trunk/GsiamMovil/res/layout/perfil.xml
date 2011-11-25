@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:background="@color/background" android:layout_height="fill_parent"
+    android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
-	android:orientation="horizontal">
+	android:orientation="horizontal" android:background="@color/background2">
 	
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="center">
