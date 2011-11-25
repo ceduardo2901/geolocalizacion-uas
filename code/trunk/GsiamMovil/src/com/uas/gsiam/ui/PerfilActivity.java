@@ -1,6 +1,7 @@
 package com.uas.gsiam.ui;
 
-import android.app.Activity;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem.Type;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Util;
 
 
-public class PerfilActivity extends Activity {
+public class PerfilActivity extends GDActivity {
 
 	protected TextView nombreTxt;
 	protected TextView emailTxt;
@@ -21,13 +22,11 @@ public class PerfilActivity extends Activity {
 	protected Button editarPerfilBtn;
 		
 	
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.perfil);
-		
+		setActionBarContentView(R.layout.perfil);
 		ApplicationController app = ((ApplicationController)getApplicationContext());
 	    UsuarioDTO user = app.getUserLogin();
 	    
@@ -42,10 +41,17 @@ public class PerfilActivity extends Activity {
 	    if (user.getAvatar() != null)
 	    	iv.setImageBitmap(Util.ArrayToBitmap(user.getAvatar()));
 
-		
+	    inicializarBar();
 
 	}
 
+	private void inicializarBar() {
+
+		addActionBarItem(Type.Help, 0);
+		getActionBar().setTitle("GSIAM - Perfil");
+
+	}
+	
 	protected void onResume() {
 		 super.onResume();
 		
