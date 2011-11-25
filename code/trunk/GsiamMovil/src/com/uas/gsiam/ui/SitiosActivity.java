@@ -105,7 +105,7 @@ public class SitiosActivity extends GDActivity implements
 		addActionBarItem(Type.Search, BUSCAR);
 		addActionBarItem(Type.Refresh, ACTUALIZAR);
 
-		setTitle(R.string.app_name);
+		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
 	private void initQuickActionBar() {

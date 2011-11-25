@@ -112,7 +112,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 
 	private void inicializarBarra() {
 
-		setTitle(R.string.app_name);
+		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
 	protected void onResume() {

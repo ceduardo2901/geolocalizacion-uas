@@ -1,5 +1,8 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem.Type;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +11,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -41,7 +43,7 @@ import com.uas.gsiam.utils.Constantes;
 
 import com.uas.gsiam.utils.Util;
 
-public class EditarUsuarioActivity extends Activity {
+public class EditarUsuarioActivity extends GDActivity {
 
 	protected String email;
 	protected String nombre;
@@ -67,7 +69,7 @@ public class EditarUsuarioActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.editar_perfil);
+		setActionBarContentView(R.layout.editar_perfil);
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
@@ -87,10 +89,16 @@ public class EditarUsuarioActivity extends Activity {
 	    
 	    editarPerfilFiltro = new IntentFilter(Constantes.EDITAR_USUARIO_FILTRO_ACTION);
 		
+	    inicializarBar();
 	}
 		
 		
-		
+	private void inicializarBar() {
+
+		addActionBarItem(Type.Help, 0);
+		getActionBar().setTitle("GSIAM - Perfil");
+
+	}
 
 	
 	protected void onResume() {
