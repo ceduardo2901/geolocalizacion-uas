@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+	android:layout_height="fill_parent" android:background="@color/background2">
 	
 	<LinearLayout android:layout_height="wrap_content"
 		android:id="@+id/linearLayout1" android:layout_width="match_parent">
@@ -17,10 +17,10 @@
 	</LinearLayout>
 	
 	<ListView android:id="@id/android:list" android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:divider="#FFFFFF" android:dividerHeight="2px" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 	<TextView android:id="@android:id/empty" android:layout_width="match_parent"
-		android:layout_height="match_parent" android:text="@string/listaVacia" />
+		android:layout_height="match_parent" android:text="@string/listaVacia" android:textColor="@color/fuente"/>
 	
 		
 		

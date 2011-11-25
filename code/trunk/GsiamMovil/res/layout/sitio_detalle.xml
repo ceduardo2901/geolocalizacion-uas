@@ -4,7 +4,7 @@
 	android:layout_height="fill_parent" android:fillViewport="true" android:scrollbars="vertical" >
 	<LinearLayout android:orientation="vertical"
 		android:layout_width="match_parent" android:layout_height="fill_parent"
-		android:background="@color/fondo">
+		android:background="@color/background2">
 
 		<TableLayout android:layout_width="match_parent"
 			android:id="@+id/tableLayout1" android:layout_height="wrap_content">

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
-	android:orientation="horizontal">
+	android:orientation="horizontal" android:background="@color/background2">
 	
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
@@ -10,14 +10,14 @@
 
 			
 		<TextView android:layout_width="fill_parent" android:text="@string/email"
-			android:layout_height="wrap_content" android:id="@+id/emailLbl"
+			android:layout_height="wrap_content" android:textColor="@color/fuente"
 			android:layout_weight="1" android:layout_marginTop="15dp"></TextView>
 
 
 
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/emailTxt"
-			android:inputType="textEmailAddress">
+			android:inputType="textEmailAddress" >
 		</EditText>
 		
 		
@@ -34,7 +34,8 @@
 			<TextView android:layout_width="wrap_content"
 				android:layout_height="wrap_content" android:text="Amigos de Facebook"
 				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
-				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"/>
+				android:paddingRight="10dp" android:layout_gravity="center_horizontal|center"
+				android:textColor="@color/fuente"/>
 				
 			<Button android:id="@+id/button1" android:text="@string/BtnInvitar"
 				android:onClick="btnInvitarAmigosFacebook" android:layout_gravity="right"
