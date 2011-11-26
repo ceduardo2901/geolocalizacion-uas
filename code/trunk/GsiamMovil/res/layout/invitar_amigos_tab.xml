@@ -5,16 +5,19 @@
 	android:orientation="horizontal" android:background="@color/background2">
 	
 	<LinearLayout android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:layout_gravity="center">
+		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="top|center">
 
+			<TextView android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:text="Envia invitaciones a tus amigos"
+				android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
+				android:paddingRight="10dp" android:textColor="@color/fuente" android:layout_gravity="top|center_horizontal" android:layout_marginTop="30dp"/>
+			
 			
 		<TextView android:layout_width="fill_parent" android:text="@string/email"
 			android:layout_height="wrap_content" android:textColor="@color/fuente"
-			android:layout_weight="1" android:layout_marginTop="15dp"></TextView>
+			android:layout_weight="1" android:layout_marginTop="70dp"></TextView>
 
-
-
+		
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/emailTxt"
 			android:inputType="textEmailAddress" >
