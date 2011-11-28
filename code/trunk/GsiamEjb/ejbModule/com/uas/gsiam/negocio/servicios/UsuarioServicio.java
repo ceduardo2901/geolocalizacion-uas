@@ -15,7 +15,7 @@ public interface UsuarioServicio {
 
 	static final String SERVICE_ADDRESS = "java:global/Gsiam/GsiamEjb/UsuarioServicio";
 	
-	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
+	public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion, UsuarioExcepcion;
 
 	public void crearUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		

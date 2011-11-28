@@ -21,7 +21,9 @@ public class Constantes {
 	public static String ERROR_RESPONDER_SOLICITUD = "Error al intentar aceptar o rechazar la solicitud";
 	public static String ERROR_YA_EXISTE_USUARIO = "El mail ingresado ya existe, ingrese otro";
 	public static String ERROR_LOGIN = "Error al intentar ingrear a la aplicacion";
+	public static String NO_EXISTE_USUARIO = "El email o password es incorrecto";
 	public static String ERROR_ACTUALIZAR_UBICACION = "Error al intentar actualizar su ubicacion";
+	
 	
 	// Mensajes de error sitios
 	public static String ERROR_CREAR_SITIO = "Error al intentar crear el sitio";
