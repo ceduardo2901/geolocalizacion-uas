@@ -1,14 +1,18 @@
 package com.uas.gsiam.ui;
 
+import greendroid.app.GDTabActivity;
 import greendroid.widget.ActionBarItem;
+import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.location.Location;
 import android.net.Uri;
@@ -26,6 +30,7 @@ import android.widget.TextView;
 import com.uas.gsiam.adapter.ComentarioAdapter;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
 public class SitioDetalleActivity extends Activity implements OnItemClickListener{
@@ -44,6 +49,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	private static final int MAPA = 1;
 	private Gallery galeria;
 	private ArrayList<byte[]> fotos;
+	private IntentFilter detalleFiltro;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		//inicializarBarra();
 		
 		galeria.setOnItemClickListener(this);
+		detalleFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 
 	}
 
@@ -105,6 +112,30 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 //		return true;
 //
 //	}
+	
+	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
+		@Override
+	    public void onReceive(Context context, Intent intent) {
+	    		
+	    	Bundle bundle = intent.getExtras();
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
+			if(!sitios.isEmpty()){
+				setSitio(sitios.get(0));
+				List<PublicacionDTO> publicaciones = sitios.get(0).getPublicaciones();
+				if(!publicaciones.isEmpty()){
+					
+					cargarFotos(sitio.getPublicaciones());
+				}
+				
+			}
+			Util.dismissProgressDialog();
+			
+			GDTabActivity padre = (GDTabActivity) getParent();
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+			loaderActionBarItem.setLoading(false);
+			
+	    }
+	  };
 
 	public void onResume() {
 		super.onResume();
@@ -117,6 +148,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		txtWeb.setText(sitio.getWeb());
 		
 		loc = intent.getParcelableExtra("ubicacion");
+		registerReceiver(receiverSitio, detalleFiltro);
 
 //		if (!sitio.getPublicaciones().isEmpty()) {
 //			ComentarioAdapter adaptador = new ComentarioAdapter(this,
@@ -137,6 +169,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 
 	public void onPause() {
 		super.onPause();
+		unregisterReceiver(receiverSitio);
 
 	}
 

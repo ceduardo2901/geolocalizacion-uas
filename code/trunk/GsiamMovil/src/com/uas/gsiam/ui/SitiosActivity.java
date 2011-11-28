@@ -79,7 +79,7 @@ public class SitiosActivity extends GDActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.lista_sitios);
-
+		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();
 		boolean result = locHelper.getLocation(this, locationResult);
@@ -87,16 +87,20 @@ public class SitiosActivity extends GDActivity implements
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
-		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
-		if (loc == null) {
-			buildAlertMessageNoGps();
-		} else {
-			// TODO poner aca despues obtener la ubicacion
-		}
-
+		
 		inicializarActionBar();
 		initQuickActionBar();
-		actualizarSitios(loc);
+		if (loc == null) {
+			//buildAlertMessageNoGps();
+			Util.dismissProgressDialog();
+			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+		} else {
+			
+			actualizarSitios(loc);
+		}
+
+		
+		
 
 	}
 

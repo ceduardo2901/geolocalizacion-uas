@@ -107,18 +107,22 @@ public class LoginActivity extends Activity {
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
-			// Bundle bundleError = intent.getExtras();
-			Bundle bundle = intent.getBundleExtra("usuario");
-
-			if (bundle == null) {
-				Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
+			String error = intent.getStringExtra("error");
+			if (error != null) {
+				Util.showToast(context, error);
 			} else {
-				user = (UsuarioDTO) bundle.getSerializable("usuario");
-				if (user.getEmail() != null) {
-					// SessionStore.save(email, getApplicationContext());
-					actividadPrincipal();
-				} else {
+				Bundle bundle = intent.getBundleExtra("usuario");
+
+				if (bundle == null) {
 					Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
+				} else {
+					user = (UsuarioDTO) bundle.getSerializable("usuario");
+					if (user.getEmail() != null) {
+						// SessionStore.save(email, getApplicationContext());
+						actividadPrincipal();
+					} else {
+						Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
+					}
 				}
 			}
 
