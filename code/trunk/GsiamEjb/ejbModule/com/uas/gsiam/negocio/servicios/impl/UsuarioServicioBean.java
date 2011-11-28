@@ -32,7 +32,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
     }
 
     
-    public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
+    public UsuarioDTO login (UsuarioDTO usuario) throws UsuarioNoExisteExcepcion, UsuarioExcepcion{
 		UsuarioDTO user=null;
 		try {
 			
@@ -40,17 +40,17 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_LOGIN);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_LOGIN);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UsuarioExcepcion(Constantes.ERROR_LOGIN);
+		}
+		
+		if(user == null){
+			throw new UsuarioNoExisteExcepcion(Constantes.NO_EXISTE_USUARIO);
 		}
 		
 		return user;

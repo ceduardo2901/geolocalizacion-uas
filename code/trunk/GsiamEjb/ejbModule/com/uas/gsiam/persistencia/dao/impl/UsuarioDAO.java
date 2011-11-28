@@ -23,7 +23,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion{
 		
 		PreparedStatement ps;
-		UsuarioDTO usuarioRetorno = new UsuarioDTO();
+		UsuarioDTO usuarioRetorno = null;
 				
 		try {
 			
@@ -37,6 +37,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()){
+				usuarioRetorno = new UsuarioDTO();
 				usuarioRetorno.setNombre(rs.getString("usu_nombre"));	
 				usuarioRetorno.setId(rs.getInt("usu_id"));
 				usuarioRetorno.setEmail(usuario.getEmail());
