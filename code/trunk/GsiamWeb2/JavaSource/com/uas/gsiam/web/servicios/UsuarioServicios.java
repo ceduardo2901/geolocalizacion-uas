@@ -10,10 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 import org.jboss.resteasy.specimpl.ResponseBuilderImpl;
@@ -22,7 +19,6 @@ import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
-import com.uas.gsiam.negocio.excepciones.UsuarioMapperException;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.persistencia.utiles.Constantes;
 import com.uas.gsiam.web.delegate.UsuarioDelegate;
