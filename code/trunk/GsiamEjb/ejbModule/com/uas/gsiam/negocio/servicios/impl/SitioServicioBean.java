@@ -80,22 +80,20 @@ public class SitioServicioBean implements SitioServicio{
 	}
 
 	@Override
-	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
+	public List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SitioExcepcion {
 		List<SitioDTO> sitios=null;
 		try {
 			sitios = AbstractFactory.getInstance().getSitioDAO().obtenerSitios(sitio);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_LISTA_SITIO);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_LISTA_SITIO);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioExcepcion(Constantes.ERROR_LISTA_SITIO);
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_LISTA_SITIO);
 		}
 		return sitios;
 	}

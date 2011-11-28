@@ -247,7 +247,7 @@ public class SitioDAO implements ISitioDAO {
 	}
 
 	@Override
-	public List<SitioDTO> obtenerSitios(SitioDTO sitio) {
+	public List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SQLException {
 		PreparedStatement ps = null;
 		SitioDTO resultado = null;
 		CategoriaDTO categoria;
@@ -261,7 +261,7 @@ public class SitioDAO implements ISitioDAO {
 				+ "where s.sit_id_categoria=c.cat_id "
 				+ "and ST_DWithin(s.sit_punto,GeomFromText(?),?)"
 				+ " order by ST_Distance(sit_punto,GeomFromText(?))";
-		try {
+		
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 			
 			PGgeometry geom;
@@ -293,19 +293,12 @@ public class SitioDAO implements ISitioDAO {
 				
 			}
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
+		
+		
 				ps.close();
 				rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
+		
+		
 		return sitios;
 	}
 	

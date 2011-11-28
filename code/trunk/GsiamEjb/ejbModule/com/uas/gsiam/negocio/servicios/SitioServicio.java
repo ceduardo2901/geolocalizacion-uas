@@ -23,7 +23,7 @@ public interface SitioServicio {
 	
 	void modificarSitio(SitioDTO sitioInteres) throws SitioExcepcion;
 	
-	List<SitioDTO> obtenerSitios(SitioDTO sitio);
+	List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SitioExcepcion;
 	
 	List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion;
 	
