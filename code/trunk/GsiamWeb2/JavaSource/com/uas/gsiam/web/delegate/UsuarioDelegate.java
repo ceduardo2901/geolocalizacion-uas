@@ -3,6 +3,10 @@ package com.uas.gsiam.web.delegate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
 import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -22,27 +26,19 @@ public class UsuarioDelegate {
 
 	public void initialLoadBean() {
 		try {
-			this.servicioUsuario =
-					(UsuarioServicio)ServiceLocator.getBean(UsuarioServicio.SERVICE_ADDRESS);
+			this.servicioUsuario = (UsuarioServicio) ServiceLocator
+					.getBean(UsuarioServicio.SERVICE_ADDRESS);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public UsuarioDTO login(UsuarioDTO usuario) {
+	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion, UsuarioExcepcion {
 
+		usuario = servicioUsuario.login(usuario);
 
-		try {
-			usuario = servicioUsuario.login(usuario);
-
-		} catch (UsuarioNoExisteExcepcion e) {
-
-			e.printStackTrace();
-		}
 		return usuario;
 	}
-
-
 
 	public void crearUsuario(UsuarioDTO usuario) throws UsuarioExcepcion {
 
@@ -56,48 +52,52 @@ public class UsuarioDelegate {
 
 	}
 
-	public List<UsuarioDTO> getAmigos(int idUsuario) throws UsuarioExcepcion{
+	public List<UsuarioDTO> getAmigos(int idUsuario) throws UsuarioExcepcion {
 
 		return servicioUsuario.getAmigos(idUsuario);
 	}
 
-
-	public List<UsuarioDTO> getUsuarios(int id, String nombre) throws UsuarioExcepcion{
+	public List<UsuarioDTO> getUsuarios(int id, String nombre)
+			throws UsuarioExcepcion {
 
 		return servicioUsuario.getUsuarios(id, nombre);
 	}
 
-
-	public void crearSolicitudContacto(SolicitudContactoDTO solicitud) throws UsuarioExcepcion{
+	public void crearSolicitudContacto(SolicitudContactoDTO solicitud)
+			throws UsuarioExcepcion {
 
 		servicioUsuario.crearSolicitudContacto(solicitud);
 	}
 
-
-	public void responderSolicitudContacto(SolicitudContactoDTO solicitud, int accion) throws UsuarioExcepcion{
+	public void responderSolicitudContacto(SolicitudContactoDTO solicitud,
+			int accion) throws UsuarioExcepcion {
 
 		servicioUsuario.responderSolicitudContacto(solicitud, accion);
 	}
 
-	public List<UsuarioDTO> getSolicitudesEnviadasPendientes(int idUsuario) throws UsuarioExcepcion{
+	public List<UsuarioDTO> getSolicitudesEnviadasPendientes(int idUsuario)
+			throws UsuarioExcepcion {
 
 		return servicioUsuario.getSolicitudesEnviadasPendientes(idUsuario);
 	}
 
-	public List<UsuarioDTO> getSolicitudesRecibidasPendientes(int idUsuario) throws UsuarioExcepcion{
+	public List<UsuarioDTO> getSolicitudesRecibidasPendientes(int idUsuario)
+			throws UsuarioExcepcion {
 
 		return servicioUsuario.getSolicitudesRecibidasPendientes(idUsuario);
 	}
-	
-	public void enviarInvitaciones(ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion{
+
+	public void enviarInvitaciones(ArrayList<String> direcciones, String nombre)
+			throws UsuarioExcepcion {
 
 		servicioUsuario.enviarInvitaciones(direcciones, nombre);
 	}
 
-	public void actualizarPosicionUsuario(PosicionUsuarioDTO posUsuario) throws UsuarioExcepcion {
+	public void actualizarPosicionUsuario(PosicionUsuarioDTO posUsuario)
+			throws UsuarioExcepcion {
 
 		servicioUsuario.actualizarPosicionUsuario(posUsuario);
 
 	}
-	
+
 }
