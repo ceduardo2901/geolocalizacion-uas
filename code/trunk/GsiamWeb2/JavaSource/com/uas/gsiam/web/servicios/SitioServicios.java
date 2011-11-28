@@ -12,13 +12,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.commons.lang.StringUtils;
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
+import org.jboss.resteasy.specimpl.ResponseBuilderImpl;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -63,8 +64,11 @@ public class SitioServicios {
 		try {
 			sitios = servicio.buscarSitios(sitio);
 		} catch (SitioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.NOT_FOUND);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
 
 		return sitios;
@@ -76,6 +80,7 @@ public class SitioServicios {
 	@Consumes("application/json")
 	public Response crearSitio(@BadgerFish SitioDTO sitio) {
 		ResponseBuilder builder = Response.ok();
+		
 		try {
 			servicio.crearSitio(sitio);
 			builder.status(Status.OK);
@@ -84,7 +89,7 @@ public class SitioServicios {
 			e.printStackTrace();
 		} catch (SitioExcepcion e) {
 			System.out.println("prueba de error");
-			// throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+			 throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 			// return Response.status(Status.INTERNAL_SERVER_ERROR);
 
 		}
