@@ -29,7 +29,7 @@ public class SitioDelegate {
 		}
 	}
 
-	public List<SitioDTO> getSitios(String lat, String lon) {
+	public List<SitioDTO> getSitios(String lat, String lon) throws SitioExcepcion {
 		SitioDTO sitio = new SitioDTO();
 		sitio.setLat(new Double(lat));
 		sitio.setLon(new Double(lon));

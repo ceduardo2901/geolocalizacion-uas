@@ -43,7 +43,17 @@ public class SitioServicios {
 	@Produces("application/json")
 	public List<SitioDTO> getSitios(@PathParam("lat") String lat,
 			@PathParam("lon") String lon) {
-		List<SitioDTO> sitios = servicio.getSitios(lat, lon);
+		List<SitioDTO> sitios=new ArrayList<SitioDTO>();
+		try {
+			sitios = servicio.getSitios(lat, lon);
+		} catch (SitioExcepcion e) {
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
+			
+		}
 
 		return sitios;
 	}
@@ -85,16 +95,21 @@ public class SitioServicios {
 			servicio.crearSitio(sitio);
 			builder.status(Status.OK);
 		} catch (SitioYaExisteExcepcion e) {
-
-			e.printStackTrace();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.CONFLICT);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		} catch (SitioExcepcion e) {
-			System.out.println("prueba de error");
-			 throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-			// return Response.status(Status.INTERNAL_SERVER_ERROR);
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 
 		}
-		return builder.type(MediaType.APPLICATION_JSON).build();// status(Status.INTERNAL_SERVER_ERROR).build();
-		// return Response.status(200).build().toString();
+		return builder.type(MediaType.APPLICATION_JSON).build();
+		
 
 	}
 
