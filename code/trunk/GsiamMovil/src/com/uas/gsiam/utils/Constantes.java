@@ -98,7 +98,7 @@ public class Constantes {
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
 	public static final String MSG_ERROR_SERVIDOR = "Error al intentar acceder al servidor";
-	public static final String MSG_GPS_DISABLE = "Por favor habilite su gps para continuar";
+	public static final String MSG_GPS_DISABLE = "Para continuar habilite el gps";
 	public static final String MSG_ACEPTAR = "Aceptar";
 	public static final String MSG_CANCELAR = "Cancelar";
 	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
