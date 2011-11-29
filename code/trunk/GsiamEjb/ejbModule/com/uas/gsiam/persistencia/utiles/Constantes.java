@@ -31,6 +31,7 @@ public class Constantes {
 	public static String ERROR_MODIFICAR_SITIO = "Error al intentar modificar el sitio";
 	public static String ERROR_BUSCAR_SITIO = "Error al buscar el sitio";
 	public static String ERROR_CARGAR_CATEGORIAS = "Error al cargar las categorias";
+	public static String ERROR_LISTA_SITIO = "Error al obtener los sitios, intentelo luego";
 	
 	// Mensajes de error publicacion
 	public static String ERROR_CREAR_PUBLICACION = "Error al intentar crear la publicacion";
