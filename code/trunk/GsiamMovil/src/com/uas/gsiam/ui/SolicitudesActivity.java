@@ -2,9 +2,7 @@ package com.uas.gsiam.ui;
 
 import java.util.ArrayList;
 
-import greendroid.app.GDActivity;
 import greendroid.app.GDTabActivity;
-import greendroid.widget.ActionBarItem;
 import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.SegmentedAdapter;
 import greendroid.widget.SegmentedBar.OnSegmentChangeListener;
@@ -17,6 +15,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
@@ -35,8 +34,6 @@ import com.uas.gsiam.servicios.ResponderSolicitudServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
-
-
 
 public class SolicitudesActivity extends ListActivity implements OnItemClickListener{
 
@@ -70,7 +67,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
         	
         
    		lv.setOnItemClickListener(this);
-
+   		lv.setCacheColorHint(Color.TRANSPARENT);
         
         segmentedHost = (SegmentedHost) findViewById(R.id.segmented_host);
         
@@ -132,6 +129,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     
 	
 	protected BroadcastReceiver receiverSolicitudes = new BroadcastReceiver() {
+		@SuppressWarnings("unchecked")
 		@Override
 	    public void onReceive(Context context, Intent intent) {
 	    		
@@ -186,7 +184,6 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 		  
 		  UsuarioAdapter adaptador = new UsuarioAdapter((Activity) lv.getContext(), R.layout.usuario_item, usuariosSolicitudesRecibidas);
 			lv.setAdapter(adaptador);
-	
 			
 		}
     
@@ -199,7 +196,6 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
         public View getView(int position, ViewGroup parent) {
  
         	Log.i(TAG, "***** estoy en el getView :"+ position);
-	    	
         	return lv;
         	
         	
