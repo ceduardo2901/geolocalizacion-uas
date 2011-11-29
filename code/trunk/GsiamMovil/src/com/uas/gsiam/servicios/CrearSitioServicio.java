@@ -48,7 +48,7 @@ public class CrearSitioServicio extends IntentService {
 			String respuesta = restTemp.postForObject(
 					Constantes.CREAR_SITIOS_SERVICE_URL, sitio, String.class);
 
-			bundle.putString("respuesta", "respuesta");
+			bundle.putString("respuesta", respuesta);
 
 		} catch (RestResponseException e) {
 			String msg = (String) e.getResponseEntity().getBody();
