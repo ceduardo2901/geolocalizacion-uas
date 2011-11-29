@@ -243,7 +243,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		try{
 		
-			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_avatar) " +
+			String sqlCrearUsuario = "INSERT INTO t_usuarios (usu_nombre, usu_mail, usu_password, usu_avatar) " +
 					                 "VALUES (?, ?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
