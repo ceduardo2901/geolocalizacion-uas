@@ -3,6 +3,9 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -45,11 +48,13 @@ public class CrearSitioServicio extends IntentService {
 
 		try {
 
-			String respuesta = restTemp.postForObject(
-					Constantes.CREAR_SITIOS_SERVICE_URL, sitio, String.class);
-
-			bundle.putString("respuesta", respuesta);
-
+//			ResponseEntity<String> respuesta = restTemp.postForObject(
+//					Constantes.CREAR_SITIOS_SERVICE_URL, sitio, String.class);
+			ResponseEntity<String> respuesta = restTemp.exchange(Constantes.CREAR_SITIOS_SERVICE_URL, HttpMethod.POST, null, String.class);
+			//bundle.putString("respuesta", respuesta);
+			if(respuesta.getStatusCode() == HttpStatus.OK){
+				
+			}
 		} catch (RestResponseException e) {
 			String msg = (String) e.getResponseEntity().getBody();
 			Log.d(TAG, "Error: " + msg);
