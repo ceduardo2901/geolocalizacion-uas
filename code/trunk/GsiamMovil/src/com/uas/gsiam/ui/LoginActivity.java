@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -75,6 +77,7 @@ public class LoginActivity extends Activity {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
 
 		} else {
+			if(isOnline()){
 			Bundle bundle = new Bundle();
 			bundle.putString("email", email);
 			bundle.putString("pass", pass);
@@ -85,7 +88,19 @@ public class LoginActivity extends Activity {
 
 			Util.showProgressDialog(this,
 					Constantes.MSG_ESPERA_INICIANDO_SESION);
+			}else{
+				Util.showToast(this, Constantes.MSG_CONEXION_ERROR);
+			}
 		}
+	}
+	
+	public boolean isOnline() {
+	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	        return true;
+	    }
+	    return false;
 	}
 
 	public void btnRegistrarse(View v) {
