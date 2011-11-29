@@ -28,8 +28,8 @@ public class Constantes {
 	// Servicios
 	
 	//TODO poner esto en un archivo de configuracion
-	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
-//	public static final String DOMINIO_SERVICE = "http://192.168.0.102:8080";
+	//public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	public static final String DOMINIO_SERVICE = "http://192.168.1.101:8080";
 	public static final String LOGIN_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/login/{email}/{pass}";
 	public static final String LOGIN_FILTRO_ACTION = "com.gsiam.places.LOGIN_FILTRO_ACTION";
 	
@@ -107,7 +107,7 @@ public class Constantes {
 	public static final String MSG_NO_EXISTEN_SITIOS = "No se encontraron sitios cercanos a su ubicacion";
 	public static final String MSG_SITIO_CREADO = "El Sitio se creo correctamente";
 	public static final String MSG_INVITACIONES_OK = "Invitacion enviada existosamente";
-	
+	public static final String MSG_CONEXION_ERROR = "Para continuar debe tener conexion a internet";
 	public static final String MSG_INVITACIONES_FACEBOOK = "Unite a Gsiam";
 	public static final String MSG_INVITACIONES_FACEBOOK_OK = "Se envio la solicitud de forma correcta";
 	public static final String MSG_INVITACIONES_FACEBOOK_ERROR = "Error al enviar solicitud, intentelo mas tarde";
