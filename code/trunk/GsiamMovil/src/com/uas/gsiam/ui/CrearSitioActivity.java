@@ -60,7 +60,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private Button crearSitioBtn;
 	private SitioDTO sitioDto;
 	private Location loc;
-	private Integer index;
+	private int index;
 	protected IntentFilter crearSitioFiltro;
 	private MapView mapa;
 	private GeoPoint geoPoint;
