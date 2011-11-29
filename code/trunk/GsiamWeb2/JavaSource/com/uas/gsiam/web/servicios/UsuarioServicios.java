@@ -74,8 +74,13 @@ public class UsuarioServicios {
 			return Constantes.RETURN_OK;
 
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
+		
 
 	}
 
