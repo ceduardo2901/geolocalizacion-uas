@@ -6,6 +6,7 @@ public class Constantes {
 
 	// radio por defecto.
 	public static final int RADIO = 150;
+	public static final int TIMEOUT = 20000;
 	public static String METROS = "metros";
 	public static final String SHARED_PREFERENCE_FILE = "SHARED_PREFERENCE_FILE";
 	public static final boolean SUPPORTS_GINGERBREAD = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD;
@@ -114,6 +115,9 @@ public class Constantes {
 	public static final String MSG_INVITACIONES_FACEBOOK = "Unite a Gsiam";
 	public static final String MSG_INVITACIONES_FACEBOOK_OK = "Se envio la solicitud de forma correcta";
 	public static final String MSG_INVITACIONES_FACEBOOK_ERROR = "Error al enviar solicitud, intentelo mas tarde";
+	public static final String MSG_CREAR_SITIO_OK = "El sitio se creo correctamente";
+	public static final String MSG_ERROR_INESPERADO = "Ups!!! ocurrio un error inesperado, intentelo luego";
+	public static final String MSG_ERROR_TIMEOUT = "Error al accder al servidor, intentelo luego";
 	
 	
 }

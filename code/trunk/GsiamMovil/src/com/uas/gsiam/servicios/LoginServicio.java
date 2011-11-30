@@ -3,7 +3,13 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
@@ -17,6 +23,7 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.CategoriasUtil;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
@@ -34,9 +41,11 @@ public class LoginServicio extends IntentService {
 
 	public void onCreate() {
 		super.onCreate();
-
-		restTemp = new RestTemplate(
-				new HttpComponentsClientHttpRequestFactory());
+		
+		 
+	    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpUtils.getNewHttpClient());
+		
+		restTemp = new RestTemplate(requestFactory);
 	}
 
 	@Override
@@ -54,6 +63,7 @@ public class LoginServicio extends IntentService {
 			parms.put("pass", pass);
 			restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 					String.class));
+			 
 			UsuarioDTO user = restTemp.getForObject(
 					Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class, parms);
 			// ResponseEntity<String> responseEntity = restTemp.exchange(
@@ -87,6 +97,12 @@ public class LoginServicio extends IntentService {
 					.getBody());
 			Log.e(TAG, (String) e.getResponseEntity().getBody());
 			sendBroadcast(intentLogin);
+		}catch(ResourceAccessException e){
+			intentLogin.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
+			Log.e(TAG, e.getMessage());
+			sendBroadcast(intentLogin);
+			
+			
 		}
 
 	}
