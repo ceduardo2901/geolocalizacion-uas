@@ -150,78 +150,76 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	}
 
 	private AlertDialog dialog = null;
-	
+
 	public void mostarCategoria(View v) {
 		/*
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] categorias = getResources().getStringArray(
-				R.array.listNames);
-		builder.setTitle(R.string.categoria);
-		builder.setItems(categorias, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialoginterface, int i) {
-				index = i;
-				categoriaSitioTxt.setText(categorias[i]);
+		 * AlertDialog.Builder builder = new AlertDialog.Builder(this); final
+		 * String[] categorias = getResources().getStringArray(
+		 * R.array.listNames); builder.setTitle(R.string.categoria);
+		 * builder.setItems(categorias, new DialogInterface.OnClickListener() {
+		 * 
+		 * @Override public void onClick(DialogInterface dialoginterface, int i)
+		 * { index = i; categoriaSitioTxt.setText(categorias[i]);
+		 * 
+		 * } }); builder.show();
+		 */
 
-			}
-		});
-		builder.show();
-		*/
-		
 		ExpandableListView myList = new ExpandableListView(this);
 		myList.setDividerHeight(2);
 		ApplicationController app = ((ApplicationController) getApplicationContext());
-		ArrayList<HashMap<String, Object>> gruposCategorias = app.getGruposCategorias();
-		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app.getSubCategorias();
-		
-		 CategoriaAdapter adaptador = new CategoriaAdapter(this,
-				    gruposCategorias,
-	        		android.R.layout.simple_expandable_list_item_1,
-	        		new String[] {  },     // the name of the field data
-	        		new int[] { android.R.id.text1 }, // the text field to populate with the field data
-	        		subCategorias,
-	        		0,
-	        		null,
-	        		new int[] {});
-		
+		ArrayList<HashMap<String, Object>> gruposCategorias = app
+				.getGruposCategorias();
+		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app
+				.getSubCategorias();
+
+		CategoriaAdapter adaptador = new CategoriaAdapter(this,
+				gruposCategorias,
+				android.R.layout.simple_expandable_list_item_1,
+				new String[] {}, // the name of the field data
+				new int[] { android.R.id.text1 }, // the text field to populate
+													// with the field data
+				subCategorias, 0, null, new int[] {});
+
 		myList.setAdapter(adaptador);
-		
+
 		myList.setOnChildClickListener(new OnChildClickListener() {
 
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
-				
-				@SuppressWarnings("unchecked")
-				Map<String,Object> map  = (Map<String, Object>) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
-				
-				 CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
-					
-				
-				Util.showToast(getApplicationContext(),"getDescripcionGrupo:" + categoriaSeleccionada.getDescripcionGrupo() + 
-						                               "\ngetDescripcion:" + categoriaSeleccionada.getDescripcion());
 
-		       
-		        if (dialog != null){
-		        	dialog.dismiss();
-		        	categoriaSitioTxt.setText(categoriaSeleccionada.getDescripcion());
-		        }
-		        	
-		        
+				@SuppressWarnings("unchecked")
+				Map<String, Object> map = (Map<String, Object>) parent
+						.getExpandableListAdapter().getChild(groupPosition,
+								childPosition);
+
+				CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map
+						.get("CategoriaDTO");
+
+				Util.showToast(
+						getApplicationContext(),
+						"getDescripcionGrupo:"
+								+ categoriaSeleccionada.getDescripcionGrupo()
+								+ "\ngetDescripcion:"
+								+ categoriaSeleccionada.getDescripcion());
+
+				if (dialog != null) {
+					dialog.dismiss();
+					categoriaSitioTxt.setText(categoriaSeleccionada
+							.getDescripcion());
+				}
+
 				return true;
 			}
-		});	
-				
-		 
+		});
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Selecione Categoria");
 		builder.setView(myList);
-		
+
 		dialog = builder.create();
 		dialog.show();
-		
-		
-		
+
 	}
 
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
@@ -229,19 +227,19 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "onReceive");
 			Bundle bundle = intent.getExtras();
-			String respuesta = bundle.getString("respuesta");
-
+			String respuesta = intent.getStringExtra("respuesta");
+			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
 
-			if (!respuesta.isEmpty()) {
+			if (!error.isEmpty()) {
 
-				Util.showToast(context, respuesta);
-				// Intent actividadPrincipal = new
-				// Intent(getApplicationContext(), SitiosActivity.class);
-				// startActivity(actividadPrincipal);
+				Util.showToast(context, error);
 
 			} else {
-				Util.showToast(context, Constantes.MSG_SITIO_CREADO);
+				Util.showToast(context, respuesta);
+				Intent actividadPrincipal = new Intent(getApplicationContext(),
+						SitiosActivity.class);
+				startActivity(actividadPrincipal);
 			}
 
 		}
@@ -330,12 +328,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 					Projection proj = mapView.getProjection();
 					GeoPoint punto = proj.fromPixels((int) event.getX(),
 							(int) event.getY());
-					
+
 					mapa.getOverlays().remove(0);
-										
+
 					loc.setLatitude(punto.getLatitudeE6() / 1000000F);
 					loc.setLongitude(punto.getLongitudeE6() / 1000000F);
-					mapControl.setCenter(punto);					
+					mapControl.setCenter(punto);
 					PosicionOverlay miPosicionOverlay = new PosicionOverlay(
 							getResources().getDrawable(
 									R.drawable.gd_map_pin_pin));
@@ -343,7 +341,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 							null));
 					mapa.getOverlays().add(miPosicionOverlay);
 					populate();
-					
+
 				}
 			} else if (action == MotionEvent.ACTION_DOWN) {
 
