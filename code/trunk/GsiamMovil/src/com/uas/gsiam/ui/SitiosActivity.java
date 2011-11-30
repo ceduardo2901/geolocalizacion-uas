@@ -83,24 +83,21 @@ public class SitiosActivity extends GDActivity implements
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();
 		boolean result = locHelper.getLocation(this, locationResult);
-		
+
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
-		
+
 		inicializarActionBar();
 		initQuickActionBar();
 		if (loc == null) {
-			//buildAlertMessageNoGps();
+			// buildAlertMessageNoGps();
 			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
-			
+
 			actualizarSitios(loc);
 		}
-
-		
-		
 
 	}
 
@@ -162,88 +159,78 @@ public class SitiosActivity extends GDActivity implements
 	}
 
 	private AlertDialog dialog = null;
-	
-	public void mostarCategoria() {
-	
-	//	Intent mostrarCategoriasIntent = new Intent(this, ListaCategoriasActivity.class);
-	//	startActivity(mostrarCategoriasIntent);
-		
-	/*	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] categorias = getResources().getStringArray(
-				R.array.listNames);
-		builder.setTitle(R.string.categoria);
-		builder.setItems(categorias, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialoginterface, int i) {
 
-			//	mostrarSitios(filtrarPorCategoria(i + 1));
-				mostrarRaiting();
-			}
-		});
-		builder.show();
-		
-		*/
-		
-				
+	public void mostarCategoria() {
+
+		// Intent mostrarCategoriasIntent = new Intent(this,
+		// ListaCategoriasActivity.class);
+		// startActivity(mostrarCategoriasIntent);
+
+		/*
+		 * AlertDialog.Builder builder = new AlertDialog.Builder(this); final
+		 * String[] categorias = getResources().getStringArray(
+		 * R.array.listNames); builder.setTitle(R.string.categoria);
+		 * builder.setItems(categorias, new DialogInterface.OnClickListener() {
+		 * 
+		 * @Override public void onClick(DialogInterface dialoginterface, int i)
+		 * {
+		 * 
+		 * // mostrarSitios(filtrarPorCategoria(i + 1)); mostrarRaiting(); } });
+		 * builder.show();
+		 */
+
 		ExpandableListView myList = new ExpandableListView(this);
 		myList.setDividerHeight(2);
 		ApplicationController app = ((ApplicationController) getApplicationContext());
-		ArrayList<HashMap<String, Object>> gruposCategorias = app.getGruposCategorias();
-		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app.getSubCategorias();
-		
-		 CategoriaAdapter adaptador = new CategoriaAdapter(this,
-				    gruposCategorias,
-	        		android.R.layout.simple_expandable_list_item_1,
-	        		new String[] {  },     // the name of the field data
-	        		new int[] { android.R.id.text1 }, // the text field to populate with the field data
-	        		subCategorias,
-	        		0,
-	        		null,
-	        		new int[] {});
-		
+		ArrayList<HashMap<String, Object>> gruposCategorias = app
+				.getGruposCategorias();
+		ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = app
+				.getSubCategorias();
+
+		CategoriaAdapter adaptador = new CategoriaAdapter(this,
+				gruposCategorias,
+				android.R.layout.simple_expandable_list_item_1,
+				new String[] {}, // the name of the field data
+				new int[] { android.R.id.text1 }, // the text field to populate
+													// with the field data
+				subCategorias, 0, null, new int[] {});
+
 		myList.setAdapter(adaptador);
-		
+
 		myList.setOnChildClickListener(new OnChildClickListener() {
 
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
-				
-				@SuppressWarnings("unchecked")
-				Map<String,Object> map  = (Map<String, Object>) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
-				
-				 CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
-					
-				
-				Util.showToast(getApplicationContext(),"getDescripcionGrupo:" + categoriaSeleccionada.getDescripcionGrupo() + 
-						                               "\ngetDescripcion:" + categoriaSeleccionada.getDescripcion());
 
-		       
-		        if (dialog != null){
-		        	dialog.dismiss();
-		        	mostrarSitios(filtrarPorCategoria(categoriaSeleccionada.getIdCategoria()));
-					mostrarRaiting();
-		        }
-		        	
-		        
+				@SuppressWarnings("unchecked")
+				Map<String, Object> map = (Map<String, Object>) parent
+						.getExpandableListAdapter().getChild(groupPosition,
+								childPosition);
+
+				CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map
+						.get("CategoriaDTO");
+
+				if (dialog != null) {
+					dialog.dismiss();
+					mostrarSitios(filtrarPorCategoria(categoriaSeleccionada
+							.getIdCategoria()));
+
+				}
+
 				return true;
 			}
-		});	
-				
-		 
+		});
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Selecione Categoria");
 		builder.setView(myList);
-		
+
 		dialog = builder.create();
 		dialog.show();
-		
 
 	}
 
-	
-	
-	
 	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
 		if (!sitios.isEmpty()) {
@@ -339,7 +326,7 @@ public class SitiosActivity extends GDActivity implements
 			startSearch(null, false, null, false);
 			break;
 		case ACTUALIZAR:
-			//loc = PosicionGPS.getPosicion(getApplicationContext());
+			// loc = PosicionGPS.getPosicion(getApplicationContext());
 			locHelper.getLocation(this, locationResult);
 			actualizarSitios(loc);
 
@@ -378,7 +365,7 @@ public class SitiosActivity extends GDActivity implements
 		registerReceiver(sitiosReceiver, sitioAccion);
 		registerReceiver(eliminarSitioReceiver, intentEliminarSitio);
 
-		//startListening();
+		// startListening();
 
 	}
 
@@ -394,7 +381,7 @@ public class SitiosActivity extends GDActivity implements
 		super.onPause();
 		unregisterReceiver(sitiosReceiver);
 		unregisterReceiver(eliminarSitioReceiver);
-		//stopListening();
+		// stopListening();
 
 	}
 
@@ -514,15 +501,15 @@ public class SitiosActivity extends GDActivity implements
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
 
-//	private void startListening() {
-//		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-//				0, this);
-//	}
-//
-//	private void stopListening() {
-//		if (locationManager != null)
-//			locationManager.removeUpdates(this);
-//	}
+	// private void startListening() {
+	// locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+	// 0, this);
+	// }
+	//
+	// private void stopListening() {
+	// if (locationManager != null)
+	// locationManager.removeUpdates(this);
+	// }
 
 	private void actualizarSitios(Location loc) {
 		if (loc != null) {
@@ -542,41 +529,38 @@ public class SitiosActivity extends GDActivity implements
 
 		}
 	}
-	
-	public LocationResult locationResult = new LocationResult()
-	{
-	    
+
+	public LocationResult locationResult = new LocationResult() {
 
 		@Override
-	    public void obtenerUbicacion(final Location location)
-	    {
-	        loc = location;
-	    }
+		public void obtenerUbicacion(final Location location) {
+			loc = location;
+		}
 	};
 
-//	@Override
-//	public void onLocationChanged(Location location) {
-//		this.loc = location;
-//		actualizarSitios(loc);
-//
-//	}
-//
-//	@Override
-//	public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//	}
-//
-//	@Override
-//	public void onProviderEnabled(String provider) {
-//		// TODO Auto-generated method stub
-//
-//	}
-//
-//	@Override
-//	public void onProviderDisabled(String provider) {
-//		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
-//
-//	}
+	// @Override
+	// public void onLocationChanged(Location location) {
+	// this.loc = location;
+	// actualizarSitios(loc);
+	//
+	// }
+	//
+	// @Override
+	// public void onStatusChanged(String provider, int status, Bundle extras) {
+	//
+	// }
+	//
+	// @Override
+	// public void onProviderEnabled(String provider) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void onProviderDisabled(String provider) {
+	// Util.showToast(getApplicationContext(), "EL gps no esta encendido");
+	//
+	// }
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,
