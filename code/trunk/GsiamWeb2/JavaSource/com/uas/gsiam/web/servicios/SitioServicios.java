@@ -108,7 +108,8 @@ public class SitioServicios {
 			throw new WebApplicationException(response);
 
 		}
-		return builder.type(MediaType.APPLICATION_JSON).build();
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 		
 
 	}
