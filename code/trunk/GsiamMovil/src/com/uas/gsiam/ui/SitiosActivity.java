@@ -39,11 +39,13 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
 
 import com.uas.gsiam.adapter.CategoriaAdapter;
+import com.uas.gsiam.adapter.RatingAdapter;
 import com.uas.gsiam.adapter.SitiosAdapter;
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -144,40 +146,32 @@ public class SitiosActivity extends GDActivity implements
 	}
 
 	private void mostrarRaiting() {
+	
+String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
+		ListAdapter adapter = new RatingAdapter(this, R.layout.rating_item, items); 
+		   
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		final String[] puntajes = getResources().getStringArray(R.array.rating);
 		builder.setTitle(R.string.rating);
-		builder.setItems(puntajes, new DialogInterface.OnClickListener() {
+		builder.setAdapter(adapter,new DialogInterface.OnClickListener() {
+
 			@Override
-			public void onClick(DialogInterface dialoginterface, int i) {
-				// setSitios();
-				mostrarSitios(filtrarPorRating(i + 1));
+			public void onClick(DialogInterface dialog, int item) {
+
+				mostrarSitios(filtrarPorRating(item + 1));
+
 			}
+
 		});
-		builder.show();
+
+		AlertDialog alert = builder.create();
+		alert.show();
+		  
 
 	}
 
 	private AlertDialog dialog = null;
 
 	public void mostarCategoria() {
-
-		// Intent mostrarCategoriasIntent = new Intent(this,
-		// ListaCategoriasActivity.class);
-		// startActivity(mostrarCategoriasIntent);
-
-		/*
-		 * AlertDialog.Builder builder = new AlertDialog.Builder(this); final
-		 * String[] categorias = getResources().getStringArray(
-		 * R.array.listNames); builder.setTitle(R.string.categoria);
-		 * builder.setItems(categorias, new DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialoginterface, int i)
-		 * {
-		 * 
-		 * // mostrarSitios(filtrarPorCategoria(i + 1)); mostrarRaiting(); } });
-		 * builder.show();
-		 */
 
 		ExpandableListView myList = new ExpandableListView(this);
 		myList.setDividerHeight(2);
