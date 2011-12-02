@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -196,12 +198,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 				CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map
 						.get("CategoriaDTO");
 
-				Util.showToast(
-						getApplicationContext(),
-						"getDescripcionGrupo:"
-								+ categoriaSeleccionada.getDescripcionGrupo()
-								+ "\ngetDescripcion:"
-								+ categoriaSeleccionada.getDescripcion());
+//				Util.showToast(
+//						getApplicationContext(),
+//						"getDescripcionGrupo:"
+//								+ categoriaSeleccionada.getDescripcionGrupo()
+//								+ "\ngetDescripcion:"
+//								+ categoriaSeleccionada.getDescripcion());
 
 				if (dialog != null) {
 					dialog.dismiss();
@@ -255,9 +257,9 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-		if (!nombreSitioTxt.getText().toString().isEmpty()
-				&& !direccionSitioTxt.getText().toString().isEmpty()
-				&& !categoriaSitioTxt.getText().toString().isEmpty()
+		if (!nombreSitioTxt.getText().toString().equals("")
+				&& !direccionSitioTxt.getText().toString().equals("")
+				&& !categoriaSitioTxt.getText().toString().equals("")
 				&& s.length() != 0) {
 			crearSitioBtn.setEnabled(true);
 		} else {

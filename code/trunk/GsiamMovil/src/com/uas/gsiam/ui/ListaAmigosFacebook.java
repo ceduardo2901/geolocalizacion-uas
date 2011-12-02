@@ -131,7 +131,9 @@ public class ListaAmigosFacebook extends Activity {
 						params.putString("description", "descripccion");
 						params.putString("message",
 								Constantes.MSG_INVITACIONES_FACEBOOK);
-						facebook.request("feed", params, "POST");
+						//params.putString("method", "apprequests");
+						//facebook.request("feed", params, "POST");
+						facebook.request(params);
 
 					}
 				}
