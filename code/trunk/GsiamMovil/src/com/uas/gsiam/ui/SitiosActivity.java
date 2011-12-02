@@ -81,6 +81,9 @@ public class SitiosActivity extends GDActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.lista_sitios);
+
+		
+
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();
@@ -92,15 +95,30 @@ public class SitiosActivity extends GDActivity implements
 
 		inicializarActionBar();
 		initQuickActionBar();
+		sitios = (List<SitioDTO>) getLastNonConfigurationInstance();
+		if (sitios != null) {
+			mostrarSitios(sitios);
+		}
+		
 		if (loc == null) {
 			// buildAlertMessageNoGps();
 			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
+			if (sitios == null) {
 
-			actualizarSitios(loc);
+				actualizarSitios(loc);
+			}else{
+				Util.dismissProgressDialog();
+			}
 		}
 
+	}
+
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		final List<SitioDTO> data = getSitios();
+		return data;
 	}
 
 	private void inicializarActionBar() {
