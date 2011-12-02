@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/scroller" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:fillViewport="true" android:scrollbars="vertical" >
+	android:layout_height="fill_parent" android:fillViewport="true"
+	android:scrollbars="vertical">
 	<LinearLayout android:orientation="vertical"
 		android:layout_width="match_parent" android:layout_height="fill_parent"
 		android:background="@color/background2">
@@ -66,16 +67,14 @@
 			xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/gallery" android:layout_width="fill_parent"
 			android:layout_height="wrap_content" android:scrollbars="vertical"
-			android:gravity="left"  android:layout_marginLeft="0dp"/>
+			android:gravity="left" android:layout_marginLeft="0dp" />
 
 
 		<TableLayout android:id="@+id/tableLayout2"
 			android:layout_width="match_parent" android:layout_height="wrap_content">
 			<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
 				android:layout_height="wrap_content">
-				<!--  <Button android:text="@string/publicar" android:id="@+id/btnPublicarId"
-					android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:onClick="publicar" />-->
+
 
 				<Button android:text="@string/comoIr" android:id="@+id/btnComoIrId"
 					android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -91,15 +90,6 @@
 			android:scaleType="fitXY" android:paddingLeft="5dp"
 			android:paddingRight="5dp" android:paddingBottom="5dp"
 			android:paddingTop="5dp" />
-
-		<!--  <TextView android:text="@string/comentarios"
-			android:layout_width="wrap_content" android:id="@+id/textView1"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:layout_height="wrap_content" android:textColor="@color/fuente" />
-
-		<ListView android:layout_width="match_parent" android:id="@+id/listComentariosId"
-			android:layout_height="wrap_content" android:divider="@color/fuente" android:scrollbars="none"/>
-		-->
 
 	</LinearLayout>
 </ScrollView>
