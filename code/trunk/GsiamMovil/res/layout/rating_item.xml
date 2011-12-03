@@ -20,6 +20,6 @@
 		
 		
 	<TextView android:id="@+id/title" android:textColor="#0000FF"
-		android:text="" android:paddingLeft="20dip" android:layout_gravity="center"
+		android:text="" android:paddingLeft="15dip" android:layout_gravity="center"
 		android:layout_width="wrap_content" android:layout_height="wrap_content" />
 </LinearLayout>
