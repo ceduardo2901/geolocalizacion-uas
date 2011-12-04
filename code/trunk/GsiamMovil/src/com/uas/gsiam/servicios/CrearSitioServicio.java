@@ -55,7 +55,8 @@ public class CrearSitioServicio extends IntentService {
 		
 		
 		requestEntity = new HttpEntity<SitioDTO>(sitio,requestHeaders);
-		intent.setAction(Constantes.CREAR_SITIO_FILTRO_ACTION);
+		//intent.setAction(Constantes.CREAR_SITIO_FILTRO_ACTION);
+		Intent intentBack = new  Intent(Constantes.CREAR_SITIO_FILTRO_ACTION);
 		try {
 
 //			ResponseEntity<String> respuesta = restTemp.postForObject(
@@ -69,19 +70,19 @@ public class CrearSitioServicio extends IntentService {
 			// bundle.putString("respuesta", respuesta);
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
-				intent.putExtra("respuesta", Constantes.MSG_CREAR_SITIO_OK);
+				intentBack.putExtra("respuesta", Constantes.MSG_CREAR_SITIO_OK);
 			} else {
-				intent.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
+				intentBack.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
 
 			}
 
 		} catch (RestResponseException e) {
 			String msg = (String) e.getResponseEntity().getBody();
 			Log.d(TAG, "Error: " + msg);
-			intent.putExtra("error", msg);
+			intentBack.putExtra("error", msg);
 		}
 
-		sendBroadcast(intent);
+		sendBroadcast(intentBack);
 
 	}
 

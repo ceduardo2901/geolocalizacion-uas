@@ -1,6 +1,7 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDMapActivity;
+import greendroid.image.ImageCache;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -198,12 +199,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 				CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map
 						.get("CategoriaDTO");
 
-//				Util.showToast(
-//						getApplicationContext(),
-//						"getDescripcionGrupo:"
-//								+ categoriaSeleccionada.getDescripcionGrupo()
-//								+ "\ngetDescripcion:"
-//								+ categoriaSeleccionada.getDescripcion());
+				// Util.showToast(
+				// getApplicationContext(),
+				// "getDescripcionGrupo:"
+				// + categoriaSeleccionada.getDescripcionGrupo()
+				// + "\ngetDescripcion:"
+				// + categoriaSeleccionada.getDescripcion());
 
 				if (dialog != null) {
 					dialog.dismiss();
@@ -233,7 +234,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
 
-			if (!error.isEmpty()) {
+			if (error != null && !error.isEmpty()) {
 
 				Util.showToast(context, error);
 
