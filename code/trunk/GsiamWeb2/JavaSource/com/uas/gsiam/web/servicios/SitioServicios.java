@@ -75,7 +75,7 @@ public class SitioServicios {
 			sitios = servicio.buscarSitios(sitio);
 		} catch (SitioExcepcion e) {
 			ResponseBuilderImpl builder = new ResponseBuilderImpl();
-			builder.status(Response.Status.NOT_FOUND);
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
 			Response response = builder.build();
 			throw new WebApplicationException(response);
@@ -119,15 +119,20 @@ public class SitioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response eliminarSitio(@PathParam("sitio") String sitio) {
-
+		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.eliminarSitio(new Integer(sitio));
 		} catch (SitioExcepcion e) {
-			return Response.status(500).build();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
+			
 
 		}
-
-		return Response.ok().build();
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 
 	}
 
@@ -136,15 +141,20 @@ public class SitioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response modificarSitio(@BadgerFish SitioDTO sitio) {
-
+		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.modificarSitio(sitio);
 		} catch (SitioExcepcion e) {
-			return Response.status(500).build();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 
 		}
 
-		return Response.ok().build();
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 
 	}
 
@@ -153,15 +163,20 @@ public class SitioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response publicar(@BadgerFish PublicacionDTO publicacion) {
-
+		ResponseBuilder builder = Response.ok();
 		try {
 			publicacion.setFecha(new Date());
 			servicio.crearPublicacion(publicacion);
 		} catch (PublicacionExcepcion e) {
-			return Response.status(500).build();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 
 		}
-		return Response.ok().build();
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 
 	}
 
@@ -176,8 +191,11 @@ public class SitioServicios {
 			listaCategorias = servicio.getCategorias();
 
 		} catch (SitioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
 
 		return listaCategorias;

@@ -13,8 +13,18 @@
 		android:hint="@string/direccion">
 		<requestFocus></requestFocus>
 	</EditText>
+	<EditText android:id="@+id/txtTelefonoId"
+		android:layout_height="wrap_content" android:layout_width="300dp"
+		android:hint="@string/telefono">
+		<requestFocus></requestFocus>
+	</EditText>
+	<EditText android:id="@+id/txtWebId"
+		android:layout_height="wrap_content" android:layout_width="300dp"
+		android:hint="@string/web">
+		<requestFocus></requestFocus>
+	</EditText>
 	<Button android:text="@string/modificar" android:id="@+id/modificarBtn"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="btnModificar"/>
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:onClick="btnModificar"/>
 
 
 

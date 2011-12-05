@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
@@ -37,7 +38,7 @@ public class CrearSitioServicio extends IntentService {
 
 	public void onCreate() {
 		super.onCreate();
-		requestHeaders = new HttpHeaders();		
+		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
 				HttpUtils.getNewHttpClient()));
@@ -52,22 +53,15 @@ public class CrearSitioServicio extends IntentService {
 
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
-		
-		
-		requestEntity = new HttpEntity<SitioDTO>(sitio,requestHeaders);
-		//intent.setAction(Constantes.CREAR_SITIO_FILTRO_ACTION);
-		Intent intentBack = new  Intent(Constantes.CREAR_SITIO_FILTRO_ACTION);
+
+		requestEntity = new HttpEntity<SitioDTO>(sitio, requestHeaders);
+
+		Intent intentBack = new Intent(Constantes.CREAR_SITIO_FILTRO_ACTION);
 		try {
 
-//			ResponseEntity<String> respuesta = restTemp.postForObject(
-//					Constantes.CREAR_SITIOS_SERVICE_URL, sitio,
-//					ResponseEntity.class);
-
-
-			 ResponseEntity<String> respuesta = restTemp.exchange(
-			 Constantes.CREAR_SITIOS_SERVICE_URL, HttpMethod.POST, requestEntity,
-			 String.class);
-			// bundle.putString("respuesta", respuesta);
+			ResponseEntity<String> respuesta = restTemp.exchange(
+					Constantes.CREAR_SITIOS_SERVICE_URL, HttpMethod.POST,
+					requestEntity, String.class);
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentBack.putExtra("respuesta", Constantes.MSG_CREAR_SITIO_OK);
@@ -78,8 +72,13 @@ public class CrearSitioServicio extends IntentService {
 
 		} catch (RestResponseException e) {
 			String msg = (String) e.getResponseEntity().getBody();
-			Log.d(TAG, "Error: " + msg);
+			Log.e(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
+		}catch(ResourceAccessException e){
+			Log.e(TAG, e.getMessage());
+			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
+			
+			
 		}
 
 		sendBroadcast(intentBack);

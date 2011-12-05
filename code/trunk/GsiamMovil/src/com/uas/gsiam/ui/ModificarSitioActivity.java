@@ -20,6 +20,8 @@ public class ModificarSitioActivity extends Activity {
 	protected static String TAG = "ModificarSitioActivity";
 	protected EditText nombre;
 	protected EditText direccion;
+	protected EditText telefono;
+	protected EditText web;
 	protected SitioDTO sitio;
 	protected IntentFilter filtroModificarSitio;
 
@@ -29,7 +31,8 @@ public class ModificarSitioActivity extends Activity {
 		setContentView(R.layout.modificar_sitio);
 		nombre = (EditText) findViewById(R.id.txtNombreId);
 		direccion = (EditText) findViewById(R.id.txtDireccionId);
-
+		telefono = (EditText) findViewById(R.id.txtTelefonoId);
+		web = (EditText) findViewById(R.id.txtWebId);
 		filtroModificarSitio = new IntentFilter(
 				Constantes.MODIFICAR_SITIO_FILTRO_ACTION);
 	}
@@ -41,7 +44,8 @@ public class ModificarSitioActivity extends Activity {
 
 		nombre.setText(sitio.getNombre());
 		direccion.setText(sitio.getDireccion());
-
+		telefono.setText(sitio.getTelefono());
+		web.setText(sitio.getWeb());
 		registerReceiver(modificarSitioReceiver, filtroModificarSitio);
 	}
 
@@ -73,12 +77,14 @@ public class ModificarSitioActivity extends Activity {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
 			String error = intent.getStringExtra("error");
-
+			String respuesta = intent.getStringExtra("respuesta");
 			if (error != null) {
 				Util.showToast(context, error);
 			} else {
-
-				mostarSitios();
+				if (respuesta != null && !respuesta.isEmpty()) {
+					Util.showToast(context, respuesta);
+					mostarSitios();
+				}
 
 			}
 
