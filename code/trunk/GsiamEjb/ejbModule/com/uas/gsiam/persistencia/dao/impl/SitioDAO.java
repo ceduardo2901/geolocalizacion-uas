@@ -230,14 +230,16 @@ public class SitioDAO implements ISitioDAO {
 			Point punto = new Point(sitio.getLat(), sitio.getLon());
 			PGgeometry geom = new PGgeometry(punto);
 
-			String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_punto=? where sit_id=?";
+			String sqlCrearSitio = "UPDATE t_sitio SET sit_nombre=?, sit_direccion=?, sit_telefono=?, sit_web=?, sit_punto=? where sit_id=?";
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
 			ps.setString(1, sitio.getNombre());
 			ps.setString(2, sitio.getDireccion());
-			ps.setObject(3, geom);
-			ps.setInt(4, new Integer(sitio.getIdSitio()));
+			ps.setString(3, sitio.getTelefono());
+			ps.setString(4, sitio.getWeb());
+			ps.setObject(5, geom);
+			ps.setInt(6, new Integer(sitio.getIdSitio()));
 
 			ps.execute();
 		} catch (SQLException e) {
