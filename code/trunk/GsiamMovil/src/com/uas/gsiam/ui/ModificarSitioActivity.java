@@ -1,10 +1,5 @@
 package com.uas.gsiam.ui;
 
-import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.servicios.ModificarSitioServicio;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.Util;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,6 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.servicios.ModificarSitioServicio;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 public class ModificarSitioActivity extends Activity {
 
@@ -60,6 +60,8 @@ public class ModificarSitioActivity extends Activity {
 				ModificarSitioServicio.class);
 		sitio.setNombre(nombre.getText().toString());
 		sitio.setDireccion(direccion.getText().toString());
+		sitio.setTelefono(telefono.getText().toString());
+		sitio.setWeb(web.getText().toString());
 		intentModificarSitio.putExtra("sitio", sitio);
 		startService(intentModificarSitio);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
@@ -81,7 +83,7 @@ public class ModificarSitioActivity extends Activity {
 			if (error != null) {
 				Util.showToast(context, error);
 			} else {
-				if (respuesta != null && !respuesta.isEmpty()) {
+				if (respuesta != null) {
 					Util.showToast(context, respuesta);
 					mostarSitios();
 				}

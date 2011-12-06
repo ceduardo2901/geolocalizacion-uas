@@ -4,22 +4,22 @@
 	android:layout_height="match_parent" android:background="@color/background2">
 
 	<EditText android:id="@+id/txtNombreId" android:layout_height="wrap_content"
-		android:layout_width="300dp" android:hint="@string/Nombre">
+		android:layout_width="fill_parent" android:hint="@string/Nombre">
 		<requestFocus></requestFocus>
 	</EditText>
 
 	<EditText android:id="@+id/txtDireccionId"
-		android:layout_height="wrap_content" android:layout_width="300dp"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:hint="@string/direccion">
 		<requestFocus></requestFocus>
 	</EditText>
 	<EditText android:id="@+id/txtTelefonoId"
-		android:layout_height="wrap_content" android:layout_width="300dp"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:hint="@string/telefono">
 		<requestFocus></requestFocus>
 	</EditText>
 	<EditText android:id="@+id/txtWebId"
-		android:layout_height="wrap_content" android:layout_width="300dp"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:hint="@string/web">
 		<requestFocus></requestFocus>
 	</EditText>
