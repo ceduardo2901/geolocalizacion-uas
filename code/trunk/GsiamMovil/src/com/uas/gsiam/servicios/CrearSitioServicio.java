@@ -1,6 +1,5 @@
 package com.uas.gsiam.servicios;
 
-import org.apache.http.client.HttpClient;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,11 +13,9 @@ import org.springframework.web.client.RestTemplate;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
