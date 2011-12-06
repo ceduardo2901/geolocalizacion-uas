@@ -1,7 +1,6 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem.Type;
 
 import java.io.IOException;
 
@@ -14,7 +13,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,33 +118,28 @@ public class CrearUsuarioActivity extends GDActivity {
 	protected BroadcastReceiver receiverCrearUsuario = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	Log.i(TAG, "onReceive");
-	    	Bundle bundle = intent.getExtras();
-			String respuesta = bundle.getString("respuesta");
-		
+	    	
+	    	String respuesta = intent.getStringExtra("respuesta");
+			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
 			
-	    	if (respuesta.equals(Constantes.RETURN_OK)){
-	    		
-	    		Util.showToast(context, Constantes.MSG_USUARIO_CREADO_OK);
-				Intent actividadLogin = new Intent(getApplicationContext(), LoginActivity.class);
-				startActivity(actividadLogin);
-				
-			}
-			else{
+			
+			if (error != null && !error.isEmpty()) {
+
+				Util.showToast(context, error);
+
+			} else {
 				Util.showToast(context, respuesta);
+				Intent actividadLogin = new Intent(getApplicationContext(),
+						LoginActivity.class);
+				startActivity(actividadLogin);
 			}
-	    	
 			
 	    }
 	  };
 	  
 	  
 	  private void inicializarActionBar() {
-			addActionBarItem(Type.Trashcan, 0);
-	/*		addActionBarItem(Type.Search, BUSCAR);
-			addActionBarItem(Type.Refresh, ACTUALIZAR);
-*/
 			setTitle("GSIAM - Registrarse");
 		}
 	  

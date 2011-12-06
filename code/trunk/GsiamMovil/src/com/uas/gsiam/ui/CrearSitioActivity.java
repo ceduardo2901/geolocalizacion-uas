@@ -1,29 +1,19 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDMapActivity;
-import greendroid.image.ImageCache;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.springframework.util.StringUtils;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Canvas;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,8 +23,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ExpandableListView.OnChildClickListener;
 
 import com.google.android.maps.GeoPoint;
@@ -229,7 +217,6 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "onReceive");
-			Bundle bundle = intent.getExtras();
 			String respuesta = intent.getStringExtra("respuesta");
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
