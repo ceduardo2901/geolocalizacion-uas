@@ -1,8 +1,15 @@
 package com.uas.gsiam.servicios;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.protocol.ResponseServer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -42,18 +49,29 @@ public class ModificarSitioServicio extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Bundle bundle = intent.getExtras();
+		
+		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
-		SitioDTO sitio = (SitioDTO) bundle.getParcelable("sitio");
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
+		requestEntity = new HttpEntity<SitioDTO>(sitio, requestHeaders);
+
 		Intent intentModificarSitio = new Intent(
 				Constantes.MODIFICAR_SITIO_FILTRO_ACTION);
+
 		try {
 
-			restTemp.put(Constantes.MODIFICAR_SITIOS_SERVICE_URL, sitio);
-			intentModificarSitio.putExtra("respuesta",
-					Constantes.MSG_CREAR_SITIO_OK);
+			ResponseEntity<String> respuesta = restTemp.exchange(
+					Constantes.MODIFICAR_SITIOS_SERVICE_URL, HttpMethod.PUT,
+					requestEntity,String.class);
+			//restTemp.put(Constantes.MODIFICAR_SITIOS_SERVICE_URL,sitio);
+			if (respuesta.getStatusCode() == HttpStatus.OK) {
+				intentModificarSitio.putExtra("respuesta", Constantes.MSG_MODIFICAR_SITIO_OK);
+			} else {
+				intentModificarSitio.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
+
+			}
+			
 
 		} catch (RestResponseException e) {
 			Log.i(TAG, "Error: " + e.getMessage());
@@ -65,6 +83,8 @@ public class ModificarSitioServicio extends IntentService {
 			intentModificarSitio
 					.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 
+		}catch(Exception e){
+			Log.e(TAG, e.getMessage());
 		}
 
 		sendBroadcast(intentModificarSitio);
