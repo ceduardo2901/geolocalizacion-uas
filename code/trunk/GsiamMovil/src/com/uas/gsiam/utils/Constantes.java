@@ -31,9 +31,9 @@ public class Constantes {
 	//TODO poner esto en un archivo de configuracion
 	//public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	//ip tony
-	//public static final String DOMINIO_SERVICE = "http://192.168.1.101:8080";
+	public static final String DOMINIO_SERVICE = "http://186.49.62.5:8080";
 	//ipmartin
-	public static final String DOMINIO_SERVICE = "http://192.168.0.103:8080";
+	//public static final String DOMINIO_SERVICE = "http://192.168.0.103:8080";
 	public static final String LOGIN_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/login/{email}/{pass}";
 	public static final String LOGIN_FILTRO_ACTION = "com.gsiam.places.LOGIN_FILTRO_ACTION";
 	
@@ -116,6 +116,7 @@ public class Constantes {
 	public static final String MSG_INVITACIONES_FACEBOOK_OK = "Se envio la solicitud de forma correcta";
 	public static final String MSG_INVITACIONES_FACEBOOK_ERROR = "Error al enviar solicitud, intentelo mas tarde";
 	public static final String MSG_CREAR_SITIO_OK = "El sitio se creo correctamente";
+	public static final String MSG_MODIFICAR_SITIO_OK = "El sitio se modifico correctamente";
 	public static final String MSG_ERROR_INESPERADO = "Ups!!! ocurrio un error inesperado, intentelo luego";
 	public static final String MSG_ERROR_TIMEOUT = "Error al accder al servidor, intentelo luego";
 	
