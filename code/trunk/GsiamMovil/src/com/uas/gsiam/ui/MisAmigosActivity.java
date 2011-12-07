@@ -40,7 +40,6 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 	public void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 		  
-		  Log.i(TAG, "***** estoy en el onCreate");
 		  setContentView(R.layout.mis_amigos_tab);
 		  lv = getListView();
 		  lv.setOnItemClickListener(this);
@@ -88,8 +87,36 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		@Override
 	    public void onReceive(Context context, Intent intent) {
 	    		
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<UsuarioDTO> respuesta = (ArrayList<UsuarioDTO>) intent.getSerializableExtra("respuesta");
+			String error = intent.getStringExtra("error");
+			Util.dismissProgressDialog();
+			
+			
+			if (error != null && !error.isEmpty()) {
+
+				Util.showToast(context, error);
+
+			} else {
+				
+				misAmigos = respuesta;
+				Log.i(TAG, "mi lista}11111111 = "+misAmigos.size());
+				
+				mostrarAmigos();
+				
+				Util.dismissProgressDialog();
+				
+				GDTabActivity padre = (GDTabActivity) getParent();
+				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+				loaderActionBarItem.setLoading(false);
+			}
+			
+			
+			
+			/*
 	    	Bundle bundle = intent.getExtras();
-			misAmigos = (ArrayList<UsuarioDTO>) bundle.getSerializable("lista");
+			misAmigos = (ArrayList<UsuarioDTO>) bundle.getSerializable("respuesta");
 		
 	    	Log.i(TAG, "mi lista}11111111 = "+misAmigos.size());
 	    	    	
@@ -100,7 +127,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 			GDTabActivity padre = (GDTabActivity) getParent();
 			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
 			loaderActionBarItem.setLoading(false);
-			
+			*/
 	    }
 	  };
  
