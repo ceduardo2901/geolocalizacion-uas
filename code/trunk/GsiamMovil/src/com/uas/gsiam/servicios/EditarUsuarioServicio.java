@@ -3,24 +3,28 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-
-
-import com.uas.gsiam.negocio.dto.UsuarioDTO;
-import com.uas.gsiam.utils.Constantes;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
+
+import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
 
 
 public class EditarUsuarioServicio extends IntentService{
 
 	protected static String TAG = "EditarUsuarioServicio";
 	protected RestTemplate restTemp;
+	private HttpHeaders requestHeaders;
 	
 	public EditarUsuarioServicio() {
 		super(TAG);
@@ -29,34 +33,44 @@ public class EditarUsuarioServicio extends IntentService{
 	
 	public void onCreate(){
 		super.onCreate();
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
 
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		Bundle bundle = intent.getExtras();
-		
-		UsuarioDTO usuario = (UsuarioDTO) bundle.getSerializable("usuario");
+		UsuarioDTO usuario = (UsuarioDTO) intent.getSerializableExtra("usuario");
 		
 		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
 		parms.put("usuarioDto", usuario);
 		
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
+		
+		Intent intentBack = new Intent(Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
+		
 		try{
 		
-			String respuesta = restTemp.postForObject(Constantes.EDITAR_USUARIO_SERVICE_URL, usuario, String.class);	
-			bundle.putString("respuesta", respuesta);
+			restTemp.postForObject(Constantes.MODIFICAR_USUARIO_SERVICE_URL, usuario, String.class);	
+			intentBack.putExtra("respuesta", Constantes.MSG_USUARIO_EDITADO_OK);
 			
-		}catch (RestClientException e){
-			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
+		}catch (RestResponseException e){
+			
+			String msg = (String) e.getResponseEntity().getBody();
+			intentBack.putExtra("error", msg);
+			
+		}catch (ResourceAccessException e) {
+			
+			Log.e(TAG, e.getMessage());
+			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
+
 		}
-	
-		
-		Intent intentEditarUsuario = new Intent(Constantes.EDITAR_USUARIO_FILTRO_ACTION);
-		intentEditarUsuario.putExtras(bundle);
-		sendBroadcast(intentEditarUsuario);
+
+		sendBroadcast(intentBack);
 		
 	}
 

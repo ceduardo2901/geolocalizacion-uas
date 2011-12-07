@@ -1,9 +1,5 @@
 package com.uas.gsiam.servicios;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.http.protocol.ResponseServer;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
