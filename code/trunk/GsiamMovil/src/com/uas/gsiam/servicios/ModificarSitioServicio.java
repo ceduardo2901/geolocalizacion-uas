@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
@@ -59,7 +60,7 @@ public class ModificarSitioServicio extends IntentService {
 			ResponseEntity<String> respuesta = restTemp.exchange(
 					Constantes.MODIFICAR_SITIOS_SERVICE_URL, HttpMethod.PUT,
 					requestEntity,String.class);
-			//restTemp.put(Constantes.MODIFICAR_SITIOS_SERVICE_URL,sitio);
+			
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentModificarSitio.putExtra("respuesta", Constantes.MSG_MODIFICAR_SITIO_OK);
 			} else {
@@ -69,16 +70,17 @@ public class ModificarSitioServicio extends IntentService {
 			
 
 		} catch (RestResponseException e) {
-			Log.i(TAG, "Error: " + e.getMessage());
-			String msg = (String) e.getResponseEntity().getBody();
-			Log.e(TAG, "Error: " + msg);
-			intentModificarSitio.putExtra("error", msg);
+			
+			Log.i(TAG, "Error: " + e.getMensaje());
+			
+			Log.e(TAG, "Error: " + e.getMensaje());
+			intentModificarSitio.putExtra("error", e.getMensaje());
 		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentModificarSitio
 					.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 
-		}catch(Exception e){
+		}catch(RestClientException e){
 			Log.e(TAG, e.getMessage());
 		}
 
