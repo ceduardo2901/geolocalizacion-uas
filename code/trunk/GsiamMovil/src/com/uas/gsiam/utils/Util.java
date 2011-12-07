@@ -123,10 +123,11 @@ public class Util {
 	public static byte[] BitmapToArray(BitmapDrawable drawable) throws IOException {
 
 		Bitmap bitmap = drawable.getBitmap();
-		int size = bitmap.getWidth() * bitmap.getHeight() * 4;
-		ByteArrayOutputStream out = new ByteArrayOutputStream(size);
+				
+		//int size = bitmap.getWidth() * bitmap.getHeight() * 4;
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+		bitmap.compress(Bitmap.CompressFormat.PNG, 60, out);
 		out.flush();
 		out.close();
 		return out.toByteArray();

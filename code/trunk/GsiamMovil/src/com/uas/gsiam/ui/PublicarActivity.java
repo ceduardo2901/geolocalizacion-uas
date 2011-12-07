@@ -1,10 +1,12 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
+import greendroid.image.ImageLoader;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,6 +25,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -73,6 +76,7 @@ public class PublicarActivity extends GDActivity implements
 	private static final int RESULT = 1001;
 	private String nombre;
 	private ImageView fotoPub;
+	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicar;
 	private static final Integer PUBLICACION_OK = 200;
@@ -147,10 +151,17 @@ public class PublicarActivity extends GDActivity implements
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "onReceive");
 			Bundle bundle = intent.getExtras();
-			String respuesta = bundle.getString("respuesta");
-			
+			String respuesta = intent.getStringExtra("respuesta");
+			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
-			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
+			if(error != null){
+				Util.showToast(getApplicationContext(), error);
+			}else{
+				Util.showToast(getApplicationContext(), respuesta);
+				volverPublicaciones();
+			}
+			
+			
 			
 			//actualizarSitio();
 			
@@ -190,11 +201,10 @@ public class PublicarActivity extends GDActivity implements
 //		
 //	}
 
-	private void volver(){
-		setResult(RESULT_OK);
+	private void volverPublicaciones(){
+		
 		Intent volver = new Intent(this, ComentarioTabActivity.class);
 		
-		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
 	
@@ -233,25 +243,11 @@ public class PublicarActivity extends GDActivity implements
 		publicar.setIdUsuario(usuario.getId());
 		publicar.setPuntaje(puntaje.getRating());
 		
-		Drawable drawable= fotoPub.getDrawable();
-		
-		byte[] arrayBytes = null;
-		try {
-			if(drawable != null){
-				arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
-				publicar.setFoto(arrayBytes);
-				
-			}
-			
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-			e.printStackTrace();
-		}
-		
-		Bundle publicacion = new Bundle();
-		publicacion.putSerializable("publicacion", publicar);
+		publicar.setFoto(foto);
+		//Bundle publicacion = new Bundle();
+		//publicacion.putSerializable("publicacion", publicar);
 		Intent intent = new Intent(this, PublicarServicio.class);
-		intent.putExtras(publicacion);
+		intent.putExtra("publicacion", publicar);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 		comentarFacebook();
 		startService(intent);
@@ -372,8 +368,14 @@ public class PublicarActivity extends GDActivity implements
 			break;
 		case Constantes.REQUEST_CAMERA:
 			if (resultCode != 0) {
-
-				myBitmap = BitmapFactory.decodeFile(path);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inSampleSize=2;
+				//Bitmap temp_bitmap = BitmapFactory.decodeByteArray(data, 0, data.,options)
+				myBitmap = BitmapFactory.decodeFile(path, options);
+				
+				ByteArrayOutputStream out =  new ByteArrayOutputStream();
+				myBitmap.compress(CompressFormat.JPEG, 60, out);
+				foto = out.toByteArray();
 				fotoPub.setImageBitmap(myBitmap);
 				almacenarEnMemoria();
 
