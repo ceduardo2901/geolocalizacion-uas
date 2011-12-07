@@ -89,24 +89,26 @@ public class UsuarioServicios {
 	
 	
 	@POST
-	@Path("/editar")
+	@Path("/modificar")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public String editarUsuario(@BadgerFish UsuarioDTO usuario) {
-
+	public Response modificarUsuario(@BadgerFish UsuarioDTO usuario) {
+		ResponseBuilder builder = Response.ok();
 		try {
 
 			servicio.modificarUsuario(usuario);
 
-			return Constantes.RETURN_OK;
+		}catch (UsuarioExcepcion e) {
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 
-		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
-		} catch (Exception e) {
-			return e.getMessage();
 		}
-		// TODO Esta bien agarrar el exception aca??
-
+		
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 	}
 
 	@GET
@@ -119,12 +121,12 @@ public class UsuarioServicios {
 		try {
 			listaAmigos = servicio.getAmigos(id);
 		} catch (UsuarioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-		// TODO definir como enviar el error en caso de
-
-		System.out.println(listaAmigos.size());
 
 		return listaAmigos;
 
