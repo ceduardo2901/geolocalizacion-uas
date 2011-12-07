@@ -75,7 +75,7 @@ public class PublicarServicio extends IntentService {
 			}
 
 		} catch (RestResponseException e) {
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			Log.e(TAG, "Error: " + msg);
 			intentPublicacion.putExtra("error", msg);
 

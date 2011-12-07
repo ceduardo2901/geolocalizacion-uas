@@ -55,7 +55,7 @@ public class EliminarSitioServicio extends IntentService {
 					Constantes.MSG_CREAR_SITIO_OK);
 
 		} catch (RestResponseException e) {
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			Log.e(TAG, "Error: " + msg);
 			intentEliminarSitio.putExtra("error", msg);
 

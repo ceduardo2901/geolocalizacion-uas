@@ -60,9 +60,12 @@ public class RestResponseErrorHandler<T> implements ResponseErrorHandler {
 	public void handleError(ClientHttpResponse response) throws IOException {
 		// Create a new generic Response Entity adding the unmarshalled response, headers and status code
 		ResponseEntity<T> responseEntity = new ResponseEntity<T>(this.delegate.extractData(response), response.getHeaders(), response.getStatusCode());
-		
+		String msg = (String) responseEntity.getBody();
 		//Create a new RestResponseException and set the ResponseEntity
-		RestResponseException responseException = new RestResponseException ();
+		RestResponseException responseException = new RestResponseException (msg);
+		if(responseEntity.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+			responseException.setMensaje(response.getStatusCode() + " " + response.getStatusText());
+		}
 		responseException.setResponseEntity(responseEntity);
 		
 		// Throw the Exception

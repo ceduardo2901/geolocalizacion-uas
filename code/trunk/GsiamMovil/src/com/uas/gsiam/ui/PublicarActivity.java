@@ -361,6 +361,8 @@ public class PublicarActivity extends GDActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 
 		Bitmap myBitmap;
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inSampleSize=2;
 		switch (requestCode) {
 
 		case RESULT:
@@ -368,8 +370,7 @@ public class PublicarActivity extends GDActivity implements
 			break;
 		case Constantes.REQUEST_CAMERA:
 			if (resultCode != 0) {
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize=2;
+				
 				//Bitmap temp_bitmap = BitmapFactory.decodeByteArray(data, 0, data.,options)
 				myBitmap = BitmapFactory.decodeFile(path, options);
 				
@@ -391,8 +392,10 @@ public class PublicarActivity extends GDActivity implements
 					is = getContentResolver().openInputStream(selectedImage);
 
 					BufferedInputStream bis = new BufferedInputStream(is);
-					myBitmap = BitmapFactory.decodeStream(bis);
-
+					myBitmap = BitmapFactory.decodeStream(bis,null,options);
+					ByteArrayOutputStream out =  new ByteArrayOutputStream();
+					myBitmap.compress(CompressFormat.JPEG, 60, out);
+					foto = out.toByteArray();
 					fotoPub.setImageBitmap(myBitmap);
 
 				} catch (FileNotFoundException e) {
