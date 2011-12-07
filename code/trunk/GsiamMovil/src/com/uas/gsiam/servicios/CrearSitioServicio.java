@@ -68,7 +68,7 @@ public class CrearSitioServicio extends IntentService {
 			}
 
 		} catch (RestResponseException e) {
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			Log.e(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
 		}catch(ResourceAccessException e){
