@@ -130,11 +130,9 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		sitioDto.setLat(loc.getLatitude());
 		sitioDto.setLon(loc.getLongitude());
 		sitioDto.setCategoria(categoria);
-		Bundle bundle = new Bundle();
-		bundle.putSerializable("sitio", sitioDto);
-
+	
 		Intent intent = new Intent(this, CrearSitioServicio.class);
-		intent.putExtras(bundle);
+		intent.putExtra("sitio", sitioDto);
 		startService(intent);
 
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);

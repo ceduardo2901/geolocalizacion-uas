@@ -98,12 +98,9 @@ public class CrearUsuarioActivity extends GDActivity {
 		
 		
 			usuario.setAvatar(bitmapdata);
-			
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("usuario", usuario);
-			
+
 			Intent intent = new Intent(this,CrearUsuarioServicio.class);
-			intent.putExtras(bundle);
+			intent.putExtra("usuario", usuario);
 			startService(intent);
 			
 			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
