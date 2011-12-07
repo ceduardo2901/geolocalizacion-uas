@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,7 +86,7 @@ public class EditarUsuarioActivity extends GDActivity {
 	    if (userLogin.getAvatar() != null)
 	    	avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
 	    
-	    editarPerfilFiltro = new IntentFilter(Constantes.EDITAR_USUARIO_FILTRO_ACTION);
+	    editarPerfilFiltro = new IntentFilter(Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
 		
 	    inicializarBar();
 	}
@@ -257,11 +256,8 @@ public class EditarUsuarioActivity extends GDActivity {
 
 			usuario.setAvatar(arrayBytes);
 			
-			Bundle bundle = new Bundle();
-			bundle.putSerializable("usuario", usuario);
-			
 			Intent intent = new Intent(this,EditarUsuarioServicio.class);
-			intent.putExtras(bundle);
+			intent.putExtra("usuario", usuario);
 			startService(intent);
 			
 			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
@@ -276,16 +272,20 @@ public class EditarUsuarioActivity extends GDActivity {
 	protected BroadcastReceiver receiverEditarUsuario = new BroadcastReceiver() {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
-	    	Log.i(TAG, "onReceive");
-	    	Bundle bundle = intent.getExtras();
-			String respuesta = bundle.getString("respuesta");
+	    	
+			String error = intent.getStringExtra("error");
+			String respuesta = intent.getStringExtra("respuesta");
 		
 			Util.dismissProgressDialog();
 			
-	    	if (respuesta.equals(Constantes.RETURN_OK)){
+			if (error != null && !error.isEmpty()) {
+				
+				Util.showToast(context, error);
+			}
+			else{
 	    		
-	    		Util.showToast(context, Constantes.MSG_USUARIO_EDITADO_OK);
-	    		
+				Util.showToast(context, respuesta);
+				Bundle bundle = intent.getExtras();
 	    		UsuarioDTO usuarioEditado = (UsuarioDTO) bundle.getSerializable("usuario");
 	    		ApplicationController app = ((ApplicationController)getApplicationContext());
 				app.setUserLogin(usuarioEditado);
@@ -293,9 +293,6 @@ public class EditarUsuarioActivity extends GDActivity {
 				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(actividadPrincipal);
 				
-			}
-			else{
-				Util.showToast(context, respuesta);
 			}
 	    	
 			
