@@ -4,9 +4,13 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,13 +24,16 @@ import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
 public class SitioServicio extends IntentService {
 
 	protected static String TAG = "SitioServicio";
-	protected SharedPreferences prefs;
-	protected Editor prefsEditor;
+	private HttpEntity<SitioDTO> requestEntity;
+	private HttpHeaders requestHeaders;
 	protected RestTemplate restTemp;
 
 	public SitioServicio() {
@@ -36,22 +43,25 @@ public class SitioServicio extends IntentService {
 
 	public void onCreate() {
 		super.onCreate();
-		restTemp = new RestTemplate(
-				new HttpComponentsClientHttpRequestFactory());
-		prefs = getSharedPreferences(Constantes.SHARED_PREFERENCE_FILE,
-				Context.MODE_PRIVATE);
-		prefsEditor = prefs.edit();
+		requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
+		
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Bundle bundle = intent.getExtras();
-
 		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
 		SitioDTO[] respuesta = null;
-
+		
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
+		requestEntity = new HttpEntity<SitioDTO>(sitio, requestHeaders);
+		
+		Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
 		try {
 			if (sitio.getLat() != null && sitio.getLon() != null) {
 				Map<String, Double> parms = new HashMap<String, Double>();
@@ -81,14 +91,25 @@ public class SitioServicio extends IntentService {
 						SitioDTO[].class, parms);
 			}
 
-			Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
-			bundle.putSerializable("sitios", Util.getArrayListSitioDTO(respuesta));
+			
+			intentSitio.putExtra("sitios", Util.getArrayListSitioDTO(respuesta));
 
-			intentSitio.putExtras(bundle);
-			sendBroadcast(intentSitio);
-		} catch (RestClientException e) {
-			Log.e(TAG, "Error al llamar servicio");
+			
+			
+		} catch (RestResponseException e) {
+			
+			Log.i(TAG, "Error: " + e.getMensaje());
+			
+			Log.e(TAG, "Error: " + e.getMensaje());
+			intentSitio.putExtra("error", e.getMensaje());
+		} catch (ResourceAccessException e) {
+			Log.e(TAG, e.getMessage());
+			intentSitio
+					.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
+
 		}
+		
+		sendBroadcast(intentSitio);
 
 	}
 
