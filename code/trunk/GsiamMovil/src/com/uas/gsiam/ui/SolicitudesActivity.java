@@ -47,6 +47,10 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     public static ArrayList<UsuarioDTO> usuariosSolicitudesRecibidas;
     protected ApplicationController app;
     private SegmentedHost segmentedHost;
+    
+    protected UsuarioDTO usuarioSeleccionadoRecibidas;
+	protected int pos; 
+	protected boolean aceptarAmistad;
   
     protected static String TAG = "SolicitudesActivity";
     
@@ -157,17 +161,20 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 			@Override
 		    public void onReceive(Context context, Intent intent) {
 
+				String respuesta = intent.getStringExtra("respuesta");
+				String error = intent.getStringExtra("error");
 				Util.dismissProgressDialog();
-				Bundle bundle = intent.getExtras();
-				String respuesta = bundle.getString("respuesta");
 				
-				if (respuesta.equals(Constantes.RETURN_OK)){
-		    		
-					Util.showToast(context, Constantes.MSG_SOLICITUD_RESPONDIDA_OK);
-					
-				}
-				else{
+
+				if (error != null && !error.isEmpty()) {
+
+					Util.showToast(context, error);
+
+				} else {
 					Util.showToast(context, respuesta);
+					usuariosSolicitudesRecibidas.remove(pos);
+					mostrarSolicitudesRecibidas();
+					
 				}	
 		    }
 		  };
@@ -231,14 +238,13 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 
     	final Context appContext = this;
-    	final UsuarioDTO usuario;
     	final int pos = position;
 		
     	if (vista == 0){
 
-    		usuario = usuariosSolicitudesRecibidas.get(pos);
+    		usuarioSeleccionadoRecibidas = usuariosSolicitudesRecibidas.get(pos);
 
-    		Log.i(TAG, "Seleccione: "+ usuario.getNombre());
+    		Log.i(TAG, "Seleccione: "+ usuarioSeleccionadoRecibidas.getNombre());
 
 
     		// El usuario seleccionado ya envio una solicitud y esta pendiente 
@@ -246,10 +252,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 			AlertDialog.Builder dialog = new AlertDialog.Builder(appContext);
 			
 			dialog.setTitle(Html.fromHtml("<b><font color=#ff0000> Solicitud de Amistad Pendiente")); 
-			dialog.setMessage(usuario.getNombre() +" quiere ser tu amigo.\n\n¿Deseeas responder la solicitud?");
-			
-		//	Html.fromHtml("<b><font color=#ff0000> Html View " +"</font></b><br>Androidpeople.com")
-			
+			dialog.setMessage(usuarioSeleccionadoRecibidas.getNombre() +" quiere ser tu amigo.\n\n¿Deseeas responder la solicitud?");
 			
 			dialog.setCancelable(false);
 			dialog.setIcon(android.R.drawable.ic_dialog_alert);  
@@ -260,7 +263,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 			        	   
 			        	   AlertDialog.Builder dialogResponder = new AlertDialog.Builder(appContext);
 			        	   dialogResponder.setTitle("Solicitud de Amistad Pendiente"); 
-			        	   dialogResponder.setMessage("Responder Solicitud de " + usuario.getNombre());
+			        	   dialogResponder.setMessage("Responder Solicitud de " + usuarioSeleccionadoRecibidas.getNombre());
 			        	   dialogResponder.setCancelable(true);
 			        	   dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);  
 			        	   
@@ -269,10 +272,7 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 			        		   public void onClick(DialogInterface dialog, int id) {
 			        			   //  Confirmar Amistad 
 
-			        			   responderAmistad(usuario.getId(), Constantes.ACEPTAR_SOLICITUD);
-			        			   usuariosSolicitudesRecibidas.remove(pos);
-			        			   mostrarSolicitudesRecibidas();
-
+			        			   responderAmistad(usuarioSeleccionadoRecibidas.getId(), Constantes.ACEPTAR_SOLICITUD);
 			        			   dialog.cancel();
 			        		   }
 			        	   });
@@ -281,12 +281,8 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 
 			        		   public void onClick(DialogInterface dialog, int id) {
 			        			   //  Rechazar Amistad
-/*
-			        			   responderAmistad(usuarioSeleccionado.getId(), Constantes.RECHAZAR_SOLICITUD);
-			        			   usuarioSeleccionado.setSolicitudRecibida(false);
-			        			   usuarios.set(pos, usuarioSeleccionado);
-			        			   mostrarUsuarios();
-*/
+
+			        			   responderAmistad(usuarioSeleccionadoRecibidas.getId(), Constantes.RECHAZAR_SOLICITUD);
 			        			   dialog.cancel();
 			        		   }
 			        	   });
@@ -311,27 +307,24 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
     }
     
     
-    public void responderAmistad(int idUsuarioSeleccionado, int accion){
+    public void responderAmistad(int idUsuarioSeleccionado, String accion){
 
-		  Bundle bundle = new Bundle();
-		  
-		  SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
-		  solicitud.setIdUsuarioSolicitante(idUsuarioSeleccionado);
-		  solicitud.setIdUsuarioAprobador(app.getUserLogin().getId());
+    	SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
+    	solicitud.setIdUsuarioSolicitante(idUsuarioSeleccionado);
+    	solicitud.setIdUsuarioAprobador(app.getUserLogin().getId());
 
-		  bundle.putSerializable("solicitud", solicitud);
-		  bundle.putInt("accion", accion);
-		  
-		  Intent intentAceptarSolicitud = new Intent(getApplicationContext(),ResponderSolicitudServicio.class);
-		  intentAceptarSolicitud.putExtras(bundle);
-		  startService(intentAceptarSolicitud);
+    	Intent intentAceptarSolicitud = new Intent(getApplicationContext(),ResponderSolicitudServicio.class);
+    	intentAceptarSolicitud.putExtra("solicitud", solicitud);
+    	intentAceptarSolicitud.putExtra("accion", accion);
 
-		  if (accion == Constantes.ACEPTAR_SOLICITUD){
-			  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACEPTANDO_SOLICITUD);
-		  }
-		  else{
-			  Util.showProgressDialog(this, Constantes.MSG_ESPERA_RECHAZANDO_SOLICITUD);
-		  }
+    	 startService(intentAceptarSolicitud);
+    	
+    	if (accion.equalsIgnoreCase(Constantes.ACEPTAR_SOLICITUD)){
+    		Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACEPTANDO_SOLICITUD);
+    	}
+    	else{
+    		Util.showProgressDialog(this, Constantes.MSG_ESPERA_RECHAZANDO_SOLICITUD);
+    	}
 
 	  }
     
