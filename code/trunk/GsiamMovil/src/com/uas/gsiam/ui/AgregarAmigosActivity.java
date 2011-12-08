@@ -69,11 +69,8 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		
 		} else {
 
-			Bundle bundle = new Bundle();
-			bundle.putString("nombre", nombre);
-
 			Intent intent = new Intent(this,GetUsuariosServicio.class);
-			intent.putExtras(bundle);
+			intent.putExtra("nombre", nombre);
 			startService(intent);
 
 			Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
@@ -108,15 +105,27 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		@Override
 	    public void onReceive(Context context, Intent intent) {
 	    		
-	    	Bundle bundle = intent.getExtras();
-			usuarios = (ArrayList<UsuarioDTO>) bundle.getSerializable("lista");
-		
-	    	Log.i(TAG, "mi lista}11111111 = "+usuarios.size());
-	    	
-	    	mostrarUsuarios();
-
-			Util.dismissProgressDialog();	    	
 			
+			ArrayList<UsuarioDTO> respuesta = (ArrayList<UsuarioDTO>) intent.getSerializableExtra("respuesta");
+			String error = intent.getStringExtra("error");
+			Util.dismissProgressDialog();
+			
+			
+			if (error != null && !error.isEmpty()) {
+
+				Util.showToast(context, error);
+
+			} else {
+				
+				usuarios = respuesta;
+				Log.i(TAG, "mi lista}11111111 = "+usuarios.size());
+				
+				mostrarUsuarios();
+				
+				Util.dismissProgressDialog();
+				
+			}
+
 	    }
 	  };
 	
@@ -125,18 +134,19 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			@Override
 		    public void onReceive(Context context, Intent intent) {
 
+				String respuesta = intent.getStringExtra("respuesta");
+				String error = intent.getStringExtra("error");
 				Util.dismissProgressDialog();
-				Bundle bundle = intent.getExtras();
-				String respuesta = bundle.getString("respuesta");
 				
-				if (respuesta.equals(Constantes.RETURN_OK)){
-		    		
-					Util.showToast(context, Constantes.MSG_SOLICITUD_CREADA_OK);
-					
-				}
-				else{
+			
+				if (error != null && !error.isEmpty()) {
+
+					Util.showToast(context, error);
+
+				} else {
 					Util.showToast(context, respuesta);
-				}	
+				}
+					
 		    }
 		  };
 	
@@ -311,16 +321,13 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  
 	  public void enviarSolicitud(int idUsuarioSeleccionado){
 		  
-		  Bundle bundle = new Bundle();
-		  
+	
 		  SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
 		  solicitud.setIdUsuarioSolicitante(app.getUserLogin().getId());
 		  solicitud.setIdUsuarioAprobador(idUsuarioSeleccionado);
-
-		  bundle.putSerializable("solicitud", solicitud);
 		  
 		  Intent intentEnviarSolicitud = new Intent(getApplicationContext(),CrearSolicitudAmistadServicio.class);
-		  intentEnviarSolicitud.putExtras(bundle);
+		  intentEnviarSolicitud.putExtra("solicitud", solicitud);
 		  startService(intentEnviarSolicitud);
 
 		  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_SOLICITUD);
