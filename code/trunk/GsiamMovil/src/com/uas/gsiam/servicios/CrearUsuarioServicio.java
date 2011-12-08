@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
@@ -46,8 +45,7 @@ public class CrearUsuarioServicio extends IntentService{
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		Bundle bundle = intent.getExtras();
-		UsuarioDTO usuario = (UsuarioDTO) bundle.getSerializable("usuario");
+		UsuarioDTO usuario = (UsuarioDTO) intent.getSerializableExtra("usuario");
 		requestEntity = new HttpEntity<UsuarioDTO>(usuario,requestHeaders);
 		Intent intentBack = new Intent(Constantes.CREAR_USUARIO_FILTRO_ACTION);
 		
