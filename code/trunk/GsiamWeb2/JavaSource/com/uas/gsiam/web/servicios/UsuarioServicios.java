@@ -69,7 +69,7 @@ public class UsuarioServicios {
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response crearUsuario(@BadgerFish UsuarioDTO usuario) {
-		
+
 		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.crearUsuario(usuario);
@@ -82,20 +82,20 @@ public class UsuarioServicios {
 			Response response = builder.build();
 			throw new WebApplicationException(response);
 		}
-		
+
 		builder.type(MediaType.APPLICATION_JSON);
 		return builder.build();
 	}
-	
-	
+
+
 	@POST
 	@Path("/modificar")
 	@Produces("application/json")
 	@Consumes("application/json")
 	public Response modificarUsuario(@BadgerFish UsuarioDTO usuario) {
+		
 		ResponseBuilder builder = Response.ok();
 		try {
-
 			servicio.modificarUsuario(usuario);
 
 		}catch (UsuarioExcepcion e) {
@@ -106,7 +106,7 @@ public class UsuarioServicios {
 			throw new WebApplicationException(response);
 
 		}
-		
+
 		builder.type(MediaType.APPLICATION_JSON);
 		return builder.build();
 	}
@@ -143,11 +143,12 @@ public class UsuarioServicios {
 		try {
 			listaUsuarios = servicio.getUsuarios(Integer.parseInt(id), nombre);
 		} catch (UsuarioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-		// TODO definir como enviar el error en caso de
-
 		return listaUsuarios;
 
 	}
@@ -156,19 +157,24 @@ public class UsuarioServicios {
 	@Path("/agregarsolicitud")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public String crearSolicitudContacto(
+	public Response crearSolicitudContacto(
 			@BadgerFish SolicitudContactoDTO solicitud) {
-
+		
+		ResponseBuilder builder = Response.ok();
 		try {
 
 			servicio.crearSolicitudContacto(solicitud);
 
-			return Constantes.RETURN_OK;
-
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-
+		
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 	}
 
 	@POST
