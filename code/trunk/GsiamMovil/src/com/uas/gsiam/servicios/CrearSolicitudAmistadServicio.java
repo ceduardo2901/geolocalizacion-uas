@@ -1,17 +1,24 @@
 package com.uas.gsiam.servicios;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
-import com.uas.gsiam.utils.Constantes;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
+
+import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
 
 
 public class CrearSolicitudAmistadServicio extends IntentService{
@@ -19,6 +26,8 @@ public class CrearSolicitudAmistadServicio extends IntentService{
 	protected static String TAG = "CrearSolicitudAmistadServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
+	protected HttpHeaders requestHeaders;
+	protected HttpEntity<SolicitudContactoDTO> requestEntity;
 	
 	public CrearSolicitudAmistadServicio() {
 		super(TAG);
@@ -27,33 +36,44 @@ public class CrearSolicitudAmistadServicio extends IntentService{
 	
 	public void onCreate(){
 		super.onCreate();
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		requestHeaders = new HttpHeaders();		
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
 
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		Bundle bundle = intent.getExtras();
-		
-		SolicitudContactoDTO solicitud = (SolicitudContactoDTO) bundle.getSerializable("solicitud");
-		
+		SolicitudContactoDTO solicitud = (SolicitudContactoDTO) intent.getSerializableExtra("solicitud");
+		requestEntity = new HttpEntity<SolicitudContactoDTO>(solicitud,requestHeaders);
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
+		Intent intentBack = new Intent(Constantes.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION);
 		
 		try{
+						
+			ResponseEntity<String> respuesta = restTemp.exchange(Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL, 
+					HttpMethod.POST, requestEntity, String.class);	
 			
-			String respuesta = restTemp.postForObject(Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL, solicitud, String.class);
-			bundle.putString("respuesta", respuesta);
+			if (respuesta.getStatusCode() == HttpStatus.OK) {
+				intentBack.putExtra("respuesta", Constantes.MSG_SOLICITUD_CREADA_OK);
+			} else {
+				intentBack.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
+
+			}
 			
-		}catch (RestClientException e){
-			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
+			
+		}catch (RestResponseException e){
+			String msg = (String) e.getResponseEntity().getBody();
+			Log.d(TAG, "Error: " + msg);
+			intentBack.putExtra("error", msg);
 		}
 	
-		
-		Intent intentCrearSolicitudAmistad = new Intent(Constantes.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION);
-		intentCrearSolicitudAmistad.putExtras(bundle);
-		sendBroadcast(intentCrearSolicitudAmistad);
-		
-	}
+		sendBroadcast(intentBack);
 
+	}
+	
+
+	
 }

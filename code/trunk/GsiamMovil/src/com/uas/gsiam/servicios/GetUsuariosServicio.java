@@ -3,19 +3,23 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
 
@@ -24,6 +28,7 @@ public class GetUsuariosServicio extends IntentService{
 	protected static String TAG = "GetUsuariosServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
+	private HttpHeaders requestHeaders;
 	
 	public GetUsuariosServicio() {
 		super(TAG);
@@ -32,15 +37,19 @@ public class GetUsuariosServicio extends IntentService{
 	
 	public void onCreate(){
 		super.onCreate();
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
+
 
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		Bundle bundle = intent.getExtras();
-		String nombre = bundle.getString("nombre");
+	
+		String nombre = intent.getStringExtra("nombre");
 		ApplicationController app = ((ApplicationController) getApplicationContext());
 		UsuarioDTO user = app.getUserLogin();
 		
@@ -48,21 +57,23 @@ public class GetUsuariosServicio extends IntentService{
 		parms.put("id", String.valueOf(user.getId()));
 		parms.put("nombre", nombre);
 		
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
+		Intent intentBack = new Intent(Constantes.GET_USUARIOS_FILTRO_ACTION);
+		
 		try{
 		
 			UsuarioDTO[] respuesta = restTemp.getForObject(Constantes.GET_USUARIOS_SERVICE_URL, UsuarioDTO[].class, parms);
+			intentBack.putExtra("respuesta", Util.getArrayListUsuarioDTO(respuesta));
 			
-			bundle.putSerializable("lista", Util.getArrayListUsuarioDTO(respuesta));
-			
-			
-		}catch (RestClientException e){
-			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
+		}catch (RestResponseException e){
+			String msg = (String) e.getResponseEntity().getBody();
+			intentBack.putExtra("error", msg);
+		}catch (ResourceAccessException e) {
+			Log.e(TAG, e.getMessage());
+			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}
 	
-		Intent intentGetUsuarios = new Intent(Constantes.GET_USUARIOS_FILTRO_ACTION);
-		intentGetUsuarios.putExtras(bundle);
-		this.sendBroadcast(intentGetUsuarios);
+		this.sendBroadcast(intentBack);
 		
 	}
 	

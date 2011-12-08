@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -44,9 +43,8 @@ public class CrearSitioServicio extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		Bundle bundle = intent.getExtras();
 
-		SitioDTO sitio = (SitioDTO) bundle.getSerializable("sitio");
+		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
