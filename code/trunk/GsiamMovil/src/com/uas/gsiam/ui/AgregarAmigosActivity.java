@@ -40,6 +40,8 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	public static ArrayList<UsuarioDTO> usuarios;
 	protected EditText nombreTxt;
 	protected ApplicationController app;
+	protected UsuarioDTO usuarioSeleccionado;
+	protected int pos; 
 	
 	protected static String TAG = "AgregarAmigosActivity";
 	
@@ -142,6 +144,10 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				if (error != null && !error.isEmpty()) {
 
 					Util.showToast(context, error);
+					// Actualizo la lista dado que vino un error.
+					usuarioSeleccionado.setSolicitudEnviada(false);
+					usuarios.set(pos, usuarioSeleccionado);
+		        	mostrarUsuarios();
 
 				} else {
 					Util.showToast(context, respuesta);
@@ -181,8 +187,8 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  @Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 		  
-		    final int pos = position;
-			final UsuarioDTO usuarioSeleccionado = usuarios.get(pos);
+		    pos = position;
+			usuarioSeleccionado = usuarios.get(pos);
 			final Context appContext = this;
 			
 			Log.i(TAG, "Seleccione: "+ usuarioSeleccionado.getNombre());
@@ -294,7 +300,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
 				    	   
 				           public void onClick(DialogInterface dialog, int id) {
-				        	   
 				        	   
 				        	   enviarSolicitud(usuarioSeleccionado.getId());
 				        	   
