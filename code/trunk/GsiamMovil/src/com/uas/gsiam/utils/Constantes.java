@@ -23,15 +23,15 @@ public class Constantes {
 	public static final int REQUEST_CAMERA = 1;
 	public static final int REQUEST_SELECT_PHOTO = 2;
 	
-	public static final int ACEPTAR_SOLICITUD = 0;
-	public static final int RECHAZAR_SOLICITUD = 1;
+	public static final String ACEPTAR_SOLICITUD = "ACEPTAR";
+	public static final String RECHAZAR_SOLICITUD = "RECHAZAR";
 		
 	// Servicios
 	
 	//TODO poner esto en un archivo de configuracion
 	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	//ip tony
-	//public static final String DOMINIO_SERVICE = "http://186.49.62.5:8080";
+	//public static final String DOMINIO_SERVICE = "http://186.49.68.212:8080";
 	//ipmartin
 	//public static final String DOMINIO_SERVICE = "http://192.168.0.103:8080";
 	public static final String LOGIN_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/login/{email}/{pass}";

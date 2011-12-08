@@ -181,38 +181,47 @@ public class UsuarioServicios {
 	@Path("/aceptarsolicitud")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public String aceptarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
+	public Response aceptarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
 
+		ResponseBuilder builder = Response.ok();
 		try {
-
 			servicio.responderSolicitudContacto(solicitud,
 					Constantes.ACEPTAR_SOLICITUD);
 
-			return Constantes.RETURN_OK;
-
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-
+		
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 	}
 
 	@POST
 	@Path("/rechazarsolicitud")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public String rechazarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
-
+	public Response rechazarSolicitud(@BadgerFish SolicitudContactoDTO solicitud) {
+		
+		ResponseBuilder builder = Response.ok();
 		try {
 
 			servicio.responderSolicitudContacto(solicitud,
 					Constantes.RECHAZAR_SOLICITUD);
 
-			return Constantes.RETURN_OK;
-
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-
+		
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 	}
 
 	@GET

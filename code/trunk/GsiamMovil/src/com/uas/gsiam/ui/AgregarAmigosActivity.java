@@ -42,6 +42,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	protected ApplicationController app;
 	protected UsuarioDTO usuarioSeleccionado;
 	protected int pos; 
+	protected boolean aceptarAmistad;
 	
 	protected static String TAG = "AgregarAmigosActivity";
 	
@@ -79,9 +80,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		}
 
 	}
-	
-	
-	
 	
 	
 	
@@ -140,39 +138,48 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				String error = intent.getStringExtra("error");
 				Util.dismissProgressDialog();
 				
-			
+
 				if (error != null && !error.isEmpty()) {
 
 					Util.showToast(context, error);
-					// Actualizo la lista dado que vino un error.
-					usuarioSeleccionado.setSolicitudEnviada(false);
-					usuarios.set(pos, usuarioSeleccionado);
-		        	mostrarUsuarios();
 
 				} else {
 					Util.showToast(context, respuesta);
+					usuarioSeleccionado.setSolicitudEnviada(true);
+					usuarios.set(pos, usuarioSeleccionado);
+					mostrarUsuarios();
 				}
-					
-		    }
+
+			}
 		  };
 	
 		  
 		  protected BroadcastReceiver receiverResponderSolicitud = new BroadcastReceiver() {
 				@Override
 			    public void onReceive(Context context, Intent intent) {
-
-					Util.dismissProgressDialog();
-					Bundle bundle = intent.getExtras();
-					String respuesta = bundle.getString("respuesta");
 					
-					if (respuesta.equals(Constantes.RETURN_OK)){
-			    		
-						Util.showToast(context, Constantes.MSG_SOLICITUD_RESPONDIDA_OK);
-						
-					}
-					else{
+					String respuesta = intent.getStringExtra("respuesta");
+					String error = intent.getStringExtra("error");
+					Util.dismissProgressDialog();
+					
+					if (error != null && !error.isEmpty()) {
+
+						Util.showToast(context, error);
+
+					} else {
 						Util.showToast(context, respuesta);
-					}	
+
+						if (aceptarAmistad){
+							usuarios.remove(pos);
+						}
+						else{
+							usuarioSeleccionado.setSolicitudRecibida(false);
+							usuarios.set(pos, usuarioSeleccionado);
+						}
+
+						mostrarUsuarios();
+					}
+
 			    }
 			  };
 		  
@@ -234,8 +241,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 				    	   
 				           public void onClick(DialogInterface dialog, int id) {
-
-				        	  
 				        	   
 				        	   ///////////////////////////
 				        	   
@@ -249,11 +254,8 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Confirmar Amistad 
-
 				        			   responderAmistad(usuarioSeleccionado.getId(), Constantes.ACEPTAR_SOLICITUD);
-				        			   usuarios.remove(pos);
-				        			   mostrarUsuarios();
-
+				        			   aceptarAmistad = true;
 				        			   dialog.cancel();
 				        		   }
 				        	   });
@@ -262,18 +264,13 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Rechazar Amistad
-
 				        			   responderAmistad(usuarioSeleccionado.getId(), Constantes.RECHAZAR_SOLICITUD);
-				        			   usuarioSeleccionado.setSolicitudRecibida(false);
-				        			   usuarios.set(pos, usuarioSeleccionado);
-				        			   mostrarUsuarios();
-
+				        			   aceptarAmistad = false;
 				        			   dialog.cancel();
 				        		   }
 				        	   });
 
 				        	   dialogResponder.show();
-
 				        	   
 				        	   /////////////////////////
 				        	   dialog.cancel();
@@ -302,12 +299,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   
 				        	   enviarSolicitud(usuarioSeleccionado.getId());
-				        	   
-				        	   //TODO que pasa cuando da error el servicio...
-				        	   usuarioSeleccionado.setSolicitudEnviada(true);
-				        	   usuarios.set(pos, usuarioSeleccionado);
-				        	   mostrarUsuarios();
-				        	   
 				        	   dialog.cancel();
 				           }
 				       });
@@ -340,22 +331,20 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  }
 	  
 	  
-	  public void responderAmistad(int idUsuarioSeleccionado, int accion){
-
-		  Bundle bundle = new Bundle();
+	  public void responderAmistad(int idUsuarioSeleccionado, String accion){
 		  
 		  SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
 		  solicitud.setIdUsuarioSolicitante(idUsuarioSeleccionado);
 		  solicitud.setIdUsuarioAprobador(app.getUserLogin().getId());
 
-		  bundle.putSerializable("solicitud", solicitud);
-		  bundle.putInt("accion", accion);
-		  
 		  Intent intentAceptarSolicitud = new Intent(getApplicationContext(),ResponderSolicitudServicio.class);
-		  intentAceptarSolicitud.putExtras(bundle);
+		  intentAceptarSolicitud.putExtra("solicitud", solicitud);
+		  intentAceptarSolicitud.putExtra("accion", accion);
+		  
+		  
 		  startService(intentAceptarSolicitud);
 		  
-		  if (accion == Constantes.ACEPTAR_SOLICITUD){
+		  if (accion.equalsIgnoreCase(Constantes.ACEPTAR_SOLICITUD)){
 			  Util.showProgressDialog(this, Constantes.MSG_ESPERA_ACEPTANDO_SOLICITUD);
 		  }
 		  else{
