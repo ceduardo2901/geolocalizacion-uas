@@ -59,12 +59,9 @@ public class EditarUsuarioServicio extends IntentService{
 			intentBack.putExtra("respuesta", Constantes.MSG_USUARIO_EDITADO_OK);
 			
 		}catch (RestResponseException e){
-			
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
-			
 		}catch (ResourceAccessException e) {
-			
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 

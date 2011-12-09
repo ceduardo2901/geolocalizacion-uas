@@ -62,7 +62,7 @@ public class GetAmigosServicio extends IntentService {
 			intentBack.putExtra("respuesta", Util.getArrayListUsuarioDTO(respuesta));
 
 		}catch (RestResponseException e){
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
 		}catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
