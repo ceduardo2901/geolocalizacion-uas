@@ -204,7 +204,7 @@ public class PublicarActivity extends GDActivity implements
 	private void volverPublicaciones(){
 		
 		Intent volver = new Intent(this, ComentarioTabActivity.class);
-		
+		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
 	
