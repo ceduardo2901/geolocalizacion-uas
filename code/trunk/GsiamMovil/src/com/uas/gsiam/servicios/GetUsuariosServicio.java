@@ -28,7 +28,7 @@ public class GetUsuariosServicio extends IntentService{
 	protected static String TAG = "GetUsuariosServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
-	private HttpHeaders requestHeaders;
+	protected HttpHeaders requestHeaders;
 	
 	public GetUsuariosServicio() {
 		super(TAG);

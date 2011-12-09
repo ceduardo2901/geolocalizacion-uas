@@ -112,22 +112,6 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 				loaderActionBarItem.setLoading(false);
 			}
 			
-			
-			
-			/*
-	    	Bundle bundle = intent.getExtras();
-			misAmigos = (ArrayList<UsuarioDTO>) bundle.getSerializable("respuesta");
-		
-	    	Log.i(TAG, "mi lista}11111111 = "+misAmigos.size());
-	    	    	
-	    	mostrarAmigos();
-	
-			Util.dismissProgressDialog();
-			
-			GDTabActivity padre = (GDTabActivity) getParent();
-			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
-			loaderActionBarItem.setLoading(false);
-			*/
 	    }
 	  };
  

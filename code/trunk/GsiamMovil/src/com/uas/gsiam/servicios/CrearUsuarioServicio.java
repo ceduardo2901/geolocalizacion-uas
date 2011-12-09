@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
@@ -65,9 +66,12 @@ public class CrearUsuarioServicio extends IntentService{
 			}
 
 		}catch (RestResponseException e){
-			String msg = (String) e.getResponseEntity().getBody();
+			String msg = e.getMensaje();
 			Log.d(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
+		}catch (ResourceAccessException e) {
+			Log.e(TAG, e.getMessage());
+			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}
 	
 		sendBroadcast(intentBack);
