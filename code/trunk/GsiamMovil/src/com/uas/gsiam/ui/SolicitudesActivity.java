@@ -136,21 +136,30 @@ public class SolicitudesActivity extends ListActivity implements OnItemClickList
 		@SuppressWarnings("unchecked")
 		@Override
 	    public void onReceive(Context context, Intent intent) {
-	    		
-	    	Bundle bundle = intent.getExtras();
-			usuariosSolicitudesEnviadas = (ArrayList<UsuarioDTO>) bundle.getSerializable("listaEnviadas");
-			usuariosSolicitudesRecibidas = (ArrayList<UsuarioDTO>) bundle.getSerializable("listaRecibidas");
-	    	    	
-			mostrarSolicitudesEnviadas();
-			mostrarSolicitudesRecibidas();
 			
-			segmentedHost.getSegmentedBar().setCurrentSegment(0);
+			String error = intent.getStringExtra("error");
+			usuariosSolicitudesEnviadas = (ArrayList<UsuarioDTO>) intent.getSerializableExtra("listaEnviadas");
+			usuariosSolicitudesRecibidas = (ArrayList<UsuarioDTO>) intent.getSerializableExtra("listaRecibidas");
+	    	
 			
-			
-			Util.dismissProgressDialog();
-			GDTabActivity padre = (GDTabActivity) getParent();
-			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
-			loaderActionBarItem.setLoading(false);
+			if (error != null && !error.isEmpty()) {
+
+				Util.showToast(context, error);
+
+			} else {
+				
+				mostrarSolicitudesEnviadas();
+				mostrarSolicitudesRecibidas();
+				
+				segmentedHost.getSegmentedBar().setCurrentSegment(0);
+				
+				
+				Util.dismissProgressDialog();
+				GDTabActivity padre = (GDTabActivity) getParent();
+				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+				loaderActionBarItem.setLoading(false);
+				
+			}
 			
 			
 	    }
