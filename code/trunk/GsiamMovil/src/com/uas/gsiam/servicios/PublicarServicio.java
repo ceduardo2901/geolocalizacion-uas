@@ -67,7 +67,7 @@ public class PublicarServicio extends IntentService {
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentPublicacion.putExtra("respuesta",
-						Constantes.MSG_CREAR_SITIO_OK);
+						Constantes.MSG_PUBLICACION_CREADA);
 			} else {
 				intentPublicacion.putExtra("error",
 						Constantes.MSG_ERROR_INESPERADO);
