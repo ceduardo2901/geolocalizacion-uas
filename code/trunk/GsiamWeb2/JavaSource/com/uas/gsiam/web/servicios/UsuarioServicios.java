@@ -235,8 +235,11 @@ public class UsuarioServicios {
 		try {
 			listaUsuarios = servicio.getSolicitudesEnviadasPendientes(id);
 		} catch (UsuarioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
 
 		return listaUsuarios;
@@ -254,8 +257,11 @@ public class UsuarioServicios {
 		try {
 			listaUsuarios = servicio.getSolicitudesRecibidasPendientes(id);
 		} catch (UsuarioExcepcion e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
 
 		return listaUsuarios;
