@@ -46,12 +46,12 @@ public class AmigosTabActivity extends GDTabActivity {
         mTabHost = getTabHost();       
       
         
-        añadirTab2();
-        añadirTab1();
-        añadirTab3();
-        añadirTab4(); 
+        anadirTab2();
+        anadirTab1();
+        anadirTab3();
+        anadirTab4(); 
         
-        // Al abrir la aplicacion restauramos la última pestaña activada
+        // Al abrir la aplicacion restauramos la ï¿½ltima pestaï¿½a activada
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
         mTabHost.setCurrentTab(currentTab);
@@ -93,7 +93,7 @@ public class AmigosTabActivity extends GDTabActivity {
     protected void onPause() {
         super.onPause();
 
-        // Cuando se cierra la aplicación guardamos la pestaña activa
+        // Cuando se cierra la aplicaciï¿½n guardamos la pestaï¿½a activa
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         int currentTab = mTabHost.getCurrentTab();
@@ -104,10 +104,10 @@ public class AmigosTabActivity extends GDTabActivity {
     
     
 	/*
-	 * Pestaña 1
+	 * Pestaï¿½a 1
 	 */
      
-    private void añadirTab1() {
+    private void anadirTab1() {
     	
     	Intent intent = new Intent(this, MisAmigosActivity.class);
     	addTab(TAG_MIS_AMIGOS, "Amigos", intent);
@@ -116,10 +116,10 @@ public class AmigosTabActivity extends GDTabActivity {
     }
     
 	/*
-	 * Pestaña 2
+	 * Pestaï¿½a 2
 	 */
     
-    private void añadirTab2() {
+    private void anadirTab2() {
     	
     	Intent intent = new Intent(this, AgregarAmigosActivity.class);
     	addTab(TAG_AGREGAR_AMIGOS, "Agregar", intent);
@@ -127,10 +127,10 @@ public class AmigosTabActivity extends GDTabActivity {
     }
     
 	/*
-	 * Pestaña 3
+	 * Pestaï¿½a 3
 	 */
     
-    private void añadirTab3() {
+    private void anadirTab3() {
     	
     	Intent intent = new Intent(this, SolicitudesActivity.class);
     	addTab(TAG_SOLICITUDES, "Solicitudes", intent);
@@ -138,10 +138,10 @@ public class AmigosTabActivity extends GDTabActivity {
     }
    
     /*
-	 * Pestaña 4
+	 * Pestaï¿½a 4
 	 */
     
-    private void añadirTab4() {
+    private void anadirTab4() {
     	
     	Intent intent = new Intent(this, InvitarAmigosActivity.class);
     	addTab(TAG_INVITAR_AMIGOS, "Invitar", intent);
@@ -194,7 +194,7 @@ public class AmigosTabActivity extends GDTabActivity {
 				radarAmigos();
 				
 			}
-			//TODO: ver que hacer cuando esta en las pestañas de abajo... 
+			//TODO: ver que hacer cuando esta en las pestaï¿½as de abajo... 
 			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
 				Util.showToast(this, "TAG_AGREGAR_AMIGOS");
 			}
