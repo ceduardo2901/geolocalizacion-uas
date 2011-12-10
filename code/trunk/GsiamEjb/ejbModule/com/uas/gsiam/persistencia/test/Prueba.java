@@ -1,7 +1,5 @@
 package com.uas.gsiam.persistencia.test;
 
-import java.util.ArrayList;
-
 import com.uas.gsiam.persistencia.utiles.email.EmailSender;
 import com.uas.gsiam.persistencia.utiles.email.EmailTemplate;
 import com.uas.gsiam.persistencia.utiles.email.EmailTemplateFactory;
@@ -22,12 +20,8 @@ public class Prueba {
 
 			EmailSender mail = new EmailSender();
 			mail.setTemplate(template);
-
-			ArrayList<String> lista = new ArrayList<String>();
-			lista.add("mloure@gmail.com");
-			lista.add("peludens@hotmail.com");
 			
-			mail.setListEmailDestinatario(lista);
+			mail.setEmailDestinatario("mloure@gmail.com");
 			mail.setSubject("esta es una prueba lalala");
 			
 

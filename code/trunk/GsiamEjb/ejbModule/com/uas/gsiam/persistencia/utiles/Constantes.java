@@ -2,9 +2,6 @@ package com.uas.gsiam.persistencia.utiles;
 
 public class Constantes {	
 	
-	
-	public static String RETURN_OK = "ok";
-	
 	public static final int ACEPTAR_SOLICITUD = 0;
 	public static final int RECHAZAR_SOLICITUD = 1;
 	
