@@ -35,7 +35,7 @@ public interface UsuarioServicio {
 	
 	public ArrayList<UsuarioDTO> getUsuarios (int id, String nombre) throws UsuarioExcepcion;
 	
-	public void enviarInvitaciones (ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion;
+	public void enviarInvitaciones (String direccion, String nombre) throws UsuarioExcepcion;
 	
 	public void actualizarPosicionUsuario (PosicionUsuarioDTO posUsuario) throws UsuarioExcepcion;
 		

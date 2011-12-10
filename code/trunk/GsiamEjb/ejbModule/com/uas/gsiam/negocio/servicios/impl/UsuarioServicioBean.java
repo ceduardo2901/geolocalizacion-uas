@@ -182,9 +182,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 				EmailSender mail = new EmailSender();
 				mail.setTemplate(template);
 
-				ArrayList<String> direcciones = new ArrayList<String>();
-				direcciones.add(uApr.getEmail());
-				mail.setListEmailDestinatario(direcciones);
+				mail.setEmailDestinatario(uApr.getEmail());
 				
 				mail.setSubject(uSol.getNombre() + Constantes.EMAIL_SUBJECT_SOLICITUD_AMISTAD);
 
@@ -344,7 +342,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 
 	
-	public void enviarInvitaciones (ArrayList<String> direcciones, String nombre) throws UsuarioExcepcion {
+	public void enviarInvitaciones (String direccion, String nombre) throws UsuarioExcepcion {
 		
 		//TODO: deberiamos fijarnos si el mail ingresado ya pertenece a GSIAM???? par evitar spam
 
@@ -355,7 +353,9 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			EmailSender mail = new EmailSender();
 			mail.setTemplate(template);
 
-			mail.setListEmailDestinatario(direcciones);
+		//	mail.setListEmailDestinatario(direcciones);
+			
+			mail.setEmailDestinatario(direccion);
 			
 			mail.setSubject(nombre + Constantes.EMAIL_SUBJECT_INVITACION);
 
