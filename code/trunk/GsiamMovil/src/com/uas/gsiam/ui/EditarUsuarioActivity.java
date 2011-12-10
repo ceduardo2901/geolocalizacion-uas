@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,8 +22,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
@@ -295,13 +292,12 @@ public class EditarUsuarioActivity extends GDActivity {
 			else{
 	    		
 				Util.showToast(context, respuesta);
-				Bundle bundle = intent.getExtras();
-	    		UsuarioDTO usuarioEditado = (UsuarioDTO) bundle.getSerializable("usuario");
+	    		UsuarioDTO usuarioEditado = (UsuarioDTO) intent.getSerializableExtra("usuario");
 	    		ApplicationController app = ((ApplicationController)getApplicationContext());
 				app.setUserLogin(usuarioEditado);
 	    		
-				Intent actividadPrincipal = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(actividadPrincipal);
+				Intent intentPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+				startActivity(intentPerfil);
 				
 			}
 	    	
