@@ -58,11 +58,11 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost = getTabHost();
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
-		// añadirTab2(intent);
-		añadirTab1(intent);
-		añadirTab3(intent);
+		// aï¿½adirTab2(intent);
+		anadirTab1(intent);
+		anadirTab3(intent);
 
-		// Al abrir la aplicacion restauramos la última pestaña activada
+		// Al abrir la aplicacion restauramos la ï¿½ltima pestaï¿½a activada
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
@@ -77,7 +77,7 @@ public class SitioTabActivity extends GDTabActivity {
 	protected void onPause() {
 		super.onPause();
 
-		// Cuando se cierra la aplicación guardamos la pestaña activa
+		// Cuando se cierra la aplicaciï¿½n guardamos la pestaï¿½a activa
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = prefs.edit();
@@ -190,17 +190,17 @@ public class SitioTabActivity extends GDTabActivity {
 	}
 
 	/*
-	 * Pestaña 1
+	 * Pestaï¿½a 1
 	 */
 
-	private void añadirTab1(Intent intent) {
+	private void anadirTab1(Intent intent) {
 		intent.setClass(this, SitioDetalleActivity.class);
 		addTab(TAG_SITIO_DETALLE, "Sitio", intent);
 
 	}
 
 	/*
-	 * Pestaña 2
+	 * Pestaï¿½a 2
 	 */
 
 	private void mostarMapa() {
@@ -211,10 +211,10 @@ public class SitioTabActivity extends GDTabActivity {
 	}
 
 	/*
-	 * Pestaña 3
+	 * Pestaï¿½a 3
 	 */
 
-	private void añadirTab3(Intent intent) {
+	private void anadirTab3(Intent intent) {
 		intent.setClass(this, ComentarioTabActivity.class);
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
