@@ -44,9 +44,7 @@ public class MisAmigosActivity extends ListActivity implements OnItemClickListen
 		  lv = getListView();
 		  lv.setOnItemClickListener(this);
 		  
-		  
-		  
-		  
+
 		  misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		  this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
 	//	  AmigosTabActivity.registroMisAmigosService = true; 

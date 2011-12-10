@@ -3,23 +3,28 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+
+import android.app.IntentService;
+import android.content.Intent;
+import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
-
-import android.app.IntentService;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
 
 public class EnviarInvitacionServicio extends IntentService{
 
 	protected static String TAG = "EnviarInvitacionServicio";
 	protected RestTemplate restTemp;
+	protected HttpHeaders requestHeaders;
 	
 	public EnviarInvitacionServicio() {
 		super(TAG);
@@ -28,38 +33,43 @@ public class EnviarInvitacionServicio extends IntentService{
 	
 	public void onCreate(){
 		super.onCreate();
-		
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
+		requestHeaders = new HttpHeaders();		
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
 	}
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
 		
-		Bundle bundle = intent.getExtras();
-        String direcciones = bundle.getString("direcciones");
+	
+        String direccion = intent.getStringExtra("direccion");
         
         ApplicationController app = ((ApplicationController) getApplicationContext());
 		UsuarioDTO user = app.getUserLogin();
 		
+		Map<String, String> parms = new HashMap<String, String>();
+		parms.put("direccion", direccion);
+		parms.put("nombre", user.getNombre());
+		
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
+		Intent intentBack = new Intent(Constantes.ENVIAR_INVITACIONES_FILTRO_ACTION);
+		
 		try{
-			
-			Map<String, String> parms = new HashMap<String, String>();
-			parms.put("direcciones", direcciones);
-			parms.put("nombre", user.getNombre());
+
 			String respuesta = restTemp.getForObject(Constantes.ENVIAR_INVITACIONES_SERVICE_URL, String.class, parms);
 			
-			bundle.putString("respuesta", respuesta);
+			intentBack.putExtra("respuesta", respuesta);
 			
-		}catch (RestClientException e) {
-			
-			Log.i(TAG, "Error: " + e.getMessage());
-			bundle.putString("respuesta", Constantes.MSG_ERROR_SERVIDOR);
-			
+		}catch (RestResponseException e){
+			String msg = e.getMensaje();
+			intentBack.putExtra("error", msg);
+		}catch (ResourceAccessException e) {
+			Log.e(TAG, e.getMessage());
+			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}
 		
-		Intent intentInvitacion = new Intent(Constantes.ENVIAR_INVITACIONES_FILTRO_ACTION);
-		intentInvitacion.putExtras(bundle);
-		sendBroadcast(intentInvitacion);
+		sendBroadcast(intentBack);
 		
 	}
 

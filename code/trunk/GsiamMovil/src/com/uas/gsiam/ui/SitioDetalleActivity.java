@@ -1,9 +1,7 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDTabActivity;
-import greendroid.widget.ActionBarItem;
 import greendroid.widget.LoaderActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,7 @@ import android.content.res.TypedArray;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,10 +23,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.uas.gsiam.adapter.ComentarioAdapter;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
@@ -40,6 +37,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	protected TextView txtDireccion;
 	protected TextView txtTelefono;
 	protected TextView txtWeb;
+	protected TextView txtFotos;
 	protected Location loc;
 	private Double lat;
 	private Double lon;
@@ -62,10 +60,27 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		cargarFotos(sitio.getPublicaciones());
 		galeria.setAdapter(new FotosAdapter(this));
+		
+		if (fotos.size() > 1){
+			galeria.setSelection(1);
+		}
+		
 		txtNombre = (TextView) findViewById(R.id.txtSitioNombreId);
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
 		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
+		txtFotos = (TextView) findViewById(R.id.txtFotosId);
+		if (fotos.isEmpty()){
+			txtFotos.setText(null);
+			Log.i(TAG, "oncreate -no hay fotos: ");
+		}
+		else{
+			txtFotos.setText("Fotos");
+			Log.i(TAG, "oncreate - hay fotos: ");
+			
+		}
+		
+		
 		//listComentarios = (ListView) findViewById(R.id.listComentariosId);
 		
 		//inicializarBarra();
@@ -146,6 +161,16 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		txtDireccion.setText(sitio.getDireccion());
 		txtTelefono.setText(sitio.getTelefono());
 		txtWeb.setText(sitio.getWeb());
+		if (fotos.isEmpty()){
+			txtFotos.setText(null);
+			Log.i(TAG, "oncreate -no hay fotos: ");
+		}
+		else{
+			txtFotos.setText("Fotos");
+			Log.i(TAG, "oncreate - hay fotos: ");
+			
+		}
+		
 		
 		loc = intent.getParcelableExtra("ubicacion");
 		registerReceiver(receiverSitio, detalleFiltro);
@@ -246,7 +271,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 
 			imgView.setImageBitmap(Util.ArrayToBitmap(fotos.get(position)));
 
-			imgView.setLayoutParams(new Gallery.LayoutParams(80, 70));
+			imgView.setLayoutParams(new Gallery.LayoutParams(130, 100));
 			imgView.setScaleType(ImageView.ScaleType.FIT_XY);
 			imgView.setBackgroundResource(mGalleryItemBackground);
 
