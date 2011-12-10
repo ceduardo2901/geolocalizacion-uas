@@ -1,18 +1,17 @@
 package com.uas.gsiam.ui;
 
-import com.uas.gsiam.servicios.EnviarInvitacionServicio;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.Util;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.uas.gsiam.servicios.EnviarInvitacionServicio;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.Util;
 
 public class InvitarAmigosActivity extends Activity {
 
@@ -28,10 +27,7 @@ public class InvitarAmigosActivity extends Activity {
 		super.onCreate(savedInstanceState);
 	
 		setContentView(R.layout.invitar_amigos_tab);		
-		Log.i(TAG, "***** estoy en el onCreate");
-
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
-		
 		enviarInvitacionesFiltro = new IntentFilter(Constantes.ENVIAR_INVITACIONES_FILTRO_ACTION);
 		
 	}
@@ -57,13 +53,12 @@ public class InvitarAmigosActivity extends Activity {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
 			
 		} else {
-			Bundle bundle = new Bundle();
-			bundle.putString("direcciones", email);
-
-			Intent intent = new Intent(this, EnviarInvitacionServicio.class);
-			intent.putExtras(bundle);
+			
+			
+			Intent intent = new Intent(this,EnviarInvitacionServicio.class);
+			intent.putExtra("direccion", email);
 			startService(intent);
-
+			
 			Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_INVITACION);
 		}
 	}
@@ -71,7 +66,6 @@ public class InvitarAmigosActivity extends Activity {
 	
 	public void btnInvitarAmigosFacebook(View v) {
 
-		
 		Intent intent = new Intent(this, ListaAmigosFacebook.class);
 		startActivity(intent);
 		
@@ -82,20 +76,19 @@ public class InvitarAmigosActivity extends Activity {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
 	    	
-	    	Bundle bundle = intent.getExtras();
-			String respuesta = bundle.getString("respuesta");
-		
+			String error = intent.getStringExtra("error");
+	    	
 			Util.dismissProgressDialog();
 			
-	    	if (respuesta.equals(Constantes.RETURN_OK)){
-	    		
-	    		Util.showToast(context, Constantes.MSG_INVITACIONES_OK);
+			if (error != null && !error.isEmpty()) {
+
+				Util.showToast(context, error);
+
+			} else {
+				
+				Util.showToast(context, Constantes.MSG_INVITACIONES_OK);
 				
 			}
-			else{
-				Util.showToast(context, respuesta);
-			}
-	    	
 	    }
 	  };
   

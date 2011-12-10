@@ -25,8 +25,8 @@ public class CrearUsuarioServicio extends IntentService{
 
 	protected static String TAG = "CrearUsuarioServicio";
 	protected RestTemplate restTemp;
-	private HttpEntity<UsuarioDTO> requestEntity;
-	private HttpHeaders requestHeaders;
+	protected HttpEntity<UsuarioDTO> requestEntity;
+	protected HttpHeaders requestHeaders;
 	
 	public CrearUsuarioServicio() {
 		super(TAG);
@@ -39,8 +39,6 @@ public class CrearUsuarioServicio extends IntentService{
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
 				HttpUtils.getNewHttpClient()));
-		
-		
 	}
 
 	@Override

@@ -18,8 +18,6 @@ public class Constantes {
 	
 	public final static String REGEX_EMAIL = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
 	
-	public static final String RETURN_OK = "ok";
-	
 	public static final int REQUEST_CAMERA = 1;
 	public static final int REQUEST_SELECT_PHOTO = 2;
 	
@@ -31,7 +29,7 @@ public class Constantes {
 	//TODO poner esto en un archivo de configuracion
 	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	//ip tony
-	//public static final String DOMINIO_SERVICE = "http://186.49.68.212:8080";
+	//public static final String DOMINIO_SERVICE = "http://186.49.38.32:8080";
 	//ipmartin
 	//public static final String DOMINIO_SERVICE = "http://192.168.0.103:8080";
 	public static final String LOGIN_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/login/{email}/{pass}";
@@ -77,7 +75,7 @@ public class Constantes {
 	public static final String RECHAZAR_SOLICITUD_AMISTAD_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/rechazarsolicitud";
 	public static final String RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION";
 	
-	public static final String ENVIAR_INVITACIONES_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/invitar/{direcciones}/{nombre}";
+	public static final String ENVIAR_INVITACIONES_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/invitar/{direccion}/{nombre}";
 	public static final String ENVIAR_INVITACIONES_FILTRO_ACTION = "com.gsiam.places.ENVIAR_INVITACIONES_FILTRO_ACTION";
 	
 	public static final String ACTUALIZAR_POSICION_USUARIO_SERVICE_URL = DOMINIO_SERVICE + "/GsiamWeb2/usuarios/actualizarPosicion";
@@ -95,13 +93,12 @@ public class Constantes {
 	public static final String MSG_ESPERA_ENVIANDO_SOLICITUD = "Enviando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_ACEPTANDO_SOLICITUD = "Aceptando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_RECHAZANDO_SOLICITUD = "Rechazando solicitud, por favor espere...";
-	public static final String MSG_ESPERA_ENVIANDO_INVITACION = "Enviando invitaciones, por favor espere...";
+	public static final String MSG_ESPERA_ENVIANDO_INVITACION = "Enviando invitacion, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha \ncreado exitosamente";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
 	public static final String MSG_SOLICITUD_RESPONDIDA_OK = "La solicitud se aprobo/rechazo correctamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
-	public static final String MSG_ERROR_SERVIDOR = "Error al intentar acceder al servidor";
 	public static final String MSG_GPS_DISABLE = "Para continuar habilite el gps";
 	public static final String MSG_ACEPTAR = "Aceptar";
 	public static final String MSG_CANCELAR = "Cancelar";

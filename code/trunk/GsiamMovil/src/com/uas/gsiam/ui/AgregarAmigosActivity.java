@@ -110,7 +110,6 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
 			
-			
 			if (error != null && !error.isEmpty()) {
 
 				Util.showToast(context, error);
@@ -122,10 +121,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				
 				mostrarUsuarios();
 				
-				Util.dismissProgressDialog();
-				
 			}
-
 	    }
 	  };
 	

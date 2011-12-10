@@ -3,15 +3,11 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-
-import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
-import com.uas.gsiam.utils.ApplicationController;
-import com.uas.gsiam.utils.Constantes;
-import com.uas.gsiam.utils.PosicionGPS;
-import com.uas.gsiam.utils.Util;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -20,22 +16,40 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
+import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.HttpUtils;
+import com.uas.gsiam.utils.PosicionGPS;
+import com.uas.gsiam.utils.RestResponseErrorHandler;
+import com.uas.gsiam.utils.RestResponseException;
+import com.uas.gsiam.utils.Util;
+
 
 public class UbicacionServicio extends IntentService implements LocationListener{
+
+	protected static String TAG = "UbicacionServicio";
+	protected RestTemplate restTemp;
+	protected HttpHeaders requestHeaders;
+	protected Location loc;
+	protected ApplicationController app;
 
 	public UbicacionServicio(String name) {
 		super(name);
 	}
+	
+	public void onCreate(){
+		super.onCreate();
+		requestHeaders = new HttpHeaders();
+		requestHeaders.setContentType(new MediaType("application", "json"));
+		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient()));
 
-	protected static String TAG = "SitioServicio";
-	protected RestTemplate restTemp;
-	protected Location loc;
-	protected ApplicationController app;
+	}
 
+	
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 		
 		loc = PosicionGPS.getPosicion(this);
 		app = ((ApplicationController) getApplicationContext());
@@ -48,18 +62,22 @@ public class UbicacionServicio extends IntentService implements LocationListener
 		Map<String, PosicionUsuarioDTO> parms = new HashMap<String, PosicionUsuarioDTO>();
 		parms.put("posUsuario", posUsuario);
 		
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
+		
 		try{
 		
-			String respuesta = restTemp.postForObject(Constantes.ACTUALIZAR_POSICION_USUARIO_SERVICE_URL, posUsuario, String.class);	
+			restTemp.postForObject(Constantes.ACTUALIZAR_POSICION_USUARIO_SERVICE_URL, posUsuario, String.class);	
 			
 			//TODO: Que hacemos si hay error aca???
-			if (!respuesta.equalsIgnoreCase(Constantes.RETURN_OK)){
-				Log.i(TAG, "Error: " + respuesta);
-			}
-		}catch (RestClientException e){
-			Log.i(TAG, "Error: " + e.getMessage());
+			
+		}catch (RestResponseException e){
+			String msg = e.getMensaje();
+			Log.i(TAG, "Error: " + msg);
+		}catch (ResourceAccessException e) {
+			Log.e(TAG, e.getMessage());
+
 		}
-		
 		
 	}	
 

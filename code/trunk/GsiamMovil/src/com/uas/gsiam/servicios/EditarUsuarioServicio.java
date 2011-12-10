@@ -24,7 +24,7 @@ public class EditarUsuarioServicio extends IntentService{
 
 	protected static String TAG = "EditarUsuarioServicio";
 	protected RestTemplate restTemp;
-	private HttpHeaders requestHeaders;
+	protected HttpHeaders requestHeaders;
 	
 	public EditarUsuarioServicio() {
 		super(TAG);
