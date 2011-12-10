@@ -4,6 +4,7 @@ import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -48,7 +50,7 @@ public class EditarUsuarioActivity extends GDActivity {
 	protected String nombre;
 	protected Byte [] array;
 	protected UsuarioDTO userLogin;
-
+	private byte[] foto;
 	protected EditText nombreTxt;
 	protected EditText emailTxt;
 	protected ImageView avatar;
@@ -168,16 +170,21 @@ public class EditarUsuarioActivity extends GDActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		Bitmap myBitmap;
-
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inSampleSize=2;
 		switch (requestCode){
 		
 			case Constantes.REQUEST_CAMERA:
 				if( resultCode != 0 ){
 	
-					myBitmap = BitmapFactory.decodeFile(path);
-					avatar.setImageBitmap(myBitmap);	
-					almacenarEnMemoria();
+					myBitmap = BitmapFactory.decodeFile(path, options);
 					
+					ByteArrayOutputStream out =  new ByteArrayOutputStream();
+					myBitmap.compress(CompressFormat.JPEG, 60, out);
+					foto = out.toByteArray();
+					avatar.setImageBitmap(myBitmap);
+					almacenarEnMemoria();
+										
 				}
 	
 				break ;
@@ -191,8 +198,11 @@ public class EditarUsuarioActivity extends GDActivity {
 						is = getContentResolver().openInputStream(selectedImage);
 	
 						BufferedInputStream bis = new BufferedInputStream(is);
-						myBitmap = BitmapFactory.decodeStream(bis);     
-	
+						myBitmap = BitmapFactory.decodeStream(bis,null,options);
+						ByteArrayOutputStream out =  new ByteArrayOutputStream();
+						myBitmap.compress(CompressFormat.JPEG, 60, out);
+						foto = out.toByteArray();
+						
 						avatar.setImageBitmap(myBitmap);	
 	
 					} catch (FileNotFoundException e) {
@@ -244,17 +254,17 @@ public class EditarUsuarioActivity extends GDActivity {
 			usuario.setPassword(userLogin.getPassword());
 			usuario.setId(userLogin.getId());
 			
-			Drawable drawable= avatar.getDrawable();
-			
-			byte[] arrayBytes = null;
-			try {
-				arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			Drawable drawable= avatar.getDrawable();
+//			
+//			byte[] arrayBytes = null;
+//			try {
+//				arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
-			usuario.setAvatar(arrayBytes);
+			usuario.setAvatar(foto);
 			
 			Intent intent = new Intent(this,EditarUsuarioServicio.class);
 			intent.putExtra("usuario", usuario);
@@ -278,7 +288,7 @@ public class EditarUsuarioActivity extends GDActivity {
 		
 			Util.dismissProgressDialog();
 			
-			if (error != null && !error.isEmpty()) {
+			if (error != null) {
 				
 				Util.showToast(context, error);
 			}
