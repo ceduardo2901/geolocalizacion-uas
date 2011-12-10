@@ -57,6 +57,7 @@ public class EditarUsuarioServicio extends IntentService{
 		
 			restTemp.postForObject(Constantes.MODIFICAR_USUARIO_SERVICE_URL, usuario, String.class);	
 			intentBack.putExtra("respuesta", Constantes.MSG_USUARIO_EDITADO_OK);
+			intentBack.putExtra("usuario", usuario);
 			
 		}catch (RestResponseException e){
 			String msg = e.getMensaje();
