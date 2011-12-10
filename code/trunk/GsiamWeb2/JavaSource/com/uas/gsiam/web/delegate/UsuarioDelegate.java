@@ -1,6 +1,5 @@
 package com.uas.gsiam.web.delegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
@@ -83,10 +82,10 @@ public class UsuarioDelegate {
 		return servicioUsuario.getSolicitudesRecibidasPendientes(idUsuario);
 	}
 
-	public void enviarInvitaciones(ArrayList<String> direcciones, String nombre)
+	public void enviarInvitaciones(String direccion, String nombre)
 			throws UsuarioExcepcion {
 
-		servicioUsuario.enviarInvitaciones(direcciones, nombre);
+		servicioUsuario.enviarInvitaciones(direccion, nombre);
 	}
 
 	public void actualizarPosicionUsuario(PosicionUsuarioDTO posUsuario)

@@ -269,43 +269,48 @@ public class UsuarioServicios {
 	}
 
 	@GET
-	@Path("/invitar/{direcciones}/{nombre}")
+	@Path("/invitar/{direccion}/{nombre}")
 	@Produces("application/json")
 	public String enviarInvitaciones(
-			@PathParam("direcciones") String direcciones,
+			@PathParam("direccion") String direccion,
 			@PathParam("nombre") String nombre) {
-
+		
+		ResponseBuilder builder = Response.ok();
 		try {
 
-			// TODO: Solucion parche, ver como hacemos cuando venga una lista..
-			ArrayList<String> dir = new ArrayList<String>();
-			dir.add(direcciones);
-
-			servicio.enviarInvitaciones(dir, nombre);
-			return Constantes.RETURN_OK;
+			servicio.enviarInvitaciones(direccion, nombre);
 
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
-
+		return "ok";
 	}
 
 	@POST
 	@Path("/actualizarPosicion")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public String actualizarPosicionUsuario(
+	public Response actualizarPosicionUsuario(
 			@BadgerFish PosicionUsuarioDTO posUsuario) {
-
+		
+		ResponseBuilder builder = Response.ok();
 		try {
 			servicio.actualizarPosicionUsuario(posUsuario);
 
-			return Constantes.RETURN_OK;
-
 		} catch (UsuarioExcepcion e) {
-			return e.getMensaje();
-
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
 		}
+		
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
 
 	}
 
