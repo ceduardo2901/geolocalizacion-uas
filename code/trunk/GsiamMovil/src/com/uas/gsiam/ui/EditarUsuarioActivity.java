@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +23,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
@@ -260,8 +263,24 @@ public class EditarUsuarioActivity extends GDActivity {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-
-			usuario.setAvatar(foto);
+			
+			if (foto != null)
+				usuario.setAvatar(foto);
+			else{
+				
+				Drawable drawable= avatar.getDrawable();
+				
+				byte[] arrayBytes = null;
+				try {
+					arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				usuario.setAvatar(arrayBytes);
+			}
+				
 			
 			Intent intent = new Intent(this,EditarUsuarioServicio.class);
 			intent.putExtra("usuario", usuario);
