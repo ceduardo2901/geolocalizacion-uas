@@ -39,12 +39,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	protected TextView txtWeb;
 	protected TextView txtFotos;
 	protected Location loc;
-	private Double lat;
-	private Double lon;
-	private Integer sitioId;
-	//private ListView listComentarios;
 	private SitioDTO sitio;
-	private static final int MAPA = 1;
 	private Gallery galeria;
 	private ArrayList<byte[]> fotos;
 	private IntentFilter detalleFiltro;
@@ -52,7 +47,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setActionBarContentView(R.layout.sitio_detalle);
+		
 		setContentView(R.layout.sitio_detalle);
 		galeria = (Gallery) findViewById(R.id.gallery);
 		fotos = new ArrayList<byte[]>();
@@ -129,6 +124,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 //	}
 	
 	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
+		@SuppressWarnings("unchecked")
 		@Override
 	    public void onReceive(Context context, Intent intent) {
 	    		

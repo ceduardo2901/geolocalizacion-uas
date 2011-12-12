@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -59,7 +60,7 @@ public class ComentarioTabActivity extends Activity {
 	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
 		@Override
 	    public void onReceive(Context context, Intent intent) {
-	    		
+			Log.i("**********", "***********LALALALA");
 	    	Bundle bundle = intent.getExtras();
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
 			if(!sitios.isEmpty()){
