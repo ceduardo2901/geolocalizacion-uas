@@ -2,13 +2,10 @@ package com.uas.gsiam.negocio.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 public class SitioDTO implements Serializable{
 
-	
+	private static final long serialVersionUID = 1L;
 	private Integer idSitio;
 	private String nombre;
 	private String direccion;

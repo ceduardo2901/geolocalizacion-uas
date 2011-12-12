@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class PublicacionDTO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Integer idPublicacion;
 	private String comentario;
 	private Integer idUsuario;
