@@ -20,11 +20,9 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -36,13 +34,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.TextView;
 
 import com.uas.gsiam.adapter.CategoriaAdapter;
 import com.uas.gsiam.adapter.RatingAdapter;
@@ -55,9 +50,8 @@ import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.LocationHelper;
-import com.uas.gsiam.utils.PosicionGPS;
-import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
+import com.uas.gsiam.utils.Util;
 
 public class SitiosActivity extends GDActivity implements
 		OnItemLongClickListener {
@@ -77,6 +71,7 @@ public class SitiosActivity extends GDActivity implements
 	private SitiosAdapter adaptador;
 	private LocationHelper locHelper;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,7 +82,7 @@ public class SitiosActivity extends GDActivity implements
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();
-		boolean result = locHelper.getLocation(this, locationResult);
+	
 
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
@@ -302,15 +297,15 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 				.setPositiveButton(Constantes.MSG_ACEPTAR,
 						new DialogInterface.OnClickListener() {
 							public void onClick(
-									@SuppressWarnings("unused") final DialogInterface dialog,
-									@SuppressWarnings("unused") final int id) {
+									final DialogInterface dialog,
+									final int id) {
 								launchGPSOptions();
 							}
 						})
 				.setNegativeButton(Constantes.MSG_CANCELAR,
 						new DialogInterface.OnClickListener() {
 							public void onClick(final DialogInterface dialog,
-									@SuppressWarnings("unused") final int id) {
+									final int id) {
 								dialog.cancel();
 							}
 						});
@@ -467,7 +462,7 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
 
-			String respuesta = intent.getStringExtra("respuesta");
+		
 
 			actualizarSitios(loc);
 
@@ -486,7 +481,7 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				SitioDTO sitio = sitios.get(position);
+				
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),
 						SitioTabActivity.class);
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));

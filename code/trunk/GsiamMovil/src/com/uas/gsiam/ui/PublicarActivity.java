@@ -1,20 +1,15 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.image.ImageLoader;
 import greendroid.widget.ActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -24,10 +19,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
@@ -51,7 +45,6 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.PublicarServicio;
-import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SessionStore;
@@ -69,7 +62,6 @@ public class PublicarActivity extends GDActivity implements
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
 	
-	private IntentFilter ActualizarSitioFiltro;
 	private SitioDTO sitio;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
@@ -78,10 +70,7 @@ public class PublicarActivity extends GDActivity implements
 	private ImageView fotoPub;
 	private byte[] foto;
 	private String APP_ID;
-	private PublicacionDTO publicar;
-	private static final Integer PUBLICACION_OK = 200;
-	private static final Integer ERROR_PUBLICACION = 501;
-	//private ListView listComentarios;
+	private PublicacionDTO publicacion;
 
 	protected String path = "";
 
@@ -101,17 +90,9 @@ public class PublicarActivity extends GDActivity implements
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
-		ActualizarSitioFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
-
+	
 		app = ((ApplicationController) getApplicationContext());
 
-
-	}
-
-	private void inicializarActionBar() {
-		addActionBarItem(Type.Share, COMPARTIR);
-
-		setTitle(R.string.app_name);
 
 	}
 
@@ -133,8 +114,6 @@ public class PublicarActivity extends GDActivity implements
 	protected void onResume() {
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
-		//registerReceiver(receiverActualizarSitio, ActualizarSitioFiltro);
-		
 		usuario = app.getUserLogin();
 		
 		
@@ -143,14 +122,13 @@ public class PublicarActivity extends GDActivity implements
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverPublicar);
-		//unregisterReceiver(receiverActualizarSitio);
+		
 	}
 
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "onReceive");
-			Bundle bundle = intent.getExtras();
 			String respuesta = intent.getStringExtra("respuesta");
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
@@ -162,48 +140,14 @@ public class PublicarActivity extends GDActivity implements
 			}
 			
 			
-			
-			//actualizarSitio();
-			
-			
-			
 		}
 	};
-	
-//	protected BroadcastReceiver receiverActualizarSitio = new BroadcastReceiver() {
-//		@Override
-//		public void onReceive(Context context, Intent intent) {
-//			Log.i(TAG, "onReceive");
-//			Bundle bundle = intent.getExtras();
-//			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
-//			if(!sitios.isEmpty()){
-//				
-//				SitioDTO sitio = sitios.get(0);
-//				if(sitio != null){
-//					setSitio(sitio);
-//				}
-//				
-//				
-//			}
-//			Util.dismissProgressDialog();
-//			Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
-//			volver();
-//			
-//		}
-//	};
-	
-//	private void actualizarSitio(){
-//		Intent intent = new Intent(this, SitioServicio.class);
-//		SitioDTO sitioUpdate = new SitioDTO();
-//		sitioUpdate.setIdSitio(sitio.getIdSitio());
-//		intent.putExtra("sitio", sitioUpdate);
-//		startService(intent);
-//		
-//	}
+
 
 	private void volverPublicaciones(){
 		
 		Intent volver = new Intent(this, SitioTabActivity.class);
+		sitio.getPublicaciones().add(publicacion);
 		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
@@ -213,7 +157,7 @@ public class PublicarActivity extends GDActivity implements
 		if (comentarFaceBook.isChecked()) {
 
 			
-			mAsyncRunner = new AsyncFacebookRunner(facebook);
+			this.mAsyncRunner = new AsyncFacebookRunner(facebook);
 			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
 			
 			if (!facebook.isSessionValid()) {
@@ -237,17 +181,17 @@ public class PublicarActivity extends GDActivity implements
 	}
 
 	public void publicar(View v) {
-		publicar = new PublicacionDTO();
-		publicar.setComentario(comentario.getText().toString());
-		publicar.setIdSitio(sitio.getIdSitio());
-		publicar.setIdUsuario(usuario.getId());
-		publicar.setPuntaje(puntaje.getRating());
+		publicacion = new PublicacionDTO();
+		publicacion.setComentario(comentario.getText().toString());
+		publicacion.setIdSitio(sitio.getIdSitio());
+		publicacion.setIdUsuario(usuario.getId());
+		publicacion.setPuntaje(puntaje.getRating());
+		publicacion.setFecha(new Date());
+		publicacion.setNombreUsuario(usuario.getNombre());
+		publicacion.setFoto(foto);
 		
-		publicar.setFoto(foto);
-		//Bundle publicacion = new Bundle();
-		//publicacion.putSerializable("publicacion", publicar);
 		Intent intent = new Intent(this, PublicarServicio.class);
-		intent.putExtra("publicacion", publicar);
+		intent.putExtra("publicacion", publicacion);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 		comentarFacebook();
 		startService(intent);
