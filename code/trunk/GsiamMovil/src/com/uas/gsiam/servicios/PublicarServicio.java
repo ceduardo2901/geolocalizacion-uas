@@ -61,9 +61,6 @@ public class PublicarServicio extends IntentService {
 					Constantes.CREAR_PUBLICACION_SERVICE_URL, HttpMethod.POST,
 					requestEntity, String.class);
 
-			// String respuesta =
-			// restTemp.postForObject(Constantes.CREAR_PUBLICACION_SERVICE_URL,
-			// publicacion, String.class);
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentPublicacion.putExtra("respuesta",
