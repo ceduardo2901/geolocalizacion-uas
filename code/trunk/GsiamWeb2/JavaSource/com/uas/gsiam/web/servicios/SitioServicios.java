@@ -1,7 +1,6 @@
 package com.uas.gsiam.web.servicios;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -165,7 +164,6 @@ public class SitioServicios {
 	public Response publicar(@BadgerFish PublicacionDTO publicacion) {
 		ResponseBuilder builder = Response.ok();
 		try {
-			publicacion.setFecha(new Date());
 			servicio.crearPublicacion(publicacion);
 		} catch (PublicacionExcepcion e) {
 			builder = new ResponseBuilderImpl();
