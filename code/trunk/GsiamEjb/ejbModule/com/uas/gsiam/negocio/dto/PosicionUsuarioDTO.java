@@ -1,7 +1,6 @@
 package com.uas.gsiam.negocio.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class PosicionUsuarioDTO implements Serializable{
