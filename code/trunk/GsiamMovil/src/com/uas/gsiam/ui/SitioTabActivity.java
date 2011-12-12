@@ -1,38 +1,31 @@
 package com.uas.gsiam.ui;
 
-import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import greendroid.app.GDTabActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
+import greendroid.widget.LoaderActionBarItem;
+
 import java.util.ArrayList;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.TabHost;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-import greendroid.app.GDTabActivity;
-import greendroid.widget.ActionBarItem;
-import greendroid.widget.LoaderActionBarItem;
-import greendroid.widget.ActionBarItem.Type;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.TabHost;
-
 public class SitioTabActivity extends GDTabActivity {
 
-	protected static String TAG = "AmigosTabActivity";
-	// protected static boolean registroMisAmigosService = false;
+	protected static String TAG = "SitioTabActivity";
 	private static final String TAG_SITIO_DETALLE = "Sitio";
-	private static final String TAG_SITIO_MAPA = "Mapa";
 	private static final String TAG_SITIO_COMENTARIO = "Comentario";
 	private static final String PREF_STICKY_TAB = "stickyTab";
 	protected IntentFilter sitioAccion;
@@ -46,8 +39,6 @@ public class SitioTabActivity extends GDTabActivity {
 	private Intent intent;
 	private SitioDTO sitio;
 
-	private String tabClick;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +49,9 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost = getTabHost();
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
-		// a�adirTab2(intent);
-		anadirTab1(intent);
-		anadirTab3(intent);
+
+		addTab1(intent);
+		addTab2(intent);
 
 		// Al abrir la aplicacion restauramos la �ltima pesta�a activada
 		SharedPreferences prefs = PreferenceManager
@@ -69,7 +60,7 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost.setCurrentTab(currentTab);
 		
 		Log.i(TAG, "**** currentTab =  " + currentTab);
-		tabClick = mTabHost.getCurrentTabTag();
+		mTabHost.getCurrentTabTag();
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 	}
 
@@ -94,6 +85,7 @@ public class SitioTabActivity extends GDTabActivity {
 	
 	
 	protected BroadcastReceiver sitiosReceiver = new BroadcastReceiver() {
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
@@ -190,34 +182,30 @@ public class SitioTabActivity extends GDTabActivity {
 	}
 
 	/*
-	 * Pesta�a 1
+	 * Tab 1
 	 */
 
-	private void anadirTab1(Intent intent) {
+	private void addTab1(Intent intent) {
 		intent.setClass(this, SitioDetalleActivity.class);
 		addTab(TAG_SITIO_DETALLE, "Sitio", intent);
 
 	}
 
 	/*
-	 * Pesta�a 2
+	 * Tab 2
 	 */
-
-	private void mostarMapa() {
-		intent.setClass(this, MostrarMapaActivity.class);
-		startActivity(intent);
-		// addTab(TAG_SITIO_MAPA, "Mapa", intent);
-
-	}
-
-	/*
-	 * Pesta�a 3
-	 */
-
-	private void anadirTab3(Intent intent) {
+	private void addTab2(Intent intent) {
 		intent.setClass(this, ComentarioTabActivity.class);
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
 	}
+	
+
+	private void mostarMapa() {
+		intent.setClass(this, MostrarMapaActivity.class);
+		startActivity(intent);
+
+	}
+
 
 }
