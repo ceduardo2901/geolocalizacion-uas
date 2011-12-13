@@ -69,7 +69,6 @@
 		<service android:name="com.uas.gsiam.servicios.ResponderSolicitudServicio" />
 		<service android:name="com.uas.gsiam.servicios.GetSolicitudesPendientesServicio" />
 		<service android:name="com.uas.gsiam.servicios.EnviarInvitacionServicio" />
-		<service android:name="com.uas.gsiam.servicios.UbicacionServicio" />
 		<service android:name="com.uas.gsiam.servicios.ActualizarPosicionServicio"/>
 				
 

@@ -1,10 +1,12 @@
 package com.uas.gsiam.utils;
 
+import greendroid.app.GDApplication;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import greendroid.app.GDApplication;
 import android.content.Intent;
+import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.MainActivity;
@@ -15,7 +17,13 @@ public class ApplicationController extends GDApplication {
 	private ArrayList<HashMap<String, Object>> gruposCategorias = new ArrayList<HashMap<String, Object>>();
 	private ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = new ArrayList<ArrayList<HashMap<String, Object>>>();
 	
-
+	@Override
+	  public void onCreate() {
+	    super.onCreate();
+	    Log.i("PPPPPPPPPPPPPPPPPPP", "startService");
+	}
+	      
+	
 	public Class<?> getHomeActivityClass() {
 		return MainActivity.class;
 	}

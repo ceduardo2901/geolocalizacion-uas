@@ -1,9 +1,8 @@
 package com.uas.gsiam.ui;
 
-import greendroid.app.GDActivity;
-
 import java.io.IOException;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +21,7 @@ import com.uas.gsiam.servicios.CrearUsuarioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class CrearUsuarioActivity extends GDActivity {
+public class CrearUsuarioActivity extends Activity {
 
 	protected String email;
 	protected String pass;
@@ -45,7 +44,7 @@ public class CrearUsuarioActivity extends GDActivity {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
-		setActionBarContentView(R.layout.crear_usuario);
+		setContentView(R.layout.crear_usuario);
 		
 		inicializarActionBar();
 		
