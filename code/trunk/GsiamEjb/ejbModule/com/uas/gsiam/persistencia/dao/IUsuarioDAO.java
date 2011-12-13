@@ -24,7 +24,9 @@ public interface IUsuarioDAO {
 		
 	public void modificarUsuario(UsuarioDTO usuario) throws SQLException;
 	
-	public void eliminarUsuario(UsuarioDTO usuario) throws SQLException;
+	public void desactivarUsuario(UsuarioDTO usuario) throws SQLException;
+	
+	public void eliminarContactos(UsuarioDTO usuario) throws SQLException;
 	
 	public void crearContacto(SolicitudContactoDTO solicitud) throws SQLException;
 	

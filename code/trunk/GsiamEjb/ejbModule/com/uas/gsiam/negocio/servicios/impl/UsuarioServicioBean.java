@@ -134,27 +134,29 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	}
 	
 	
-	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion{
+	public void cerrarCuenta (UsuarioDTO usuario) throws UsuarioExcepcion{
 			
 		try {
 			
-			AbstractFactory.getInstance().getUsuarioDAO().eliminarUsuario(usuario);
+			AbstractFactory.getInstance().getUsuarioDAO().desactivarUsuario(usuario);
+			
+			AbstractFactory.getInstance().getUsuarioDAO().eliminarContactos(usuario);
 			
 			
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 			
 		} catch (InstantiationException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			throw new UsuarioExcepcion(Constantes.ERROR_CERRAR_CUENTA);
 			
 		} catch (IllegalAccessException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			throw new UsuarioExcepcion(Constantes.ERROR_CERRAR_CUENTA);
 			
 		} catch (ClassNotFoundException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			throw new UsuarioExcepcion(Constantes.ERROR_CERRAR_CUENTA);
 			
 		} catch (SQLException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_ELIMINAR_USUARIO);
+			throw new UsuarioExcepcion(Constantes.ERROR_CERRAR_CUENTA);
 		}
 	
 	}

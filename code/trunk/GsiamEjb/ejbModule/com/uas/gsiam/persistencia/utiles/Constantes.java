@@ -10,7 +10,7 @@ public class Constantes {
 	public static String ERROR_COMUNICACION_BD = "Error al comunicarse con la Base de Datos";
 	public static String ERROR_CREAR_USUARIO = "Error al intentar crear el usuario";
 	public static String ERROR_MODIFICAR_USUARIO = "Error al intentar modificar el usuario";
-	public static String ERROR_ELIMINAR_USUARIO = "Error al intentar eliminar el usuario";
+	public static String ERROR_CERRAR_CUENTA = "Error al intentar cerrar su cuenta";
 	public static String ERROR_CREAR_CONTACTO = "Error al intentar crear la solicitud";
 	public static String ERROR_RECUPERAR_SOLICITUDES = "Error al intentar traer las solicitudes";
 	public static String ERROR_RECUPERAR_CONTACTOS = "Error al intentar traer los contactos";
