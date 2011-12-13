@@ -28,7 +28,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		try {
 			
 			String sqlLogin = "SELECT * FROM t_usuario u " +
-	                          "WHERE u.usu_mail = ? AND u.usu_password = ?";
+	                          "WHERE u.usu_mail = ? AND u.usu_password = ? AND u.usu_activo = 1";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlLogin);
 
@@ -67,7 +67,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		try{
 
 			String sqlExisteUsuario = "SELECT COUNT(*) FROM t_usuario u " +
-	        						  "WHERE u.usu_mail = ?";
+	        						  "WHERE u.usu_mail = ? AND u.usu_activo = 1";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteUsuario);
 			
@@ -103,7 +103,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		try{
 
 			String sqlGetUsuario = "SELECT * FROM t_usuario u " +
-	        						  "WHERE u.usu_id = ?";
+	        						  "WHERE u.usu_id = ? AND u.usu_activo = 1";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlGetUsuario);
 			
@@ -151,7 +151,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			String sqlUsuariosNoAmigos = "SELECT todos.*, soli.flag " +
 									    "FROM (SELECT * " + 
 										  "FROM t_usuario u " + 
-										  "WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND " + 
+										  "WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND u.usu_activo = 1 AND" + 
 											"u.usu_id NOT IN (SELECT CASE  " +
 													 "WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
 													 "WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
@@ -243,8 +243,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 		try{
 		
-			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_avatar) " +
-					                 "VALUES (?, ?, ?, ?)";
+			String sqlCrearUsuario = "INSERT INTO t_usuario (usu_nombre, usu_mail, usu_password, usu_avatar, usu_activo) " +
+					                 "VALUES (?, ?, ?, ?, ?)";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearUsuario);
 			
@@ -252,6 +252,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
 			ps.setBytes(4, usuario.getAvatar());
+			ps.setInt(5, 1);
 
 			
 			ps.executeUpdate();
@@ -325,21 +326,47 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	
 	
-	// TODO : ver si esto va...
 	/*
-	 * Metodo que elimina usuario
+	 * Metodo que desactiva usuario
 	 */
-	public void eliminarUsuario(UsuarioDTO usuario) throws SQLException{
+	public void desactivarUsuario(UsuarioDTO usuario) throws SQLException{
 		
 		PreparedStatement ps;
 					
-		String sqlModificarUsuario = "DELETE FROM t_usuario WHERE usu_id = ?";
-		// TODO Ver como se eliminar los contactos del mismo
+		String sqlDesactivarUsuario = "UPDATE t_usuario SET usu_activo = ? " +
+								      "WHERE usu_id = ?";
 
-		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlModificarUsuario);
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlDesactivarUsuario);
+		
+		ps.setInt(1, 0);
+		ps.setInt(2, usuario.getId());
+		
+		ps.executeUpdate();
+		
+		ps.close();
+ 
+		
+	}
+	
+	/*
+	 * Elimina las solicitudes del usuario
+	 */
+	public void eliminarContactos(UsuarioDTO usuario) throws SQLException{
+		
+		PreparedStatement ps;
+			
+		String sqlEliminarContactos = "DELETE FROM t_contacto " +
+						              "WHERE con_id_usuario_sol = ? OR con_id_usuario_apr = ?";
+
+		
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlEliminarContactos);
+		
 		
 		ps.setInt(1, usuario.getId());
+		ps.setInt(2, usuario.getId());
 		
+		ps.executeUpdate();
+					
 		ps.close();
  
 		

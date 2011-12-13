@@ -21,7 +21,7 @@ public interface UsuarioServicio {
 		
 	public void modificarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;
 		
-	public void eliminarUsuario (UsuarioDTO usuario) throws UsuarioExcepcion;	
+	public void cerrarCuenta (UsuarioDTO usuario) throws UsuarioExcepcion;	
 		
 	public void crearSolicitudContacto (SolicitudContactoDTO solicitud) throws UsuarioExcepcion;
 	
