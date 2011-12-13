@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@color/background2" android:layout_height="fill_parent"
+	android:background="@color/background1" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal">
-	
+
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:layout_gravity="center">
+
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="Crear Cuenta"
+			android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_gravity="center_horizontal|center"
+			android:textColor="@color/fuente" android:paddingBottom="20dp"/>
+
 
 		<TextView android:layout_width="fill_parent" android:text="@string/Nombre"
 			android:layout_height="wrap_content" android:id="@+id/textView1"
@@ -21,7 +28,8 @@
 
 		<TextView android:layout_width="fill_parent" android:text="@string/email"
 			android:layout_height="wrap_content" android:id="@+id/emailLbl"
-			android:layout_weight="1" android:textColor="@color/fuente" android:layout_marginTop="15dp"></TextView>
+			android:layout_weight="1" android:textColor="@color/fuente"
+			android:layout_marginTop="15dp"></TextView>
 
 
 
@@ -31,7 +39,8 @@
 		</EditText>
 		<TextView android:layout_width="fill_parent" android:text="@string/pass"
 			android:textColor="@color/fuente" android:layout_height="wrap_content"
-			android:id="@+id/passLbl" android:layout_weight="1" android:layout_marginTop="15dp"></TextView>
+			android:id="@+id/passLbl" android:layout_weight="1"
+			android:layout_marginTop="15dp"></TextView>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/passTxt"
 			android:inputType="textPassword"></EditText>
@@ -39,7 +48,8 @@
 		<Button android:id="@+id/crearUsuarioBtn"
 			android:layout_height="wrap_content" android:text="@string/BtnRegistrarse"
 			android:onClick="crearUsuario" android:gravity="center_vertical|center_horizontal|center"
-			android:layout_gravity="right" android:layout_width="100dp" android:layout_marginTop="15dp"></Button>
+			android:layout_gravity="right" android:layout_width="100dp"
+			android:layout_marginTop="15dp"></Button>
 
 
 

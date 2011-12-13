@@ -2,15 +2,12 @@ package com.uas.gsiam.ui;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
-
-import com.uas.gsiam.servicios.UbicacionServicio;
 
 public class Preferencias extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
