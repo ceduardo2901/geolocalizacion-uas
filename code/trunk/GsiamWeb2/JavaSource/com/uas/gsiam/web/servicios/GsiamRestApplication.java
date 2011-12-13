@@ -8,6 +8,7 @@ import javax.ws.rs.core.Application;
 public class GsiamRestApplication extends Application{
 
 	private Set<Object> singletons = new HashSet<Object>();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private Set<Class<?>> empty = new HashSet();
 
 	public GsiamRestApplication() {
