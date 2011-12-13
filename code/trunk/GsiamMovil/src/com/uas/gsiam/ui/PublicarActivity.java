@@ -152,26 +152,6 @@ public class PublicarActivity extends GDActivity implements
 		startActivity(volver);
 	}
 	
-	private void comentarFacebook() {
-		setResult(RESULT_OK);
-		if (comentarFaceBook.isChecked()) {
-
-			
-			this.mAsyncRunner = new AsyncFacebookRunner(facebook);
-			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
-			
-			if (!facebook.isSessionValid()) {
-				facebook.authorize(this,
-						getResources().getStringArray(R.array.permissions),
-						new FaceBookDialog());
-			} else {
-				postOnWall(comentario.getText().toString());
-			}
-
-			// SessionEvents.addAuthListener(new SampleAuthListener());
-
-		}
-	}
 
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -181,23 +161,31 @@ public class PublicarActivity extends GDActivity implements
 	}
 
 	public void publicar(View v) {
-		publicacion = new PublicacionDTO();
-		publicacion.setComentario(comentario.getText().toString());
-		publicacion.setIdSitio(sitio.getIdSitio());
-		publicacion.setIdUsuario(usuario.getId());
-		publicacion.setPuntaje(puntaje.getRating());
-		publicacion.setFecha(new Date());
-		publicacion.setNombreUsuario(usuario.getNombre());
-		publicacion.setFoto(foto);
 		
-		Intent intent = new Intent(this, PublicarServicio.class);
-		intent.putExtra("publicacion", publicacion);
-		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
-		comentarFacebook();
-		startService(intent);
+		if(comentario.getText().toString().trim().isEmpty()){
+			Util.showToast(this, "Debe ingresar \nun comentario");
+		}
+		else{
+			
+			publicacion = new PublicacionDTO();
+			publicacion.setComentario(comentario.getText().toString().trim());
+			publicacion.setIdSitio(sitio.getIdSitio());
+			publicacion.setIdUsuario(usuario.getId());
+			publicacion.setPuntaje(puntaje.getRating());
+			publicacion.setFecha(new Date());
+			publicacion.setNombreUsuario(usuario.getNombre());
+			publicacion.setFoto(foto);
+			
+			Intent intent = new Intent(this, PublicarServicio.class);
+			intent.putExtra("publicacion", publicacion);
+			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+			comentarFacebook();
+			startService(intent);
+		}
 		
 
 	}
+	
 
 	public void cargarFoto(View v) {
 
@@ -261,6 +249,27 @@ public class PublicarActivity extends GDActivity implements
 
 	}
 
+	private void comentarFacebook() {
+		setResult(RESULT_OK);
+		if (comentarFaceBook.isChecked()) {
+
+			
+			this.mAsyncRunner = new AsyncFacebookRunner(facebook);
+			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
+			
+			if (!facebook.isSessionValid()) {
+				facebook.authorize(this,
+						getResources().getStringArray(R.array.permissions),
+						new FaceBookDialog());
+			} else {
+				postOnWall(comentario.getText().toString());
+			}
+
+			// SessionEvents.addAuthListener(new SampleAuthListener());
+
+		}
+	}
+	
 	public void postOnWall(String msg) {
 		Log.d("Tests", "Testing graph API wall post");
 		try {

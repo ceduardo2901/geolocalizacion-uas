@@ -55,6 +55,7 @@ public class ComentarioAdapter extends ArrayAdapter<PublicacionDTO> {
 		return item;
 	}
 	
+	@SuppressWarnings("static-access")
 	private String dateFormate(Date fecha){
 		DateFormat format = new DateFormat();
 		return format.format("dd/MM/yyyy", fecha).toString();

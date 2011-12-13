@@ -21,8 +21,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
@@ -41,7 +41,6 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.EditarUsuarioServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
-
 import com.uas.gsiam.utils.Util;
 
 public class EditarUsuarioActivity extends GDActivity {
