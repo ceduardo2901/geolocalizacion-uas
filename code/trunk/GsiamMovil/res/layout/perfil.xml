@@ -87,7 +87,7 @@
 			 	    android:text="@string/BtnEliminarPerfil"
 			 	    android:layout_width="wrap_content" 
 			 	    android:layout_height="wrap_content"
-			 	    android:onClick=""/>
+			 	    android:onClick="cerrarCuenta"/>
 		</TableRow>
 		
 		
