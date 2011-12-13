@@ -57,6 +57,7 @@
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />
 		<service android:name="com.uas.gsiam.servicios.EditarUsuarioServicio" />
+		<service android:name="com.uas.gsiam.servicios.CerrarCuentaServicio" />
 		<service android:name="com.uas.gsiam.servicios.SitioServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearSitioServicio" />
 		<service android:name="com.uas.gsiam.servicios.PublicarServicio" />
