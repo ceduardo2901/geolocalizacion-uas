@@ -111,6 +111,31 @@ public class UsuarioServicios {
 		return builder.build();
 	}
 
+	
+	@POST
+	@Path("/cerrar")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Response cerrarCuenta(@BadgerFish UsuarioDTO usuario) {
+		
+		ResponseBuilder builder = Response.ok();
+		try {
+			servicio.cerrarCuenta(usuario);
+
+		}catch (UsuarioExcepcion e) {
+			builder = new ResponseBuilderImpl();
+			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
+			builder.entity(e.getMessage());
+			Response response = builder.build();
+			throw new WebApplicationException(response);
+
+		}
+
+		builder.type(MediaType.APPLICATION_JSON);
+		return builder.build();
+	}
+	
+	
 	@GET
 	@Path("/amigos/{id}")
 	@Produces("application/json")
