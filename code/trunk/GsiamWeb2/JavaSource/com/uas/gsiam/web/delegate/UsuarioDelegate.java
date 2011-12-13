@@ -46,6 +46,12 @@ public class UsuarioDelegate {
 		servicioUsuario.modificarUsuario(usuario);
 
 	}
+	
+	public void cerrarCuenta(UsuarioDTO usuario) throws UsuarioExcepcion {
+
+		servicioUsuario.cerrarCuenta(usuario);
+
+	}
 
 	public List<UsuarioDTO> getAmigos(int idUsuario) throws UsuarioExcepcion {
 
