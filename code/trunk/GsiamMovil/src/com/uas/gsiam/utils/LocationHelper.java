@@ -42,6 +42,7 @@ public class LocationHelper {
 					LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
 		}
 		if (networkEnabled) {
+
 			locationManager.requestLocationUpdates(
 					LocationManager.NETWORK_PROVIDER, 0, 0,
 					locationListenerNetwork);

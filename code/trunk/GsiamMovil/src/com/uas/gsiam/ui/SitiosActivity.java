@@ -82,7 +82,7 @@ public class SitiosActivity extends GDActivity implements
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();
-	
+		locHelper.getLocation(this, locationResult);
 
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 		intentEliminarSitio = new IntentFilter(
