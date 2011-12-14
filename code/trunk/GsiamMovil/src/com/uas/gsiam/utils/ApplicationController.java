@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Intent;
-import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.MainActivity;
@@ -20,7 +19,6 @@ public class ApplicationController extends GDApplication {
 	@Override
 	  public void onCreate() {
 	    super.onCreate();
-	    Log.i("PPPPPPPPPPPPPPPPPPP", "startService");
 	}
 	      
 	

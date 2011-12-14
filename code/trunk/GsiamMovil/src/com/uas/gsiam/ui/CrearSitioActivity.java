@@ -51,11 +51,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private Button crearSitioBtn;
 	private SitioDTO sitioDto;
 	private Location loc;
-	private int index;
+//	private int index;
 	protected IntentFilter crearSitioFiltro;
 	private MapView mapa;
 	private GeoPoint geoPoint;
 	private MapController mapControl;
+	private CategoriaDTO categoriaSeleccionada;
 
 	// private ArrayList<CategoriaIconoMenu> listCategorias = new
 	// ArrayList<CategoriaIconoMenu>();
@@ -123,13 +124,9 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		sitioDto.setNombre(nombreSitioTxt.getText().toString());
 		sitioDto.setTelefono(telefonoSitioTxt.getText().toString());
 		sitioDto.setWeb(webTxt.getText().toString());
-		CategoriaDTO categoria = new CategoriaDTO();
-		categoria.setDescripcion(categoriaSitioTxt.getText().toString());
-		index++;
-		categoria.setIdCategoria(index);
 		sitioDto.setLat(loc.getLatitude());
 		sitioDto.setLon(loc.getLongitude());
-		sitioDto.setCategoria(categoria);
+		sitioDto.setCategoria(categoriaSeleccionada);
 	
 		Intent intent = new Intent(this, CrearSitioServicio.class);
 		intent.putExtra("sitio", sitioDto);
@@ -141,18 +138,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private AlertDialog dialog = null;
 
 	public void mostarCategoria(View v) {
-		/*
-		 * AlertDialog.Builder builder = new AlertDialog.Builder(this); final
-		 * String[] categorias = getResources().getStringArray(
-		 * R.array.listNames); builder.setTitle(R.string.categoria);
-		 * builder.setItems(categorias, new DialogInterface.OnClickListener() {
-		 * 
-		 * @Override public void onClick(DialogInterface dialoginterface, int i)
-		 * { index = i; categoriaSitioTxt.setText(categorias[i]);
-		 * 
-		 * } }); builder.show();
-		 */
-
+		
 		ExpandableListView myList = new ExpandableListView(this);
 		myList.setDividerHeight(2);
 		ApplicationController app = ((ApplicationController) getApplicationContext());
@@ -182,20 +168,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 						.getExpandableListAdapter().getChild(groupPosition,
 								childPosition);
 
-				CategoriaDTO categoriaSeleccionada = (CategoriaDTO) map
-						.get("CategoriaDTO");
-
-				// Util.showToast(
-				// getApplicationContext(),
-				// "getDescripcionGrupo:"
-				// + categoriaSeleccionada.getDescripcionGrupo()
-				// + "\ngetDescripcion:"
-				// + categoriaSeleccionada.getDescripcion());
-
+				categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
+				categoriaSitioTxt.setText(categoriaSeleccionada.getDescripcion());
+				
 				if (dialog != null) {
 					dialog.dismiss();
-					categoriaSitioTxt.setText(categoriaSeleccionada
-							.getDescripcion());
+					
 				}
 
 				return true;

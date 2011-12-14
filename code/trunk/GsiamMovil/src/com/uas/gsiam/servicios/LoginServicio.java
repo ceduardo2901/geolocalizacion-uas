@@ -3,11 +3,6 @@ package com.uas.gsiam.servicios;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -76,7 +71,6 @@ public class LoginServicio extends IntentService {
 
 				// /////////////////////////////////////////////////
 				// Cargo las categorias
-				// TODO Ver como hacer al iniciar la aplicacion y no en el login
 
 				CategoriaDTO[] respuesta = restTemp.getForObject(
 						Constantes.GET_CATEGORIAS_SERVICE_URL,

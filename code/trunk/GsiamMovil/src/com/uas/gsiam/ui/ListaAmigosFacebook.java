@@ -25,16 +25,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.facebook.android.DialogError;
-import com.facebook.android.Facebook;
-import com.facebook.android.Facebook.DialogListener;
-import com.facebook.android.FacebookError;
 import com.facebook.android.R;
 import com.uas.gsiam.utils.AmigoFacebook;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.FacebookUtil;
 import com.uas.gsiam.utils.FriendsGetProfilePics;
-import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
 
 public class ListaAmigosFacebook extends Activity {
@@ -43,8 +38,6 @@ public class ListaAmigosFacebook extends Activity {
 
 	protected ListView listaAmigos;
 	protected static JSONArray jsonArray;
-	private String APP_ID;
-	private Facebook facebook;
 	private ArrayAdapter<AmigoFacebook> listAdapter;
 	private List<AmigoFacebook> list;
 
@@ -52,21 +45,22 @@ public class ListaAmigosFacebook extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		//btnInvitar = (Button)findViewById(R.id.btnInvAmigosFacebookId);
 		list = new ArrayList<AmigoFacebook>();
-		APP_ID = getString(R.string.facebook_app_id);
-		facebook = new Facebook(APP_ID);
 		setContentView(R.layout.lista_amigos_facebook);
+		
+//		SessionStore.restore(facebook, getApplicationContext(), APP_ID);
+//	
+//		if (!facebook.isSessionValid()) {
+//			facebook.authorize(this,
+//					getResources().getStringArray(R.array.permissions),
+//					new FaceBookDialog());
+//		} else {
+//			obtenerAmigos();
+//		}
 
-		SessionStore.restore(facebook, getApplicationContext(), APP_ID);
-		// SessionStore.clear(this, APP_ID);
-		if (!facebook.isSessionValid()) {
-			facebook.authorize(this,
-					getResources().getStringArray(R.array.permissions),
-					new FaceBookDialog());
-		} else {
-			obtenerAmigos();
-		}
-
+		obtenerAmigos();
+		
 		listaAmigos = (ListView) findViewById(R.id.friends_list);
 		listaAmigos
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,7 +83,7 @@ public class ListaAmigosFacebook extends Activity {
 		params.putString("fields", "id, name, picture");
 
 		try {
-			String respuesta = facebook.request("me/friends", params);
+			String respuesta = InvitarAmigosActivity.facebook.request("me/friends", params);
 			jsonArray = new JSONObject(respuesta).getJSONArray("data");
 			AmigoFacebook amigo;
 			if (jsonArray.length() > 0) {
@@ -131,7 +125,7 @@ public class ListaAmigosFacebook extends Activity {
 								Constantes.MSG_INVITACIONES_FACEBOOK);
 						//params.putString("method", "apprequests");
 						//facebook.request("feed", params, "POST");
-						facebook.request(params);
+						InvitarAmigosActivity.facebook.request(params);
 
 					}
 				}
@@ -165,7 +159,7 @@ public class ListaAmigosFacebook extends Activity {
 		switch (resultCode) {
 
 		case -1:
-			facebook.authorizeCallback(requestCode, resultCode, data);
+			InvitarAmigosActivity.facebook.authorizeCallback(requestCode, resultCode, data);
 			break;
 
 		}
@@ -238,19 +232,7 @@ public class ListaAmigosFacebook extends Activity {
 
 			holder.name.setText(amigoFace.getNombre());
 
-			// try {
-			//
-			// holder.info.setText(jsonObject.getJSONObject("location")
-			// .getString("name"));
-			//
-			// JSONObject location = jsonObject
-			// .getJSONObject("current_location");
-			// holder.info.setText(location.getString("city") + ", "
-			// + location.getString("state"));
-			//
-			// } catch (JSONException e) {
-			// holder.info.setText("");
-			// }
+		
 			return hView;
 		}
 
@@ -263,33 +245,6 @@ public class ListaAmigosFacebook extends Activity {
 		CheckBox check;
 	}
 
-	public class FaceBookDialog implements DialogListener {
-
-		@Override
-		public void onComplete(Bundle values) {
-			SessionStore.save(facebook, getApplicationContext(), APP_ID);
-			obtenerAmigos();
-
-		}
-
-		@Override
-		public void onFacebookError(FacebookError e) {
-			Log.e(TAG, "Error al autenticase en facebook");
-
-		}
-
-		@Override
-		public void onError(DialogError e) {
-			Log.e(TAG, "Error al autenticase en facebook");
-
-		}
-
-		@Override
-		public void onCancel() {
-			// TODO Auto-generated method stub
-
-		}
-
-	}
+	
 
 }
