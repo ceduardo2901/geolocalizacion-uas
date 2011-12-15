@@ -10,9 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -22,9 +20,8 @@ import com.google.android.maps.OverlayItem;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.LocationHelper;
-import com.uas.gsiam.utils.PosicionGPS;
-import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
+import com.uas.gsiam.utils.Util;
 
 public class RadarActivity extends GDMapActivity implements LocationListener{
 
