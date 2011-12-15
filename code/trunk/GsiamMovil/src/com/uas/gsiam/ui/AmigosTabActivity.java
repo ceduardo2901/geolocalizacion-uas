@@ -190,19 +190,17 @@ public class AmigosTabActivity extends GDTabActivity {
 		case RADAR:
 			
 			if (tabClick.equalsIgnoreCase(TAG_MIS_AMIGOS)){
-				Util.showToast(this, "TAG_MIS_AMIGOS");
 				radarAmigos();
 				
 			}
-			//TODO: ver que hacer cuando esta en las pesta�as de abajo... 
 			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
-				Util.showToast(this, "TAG_AGREGAR_AMIGOS");
+				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
 			}
 			if (tabClick.equalsIgnoreCase(TAG_SOLICITUDES)){
-				Util.showToast(this, "TAG_SOLICITUDES");
+				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
 			}
 			if (tabClick.equalsIgnoreCase(TAG_INVITAR_AMIGOS)){
-				Util.showToast(this, "TAG_INVITAR_AMIGOS");
+				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
 			}
 			
 			break;

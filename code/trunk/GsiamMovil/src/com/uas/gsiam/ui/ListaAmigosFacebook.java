@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.facebook.android.R;
 import com.uas.gsiam.utils.AmigoFacebook;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.FacebookUtil;
 import com.uas.gsiam.utils.FriendsGetProfilePics;
@@ -121,8 +122,10 @@ public class ListaAmigosFacebook extends Activity {
 						params.putString("caption",
 								getString(R.string.app_name));
 						params.putString("description", "descripccion");
-						params.putString("message",
-								Constantes.MSG_INVITACIONES_FACEBOOK);
+						
+						ApplicationController app = ((ApplicationController) getApplicationContext());
+						
+						params.putString("message", app.getUserLogin().getNombre() + Constantes.MSG_INVITACIONES_FACEBOOK);
 						//params.putString("method", "apprequests");
 						//facebook.request("feed", params, "POST");
 						InvitarAmigosActivity.facebook.request(params);

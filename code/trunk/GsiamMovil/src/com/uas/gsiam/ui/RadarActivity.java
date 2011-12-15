@@ -77,16 +77,17 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 		if (mapa == null)
 			mapa = (MapView) findViewById(R.id.radarid);
 		MapController mapControl = mapa.getController();
+		mapa.setBuiltInZoomControls(true);	
 		
 		if (loc == null){
-			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+			
 			
 		} else {
 			geoPointUbicacion = new GeoPoint(
 					(int) (loc.getLatitude()*1000000),
 					(int) (loc.getLongitude()*1000000));	
-			mapa.setBuiltInZoomControls(true);		
+				
 			
 			mapControl.setZoom(15);
 			mapControl.animateTo(geoPointUbicacion);
