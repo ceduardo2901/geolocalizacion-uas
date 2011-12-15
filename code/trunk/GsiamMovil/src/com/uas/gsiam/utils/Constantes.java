@@ -113,13 +113,14 @@ public class Constantes {
 	public static final String MSG_SITIO_CREADO = "El Sitio se creo correctamente";
 	public static final String MSG_INVITACIONES_OK = "Invitacion enviada existosamente";
 	public static final String MSG_CONEXION_ERROR = "Para continuar debe tener conexion a internet";
-	public static final String MSG_INVITACIONES_FACEBOOK = "Unite a Gsiam";
+	public static final String MSG_INVITACIONES_FACEBOOK = " quiere que te unas a la red Gsiam";
 	public static final String MSG_INVITACIONES_FACEBOOK_OK = "Se envio la solicitud de forma correcta";
 	public static final String MSG_INVITACIONES_FACEBOOK_ERROR = "Error al enviar solicitud, intentelo mas tarde";
 	public static final String MSG_CREAR_SITIO_OK = "El sitio se creo correctamente";
 	public static final String MSG_MODIFICAR_SITIO_OK = "El sitio se modifico correctamente";
+	public static final String MSG_RADAR_TAB_AMIGOS = "Para ver el radar vaya sobre la pestaña amigos";
 	public static final String MSG_ERROR_INESPERADO = "Ups!!! ocurrio un error inesperado, intentelo luego";
-	public static final String MSG_ERROR_TIMEOUT = "Error al accder al servidor, intentelo luego";
+	public static final String MSG_ERROR_TIMEOUT = "Error al acceder al servidor, intentelo luego";
 	
 	
 }
