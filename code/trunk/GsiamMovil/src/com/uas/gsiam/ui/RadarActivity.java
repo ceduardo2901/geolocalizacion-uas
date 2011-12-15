@@ -20,8 +20,11 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.PosicionGPS;
 import com.uas.gsiam.utils.Util;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
 public class RadarActivity extends GDMapActivity implements LocationListener{
 
@@ -29,7 +32,7 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 	private MapView mapa;
 	private GeoPoint geoPointUbicacion;
 	private Location loc;
-	protected LocationManager locationManager;
+	private LocationHelper locHelper;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,13 +41,22 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 		mapa = (MapView) findViewById(R.id.radarid);
 		
 		
-		loc = PosicionGPS.getPosicion(getApplicationContext());
-		locationManager = PosicionGPS.getLocationManager();
+		locHelper = new LocationHelper();
+		locHelper.getLocation(this, locationResult);
+		
 		mostrarMapa(MisAmigosActivity.misAmigos);
 		
 		inicializarBar();
 		
 	}
+	
+	public LocationResult locationResult = new LocationResult() {
+
+		@Override
+		public void obtenerUbicacion(final Location location) {
+			loc = location;
+		}
+	};
 	
 	private void inicializarBar() {
 		
@@ -69,67 +81,65 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 			mapa = (MapView) findViewById(R.id.radarid);
 		MapController mapControl = mapa.getController();
 		
-		if (loc != null){
-			Log.i(TAG, "****************** El loc vino OK");
+		if (loc == null){
+			Util.dismissProgressDialog();
+			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 			
-		}else{
-			Log.i(TAG, "****************** El loc = null");
-			loc = new Location("lala");
-			loc.setLatitude(new Double(0));
-			loc.setLongitude(new Double(0));
+		} else {
+			geoPointUbicacion = new GeoPoint(
+					(int) (loc.getLatitude()*1000000),
+					(int) (loc.getLongitude()*1000000));	
+			mapa.setBuiltInZoomControls(true);		
 			
-		}
-		
-		geoPointUbicacion = new GeoPoint(
-				(int) (loc.getLatitude()*1000000),
-				(int) (loc.getLongitude()*1000000));	
-		mapa.setBuiltInZoomControls(true);		
-		
-		mapControl.setZoom(15);
-		mapControl.animateTo(geoPointUbicacion);
-		
-		
-		BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
-		miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, "Aquí esoy", null));
-		
-		for (UsuarioDTO usuarioDTO : amigos) {
+			mapControl.setZoom(15);
+			mapControl.animateTo(geoPointUbicacion);
 			
-			// TODO : aqui falta filtar el tema de la hora de actualizacion!!!
 			
-			if (usuarioDTO.getPosicion() != null){
+			BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
+			miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, "Aquí esoy", null));
+			
+			for (UsuarioDTO usuarioDTO : amigos) {
 				
-				GeoPoint geoPoint = new GeoPoint(
-						(int) (usuarioDTO.getPosicion().getLat()*1000000),
-						(int) (usuarioDTO.getPosicion().getLon()*1000000));
+				// TODO : aqui falta filtar el tema de la hora de actualizacion!!!
 				
-				Drawable drw;
-				if (usuarioDTO.getAvatar() != null){
-					Bitmap bit = Util.ArrayToBitmap(usuarioDTO.getAvatar());
-					bit = Util.getResizedBitmap(bit, 50, 50);
-					drw = Util.BitmapToDrawable(bit);
+				if (usuarioDTO.getPosicion() != null){
+					
+					GeoPoint geoPoint = new GeoPoint(
+							(int) (usuarioDTO.getPosicion().getLat()*1000000),
+							(int) (usuarioDTO.getPosicion().getLon()*1000000));
+					
+					Drawable drw;
+					if (usuarioDTO.getAvatar() != null){
+						Bitmap bit = Util.ArrayToBitmap(usuarioDTO.getAvatar());
+						bit = Util.getResizedBitmap(bit, 50, 50);
+						drw = Util.BitmapToDrawable(bit);
+					}
+					else{
+						drw = getResources().getDrawable(R.drawable.avatardefault);
+					}
+					
+					BasicItemizedOverlay amigoOverlay = new BasicItemizedOverlay(drw, this);
+					
+					Location locAmigo = new Location("Ubicacion Amigo");  
+					locAmigo.setLatitude(usuarioDTO.getPosicion().getLat());  
+					locAmigo.setLongitude(usuarioDTO.getPosicion().getLon());  
+					Float distance = loc.distanceTo(locAmigo);  
+					
+					String fechaFormateada = new SimpleDateFormat("MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion().getFechaActualizacion());
+					
+					amigoOverlay.addOverlay(new OverlayItem(geoPoint, "Aquí se encuentra " + usuarioDTO.getNombre(), 
+											"Ultima actualización: " + fechaFormateada +"\nDistancia: " + distance/1000 + "Km"));
+					mapa.getOverlays().add(amigoOverlay);
 				}
-				else{
-					drw = getResources().getDrawable(R.drawable.avatardefault);
-				}
-				
-				BasicItemizedOverlay amigoOverlay = new BasicItemizedOverlay(drw, this);
-				
-				Location locAmigo = new Location("Ubicacion Amigo");  
-				locAmigo.setLatitude(usuarioDTO.getPosicion().getLat());  
-				locAmigo.setLongitude(usuarioDTO.getPosicion().getLon());  
-				Float distance = loc.distanceTo(locAmigo);  
-				
-				String fechaFormateada = new SimpleDateFormat("MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion().getFechaActualizacion());
-				
-				amigoOverlay.addOverlay(new OverlayItem(geoPoint, "Aquí se encuentra " + usuarioDTO.getNombre(), 
-										"Ultima actualización: " + fechaFormateada +"\nDistancia: " + distance/1000 + "Km"));
-				mapa.getOverlays().add(amigoOverlay);
 			}
+			
+			mapa.setClickable(true);
+			mapControl.setCenter(geoPointUbicacion);
+			mapa.getOverlays().add(miPosicionOverlay);
 		}
 		
-		mapa.setClickable(true);
-		mapControl.setCenter(geoPointUbicacion);
-		mapa.getOverlays().add(miPosicionOverlay);
+		
+		
 		
 		
 	}
