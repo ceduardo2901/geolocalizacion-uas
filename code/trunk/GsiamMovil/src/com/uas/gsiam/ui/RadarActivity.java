@@ -78,6 +78,8 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 			mapa = (MapView) findViewById(R.id.radarid);
 		MapController mapControl = mapa.getController();
 		mapa.setBuiltInZoomControls(true);	
+		mapControl.setZoom(15);
+		mapa.setClickable(true);
 		
 		if (loc == null){
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
@@ -89,7 +91,7 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 					(int) (loc.getLongitude()*1000000));	
 				
 			
-			mapControl.setZoom(15);
+			
 			mapControl.animateTo(geoPointUbicacion);
 			
 			
@@ -131,7 +133,7 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 				}
 			}
 			
-			mapa.setClickable(true);
+			
 			mapControl.setCenter(geoPointUbicacion);
 			mapa.getOverlays().add(miPosicionOverlay);
 		}
