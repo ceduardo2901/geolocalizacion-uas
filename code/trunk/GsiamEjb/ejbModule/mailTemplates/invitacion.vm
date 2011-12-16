@@ -1,7 +1,7 @@
 <html> 
 <body> 
 <p>Hola, </p><br> 
-<p>${p_nombre} quiere invitarte a que conoscas la red de G-SIAM.</p> 
+<p>${p_nombre} quiere invitarte a que conozcas la red de G-SIAM.</p> 
 <br>
 <p>Para poder ser parte de esta nueva red solo tienes que bajar la aplicación android desde tu android market</p> 
 <br>
