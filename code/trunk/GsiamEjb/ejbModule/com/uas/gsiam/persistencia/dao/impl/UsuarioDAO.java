@@ -151,7 +151,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			String sqlUsuariosNoAmigos = "SELECT todos.*, soli.flag " +
 									    "FROM (SELECT * " + 
 										  "FROM t_usuario u " + 
-										  "WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND u.usu_activo = 1 AND" + 
+										  "WHERE UPPER(u.usu_nombre) like ? AND u.usu_id <> ? AND u.usu_activo = 1 AND " + 
 											"u.usu_id NOT IN (SELECT CASE  " +
 													 "WHEN c.con_id_usuario_sol = ? THEN c.con_id_usuario_apr " +
 													 "WHEN c.con_id_usuario_apr = ? THEN c.con_id_usuario_sol " +
