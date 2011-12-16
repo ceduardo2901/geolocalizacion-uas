@@ -162,7 +162,7 @@ public class PublicarActivity extends GDActivity implements
 
 	public void publicar(View v) {
 		
-		if(comentario.getText().toString().trim().isEmpty()){
+		if(comentario.getText().toString().trim().length() == 0){
 			Util.showToast(this, "Debe ingresar \nun comentario");
 		}
 		else{
