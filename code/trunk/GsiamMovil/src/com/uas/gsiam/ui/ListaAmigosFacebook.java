@@ -46,19 +46,8 @@ public class ListaAmigosFacebook extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//btnInvitar = (Button)findViewById(R.id.btnInvAmigosFacebookId);
 		list = new ArrayList<AmigoFacebook>();
 		setContentView(R.layout.lista_amigos_facebook);
-		
-//		SessionStore.restore(facebook, getApplicationContext(), APP_ID);
-//	
-//		if (!facebook.isSessionValid()) {
-//			facebook.authorize(this,
-//					getResources().getStringArray(R.array.permissions),
-//					new FaceBookDialog());
-//		} else {
-//			obtenerAmigos();
-//		}
 
 		obtenerAmigos();
 		
@@ -109,52 +98,77 @@ public class ListaAmigosFacebook extends Activity {
 	}
 
 	public void btnInvitarAmigos(View v) {
-		Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_INVITACION);
+		
 		boolean error = Boolean.FALSE;
+		
 		if (!list.isEmpty()) {
-			Bundle params;
-			try {
-				for (AmigoFacebook aFace : list) {
-					if (aFace.isSeleccionado()) {
 
-						params = new Bundle();
-						params.putString("to", aFace.getId());
-						params.putString("caption",
-								getString(R.string.app_name));
-						params.putString("description", "descripccion");
-						
-						ApplicationController app = ((ApplicationController) getApplicationContext());
-						
-						params.putString("message", app.getUserLogin().getNombre() + Constantes.MSG_INVITACIONES_FACEBOOK);
-						//params.putString("method", "apprequests");
-						//facebook.request("feed", params, "POST");
-						InvitarAmigosActivity.facebook.request(params);
-
-					}
-				}
-			} catch (FileNotFoundException e) {
-				error = Boolean.TRUE;
-				Log.e(TAG, e.getCause().getMessage());
-			} catch (MalformedURLException e) {
-				error = Boolean.TRUE;
-				Log.e(TAG, e.getCause().getMessage());
-			} catch (IOException e) {
-				error = Boolean.TRUE;
-				Log.e(TAG, e.getCause().getMessage());
-			} finally {
-				Util.dismissProgressDialog();
-			}
-			
-			if(!error){
-				Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_OK);
-			}else{
-				Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_ERROR);
-			}
+			if (haySeleccionados()){
 				
+				Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_INVITACION);
+				
+				Bundle params;
+				try {
+					for (AmigoFacebook aFace : list) {
+						if (aFace.isSeleccionado()) {
+
+							params = new Bundle();
+							params.putString("to", aFace.getId());
+							params.putString("caption",
+									getString(R.string.app_name));
+							params.putString("description", "descripccion");
+
+							ApplicationController app = ((ApplicationController) getApplicationContext());
+
+							params.putString("message", app.getUserLogin().getNombre() + Constantes.MSG_INVITACIONES_FACEBOOK);
+							//params.putString("method", "apprequests");
+							//facebook.request("feed", params, "POST");
+							InvitarAmigosActivity.facebook.request(params);
+
+						}
+					}
+				} catch (FileNotFoundException e) {
+					error = Boolean.TRUE;
+					Log.e(TAG, e.getCause().getMessage());
+				} catch (MalformedURLException e) {
+					error = Boolean.TRUE;
+					Log.e(TAG, e.getCause().getMessage());
+				} catch (IOException e) {
+					error = Boolean.TRUE;
+					Log.e(TAG, e.getCause().getMessage());
+				} finally {
+					Util.dismissProgressDialog();
+				}
+
+				if(!error){
+					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_OK);
+				}else{
+					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_ERROR);
+				}
+			}
+		}
+		else{
+			Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_SELECCION);
 		}
 
 	}
 
+	
+	public boolean haySeleccionados (){
+
+		boolean haySeleccionado = Boolean.FALSE;
+		
+		for (AmigoFacebook aFace : list) {
+			if (aFace.isSeleccionado()) {
+
+			haySeleccionado = Boolean.TRUE;
+
+			}
+		}
+		
+		return haySeleccionado;
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
