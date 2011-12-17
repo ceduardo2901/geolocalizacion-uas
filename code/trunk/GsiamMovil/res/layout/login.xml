@@ -3,9 +3,15 @@
 	android:background="@color/background1" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal">
+	
+	<ScrollView android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
 		android:layout_gravity="center">
+		
 		<ImageView android:src="@drawable/logo_texto" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageView1" android:paddingBottom="35dp"></ImageView>
 			
 		<TextView android:layout_width="fill_parent"
@@ -44,4 +50,5 @@
 				android:layout_width="100dp" android:layout_height="wrap_content" android:layout_marginTop="10dp"></Button>
 		</LinearLayout>
 	</LinearLayout>
+		</ScrollView>
 </LinearLayout>
