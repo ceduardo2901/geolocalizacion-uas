@@ -2,21 +2,19 @@ package com.uas.gsiam.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.uas.gsiam.adapter.ComentarioAdapter;
 import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.utils.Constantes;
 
 public class ComentarioTabActivity extends Activity {
 
 	protected static final String TAG = "ComentarioTabActivity";
 	private ListView listComentarios;
 	private SitioDTO sitio;
-	private IntentFilter comentarioFiltro;
+	//private IntentFilter comentarioFiltro;
 	
 
 	@Override
@@ -30,7 +28,7 @@ public class ComentarioTabActivity extends Activity {
 		if (!sitio.getPublicaciones().isEmpty()) {
 			mostrarComentarios();
 		}
-		comentarioFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
+		//comentarioFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
 	}
 	
 	public void onResume(){
