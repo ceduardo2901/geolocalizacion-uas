@@ -78,6 +78,8 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		mapControl = mapa.getController();
 		mapControl.setZoom(15);
 		mapa.setBuiltInZoomControls(true);
+		mapa.setClickable(true);
+		
 		geoPoint = new GeoPoint((int) (loc.getLatitude() * 1000000),
 				(int) (loc.getLongitude() * 1000000));
 

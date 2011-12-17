@@ -7,6 +7,7 @@ import greendroid.widget.ActionBarItem.Type;
 import greendroid.widget.LoaderActionBarItem;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -16,7 +17,9 @@ import android.widget.TabHost.OnTabChangeListener;
 import com.uas.gsiam.servicios.GetAmigosServicio;
 import com.uas.gsiam.servicios.GetSolicitudesPendientesServicio;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.Util;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
 public class AmigosTabActivity extends GDTabActivity {
 
@@ -36,6 +39,11 @@ public class AmigosTabActivity extends GDTabActivity {
     
     private String tabClick;
 	
+    
+    private Location loc;
+	private LocationHelper locHelper;
+	
+    
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -186,12 +194,21 @@ public class AmigosTabActivity extends GDTabActivity {
 			
 			break;
 		
-			
+
 		case RADAR:
-			
+
 			if (tabClick.equalsIgnoreCase(TAG_MIS_AMIGOS)){
-				radarAmigos();
-				
+
+				locHelper = new LocationHelper();
+				locHelper.getLocation(this, locationResult);
+
+				if (loc == null){
+					Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+
+				} else {
+					radarAmigos();
+				}
+
 			}
 			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
 				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
@@ -202,7 +219,7 @@ public class AmigosTabActivity extends GDTabActivity {
 			if (tabClick.equalsIgnoreCase(TAG_INVITAR_AMIGOS)){
 				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
 			}
-			
+
 			break;
 			
 		default:
@@ -213,6 +230,13 @@ public class AmigosTabActivity extends GDTabActivity {
 
 	}
 	
+	public LocationResult locationResult = new LocationResult() {
+
+		@Override
+		public void obtenerUbicacion(final Location location) {
+			loc = location;
+		}
+	};
 	
 	private void actualizarAmigos(){
 		Intent intent = new Intent(this,GetAmigosServicio.class);
