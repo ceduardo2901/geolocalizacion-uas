@@ -4,6 +4,10 @@
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal" android:background="@color/background2">
 	
+    <ScrollView android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+    
 	<LinearLayout android:orientation="vertical"
 		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="top|center">
 
@@ -49,7 +53,7 @@
 	</LinearLayout>
 	
 
-	
+	</ScrollView>
 
 </LinearLayout>
 

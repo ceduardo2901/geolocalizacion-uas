@@ -51,12 +51,12 @@
 
 		</TableRow>
 	</TableLayout>
-	<LinearLayout android:layout_height="wrap_content"
+	<LinearLayout android:layout_height="0dip"
 		android:id="@+id/linearLayout3" android:layout_marginTop="10dp"
 		android:layout_width="fill_parent" android:orientation="horizontal"
 		android:layout_weight="1" android:gravity="center_horizontal">
-		<ImageView android:layout_height="150px"
-			android:layout_width="150px" android:id="@+id/fotoPubId"
+		<ImageView android:layout_height="150dp"
+			android:layout_width="150dp" android:id="@+id/fotoPubId"
 			android:layout_gravity="center" />
 	</LinearLayout>
 	

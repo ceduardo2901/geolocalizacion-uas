@@ -24,8 +24,8 @@
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingRight="20px" android:paddingTop="20px">
-				<ImageButton android:layout_width="wrap_content"
-					android:id="@+id/sitios_button" android:layout_height="wrap_content"
+				<ImageButton android:layout_width="80dp"
+					android:id="@+id/sitios_button" android:layout_height="80dp"
 					android:background="@drawable/sitios"
 					android:clickable="true" />
 
@@ -39,8 +39,8 @@
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingLeft="20px" android:paddingTop="20px">
 
-				<Button android:layout_width="wrap_content" android:id="@+id/amigos_button"
-					android:layout_height="wrap_content" android:background="@drawable/amigos" />
+				<Button android:layout_width="80dp" android:id="@+id/amigos_button"
+					android:layout_height="80dp" android:background="@drawable/amigos" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -58,7 +58,7 @@
 				android:orientation="vertical" android:layout_width="fill_parent"
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingRight="20px" android:paddingBottom="20px">
-				<Button android:padding="20px" android:layout_width="wrap_content" android:background="@drawable/perfil" android:id="@+id/perfil_button" android:layout_height="wrap_content"></Button>
+				<Button android:padding="20px" android:layout_width="80dp" android:background="@drawable/perfil" android:id="@+id/perfil_button" android:layout_height="80dp"></Button>
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
@@ -70,8 +70,8 @@
 				android:layout_height="fill_parent" android:layout_weight="1"
 				android:gravity="center" android:paddingLeft="20px" android:paddingBottom="20px">
 
-				<Button android:layout_width="wrap_content" android:id="@+id/preferencias_button"
-					android:layout_height="wrap_content" android:background="@drawable/configuracion" />
+				<Button android:layout_width="80dp" android:id="@+id/preferencias_button"
+					android:layout_height="80dp" android:background="@drawable/configuracion" />
 
 				<TextView android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:gravity="center"
