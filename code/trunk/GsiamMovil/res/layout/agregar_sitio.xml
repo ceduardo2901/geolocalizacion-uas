@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:background="@color/background1" android:layout_height="fill_parent"
+	android:background="@color/background2" android:layout_height="fill_parent"
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal">
 	
@@ -8,7 +8,7 @@
 	android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="@color/background2" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:orientation="vertical"
+	android:layout_height="wrap_content" android:orientation="vertical"
 	android:weightSum="1">
 
 	<TableLayout android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
 				android:layout_height="match_parent" android:layout_width="match_parent"
 				android:layout_weight="1" />
 		</TableRow>
-		<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
+		<TableRow android:id="@+id/tableRow22" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:paddingTop="0dp">
 
 			<EditText android:layout_height="wrap_content" android:id="@+id/txtDireccionId"
@@ -63,7 +63,7 @@
 			</EditText>
 
 		</TableRow>
-		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+		<TableRow android:id="@+id/tableRow65" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
 			<Button android:ellipsize="start" android:text="@string/agregar"
 			android:layout_width="fill_parent" android:layout_height="fill_parent"
