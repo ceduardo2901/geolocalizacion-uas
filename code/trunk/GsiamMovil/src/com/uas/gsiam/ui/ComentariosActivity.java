@@ -9,7 +9,7 @@ import android.widget.ListView;
 import com.uas.gsiam.adapter.ComentarioAdapter;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 
-public class ComentarioTabActivity extends Activity {
+public class ComentariosActivity extends Activity {
 
 	protected static final String TAG = "ComentarioTabActivity";
 	private ListView listComentarios;
