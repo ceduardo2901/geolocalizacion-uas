@@ -52,7 +52,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		galeria = (Gallery) findViewById(R.id.gallery);
 		fotos = new ArrayList<byte[]>();
 
-		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
+		sitio = SitioTabActivity.sitio;
 		cargarFotos(sitio.getPublicaciones());
 		galeria.setAdapter(new FotosAdapter(this));
 		
@@ -75,10 +75,6 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 			
 		}
 		
-		
-		//listComentarios = (ListView) findViewById(R.id.listComentariosId);
-		
-		//inicializarBarra();
 		
 		galeria.setOnItemClickListener(this);
 		detalleFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
@@ -103,25 +99,6 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		this.sitio = sitio;
 	}
 
-//	private void inicializarBarra() {
-//		addActionBarItem(Type.Locate, MAPA);
-//		setTitle(R.string.app_name);
-//	}
-
-//	@Override
-//	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-//		switch (item.getItemId()) {
-//		case MAPA:
-//			mostarMapa();
-//			break;
-//
-//		default:
-//			return super.onHandleActionBarItemClick(item, position);
-//		}
-//
-//		return true;
-//
-//	}
 	
 	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
 		@SuppressWarnings("unchecked")
@@ -151,7 +128,6 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	public void onResume() {
 		super.onResume();
 		Intent intent = getIntent();
-		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
 		txtNombre.setText(sitio.getNombre());
 		txtDireccion.setText(sitio.getDireccion());
@@ -171,12 +147,6 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		loc = intent.getParcelableExtra("ubicacion");
 		registerReceiver(receiverSitio, detalleFiltro);
 
-//		if (!sitio.getPublicaciones().isEmpty()) {
-//			ComentarioAdapter adaptador = new ComentarioAdapter(this,
-//					R.layout.comentario, sitio.getPublicaciones());
-//			// ListView lstOpciones = (ListView) findViewById(R.id.LstOpciones);
-//			listComentarios.setAdapter(adaptador);
-//		}
 
 	}
 

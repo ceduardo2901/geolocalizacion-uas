@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
@@ -69,6 +70,7 @@ public class EditarUsuarioActivity extends GDActivity {
 		
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	//	doLock(true);
 		setActionBarContentView(R.layout.editar_perfil);
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
@@ -113,6 +115,8 @@ public class EditarUsuarioActivity extends GDActivity {
 	 
 	
 	public void cambiarAvatar(View v) {
+		
+	
 		
 		final CharSequence[] items = {"Camara", "Galeria"};
 
@@ -323,5 +327,16 @@ public class EditarUsuarioActivity extends GDActivity {
 	    }
 	  };
   
-
+	  public void doLock(boolean locked) {
+	        if (locked) {
+	            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+	                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+	            }
+	            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+	                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	            }
+	        } else {
+	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+	        }
+	    }
 }

@@ -37,7 +37,7 @@ public class SitioTabActivity extends GDTabActivity {
 	private static final int COMPARTIR = 2;
 	private static final int RESULT = 1;
 	private Intent intent;
-	private SitioDTO sitio;
+	protected static SitioDTO sitio;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -50,8 +50,8 @@ public class SitioTabActivity extends GDTabActivity {
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
-		addTab1(intent);
-		addTab2(intent);
+		addTab1();
+		addTab2();
 
 		// Al abrir la aplicacion restauramos la �ltima pesta�a activada
 		SharedPreferences prefs = PreferenceManager
@@ -75,12 +75,11 @@ public class SitioTabActivity extends GDTabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(PREF_STICKY_TAB, currentTab);
 		editor.commit();
-		//unregisterReceiver(sitiosReceiver);
+		
 	}
 	
 	protected void OnResume() {
 		super.onResume();
-		//registerReceiver(sitiosReceiver, sitioAccion);
 	}
 	
 	
@@ -185,8 +184,8 @@ public class SitioTabActivity extends GDTabActivity {
 	 * Tab 1
 	 */
 
-	private void addTab1(Intent intent) {
-		intent.setClass(this, SitioDetalleActivity.class);
+	private void addTab1() {
+		Intent intent = new Intent(this, SitioDetalleActivity.class);
 		addTab(TAG_SITIO_DETALLE, "Sitio", intent);
 
 	}
@@ -194,8 +193,8 @@ public class SitioTabActivity extends GDTabActivity {
 	/*
 	 * Tab 2
 	 */
-	private void addTab2(Intent intent) {
-		intent.setClass(this, ComentariosActivity.class);
+	private void addTab2() {
+		Intent intent = new Intent(this, ComentariosActivity.class);
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
 	}
