@@ -14,59 +14,31 @@ public class ComentariosActivity extends Activity {
 	protected static final String TAG = "ComentarioTabActivity";
 	private ListView listComentarios;
 	private SitioDTO sitio;
-	//private IntentFilter comentarioFiltro;
 	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.comentarios);
-		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
-		
+		sitio = SitioTabActivity.sitio;
 		listComentarios = (ListView) findViewById(R.id.listComentariosId);
 		
 		if (!sitio.getPublicaciones().isEmpty()) {
 			mostrarComentarios();
 		}
-		//comentarioFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
+
 	}
 	
 	public void onResume(){
 		super.onResume();
-//		registerReceiver(receiverSitio, comentarioFiltro);
 		
 	}
 	
 	public void onPause(){
 		super.onPause();
-	//	unregisterReceiver(receiverSitio);
 		
 	}
 	
-	
-//	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
-//		@Override
-//	    public void onReceive(Context context, Intent intent) {
-//			Log.i("**********", "***********LALALALA");
-//	    	Bundle bundle = intent.getExtras();
-//			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
-//			if(!sitios.isEmpty()){
-//				
-//				List<PublicacionDTO> publicaciones = sitios.get(0).getPublicaciones();
-//				if(!publicaciones.isEmpty()){
-//					setSitio(sitios.get(0));
-//					mostrarComentarios();
-//				}
-//				
-//			}
-//			Util.dismissProgressDialog();
-//			
-//			GDTabActivity padre = (GDTabActivity) getParent();
-//			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
-//			loaderActionBarItem.setLoading(false);
-//			
-//	    }
-//	  };
 	
 	  public void mostrarComentarios() {
 		  
