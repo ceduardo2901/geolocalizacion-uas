@@ -52,7 +52,7 @@
 		<activity android:name="SitioTabActivity"/>
 		<activity android:name="ListaAmigosFacebook"/>
 		<activity android:name="RadarActivity" />
-		<activity android:name="ComentarioTabActivity"/>		
+		<activity android:name="ComentariosActivity"/>		
 		
 		<service android:name="com.uas.gsiam.servicios.LoginServicio" />
 		<service android:name="com.uas.gsiam.servicios.CrearUsuarioServicio" />

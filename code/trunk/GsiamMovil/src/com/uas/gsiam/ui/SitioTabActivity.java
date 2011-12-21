@@ -195,7 +195,7 @@ public class SitioTabActivity extends GDTabActivity {
 	 * Tab 2
 	 */
 	private void addTab2(Intent intent) {
-		intent.setClass(this, ComentarioTabActivity.class);
+		intent.setClass(this, ComentariosActivity.class);
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
 	}
