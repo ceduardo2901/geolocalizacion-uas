@@ -59,7 +59,6 @@ public class PerfilActivity extends GDActivity {
 
 	private void inicializarBar() {
 
-		addActionBarItem(Type.Help, 0);
 		getActionBar().setTitle("GSIAM - Perfil");
 
 	}

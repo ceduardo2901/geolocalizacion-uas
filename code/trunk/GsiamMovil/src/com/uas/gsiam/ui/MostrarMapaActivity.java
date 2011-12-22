@@ -4,7 +4,6 @@ import greendroid.app.GDMapActivity;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -14,8 +13,8 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
-import com.uas.gsiam.negocio.dto.SitioDTO;
-import com.uas.gsiam.utils.PositionOverlay;
+import com.uas.gsiam.utils.LocationHelper;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
 public class MostrarMapaActivity extends GDMapActivity{
 
@@ -23,31 +22,39 @@ public class MostrarMapaActivity extends GDMapActivity{
 	private MapView mapa;
 	private GeoPoint geoPoint;
 	private GeoPoint geoPointUbicacion;
-	private PositionOverlay sitioPosOverlay;
-	private PositionOverlay myposOverlay;
 	private Location loc;
+	private LocationHelper locHelper;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.mostrar_mapa);
 		mapa = (MapView) findViewById(R.id.mapaId);
-		Intent intent = getIntent();
+	
+		locHelper = new LocationHelper();
+		locHelper.getLocation(this, locationResult);
 		
-		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
+		
 		Double lat = new Double(0);
 		Double lon = new Double(0);
-		if(sitio != null){
-			lat = sitio.getLat();
-			lon = sitio.getLon();
+		if(SitioTabActivity.sitio != null){
+			lat = SitioTabActivity.sitio.getLat();
+			lon = SitioTabActivity.sitio.getLon();
 		}
 		
-		loc = getIntent().getParcelableExtra("ubicacion");
 		mostrarMapa(lat,lon);
 		
 		inicializarBar();
 		
 	}
+	
+	public LocationResult locationResult = new LocationResult() {
+
+		@Override
+		public void obtenerUbicacion(final Location location) {
+			loc = location;
+		}
+	};
 	
 	private void inicializarBar() {
 		

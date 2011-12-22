@@ -97,7 +97,6 @@ public class EditarUsuarioActivity extends GDActivity {
 		
 	private void inicializarBar() {
 
-		addActionBarItem(Type.Help, 0);
 		getActionBar().setTitle("GSIAM - Perfil");
 
 	}

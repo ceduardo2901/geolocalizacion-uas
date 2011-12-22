@@ -77,8 +77,6 @@ public class SitiosActivity extends GDActivity implements
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.lista_sitios);
 
-		
-
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		lw = (ListView) findViewById(R.id.listaSitios);
 		locHelper = new LocationHelper();

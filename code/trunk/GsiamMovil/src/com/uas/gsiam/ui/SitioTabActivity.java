@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class SitioTabActivity extends GDTabActivity {
 	private static final int RESULT = 1;
 	private Intent intent;
 	protected static SitioDTO sitio;
+
 
 	/** Called when the activity is first created. */
 	@Override
@@ -201,7 +203,7 @@ public class SitioTabActivity extends GDTabActivity {
 	
 
 	private void mostarMapa() {
-		intent.setClass(this, MostrarMapaActivity.class);
+		Intent intent = new Intent(this, MostrarMapaActivity.class);
 		startActivity(intent);
 
 	}
