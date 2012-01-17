@@ -28,7 +28,9 @@ import android.widget.TextView;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
+import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.Util;
+import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
 public class SitioDetalleActivity extends Activity implements OnItemClickListener{
 
@@ -43,6 +45,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	private Gallery galeria;
 	private ArrayList<byte[]> fotos;
 	private IntentFilter detalleFiltro;
+	private LocationHelper locHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,9 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		
 		galeria.setOnItemClickListener(this);
 		detalleFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
+		
+		locHelper = new LocationHelper();
+		locHelper.getLocation(this, locationResult);
 
 	}
 
@@ -144,7 +150,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		}
 		
 		
-		loc = intent.getParcelableExtra("ubicacion");
+		//loc = intent.getParcelableExtra("ubicacion");
 		registerReceiver(receiverSitio, detalleFiltro);
 
 
@@ -257,6 +263,14 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		
 		
 	}
+	
+	public LocationResult locationResult = new LocationResult() {
+
+		@Override
+		public void obtenerUbicacion(final Location location) {
+			loc = location;
+		}
+	};
 
 	
 

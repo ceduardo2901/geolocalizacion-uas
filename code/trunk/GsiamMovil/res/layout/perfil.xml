@@ -83,11 +83,11 @@
 			 	    android:layout_height="wrap_content"
 			 	    android:onClick="editarPerfil"/>
 			 	    
-			<Button android:id="@+id/eliminarPerfilBtn" 
+		<!--  	<Button android:id="@+id/eliminarPerfilBtn" 
 			 	    android:text="@string/BtnEliminarPerfil"
 			 	    android:layout_width="wrap_content" 
 			 	    android:layout_height="wrap_content"
-			 	    android:onClick="cerrarCuenta"/>
+			 	    android:onClick="cerrarCuenta"/>-->
 		</TableRow>
 		
 		
