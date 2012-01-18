@@ -111,9 +111,8 @@ public class ListaAmigosFacebook extends Activity {
 				try {
 					for (AmigoFacebook aFace : list) {
 						if (aFace.isSeleccionado()) {
-
 							params = new Bundle();
-							params.putString("to", aFace.getId());
+							String response = InvitarAmigosActivity.facebook.request("me");
 							params.putString("caption",
 									getString(R.string.app_name));
 							params.putString("description", "descripccion");
@@ -121,9 +120,7 @@ public class ListaAmigosFacebook extends Activity {
 							ApplicationController app = ((ApplicationController) getApplicationContext());
 
 							params.putString("message", app.getUserLogin().getNombre() + Constantes.MSG_INVITACIONES_FACEBOOK);
-							//params.putString("method", "apprequests");
-							InvitarAmigosActivity.facebook.request("feed", params, "POST");
-							//InvitarAmigosActivity.facebook.request(params);
+							InvitarAmigosActivity.facebook.request(aFace.getId()+"/feed", params, "POST");
 
 						}
 					}
@@ -142,6 +139,7 @@ public class ListaAmigosFacebook extends Activity {
 
 				if(!error){
 					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_OK);
+					volver();
 				}else{
 					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_ERROR);
 				}
@@ -153,6 +151,11 @@ public class ListaAmigosFacebook extends Activity {
 
 	}
 
+	
+	private void volver(){
+		Intent intent = new Intent(this, AmigosTabActivity.class);
+		startActivity(intent);
+	}
 	
 	public boolean haySeleccionados (){
 
