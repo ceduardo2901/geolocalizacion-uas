@@ -59,7 +59,7 @@ public class SitioTabActivity extends GDTabActivity {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
-		mTabHost.setCurrentTab(currentTab);
+		mTabHost.setCurrentTab(0);
 		
 		Log.i(TAG, "**** currentTab =  " + currentTab);
 		mTabHost.getCurrentTabTag();
