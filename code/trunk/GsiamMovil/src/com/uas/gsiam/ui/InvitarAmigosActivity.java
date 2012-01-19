@@ -103,7 +103,7 @@ public class InvitarAmigosActivity extends Activity {
 	    	
 			Util.dismissProgressDialog();
 			
-			if (error != null && !error.isEmpty()) {
+			if (error != null && error.length() > 0) {
 
 				Util.showToast(context, error);
 
