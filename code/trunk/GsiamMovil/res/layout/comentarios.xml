@@ -13,7 +13,7 @@
 	<ListView android:id="@+id/listComentariosId"
 		android:layout_width="match_parent" android:layout_height="0dip"
 		android:layout_weight="1" android:stackFromBottom="false"
-		android:transcriptMode="normal" android:listSelector="@color/background2" android:clickable="false"/>
+		android:transcriptMode="normal" android:listSelector="@color/background2" android:clickable="false" android:cacheColorHint="#00000000"/>
 
 
 	<Button android:id="@+id/publicarBtnId" android:layout_width="fill_parent"
