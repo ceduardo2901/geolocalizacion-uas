@@ -65,20 +65,27 @@
 		</TableRow>
 		<TableRow android:id="@+id/tableRow65" android:layout_width="wrap_content"
 			android:layout_height="wrap_content">
-			<Button android:ellipsize="start" android:text="@string/agregar"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
-			android:onClick="crearSitio" android:id="@+id/btnAgregarSitioId" />
+			
+		    
+			
 		</TableRow>
 		
 	</TableLayout>
 
 	<LinearLayout android:orientation="horizontal"
-		android:layout_width="fill_parent" android:layout_height="fill_parent">
+		android:layout_width="fill_parent" android:layout_height="fill_parent" android:scrollbars="none">
 
 		<view class="com.google.android.maps.MapView" android:id="@+id/crearSitioMapaId"
-			android:apiKey="0Qsl4_fn8sroc6Gk0Gr0K7C8o8sQlIhjTDlhcwA"
+			android:apiKey="0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw"
 			android:clickable="true" android:focusableInTouchMode="true"
 			android:layout_height="fill_parent" android:layout_width="fill_parent" />
+	</LinearLayout>
+	
+	<LinearLayout android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:scrollbars="none">
+		<Button android:ellipsize="start" android:text="@string/agregar"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:onClick="crearSitio" android:id="@+id/btnAgregarSitioId" />
 	</LinearLayout>
 </LinearLayout>
 </ScrollView>
