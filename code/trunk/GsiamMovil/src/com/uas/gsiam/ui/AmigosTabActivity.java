@@ -172,22 +172,22 @@ public class AmigosTabActivity extends GDTabActivity {
 		case ACTUALIZAR:
 			
 			if (tabClick.equalsIgnoreCase(TAG_MIS_AMIGOS)){
-				Util.showToast(this, "TAG_MIS_AMIGOS");
+				//Util.showToast(this, "TAG_MIS_AMIGOS");
 				actualizarAmigos();
 				
 			}
 			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
-				Util.showToast(this, "TAG_AGREGAR_AMIGOS");
+				//Util.showToast(this, "TAG_AGREGAR_AMIGOS");
 				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
 				loaderActionBarItem.setLoading(false);
 			}
 			if (tabClick.equalsIgnoreCase(TAG_SOLICITUDES)){
-				Util.showToast(this, "TAG_SOLICITUDES");
+				//Util.showToast(this, "TAG_SOLICITUDES");
 				actualizarSolicitudes();
 		    	
 			}
 			if (tabClick.equalsIgnoreCase(TAG_INVITAR_AMIGOS)){
-				Util.showToast(this, "TAG_INVITAR_AMIGOS");
+				//Util.showToast(this, "TAG_INVITAR_AMIGOS");
 				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
 				loaderActionBarItem.setLoading(false);
 			}
