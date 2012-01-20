@@ -48,11 +48,13 @@ public class EditarUsuarioActivity extends GDActivity {
 
 	protected String email;
 	protected String nombre;
+	protected String pass;
 	protected Byte [] array;
 	protected UsuarioDTO userLogin;
 	private byte[] foto;
 	protected EditText nombreTxt;
 	protected EditText emailTxt;
+	protected EditText passTxt;
 	protected ImageView avatar;
 	protected Button cambiarAvatarBtn;
 	protected Button editarPerfilBtn;
@@ -75,6 +77,7 @@ public class EditarUsuarioActivity extends GDActivity {
 		
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
+		passTxt = (EditText) findViewById(R.id.passTxt);
 		cambiarAvatarBtn = (Button) findViewById(R.id.cambiarAvatarBtn);  
 		editarPerfilBtn = (Button) findViewById(R.id.editarPerfilBtn);  
 		avatar = (ImageView) findViewById(R.id.avatar);
@@ -84,7 +87,7 @@ public class EditarUsuarioActivity extends GDActivity {
 	    
 	    nombreTxt.setText(userLogin.getNombre());
 	    emailTxt.setText(userLogin.getEmail());
-	  
+	    passTxt.setText(userLogin.getPassword());
 	    
 	    if (userLogin.getAvatar() != null)
 	    	avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
@@ -241,7 +244,7 @@ public class EditarUsuarioActivity extends GDActivity {
 
 		nombre = nombreTxt.getText().toString().trim();
 		email = emailTxt.getText().toString().trim();
-		
+		pass = passTxt.getText().toString().trim();
 		
 		if (!Util.validaMail(email)) {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
@@ -253,7 +256,7 @@ public class EditarUsuarioActivity extends GDActivity {
 			usuario.setNombre(nombre);
 			usuario.setEmail(email);
 			
-			usuario.setPassword(userLogin.getPassword());
+			usuario.setPassword(pass);
 			usuario.setId(userLogin.getId());
 			
 //			Drawable drawable= avatar.getDrawable();
