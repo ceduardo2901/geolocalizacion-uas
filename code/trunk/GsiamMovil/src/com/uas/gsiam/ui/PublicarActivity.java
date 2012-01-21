@@ -61,7 +61,7 @@ public class PublicarActivity extends GDActivity implements
 	private AsyncFacebookRunner mAsyncRunner;
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
-	
+
 	private SitioDTO sitio;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
@@ -89,9 +89,8 @@ public class PublicarActivity extends GDActivity implements
 		sitio = (SitioDTO) getIntent().getSerializableExtra("sitio");
 		publicarFiltro = new IntentFilter(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
-	
-		app = ((ApplicationController) getApplicationContext());
 
+		app = ((ApplicationController) getApplicationContext());
 
 	}
 
@@ -114,14 +113,13 @@ public class PublicarActivity extends GDActivity implements
 		super.onResume();
 		registerReceiver(receiverPublicar, publicarFiltro);
 		usuario = app.getUserLogin();
-		
-		
+
 	}
 
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverPublicar);
-		
+
 	}
 
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
@@ -131,26 +129,23 @@ public class PublicarActivity extends GDActivity implements
 			String respuesta = intent.getStringExtra("respuesta");
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
-			if(error != null){
+			if (error != null) {
 				Util.showToast(getApplicationContext(), error);
-			}else{
+			} else {
 				Util.showToast(getApplicationContext(), respuesta);
 				volverPublicaciones();
 			}
-			
-			
+
 		}
 	};
 
+	private void volverPublicaciones() {
 
-	private void volverPublicaciones(){
-		
 		Intent volver = new Intent(this, SitioTabActivity.class);
 		sitio.getPublicaciones().add(publicacion);
 		volver.putExtra("sitio", sitio);
 		startActivity(volver);
 	}
-	
 
 	@Override
 	public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -160,31 +155,33 @@ public class PublicarActivity extends GDActivity implements
 	}
 
 	public void publicar(View v) {
-		
-		if(comentario.getText().toString().trim().length() == 0){
+
+		if (comentario.getText().toString().trim().length() == 0) {
 			Util.showToast(this, "Debe ingresar \nun comentario");
-		}
-		else{
-			
+		} else {
 			publicacion = new PublicacionDTO();
-			publicacion.setComentario(comentario.getText().toString().trim());
-			publicacion.setIdSitio(sitio.getIdSitio());
-			publicacion.setIdUsuario(usuario.getId());
-			publicacion.setPuntaje(puntaje.getRating());
-			publicacion.setFecha(new Date());
-			publicacion.setNombreUsuario(usuario.getNombre());
-			publicacion.setFoto(foto);
+			if (comentarFaceBook.isChecked()) {
+				comentarFacebook();
+			} else {
+				publicacion.setComentario(comentario.getText().toString().trim());
+				publicacion.setIdSitio(sitio.getIdSitio());
+				publicacion.setIdUsuario(usuario.getId());
+				publicacion.setPuntaje(puntaje.getRating());
+				publicacion.setFecha(new Date());
+				publicacion.setNombreUsuario(usuario.getNombre());
+				publicacion.setFoto(foto);
+
+				Intent intent = new Intent(this, PublicarServicio.class);
+				intent.putExtra("publicacion", publicacion);
+				Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+
+				startService(intent);
+			}
 			
-			Intent intent = new Intent(this, PublicarServicio.class);
-			intent.putExtra("publicacion", publicacion);
-			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
-			comentarFacebook();
-			startService(intent);
+			
 		}
-		
 
 	}
-	
 
 	public void cargarFoto(View v) {
 
@@ -250,50 +247,61 @@ public class PublicarActivity extends GDActivity implements
 
 	private void comentarFacebook() {
 		setResult(RESULT_OK);
-		if (comentarFaceBook.isChecked()) {
 
-			
-			this.mAsyncRunner = new AsyncFacebookRunner(facebook);
-			SessionStore.restore(facebook, getApplicationContext(), APP_ID);
-			
-			if (!facebook.isSessionValid()) {
-				facebook.authorize(this,
-						getResources().getStringArray(R.array.permissions),
-						new FaceBookDialog());
-			} else {
-				postOnWall(comentario.getText().toString());
-			}
+		this.mAsyncRunner = new AsyncFacebookRunner(facebook);
+		SessionStore.restore(facebook, getApplicationContext(), APP_ID);
 
-			// SessionEvents.addAuthListener(new SampleAuthListener());
-
+		if (!facebook.isSessionValid()) {
+			facebook.authorize(this,
+					getResources().getStringArray(R.array.permissions),
+					new FaceBookDialog());
+		} else {
+			postOnWall(comentario.getText().toString());
 		}
+
+		
+
 	}
-	
+
 	public void postOnWall(String msg) {
 		Log.d("Tests", "Testing graph API wall post");
 		try {
 			String response;
-			
+
 			Bundle parameters = new Bundle();
-			if(fotoPub.getDrawable() != null){
-				
-				parameters.putByteArray("picture", Util.BitmapToArray((BitmapDrawable)fotoPub.getDrawable()));
+			if (fotoPub.getDrawable() != null) {
+
+				parameters.putByteArray("picture", Util
+						.BitmapToArray((BitmapDrawable) fotoPub.getDrawable()));
 				parameters.putString("caption", msg);
 				response = facebook.request("me/photos", parameters, "POST");
-				
-			}else{
+
+			} else {
 				parameters.putString("message", msg);
 				parameters.putString("description", "test test test");
-				
+
 				response = facebook.request("me/feed", parameters, "POST");
 			}
 			
-			
-			
-			if(response == null){
+			publicacion = new PublicacionDTO();
+			publicacion.setComentario(comentario.getText().toString().trim());
+			publicacion.setIdSitio(sitio.getIdSitio());
+			publicacion.setIdUsuario(usuario.getId());
+			publicacion.setPuntaje(puntaje.getRating());
+			publicacion.setFecha(new Date());
+			publicacion.setNombreUsuario(usuario.getNombre());
+			publicacion.setFoto(foto);
+
+			Intent intent = new Intent(this, PublicarServicio.class);
+			intent.putExtra("publicacion", publicacion);
+			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+
+			startService(intent);
+
+			if (response == null) {
 				Log.i(TAG, "error al comentar en facebook");
 			}
-		
+
 		} catch (Exception e) {
 			Log.v("Error", "Blank response");
 			e.printStackTrace();
@@ -314,7 +322,7 @@ public class PublicarActivity extends GDActivity implements
 
 		Bitmap myBitmap;
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize=2;
+		options.inSampleSize = 2;
 		switch (requestCode) {
 
 		case RESULT:
@@ -322,11 +330,12 @@ public class PublicarActivity extends GDActivity implements
 			break;
 		case Constantes.REQUEST_CAMERA:
 			if (resultCode != 0) {
-				
-				//Bitmap temp_bitmap = BitmapFactory.decodeByteArray(data, 0, data.,options)
+
+				// Bitmap temp_bitmap = BitmapFactory.decodeByteArray(data, 0,
+				// data.,options)
 				myBitmap = BitmapFactory.decodeFile(path, options);
-				
-				ByteArrayOutputStream out =  new ByteArrayOutputStream();
+
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				myBitmap.compress(CompressFormat.JPEG, 60, out);
 				foto = out.toByteArray();
 				fotoPub.setImageBitmap(myBitmap);
@@ -344,8 +353,8 @@ public class PublicarActivity extends GDActivity implements
 					is = getContentResolver().openInputStream(selectedImage);
 
 					BufferedInputStream bis = new BufferedInputStream(is);
-					myBitmap = BitmapFactory.decodeStream(bis,null,options);
-					ByteArrayOutputStream out =  new ByteArrayOutputStream();
+					myBitmap = BitmapFactory.decodeStream(bis, null, options);
+					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					myBitmap.compress(CompressFormat.JPEG, 60, out);
 					foto = out.toByteArray();
 					fotoPub.setImageBitmap(myBitmap);
@@ -358,6 +367,7 @@ public class PublicarActivity extends GDActivity implements
 			}
 		default:
 			facebook.authorizeCallback(requestCode, resultCode, data);
+
 			break;
 		}
 
@@ -385,7 +395,7 @@ public class PublicarActivity extends GDActivity implements
 
 		@Override
 		public void onComplete(Bundle values) {
-			SessionStore.save(facebook, getApplicationContext(),APP_ID);
+			SessionStore.save(facebook, getApplicationContext(), APP_ID);
 			postOnWall(comentario.getText().toString());
 
 		}
