@@ -130,7 +130,7 @@ public class AmigosTabActivity extends GDTabActivity {
     private void anadirTab2() {
     	
     	Intent intent = new Intent(this, AgregarAmigosActivity.class);
-    	addTab(TAG_AGREGAR_AMIGOS, "Agregar", intent);
+    	addTab(TAG_AGREGAR_AMIGOS, "Buscar", intent);
   
     }
     
