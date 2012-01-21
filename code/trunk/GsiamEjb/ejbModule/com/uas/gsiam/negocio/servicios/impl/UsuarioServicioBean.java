@@ -355,7 +355,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			EmailSender mail = new EmailSender();
 			mail.setTemplate(template);
 
-		//	mail.setListEmailDestinatario(direcciones);
+	
 			
 			mail.setEmailDestinatario(direccion);
 			

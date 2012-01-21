@@ -12,22 +12,84 @@ import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 
+/**
+ * Interfaz remoto del ejb encargado de procesar las solicitudes para los sitios
+ * 
+ * @author Antonio
+ * 
+ */
 @Remote
 public interface SitioServicio {
 
 	static final String SERVICE_ADDRESS = "java:global/Gsiam/GsiamEjb/SitioServicio";
-	
-	void crearSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion, SitioExcepcion;
-	
+
+	/**
+	 * Crea un sitio de interes en el sistema con los datos ingresados
+	 * 
+	 * @param sitioInteres
+	 *            Sitio de interes a crear en el sistema
+	 * @throws SitioYaExisteExcepcion
+	 * @throws SitioExcepcion
+	 */
+	void crearSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion,
+			SitioExcepcion;
+
+	/**
+	 * Elimina un sitio de interes del sistema con el identificador ingresado
+	 * 
+	 * @param idSitio
+	 *            Identificador del sitio de interes a elminar
+	 * @throws SitioExcepcion
+	 */
 	void eliminarSitio(Integer idSitio) throws SitioExcepcion;
-	
+
+	/**
+	 * Modifica un sitio de interes del sistema
+	 * 
+	 * @param sitioInteres
+	 *            Datos del sitio a modificar
+	 * @throws SitioExcepcion
+	 */
 	void modificarSitio(SitioDTO sitioInteres) throws SitioExcepcion;
-	
+
+	/**
+	 * Obtiene los sitios de interes a un radio determinado de una posición
+	 * geografica dada
+	 * 
+	 * @param sitio
+	 *            Posición geografica
+	 * @return Retorna todos los sitios de interes que se encuentran a un radio
+	 *         determinado de una posición geografica dada
+	 * @throws SitioExcepcion
+	 */
 	List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SitioExcepcion;
-	
+
+	/**
+	 * Busca los sitios con los criterios de busqueda ingresados por paramentro
+	 * 
+	 * @param sitio
+	 *            Filtros que se aplicaran al buscar los sitios de interes
+	 * @return Retorna una lista con los sitios encontrados
+	 * @throws SitioExcepcion
+	 */
 	List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion;
-	
-	void crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion;
-	
+
+	/**
+	 * Crea una publicación sobre un sitio en el sistema
+	 * 
+	 * @param publicacion
+	 *            Publiación a crear
+	 * @throws PublicacionExcepcion
+	 */
+	void crearPublicacion(PublicacionDTO publicacion)
+			throws PublicacionExcepcion;
+
+	/**
+	 * Este metodo retorna las categorias de sitios de interes que se encuentran
+	 * en el sistema
+	 * 
+	 * @return Lista de categorias del sistema
+	 * @throws SitioExcepcion
+	 */
 	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion;
 }

@@ -135,12 +135,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		
 	}
 	
-	/**
-	 * Retorna todos los usuarios cuyo nombre contiene el nombre ingresado por parametro que no sean amigos del id ingresado.
-	 * @param id
-	 * @return
-	 * @throws SQLException
-	 */
+	
 	public ArrayList<UsuarioDTO> getUsuarios(int id, String nombre) throws SQLException{
 		
 		PreparedStatement ps;
