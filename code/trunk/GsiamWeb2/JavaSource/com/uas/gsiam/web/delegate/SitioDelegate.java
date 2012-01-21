@@ -12,6 +12,13 @@ import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.web.sl.ServiceLocator;
 
+/**
+ * Esta clase es la encargada de llamar a los servicios publicados en el ejb
+ * SitioServicioBean.
+ * 
+ * @author Antonio
+ * 
+ */
 public class SitioDelegate {
 
 	private SitioServicio servicioSitio;
@@ -29,40 +36,97 @@ public class SitioDelegate {
 		}
 	}
 
-	public List<SitioDTO> getSitios(String lat, String lon) throws SitioExcepcion {
+	/**
+	 * Obtiene la lista de sitios a un radio dado de las coordenadas ingresadas
+	 * por parametros
+	 * 
+	 * @param lat
+	 *            latitud ingredad
+	 * @param lon
+	 *            loguitud ingresada
+	 * @return la lista de sitios a un radio dado
+	 * @throws SitioExcepcion
+	 */
+	public List<SitioDTO> getSitios(String lat, String lon)
+			throws SitioExcepcion {
 		SitioDTO sitio = new SitioDTO();
 		sitio.setLat(new Double(lat));
 		sitio.setLon(new Double(lon));
 		return servicioSitio.obtenerSitios(sitio);
 	}
 
+	/**
+	 * Retorna la lista de sitios que corresponde con los criterios de filtro
+	 * ingresados
+	 * 
+	 * @param sitio
+	 *            Este parametro contiene los filtros que se aplicaran para
+	 *            buscar los sitios
+	 * @return Lista de sitios que machean con los filtros ingresados
+	 * @throws SitioExcepcion
+	 */
 	public List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion {
 
 		return servicioSitio.buscarSitios(sitio);
 	}
 
+	/**
+	 * Crea un sitio nuevo en el sistema
+	 * 
+	 * @param sitio
+	 *            Sitio nuevo a crear
+	 * @throws SitioYaExisteExcepcion
+	 * @throws SitioExcepcion
+	 */
 	public void crearSitio(SitioDTO sitio) throws SitioYaExisteExcepcion,
 			SitioExcepcion {
 
 		servicioSitio.crearSitio(sitio);
 	}
 
+	/**
+	 * Elimina un sitio del sistema
+	 * 
+	 * @param idSitio
+	 *            Id del sitio que se desea eliminar
+	 * @throws SitioExcepcion
+	 */
 	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
 
 		servicioSitio.eliminarSitio(idSitio);
 	}
 
+	/**
+	 * Modifica un sitio en el sistema
+	 * 
+	 * @param sitio
+	 *            Datos del sitio que se desean eliminar
+	 * @throws SitioExcepcion
+	 */
 	public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
 
 		servicioSitio.modificarSitio(sitio);
 	}
 
+	/**
+	 * Este metodo crea una nueva publicacion en el sistema asociada a un sitio
+	 * 
+	 * @param publicacion
+	 *            Publicacion a crear en el sistema
+	 * @throws PublicacionExcepcion
+	 */
 	public void crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
 
 		servicioSitio.crearPublicacion(publicacion);
 	}
 
+	/**
+	 * Metodo que retorna las categorias de sitios del sistema
+	 * 
+	 * @return Retorna la lista de categorias que se desplegaran en el sistema
+	 * @throws SitioExcepcion
+	 */
 	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion {
 
 		return servicioSitio.getCategorias();
