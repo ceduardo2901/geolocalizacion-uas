@@ -11,6 +11,12 @@ import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 
 public interface ISitioDAO {
 	
+	/**
+	 * 
+	 * @param sitio
+	 * @return
+	 * @throws SQLException
+	 */
 	List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SQLException;
 
 	List<SitioDTO> buscarSitio(SitioDTO sitioInteres)throws SitioExcepcion;
