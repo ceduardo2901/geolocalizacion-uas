@@ -68,7 +68,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		String nombre = nombreTxt.getText().toString().trim();
 
 		if (nombre.length() == 0) {
-			Util.showToast(v.getContext(), "Debe ingresar un nombre");
+			Util.showToast(v.getContext(), "Debe ingresar \nal menos un caracter");
 		
 		} else {
 
