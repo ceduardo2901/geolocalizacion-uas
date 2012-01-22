@@ -14,11 +14,31 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.R;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Adapter para manejar la lista de usuarios. Esta clase permite mostrar
+ * la lista de usuarios con los atributos de nombre, email del usuario, estado de
+ * la solicitud y la imagen del perfil del usuario
+ * 
+ * @author Martín
+ * 
+ */
 public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 
 	Activity context;
 	private List<UsuarioDTO> usuarios;
 
+	/**
+	 * 
+	 * Contructor del adaptador
+	 * 
+	 * @param context
+	 *            Contexto del Activity que maneja la lista
+	 * @param resource
+	 *            Identificador de la interfaz grafica de un usuario
+	 * @param objects
+	 *            Lista de usuarios a mostrar
+	 */
 	public UsuarioAdapter(Activity context, int resource,
 			List<UsuarioDTO> objects) {
 		super(context, resource, objects);
@@ -40,7 +60,8 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 			holder.icono = (ImageView) item.findViewById(R.id.LblIcono);
 			holder.nombre = (TextView) item.findViewById(R.id.LblNombre);
 			holder.email = (TextView) item.findViewById(R.id.LblMail);
-			holder.solicitudFlag = (ImageView) item.findViewById(R.id.LblSolicitud);
+			holder.solicitudFlag = (ImageView) item
+					.findViewById(R.id.LblSolicitud);
 			item.setTag(holder);
 
 		} else {
@@ -49,33 +70,30 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 		}
 
 		if (usuario.getAvatar() != null)
-			holder.icono.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
-		
+			holder.icono
+					.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
+
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
-		
-		
-		if (usuario.isSolicitudEnviada()){
+
+		if (usuario.isSolicitudEnviada()) {
 			holder.solicitudFlag.setVisibility(View.VISIBLE);
-		//	holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_ff);
+
 			holder.solicitudFlag.setImageResource(R.drawable.ic_menu_forward);
-			
+
+		} else if (usuario.isSolicitudRecibida()) {
+			holder.solicitudFlag.setVisibility(View.VISIBLE);
+
+			holder.solicitudFlag.setImageResource(R.drawable.ic_menu_back);
+
 		}
+
 		else
-			if (usuario.isSolicitudRecibida()){
-				holder.solicitudFlag.setVisibility(View.VISIBLE);
-			//	holder.solicitudFlag.setImageResource(android.R.drawable.ic_media_rew);
-				holder.solicitudFlag.setImageResource(R.drawable.ic_menu_back);
-				
-			}
-			
-			else 			
-				 holder.solicitudFlag.setVisibility(View.INVISIBLE);
-		
+			holder.solicitudFlag.setVisibility(View.INVISIBLE);
+
 		return item;
 	}
-	
-		
+
 	static class ViewHolder {
 		ImageView icono;
 		TextView nombre;

@@ -14,13 +14,30 @@ import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.R;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Este adapter muestra la lista de amigos de un usuario. Se muestran el nombre,
+ * email y la foto del perfil.
+ * 
+ * @author Martín
+ * 
+ */
 public class AmigoAdapter extends ArrayAdapter<UsuarioDTO> {
 
 	Activity context;
 	private List<UsuarioDTO> usuarios;
 
-	public AmigoAdapter(Activity context, int resource,
-			List<UsuarioDTO> objects) {
+	/**
+	 * Constructor del adaptador
+	 * 
+	 * @param context
+	 *            Contexto del activity
+	 * @param resource
+	 *            identificador del recurso de interfaz de grafica
+	 * @param objects
+	 *            Lista de usuarios a desplegar
+	 */
+	public AmigoAdapter(Activity context, int resource, List<UsuarioDTO> objects) {
 		super(context, resource, objects);
 		this.context = context;
 		usuarios = objects;
@@ -48,14 +65,14 @@ public class AmigoAdapter extends ArrayAdapter<UsuarioDTO> {
 		}
 
 		if (usuario.getAvatar() != null)
-			holder.icono.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
-		
+			holder.icono
+					.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
+
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
 		return item;
 	}
-	
-		
+
 	static class ViewHolder {
 		ImageView icono;
 		TextView nombre;
