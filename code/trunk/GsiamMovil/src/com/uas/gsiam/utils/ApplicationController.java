@@ -10,18 +10,25 @@ import android.content.Intent;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.ui.MainActivity;
 
+/**
+ * 
+ * Clase para mantener ciertos objetos en memoria mientras la aplicacion esta
+ * corriendo.
+ * 
+ * @author Martín
+ * 
+ */
 public class ApplicationController extends GDApplication {
-	
+
 	private UsuarioDTO userLogin;
 	private ArrayList<HashMap<String, Object>> gruposCategorias = new ArrayList<HashMap<String, Object>>();
 	private ArrayList<ArrayList<HashMap<String, Object>>> subCategorias = new ArrayList<ArrayList<HashMap<String, Object>>>();
-	
+
 	@Override
-	  public void onCreate() {
-	    super.onCreate();
+	public void onCreate() {
+		super.onCreate();
 	}
-	      
-	
+
 	public Class<?> getHomeActivityClass() {
 		return MainActivity.class;
 	}
@@ -56,8 +63,5 @@ public class ApplicationController extends GDApplication {
 			ArrayList<ArrayList<HashMap<String, Object>>> subCategorias) {
 		this.subCategorias = subCategorias;
 	}
-
-	
-	
 
 }

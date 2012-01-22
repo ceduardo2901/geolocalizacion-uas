@@ -6,6 +6,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * Clase encargada de obtener la ubicación geografica del dispositivo movil
+ * 
+ * @author Antonio
+ * 
+ */
 public class LocationHelper {
 
 	LocationManager locationManager;
@@ -13,6 +19,17 @@ public class LocationHelper {
 	boolean gpsEnabled = false;
 	boolean networkEnabled = false;
 
+	/**
+	 * Retorna la ubicacion geografica en terminos de latitud y longitud del
+	 * dispositivo movil
+	 * 
+	 * @param context
+	 *            Contexto de la aplicación
+	 * @param result
+	 *            Retorna la ubicacion en un objeto {@link LocationResult}
+	 * @return Retorna true si se pudo obtener la ubicacion geografica, false en
+	 *         caso contrario
+	 */
 	public boolean getLocation(Context context, LocationResult result) {
 		locationResult = result;
 
@@ -20,7 +37,7 @@ public class LocationHelper {
 			locationManager = (LocationManager) context
 					.getSystemService(Context.LOCATION_SERVICE);
 		}
-		// exceptions thrown if provider not enabled
+		// la excepccion es lanzada si el provedor no esta habilitado
 		try {
 			gpsEnabled = locationManager
 					.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -32,7 +49,7 @@ public class LocationHelper {
 		} catch (Exception ex) {
 		}
 
-		// dont start listeners if no provider is enabled
+		// no inicio el listener si el provider no esta habilitado
 		if (!gpsEnabled && !networkEnabled) {
 			return false;
 		}
@@ -52,6 +69,10 @@ public class LocationHelper {
 		return true;
 	}
 
+	/**
+	 * Implementacion de un locationListener para escuchar los cambios en la
+	 * ubicación
+	 */
 	LocationListener locationListenerGps = new LocationListener() {
 		public void onLocationChanged(Location location) {
 			locationResult.obtenerUbicacion(location);
@@ -70,6 +91,10 @@ public class LocationHelper {
 		}
 	};
 
+	/**
+	 * Implementacion de un locationListener para escuchar los cambios en la
+	 * ubicación
+	 */
 	LocationListener locationListenerNetwork = new LocationListener() {
 		public void onLocationChanged(Location location) {
 			locationResult.obtenerUbicacion(location);
@@ -89,6 +114,10 @@ public class LocationHelper {
 
 	};
 
+	/**
+	 * Obtiene la ubicacion geografica del movil y la almacena en un objeto
+	 * {@link LocationResult}
+	 */
 	private void GetLastLocation() {
 		locationManager.removeUpdates(locationListenerGps);
 		locationManager.removeUpdates(locationListenerNetwork);
@@ -105,7 +134,7 @@ public class LocationHelper {
 					.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		}
 
-		// if there are both values use the latest one
+		// Si hay dos valores utilizo el mas reciente
 		if (gpsLocation != null && networkLocation != null) {
 			if (gpsLocation.getTime() > networkLocation.getTime()) {
 				locationResult.obtenerUbicacion(gpsLocation);
@@ -133,6 +162,10 @@ public class LocationHelper {
 		public abstract void obtenerUbicacion(Location location);
 	}
 
+	/**
+	 * Metodo que elimina los listener registrados para escuchar los cambios de
+	 * ubicación
+	 */
 	public void stopLocationUpdates() {
 		locationManager.removeUpdates(locationListenerGps);
 		locationManager.removeUpdates(locationListenerNetwork);

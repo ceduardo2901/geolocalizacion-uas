@@ -20,111 +20,180 @@ import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 
+/**
+ * Esta clase contiene metodos auxiliares que se usan en toda la aplicacion
+ * 
+ * @author Martin
+ * 
+ */
 public class Util {
-	
+
 	private static ProgressDialog progressDialog;
 
-	public static boolean validaMail (String email){
-		
+	/**
+	 * Valida que email ingresado tenga un formato correcto. Se usa la expresion
+	 * regular definida en las contantes para validarla {@link Constantes}
+	 * 
+	 * @param email
+	 *            Email ingresado para validar
+	 * @return Retorna true en caso que el email tenga un formato correcto de lo
+	 *         contrario falso
+	 */
+	public static boolean validaMail(String email) {
+
 		boolean result = true;
-		
+
 		Matcher match = Pattern.compile(Constantes.REGEX_EMAIL).matcher(email);
 		if (!match.matches()) {
 			result = false;
-		} 
-		
+		}
+
 		return result;
-		
+
 	}
-	
-	
-	
+
+	/**
+	 * Metodo que mustra un progress dialog con el mensaje con un mensaje
+	 * determinado.
+	 * 
+	 * @param context
+	 *            Contexto de la aplicación
+	 * @param mensaje
+	 *            Mensaje a desplegar
+	 */
 	public static void showProgressDialog(Context context, String mensaje) {
 		synchronized (Util.class) {
-		progressDialog = ProgressDialog.show(context, "",
-				mensaje, true);
+			progressDialog = ProgressDialog.show(context, "", mensaje, true);
 		}
 	}
 
-	
-	
+	/**
+	 * Cierra un progress dialog
+	 */
 	public static void dismissProgressDialog() {
-		
+
 		if (progressDialog != null) {
 
 			progressDialog.dismiss();
 		}
 	}
-	
-	
-	
-	public static void showAlertDialogConfirm (Context contexto, String titulo, String mensaje) {
-		
+
+	/**
+	 * Muestra un Alert dialog para la confirmacion de una acción. Si se
+	 * presiona si la acción se confirma si se presiona no se cancela
+	 * 
+	 * @param contexto
+	 *            Contecto de la aplicacion
+	 * @param titulo
+	 *            Titulo a desplegar
+	 * @param mensaje
+	 *            Mensaje a desplegar
+	 */
+	public static void showAlertDialogConfirm(Context contexto, String titulo,
+			String mensaje) {
+
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
-		
-		dialog.setTitle(titulo); 
+
+		dialog.setTitle(titulo);
 		dialog.setMessage(mensaje);
 		dialog.setCancelable(false);
-		dialog.setIcon(android.R.drawable.ic_dialog_info);  
+		dialog.setIcon(android.R.drawable.ic_dialog_info);
 		dialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-		    	   
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.cancel();
-		           }
-		       });
+
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
 		dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-		           public void onClick(DialogInterface dialog, int id) {
-		                dialog.cancel();
-		           }
-		       });
-		dialog.show(); 
-		
-		
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		dialog.show();
+
 	}
-	
-	public static void showAlertDialogOk (Context contexto, String titulo, String mensaje) {
-		
+
+	/**
+	 * Muestra un Alert dialog para la confirmacion de una acción. Solo se puede
+	 * confirmar la acción
+	 * 
+	 * @param contexto
+	 *            Contecto de la aplicacion
+	 * @param titulo
+	 *            Titulo a desplegar
+	 * @param mensaje
+	 *            Mensaje a desplegar
+	 */
+	public static void showAlertDialogOk(Context contexto, String titulo,
+			String mensaje) {
+
 		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
-		
-		dialog.setTitle(titulo); 
+
+		dialog.setTitle(titulo);
 		dialog.setMessage(mensaje);
 		dialog.setCancelable(false);
-		dialog.setIcon(android.R.drawable.ic_dialog_info);  
-		dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-		    	   
-		           public void onClick(DialogInterface dialog, int id) {
-		        	   dialog.cancel();
-		           }
-		       });
-		dialog.show(); 
-		
-		
-	}
-	
-	public static void showAlertDialog (Context contexto, String titulo, String mensaje){
-		
-		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);  
-		dialog.setTitle(titulo);  
-		dialog.setMessage(mensaje);  
-		dialog.setIcon(android.R.drawable.ic_dialog_info);  
-		dialog.show();  
+		dialog.setIcon(android.R.drawable.ic_dialog_info);
+		dialog.setPositiveButton("Aceptar",
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		dialog.show();
 
 	}
-	   	
-	
-	public static void showToast(Context contexto, String mensaje){
-		
-		Toast.makeText(contexto, mensaje,
-				Toast.LENGTH_LONG).show();
-		
+
+	/**
+	 * 
+	 * Muestra un Alert dialog para la confirmacion de una acción. Este metodo
+	 * solo es de caracter informativo y no permite la interacción del usuario
+	 * 
+	 * @param contexto
+	 *            Contecto de la aplicacion
+	 * @param titulo
+	 *            Titulo a desplegar
+	 * @param mensaje
+	 *            Mensaje a desplegar
+	 */
+	public static void showAlertDialog(Context contexto, String titulo,
+			String mensaje) {
+
+		AlertDialog.Builder dialog = new AlertDialog.Builder(contexto);
+		dialog.setTitle(titulo);
+		dialog.setMessage(mensaje);
+		dialog.setIcon(android.R.drawable.ic_dialog_info);
+		dialog.show();
+
 	}
 
-	
-	public static byte[] BitmapToArray(BitmapDrawable drawable) throws IOException {
+	/**
+	 * Muestra un mensaje por pantalla por unos segundos.
+	 * 
+	 * @param contexto
+	 *            Contexto de la aplicación
+	 * @param mensaje
+	 *            Mensaje a desplegar
+	 */
+	public static void showToast(Context contexto, String mensaje) {
+
+		Toast.makeText(contexto, mensaje, Toast.LENGTH_LONG).show();
+
+	}
+
+	/**
+	 * Transforma una imagen en formato BitmaoDrawable en un arreglo de byte
+	 * 
+	 * @param drawable
+	 *            Imagen a transformar
+	 * @return Retorna un byte[] con la imagen transformada
+	 * @throws IOException
+	 */
+	public static byte[] BitmapToArray(BitmapDrawable drawable)
+			throws IOException {
 
 		Bitmap bitmap = drawable.getBitmap();
-				
-		//int size = bitmap.getWidth() * bitmap.getHeight() * 4;
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
 		bitmap.compress(Bitmap.CompressFormat.PNG, 60, out);
@@ -132,30 +201,59 @@ public class Util {
 		out.close();
 		return out.toByteArray();
 
-	}		
-	
-	
+	}
+
+	/**
+	 * Transforma un arreglo de byte en un Bitmap
+	 * 
+	 * @param byteArray
+	 *            Imagen en formato de arreglo de byte a ser transformada
+	 * @return Retorna un bitmap con la imagen transformada
+	 */
 	public static Bitmap ArrayToBitmap(byte[] byteArray) {
 
 		return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-	}	
-	
-	public static Drawable BitmapToDrawable(Bitmap bitmap){
+	}
+
+	/**
+	 * Transforma un Bitmap en un objeto Drawable
+	 * 
+	 * @param Drawable
+	 *            Imagen en formato de Bitmap a ser transformada
+	 * @return Retorna un Drawable con la imagen transformada
+	 */
+	public static Drawable BitmapToDrawable(Bitmap bitmap) {
 
 		return new BitmapDrawable(bitmap);
 
 	}
-	
-	
-	public static ArrayList<UsuarioDTO> getArrayListUsuarioDTO(UsuarioDTO[] usuarios){
-        ArrayList<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
-        for(UsuarioDTO usuario : usuarios){
-                lista.add(usuario);
-        }
-        return lista;
+
+	/**
+	 * Metodo que retrona un arraylist de usuario a partir de un arreglo de
+	 * usuarios
+	 * 
+	 * @param usuarios
+	 *            Arreglo de usuarios a procesar
+	 * @return Retorna un ArrayList con los usuarios ingresados
+	 */
+	public static ArrayList<UsuarioDTO> getArrayListUsuarioDTO(
+			UsuarioDTO[] usuarios) {
+		ArrayList<UsuarioDTO> lista = new ArrayList<UsuarioDTO>();
+		for (UsuarioDTO usuario : usuarios) {
+			lista.add(usuario);
+		}
+		return lista;
 	}
-	
+
+	/**
+	 * Metodo que retrona un arraylist de sitios a partir de un arreglo de
+	 * sitios
+	 * 
+	 * @param sitios
+	 *            Arreglo de sitios a procesar
+	 * @return Retorna un ArrayList con los sitios ingresados
+	 */
 	public static ArrayList<SitioDTO> getArrayListSitioDTO(SitioDTO[] sitios) {
 		ArrayList<SitioDTO> lista = new ArrayList<SitioDTO>();
 		for (SitioDTO sitio : sitios) {
@@ -164,36 +262,66 @@ public class Util {
 		return lista;
 	}
 
-	public static ArrayList<CategoriaDTO> getArrayListCategoriaDTO(CategoriaDTO[] categorias){
-        ArrayList<CategoriaDTO> lista = new ArrayList<CategoriaDTO>();
-        for(CategoriaDTO categoria : categorias){
-                lista.add(categoria);
-        }
-        return lista;
+	/**
+	 * Metodo que retorna un array list de categorias a partirn de un arreglo de
+	 * categorias
+	 * 
+	 * @param categorias
+	 *            Arreglos de categorias a procesar
+	 * @return Retorna un ArrayList con las categorias ingresadas
+	 */
+	public static ArrayList<CategoriaDTO> getArrayListCategoriaDTO(
+			CategoriaDTO[] categorias) {
+		ArrayList<CategoriaDTO> lista = new ArrayList<CategoriaDTO>();
+		for (CategoriaDTO categoria : categorias) {
+			lista.add(categoria);
+		}
+		return lista;
 	}
-	
+
+	/**
+	 * 
+	 * Metodo que ajusta una imagen con el ancho y largo ingresado
+	 * 
+	 * @param bitmap
+	 *            Imagen a procesar
+	 * @param width
+	 *            Ancho
+	 * @param height
+	 *            Largo
+	 * @return Retorna la imagen transformada
+	 */
 	public static Bitmap getResizedBitmap(Bitmap bitmap, int width, int height) {
 
-	    final int bitmapWidth = bitmap.getWidth();
-	    final int bitmapHeight = bitmap.getHeight();
+		final int bitmapWidth = bitmap.getWidth();
+		final int bitmapHeight = bitmap.getHeight();
 
-	    final float scale = Math.min((float) width / (float) bitmapWidth,
-	        (float) height / (float) bitmapHeight);
+		final float scale = Math.min((float) width / (float) bitmapWidth,
+				(float) height / (float) bitmapHeight);
 
-	    final int scaledWidth = (int) (bitmapWidth * scale);
-	    final int scaledHeight = (int) (bitmapHeight * scale);
+		final int scaledWidth = (int) (bitmapWidth * scale);
+		final int scaledHeight = (int) (bitmapHeight * scale);
 
-	    final Bitmap decored = Bitmap.createScaledBitmap(bitmap, scaledWidth,
-	        scaledHeight, true);
+		final Bitmap decored = Bitmap.createScaledBitmap(bitmap, scaledWidth,
+				scaledHeight, true);
 
-	    return decored;
-	  }
-	
-	
-	public static int getDrawableIdFromString(Context context, String name){
-		
-		return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
-		
+		return decored;
 	}
-	
+
+	/**
+	 * Metodo que obtiene el identificador de un Drawable a partir de su nombre
+	 * 
+	 * @param context
+	 *            Contexto de la aplicación
+	 * @param name
+	 *            Nombre del recurso a buscar
+	 * @return Retorna el identificador unico del recurso
+	 */
+	public static int getDrawableIdFromString(Context context, String name) {
+
+		return context.getResources().getIdentifier(name, "drawable",
+				context.getPackageName());
+
+	}
+
 }
