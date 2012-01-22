@@ -61,9 +61,7 @@ public class LoginServicio extends IntentService {
 			 
 			UsuarioDTO user = restTemp.getForObject(
 					Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class, parms);
-			// ResponseEntity<String> responseEntity = restTemp.exchange(
-			// Constantes.LOGIN_SERVICE_URL, HttpMethod.GET, null,
-			// String.class, parms);
+			
 			
 			if (user.getEmail() != null) {
 				ApplicationController app = ((ApplicationController) getApplicationContext());
