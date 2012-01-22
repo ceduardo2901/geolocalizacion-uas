@@ -32,7 +32,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
@@ -61,13 +61,13 @@ public class PublicarActivity extends GDActivity implements
 	private AsyncFacebookRunner mAsyncRunner;
 	private Facebook facebook;
 	private IntentFilter publicarFiltro;
-
+	private ImageButton fotoButton;
 	private SitioDTO sitio;
 	private UsuarioDTO usuario;
 	private ApplicationController app;
 	private static final int RESULT = 1001;
 	private String nombre;
-	private ImageView fotoPub;
+	//private ImageView fotoPub;
 	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicacion;
@@ -82,7 +82,8 @@ public class PublicarActivity extends GDActivity implements
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
-		fotoPub = (ImageView) findViewById(R.id.fotoPubId);
+		//fotoPub = (ImageView) findViewById(R.id.fotoPubId);
+		fotoButton = (ImageButton) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
 		facebook = new Facebook(APP_ID);
@@ -269,10 +270,10 @@ public class PublicarActivity extends GDActivity implements
 			String response;
 
 			Bundle parameters = new Bundle();
-			if (fotoPub.getDrawable() != null) {
+			if (fotoButton.getDrawable() != null) {
 
 				parameters.putByteArray("picture", Util
-						.BitmapToArray((BitmapDrawable) fotoPub.getDrawable()));
+						.BitmapToArray((BitmapDrawable) fotoButton.getDrawable()));
 				parameters.putString("caption", msg);
 				response = facebook.request("me/photos", parameters, "POST");
 
@@ -338,7 +339,7 @@ public class PublicarActivity extends GDActivity implements
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				myBitmap.compress(CompressFormat.JPEG, 60, out);
 				foto = out.toByteArray();
-				fotoPub.setImageBitmap(myBitmap);
+				fotoButton.setImageBitmap(myBitmap);
 				almacenarEnMemoria();
 
 			}
@@ -357,8 +358,8 @@ public class PublicarActivity extends GDActivity implements
 					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					myBitmap.compress(CompressFormat.JPEG, 60, out);
 					foto = out.toByteArray();
-					fotoPub.setImageBitmap(myBitmap);
-
+					fotoButton.setImageBitmap(myBitmap);
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
