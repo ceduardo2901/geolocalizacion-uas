@@ -27,7 +27,7 @@ public class AmigosTabActivity extends GDTabActivity {
     protected static String TAG = "AmigosTabActivity";
  //   protected static boolean registroMisAmigosService = false;
     private static final String TAG_MIS_AMIGOS = "Amigos";
-    private static final String TAG_AGREGAR_AMIGOS = "Agregar";
+    private static final String TAG_BUSCAR_AMIGOS = "Buscar";
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
     private static final String TAG_SOLICITUDES = "Solicitudes";
     private static final String PREF_STICKY_TAB = "stickyTab";
@@ -130,7 +130,7 @@ public class AmigosTabActivity extends GDTabActivity {
     private void anadirTab2() {
     	
     	Intent intent = new Intent(this, AgregarAmigosActivity.class);
-    	addTab(TAG_AGREGAR_AMIGOS, "Agregar", intent);
+    	addTab(TAG_BUSCAR_AMIGOS, "Buscar", intent);
   
     }
     
@@ -176,8 +176,8 @@ public class AmigosTabActivity extends GDTabActivity {
 				actualizarAmigos();
 				
 			}
-			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
-				//Util.showToast(this, "TAG_AGREGAR_AMIGOS");
+			if (tabClick.equalsIgnoreCase(TAG_BUSCAR_AMIGOS)){
+				//Util.showToast(this, "TAG_BUSCAR_AMIGOS");
 				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
 				loaderActionBarItem.setLoading(false);
 			}
@@ -210,7 +210,7 @@ public class AmigosTabActivity extends GDTabActivity {
 				}
 
 			}
-			if (tabClick.equalsIgnoreCase(TAG_AGREGAR_AMIGOS)){
+			if (tabClick.equalsIgnoreCase(TAG_BUSCAR_AMIGOS)){
 				Util.showToast(this, Constantes.MSG_RADAR_TAB_AMIGOS);
 			}
 			if (tabClick.equalsIgnoreCase(TAG_SOLICITUDES)){
