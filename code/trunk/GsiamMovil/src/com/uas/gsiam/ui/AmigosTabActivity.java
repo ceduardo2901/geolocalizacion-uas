@@ -27,7 +27,7 @@ public class AmigosTabActivity extends GDTabActivity {
     protected static String TAG = "AmigosTabActivity";
  //   protected static boolean registroMisAmigosService = false;
     private static final String TAG_MIS_AMIGOS = "Amigos";
-    private static final String TAG_AGREGAR_AMIGOS = "Buscar";
+    private static final String TAG_AGREGAR_AMIGOS = "Agregar";
     private static final String TAG_INVITAR_AMIGOS = "Invitar";
     private static final String TAG_SOLICITUDES = "Solicitudes";
     private static final String PREF_STICKY_TAB = "stickyTab";
@@ -130,7 +130,7 @@ public class AmigosTabActivity extends GDTabActivity {
     private void anadirTab2() {
     	
     	Intent intent = new Intent(this, AgregarAmigosActivity.class);
-    	addTab(TAG_AGREGAR_AMIGOS, "Buscar", intent);
+    	addTab(TAG_AGREGAR_AMIGOS, "Agregar", intent);
   
     }
     
