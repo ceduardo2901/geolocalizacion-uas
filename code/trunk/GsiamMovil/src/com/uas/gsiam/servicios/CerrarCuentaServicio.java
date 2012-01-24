@@ -19,19 +19,25 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
-
-public class CerrarCuentaServicio extends IntentService{
+/**
+ * Servicio que cierra la cuenta de un usuario en el sistema. Se envian al
+ * servidor el identificador de usuario. 
+ * 
+ * @author Martin
+ * 
+ */
+public class CerrarCuentaServicio extends IntentService {
 
 	protected static String TAG = "CerrarCuentaServicio";
 	protected RestTemplate restTemp;
 	protected HttpHeaders requestHeaders;
-	
+
 	public CerrarCuentaServicio() {
 		super(TAG);
-		
+
 	}
-	
-	public void onCreate(){
+
+	public void onCreate() {
 		super.onCreate();
 		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
@@ -42,33 +48,35 @@ public class CerrarCuentaServicio extends IntentService{
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		UsuarioDTO usuario = (UsuarioDTO) intent.getSerializableExtra("usuario");
-		
+
+		UsuarioDTO usuario = (UsuarioDTO) intent
+				.getSerializableExtra("usuario");
+
 		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
 		parms.put("usuarioDto", usuario);
-		
+
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
-		
+
 		Intent intentBack = new Intent(Constantes.CERRAR_CUENTA_FILTRO_ACTION);
-		
-		try{
-		
-			restTemp.postForObject(Constantes.CERRAR_CUENTA_SERVICE_URL, usuario, String.class);	
+
+		try {
+
+			restTemp.postForObject(Constantes.CERRAR_CUENTA_SERVICE_URL,
+					usuario, String.class);
 			intentBack.putExtra("respuesta", Constantes.MSG_CUENTA_CERRADA_OK);
-			
-		}catch (RestResponseException e){
+
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
-		}catch (ResourceAccessException e) {
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 
 		}
 
 		sendBroadcast(intentBack);
-		
+
 	}
 
 }

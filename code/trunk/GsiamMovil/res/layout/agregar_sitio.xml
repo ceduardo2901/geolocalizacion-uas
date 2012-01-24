@@ -20,14 +20,14 @@
 
 			<EditText android:id="@+id/txtNombreId" android:hint="@string/Nombre"
 				android:layout_height="match_parent" android:layout_width="match_parent"
-				android:layout_weight="1" />
+				android:layout_weight="1" android:maxLength="20"/>
 		</TableRow>
 		<TableRow android:id="@+id/tableRow22" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:paddingTop="0dp">
 
 			<EditText android:layout_height="wrap_content" android:id="@+id/txtDireccionId"
 				android:layout_weight="1" android:hint="@string/direccion"
-				android:layout_width="match_parent" android:layout_gravity="top" />
+				android:layout_width="match_parent" android:layout_gravity="top" android:maxLength="50"/>
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
 
 			<EditText android:inputType="number" android:id="@+id/txtTelefonoId"
 				android:layout_width="0dp" android:layout_weight="1"
-				android:layout_height="wrap_content" android:hint="@string/telefono" />
+				android:layout_height="wrap_content" android:hint="@string/telefono" android:maxLength="15"/>
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
 
 			<EditText android:inputType="textWebEditText" android:id="@+id/txtWebId"
 				android:layout_width="0dp" android:layout_weight="1"
-				android:layout_height="wrap_content" android:hint="@string/web" />
+				android:layout_height="wrap_content" android:hint="@string/web" android:maxLength="50"/>
 
 		</TableRow>
 		<TableRow android:id="@+id/tableRow4" android:layout_width="wrap_content"

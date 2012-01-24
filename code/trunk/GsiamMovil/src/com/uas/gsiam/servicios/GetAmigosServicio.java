@@ -21,6 +21,13 @@ import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * El servicio obtiene los amigos de un usuario en la aplicación a partirn del
+ * identificador de usuario.
+ * 
+ * @author Martín
+ * 
+ */
 public class GetAmigosServicio extends IntentService {
 
 	protected static String TAG = "GetAmigosServicio";
@@ -50,7 +57,8 @@ public class GetAmigosServicio extends IntentService {
 		Map<String, Integer> parms = new HashMap<String, Integer>();
 		parms.put("id", user.getId());
 
-		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
 		Intent intentBack = new Intent(Constantes.GET_AMIGOS_FILTRO_ACTION);
 
 		try {
@@ -59,12 +67,13 @@ public class GetAmigosServicio extends IntentService {
 					Constantes.GET_AMIGOS_SERVICE_URL, UsuarioDTO[].class,
 					parms);
 
-			intentBack.putExtra("respuesta", Util.getArrayListUsuarioDTO(respuesta));
+			intentBack.putExtra("respuesta",
+					Util.getArrayListUsuarioDTO(respuesta));
 
-		}catch (RestResponseException e){
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
-		}catch (ResourceAccessException e) {
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}

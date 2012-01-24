@@ -24,6 +24,13 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
+/**
+ * Este servicio se activa cuando se quiere compartir la ubicacion geografica
+ * del usuario. Este servicio corre en background cada un tiempo determinado.
+ * 
+ * @author Antonio
+ * 
+ */
 public class ActualizarPosicionServicio extends Service {
 
 	private static Timer timer = new Timer();
@@ -50,9 +57,7 @@ public class ActualizarPosicionServicio extends Service {
 				HttpUtils.getNewHttpClient()));
 
 		app = ((ApplicationController) getApplicationContext());
-//		if (loc != null) {
-//			startService();
-//		}
+
 	}
 
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -77,7 +82,7 @@ public class ActualizarPosicionServicio extends Service {
 
 			Map<String, PosicionUsuarioDTO> parms = new HashMap<String, PosicionUsuarioDTO>();
 			parms.put("posUsuario", posUsuario);
-			
+
 			restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 					String.class));
 			try {
@@ -87,10 +92,10 @@ public class ActualizarPosicionServicio extends Service {
 						posUsuario, String.class);
 
 				// TODO: Que hacemos si hay error aca???
-			}catch (RestResponseException e){
+			} catch (RestResponseException e) {
 				String msg = e.getMensaje();
 				Log.i(TAG, "Error: " + msg);
-			}catch (ResourceAccessException e) {
+			} catch (ResourceAccessException e) {
 				Log.e(TAG, e.getMessage());
 
 			}

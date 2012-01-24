@@ -23,30 +23,37 @@ import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 import com.uas.gsiam.utils.Util;
 
-public class RadarActivity extends GDMapActivity implements LocationListener{
+/**
+ * 
+ * Esta activity muestra un mapa con los amigos del usuario que comparte su
+ * ubicacion.
+ * 
+ * @author Antonio
+ * 
+ */
+public class RadarActivity extends GDMapActivity implements LocationListener {
 
 	protected static final String TAG = "RadarActivity";
 	private MapView mapa;
 	private GeoPoint geoPointUbicacion;
 	private Location loc;
 	private LocationHelper locHelper;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.radar);
 		mapa = (MapView) findViewById(R.id.radarid);
-		
-		
+
 		locHelper = new LocationHelper();
 		locHelper.getLocation(this, locationResult);
-		
+
 		mostrarMapa(MisAmigosActivity.misAmigos);
-		
+
 		inicializarBar();
-		
+
 	}
-	
+
 	public LocationResult locationResult = new LocationResult() {
 
 		@Override
@@ -54,111 +61,119 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 			loc = location;
 		}
 	};
-	
+
 	private void inicializarBar() {
-		
-		getActionBar().setTitle("GSIAM - Radar Amigos");
+
+		getActionBar().setTitle(getString(R.string.radar));
 	}
-	
-	protected void onResume(){
+
+	protected void onResume() {
 		super.onResume();
 
 	}
-	
-	
+
 	@Override
 	protected boolean isRouteDisplayed() {
-		
+
 		return false;
 	}
-	
+
+	/**
+	 * Este metodo desplegara la posicion del usuario y todos los amigos que
+	 * compartan su ubicacion en este momento
+	 * 
+	 * @param amigos
+	 *            Lista de amigos a desplegar sobre el mapa.
+	 */
 	private void mostrarMapa(ArrayList<UsuarioDTO> amigos) {
 
 		if (mapa == null)
 			mapa = (MapView) findViewById(R.id.radarid);
 		MapController mapControl = mapa.getController();
-		mapa.setBuiltInZoomControls(true);	
+		mapa.setBuiltInZoomControls(true);
 		mapControl.setZoom(15);
 		mapa.setClickable(true);
-		
-		if (loc == null){
+
+		if (loc == null) {
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
-			
-			
+
 		} else {
 			geoPointUbicacion = new GeoPoint(
-					(int) (loc.getLatitude()*1000000),
-					(int) (loc.getLongitude()*1000000));	
-				
-			
-			
+					(int) (loc.getLatitude() * 1000000),
+					(int) (loc.getLongitude() * 1000000));
+
 			mapControl.animateTo(geoPointUbicacion);
-			
-			
-			BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
-			miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, "Aquí esoy", null));
-			
+
+			BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(
+					getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
+			miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion,
+					"Aquí esoy", null));
+
 			for (UsuarioDTO usuarioDTO : amigos) {
-				
-				// TODO : aqui falta filtar el tema de la hora de actualizacion!!!
-				
-				if (usuarioDTO.getPosicion() != null){
-					
-					GeoPoint geoPoint = new GeoPoint(
-							(int) (usuarioDTO.getPosicion().getLat()*1000000),
-							(int) (usuarioDTO.getPosicion().getLon()*1000000));
-					
+
+				// TODO : aqui falta filtar el tema de la hora de
+				// actualizacion!!!
+
+				if (usuarioDTO.getPosicion() != null) {
+
+					GeoPoint geoPoint = new GeoPoint((int) (usuarioDTO
+							.getPosicion().getLat() * 1000000),
+							(int) (usuarioDTO.getPosicion().getLon() * 1000000));
+
 					Drawable drw;
-					if (usuarioDTO.getAvatar() != null){
+					if (usuarioDTO.getAvatar() != null) {
 						Bitmap bit = Util.ArrayToBitmap(usuarioDTO.getAvatar());
 						bit = Util.getResizedBitmap(bit, 50, 50);
 						drw = Util.BitmapToDrawable(bit);
+					} else {
+						drw = getResources().getDrawable(
+								R.drawable.avatardefault);
 					}
-					else{
-						drw = getResources().getDrawable(R.drawable.avatardefault);
-					}
-					
-					BasicItemizedOverlay amigoOverlay = new BasicItemizedOverlay(drw, this);
-					
-					Location locAmigo = new Location("Ubicacion Amigo");  
-					locAmigo.setLatitude(usuarioDTO.getPosicion().getLat());  
-					locAmigo.setLongitude(usuarioDTO.getPosicion().getLon());  
-					Float distance = loc.distanceTo(locAmigo);  
-					
-					String fechaFormateada = new SimpleDateFormat("MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion().getFechaActualizacion());
-					
-					amigoOverlay.addOverlay(new OverlayItem(geoPoint, "Aquí se encuentra " + usuarioDTO.getNombre(), 
-											"Ultima actualización: " + fechaFormateada +"\nDistancia: " + distance/1000 + "Km"));
+
+					BasicItemizedOverlay amigoOverlay = new BasicItemizedOverlay(
+							drw, this);
+
+					Location locAmigo = new Location("Ubicacion Amigo");
+					locAmigo.setLatitude(usuarioDTO.getPosicion().getLat());
+					locAmigo.setLongitude(usuarioDTO.getPosicion().getLon());
+					Float distance = loc.distanceTo(locAmigo);
+
+					String fechaFormateada = new SimpleDateFormat(
+							"MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion()
+							.getFechaActualizacion());
+
+					amigoOverlay
+							.addOverlay(new OverlayItem(geoPoint,
+									"Aquí se encuentra "
+											+ usuarioDTO.getNombre(),
+									"Ultima actualización: " + fechaFormateada
+											+ "\nDistancia: " + distance / 1000
+											+ "Km"));
 					mapa.getOverlays().add(amigoOverlay);
 				}
 			}
-			
-			
+
 			mapControl.setCenter(geoPointUbicacion);
 			mapa.getOverlays().add(miPosicionOverlay);
 		}
-		
-		
-		
-		
-		
+
 	}
-	
+
 	private class BasicItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 		private Context mContext;
-		
+
 		public BasicItemizedOverlay(Drawable defaultMarker, Context context) {
 			super(boundCenterBottom(defaultMarker));
-			 mContext = context;
-			
+			mContext = context;
+
 		}
-		
+
 		public void addOverlay(OverlayItem overlay) {
-            mOverlays.add(overlay);
-            populate();
-        }
+			mOverlays.add(overlay);
+			populate();
+		}
 
 		@Override
 		protected OverlayItem createItem(int i) {
@@ -169,40 +184,40 @@ public class RadarActivity extends GDMapActivity implements LocationListener{
 		public int size() {
 			return mOverlays.size();
 		}
-		
+
 		@Override
-        protected boolean onTap(int index) {
-			
+		protected boolean onTap(int index) {
+
 			OverlayItem item = mOverlays.get(index);
 			Util.showAlertDialog(mContext, item.getTitle(), item.getSnippet());
-			
-            return true;
-        }
-		
+
+			return true;
+		}
+
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
 		this.loc = location;
-		
+
 	}
 
 	@Override
 	public void onProviderDisabled(String arg0) {
 		Util.showToast(getApplicationContext(), "EL gps no esta encendido");
-		
+
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

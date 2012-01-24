@@ -44,12 +44,21 @@ import com.facebook.android.FacebookError;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
+import com.uas.gsiam.servicios.EliminarSitioServicio;
 import com.uas.gsiam.servicios.PublicarServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.SessionStore;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * Esta activity es la encargada de manejar una publicacion en el sistema. Se
+ * puede ingresar un comentario, un puntaje del 1 al 5 y una foto. Tambien se da
+ * la posibilidad de compartir estos datos en facebook
+ * 
+ * @author Antonio
+ * 
+ */
 public class PublicarActivity extends GDActivity implements
 		OnRatingBarChangeListener {
 
@@ -67,7 +76,7 @@ public class PublicarActivity extends GDActivity implements
 	private ApplicationController app;
 	private static final int RESULT = 1001;
 	private String nombre;
-	//private ImageView fotoPub;
+	// private ImageView fotoPub;
 	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicacion;
@@ -82,7 +91,7 @@ public class PublicarActivity extends GDActivity implements
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
-		//fotoPub = (ImageView) findViewById(R.id.fotoPubId);
+		// fotoPub = (ImageView) findViewById(R.id.fotoPubId);
 		fotoButton = (ImageButton) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
@@ -123,6 +132,10 @@ public class PublicarActivity extends GDActivity implements
 
 	}
 
+	/**
+	 * Metodo que escucha la respuesta del servicio de
+	 * {@link PublicarServicio} 
+	 */
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -164,7 +177,8 @@ public class PublicarActivity extends GDActivity implements
 			if (comentarFaceBook.isChecked()) {
 				comentarFacebook();
 			} else {
-				publicacion.setComentario(comentario.getText().toString().trim());
+				publicacion.setComentario(comentario.getText().toString()
+						.trim());
 				publicacion.setIdSitio(sitio.getIdSitio());
 				publicacion.setIdUsuario(usuario.getId());
 				publicacion.setPuntaje(puntaje.getRating());
@@ -178,8 +192,7 @@ public class PublicarActivity extends GDActivity implements
 
 				startService(intent);
 			}
-			
-			
+
 		}
 
 	}
@@ -260,8 +273,6 @@ public class PublicarActivity extends GDActivity implements
 			postOnWall(comentario.getText().toString());
 		}
 
-		
-
 	}
 
 	public void postOnWall(String msg) {
@@ -273,7 +284,8 @@ public class PublicarActivity extends GDActivity implements
 			if (fotoButton.getDrawable() != null) {
 
 				parameters.putByteArray("picture", Util
-						.BitmapToArray((BitmapDrawable) fotoButton.getDrawable()));
+						.BitmapToArray((BitmapDrawable) fotoButton
+								.getDrawable()));
 				parameters.putString("caption", msg);
 				response = facebook.request("me/photos", parameters, "POST");
 
@@ -283,7 +295,7 @@ public class PublicarActivity extends GDActivity implements
 
 				response = facebook.request("me/feed", parameters, "POST");
 			}
-			
+
 			publicacion = new PublicacionDTO();
 			publicacion.setComentario(comentario.getText().toString().trim());
 			publicacion.setIdSitio(sitio.getIdSitio());
@@ -332,8 +344,6 @@ public class PublicarActivity extends GDActivity implements
 		case Constantes.REQUEST_CAMERA:
 			if (resultCode != 0) {
 
-				// Bitmap temp_bitmap = BitmapFactory.decodeByteArray(data, 0,
-				// data.,options)
 				myBitmap = BitmapFactory.decodeFile(path, options);
 
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -359,7 +369,7 @@ public class PublicarActivity extends GDActivity implements
 					myBitmap.compress(CompressFormat.JPEG, 60, out);
 					foto = out.toByteArray();
 					fotoButton.setImageBitmap(myBitmap);
-					
+
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -53,6 +53,21 @@ import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Esta activity es la responsable de mostrar la lista de sitios de interes
+ * cercanos a la ubicación del usuario. Se muestra el nombre del sitio, la
+ * direccion, el puntaje y la distancia a la ubicacion del usuario, ademas se
+ * mustra el icono de la categoria del sitio.
+ * 
+ * Dentro de esta activity se permite varias acciones como es la de filtrar la
+ * lista dependiendo la categoria del sitio o el puntaje de este. Buscar un
+ * sitio de interes por su nombre y actualizar la lista para obtener los datos
+ * mas recientes
+ * 
+ * @author Antonio
+ * 
+ */
 public class SitiosActivity extends GDActivity implements
 		OnItemLongClickListener {
 
@@ -92,7 +107,7 @@ public class SitiosActivity extends GDActivity implements
 		if (sitios != null) {
 			mostrarSitios(sitios);
 		}
-		
+
 		if (loc == null) {
 			// buildAlertMessageNoGps();
 			Util.dismissProgressDialog();
@@ -101,7 +116,7 @@ public class SitiosActivity extends GDActivity implements
 			if (sitios == null) {
 
 				actualizarSitios(loc);
-			}else{
+			} else {
 				Util.dismissProgressDialog();
 			}
 		}
@@ -122,6 +137,9 @@ public class SitiosActivity extends GDActivity implements
 		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
+	/**
+	 * Este metodo inicializa los botones de la barra superior de la activity
+	 */
 	private void initQuickActionBar() {
 		quickActions = new QuickActionBar(this);
 		quickActions.addQuickAction(new QuickAction(this,
@@ -156,14 +174,22 @@ public class SitiosActivity extends GDActivity implements
 				});
 	}
 
+	/**
+	 * Muestra el puntaje que se le puede poner a un sitio junto con su
+	 * significado
+	 * 
+	 * 1 Estrella - Malo 2 Estrellas - Regular 3 Estrellas - Bueno 4 Estrellas -
+	 * Muy Bueno 5 Estrellas - Excelente
+	 */
 	private void mostrarRaiting() {
-	
-String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
-		ListAdapter adapter = new RatingAdapter(this, R.layout.rating_item, items); 
-		   
+
+		String[] items = { "Malo", "Regular", "Bueno", "Muy Bueno", "Excelente" };
+		ListAdapter adapter = new RatingAdapter(this, R.layout.rating_item,
+				items);
+
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.rating);
-		builder.setAdapter(adapter,new DialogInterface.OnClickListener() {
+		builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int item) {
@@ -176,12 +202,16 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 
 		AlertDialog alert = builder.create();
 		alert.show();
-		  
 
 	}
 
 	private AlertDialog dialog = null;
 
+	/**
+	 * Muestra la lista de categorias para filtrar los sitios de interes. Estas
+	 * categorias se pueden dividir en sub categorias para que la calificacion
+	 * sea mas precisa
+	 */
 	public void mostarCategoria() {
 
 		ExpandableListView myList = new ExpandableListView(this);
@@ -195,9 +225,8 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 		CategoriaAdapter adaptador = new CategoriaAdapter(this,
 				gruposCategorias,
 				android.R.layout.simple_expandable_list_item_1,
-				new String[] {}, // the name of the field data
-				new int[] { android.R.id.text1 }, // the text field to populate
-													// with the field data
+				new String[] {}, new int[] { android.R.id.text1 },
+
 				subCategorias, 0, null, new int[] {});
 
 		myList.setAdapter(adaptador);
@@ -294,8 +323,7 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 				.setCancelable(false)
 				.setPositiveButton(Constantes.MSG_ACEPTAR,
 						new DialogInterface.OnClickListener() {
-							public void onClick(
-									final DialogInterface dialog,
+							public void onClick(final DialogInterface dialog,
 									final int id) {
 								launchGPSOptions();
 							}
@@ -347,6 +375,11 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 
 	}
 
+	/**
+	 * Busca un sitio por su nombre
+	 * 
+	 * @param query
+	 */
 	private void buscarSitio(String query) {
 		Log.i(TAG, "Estoy en la busqueda");
 		SitioDTO sitio = new SitioDTO();
@@ -370,8 +403,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 		registerReceiver(sitiosReceiver, sitioAccion);
 		registerReceiver(eliminarSitioReceiver, intentEliminarSitio);
 
-		// startListening();
-
 	}
 
 	public List<SitioDTO> getSitios() {
@@ -386,7 +417,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 		super.onPause();
 		unregisterReceiver(sitiosReceiver);
 		unregisterReceiver(eliminarSitioReceiver);
-		// stopListening();
 
 	}
 
@@ -417,6 +447,7 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 	}
 
 	/**
+	 * Metodo que escucha la respuesta del servicio de {@link SitioServicio}
 	 * 
 	 */
 	protected BroadcastReceiver sitiosReceiver = new BroadcastReceiver() {
@@ -452,6 +483,8 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 	}
 
 	/**
+	 * Metodo que escucha la respuesta del servicio de
+	 * {@link EliminarSitioServicio}
 	 * 
 	 */
 	protected BroadcastReceiver eliminarSitioReceiver = new BroadcastReceiver() {
@@ -459,8 +492,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 			Util.dismissProgressDialog();
-
-		
 
 			actualizarSitios(loc);
 
@@ -471,7 +502,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 
 		adaptador = new SitiosAdapter(this, R.layout.sitio, sitios, loc);
 
-		// lw.setAdapter(adaptador);
 		lw.setAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
@@ -479,7 +509,7 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+
 				Intent sitioDetalleIntent = new Intent(getApplicationContext(),
 						SitioTabActivity.class);
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
@@ -506,16 +536,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
 
-	// private void startListening() {
-	// locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
-	// 0, this);
-	// }
-	//
-	// private void stopListening() {
-	// if (locationManager != null)
-	// locationManager.removeUpdates(this);
-	// }
-
 	private void actualizarSitios(Location loc) {
 		if (loc != null) {
 
@@ -529,12 +549,15 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 
 			Intent intent = new Intent(this, SitioServicio.class);
 			intent.putExtra("sitio", sitio);
-			// intent.putExtras(bundle);
+
 			startService(intent);
 
 		}
 	}
 
+	/**
+	 * Metodo que obtiene la ubicacion geografica del usuario
+	 */
 	public LocationResult locationResult = new LocationResult() {
 
 		@Override
@@ -542,30 +565,6 @@ String[] items = {"Malo", "Regular", "Bueno", "Muy Bueno", "Excelente"};
 			loc = location;
 		}
 	};
-
-	// @Override
-	// public void onLocationChanged(Location location) {
-	// this.loc = location;
-	// actualizarSitios(loc);
-	//
-	// }
-	//
-	// @Override
-	// public void onStatusChanged(String provider, int status, Bundle extras) {
-	//
-	// }
-	//
-	// @Override
-	// public void onProviderEnabled(String provider) {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	//
-	// @Override
-	// public void onProviderDisabled(String provider) {
-	// Util.showToast(getApplicationContext(), "EL gps no esta encendido");
-	//
-	// }
 
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view,

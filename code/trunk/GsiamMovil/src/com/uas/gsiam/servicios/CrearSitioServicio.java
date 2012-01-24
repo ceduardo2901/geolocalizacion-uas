@@ -15,11 +15,20 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
+/**
+ * Servicio que crea un nuevo sitio de interes en el sistema. Se envian al
+ * servidor el nombre, direccion, categoria y la ubicacion geografica.
+ * Opcionalmente se pueden enviar el telefono y la url de la web del sitio
+ * 
+ * @author Antonio
+ * 
+ */
 public class CrearSitioServicio extends IntentService {
 
 	protected static String TAG = "AgregarSitioServicio";
@@ -45,7 +54,9 @@ public class CrearSitioServicio extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 
 		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
+		ApplicationController app = ((ApplicationController) getApplicationContext());
 
+		sitio.setIdUsuario(app.getUserLogin().getId());
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
 
@@ -69,11 +80,10 @@ public class CrearSitioServicio extends IntentService {
 			String msg = e.getMensaje();
 			Log.e(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
-		}catch(ResourceAccessException e){
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
-			
-			
+
 		}
 
 		sendBroadcast(intentBack);

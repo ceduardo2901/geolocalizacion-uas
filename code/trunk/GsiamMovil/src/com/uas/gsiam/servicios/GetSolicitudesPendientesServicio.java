@@ -21,6 +21,12 @@ import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * Servicio que recupera las solicitudes pendientes para el usario ingresado.
+ * 
+ * @author Martín
+ * 
+ */
 public class GetSolicitudesPendientesServicio extends IntentService {
 
 	protected static String TAG = "GetSolicitudesPendientesServicio";
@@ -50,27 +56,30 @@ public class GetSolicitudesPendientesServicio extends IntentService {
 		Map<String, Integer> parms = new HashMap<String, Integer>();
 		parms.put("id", user.getId());
 
-		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
 		Intent intentBack = new Intent(Constantes.GET_SOLICITUDES_FILTRO_ACTION);
-		
+
 		try {
 
 			UsuarioDTO[] respuesta = restTemp.getForObject(
-					Constantes.GET_SOLICITUDES_RECIBIDAS_SERVICE_URL, UsuarioDTO[].class,
-					parms);
+					Constantes.GET_SOLICITUDES_RECIBIDAS_SERVICE_URL,
+					UsuarioDTO[].class, parms);
 
-			intentBack.putExtra("listaRecibidas", Util.getArrayListUsuarioDTO(respuesta));
+			intentBack.putExtra("listaRecibidas",
+					Util.getArrayListUsuarioDTO(respuesta));
 
 			respuesta = restTemp.getForObject(
-					Constantes.GET_SOLICITUDES_ENVIADAS_SERVICE_URL, UsuarioDTO[].class,
-					parms);
+					Constantes.GET_SOLICITUDES_ENVIADAS_SERVICE_URL,
+					UsuarioDTO[].class, parms);
 
-			intentBack.putExtra("listaEnviadas", Util.getArrayListUsuarioDTO(respuesta));
+			intentBack.putExtra("listaEnviadas",
+					Util.getArrayListUsuarioDTO(respuesta));
 
-		} catch (RestResponseException e){
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
-		}catch (ResourceAccessException e) {
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}

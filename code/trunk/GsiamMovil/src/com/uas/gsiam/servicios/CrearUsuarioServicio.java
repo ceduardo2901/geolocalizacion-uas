@@ -20,22 +20,28 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
-
-public class CrearUsuarioServicio extends IntentService{
+/**
+ * Servicio que crea un nuevo usuario en el sistema. Se envian al servidor el
+ * nombre, email y contraseña para su creacion
+ * 
+ * @author Martin
+ * 
+ */
+public class CrearUsuarioServicio extends IntentService {
 
 	protected static String TAG = "CrearUsuarioServicio";
 	protected RestTemplate restTemp;
 	protected HttpEntity<UsuarioDTO> requestEntity;
 	protected HttpHeaders requestHeaders;
-	
+
 	public CrearUsuarioServicio() {
 		super(TAG);
-		
+
 	}
-	
-	public void onCreate(){
+
+	public void onCreate() {
 		super.onCreate();
-		requestHeaders = new HttpHeaders();		
+		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
 				HttpUtils.getNewHttpClient()));
@@ -43,35 +49,38 @@ public class CrearUsuarioServicio extends IntentService{
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		UsuarioDTO usuario = (UsuarioDTO) intent.getSerializableExtra("usuario");
-		requestEntity = new HttpEntity<UsuarioDTO>(usuario,requestHeaders);
+
+		UsuarioDTO usuario = (UsuarioDTO) intent
+				.getSerializableExtra("usuario");
+		requestEntity = new HttpEntity<UsuarioDTO>(usuario, requestHeaders);
 		Intent intentBack = new Intent(Constantes.CREAR_USUARIO_FILTRO_ACTION);
-		
-		try{
-			
-			restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
 
-			ResponseEntity<String> respuesta = restTemp.exchange(Constantes.CREAR_USUARIO_SERVICE_URL, 
-					HttpMethod.POST, requestEntity, String.class);	
+		try {
 
+			restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+					String.class));
+
+			ResponseEntity<String> respuesta = restTemp.exchange(
+					Constantes.CREAR_USUARIO_SERVICE_URL, HttpMethod.POST,
+					requestEntity, String.class);
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
-				intentBack.putExtra("respuesta", Constantes.MSG_USUARIO_CREADO_OK);
+				intentBack.putExtra("respuesta",
+						Constantes.MSG_USUARIO_CREADO_OK);
 			} else {
 				intentBack.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
 
 			}
 
-		}catch (RestResponseException e){
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			Log.d(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
-		}catch (ResourceAccessException e) {
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}
-	
+
 		sendBroadcast(intentBack);
 	}
 
