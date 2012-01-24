@@ -11,7 +11,8 @@
 		<item>Galeria</item>
 
 	</string-array>
-	<string name="hello">Hello World!</string>
+	
+	<string name="radar">GSIAM - Radar Amigos</string>
 	<string name="app_name">GSIAM</string>
 	<string name="email">Email</string>
 	<string name="pass">Contraseña</string>

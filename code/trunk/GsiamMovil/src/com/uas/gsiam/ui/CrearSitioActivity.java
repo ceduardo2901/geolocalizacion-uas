@@ -35,10 +35,25 @@ import com.uas.gsiam.adapter.CategoriaAdapter;
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.servicios.CrearSitioServicio;
+import com.uas.gsiam.servicios.PublicarServicio;
 import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Esta activity representa la interfaz grafica para la creacion de un nuevo
+ * sitio de interes en la aplicacion. Para la creacion de un sitio se debera
+ * ingresar el nombre, la direccion y una categoria. Opccionalmente se podra
+ * ingresar un numero de telefono y la web del sitio.
+ * 
+ * Tambien se presenta un mapa para que el usuario pueda elegir la ubicacion
+ * geografica que desee, por defecto marca en el mapa la posicion actual del
+ * usuario
+ * 
+ * @author Antonio
+ * 
+ */
 public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 
 	private static final String TAG = "CrearSitioActivity";
@@ -51,15 +66,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private Button crearSitioBtn;
 	private SitioDTO sitioDto;
 	private Location loc;
-//	private int index;
+
 	protected IntentFilter crearSitioFiltro;
 	private MapView mapa;
 	private GeoPoint geoPoint;
 	private MapController mapControl;
 	private CategoriaDTO categoriaSeleccionada;
-
-	// private ArrayList<CategoriaIconoMenu> listCategorias = new
-	// ArrayList<CategoriaIconoMenu>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +91,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		mapControl.setZoom(15);
 		mapa.setBuiltInZoomControls(true);
 		mapa.setClickable(true);
-		
+
 		geoPoint = new GeoPoint((int) (loc.getLatitude() * 1000000),
 				(int) (loc.getLongitude() * 1000000));
 
@@ -121,6 +133,11 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		unregisterReceiver(receiverCrearSitio);
 	}
 
+	/**
+	 * Crea el sitio de interes con los valores ingresados
+	 * 
+	 * @param v
+	 */
 	public void crearSitio(View v) {
 		sitioDto.setDireccion(direccionSitioTxt.getText().toString());
 		sitioDto.setNombre(nombreSitioTxt.getText().toString());
@@ -129,7 +146,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		sitioDto.setLat(loc.getLatitude());
 		sitioDto.setLon(loc.getLongitude());
 		sitioDto.setCategoria(categoriaSeleccionada);
-	
+
 		Intent intent = new Intent(this, CrearSitioServicio.class);
 		intent.putExtra("sitio", sitioDto);
 		startService(intent);
@@ -140,7 +157,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private AlertDialog dialog = null;
 
 	public void mostarCategoria(View v) {
-		
+
 		ExpandableListView myList = new ExpandableListView(this);
 		myList.setDividerHeight(2);
 		ApplicationController app = ((ApplicationController) getApplicationContext());
@@ -152,9 +169,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		CategoriaAdapter adaptador = new CategoriaAdapter(this,
 				gruposCategorias,
 				android.R.layout.simple_expandable_list_item_1,
-				new String[] {}, // the name of the field data
-				new int[] { android.R.id.text1 }, // the text field to populate
-													// with the field data
+				new String[] {}, new int[] { android.R.id.text1 },
 				subCategorias, 0, null, new int[] {});
 
 		myList.setAdapter(adaptador);
@@ -171,11 +186,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 								childPosition);
 
 				categoriaSeleccionada = (CategoriaDTO) map.get("CategoriaDTO");
-				categoriaSitioTxt.setText(categoriaSeleccionada.getDescripcion());
-				
+				categoriaSitioTxt.setText(categoriaSeleccionada
+						.getDescripcion());
+
 				if (dialog != null) {
 					dialog.dismiss();
-					
+
 				}
 
 				return true;
@@ -191,6 +207,10 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 
 	}
 
+	/**
+	 * Metodo que escucha la respuesta del servicio de
+	 * {@link CrearSitioServicio}
+	 */
 	protected BroadcastReceiver receiverCrearSitio = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {

@@ -20,6 +20,15 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
+/**
+ * 
+ * Servicio que crea una nueva publicacion para un sitio de interes. Se puede
+ * publicar un comentario, puntaje y una foto del sitio, ademas es posible
+ * compartir esta informacion en tu muro de facebook
+ * 
+ * @author Antonio
+ * 
+ */
 public class PublicarServicio extends IntentService {
 
 	protected static String TAG = "PublicarServicio";
@@ -60,7 +69,6 @@ public class PublicarServicio extends IntentService {
 			ResponseEntity<String> respuesta = restTemp.exchange(
 					Constantes.CREAR_PUBLICACION_SERVICE_URL, HttpMethod.POST,
 					requestEntity, String.class);
-
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentPublicacion.putExtra("respuesta",

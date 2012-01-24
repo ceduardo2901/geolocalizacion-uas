@@ -19,19 +19,26 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
-
-public class EditarUsuarioServicio extends IntentService{
+/**
+ * 
+ * Servicio que permite la modificacion de los datos de un usuario del sistema.
+ * Se podra modificar el nombre, el email, contraseña y la foto del perfil
+ * 
+ * @author Martin
+ * 
+ */
+public class EditarUsuarioServicio extends IntentService {
 
 	protected static String TAG = "EditarUsuarioServicio";
 	protected RestTemplate restTemp;
 	protected HttpHeaders requestHeaders;
-	
+
 	public EditarUsuarioServicio() {
 		super(TAG);
-		
+
 	}
-	
-	public void onCreate(){
+
+	public void onCreate() {
 		super.onCreate();
 		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
@@ -42,34 +49,37 @@ public class EditarUsuarioServicio extends IntentService{
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		UsuarioDTO usuario = (UsuarioDTO) intent.getSerializableExtra("usuario");
-		
+
+		UsuarioDTO usuario = (UsuarioDTO) intent
+				.getSerializableExtra("usuario");
+
 		Map<String, UsuarioDTO> parms = new HashMap<String, UsuarioDTO>();
 		parms.put("usuarioDto", usuario);
-		
+
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
-		
-		Intent intentBack = new Intent(Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
-		
-		try{
-		
-			restTemp.postForObject(Constantes.MODIFICAR_USUARIO_SERVICE_URL, usuario, String.class);	
+
+		Intent intentBack = new Intent(
+				Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
+
+		try {
+
+			restTemp.postForObject(Constantes.MODIFICAR_USUARIO_SERVICE_URL,
+					usuario, String.class);
 			intentBack.putExtra("respuesta", Constantes.MSG_USUARIO_EDITADO_OK);
 			intentBack.putExtra("usuario", usuario);
-			
-		}catch (RestResponseException e){
+
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
-		}catch (ResourceAccessException e) {
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 
 		}
 
 		sendBroadcast(intentBack);
-		
+
 	}
 
 }

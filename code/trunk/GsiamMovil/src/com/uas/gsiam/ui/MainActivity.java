@@ -24,6 +24,17 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
+/**
+ * Esta activity es la interfaz principal de la aplicacion. En ella se puede
+ * navegar a los sitios, donde se presentara informacion de los sitios cercanos
+ * y las publicaciones hechas en estos. Tambien se puede navegar a la interfaz
+ * de amigos donde podremos invitar a un amigo a la aplicacion y ver las
+ * solicitudes de amistad. Luego podemos ir a editar el perfil de usuario o se
+ * puede ir a configuracion donde podremos habilitar compartir nuestra ubicacion
+ * 
+ * @author Antonio
+ * 
+ */
 public class MainActivity extends GDActivity {
 
 	private ImageButton sitiosButton;
@@ -69,10 +80,10 @@ public class MainActivity extends GDActivity {
 		boolean compartirUbicacion = preferencias.getBoolean("compUbicacionId",
 				false);
 		Intent intent = new Intent(this, ActualizarPosicionServicio.class);
-		
+
 		LocationHelper h = new LocationHelper();
 		boolean result = h.getLocation(this, locationResult);
-		if(result){
+		if (result) {
 			intent.putExtra("loc", currentLocation);
 		}
 		if (compartirUbicacion) {
@@ -86,18 +97,21 @@ public class MainActivity extends GDActivity {
 			}
 		}
 	}
-	
-	public LocationResult locationResult = new LocationResult()
-	{
-	    
+
+	public LocationResult locationResult = new LocationResult() {
 
 		@Override
-	    public void obtenerUbicacion(final Location location)
-	    {
-	        currentLocation = location;
-	    }
+		public void obtenerUbicacion(final Location location) {
+			currentLocation = location;
+		}
 	};
 
+	/**
+	 * Determina si el servicio de radar esta habilitado para tomar una accion
+	 * 
+	 * @return Devuelve true si el servicio esta activado, falso en caso
+	 *         contrario
+	 */
 	private boolean isMyServiceRunning() {
 		ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		for (RunningServiceInfo service : manager
@@ -118,7 +132,6 @@ public class MainActivity extends GDActivity {
 	private void inicializarBar() {
 
 		addActionBarItem(Type.Help, 0);
-		
 
 	}
 
@@ -134,14 +147,15 @@ public class MainActivity extends GDActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.cerrarSesionId:
-			// SessionStore.clear(this);
-			if(isMyServiceRunning()){
-				Intent intent = new Intent(this, ActualizarPosicionServicio.class);
+
+			if (isMyServiceRunning()) {
+				Intent intent = new Intent(this,
+						ActualizarPosicionServicio.class);
 				stopService(intent);
 			}
 			Intent loginIntent = new Intent(this, LoginActivity.class);
 			startActivity(loginIntent);
-			
+
 			break;
 
 		default:
@@ -171,22 +185,34 @@ public class MainActivity extends GDActivity {
 		}
 	};
 
+	/**
+	 * Navegacion a la interfaz de sitios
+	 */
 	private void sitiosActivity() {
 		Intent sitioIntent = new Intent(this, SitiosActivity.class);
 		startActivity(sitioIntent);
 
 	}
 
+	/**
+	 * Navegacion a la interfaz de preferencias
+	 */
 	private void preferenciasActivity() {
 		Intent preferenciasIntent = new Intent(this, Preferencias.class);
 		startActivity(preferenciasIntent);
 	}
 
+	/**
+	 * Navegacion a la interfaz de perfil de usuario
+	 */
 	private void perfilActivity() {
 		Intent perfilIntent = new Intent(this, PerfilActivity.class);
 		startActivity(perfilIntent);
 	}
 
+	/**
+	 * Navegacion a la interfaz de amigos
+	 */
 	private void amigosActivity() {
 		Intent amigosIntent = new Intent(this, AmigosTabActivity.class);
 		startActivity(amigosIntent);

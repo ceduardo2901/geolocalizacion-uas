@@ -23,6 +23,14 @@ import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Servicio que permite la autenticacion de un usuario en el sistema. Se debera
+ * enviar al servidor el email y contraseña para su autenticacion
+ * 
+ * @author Antonio
+ * 
+ */
 public class LoginServicio extends IntentService {
 
 	protected static String TAG = "LoginServicio";
@@ -36,10 +44,10 @@ public class LoginServicio extends IntentService {
 
 	public void onCreate() {
 		super.onCreate();
-		
-		 
-	    HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(HttpUtils.getNewHttpClient());
-		
+
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(
+				HttpUtils.getNewHttpClient());
+
 		restTemp = new RestTemplate(requestFactory);
 	}
 
@@ -58,11 +66,10 @@ public class LoginServicio extends IntentService {
 			parms.put("pass", pass);
 			restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 					String.class));
-			 
+
 			UsuarioDTO user = restTemp.getForObject(
 					Constantes.LOGIN_SERVICE_URL, UsuarioDTO.class, parms);
-			
-			
+
 			if (user.getEmail() != null) {
 				ApplicationController app = ((ApplicationController) getApplicationContext());
 				app.setUserLogin(user);
@@ -89,12 +96,11 @@ public class LoginServicio extends IntentService {
 					.getBody());
 			Log.e(TAG, (String) e.getResponseEntity().getBody());
 			sendBroadcast(intentLogin);
-		}catch(ResourceAccessException e){
+		} catch (ResourceAccessException e) {
 			intentLogin.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 			Log.e(TAG, e.getMessage());
 			sendBroadcast(intentLogin);
-			
-			
+
 		}
 
 	}

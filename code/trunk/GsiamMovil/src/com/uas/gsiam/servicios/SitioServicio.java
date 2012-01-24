@@ -1,6 +1,5 @@
 package com.uas.gsiam.servicios;
 
-
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,6 +35,16 @@ import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Este servicio recupera los sitios de interes a un radio determinado de la
+ * ubicacion geografica del usuario. Los datos de entrada para el servicio son
+ * la latitud y longitud del dispositivo movil
+ * 
+ * @author Antonio
+ * 
+ */
+
 public class SitioServicio extends IntentService {
 
 	protected static String TAG = "SitioServicio";
@@ -54,7 +63,7 @@ public class SitioServicio extends IntentService {
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
 				HttpUtils.getNewHttpClient()));
-		
+
 	}
 
 	@Override
@@ -63,11 +72,11 @@ public class SitioServicio extends IntentService {
 		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
 		SitioDTO[] respuesta = null;
-		
+
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
 		requestEntity = new HttpEntity<SitioDTO>(sitio, requestHeaders);
-		
+
 		Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
 		try {
 			if (sitio.getLat() != null && sitio.getLon() != null) {
@@ -80,31 +89,32 @@ public class SitioServicio extends IntentService {
 						Constantes.SITIOS_SERVICE_URL, SitioDTO[].class, parms);
 			} else {
 				Map<String, String> parms = new HashMap<String, String>();
-				
-				if(sitio.getIdSitio() != null){
+
+				if (sitio.getIdSitio() != null) {
 					String id = String.valueOf(sitio.getIdSitio());
 					parms.put("id", id);
-				}else{
+				} else {
 					parms.put("id", "0");
 				}
-				if(sitio.getNombre() != null){
+				if (sitio.getNombre() != null) {
 					parms.put("nombre", sitio.getNombre());
-				}else{
+				} else {
 					parms.put("nombre", " ");
 				}
- 
+
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
 						SitioDTO[].class, parms);
 			}
 
 			ArrayList<SitioDTO> lista = Util.getArrayListSitioDTO(respuesta);
-			if(lista != null){
-				for(SitioDTO s : lista){
-					if(s.getPublicaciones() != null){
-						List<PublicacionDTO> publicaciones = s.getPublicaciones();
-						for(PublicacionDTO p : publicaciones){
-							if(p.getFoto() != null){
+			if (lista != null) {
+				for (SitioDTO s : lista) {
+					if (s.getPublicaciones() != null) {
+						List<PublicacionDTO> publicaciones = s
+								.getPublicaciones();
+						for (PublicacionDTO p : publicaciones) {
+							if (p.getFoto() != null) {
 								p.setFoto(comprimirFoto(p));
 							}
 						}
@@ -114,36 +124,33 @@ public class SitioServicio extends IntentService {
 			}
 			intentSitio.putExtra("sitios", lista);
 
-			
-			
 		} catch (RestResponseException e) {
-			
+
 			Log.i(TAG, "Error: " + e.getMensaje());
-			
+
 			Log.e(TAG, "Error: " + e.getMensaje());
 			intentSitio.putExtra("error", e.getMensaje());
 		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
-			intentSitio
-					.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
+			intentSitio.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 
 		}
-		
+
 		sendBroadcast(intentSitio);
 
 	}
 
-	private byte[] comprimirFoto(PublicacionDTO pub){
+	private byte[] comprimirFoto(PublicacionDTO pub) {
 		Bitmap myBitmap;
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize=2;
-		
-		myBitmap = BitmapFactory.decodeByteArray(pub.getFoto(), 0, pub.getFoto().length, options);
-		ByteArrayOutputStream out =  new ByteArrayOutputStream();
+		options.inSampleSize = 2;
+
+		myBitmap = BitmapFactory.decodeByteArray(pub.getFoto(), 0,
+				pub.getFoto().length, options);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		myBitmap.compress(CompressFormat.JPEG, 60, out);
 		return out.toByteArray();
-				
+
 	}
-	
 
 }

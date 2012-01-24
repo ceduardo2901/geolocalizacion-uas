@@ -21,23 +21,30 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
-
-public class CrearSolicitudAmistadServicio extends IntentService{
+/**
+ * Este servicio crea una nueva solicitud de amistad en el sistema. Se envian al
+ * servidor el identificador del usuario solicitante, el identificador del
+ * usuario aprobador y la fecha de la solicitud
+ * 
+ * @author Martin
+ * 
+ */
+public class CrearSolicitudAmistadServicio extends IntentService {
 
 	protected static String TAG = "CrearSolicitudAmistadServicio";
 	protected SharedPreferences prefs;
 	protected RestTemplate restTemp;
 	protected HttpHeaders requestHeaders;
 	protected HttpEntity<SolicitudContactoDTO> requestEntity;
-	
+
 	public CrearSolicitudAmistadServicio() {
 		super(TAG);
-		
+
 	}
-	
-	public void onCreate(){
+
+	public void onCreate() {
 		super.onCreate();
-		requestHeaders = new HttpHeaders();		
+		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
 				HttpUtils.getNewHttpClient()));
@@ -46,37 +53,40 @@ public class CrearSolicitudAmistadServicio extends IntentService{
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		
-		SolicitudContactoDTO solicitud = (SolicitudContactoDTO) intent.getSerializableExtra("solicitud");
-		requestEntity = new HttpEntity<SolicitudContactoDTO>(solicitud,requestHeaders);
-		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(String.class));
-		Intent intentBack = new Intent(Constantes.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION);
-		
-		try{
-						
-			ResponseEntity<String> respuesta = restTemp.exchange(Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL, 
-					HttpMethod.POST, requestEntity, String.class);	
-			
+
+		SolicitudContactoDTO solicitud = (SolicitudContactoDTO) intent
+				.getSerializableExtra("solicitud");
+		requestEntity = new HttpEntity<SolicitudContactoDTO>(solicitud,
+				requestHeaders);
+		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
+				String.class));
+		Intent intentBack = new Intent(
+				Constantes.CREAR_SOLICITUD_AMISTAD_FILTRO_ACTION);
+
+		try {
+
+			ResponseEntity<String> respuesta = restTemp.exchange(
+					Constantes.CREAR_SOLICITUD_AMISTAD_SERVICE_URL,
+					HttpMethod.POST, requestEntity, String.class);
+
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
-				intentBack.putExtra("respuesta", Constantes.MSG_SOLICITUD_CREADA_OK);
+				intentBack.putExtra("respuesta",
+						Constantes.MSG_SOLICITUD_CREADA_OK);
 			} else {
 				intentBack.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
 
 			}
-			
-			
-		}catch (RestResponseException e){
+
+		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			Log.d(TAG, "Error: " + msg);
 			intentBack.putExtra("error", msg);
-		}catch(ResourceAccessException e){
+		} catch (ResourceAccessException e) {
 			Log.e(TAG, e.getMessage());
 			intentBack.putExtra("error", Constantes.MSG_ERROR_TIMEOUT);
 		}
 		sendBroadcast(intentBack);
 
 	}
-	
 
-	
 }

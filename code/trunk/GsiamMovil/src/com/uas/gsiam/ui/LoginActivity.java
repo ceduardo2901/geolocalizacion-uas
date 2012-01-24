@@ -18,6 +18,18 @@ import com.uas.gsiam.servicios.LoginServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Este activity representa la interfaz para realizar el login en la aplicacion.
+ * Permite a el usuario, a partir del email y la contraseña, la autenticacion en
+ * la misma
+ * 
+ * Tambien permite la opccion de registrarse en el sistema si es que aun no esta
+ * registrado
+ * 
+ * @author Antonio
+ * 
+ */
 public class LoginActivity extends Activity {
 
 	protected static String TAG = "LoginActivity";
@@ -39,12 +51,7 @@ public class LoginActivity extends Activity {
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
 
-		/*
-		 * textAplicacion = (TextView) findViewById(R.id.textAplicacion);
-		 * Drawable img = getResources().getDrawable(R.drawable.logo);
-		 * img.setBounds( 0, 0, 35, 35 ); textAplicacion.setCompoundDrawables(
-		 * img, null, null, null );
-		 */loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
+		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
 
@@ -77,30 +84,37 @@ public class LoginActivity extends Activity {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
 
 		} else {
-			if(isOnline()){
-			Bundle bundle = new Bundle();
-			bundle.putString("email", email);
-			bundle.putString("pass", pass);
+			if (isOnline()) {
+				Bundle bundle = new Bundle();
+				bundle.putString("email", email);
+				bundle.putString("pass", pass);
 
-			Intent intent = new Intent(this, LoginServicio.class);
-			intent.putExtras(bundle);
-			startService(intent);
+				Intent intent = new Intent(this, LoginServicio.class);
+				intent.putExtras(bundle);
+				startService(intent);
 
-			Util.showProgressDialog(this,
-					Constantes.MSG_ESPERA_INICIANDO_SESION);
-			}else{
+				Util.showProgressDialog(this,
+						Constantes.MSG_ESPERA_INICIANDO_SESION);
+			} else {
 				Util.showToast(this, Constantes.MSG_CONEXION_ERROR);
 			}
 		}
 	}
-	
+
+	/**
+	 * Determina si el dispositivo movil tiene conexion a internet, en caso
+	 * contrario avisa al usuario que habilite algun mecanismo de conexion
+	 * 
+	 * @return Devuelve true si esta hilitada la conexion a internet en el
+	 *         dispositivo movil, false en caso contrario
+	 */
 	public boolean isOnline() {
-	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-	        return true;
-	    }
-	    return false;
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+		return false;
 	}
 
 	public void btnRegistrarse(View v) {
@@ -133,7 +147,7 @@ public class LoginActivity extends Activity {
 				} else {
 					user = (UsuarioDTO) bundle.getSerializable("usuario");
 					if (user.getEmail() != null) {
-						// SessionStore.save(email, getApplicationContext());
+
 						actividadPrincipal();
 					} else {
 						Util.showToast(context, Constantes.MSG_LOGIN_ERROR);

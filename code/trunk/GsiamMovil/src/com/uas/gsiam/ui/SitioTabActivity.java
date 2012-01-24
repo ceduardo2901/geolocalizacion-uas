@@ -23,6 +23,18 @@ import com.uas.gsiam.servicios.SitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * Esta activity representa el tab que muestra el detalle del sitio de interes
+ * seleccionado. En esta interfaz se muestran todos los datos del sitio, nombre,
+ * direccion, telefono y web. Ademas se muestra las fotos subidas del sitio.
+ * 
+ * Otra de las funcionalidades de esta pantalla es la del boton como ir que
+ * permite saber que camino debo tomar para ir a este sitio desde mi posicion
+ * actual.
+ * 
+ * @author Antonio
+ * 
+ */
 public class SitioTabActivity extends GDTabActivity {
 
 	protected static String TAG = "SitioTabActivity";
@@ -40,8 +52,6 @@ public class SitioTabActivity extends GDTabActivity {
 	private Intent intent;
 	protected static SitioDTO sitio;
 
-
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
@@ -60,7 +70,7 @@ public class SitioTabActivity extends GDTabActivity {
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
 		mTabHost.setCurrentTab(0);
-		
+
 		Log.i(TAG, "**** currentTab =  " + currentTab);
 		mTabHost.getCurrentTabTag();
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
@@ -77,14 +87,13 @@ public class SitioTabActivity extends GDTabActivity {
 		int currentTab = mTabHost.getCurrentTab();
 		editor.putInt(PREF_STICKY_TAB, currentTab);
 		editor.commit();
-		
+
 	}
-	
+
 	protected void OnResume() {
 		super.onResume();
 	}
-	
-	
+
 	protected BroadcastReceiver sitiosReceiver = new BroadcastReceiver() {
 		@SuppressWarnings("unchecked")
 		@Override
@@ -97,7 +106,7 @@ public class SitioTabActivity extends GDTabActivity {
 
 			if (sitios != null) {
 				sitio = sitios.get(0);
-				
+
 			}
 			Util.dismissProgressDialog();
 
@@ -107,7 +116,8 @@ public class SitioTabActivity extends GDTabActivity {
 
 			if (sitios.size() == 0) {
 
-				Util.showToast(getApplicationContext(), Constantes.MSG_NO_EXISTEN_SITIOS);
+				Util.showToast(getApplicationContext(),
+						Constantes.MSG_NO_EXISTEN_SITIOS);
 
 			}
 
@@ -130,6 +140,7 @@ public class SitioTabActivity extends GDTabActivity {
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
 		case MAPA:
+			
 			mostarMapa();
 			break;
 		case COMPARTIR:
@@ -145,13 +156,13 @@ public class SitioTabActivity extends GDTabActivity {
 		return true;
 
 	}
-	
+
 	private void actualizar() {
 		Intent intent = new Intent(this, SitioServicio.class);
 		SitioDTO sitioUpdate = new SitioDTO();
 		sitioUpdate.setIdSitio(sitio.getIdSitio());
 		intent.putExtra("sitio", sitioUpdate);
-		
+
 		startService(intent);
 
 	}
@@ -200,13 +211,11 @@ public class SitioTabActivity extends GDTabActivity {
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
 	}
-	
 
 	private void mostarMapa() {
 		Intent intent = new Intent(this, MostrarMapaActivity.class);
 		startActivity(intent);
 
 	}
-
 
 }

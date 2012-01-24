@@ -29,6 +29,13 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Esta activity representa el tab para agregar a un amigo en el sistema.                       
+ * 
+ * @author Martín
+ *
+ */
 public class AgregarAmigosActivity extends ListActivity implements OnItemClickListener{
 
 	

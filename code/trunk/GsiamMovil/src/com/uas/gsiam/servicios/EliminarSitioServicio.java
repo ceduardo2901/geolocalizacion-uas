@@ -17,6 +17,13 @@ import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
 import com.uas.gsiam.utils.RestResponseException;
 
+/**
+ * Este servicio permite la eliminacion de un sitio de interes del sistema. Se
+ * debera ingresar el identificador del sitio de interes a eliminar
+ * 
+ * @author Antonio
+ * 
+ */
 public class EliminarSitioServicio extends IntentService {
 
 	protected static String TAG = "EliminarSitioServicio";
