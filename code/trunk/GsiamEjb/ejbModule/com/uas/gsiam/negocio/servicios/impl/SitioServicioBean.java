@@ -15,36 +15,36 @@ import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
 import com.uas.gsiam.persistencia.AbstractFactory;
+import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.utiles.Constantes;
 
-@Stateless(name="SitioServicio")
-public class SitioServicioBean implements SitioServicio{
+@Stateless(name = "SitioServicio")
+public class SitioServicioBean implements SitioServicio {
 
-	
 	public SitioServicioBean() {
-        
-    	
-    }
-	
+
+	}
+
 	@Override
-	public void crearSitio(SitioDTO sitioInteres) throws SitioYaExisteExcepcion, SitioExcepcion {
-		
-		
+	public void crearSitio(SitioDTO sitioInteres)
+			throws SitioYaExisteExcepcion, SitioExcepcion {
+
 		try {
-			AbstractFactory.getInstance().getSitioDAO().agregarSitio(sitioInteres);
+			AbstractFactory.getInstance().getSitioDAO()
+					.agregarSitio(sitioInteres);
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
-			
+
 		} catch (InstantiationException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
-			
+
 		} catch (IllegalAccessException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
 		} catch (ClassNotFoundException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
-			
+
 		}
-		
+
 	}
 
 	@Override
@@ -60,14 +60,19 @@ public class SitioServicioBean implements SitioServicio{
 		} catch (ClassNotFoundException e) {
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
-		
+
 	}
 
 	@Override
 	public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
-		
+
 		try {
-			AbstractFactory.getInstance().getSitioDAO().modificarSitio(sitio);
+			ISitioDAO sitioDao = AbstractFactory.getInstance().getSitioDAO();
+			if (sitioDao.usuarioCreadorSitio(sitio)) {
+				sitioDao.modificarSitio(sitio);
+			} else {
+				throw new SitioExcepcion(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
+			}
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -76,14 +81,17 @@ public class SitioServicioBean implements SitioServicio{
 			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
 		} catch (ClassNotFoundException e) {
 			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
+		} catch (SQLException e) {
+			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
 		}
 	}
 
 	@Override
 	public List<SitioDTO> obtenerSitios(SitioDTO sitio) throws SitioExcepcion {
-		List<SitioDTO> sitios=null;
+		List<SitioDTO> sitios = null;
 		try {
-			sitios = AbstractFactory.getInstance().getSitioDAO().obtenerSitios(sitio);
+			sitios = AbstractFactory.getInstance().getSitioDAO()
+					.obtenerSitios(sitio);
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -101,9 +109,10 @@ public class SitioServicioBean implements SitioServicio{
 	@Override
 	public void crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
-		
+
 		try {
-			AbstractFactory.getInstance().getPublicacionDAO().crearPublicacion(publicacion);
+			AbstractFactory.getInstance().getPublicacionDAO()
+					.crearPublicacion(publicacion);
 		} catch (IOException e) {
 			throw new PublicacionExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -117,10 +126,11 @@ public class SitioServicioBean implements SitioServicio{
 
 	@Override
 	public List<SitioDTO> buscarSitios(SitioDTO sitio) throws SitioExcepcion {
-		List<SitioDTO> sitios=null;
-		
+		List<SitioDTO> sitios = null;
+
 		try {
-			sitios = AbstractFactory.getInstance().getSitioDAO().buscarSitio(sitio);
+			sitios = AbstractFactory.getInstance().getSitioDAO()
+					.buscarSitio(sitio);
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -130,18 +140,18 @@ public class SitioServicioBean implements SitioServicio{
 		} catch (ClassNotFoundException e) {
 			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
 		}
-		
+
 		return sitios;
-		
+
 	}
-	
+
 	@Override
-	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion{
-		
+	public ArrayList<CategoriaDTO> getCategorias() throws SitioExcepcion {
+
 		try {
-			
+
 			return AbstractFactory.getInstance().getSitioDAO().getCategorias();
-			
+
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -152,8 +162,8 @@ public class SitioServicioBean implements SitioServicio{
 			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CARGAR_CATEGORIAS);
-		} 
-		
+		}
+
 	}
 
 }

@@ -28,25 +28,27 @@ public class SitioDAO implements ISitioDAO {
 		CategoriaDTO categoria;
 		SitioDTO resultado;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
-		
-		StringBuilder sqlExisteSitio = new StringBuilder("SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
-		if(sitioInteres.getIdSitio().doubleValue() > 0){
+
+		StringBuilder sqlExisteSitio = new StringBuilder(
+				"SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
+		if (sitioInteres.getIdSitio().doubleValue() > 0) {
 			sqlExisteSitio.append("and s.sit_id=?");
 		}
-		
-		if(sitioInteres.getNombre() != null){
+
+		if (sitioInteres.getNombre() != null) {
 			String nombre = sitioInteres.getNombre();
-			if(!nombre.equals(" ")){		
+			if (!nombre.equals(" ")) {
 				sqlExisteSitio.append("and upper(s.sit_nombre) like ?");
 			}
 		}
 		try {
 
-			ps = ConexionJDBCUtil.getConexion()
-					.prepareStatement(sqlExisteSitio.toString());
-			if(sitioInteres.getNombre() != null){
-				ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase() + "%");
-			}else{
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(
+					sqlExisteSitio.toString());
+			if (sitioInteres.getNombre() != null) {
+				ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase()
+						+ "%");
+			} else {
 				ps.setInt(1, sitioInteres.getIdSitio());
 			}
 			rs = ps.executeQuery();
@@ -95,7 +97,7 @@ public class SitioDAO implements ISitioDAO {
 					sitioInteres.getLon());
 			PGgeometry geom = new PGgeometry(punto);
 
-			String sqlCrearSitio = "INSERT INTO t_sitio (sit_nombre,sit_punto,sit_id_categoria,sit_direccion,sit_telefono,sit_web) VALUES (?,?,?,?,?,?)";
+			String sqlCrearSitio = "INSERT INTO t_sitio (sit_nombre,sit_punto,sit_id_categoria,sit_direccion,sit_telefono,sit_web,sit_id_usuario) VALUES (?,?,?,?,?,?,?)";
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
@@ -105,7 +107,7 @@ public class SitioDAO implements ISitioDAO {
 			ps.setString(4, sitioInteres.getDireccion());
 			ps.setString(5, sitioInteres.getTelefono());
 			ps.setString(6, sitioInteres.getWeb());
-
+			ps.setInt(7, sitioInteres.getIdUsuario());
 			ps.execute();
 		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
@@ -121,28 +123,22 @@ public class SitioDAO implements ISitioDAO {
 	}
 
 	/*
-	private void existeSitio(SitioDTO sitio) {
-		PreparedStatement ps = null;
+	 * private void existeSitio(SitioDTO sitio) { PreparedStatement ps = null;
+	 * 
+	 * Point punto = new Point(sitio.getLat(), sitio.getLon()); PGgeometry geom
+	 * = new PGgeometry(punto);
+	 * 
+	 * String sqlExisteSitio = "SELECT * FROM t_sitio WHERE sit_punto=?";
+	 * 
+	 * try { ps = ConexionJDBCUtil.getConexion()
+	 * .prepareStatement(sqlExisteSitio); ps.setObject(1, geom); ResultSet rs =
+	 * ps.executeQuery();
+	 * 
+	 * rs.next(); } catch (SQLException e) {
+	 * 
+	 * e.printStackTrace(); } }
+	 */
 
-		Point punto = new Point(sitio.getLat(), sitio.getLon());
-		PGgeometry geom = new PGgeometry(punto);
-
-		String sqlExisteSitio = "SELECT * FROM t_sitio WHERE sit_punto=?";
-
-		try {
-			ps = ConexionJDBCUtil.getConexion()
-					.prepareStatement(sqlExisteSitio);
-			ps.setObject(1, geom);
-			ResultSet rs = ps.executeQuery();
-
-			rs.next();
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-	}
-*/
-	
 	@Override
 	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
 		try {
@@ -256,104 +252,115 @@ public class SitioDAO implements ISitioDAO {
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		Point punto = new Point(sitio.getLat(), sitio.getLon());
 		PGgeometry pgeom = new PGgeometry(punto);
-		
-		String sql = "select s.*, c.* "
-				+ "from t_sitio s, t_categoria c "
+
+		String sql = "select s.*, c.* " + "from t_sitio s, t_categoria c "
 				+ "where s.sit_id_categoria=c.cat_id "
 				+ "and ST_DWithin(s.sit_punto,GeomFromText(?),?)"
 				+ " order by ST_Distance(sit_punto,GeomFromText(?))";
-		
-			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
-			
-			PGgeometry geom;
-			ps.setObject(1, pgeom);
-			ps.setDouble(2, 0.01);
-			ps.setObject(3, pgeom);
-			
-			rs = ps.executeQuery();
 
-			while (rs.next()) {
-				
-				categoria = new CategoriaDTO();
-				resultado = new SitioDTO();
-				geom = (PGgeometry) rs.getObject("sit_punto");
-				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
-				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
-				resultado.setIdSitio(rs.getInt("sit_id"));
-				resultado.setNombre(rs.getString("sit_nombre"));
-				resultado.setDireccion(rs.getString("sit_direccion"));
-				resultado.setTelefono(rs.getString("sit_telefono"));
-				resultado.setWeb(rs.getString("sit_web"));
-				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
-						.getIdSitio()));
-				categoria.setIdCategoria(rs.getInt("cat_id"));
-				categoria.setDescripcion(rs.getString("cat_descripcion"));
-				categoria.setImagen(rs.getString("cat_imagen"));
-				resultado.setCategoria(categoria);
-				sitios.add(resultado);
-				
-			}
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
-		
-		
-				ps.close();
-				rs.close();
-		
-		
+		PGgeometry geom;
+		ps.setObject(1, pgeom);
+		ps.setDouble(2, 0.01);
+		ps.setObject(3, pgeom);
+
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+
+			categoria = new CategoriaDTO();
+			resultado = new SitioDTO();
+			geom = (PGgeometry) rs.getObject("sit_punto");
+			resultado.setLat(geom.getGeometry().getFirstPoint().getX());
+			resultado.setLon(geom.getGeometry().getFirstPoint().getY());
+			resultado.setIdSitio(rs.getInt("sit_id"));
+			resultado.setNombre(rs.getString("sit_nombre"));
+			resultado.setDireccion(rs.getString("sit_direccion"));
+			resultado.setTelefono(rs.getString("sit_telefono"));
+			resultado.setWeb(rs.getString("sit_web"));
+			resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
+					.getIdSitio()));
+			categoria.setIdCategoria(rs.getInt("cat_id"));
+			categoria.setDescripcion(rs.getString("cat_descripcion"));
+			categoria.setImagen(rs.getString("cat_imagen"));
+			resultado.setCategoria(categoria);
+			sitios.add(resultado);
+
+		}
+
+		ps.close();
+		rs.close();
+
 		return sitios;
 	}
-	
-	
-	
-	
-	public ArrayList<CategoriaDTO> getCategorias() throws SQLException{
-		
+
+	public ArrayList<CategoriaDTO> getCategorias() throws SQLException {
+
 		PreparedStatement ps;
 		ArrayList<CategoriaDTO> listaRetorno = new ArrayList<CategoriaDTO>();
-		
-		try{
 
-			String sqlCategorias = "SELECT * "+
-								   "FROM t_categoria cat, t_grupo_categoria grupo "+
-								   "WHERE cat.cat_grp_id = grupo.grp_cat_id "+
-								   "ORDER BY cat.cat_grp_id, cat.cat_descripcion";
- 
-			
-	
+		try {
+
+			String sqlCategorias = "SELECT * "
+					+ "FROM t_categoria cat, t_grupo_categoria grupo "
+					+ "WHERE cat.cat_grp_id = grupo.grp_cat_id "
+					+ "ORDER BY cat.cat_grp_id, cat.cat_descripcion";
+
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCategorias);
-			
+
 			ResultSet rs = ps.executeQuery();
-			while (rs.next()){
-				
-				
+			while (rs.next()) {
+
 				CategoriaDTO categoria = new CategoriaDTO();
-				
+
 				categoria.setIdCategoria(rs.getInt("cat_id"));
 				categoria.setDescripcion(rs.getString("cat_descripcion"));
 				categoria.setImagen(rs.getString("cat_imagen"));
-				
+
 				categoria.setIdGrupo(rs.getInt("grp_cat_id"));
-				categoria.setDescripcionGrupo(rs.getString("grp_cat_descripcion"));
+				categoria.setDescripcionGrupo(rs
+						.getString("grp_cat_descripcion"));
 				categoria.setImagenGrupo(rs.getString("grp_cat_imagen"));
-				
+
 				listaRetorno.add(categoria);
 			}
-				
+
 			rs.close();
 			ps.close();
-			
-		
-		}finally{
-			
-				if (ConexionJDBCUtil.getConexion() != null)
-					ConexionJDBCUtil.getConexion().close();
-	
+
+		} finally {
+
+			if (ConexionJDBCUtil.getConexion() != null)
+				ConexionJDBCUtil.getConexion().close();
+
 		}
-		
-		return listaRetorno;		
-		
+
+		return listaRetorno;
+
 	}
-	
-	
+
+	@Override
+	public boolean usuarioCreadorSitio(SitioDTO sitio) throws SQLException {
+		boolean result;
+		try {
+
+		PreparedStatement ps;
+		String sql = "select * from t_sitio where sit_id=? and sit_id_usuario=?";
+		ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
+		ps.setInt(1, sitio.getIdSitio());
+		ps.setInt(2, sitio.getIdUsuario());
+		ResultSet rs = ps.executeQuery();
+		result = rs.next();
+		rs.close();
+		ps.close();
+		} finally {
+
+			if (ConexionJDBCUtil.getConexion() != null)
+				ConexionJDBCUtil.getConexion().close();
+
+		}
+		return result;
+	}
 
 }

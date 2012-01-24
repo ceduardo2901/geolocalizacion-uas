@@ -7,6 +7,7 @@ public class SitioDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Integer idSitio;
+	private Integer idUsuario;
 	private String nombre;
 	private String direccion;
 	private Double lon;
@@ -109,6 +110,16 @@ public class SitioDTO implements Serializable{
 
 	public void setWeb(String web) {
 		this.web = web;
+	}
+
+
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 
