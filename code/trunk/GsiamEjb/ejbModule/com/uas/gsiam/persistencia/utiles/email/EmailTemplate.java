@@ -5,6 +5,12 @@ import java.io.StringWriter;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 
+/**
+ * Clase que obtiene el template para enviar los email de invitacion al sistema
+ * 
+ * @author Martín
+ * 
+ */
 public class EmailTemplate {
 
 	private VelocityContext context;

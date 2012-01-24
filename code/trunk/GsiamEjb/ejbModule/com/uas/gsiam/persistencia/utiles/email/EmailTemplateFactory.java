@@ -6,7 +6,13 @@ import org.apache.velocity.app.VelocityEngine;
 
 import com.uas.gsiam.negocio.excepciones.RuntimeApplicationException;
 
-
+/**
+ * 
+ * Factory para la creacion de los template de emails
+ * 
+ * @author Martín
+ * 
+ */
 public final class EmailTemplateFactory {
 
 	private VelocityEngine engine;
@@ -17,14 +23,14 @@ public final class EmailTemplateFactory {
 		try {
 
 			this.engine = new VelocityEngine();
-					
+
 			Properties props = new Properties();
-		    props.setProperty("resource.loader", "class");
-			props.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-			
+			props.setProperty("resource.loader", "class");
+			props.setProperty("class.resource.loader.class",
+					"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+
 			engine.init(props);
-			
-			
+
 		} catch (Exception e) {
 			throw new RuntimeApplicationException(
 					"EmailTemplateFactory Initialization Error !!", e);
