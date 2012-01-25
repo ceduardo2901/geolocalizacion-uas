@@ -11,6 +11,7 @@ import greendroid.widget.QuickActionWidget.OnQuickActionClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,7 @@ public class SitiosActivity extends GDActivity implements
 	private QuickActionWidget quickActions;
 	private SitiosAdapter adaptador;
 	private LocationHelper locHelper;
+	private Integer idSitioEliminar;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -491,17 +493,53 @@ public class SitiosActivity extends GDActivity implements
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
-			Util.dismissProgressDialog();
+			
+			String respuesta = intent.getStringExtra("respuesta");
+			String error = intent.getStringExtra("error");
+			
+			if(respuesta != null && respuesta != ""){
+				Util.dismissProgressDialog();
+				Util.showToast(getApplicationContext(), respuesta);
+				adaptador.remove(getSitioPorId(idSitioEliminar));
+				
+				
+				
+			}else{
+				if(error != null && error != ""){
+					
+					Util.dismissProgressDialog();
+					Util.showToast(getApplicationContext(), error);
 
-			actualizarSitios(loc);
-
+				}
+				
+			}
+			
+			
+			
+			
 		}
+		
 	};
 
+	private SitioDTO getSitioPorId(Integer id){
+		SitioDTO sitio = new SitioDTO();
+		if(sitios != null){
+			if(!sitios.isEmpty()){
+				Iterator<SitioDTO> it = sitios.iterator();
+				while(it.hasNext()){
+					SitioDTO s = it.next();
+					if(s.getIdSitio().equals(id)){
+						sitio = s;
+					}
+				}
+			}
+		}
+		return sitio;
+	}
+	
 	public void mostrarSitios(final List<SitioDTO> sitios) {
 
 		adaptador = new SitiosAdapter(this, R.layout.sitio, sitios, loc);
-
 		lw.setAdapter(adaptador);
 
 		lw.setOnItemClickListener(new OnItemClickListener() {
@@ -532,6 +570,7 @@ public class SitiosActivity extends GDActivity implements
 	private void eliminarSitio(Integer sitioId) {
 		Intent intent = new Intent(this, EliminarSitioServicio.class);
 		intent.putExtra("sitio", sitioId);
+		idSitioEliminar = sitioId;
 		startService(intent);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}

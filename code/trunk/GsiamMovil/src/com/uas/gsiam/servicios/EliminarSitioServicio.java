@@ -1,5 +1,8 @@
 package com.uas.gsiam.servicios;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,6 +15,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.HttpUtils;
 import com.uas.gsiam.utils.RestResponseErrorHandler;
@@ -50,16 +54,24 @@ public class EliminarSitioServicio extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 
 		Integer sitio = intent.getIntExtra("sitio", 0);
+		ApplicationController app = ((ApplicationController) getApplicationContext());
+		Map<String, Integer> parms = new HashMap<String, Integer>();
+		
+		parms.put("sitio", sitio);
+		parms.put("usuario", app.getUserLogin().getId());
+		
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
+		
+		
 		Intent intentEliminarSitio = new Intent(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 		try {
 
-			restTemp.delete(Constantes.ELIMINAR_SITIOS_SERVICE_URL, sitio);
+			restTemp.delete(Constantes.ELIMINAR_SITIOS_SERVICE_URL, parms);
 
 			intentEliminarSitio.putExtra("respuesta",
-					Constantes.MSG_CREAR_SITIO_OK);
+					Constantes.MSG_ELIMINAR_SITIO_OK);
 
 		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
