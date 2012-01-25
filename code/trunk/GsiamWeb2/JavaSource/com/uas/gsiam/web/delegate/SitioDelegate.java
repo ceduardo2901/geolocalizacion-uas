@@ -87,13 +87,13 @@ public class SitioDelegate {
 	/**
 	 * Elimina un sitio del sistema
 	 * 
-	 * @param idSitio
-	 *            Id del sitio que se desea eliminar
+	 * @param sitio
+	 *            Id del sitio que se desea eliminar y identificador del usuario que eliminara el sitio
 	 * @throws SitioExcepcion
 	 */
-	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
+	public void eliminarSitio(SitioDTO sitio) throws SitioExcepcion {
 
-		servicioSitio.eliminarSitio(idSitio);
+		servicioSitio.eliminarSitio(sitio);
 	}
 
 	/**

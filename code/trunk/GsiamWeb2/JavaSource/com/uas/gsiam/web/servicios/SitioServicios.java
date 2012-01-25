@@ -157,13 +157,16 @@ public class SitioServicios {
 	 *         correspondiente
 	 */
 	@DELETE
-	@Path("/eliminar/{sitio}")
+	@Path("/eliminar/{usuario}/{sitio}")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public Response eliminarSitio(@PathParam("sitio") String sitio) {
+	public Response eliminarSitio(@PathParam("usuario") Integer usuario, @PathParam("sitio") Integer sitio) {
 		ResponseBuilder builder = Response.ok();
 		try {
-			servicio.eliminarSitio(new Integer(sitio));
+			SitioDTO sitioDto = new SitioDTO();
+			sitioDto.setIdSitio(sitio);
+			sitioDto.setIdUsuario(usuario);
+			servicio.eliminarSitio(sitioDto);
 		} catch (SitioExcepcion e) {
 			builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
