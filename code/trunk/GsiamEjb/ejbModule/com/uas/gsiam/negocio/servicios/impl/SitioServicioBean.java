@@ -48,9 +48,14 @@ public class SitioServicioBean implements SitioServicio {
 	}
 
 	@Override
-	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
+	public void eliminarSitio(SitioDTO sitio) throws SitioExcepcion {
 		try {
-			AbstractFactory.getInstance().getSitioDAO().eliminarSitio(idSitio);
+			ISitioDAO sitioDao = AbstractFactory.getInstance().getSitioDAO();
+			if (sitioDao.usuarioCreadorSitio(sitio)) {
+				sitioDao.eliminarSitio(sitio.getIdSitio());
+			} else {
+				throw new SitioExcepcion(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
+			}
 		} catch (IOException e) {
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
@@ -58,6 +63,8 @@ public class SitioServicioBean implements SitioServicio {
 		} catch (IllegalAccessException e) {
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		} catch (ClassNotFoundException e) {
+			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
+		} catch (SQLException e) {
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
 
