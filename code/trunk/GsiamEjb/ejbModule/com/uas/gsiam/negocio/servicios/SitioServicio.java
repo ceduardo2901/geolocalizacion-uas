@@ -37,11 +37,11 @@ public interface SitioServicio {
 	/**
 	 * Elimina un sitio de interes del sistema con el identificador ingresado
 	 * 
-	 * @param idSitio
-	 *            Identificador del sitio de interes a elminar
+	 * @param sitio
+	 *            sitio de interes a elminar
 	 * @throws SitioExcepcion
 	 */
-	void eliminarSitio(Integer idSitio) throws SitioExcepcion;
+	void eliminarSitio(SitioDTO sitio) throws SitioExcepcion;
 
 	/**
 	 * Modifica un sitio de interes del sistema
