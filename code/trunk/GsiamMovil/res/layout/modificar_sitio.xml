@@ -15,12 +15,12 @@
 	</EditText>
 	<EditText android:id="@+id/txtTelefonoId"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:hint="@string/telefono">
+		android:hint="@string/telefono" android:inputType="phone">
 		<requestFocus></requestFocus>
 	</EditText>
 	<EditText android:id="@+id/txtWebId"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:hint="@string/web">
+		android:hint="@string/web" android:inputType="textWebEditText">
 		<requestFocus></requestFocus>
 	</EditText>
 	<Button android:text="@string/modificar" android:id="@+id/modificarBtn"

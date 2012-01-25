@@ -60,7 +60,7 @@ public class Constantes {
 	public static final String CREAR_SITIO_FILTRO_ACTION = "com.gsiam.places.CREAR_SITIO_FILTRO_ACTION";
 
 	public static final String ELIMINAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE
-			+ "/GsiamWeb2/sitios/eliminar/{sitio}";
+			+ "/GsiamWeb2/sitios/eliminar/{usuario}/{sitio}";
 	public static final String ELIMINAR_SITIO_FILTRO_ACTION = "com.gsiam.places.ELIMINAR_SITIO_FILTRO_ACTION";
 
 	public static final String MODIFICAR_SITIOS_SERVICE_URL = DOMINIO_SERVICE
@@ -139,6 +139,7 @@ public class Constantes {
 	public static final String MSG_INVITACIONES_FACEBOOK_SELECCION = "Debe seleccionar al menos un contacto para invitar";
 	public static final String MSG_CREAR_SITIO_OK = "El sitio se creo correctamente";
 	public static final String MSG_MODIFICAR_SITIO_OK = "El sitio se modifico correctamente";
+	public static final String MSG_ELIMINAR_SITIO_OK = "El sitio se elimino correctamente";
 	public static final String MSG_RADAR_TAB_AMIGOS = "Para ver el radar vaya sobre la pestaña amigos";
 	public static final String MSG_ERROR_INESPERADO = "Ups!!! ocurrio un error inesperado, intentelo luego";
 	public static final String MSG_ERROR_TIMEOUT = "Error al acceder al servidor, intentelo luego";
