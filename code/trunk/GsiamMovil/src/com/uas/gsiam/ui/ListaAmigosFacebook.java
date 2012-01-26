@@ -33,6 +33,14 @@ import com.uas.gsiam.utils.FacebookUtil;
 import com.uas.gsiam.utils.FriendsGetProfilePics;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * Esta activity muestra la lista de amigos de facebook del usuario. Permite
+ * seleccionar los amigos a los cuales se les quiere enviar una invitacion para
+ * unirse a la aplicacion
+ * 
+ * @author Antonio
+ * 
+ */
 public class ListaAmigosFacebook extends Activity {
 
 	protected static final String TAG = "ListaAmigosFacebook";
@@ -50,7 +58,7 @@ public class ListaAmigosFacebook extends Activity {
 		setContentView(R.layout.lista_amigos_facebook);
 
 		obtenerAmigos();
-		
+
 		listaAmigos = (ListView) findViewById(R.id.friends_list);
 		listaAmigos
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,12 +76,16 @@ public class ListaAmigosFacebook extends Activity {
 
 	}
 
+	/**
+	 * Carga los amigos de facebook del usuario autenticado
+	 */
 	private void obtenerAmigos() {
 		Bundle params = new Bundle();
 		params.putString("fields", "id, name, picture");
 
 		try {
-			String respuesta = InvitarAmigosActivity.facebook.request("me/friends", params);
+			String respuesta = InvitarAmigosActivity.facebook.request(
+					"me/friends", params);
 			jsonArray = new JSONObject(respuesta).getJSONArray("data");
 			AmigoFacebook amigo;
 			if (jsonArray.length() > 0) {
@@ -97,30 +109,40 @@ public class ListaAmigosFacebook extends Activity {
 		}
 	}
 
+	/**
+	 * Envia la invitacion a los amigos de facebook del usuario
+	 * 
+	 * @param v
+	 */
 	public void btnInvitarAmigos(View v) {
-		
+
 		boolean error = Boolean.FALSE;
-		
+
 		if (!list.isEmpty()) {
 
-			if (haySeleccionados()){
-				
-				Util.showProgressDialog(this, Constantes.MSG_ESPERA_ENVIANDO_INVITACION);
-				
+			if (haySeleccionados()) {
+
+				Util.showProgressDialog(this,
+						Constantes.MSG_ESPERA_ENVIANDO_INVITACION);
+
 				Bundle params;
 				try {
 					for (AmigoFacebook aFace : list) {
 						if (aFace.isSeleccionado()) {
 							params = new Bundle();
-							String response = InvitarAmigosActivity.facebook.request("me");
+							String response = InvitarAmigosActivity.facebook
+									.request("me");
 							params.putString("caption",
 									getString(R.string.app_name));
 							params.putString("description", "descripccion");
 
 							ApplicationController app = ((ApplicationController) getApplicationContext());
 
-							params.putString("message", app.getUserLogin().getNombre() + Constantes.MSG_INVITACIONES_FACEBOOK);
-							InvitarAmigosActivity.facebook.request(aFace.getId()+"/feed", params, "POST");
+							params.putString("message", app.getUserLogin()
+									.getNombre()
+									+ Constantes.MSG_INVITACIONES_FACEBOOK);
+							InvitarAmigosActivity.facebook.request(
+									aFace.getId() + "/feed", params, "POST");
 
 						}
 					}
@@ -137,41 +159,47 @@ public class ListaAmigosFacebook extends Activity {
 					Util.dismissProgressDialog();
 				}
 
-				if(!error){
-					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_OK);
+				if (!error) {
+					Util.showToast(this,
+							Constantes.MSG_INVITACIONES_FACEBOOK_OK);
 					volver();
-				}else{
-					Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_ERROR);
+				} else {
+					Util.showToast(this,
+							Constantes.MSG_INVITACIONES_FACEBOOK_ERROR);
 				}
 			}
-		}
-		else{
+		} else {
 			Util.showToast(this, Constantes.MSG_INVITACIONES_FACEBOOK_SELECCION);
 		}
 
 	}
 
-	
-	private void volver(){
+	private void volver() {
 		Intent intent = new Intent(this, AmigosTabActivity.class);
 		startActivity(intent);
 	}
-	
-	public boolean haySeleccionados (){
+
+	/**
+	 * Determina se selecciono algun amigo de la lista
+	 * 
+	 * @return Devuelve true si se selecciono algun amigo de la lista, false en
+	 *         caso contrario
+	 */
+	public boolean haySeleccionados() {
 
 		boolean haySeleccionado = Boolean.FALSE;
-		
+
 		for (AmigoFacebook aFace : list) {
 			if (aFace.isSeleccionado()) {
 
-			haySeleccionado = Boolean.TRUE;
+				haySeleccionado = Boolean.TRUE;
 
 			}
 		}
-		
+
 		return haySeleccionado;
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -179,13 +207,20 @@ public class ListaAmigosFacebook extends Activity {
 		switch (resultCode) {
 
 		case -1:
-			InvitarAmigosActivity.facebook.authorizeCallback(requestCode, resultCode, data);
+			InvitarAmigosActivity.facebook.authorizeCallback(requestCode,
+					resultCode, data);
 			break;
 
 		}
 
 	}
 
+	/**
+	 * Adaptador para la lista de amigos de facebook
+	 * 
+	 * @author Antonio
+	 * 
+	 */
 	public class FriendListAdapter extends ArrayAdapter<AmigoFacebook> {
 		private LayoutInflater mInflater;
 		List<AmigoFacebook> friendsList;
@@ -203,9 +238,9 @@ public class ListaAmigosFacebook extends Activity {
 
 		@Override
 		public int getCount() {
-			if(jsonArray != null)
+			if (jsonArray != null)
 				return jsonArray.length();
-			else{
+			else {
 				return 0;
 			}
 		}
@@ -252,7 +287,6 @@ public class ListaAmigosFacebook extends Activity {
 
 			holder.name.setText(amigoFace.getNombre());
 
-		
 			return hView;
 		}
 
@@ -261,10 +295,7 @@ public class ListaAmigosFacebook extends Activity {
 	class ViewHolder {
 		ImageView profile_pic;
 		TextView name;
-		// TextView info;
 		CheckBox check;
 	}
-
-	
 
 }

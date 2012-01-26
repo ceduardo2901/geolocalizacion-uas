@@ -1,6 +1,7 @@
 package com.uas.gsiam.ui;
 
-import android.app.Activity;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem.Type;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,15 @@ import com.uas.gsiam.servicios.ModificarSitioServicio;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
-public class ModificarSitioActivity extends Activity {
+/**
+ * 
+ * Esta activity despliega la interfaz grafica para modificar un sitio de
+ * interes.
+ * 
+ * @author Antonio
+ * 
+ */
+public class ModificarSitioActivity extends GDActivity {
 
 	protected static String TAG = "ModificarSitioActivity";
 	protected EditText nombre;
@@ -28,13 +37,20 @@ public class ModificarSitioActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.modificar_sitio);
+		setActionBarContentView(R.layout.modificar_sitio);
+
 		nombre = (EditText) findViewById(R.id.txtNombreId);
 		direccion = (EditText) findViewById(R.id.txtDireccionId);
 		telefono = (EditText) findViewById(R.id.txtTelefonoId);
 		web = (EditText) findViewById(R.id.txtWebId);
+		inicializarActionBar();
 		filtroModificarSitio = new IntentFilter(
 				Constantes.MODIFICAR_SITIO_FILTRO_ACTION);
+	}
+
+	private void inicializarActionBar() {
+
+		getActionBar().setTitle(getString(R.string.gsiam_modificar));
 	}
 
 	public void onResume() {
@@ -54,6 +70,11 @@ public class ModificarSitioActivity extends Activity {
 		unregisterReceiver(modificarSitioReceiver);
 	}
 
+	/**
+	 * Accion para invocar el servicio externo que modifica el sitio
+	 * 
+	 * @param v
+	 */
 	public void btnModificar(View v) {
 
 		Intent intentModificarSitio = new Intent(this,
@@ -73,6 +94,9 @@ public class ModificarSitioActivity extends Activity {
 		startActivity(intentMostarSitios);
 	}
 
+	/**
+	 * Recibe la respuesta del servicio que modifica el sitio de interes
+	 */
 	protected BroadcastReceiver modificarSitioReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
