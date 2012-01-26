@@ -44,12 +44,20 @@ import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * 
+ * Esta activity permite modificar los datos del usuario, los datos modificables
+ * son el nombre, email, password y la foto del perfil de usuario
+ * 
+ * @author Martin
+ * 
+ */
 public class EditarUsuarioActivity extends GDActivity {
 
 	protected String email;
 	protected String nombre;
 	protected String pass;
-	protected Byte [] array;
+	protected Byte[] array;
 	protected UsuarioDTO userLogin;
 	private byte[] foto;
 	protected EditText nombreTxt;
@@ -60,221 +68,212 @@ public class EditarUsuarioActivity extends GDActivity {
 	protected Button editarPerfilBtn;
 	protected IntentFilter editarPerfilFiltro;
 	protected ProgressDialog progressDialog;
-	
-	
+
 	protected String path = "";
-	
+
 	protected static String TAG = "EditarPerfilActivity";
-	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	//	doLock(true);
 		setActionBarContentView(R.layout.editar_perfil);
-		
+
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		emailTxt = (EditText) findViewById(R.id.emailTxt);
 		passTxt = (EditText) findViewById(R.id.passTxt);
-		cambiarAvatarBtn = (Button) findViewById(R.id.cambiarAvatarBtn);  
-		editarPerfilBtn = (Button) findViewById(R.id.editarPerfilBtn);  
+		cambiarAvatarBtn = (Button) findViewById(R.id.cambiarAvatarBtn);
+		editarPerfilBtn = (Button) findViewById(R.id.editarPerfilBtn);
 		avatar = (ImageView) findViewById(R.id.avatar);
-		
-		ApplicationController app = ((ApplicationController)getApplicationContext());
+
+		ApplicationController app = ((ApplicationController) getApplicationContext());
 		userLogin = app.getUserLogin();
-	    
-	    nombreTxt.setText(userLogin.getNombre());
-	    emailTxt.setText(userLogin.getEmail());
-	    passTxt.setText(userLogin.getPassword());
-	    
-	    if (userLogin.getAvatar() != null)
-	    	avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
-	    
-	    editarPerfilFiltro = new IntentFilter(Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
-		
-	    inicializarBar();
+
+		nombreTxt.setText(userLogin.getNombre());
+		emailTxt.setText(userLogin.getEmail());
+		passTxt.setText(userLogin.getPassword());
+
+		if (userLogin.getAvatar() != null)
+			avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
+
+		editarPerfilFiltro = new IntentFilter(
+				Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
+
+		inicializarBar();
 	}
-		
-		
+
 	private void inicializarBar() {
 
 		getActionBar().setTitle("GSIAM - Perfil");
 
 	}
 
-	
 	protected void onResume() {
-		 super.onResume();
-		 registerReceiver(receiverEditarUsuario, editarPerfilFiltro);
-	 }
-	
-	protected void onPause(){
+		super.onResume();
+		registerReceiver(receiverEditarUsuario, editarPerfilFiltro);
+	}
+
+	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(receiverEditarUsuario);
 	}
-	 
-	
+
+	/**
+	 * Accion que cambia la foto de perfil del usuario
+	 * 
+	 * @param v
+	 */
 	public void cambiarAvatar(View v) {
-		
-	
-		
-		final CharSequence[] items = {"Camara", "Galeria"};
+
+		final CharSequence[] items = { "Camara", "Galeria" };
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Seleccionar una acción");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
-		    public void onClick(DialogInterface dialog, int item) {
-		        Toast.makeText(getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
-		        
-		        if (item == 0){
-		        	getCamara();
-		        }
-		        else{
-		        	
-		        	getGaleria();
-		        }
-		    }
+			public void onClick(DialogInterface dialog, int item) {
+				Toast.makeText(getApplicationContext(), items[item],
+						Toast.LENGTH_SHORT).show();
+
+				if (item == 0) {
+					getCamara();
+				} else {
+
+					getGaleria();
+				}
+			}
 		});
 		AlertDialog alert = builder.create();
 		alert.show();
-		
+
 	}
-	
-	
-	private void getCamara(){
-		
-		Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+	/**
+	 * Llama a la camara de fotos del telefono
+	 */
+	private void getCamara() {
+
+		Intent cameraIntent = new Intent(
+				android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 		Date ahora = new Date();
-	    SimpleDateFormat formateador = new SimpleDateFormat("ddMMyy-hhmmss");
-	    String diaHora = formateador.format(ahora);
-	        
-	    path = Environment.getExternalStorageDirectory() + "/" + diaHora + ".jpg";
-	    
-	    Uri output = Uri.fromFile(new File(path));
-	    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, output);
-	    
+		SimpleDateFormat formateador = new SimpleDateFormat("ddMMyy-hhmmss");
+		String diaHora = formateador.format(ahora);
+
+		path = Environment.getExternalStorageDirectory() + "/" + diaHora
+				+ ".jpg";
+
+		Uri output = Uri.fromFile(new File(path));
+		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, output);
+
 		startActivityForResult(cameraIntent, Constantes.REQUEST_CAMERA);
 	}
-	
-	
-	private void getGaleria(){
-		
-		Intent selectIntent = new Intent(Intent.ACTION_PICK) ;
-		selectIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  
-		MediaStore.Images.Media.CONTENT_TYPE) ;
-		startActivityForResult(selectIntent,Constantes.REQUEST_SELECT_PHOTO) ;
-	
+
+	/**
+	 * abre la galeria de fotos del telefono para seleccionar una.
+	 */
+	private void getGaleria() {
+
+		Intent selectIntent = new Intent(Intent.ACTION_PICK);
+		selectIntent.setDataAndType(
+				MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+				MediaStore.Images.Media.CONTENT_TYPE);
+		startActivityForResult(selectIntent, Constantes.REQUEST_SELECT_PHOTO);
+
 	}
-	
-	
+
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		Bitmap myBitmap;
 		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize=2;
-		switch (requestCode){
-		
-			case Constantes.REQUEST_CAMERA:
-				if( resultCode != 0 ){
-	
-					myBitmap = BitmapFactory.decodeFile(path, options);
-					
-					ByteArrayOutputStream out =  new ByteArrayOutputStream();
+		options.inSampleSize = 2;
+		switch (requestCode) {
+
+		case Constantes.REQUEST_CAMERA:
+			if (resultCode != 0) {
+
+				myBitmap = BitmapFactory.decodeFile(path, options);
+
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				myBitmap.compress(CompressFormat.JPEG, 60, out);
+				foto = out.toByteArray();
+				avatar.setImageBitmap(myBitmap);
+				almacenarEnMemoria();
+
+			}
+
+			break;
+		case Constantes.REQUEST_SELECT_PHOTO:
+			if (resultCode != 0) {
+
+				Uri selectedImage = data.getData();
+				InputStream is;
+
+				try {
+					is = getContentResolver().openInputStream(selectedImage);
+
+					BufferedInputStream bis = new BufferedInputStream(is);
+					myBitmap = BitmapFactory.decodeStream(bis, null, options);
+					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					myBitmap.compress(CompressFormat.JPEG, 60, out);
 					foto = out.toByteArray();
+
 					avatar.setImageBitmap(myBitmap);
-					almacenarEnMemoria();
-										
+
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-	
-				break ;
-			case Constantes.REQUEST_SELECT_PHOTO:
-				if( resultCode != 0 ){
-	
-					Uri selectedImage = data.getData();
-					InputStream is;
-	
-					try {
-						is = getContentResolver().openInputStream(selectedImage);
-	
-						BufferedInputStream bis = new BufferedInputStream(is);
-						myBitmap = BitmapFactory.decodeStream(bis,null,options);
-						ByteArrayOutputStream out =  new ByteArrayOutputStream();
-						myBitmap.compress(CompressFormat.JPEG, 60, out);
-						foto = out.toByteArray();
-						
-						avatar.setImageBitmap(myBitmap);	
-	
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	
-	
-					break ;
-				}
+
+				break;
+			}
 		}
 
 	}
-	
-	
-	private void almacenarEnMemoria (){
+
+	private void almacenarEnMemoria() {
 		new MediaScannerConnectionClient() {
-			private MediaScannerConnection msc = null; {
-				msc = new MediaScannerConnection(getApplicationContext(), this); msc.connect();
+			private MediaScannerConnection msc = null;
+			{
+				msc = new MediaScannerConnection(getApplicationContext(), this);
+				msc.connect();
 			}
-			public void onMediaScannerConnected() { 
+
+			public void onMediaScannerConnected() {
 				msc.scanFile(path, null);
 			}
-			public void onScanCompleted(String path, Uri uri) { 
-				msc.disconnect();
-			} 
-		};	
-	}
-	
-	
-	
-	public void editarUsuario(View v) {
 
+			public void onScanCompleted(String path, Uri uri) {
+				msc.disconnect();
+			}
+		};
+	}
+
+	public void editarUsuario(View v) {
 
 		nombre = nombreTxt.getText().toString().trim();
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
-		
+
 		if (!Util.validaMail(email)) {
 			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
-					
-		} 
-		else {
-			
+
+		} else {
+
 			UsuarioDTO usuario = new UsuarioDTO();
 			usuario.setNombre(nombre);
 			usuario.setEmail(email);
-			
+
 			usuario.setPassword(pass);
 			usuario.setId(userLogin.getId());
-			
-//			Drawable drawable= avatar.getDrawable();
-//			
-//			byte[] arrayBytes = null;
-//			try {
-//				arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			
+
 			if (foto != null)
 				usuario.setAvatar(foto);
-			else{
-				
-				Drawable drawable= avatar.getDrawable();
-				
+			else {
+
+				Drawable drawable = avatar.getDrawable();
+
 				byte[] arrayBytes = null;
 				try {
 					arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
@@ -282,63 +281,50 @@ public class EditarUsuarioActivity extends GDActivity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				usuario.setAvatar(arrayBytes);
 			}
-				
-			
-			Intent intent = new Intent(this,EditarUsuarioServicio.class);
+
+			Intent intent = new Intent(this, EditarUsuarioServicio.class);
 			intent.putExtra("usuario", usuario);
 			startService(intent);
-			
+
 			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 
 		}
 
 	}
 
-	
-	
-	
+	/**
+	 * Recibe la respuesta del servicio que modifica los datos del usuario
+	 */
 	protected BroadcastReceiver receiverEditarUsuario = new BroadcastReceiver() {
-	    @Override
-	    public void onReceive(Context context, Intent intent) {
-	    	
+		@Override
+		public void onReceive(Context context, Intent intent) {
+
 			String error = intent.getStringExtra("error");
 			String respuesta = intent.getStringExtra("respuesta");
-		
+
 			Util.dismissProgressDialog();
-			
+
 			if (error != null) {
-				
+
 				Util.showToast(context, error);
-			}
-			else{
-	    		
+			} else {
+
 				Util.showToast(context, respuesta);
-	    		UsuarioDTO usuarioEditado = (UsuarioDTO) intent.getSerializableExtra("usuario");
-	    		ApplicationController app = ((ApplicationController)getApplicationContext());
+				UsuarioDTO usuarioEditado = (UsuarioDTO) intent
+						.getSerializableExtra("usuario");
+				ApplicationController app = ((ApplicationController) getApplicationContext());
 				app.setUserLogin(usuarioEditado);
-	    		
-				Intent intentPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+
+				Intent intentPerfil = new Intent(getApplicationContext(),
+						PerfilActivity.class);
 				startActivity(intentPerfil);
-				
+
 			}
-	    	
-			
-	    }
-	  };
-  
-	  public void doLock(boolean locked) {
-	        if (locked) {
-	            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-	                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-	            }
-	            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-	                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	            }
-	        } else {
-	            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-	        }
-	    }
+
+		}
+	};
+
 }

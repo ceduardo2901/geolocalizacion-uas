@@ -21,10 +21,21 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
+/**
+ * 
+ * Esta activity permite ver una galeria con las imagenes del sitio de interes
+ * seleccionado
+ * 
+ * @author Antonio
+ * 
+ */
 public class VisorImagenes extends Activity implements
 		AdapterView.OnItemSelectedListener, ViewSwitcher.ViewFactory {
 
 	private ImageSwitcher mSwitcher;
+	/**
+	 * Lista de fotos a mostrar
+	 */
 	private ArrayList<byte[]> fotos;
 	private List<Drawable> imagenes = new ArrayList<Drawable>();
 	private Integer seleccionada;
@@ -44,7 +55,7 @@ public class VisorImagenes extends Activity implements
 				android.R.anim.fade_out));
 		fotos = (ArrayList<byte[]>) getIntent().getSerializableExtra("fotos");
 		seleccionada = getIntent().getIntExtra("indice", 0);
-		for(byte[] b : fotos){
+		for (byte[] b : fotos) {
 			ImageView i = new ImageView(this);
 			i.setImageBitmap(Util.ArrayToBitmap(b));
 			imagenes.add(i.getDrawable());
@@ -68,9 +79,9 @@ public class VisorImagenes extends Activity implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		
+
 		mSwitcher.setImageDrawable(imagenes.get(position));
-		
+
 	}
 
 	@Override
@@ -98,15 +109,15 @@ public class VisorImagenes extends Activity implements
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView i = new ImageView(mContext);
+			ImageView i = new ImageView(mContext);
 
-            i.setImageDrawable(imagenes.get(position));
-            i.setAdjustViewBounds(true);
-            i.setLayoutParams(new Gallery.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            i.setBackgroundResource(R.drawable.picture_frame);
-            return i;
-        }
+			i.setImageDrawable(imagenes.get(position));
+			i.setAdjustViewBounds(true);
+			i.setLayoutParams(new Gallery.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			i.setBackgroundResource(R.drawable.picture_frame);
+			return i;
+		}
 
 		private Context mContext;
 

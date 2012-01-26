@@ -9,6 +9,13 @@ import android.os.Handler;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 
+/**
+ * Esta activity guarda la configuracion del usuario. Se guarda si el usuario
+ * quiere compartir su ubicacion geografica
+ * 
+ * @author Antonio
+ * 
+ */
 public class Preferencias extends PreferenceActivity implements
 		OnSharedPreferenceChangeListener {
 
@@ -21,7 +28,6 @@ public class Preferencias extends PreferenceActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferencias);
-		
 
 		mCheckBoxPreference = (CheckBoxPreference) getPreferenceScreen()
 				.findPreference("compUbicacionId");
@@ -49,9 +55,7 @@ public class Preferencias extends PreferenceActivity implements
 			String key) {
 		boolean check = sharedPreferences.getBoolean(key, false);
 		if (check) {
-						
 
-			
 		}
 
 	}
