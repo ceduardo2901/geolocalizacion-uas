@@ -32,7 +32,8 @@ import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
-public class SitioDetalleActivity extends Activity implements OnItemClickListener{
+public class SitioDetalleActivity extends Activity implements
+		OnItemClickListener {
 
 	protected static final String TAG = "SitioDetalleActivity";
 	protected TextView txtNombre;
@@ -50,7 +51,7 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.sitio_detalle);
 		galeria = (Gallery) findViewById(R.id.gallery);
 		fotos = new ArrayList<byte[]>();
@@ -58,30 +59,28 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		sitio = SitioTabActivity.sitio;
 		cargarFotos(sitio.getPublicaciones());
 		galeria.setAdapter(new FotosAdapter(this));
-		
-		if (fotos.size() > 1){
+
+		if (fotos.size() > 1) {
 			galeria.setSelection(1);
 		}
-		
+
 		txtNombre = (TextView) findViewById(R.id.txtSitioNombreId);
 		txtDireccion = (TextView) findViewById(R.id.txtSitioDireccionId);
 		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
 		txtFotos = (TextView) findViewById(R.id.txtFotosId);
-		if (fotos.isEmpty()){
+		if (fotos.isEmpty()) {
 			txtFotos.setText(null);
 			Log.i(TAG, "oncreate -no hay fotos: ");
-		}
-		else{
+		} else {
 			txtFotos.setText("Fotos");
 			Log.i(TAG, "oncreate - hay fotos: ");
-			
+
 		}
-		
-		
+
 		galeria.setOnItemClickListener(this);
 		detalleFiltro = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
-		
+
 		locHelper = new LocationHelper();
 		locHelper.getLocation(this, locationResult);
 
@@ -105,31 +104,33 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		this.sitio = sitio;
 	}
 
-	
 	protected BroadcastReceiver receiverSitio = new BroadcastReceiver() {
 		@SuppressWarnings("unchecked")
 		@Override
-	    public void onReceive(Context context, Intent intent) {
-	    		
-	    	Bundle bundle = intent.getExtras();
-			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle.getSerializable("sitios");
-			if(!sitios.isEmpty()){
+		public void onReceive(Context context, Intent intent) {
+
+			Bundle bundle = intent.getExtras();
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle
+					.getSerializable("sitios");
+			if (!sitios.isEmpty()) {
 				setSitio(sitios.get(0));
-				List<PublicacionDTO> publicaciones = sitios.get(0).getPublicaciones();
-				if(!publicaciones.isEmpty()){
-					
+				List<PublicacionDTO> publicaciones = sitios.get(0)
+						.getPublicaciones();
+				if (!publicaciones.isEmpty()) {
+
 					cargarFotos(sitio.getPublicaciones());
 				}
-				
+
 			}
 			Util.dismissProgressDialog();
-			
+
 			GDTabActivity padre = (GDTabActivity) getParent();
-			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
+			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) padre
+					.getActionBar().getItem(AmigosTabActivity.ACTUALIZAR);
 			loaderActionBarItem.setLoading(false);
-			
-	    }
-	  };
+
+		}
+	};
 
 	public void onResume() {
 		super.onResume();
@@ -139,20 +140,16 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 		txtDireccion.setText(sitio.getDireccion());
 		txtTelefono.setText(sitio.getTelefono());
 		txtWeb.setText(sitio.getWeb());
-		if (fotos.isEmpty()){
+		if (fotos.isEmpty()) {
 			txtFotos.setText(null);
 			Log.i(TAG, "oncreate -no hay fotos: ");
-		}
-		else{
+		} else {
 			txtFotos.setText("Fotos");
 			Log.i(TAG, "oncreate - hay fotos: ");
-			
-		}
-		
-		
-		//loc = intent.getParcelableExtra("ubicacion");
-		registerReceiver(receiverSitio, detalleFiltro);
 
+		}
+
+		registerReceiver(receiverSitio, detalleFiltro);
 
 	}
 
@@ -255,15 +252,14 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-	
+
 		Intent intentVisor = new Intent(this, VisorImagenes.class);
 		intentVisor.putExtra("fotos", getFotos());
 		intentVisor.putExtra("indice", position);
 		startActivity(intentVisor);
-		
-		
+
 	}
-	
+
 	public LocationResult locationResult = new LocationResult() {
 
 		@Override
@@ -271,7 +267,5 @@ public class SitioDetalleActivity extends Activity implements OnItemClickListene
 			loc = location;
 		}
 	};
-
-	
 
 }

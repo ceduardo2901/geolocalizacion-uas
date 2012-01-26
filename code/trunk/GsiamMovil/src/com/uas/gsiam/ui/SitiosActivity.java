@@ -111,7 +111,7 @@ public class SitiosActivity extends GDActivity implements
 		}
 
 		if (loc == null) {
-			// buildAlertMessageNoGps();
+
 			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
@@ -493,42 +493,37 @@ public class SitiosActivity extends GDActivity implements
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
-			
+
 			String respuesta = intent.getStringExtra("respuesta");
 			String error = intent.getStringExtra("error");
-			
-			if(respuesta != null && respuesta != ""){
+
+			if (respuesta != null && respuesta != "") {
 				Util.dismissProgressDialog();
 				Util.showToast(getApplicationContext(), respuesta);
 				adaptador.remove(getSitioPorId(idSitioEliminar));
-				
-				
-				
-			}else{
-				if(error != null && error != ""){
-					
+
+			} else {
+				if (error != null && error != "") {
+
 					Util.dismissProgressDialog();
 					Util.showToast(getApplicationContext(), error);
 
 				}
-				
+
 			}
-			
-			
-			
-			
+
 		}
-		
+
 	};
 
-	private SitioDTO getSitioPorId(Integer id){
+	private SitioDTO getSitioPorId(Integer id) {
 		SitioDTO sitio = new SitioDTO();
-		if(sitios != null){
-			if(!sitios.isEmpty()){
+		if (sitios != null) {
+			if (!sitios.isEmpty()) {
 				Iterator<SitioDTO> it = sitios.iterator();
-				while(it.hasNext()){
+				while (it.hasNext()) {
 					SitioDTO s = it.next();
-					if(s.getIdSitio().equals(id)){
+					if (s.getIdSitio().equals(id)) {
 						sitio = s;
 					}
 				}
@@ -536,7 +531,7 @@ public class SitiosActivity extends GDActivity implements
 		}
 		return sitio;
 	}
-	
+
 	public void mostrarSitios(final List<SitioDTO> sitios) {
 
 		adaptador = new SitiosAdapter(this, R.layout.sitio, sitios, loc);
