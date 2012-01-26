@@ -16,10 +16,24 @@ import com.google.android.maps.OverlayItem;
 import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
+/**
+ * 
+ * Muestra el mapa junto a la posicion del usuario y la del punto de interes
+ * seleccionado.
+ * 
+ * @author Antonio
+ * 
+ */
 public class MostrarMapaActivity extends GDMapActivity {
 
 	private MapView mapa;
+	/**
+	 * ubicacion geografica del punto de interes
+	 */
 	private GeoPoint geoPoint;
+	/**
+	 * ubicacion geografica del usuario
+	 */
 	private GeoPoint geoPointUbicacion;
 	private Location loc;
 	private LocationHelper locHelper;
@@ -70,6 +84,15 @@ public class MostrarMapaActivity extends GDMapActivity {
 		return false;
 	}
 
+	/**
+	 * Muestra el mapa junto a los dos puntos en el mapa. El punto de interes
+	 * seleccionado y la ubicacion del usuario
+	 * 
+	 * @param lat
+	 *            Latitud del sitio
+	 * @param lon
+	 *            Longuitud del sitio
+	 */
 	private void mostrarMapa(Double lat, Double lon) {
 
 		if (mapa == null)
