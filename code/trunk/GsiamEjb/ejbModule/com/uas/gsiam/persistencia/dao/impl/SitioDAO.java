@@ -74,7 +74,7 @@ public class SitioDAO implements ISitioDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
+			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
 		} finally {
 			try {
 				rs.close();
