@@ -1,16 +1,22 @@
-package com.uas.gsiam.test;
+package com.uas.gsiam.usuario.test;
 
+import static org.junit.Assert.*;
+import groovyx.net.http.ContentType;
 import junit.framework.Assert;
+
 import net.sf.json.JSONArray;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ResponseBody;
+import com.uas.gsiam.test.dto.UsuarioDTO;
 
-public class ObtenerSitiosTest {
+public class AmigosTest {
 
 	RestAssured restAssured;
 
@@ -21,19 +27,19 @@ public class ObtenerSitiosTest {
 	}
 
 	@Test
-	public void servicioNoEcontrado() {
+	public void errorUrlAmigos() {
 
 		Response response = restAssured.expect().get(
-				"/Gsiameb2/sitios/{lat}/{lon}", -34.909141, -56.167225);
+				"/GsiamWeb2/usuarios/amigo/{id}", 69);
 
 		Assert.assertEquals(404, response.getStatusCode());
 	}
 
 	@Test
-	public void noExistenSitios() {
+	public void noExistenAmigos() {
 
 		Response response = restAssured.expect().get(
-				"/GsiamWeb2/sitios/{lat}/{lon}", 0, 0);
+				"/GsiamWeb2/usuarios/amigos/{id}", 0);
 		ResponseBody b = response.getBody();
 		String str = b.asString();
 
@@ -41,34 +47,18 @@ public class ObtenerSitiosTest {
 
 		Assert.assertEquals(0, jsonArray.size());
 	}
-
-	
 	
 	@Test
-	public void obtenerSitios() {
+	public void getAmigos() {
 
 		Response response = restAssured.expect().get(
-				"/GsiamWeb2/sitios/{lat}/{lon}", -34.909141, -56.167225);
+				"/GsiamWeb2/usuarios/amigos/{id}", 1);
 		ResponseBody b = response.getBody();
 		String str = b.asString();
 
 		JSONArray jsonArray = JSONArray.fromObject(str);
 
-		Assert.assertNotNull(jsonArray.getJSONObject(1));
+		Assert.assertNotSame(0, jsonArray.size());
 	}
-	
-	// @Test
-	// public void test2() {
-	// SitioDTO sitio = new SitioDTO();
-	// RestAssured r = new RestAssured();
-	// // Response response =
-	// //
-	// r.expect().contentType(ContentType.JSON).post("GsiamWeb2/sitios/agregar/",
-	// // sitio);
-	// Response response = r.given().contentType("application/json")
-	// .body(sitio).when().post("/GsiamWeb2/sitios/agregar/");
-	//
-	// Assert.assertNotNull(response);
-	// }
 
 }
