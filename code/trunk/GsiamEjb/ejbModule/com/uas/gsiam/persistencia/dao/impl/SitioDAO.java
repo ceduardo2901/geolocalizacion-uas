@@ -122,23 +122,6 @@ public class SitioDAO implements ISitioDAO {
 
 	}
 
-	/*
-	 * private void existeSitio(SitioDTO sitio) { PreparedStatement ps = null;
-	 * 
-	 * Point punto = new Point(sitio.getLat(), sitio.getLon()); PGgeometry geom
-	 * = new PGgeometry(punto);
-	 * 
-	 * String sqlExisteSitio = "SELECT * FROM t_sitio WHERE sit_punto=?";
-	 * 
-	 * try { ps = ConexionJDBCUtil.getConexion()
-	 * .prepareStatement(sqlExisteSitio); ps.setObject(1, geom); ResultSet rs =
-	 * ps.executeQuery();
-	 * 
-	 * rs.next(); } catch (SQLException e) {
-	 * 
-	 * e.printStackTrace(); } }
-	 */
-
 	@Override
 	public void eliminarSitio(Integer idSitio) throws SitioExcepcion {
 		try {
@@ -345,15 +328,15 @@ public class SitioDAO implements ISitioDAO {
 		boolean result;
 		try {
 
-		PreparedStatement ps;
-		String sql = "select * from t_sitio where sit_id=? and sit_id_usuario=?";
-		ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
-		ps.setInt(1, sitio.getIdSitio());
-		ps.setInt(2, sitio.getIdUsuario());
-		ResultSet rs = ps.executeQuery();
-		result = rs.next();
-		rs.close();
-		ps.close();
+			PreparedStatement ps;
+			String sql = "select * from t_sitio where sit_id=? and sit_id_usuario=?";
+			ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
+			ps.setInt(1, sitio.getIdSitio());
+			ps.setInt(2, sitio.getIdUsuario());
+			ResultSet rs = ps.executeQuery();
+			result = rs.next();
+			rs.close();
+			ps.close();
 		} finally {
 
 			if (ConexionJDBCUtil.getConexion() != null)
