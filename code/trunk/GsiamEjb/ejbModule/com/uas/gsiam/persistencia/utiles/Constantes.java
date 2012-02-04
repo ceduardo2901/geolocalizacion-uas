@@ -25,6 +25,7 @@ public class Constantes {
 	public static String ERROR_YA_EXISTE_USUARIO = "Ya existe una cuenta con ese mail, ingrese otro";
 	public static String ERROR_LOGIN = "Error al intentar ingrear a la aplicacion";
 	public static String NO_EXISTE_USUARIO = "El email o password es incorrecto";
+	public static String NO_EXISTE_EMAIL_USUARIO = "El email no se encuentra en el sistema";
 	public static String ERROR_ACTUALIZAR_UBICACION = "Error al intentar actualizar su ubicacion";
 
 	// Mensajes de error sitios

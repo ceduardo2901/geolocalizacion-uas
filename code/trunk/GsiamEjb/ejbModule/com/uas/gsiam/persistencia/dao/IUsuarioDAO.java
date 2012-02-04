@@ -67,11 +67,22 @@ public interface IUsuarioDAO {
 	 */
 	public void modificarUsuario(UsuarioDTO usuario) throws SQLException;
 
+	/**
+	 * Desactiva la cuenta de usuario del sistema. Setea en cero el atributo
+	 * activado
+	 * 
+	 * @param usuario
+	 *            Usuario a eliminar logicamente del sistema
+	 * @throws SQLException
+	 */
 	public void desactivarUsuario(UsuarioDTO usuario) throws SQLException;
 
 	/**
 	 * 
+	 * Elimina los contactos del usuario ingresado por parametros
+	 * 
 	 * @param usuario
+	 *            Usuario al cual se le eliminaran los contactos
 	 * @throws SQLException
 	 */
 	public void eliminarContactos(UsuarioDTO usuario) throws SQLException;
