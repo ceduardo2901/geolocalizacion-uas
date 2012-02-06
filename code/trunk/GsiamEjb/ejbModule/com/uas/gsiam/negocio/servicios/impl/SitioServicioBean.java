@@ -74,6 +74,7 @@ public class SitioServicioBean implements SitioServicio {
 	public void modificarSitio(SitioDTO sitio) throws SitioExcepcion {
 
 		try {
+			
 			ISitioDAO sitioDao = AbstractFactory.getInstance().getSitioDAO();
 			if (sitioDao.usuarioCreadorSitio(sitio)) {
 				sitioDao.modificarSitio(sitio);

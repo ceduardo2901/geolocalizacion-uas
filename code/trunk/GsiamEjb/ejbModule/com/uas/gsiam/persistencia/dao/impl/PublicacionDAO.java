@@ -16,7 +16,7 @@ public class PublicacionDAO implements IPublicacionDAO {
 	public void crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
 
-		PreparedStatement ps;
+		PreparedStatement ps=null;
 
 		String sqlCrearUsuario = "INSERT INTO t_publicacion (pub_fecha, pub_comentario, pub_foto ,pub_id_usuario, pub_id_sitio, pub_puntaje) "
 				+ "VALUES (?, ?, ? ,?, ?, ?)";
@@ -34,6 +34,13 @@ public class PublicacionDAO implements IPublicacionDAO {
 			ps.close();
 		} catch (SQLException e) {
 			throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
+		}finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		
