@@ -139,7 +139,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 		try {
 			if (usuario != null) {
-				
+
 				if (AbstractFactory.getInstance().getUsuarioDAO()
 						.existeUsuario(usuario.getEmail())) {
 					AbstractFactory.getInstance().getUsuarioDAO()
@@ -147,13 +147,13 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 					AbstractFactory.getInstance().getUsuarioDAO()
 							.eliminarContactos(usuario);
-				}else{
-					throw new UsuarioExcepcion(Constantes.NO_EXISTE_EMAIL_USUARIO);
+				} else {
+					throw new UsuarioExcepcion(
+							Constantes.NO_EXISTE_EMAIL_USUARIO);
 				}
-			}else{
+			} else {
 				throw new UsuarioExcepcion(Constantes.ERROR_CERRAR_CUENTA);
 			}
-			
 
 		} catch (IOException e) {
 			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -232,15 +232,21 @@ public class UsuarioServicioBean implements UsuarioServicio {
 			int accion) throws UsuarioExcepcion {
 
 		try {
-
-			if (accion == Constantes.ACEPTAR_SOLICITUD) {
-				// Se acepta la solicitud
-				AbstractFactory.getInstance().getUsuarioDAO()
-						.aprobarSolicitudContacto(solicitud);
-			} else {
-				// Se rechaza la solicitud
-				AbstractFactory.getInstance().getUsuarioDAO()
-						.eliminarSolicitudContacto(solicitud);
+			if (solicitud != null) {
+				if (solicitud.getIdUsuarioAprobador() != 0
+						&& solicitud.getIdUsuarioSolicitante() != 0) {
+					if (accion == Constantes.ACEPTAR_SOLICITUD) {
+						// Se acepta la solicitud
+						AbstractFactory.getInstance().getUsuarioDAO()
+								.aprobarSolicitudContacto(solicitud);
+					} else {
+						// Se rechaza la solicitud
+						AbstractFactory.getInstance().getUsuarioDAO()
+								.eliminarSolicitudContacto(solicitud);
+					}
+				} else {
+					throw new UsuarioExcepcion(Constantes.ERROR_ID_USUARIO_NULL);
+				}
 			}
 
 		} catch (IOException e) {

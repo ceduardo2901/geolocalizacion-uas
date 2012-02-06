@@ -31,8 +31,10 @@ public class SitioDAO implements ISitioDAO {
 
 		StringBuilder sqlExisteSitio = new StringBuilder(
 				"SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
-		if (sitioInteres.getIdSitio().doubleValue() > 0) {
-			sqlExisteSitio.append("and s.sit_id=?");
+		if (sitioInteres.getIdSitio() != null) {
+			if (sitioInteres.getIdSitio().doubleValue() > 0) {
+				sqlExisteSitio.append("and s.sit_id=?");
+			}
 		}
 
 		if (sitioInteres.getNombre() != null) {

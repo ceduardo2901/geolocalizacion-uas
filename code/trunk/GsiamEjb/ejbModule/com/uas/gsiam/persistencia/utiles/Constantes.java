@@ -22,6 +22,7 @@ public class Constantes {
 	public static String ERROR_RECUPERAR_CONTACTOS = "Error al intentar traer los contactos";
 	public static String ERROR_RECUPERAR_USUARIOS = "Error al intentar traer los usuarios";
 	public static String ERROR_RESPONDER_SOLICITUD = "Error al intentar aceptar o rechazar la solicitud";
+	public static String ERROR_ID_USUARIO_NULL = "El identificador de usuario no puede ser vacio";
 	public static String ERROR_YA_EXISTE_USUARIO = "Ya existe una cuenta con ese mail, ingrese otro";
 	public static String ERROR_LOGIN = "Error al intentar ingrear a la aplicacion";
 	public static String NO_EXISTE_USUARIO = "El email o password es incorrecto";
