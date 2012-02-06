@@ -89,7 +89,7 @@ public class SitioServicios {
 	public List<SitioDTO> buscarSitios(@PathParam("id") String id,
 			@PathParam("nombre") String nombre) {
 		SitioDTO sitio = new SitioDTO();
-		if (!id.isEmpty()) {
+		if (!id.isEmpty() && id.trim().length() > 0) {
 			sitio.setIdSitio(Integer.valueOf(id));
 		}
 		if (!nombre.isEmpty() && !nombre.equals(" ")) {
