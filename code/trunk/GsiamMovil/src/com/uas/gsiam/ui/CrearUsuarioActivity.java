@@ -12,6 +12,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +32,7 @@ import com.uas.gsiam.utils.Util;
  * @author Martín
  * 
  */
-public class CrearUsuarioActivity extends Activity {
+public class CrearUsuarioActivity extends Activity implements TextWatcher{
 
 	protected String email;
 	protected String pass;
@@ -62,6 +64,10 @@ public class CrearUsuarioActivity extends Activity {
 		registrarseBtn = (Button) findViewById(R.id.crearUsuarioBtn);
 		crearUsuarioFiltro = new IntentFilter(
 				Constantes.CREAR_USUARIO_FILTRO_ACTION);
+		nombreTxt.addTextChangedListener(this);
+		emailTxt.addTextChangedListener(this);
+		passTxt.addTextChangedListener(this);
+		registrarseBtn.setEnabled(false);
 	}
 
 	protected void onResume() {
@@ -145,6 +151,32 @@ public class CrearUsuarioActivity extends Activity {
 
 	private void inicializarActionBar() {
 		setTitle("GSIAM - Registrarse");
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+				
+		
+		if (!nombreTxt.getText().toString().equals("")
+				&& !emailTxt.getText().toString().equals("")
+				&& !passTxt.getText().toString().equals("")
+				&& s.length() != 0) {
+			registrarseBtn.setEnabled(true);
+		} else {
+			registrarseBtn.setEnabled(false);
+		}
+		
 	}
 
 }

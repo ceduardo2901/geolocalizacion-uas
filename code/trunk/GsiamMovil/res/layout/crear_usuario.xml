@@ -21,7 +21,8 @@
 
 
 		<EditText android:layout_height="wrap_content" android:id="@+id/nombreTxt"
-			android:inputType="textPersonName" android:layout_width="match_parent">
+			android:inputType="textPersonName" android:layout_width="match_parent"
+			android:maxLength="30">
 			<requestFocus></requestFocus>
 		</EditText>
 
@@ -35,7 +36,7 @@
 
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/emailTxt"
-			android:inputType="textEmailAddress">
+			android:inputType="textEmailAddress" android:maxLength="30">
 		</EditText>
 		<TextView android:layout_width="fill_parent" android:text="@string/pass"
 			android:textColor="@color/fuente" android:layout_height="wrap_content"
@@ -43,7 +44,7 @@
 			android:layout_marginTop="15dp"></TextView>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/passTxt"
-			android:inputType="textPassword"></EditText>
+			android:inputType="textPassword" android:maxLength="20"/>
 
 		<Button android:id="@+id/crearUsuarioBtn"
 			android:layout_height="wrap_content" android:text="@string/BtnRegistrarse"
