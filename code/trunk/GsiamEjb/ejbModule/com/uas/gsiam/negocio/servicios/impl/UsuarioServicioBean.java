@@ -28,7 +28,6 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	 * Default constructor.
 	 */
 	public UsuarioServicioBean() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public UsuarioDTO login(UsuarioDTO usuario)
@@ -60,12 +59,31 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 		try {
 
-			if (AbstractFactory.getInstance().getUsuarioDAO()
-					.existeUsuario(usuario.getEmail())) {
+			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())) {
 				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
 			} else {
-				AbstractFactory.getInstance().getUsuarioDAO()
-						.crearUsuario(usuario);
+				AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
+				
+				
+				try {
+					EmailTemplate template = EmailTemplateFactory
+							.createEmailTemplate("mailTemplates/bienvenida.vm");
+					template.put("p_nombre", usuario.getNombre());
+					
+					EmailSender mail = new EmailSender();
+					mail.setTemplate(template);
+
+					mail.setEmailDestinatario(usuario.getEmail());
+
+					mail.setSubject(Constantes.EMAIL_SUBJECT_BIENVENIDA + usuario.getNombre());
+
+					new Thread(mail).start();
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new UsuarioExcepcion(e.getMessage());
+				}
+				
+				
 			}
 
 		} catch (IOException e) {
