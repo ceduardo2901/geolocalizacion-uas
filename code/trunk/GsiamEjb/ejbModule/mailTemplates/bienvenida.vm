@@ -1,0 +1,14 @@
+<html> 
+<body> 
+<p>Hola, ${p_nombre}</p><br> 
+<p>Queremos darte las gracias por ser parte de esta fantástica red llamada G-SIAM.</p> 
+<br>
+<p>Te recordamos que con GSIAM podrás conocer muchas personas así como también obtener información de todos los sitios de tu interés.</p> 
+<br>
+<p>
+Saludos,<br>
+El equipo de <b>GSIAM</b>
+</p>	
+
+</body> 
+</html>
