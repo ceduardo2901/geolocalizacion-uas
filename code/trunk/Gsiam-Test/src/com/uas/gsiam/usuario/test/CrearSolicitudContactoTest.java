@@ -57,7 +57,7 @@ public class CrearSolicitudContactoTest {
 	
 	@Test
 	public void crearSolicitud() {
-		solicitud.setIdUsuarioSolicitante(69);
+		solicitud.setIdUsuarioSolicitante(5);
 		solicitud.setIdUsuarioAprobador(3);
 		Response response = restAssured.given().contentType(ContentType.JSON).body(solicitud).when().post("GsiamWeb2/usuarios/agregarsolicitud");
 
