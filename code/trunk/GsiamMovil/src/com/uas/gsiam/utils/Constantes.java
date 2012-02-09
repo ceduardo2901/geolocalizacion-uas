@@ -1,7 +1,5 @@
 package com.uas.gsiam.utils;
 
-import android.app.AlarmManager;
-
 /**
  * Constantes de la aplicacion movil
  * 
@@ -27,9 +25,9 @@ public class Constantes {
 	// Servicios
 
 	// TODO poner esto en un archivo de configuracion
-	// public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	 public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	// ip tony
-	public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
+	//public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
 	// ipmartin
 	// public static final String DOMINIO_SERVICE =
 	// "http://gsiamweb.no-ip.info:8080";
@@ -118,6 +116,8 @@ public class Constantes {
 	public static final String MSG_ESPERA_RECHAZANDO_SOLICITUD = "Rechazando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_ENVIANDO_INVITACION = "Enviando invitacion, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha \ncreado exitosamente";
+	public static final String MSG_CONFIRMAR_MODIFICACION_USUARIO = "¿Esta seguro que desea modificar su perfil?";
+	public static final String MSG_CONFIRMAR_CIERRE_CUENTA = "¿Esta seguro que desea cerrar su cuenta?";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
 	public static final String MSG_SOLICITUD_RESPONDIDA_OK = "La solicitud se aprobo/rechazo correctamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
