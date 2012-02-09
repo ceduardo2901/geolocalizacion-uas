@@ -33,6 +33,7 @@
 	<string name="avatar">Avatar</string>
 	<string name="BtnEditarPerfil">Editar Perfil</string>
 	<string name="BtnEliminarPerfil">Cerrar Cuenta</string>
+	<string name="BtnCrearUsuario">Crear Cuenta</string>
 	<string name="BtnRegistrarse">Registrarse</string>
 	<string name="BtnInvitar">Invitar</string>
 	<string name="Nombre">Nombre</string>
