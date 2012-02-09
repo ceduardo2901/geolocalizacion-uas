@@ -1,7 +1,6 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem.Type;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -86,12 +85,12 @@ public class PerfilActivity extends GDActivity {
 	
 	
 	
-	public void cerrarCuenta() {
+	public void ConfirmarCerrarCuenta() {
 		
 		
 	   AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
-  	   dialogResponder.setTitle("Cierre de Cuenta"); 
-  	   dialogResponder.setMessage("¿Esta seguro que desea cerrar su cuenta?");
+  	   dialogResponder.setTitle("Confirmacion"); 
+  	   dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_CIERRE_CUENTA);
   	   dialogResponder.setCancelable(true);
   	   dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);  
   	   
@@ -131,7 +130,7 @@ public class PerfilActivity extends GDActivity {
 		switch (item.getItemId()) {
 		case R.id.cerrarCuentaId:
 
-			cerrarCuenta();
+			ConfirmarCerrarCuenta();
 			break;
 
 		default:
@@ -141,7 +140,7 @@ public class PerfilActivity extends GDActivity {
 		return true;
 	}
 	
-	protected void cerrarCuentaServicio(){
+	protected void cerrarCuenta(){
 		Intent cerrarCuentaIntent = new Intent(getApplicationContext(),CerrarCuentaServicio.class);
 		cerrarCuentaIntent.putExtra("usuario", app.getUserLogin());
 		startService(cerrarCuentaIntent);

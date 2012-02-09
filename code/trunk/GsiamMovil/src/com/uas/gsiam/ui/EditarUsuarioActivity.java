@@ -1,7 +1,6 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem.Type;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -20,7 +19,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
@@ -32,6 +30,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +52,7 @@ import com.uas.gsiam.utils.Util;
  * @author Martin
  * 
  */
-public class EditarUsuarioActivity extends GDActivity {
+public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 
 	protected String email;
 	protected String nombre;
@@ -93,6 +93,10 @@ public class EditarUsuarioActivity extends GDActivity {
 		nombreTxt.setText(userLogin.getNombre());
 		emailTxt.setText(userLogin.getEmail());
 		passTxt.setText(userLogin.getPassword());
+		
+		nombreTxt.addTextChangedListener(this);
+		emailTxt.addTextChangedListener(this);
+		passTxt.addTextChangedListener(this);
 
 		if (userLogin.getAvatar() != null)
 			avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
@@ -119,6 +123,32 @@ public class EditarUsuarioActivity extends GDActivity {
 		unregisterReceiver(receiverEditarUsuario);
 	}
 
+	
+	@Override
+	public void afterTextChanged(Editable s) {
+		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+		if (!nombreTxt.getText().toString().equals("")
+				&& !emailTxt.getText().toString().equals("")
+				&& !passTxt.getText().toString().equals("")
+				&& s.length() != 0) {
+			editarPerfilBtn.setEnabled(true);
+		} else {
+			editarPerfilBtn.setEnabled(false);
+		}
+	}
+	
+	
 	/**
 	 * Accion que cambia la foto de perfil del usuario
 	 * 
@@ -252,45 +282,73 @@ public class EditarUsuarioActivity extends GDActivity {
 
 	public void editarUsuario(View v) {
 
+		final Context ctx = v.getContext();
+		
 		nombre = nombreTxt.getText().toString().trim();
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
 
 		if (!Util.validaMail(email)) {
-			Util.showToast(v.getContext(), Constantes.MSG_ERROR_MAIL);
+			Util.showToast(ctx, Constantes.MSG_ERROR_MAIL);
 
 		} else {
 
-			UsuarioDTO usuario = new UsuarioDTO();
-			usuario.setNombre(nombre);
-			usuario.setEmail(email);
+		
+			AlertDialog.Builder dialogConfirmar = new AlertDialog.Builder(this);
+			dialogConfirmar.setTitle("Confirmar"); 
+			dialogConfirmar.setMessage(Constantes.MSG_CONFIRMAR_MODIFICACION_USUARIO);
+			dialogConfirmar.setCancelable(true);
+			dialogConfirmar.setIcon(android.R.drawable.ic_dialog_alert);  
 
-			usuario.setPassword(pass);
-			usuario.setId(userLogin.getId());
+			dialogConfirmar.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
-			if (foto != null)
-				usuario.setAvatar(foto);
-			else {
+				public void onClick(DialogInterface dialog, int id) {
 
-				Drawable drawable = avatar.getDrawable();
+					dialog.cancel();
+					
+					UsuarioDTO usuario = new UsuarioDTO();
+					usuario.setNombre(nombre);
+					usuario.setEmail(email);
 
-				byte[] arrayBytes = null;
-				try {
-					arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					usuario.setPassword(pass);
+					usuario.setId(userLogin.getId());
+
+					if (foto != null)
+						usuario.setAvatar(foto);
+					else {
+
+						Drawable drawable = avatar.getDrawable();
+
+						byte[] arrayBytes = null;
+						try {
+							arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+						usuario.setAvatar(arrayBytes);
+					}
+
+					Intent intent = new Intent(ctx, EditarUsuarioServicio.class);
+					intent.putExtra("usuario", usuario);
+					startService(intent);
+
+					Util.showProgressDialog(ctx, Constantes.MSG_ESPERA_GENERICO);
+
+				
 				}
+			});
 
-				usuario.setAvatar(arrayBytes);
-			}
+			dialogConfirmar.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
-			Intent intent = new Intent(this, EditarUsuarioServicio.class);
-			intent.putExtra("usuario", usuario);
-			startService(intent);
+				public void onClick(DialogInterface dialog, int id) {
 
-			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+					dialog.cancel();
+				}
+			});
 
+			dialogConfirmar.show();
 		}
 
 	}
@@ -326,5 +384,7 @@ public class EditarUsuarioActivity extends GDActivity {
 
 		}
 	};
+
+	
 
 }

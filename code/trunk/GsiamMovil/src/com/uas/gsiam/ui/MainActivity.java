@@ -1,7 +1,6 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem.Type;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Intent;
@@ -70,7 +69,6 @@ public class MainActivity extends GDActivity {
 		user = app.getUserLogin();
 
 		nombreTxt.setText("Bienvenido: " + user.getNombre());
-		inicializarBar();
 
 		actualizarPosicion();
 	}
@@ -129,11 +127,6 @@ public class MainActivity extends GDActivity {
 		actualizarPosicion();
 	}
 
-	private void inicializarBar() {
-
-		addActionBarItem(Type.Help, 0);
-
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
