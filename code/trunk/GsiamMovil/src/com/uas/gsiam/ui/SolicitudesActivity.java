@@ -238,7 +238,7 @@ public class SolicitudesActivity extends ListActivity implements
 
 			switch (position) {
 			case 0:
-				return "Pendientes";
+				return "Recibidas";
 			case 1:
 				return "Enviadas";
 
