@@ -61,9 +61,9 @@
             android:id="@+id/nombreTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" >
+            android:inputType="textPersonName"
+            android:maxLength="30" >
 
-         
         </EditText>
 
         <TextView
@@ -79,7 +79,8 @@
             android:id="@+id/emailTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress" 
+            android:maxLength="30"/>
 
         <TextView
             android:id="@+id/passLbl"
@@ -94,7 +95,8 @@
             android:id="@+id/passTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" >
+            android:inputType="textPassword" 
+            android:maxLength="20">
         </EditText>
 
         <Button
