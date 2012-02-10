@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top|center"
         android:orientation="vertical" 
         android:background="@color/background2">
 
@@ -25,12 +25,11 @@
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-            <ImageView
+            <ImageView 
                 android:id="@+id/avatar"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -52,7 +51,7 @@
             android:id="@+id/textNombre"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:text="@string/Nombre"
             android:textColor="@color/fuente" >
         </TextView>
