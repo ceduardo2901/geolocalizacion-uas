@@ -4,13 +4,19 @@
 	android:layout_width="fill_parent" android:padding="10dip"
 	android:orientation="horizontal" android:background="@color/background2">
 	
-	<LinearLayout android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_width="fill_parent" android:layout_gravity="center">
+	<LinearLayout 
+	    android:background="@color/background2"
+	    android:orientation="vertical"
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" 
+		android:layout_gravity="center">
 	
 	
-	<TableLayout android:id="@+id/tableLayout1" 
-				 android:layout_width="match_parent" 
-				 android:layout_height="fill_parent">
+	<TableLayout 
+	    android:background="@color/background2"
+	    android:id="@+id/tableLayout1" 
+		android:layout_width="match_parent" 
+		android:layout_height="fill_parent">
 			
 		<TableRow android:id="@+id/tableRow5" 
 				  android:layout_width="wrap_content" 
@@ -23,7 +29,7 @@
 					  android:textColor="@color/fuente"
 					  android:id="@+id/textView1"/>
 					  
-			<ImageView android:id="@+id/avatar" android:layout_height="150px" android:layout_width="150px"/>
+			<ImageView android:id="@+id/avatar" android:layout_height="150dp" android:layout_width="150dp"/>
 		 
 		</TableRow>	
 			
@@ -37,9 +43,9 @@
 			          android:textColor="@color/fuente"
 					  android:layout_height="wrap_content" 
 					  android:layout_width="wrap_content" 
-					  android:id="@+id/textView1"/>
+					  android:id="@+id/textView13"/>
 			
-			<TextView android:text="TextView" android:id="@+id/nombreTxt" 
+			<TextView android:text="" android:id="@+id/nombreTxt" 
 					  android:textColor="@color/fuente"
 					  android:layout_width="wrap_content" 
 					  android:layout_height="wrap_content"></TextView>
@@ -57,7 +63,7 @@
 					  android:layout_width="fill_parent" 
 					  android:text="@string/email"/>
 					  
-			<TextView android:text="TextView" 
+			<TextView android:text="" 
 					  android:id="@+id/emailTxt" 
 					  android:textColor="@color/fuente"
 					  android:layout_width="wrap_content" 
@@ -71,7 +77,7 @@
 		<TableRow android:id="@+id/tableRow3" 
 				  android:layout_width="wrap_content"
 				  android:layout_height="wrap_content" 
-				  android:paddingTop="10px">
+				  android:paddingTop="10dp">
 		</TableRow>
 		
 		<TableRow android:id="@+id/tableRow4" 
