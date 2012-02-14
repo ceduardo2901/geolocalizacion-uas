@@ -1,6 +1,5 @@
 package com.uas.gsiam.servicios;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,22 +8,12 @@ import java.util.Map;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -111,11 +100,15 @@ public class SitioServicio extends IntentService {
 			if (lista != null) {
 				for (SitioDTO s : lista) {
 					if (s.getPublicaciones() != null) {
-						List<PublicacionDTO> publicaciones = s
-								.getPublicaciones();
+						List<PublicacionDTO> publicaciones = s.getPublicaciones();
 						for (PublicacionDTO p : publicaciones) {
 							if (p.getFoto() != null) {
-								p.setFoto(comprimirFoto(p));
+								
+								String nombreArchivo =  "publicacion_" + p.getIdPublicacion() + ".jpg"; 
+								Util.guardarImagenMemoria(this, p.getFoto(), nombreArchivo);
+								p.setFoto(null);
+								p.setFotoRuta(nombreArchivo);
+								Log.i(TAG, p.getFotoRuta());
 							}
 						}
 					}
@@ -139,18 +132,6 @@ public class SitioServicio extends IntentService {
 		sendBroadcast(intentSitio);
 
 	}
-
-	private byte[] comprimirFoto(PublicacionDTO pub) {
-		Bitmap myBitmap;
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 2;
-
-		myBitmap = BitmapFactory.decodeByteArray(pub.getFoto(), 0,
-				pub.getFoto().length, options);
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		myBitmap.compress(CompressFormat.JPEG, 60, out);
-		return out.toByteArray();
-
-	}
+	
 
 }
