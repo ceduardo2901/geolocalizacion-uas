@@ -534,6 +534,7 @@ public class SitiosActivity extends GDActivity implements
 
 	public void mostrarSitios(final List<SitioDTO> sitios) {
 
+		final Context ctx = this;
 		adaptador = new SitiosAdapter(this, R.layout.sitio, sitios, loc);
 		lw.setAdapter(adaptador);
 
@@ -548,6 +549,7 @@ public class SitiosActivity extends GDActivity implements
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
 				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);
+				Util.showProgressDialog(ctx, Constantes.MSG_ESPERA_DETALLE_SITIO);
 
 			}
 		});

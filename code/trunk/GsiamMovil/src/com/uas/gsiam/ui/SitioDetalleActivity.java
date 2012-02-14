@@ -45,6 +45,7 @@ public class SitioDetalleActivity extends Activity implements
 	private SitioDTO sitio;
 	private Gallery galeria;
 	private ArrayList<byte[]> fotos;
+	private ArrayList<String> fotosRutas;
 	private IntentFilter detalleFiltro;
 	private LocationHelper locHelper;
 
@@ -55,7 +56,7 @@ public class SitioDetalleActivity extends Activity implements
 		setContentView(R.layout.sitio_detalle);
 		galeria = (Gallery) findViewById(R.id.gallery);
 		fotos = new ArrayList<byte[]>();
-
+		fotosRutas = new ArrayList<String>();
 		sitio = SitioTabActivity.sitio;
 		cargarFotos(sitio.getPublicaciones());
 		galeria.setAdapter(new FotosAdapter(this));
@@ -69,7 +70,7 @@ public class SitioDetalleActivity extends Activity implements
 		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
 		txtFotos = (TextView) findViewById(R.id.txtFotosId);
-		if (fotos.isEmpty()) {
+	    if (fotos.isEmpty()) {
 			txtFotos.setText(null);
 			Log.i(TAG, "oncreate -no hay fotos: ");
 		} else {
@@ -89,8 +90,10 @@ public class SitioDetalleActivity extends Activity implements
 	private void cargarFotos(List<PublicacionDTO> publicaciones) {
 		if (!publicaciones.isEmpty()) {
 			for (PublicacionDTO p : publicaciones) {
-				if (p.getFoto() != null) {
-					fotos.add(p.getFoto());
+				if (p.getFotoRuta() != null) {
+					 
+					fotos.add(Util.recuperarImagenMemoria(this, p.getFotoRuta()));
+					fotosRutas.add(p.getFotoRuta());
 				}
 			}
 		}
@@ -134,8 +137,7 @@ public class SitioDetalleActivity extends Activity implements
 
 	public void onResume() {
 		super.onResume();
-		Intent intent = getIntent();
-
+	
 		txtNombre.setText(sitio.getNombre());
 		txtDireccion.setText(sitio.getDireccion());
 		txtTelefono.setText(sitio.getTelefono());
@@ -160,6 +162,16 @@ public class SitioDetalleActivity extends Activity implements
 	public void setFotos(ArrayList<byte[]> fotos) {
 		this.fotos = fotos;
 	}
+	
+	
+	public ArrayList<String> getFotosRutas() {
+		return fotosRutas;
+	}
+
+	public void setFotosRutas(ArrayList<String> fotosRutas) {
+		this.fotosRutas = fotosRutas;
+	}
+	
 
 	public void onPause() {
 		super.onPause();
@@ -212,6 +224,7 @@ public class SitioDetalleActivity extends Activity implements
 					0);
 			attr.recycle();
 			this.fotos = getFotos();
+		
 
 		}
 
@@ -254,7 +267,7 @@ public class SitioDetalleActivity extends Activity implements
 			long id) {
 
 		Intent intentVisor = new Intent(this, VisorImagenes.class);
-		intentVisor.putExtra("fotos", getFotos());
+		intentVisor.putExtra("fotosRuta", getFotosRutas());
 		intentVisor.putExtra("indice", position);
 		startActivity(intentVisor);
 

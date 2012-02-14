@@ -36,7 +36,8 @@ public class VisorImagenes extends Activity implements
 	/**
 	 * Lista de fotos a mostrar
 	 */
-	private ArrayList<byte[]> fotos;
+//	private ArrayList<byte[]> fotos;
+	private ArrayList<String> fotosRuta;
 	private List<Drawable> imagenes = new ArrayList<Drawable>();
 	private Integer seleccionada;
 
@@ -53,11 +54,16 @@ public class VisorImagenes extends Activity implements
 				android.R.anim.fade_in));
 		mSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this,
 				android.R.anim.fade_out));
-		fotos = (ArrayList<byte[]>) getIntent().getSerializableExtra("fotos");
+		fotosRuta = (ArrayList<String>) getIntent().getSerializableExtra("fotosRuta");
 		seleccionada = getIntent().getIntExtra("indice", 0);
-		for (byte[] b : fotos) {
+		
+		for (String nombre : fotosRuta) {
+			
+			byte[] foto = Util.recuperarImagenMemoria(this, nombre);
+			//fotos.add(foto);
+			
 			ImageView i = new ImageView(this);
-			i.setImageBitmap(Util.ArrayToBitmap(b));
+			i.setImageBitmap(Util.ArrayToBitmap(foto));
 			imagenes.add(i.getDrawable());
 		}
 		Gallery g = (Gallery) findViewById(R.id.galeria);

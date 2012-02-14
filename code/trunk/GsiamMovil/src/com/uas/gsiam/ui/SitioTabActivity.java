@@ -3,19 +3,11 @@ package com.uas.gsiam.ui;
 import greendroid.app.GDTabActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
-import greendroid.widget.LoaderActionBarItem;
-
-import java.util.ArrayList;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TabHost;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -61,7 +53,8 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost = getTabHost();
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
-
+		
+		
 		addTab1();
 		addTab2();
 
@@ -71,9 +64,11 @@ public class SitioTabActivity extends GDTabActivity {
 		int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
 		mTabHost.setCurrentTab(0);
 
-		Log.i(TAG, "**** currentTab =  " + currentTab);
 		mTabHost.getCurrentTabTag();
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
+		
+		Util.dismissProgressDialog();
+		
 	}
 
 	@Override
@@ -93,36 +88,6 @@ public class SitioTabActivity extends GDTabActivity {
 	protected void OnResume() {
 		super.onResume();
 	}
-
-	protected BroadcastReceiver sitiosReceiver = new BroadcastReceiver() {
-		@SuppressWarnings("unchecked")
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
-
-			Bundle b = intent.getExtras();
-			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
-					.getSerializable("sitios");
-
-			if (sitios != null) {
-				sitio = sitios.get(0);
-
-			}
-			Util.dismissProgressDialog();
-
-			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar()
-					.getItem(ACTUALIZAR);
-			loaderActionBarItem.setLoading(false);
-
-			if (sitios.size() == 0) {
-
-				Util.showToast(getApplicationContext(),
-						Constantes.MSG_NO_EXISTEN_SITIOS);
-
-			}
-
-		}
-	};
 
 	private void inicializarActionBar() {
 
@@ -217,5 +182,6 @@ public class SitioTabActivity extends GDTabActivity {
 		startActivity(intent);
 
 	}
+	
 
 }
