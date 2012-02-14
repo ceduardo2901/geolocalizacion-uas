@@ -8,8 +8,11 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,7 +33,7 @@ import com.uas.gsiam.utils.Util;
  * @author Antonio
  * 
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements TextWatcher{
 
 	protected static String TAG = "LoginActivity";
 	protected String email;
@@ -40,6 +43,7 @@ public class LoginActivity extends Activity {
 	protected EditText passTxt;
 	protected TextView textAplicacion;
 	protected IntentFilter loginFiltro;
+	protected Button loginBtn;
 
 	protected UsuarioDTO user;
 
@@ -50,7 +54,11 @@ public class LoginActivity extends Activity {
 		user = new UsuarioDTO();
 		this.passTxt = (EditText) findViewById(R.id.passTxt);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
-
+		this.loginBtn = (Button) findViewById(R.id.entrarBtn);
+		
+		passTxt.addTextChangedListener(this);
+		emailTxt.addTextChangedListener(this);
+		loginBtn.setEnabled(false);
 		loginFiltro = new IntentFilter(Constantes.LOGIN_FILTRO_ACTION);
 
 	}
@@ -157,4 +165,28 @@ public class LoginActivity extends Activity {
 
 		}
 	};
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		if (!emailTxt.getText().toString().equals("")
+				&& !passTxt.getText().toString().equals("")
+				) {
+			loginBtn.setEnabled(true);
+		} else {
+			loginBtn.setEnabled(false);
+		}
+		
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		
+	}
 }

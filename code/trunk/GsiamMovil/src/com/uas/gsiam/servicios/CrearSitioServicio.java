@@ -69,7 +69,7 @@ public class CrearSitioServicio extends IntentService {
 			ResponseEntity<String> respuesta = restTemp.exchange(
 					Constantes.CREAR_SITIOS_SERVICE_URL, HttpMethod.POST,
 					requestEntity, String.class);
-
+			
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
 				intentBack.putExtra("respuesta", Constantes.MSG_CREAR_SITIO_OK);
 			} else {

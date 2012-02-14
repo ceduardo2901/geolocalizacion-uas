@@ -20,7 +20,7 @@
 			android:textColor="@color/fuente"/>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/emailTxt"
-			android:inputType="textEmailAddress">
+			android:inputType="textEmailAddress" android:maxLength="30">
 			<requestFocus></requestFocus>
 		</EditText>
 		<TextView android:layout_width="fill_parent"
@@ -29,7 +29,7 @@
 			android:textColor="@color/fuente"/>
 		<EditText android:layout_width="match_parent"
 			android:layout_height="wrap_content" android:id="@+id/passTxt"
-			android:inputType="textPassword">
+			android:inputType="textPassword" android:maxLength="20">
 
 		</EditText>
 		<Button android:layout_height="wrap_content" android:id="@+id/entrarBtn"

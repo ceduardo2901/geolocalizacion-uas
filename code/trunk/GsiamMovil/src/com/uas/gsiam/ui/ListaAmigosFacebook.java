@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +23,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.facebook.android.R;
@@ -49,6 +55,7 @@ public class ListaAmigosFacebook extends Activity {
 	protected static JSONArray jsonArray;
 	private ArrayAdapter<AmigoFacebook> listAdapter;
 	private List<AmigoFacebook> list;
+	private EditText filtrar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,8 @@ public class ListaAmigosFacebook extends Activity {
 
 		list = new ArrayList<AmigoFacebook>();
 		setContentView(R.layout.lista_amigos_facebook);
-
+		filtrar = (EditText) findViewById(R.id.txtFiltrarId);
+		filtrar.addTextChangedListener(filterTextWatcher);
 		obtenerAmigos();
 
 		listaAmigos = (ListView) findViewById(R.id.friends_list);
@@ -71,10 +79,33 @@ public class ListaAmigosFacebook extends Activity {
 						viewHolder.check.setChecked(aFace.isSeleccionado());
 					}
 				});
+		listaAmigos.setTextFilterEnabled(true);
 		listAdapter = new FriendListAdapter(list, this);
 		listaAmigos.setAdapter(listAdapter);
 
 	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		filtrar.removeTextChangedListener(filterTextWatcher);
+	}
+
+	private TextWatcher filterTextWatcher = new TextWatcher() {
+
+		public void afterTextChanged(Editable s) {
+		}
+
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+		}
+
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			listAdapter.getFilter().filter(s);
+		}
+
+	};
 
 	/**
 	 * Carga los amigos de facebook del usuario autenticado
@@ -138,9 +169,7 @@ public class ListaAmigosFacebook extends Activity {
 
 							ApplicationController app = ((ApplicationController) getApplicationContext());
 
-							params.putString("message", app.getUserLogin()
-									.getNombre()
-									+ Constantes.MSG_INVITACIONES_FACEBOOK);
+							params.putString("message", Constantes.MSG_INVITACIONES_FACEBOOK);
 							InvitarAmigosActivity.facebook.request(
 									aFace.getId() + "/feed", params, "POST");
 
@@ -221,14 +250,20 @@ public class ListaAmigosFacebook extends Activity {
 	 * @author Antonio
 	 * 
 	 */
-	public class FriendListAdapter extends ArrayAdapter<AmigoFacebook> {
+	public class FriendListAdapter extends ArrayAdapter<AmigoFacebook>
+			implements Filterable {
 		private LayoutInflater mInflater;
-		List<AmigoFacebook> friendsList;
+		private List<AmigoFacebook> friendsList;
+		private List<AmigoFacebook> filtered;
+		private CustomFilter filter;
 
-		public FriendListAdapter(List<AmigoFacebook> friendsList,
+		public FriendListAdapter(List<AmigoFacebook> list,
 				Context context) {
-			super(context, R.layout.amigo_facebook, friendsList);
-			this.friendsList = friendsList;
+			super(context, R.layout.amigo_facebook, list);
+			this.friendsList = new ArrayList<AmigoFacebook>(list); 
+			//this.friendsList = list;
+			this.filtered = new ArrayList<AmigoFacebook>(list);
+
 			if (FacebookUtil.model == null) {
 				FacebookUtil.model = new FriendsGetProfilePics();
 			}
@@ -237,24 +272,73 @@ public class ListaAmigosFacebook extends Activity {
 		}
 
 		@Override
+		public Filter getFilter() {
+			if (filter == null)
+				filter = new CustomFilter();
+			return filter;
+		}
+
+		private class CustomFilter extends Filter {
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				constraint = constraint.toString().toLowerCase();
+				FilterResults result = new FilterResults();
+				if (constraint != null && constraint.toString().length() > 0) {
+					ArrayList<AmigoFacebook> filt = new ArrayList<AmigoFacebook>();
+					ArrayList<AmigoFacebook> lItems = new ArrayList<AmigoFacebook>();
+					synchronized (this) {
+						lItems.addAll(friendsList);
+					}
+					for (int i = 0, l = lItems.size(); i < l; i++) {
+						AmigoFacebook m = lItems.get(i);
+						if (m.getNombre().toLowerCase().contains(constraint))
+							filt.add(m);
+					}
+					result.count = filt.size();
+					result.values = filt;
+				} else {
+					synchronized (this) {
+						result.values = friendsList;
+						result.count = friendsList.size();
+					}
+				}
+				return result;
+			}
+
+			@Override
+			protected void publishResults(CharSequence constraint,
+					FilterResults results) {
+				filtered = (ArrayList<AmigoFacebook>) results.values;
+				if(results.count > 0){
+					notifyDataSetChanged();
+				}else{
+					notifyDataSetInvalidated();
+				}
+
+			}
+
+		}
+
+		@Override
 		public int getCount() {
-			if (jsonArray != null)
-				return jsonArray.length();
+			if (filtered != null)
+				return filtered.size();
 			else {
 				return 0;
 			}
 		}
-
+		
 		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
+		public AmigoFacebook getItem(int position) {
+	        return filtered.get(position);
+	    }
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			AmigoFacebook amigoFace = null;
 
-			amigoFace = friendsList.get(position);
+			amigoFace = filtered.get(position);
 
 			View hView = convertView;
 			ViewHolder holder;

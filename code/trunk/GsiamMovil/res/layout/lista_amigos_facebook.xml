@@ -7,6 +7,12 @@
     android:paddingLeft="8dip"
     android:paddingRight="8dip" >
 
+    <EditText
+        android:id="@+id/txtFiltrarId"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:hint="@string/filtrar" />
+
     <ListView
         android:id="@+id/friends_list"
         android:layout_width="match_parent"
@@ -14,12 +20,13 @@
         android:layout_weight="1"
         android:cacheColorHint="#00000000"
         android:stackFromBottom="false"
+        android:textFilterEnabled="true"
         android:transcriptMode="normal" />
 
     <Button
         android:id="@+id/btnInvAmigosFacebookId"
         android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="btnInvitarAmigos"
         android:text="@string/BtnInvitar" />
 
