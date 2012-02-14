@@ -124,8 +124,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 			} else {
 				
 				usuarios = respuesta;
-				Log.i(TAG, "mi lista}11111111 = "+usuarios.size());
-				
+					
 				mostrarUsuarios();
 				
 			}
@@ -151,6 +150,11 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 					usuarioSeleccionado.setSolicitudEnviada(true);
 					usuarios.set(pos, usuarioSeleccionado);
 					mostrarUsuarios();
+					
+					//Se agrega la solicitud enviada a la vista de solicitudes 
+					if (SolicitudesActivity.usuariosSolicitudesEnviadas != null)
+						SolicitudesActivity.usuariosSolicitudesEnviadas.add(usuarioSeleccionado);
+					
 				}
 
 			}
