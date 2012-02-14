@@ -225,20 +225,19 @@ public class SitioServicios {
 	@Path("/publicar")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public Response publicar(@BadgerFish PublicacionDTO publicacion) {
-		ResponseBuilder builder = Response.ok();
+	public int publicar(@BadgerFish PublicacionDTO publicacion) {
+		int idPublicacion;
 		try {
-			servicio.crearPublicacion(publicacion);
+			idPublicacion = servicio.crearPublicacion(publicacion);
 		} catch (PublicacionExcepcion e) {
-			builder = new ResponseBuilderImpl();
+			ResponseBuilderImpl builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
 			Response response = builder.build();
 			throw new WebApplicationException(response);
 
 		}
-		builder.type(MediaType.APPLICATION_JSON);
-		return builder.build();
+		return idPublicacion;
 
 	}
 
