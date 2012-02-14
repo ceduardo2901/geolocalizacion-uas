@@ -14,7 +14,16 @@ public class PublicacionDTO implements Serializable{
 	private Date fecha;
 	private Float puntaje;
 	private byte [] foto;
+	private String fotoRuta;
 	
+	public String getFotoRuta() {
+		return fotoRuta;
+	}
+
+	public void setFotoRuta(String fotoRuta) {
+		this.fotoRuta = fotoRuta;
+	}
+
 	public Float getPuntaje() {
 		return puntaje;
 	}

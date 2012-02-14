@@ -19,14 +19,14 @@ public interface IUsuarioDAO {
 	public UsuarioDTO login(UsuarioDTO usuario) throws UsuarioNoExisteExcepcion;
 
 	/**
-	 * Determina si el usuario existe en el sistema a partir del email de este
+	 * Determina si el usuario existe en el sistema a partir del email de este y al flag activo o no activo
 	 * 
-	 * @param mail
+	 * @param mail, activo
 	 *            Email del usuario
 	 * @return Retorna true si existe false en caso contrario
 	 * @throws SQLException
 	 */
-	public boolean existeUsuario(String mail) throws SQLException;
+	public boolean existeUsuario(String mail, int activo) throws SQLException;
 
 	/**
 	 * Retorna el usuario con el identificador ingresado por parametro

@@ -115,12 +115,11 @@ public class SitioServicioBean implements SitioServicio {
 	}
 
 	@Override
-	public void crearPublicacion(PublicacionDTO publicacion)
+	public int crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
 
 		try {
-			AbstractFactory.getInstance().getPublicacionDAO()
-					.crearPublicacion(publicacion);
+			return AbstractFactory.getInstance().getPublicacionDAO().crearPublicacion(publicacion);
 		} catch (IOException e) {
 			throw new PublicacionExcepcion(Constantes.ERROR_COMUNICACION_BD);
 		} catch (InstantiationException e) {
