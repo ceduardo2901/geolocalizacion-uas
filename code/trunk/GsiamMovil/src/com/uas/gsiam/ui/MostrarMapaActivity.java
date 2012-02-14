@@ -4,6 +4,7 @@ import greendroid.app.GDMapActivity;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import com.uas.gsiam.utils.ApplicationController;
 import com.uas.gsiam.utils.LocationHelper;
+import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 
 /**
@@ -37,13 +40,14 @@ public class MostrarMapaActivity extends GDMapActivity {
 	private GeoPoint geoPointUbicacion;
 	private Location loc;
 	private LocationHelper locHelper;
+	protected ApplicationController app;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.mostrar_mapa);
 		mapa = (MapView) findViewById(R.id.mapaId);
-
+		app = ((ApplicationController) getApplicationContext());
 		locHelper = new LocationHelper();
 		locHelper.getLocation(this, locationResult);
 
@@ -106,12 +110,15 @@ public class MostrarMapaActivity extends GDMapActivity {
 		int lonSpan = 0;
 
 		BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(
-				getResources().getDrawable(R.drawable.gd_map_pin_pin));
+				getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
+
 		BasicItemizedOverlay sitioOverlay = new BasicItemizedOverlay(
-				getResources().getDrawable(R.drawable.gd_map_pin_base));
-		miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, null,
-				null));
-		sitioOverlay.addOverlay(new OverlayItem(geoPoint, null, null));
+				getResources().getDrawable(R.drawable.gd_map_pin_base), this);
+		miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion, app
+				.getUserLogin().getNombre(), app.getUserLogin().getNombre()));
+		sitioOverlay.addOverlay(new OverlayItem(geoPoint,
+				SitioTabActivity.sitio.getNombre(), SitioTabActivity.sitio
+						.getNombre()));
 
 		mapa.setClickable(true);
 		mapa.displayZoomControls(true);
@@ -154,13 +161,16 @@ public class MostrarMapaActivity extends GDMapActivity {
 	private class BasicItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+		private Context context;
 
-		public BasicItemizedOverlay(Drawable defaultMarker) {
+		public BasicItemizedOverlay(Drawable defaultMarker, Context context) {
 			super(boundCenterBottom(defaultMarker));
+			this.context = context;
 
 		}
 
 		public void addOverlay(OverlayItem overlay) {
+
 			mOverlays.add(overlay);
 			populate();
 		}
@@ -177,6 +187,10 @@ public class MostrarMapaActivity extends GDMapActivity {
 
 		@Override
 		protected boolean onTap(int index) {
+			OverlayItem item = mOverlays.get(index);
+			
+			Util.showAlertDialog(context, item.getTitle(), item.getSnippet());
+
 			return true;
 		}
 

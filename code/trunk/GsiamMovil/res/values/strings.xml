@@ -43,6 +43,7 @@
 	<string name="agregarSitio">Agregar Sitio</string>
 	<string name="buscar">Buscar</string>
 	<string name="publicar">Publicar</string>
+	<string name="gsiam_publicar">GSIAM - Publicar</string>
 	<string name="foto">Foto</string>
 	<string name="fotos">Fotos</string>
 	<string name="comoIr">Como Ir</string>
@@ -50,6 +51,7 @@
 	<string name="comentarios">Comentarios</string>
 	<string name="mostrarMapa">Mostrar en Mapa</string>
 	<string name="direccion">Direccion</string>
+	<string name="filtrar">Filtrar</string>
 	<string name="telefono">Telefono</string>
 	<string name="web">Web</string>
 	<string name="agregar">Agregar</string>

@@ -2,6 +2,7 @@ package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -76,7 +77,6 @@ public class PublicarActivity extends GDActivity implements
 	private ApplicationController app;
 	private static final int RESULT = 1001;
 	private String nombre;
-	// private ImageView fotoPub;
 	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicacion;
@@ -91,7 +91,6 @@ public class PublicarActivity extends GDActivity implements
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
-		// fotoPub = (ImageView) findViewById(R.id.fotoPubId);
 		fotoButton = (ImageButton) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
@@ -101,7 +100,13 @@ public class PublicarActivity extends GDActivity implements
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
 		app = ((ApplicationController) getApplicationContext());
+		inicializarActionBar();
 
+	}
+	
+	private void inicializarActionBar() {
+
+		getActionBar().setTitle(getString(R.string.gsiam_publicar));
 	}
 
 	@Override
