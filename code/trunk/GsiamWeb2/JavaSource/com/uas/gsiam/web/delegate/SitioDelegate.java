@@ -115,10 +115,10 @@ public class SitioDelegate {
 	 *            Publicacion a crear en el sistema
 	 * @throws PublicacionExcepcion
 	 */
-	public void crearPublicacion(PublicacionDTO publicacion)
+	public int crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
 
-		servicioSitio.crearPublicacion(publicacion);
+		return servicioSitio.crearPublicacion(publicacion);
 	}
 
 	/**
