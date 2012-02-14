@@ -59,7 +59,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	public boolean existeUsuario(String mail) throws SQLException{
+	public boolean existeUsuario(String mail, int activo) throws SQLException{
 		
 		PreparedStatement ps;
 		boolean existe = false;
@@ -67,11 +67,12 @@ public class UsuarioDAO implements IUsuarioDAO {
 		try{
 
 			String sqlExisteUsuario = "SELECT COUNT(*) FROM t_usuario u " +
-	        						  "WHERE u.usu_mail = ? AND u.usu_activo = 1";
+	        						  "WHERE u.usu_mail = ? AND u.usu_activo = ?";
 			
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlExisteUsuario);
 			
 			ps.setString(1, mail);
+			ps.setInt(2, activo);
 			
 			ResultSet rs = ps.executeQuery();
 			
