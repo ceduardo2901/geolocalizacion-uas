@@ -12,7 +12,9 @@ public interface IPublicacionDAO {
 	 * @param publicacion
 	 *            Publiación a crear
 	 * @throws PublicacionExcepcion
+	 * @return Retorna el id de la publicacion
+	 * 
 	 */
-	void crearPublicacion(PublicacionDTO publicacion)
+	int crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion;
 }

@@ -59,50 +59,56 @@ public class UsuarioServicioBean implements UsuarioServicio {
 
 		try {
 
-			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail())) {
+			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail(), Constantes.USUARIO_ACTIVO)) {
 				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
 			} else {
-				AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
-				
-				
-				try {
-					EmailTemplate template = EmailTemplateFactory
-							.createEmailTemplate("mailTemplates/bienvenida.vm");
-					template.put("p_nombre", usuario.getNombre());
-					
-					EmailSender mail = new EmailSender();
-					mail.setTemplate(template);
 
-					mail.setEmailDestinatario(usuario.getEmail());
+				if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail(), Constantes.USUARIO_INACTIVO)) {
+					throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO_INACTIVO);
+				}	else{
 
-					mail.setSubject(Constantes.EMAIL_SUBJECT_BIENVENIDA + usuario.getNombre());
+						AbstractFactory.getInstance().getUsuarioDAO().crearUsuario(usuario);
 
-					new Thread(mail).start();
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new UsuarioExcepcion(e.getMessage());
+
+						try {
+							EmailTemplate template = EmailTemplateFactory
+									.createEmailTemplate("mailTemplates/bienvenida.vm");
+							template.put("p_nombre", usuario.getNombre());
+
+							EmailSender mail = new EmailSender();
+							mail.setTemplate(template);
+
+							mail.setEmailDestinatario(usuario.getEmail());
+
+							mail.setSubject(Constantes.EMAIL_SUBJECT_BIENVENIDA + usuario.getNombre());
+
+							new Thread(mail).start();
+						} catch (Exception e) {
+							e.printStackTrace();
+							throw new UsuarioExcepcion(e.getMessage());
+						}
+
+					}
+
 				}
-				
-				
+
+			} catch (IOException e) {
+				throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
+
+			} catch (InstantiationException e) {
+				throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
+
+			} catch (IllegalAccessException e) {
+				throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
+
+			} catch (ClassNotFoundException e) {
+				throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
+
+			} catch (SQLException e) {
+				throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
 			}
 
-		} catch (IOException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_COMUNICACION_BD);
-
-		} catch (InstantiationException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
-
-		} catch (IllegalAccessException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
-
-		} catch (ClassNotFoundException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
-
-		} catch (SQLException e) {
-			throw new UsuarioExcepcion(Constantes.ERROR_CREAR_USUARIO);
 		}
-
-	}
 
 	// TODO : deberiamos escribir todos los errores en un log
 
@@ -121,8 +127,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 							.modificarUsuario(usuario);
 				} else {
 
-					if (AbstractFactory.getInstance().getUsuarioDAO()
-							.existeUsuario(usuario.getEmail())) {
+					if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail(), Constantes.USUARIO_ACTIVO)) {
 						throw new UsuarioExcepcion(
 								Constantes.ERROR_YA_EXISTE_USUARIO);
 					} else {
@@ -158,10 +163,8 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		try {
 			if (usuario != null) {
 
-				if (AbstractFactory.getInstance().getUsuarioDAO()
-						.existeUsuario(usuario.getEmail())) {
-					AbstractFactory.getInstance().getUsuarioDAO()
-							.desactivarUsuario(usuario);
+				if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(usuario.getEmail(), Constantes.USUARIO_ACTIVO)) {
+					AbstractFactory.getInstance().getUsuarioDAO().desactivarUsuario(usuario);
 
 					AbstractFactory.getInstance().getUsuarioDAO()
 							.eliminarContactos(usuario);
