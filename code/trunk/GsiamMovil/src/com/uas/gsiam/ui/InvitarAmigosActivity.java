@@ -138,25 +138,20 @@ public class InvitarAmigosActivity extends Activity {
 		public void onComplete(Bundle values) {
 			SessionStore.save(facebook, getApplicationContext(), APP_ID);
 			obtenerAmigos();
-
 		}
 
 		@Override
 		public void onFacebookError(FacebookError e) {
 			Log.e(TAG, "Error al autenticase en facebook");
-			// TODO Auto-generated method stub
 		}
 
 		@Override
 		public void onError(DialogError e) {
 			Log.e(TAG, "Error al autenticase en facebook");
-			// TODO Auto-generated method stub
 		}
 
 		@Override
 		public void onCancel() {
-			// TODO Auto-generated method stub
-
 		}
 
 	}
