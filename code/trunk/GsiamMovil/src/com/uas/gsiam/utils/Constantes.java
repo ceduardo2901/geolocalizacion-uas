@@ -115,6 +115,7 @@ public class Constantes {
 	public static final String MSG_ESPERA_ACEPTANDO_SOLICITUD = "Aceptando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_RECHAZANDO_SOLICITUD = "Rechazando solicitud, por favor espere...";
 	public static final String MSG_ESPERA_ENVIANDO_INVITACION = "Enviando invitacion, por favor espere...";
+	public static final String MSG_ESPERA_DETALLE_SITIO = "Obteniendo informacion, por favor espere...";
 	public static final String MSG_USUARIO_CREADO_OK = "El usuario se ha \ncreado exitosamente";
 	public static final String MSG_CONFIRMAR_MODIFICACION_USUARIO = "¿Esta seguro que desea modificar su perfil?";
 	public static final String MSG_CONFIRMAR_CIERRE_CUENTA = "¿Esta seguro que desea cerrar su cuenta?";
