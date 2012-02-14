@@ -11,6 +11,9 @@ public class Constantes {
 
 	public static final int ACEPTAR_SOLICITUD = 0;
 	public static final int RECHAZAR_SOLICITUD = 1;
+	
+	public static final int USUARIO_ACTIVO = 1;
+	public static final int USUARIO_INACTIVO = 0;
 
 	// Mensajes de Error
 	public static String ERROR_COMUNICACION_BD = "Error al comunicarse con la Base de Datos";
@@ -24,6 +27,7 @@ public class Constantes {
 	public static String ERROR_RESPONDER_SOLICITUD = "Error al intentar aceptar o rechazar la solicitud";
 	public static String ERROR_ID_USUARIO_NULL = "El identificador de usuario no puede ser vacio";
 	public static String ERROR_YA_EXISTE_USUARIO = "Ya existe una cuenta con ese mail, ingrese otro";
+	public static String ERROR_YA_EXISTE_USUARIO_INACTIVO = "La cuenta de mail se encuentra inactiva, ingrese otra";
 	public static String ERROR_LOGIN = "Error al intentar ingrear a la aplicacion";
 	public static String NO_EXISTE_USUARIO = "El email o password es incorrecto";
 	public static String NO_EXISTE_EMAIL_USUARIO = "El email no se encuentra en el sistema";
