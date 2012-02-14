@@ -78,11 +78,11 @@ public interface SitioServicio {
 	 * Crea una publicación sobre un sitio en el sistema
 	 * 
 	 * @param publicacion
-	 *            Publiación a crear
+	 *            Publiación a crear           
+	 * @return Retorna el id de la publicacion
 	 * @throws PublicacionExcepcion
 	 */
-	void crearPublicacion(PublicacionDTO publicacion)
-			throws PublicacionExcepcion;
+	int crearPublicacion(PublicacionDTO publicacion) throws PublicacionExcepcion;
 
 	/**
 	 * Este metodo retorna las categorias de sitios de interes que se encuentran
