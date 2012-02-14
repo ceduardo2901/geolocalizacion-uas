@@ -3,7 +3,6 @@ package com.uas.gsiam.servicios;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -58,27 +57,22 @@ public class PublicarServicio extends IntentService {
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
 				String.class));
 
-		requestEntity = new HttpEntity<PublicacionDTO>(publicacion,
-				requestHeaders);
+		requestEntity = new HttpEntity<PublicacionDTO>(publicacion, requestHeaders);
 
 		Intent intentPublicacion = new Intent(
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
 		try {
-
-			ResponseEntity<String> respuesta = restTemp.exchange(
+			
+		
+			ResponseEntity<Integer> respuesta = restTemp.exchange(
 					Constantes.CREAR_PUBLICACION_SERVICE_URL, HttpMethod.POST,
-					requestEntity, String.class);
+					requestEntity, Integer.class);
+			
 
-			if (respuesta.getStatusCode() == HttpStatus.OK) {
-				intentPublicacion.putExtra("respuesta",
-						Constantes.MSG_PUBLICACION_CREADA);
-			} else {
-				intentPublicacion.putExtra("error",
-						Constantes.MSG_ERROR_INESPERADO);
-
-			}
-
+			
+			intentPublicacion.putExtra("respuesta", respuesta.getBody().intValue());
+			
 		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			Log.e(TAG, "Error: " + msg);

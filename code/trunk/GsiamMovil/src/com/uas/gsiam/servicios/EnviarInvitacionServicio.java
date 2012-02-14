@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -70,9 +73,10 @@ public class EnviarInvitacionServicio extends IntentService {
 			String respuesta = restTemp.getForObject(
 					Constantes.ENVIAR_INVITACIONES_SERVICE_URL, String.class,
 					parms);
+					
+					intentBack.putExtra("respuesta", respuesta);
 
-			intentBack.putExtra("respuesta", respuesta);
-
+			
 		} catch (RestResponseException e) {
 			String msg = e.getMensaje();
 			intentBack.putExtra("error", msg);
