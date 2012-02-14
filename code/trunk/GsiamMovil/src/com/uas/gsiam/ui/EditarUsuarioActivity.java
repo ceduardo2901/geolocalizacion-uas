@@ -32,6 +32,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -216,17 +217,20 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 		super.onActivityResult(requestCode, resultCode, data);
 
 		Bitmap myBitmap;
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 2;
+		
 		switch (requestCode) {
 
 		case Constantes.REQUEST_CAMERA:
 			if (resultCode != 0) {
 
-				myBitmap = BitmapFactory.decodeFile(path, options);
+				myBitmap = BitmapFactory.decodeFile(path);
 
+				if (myBitmap.getHeight() > 500 || myBitmap.getWidth() > 500 ){
+					myBitmap = Util.getResizedBitmap(myBitmap,  myBitmap.getWidth()/2, myBitmap.getHeight()/2);
+				}
+				
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				myBitmap.compress(CompressFormat.JPEG, 60, out);
+				myBitmap.compress(CompressFormat.JPEG, 95, out);
 				foto = out.toByteArray();
 				avatar.setImageBitmap(myBitmap);
 				almacenarEnMemoria();
@@ -244,9 +248,14 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 					is = getContentResolver().openInputStream(selectedImage);
 
 					BufferedInputStream bis = new BufferedInputStream(is);
-					myBitmap = BitmapFactory.decodeStream(bis, null, options);
+					myBitmap = BitmapFactory.decodeStream(bis);
+					
+					if (myBitmap.getHeight() > 500 || myBitmap.getWidth() > 500 ){
+						myBitmap = Util.getResizedBitmap(myBitmap,  myBitmap.getWidth()/2, myBitmap.getHeight()/2);
+					}
+					
 					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					myBitmap.compress(CompressFormat.JPEG, 60, out);
+					myBitmap.compress(CompressFormat.JPEG, 95, out);
 					foto = out.toByteArray();
 
 					avatar.setImageBitmap(myBitmap);
@@ -326,7 +335,10 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-
+						
+						
+						Log.i(TAG, "getHeight " + Util.ArrayToBitmap(arrayBytes).getHeight() + "getWidth " +Util.ArrayToBitmap(arrayBytes).getWidth());
+						usuario.setAvatar(arrayBytes);
 						usuario.setAvatar(arrayBytes);
 					}
 
