@@ -1,6 +1,8 @@
 package com.uas.gsiam.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -193,12 +195,14 @@ public class Util {
 			throws IOException {
 
 		Bitmap bitmap = drawable.getBitmap();
-
+		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		bitmap.compress(Bitmap.CompressFormat.PNG, 60, out);
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
 		out.flush();
 		out.close();
+		
+		
 		return out.toByteArray();
 
 	}
@@ -229,6 +233,96 @@ public class Util {
 
 	}
 
+	
+	/**
+	 * 
+	 * Metodo que ajusta una imagen con el ancho y largo ingresado
+	 * 
+	 * @param bitmap
+	 *            Imagen a procesar
+	 * @param width
+	 *            Ancho
+	 * @param height
+	 *            Largo
+	 * @return Retorna la imagen transformada
+	 */
+	public static Bitmap getResizedBitmap(Bitmap bitmap, int width, int height) {
+
+		final int bitmapWidth = bitmap.getWidth();
+		final int bitmapHeight = bitmap.getHeight();
+
+		final float scale = Math.min((float) width / (float) bitmapWidth,
+				(float) height / (float) bitmapHeight);
+
+		final int scaledWidth = (int) (bitmapWidth * scale);
+		final int scaledHeight = (int) (bitmapHeight * scale);
+
+		final Bitmap decored = Bitmap.createScaledBitmap(bitmap, scaledWidth,
+				scaledHeight, true);
+
+		return decored;
+	}
+
+	/**
+	 * 
+	 * Metodo para guardar una iamgen como byte[] en la memoria
+	 * 
+	 * @param ctx
+	 * @param foto
+	 * @param nombre
+	 */
+	public static void guardarImagenMemoria(Context ctx, byte[] foto, String nombre) {
+
+		try { 
+		    FileOutputStream fileOutStream = ctx.openFileOutput(nombre, android.content.Context.MODE_PRIVATE); 
+		    fileOutStream.write(foto);  
+		    fileOutStream.close(); 
+		    
+		} catch (IOException ioe) { 
+		    ioe.printStackTrace(); 
+		} 
+		
+	}
+	
+	/**
+	 * 
+	 * Metodo para recuperar la imagen de la memoria 
+	 * 
+	 * @param context
+	 * @param nombreArchivo
+	 * @return
+	 */
+	public static byte[] recuperarImagenMemoria (Context context, String nombreArchivo){
+		
+		File filePath = context.getFileStreamPath(nombreArchivo); 
+		Drawable d = Drawable.createFromPath(filePath.toString()); 
+
+		Bitmap bitmap = ((BitmapDrawable)d).getBitmap(); 
+		ByteArrayOutputStream stream = new ByteArrayOutputStream(); 
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream); 
+		return stream.toByteArray();
+		
+	}
+	
+	
+	
+	/**
+	 * Metodo que obtiene el identificador de un Drawable a partir de su nombre
+	 * 
+	 * @param context
+	 *            Contexto de la aplicación
+	 * @param name
+	 *            Nombre del recurso a buscar
+	 * @return Retorna el identificador unico del recurso
+	 */
+	public static int getDrawableIdFromString(Context context, String name) {
+
+		return context.getResources().getIdentifier(name, "drawable",
+				context.getPackageName());
+
+	}
+	
+	
 	/**
 	 * Metodo que retrona un arraylist de usuario a partir de un arreglo de
 	 * usuarios
@@ -263,7 +357,7 @@ public class Util {
 	}
 
 	/**
-	 * Metodo que retorna un array list de categorias a partirn de un arreglo de
+	 * Metodo que retorna un array list de categorias a partir de un arreglo de
 	 * categorias
 	 * 
 	 * @param categorias
@@ -279,49 +373,6 @@ public class Util {
 		return lista;
 	}
 
-	/**
-	 * 
-	 * Metodo que ajusta una imagen con el ancho y largo ingresado
-	 * 
-	 * @param bitmap
-	 *            Imagen a procesar
-	 * @param width
-	 *            Ancho
-	 * @param height
-	 *            Largo
-	 * @return Retorna la imagen transformada
-	 */
-	public static Bitmap getResizedBitmap(Bitmap bitmap, int width, int height) {
-
-		final int bitmapWidth = bitmap.getWidth();
-		final int bitmapHeight = bitmap.getHeight();
-
-		final float scale = Math.min((float) width / (float) bitmapWidth,
-				(float) height / (float) bitmapHeight);
-
-		final int scaledWidth = (int) (bitmapWidth * scale);
-		final int scaledHeight = (int) (bitmapHeight * scale);
-
-		final Bitmap decored = Bitmap.createScaledBitmap(bitmap, scaledWidth,
-				scaledHeight, true);
-
-		return decored;
-	}
-
-	/**
-	 * Metodo que obtiene el identificador de un Drawable a partir de su nombre
-	 * 
-	 * @param context
-	 *            Contexto de la aplicación
-	 * @param name
-	 *            Nombre del recurso a buscar
-	 * @return Retorna el identificador unico del recurso
-	 */
-	public static int getDrawableIdFromString(Context context, String name) {
-
-		return context.getResources().getIdentifier(name, "drawable",
-				context.getPackageName());
-
-	}
+	
 
 }
