@@ -10,7 +10,7 @@
 			<TextView android:layout_width="wrap_content" android:id="@+id/userId"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:layout_height="wrap_content" android:textStyle="italic"
-				android:paddingRight="10dp" android:textColor="@color/fuente" />
+				android:paddingRight="20dp" android:textColor="@color/fuente" android:maxLength="30"/>
 
 			<TextView android:layout_width="wrap_content" android:id="@+id/fechaId"
 				android:textAppearance="?android:attr/textAppearanceSmall"
