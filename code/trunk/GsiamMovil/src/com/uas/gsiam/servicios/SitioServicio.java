@@ -94,6 +94,7 @@ public class SitioServicio extends IntentService {
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
 						SitioDTO[].class, parms);
+				intentSitio.putExtra("buscarSitio", Constantes.MSG_NO_EXISTEN_SITIOS_POR_NOMBRE);
 			}
 
 			ArrayList<SitioDTO> lista = Util.getArrayListSitioDTO(respuesta);

@@ -457,9 +457,11 @@ public class SitiosActivity extends GDActivity implements
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
 
-			Bundle b = intent.getExtras();
-			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) b
+			Bundle bundle = intent.getExtras();
+			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle
 					.getSerializable("sitios");
+
+			String msg = intent.getStringExtra("buscarSitio");
 
 			if (sitios != null) {
 				setSitios(sitios);
@@ -472,8 +474,11 @@ public class SitiosActivity extends GDActivity implements
 			loaderActionBarItem.setLoading(false);
 
 			if (sitios.size() == 0) {
-
-				mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
+				if (msg != null && msg.length() > 0) {
+					mostrarMensaje(msg);
+				} else {
+					mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
+				}
 
 			}
 

@@ -21,8 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -56,6 +60,7 @@ public class ListaAmigosFacebook extends Activity {
 	private ArrayAdapter<AmigoFacebook> listAdapter;
 	private List<AmigoFacebook> list;
 	private EditText filtrar;
+	private Button btnInvitar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,10 @@ public class ListaAmigosFacebook extends Activity {
 		filtrar.addTextChangedListener(filterTextWatcher);
 		obtenerAmigos();
 
+		btnInvitar = (Button) findViewById(R.id.btnInvAmigosFacebookId);
+		btnInvitar.setEnabled(false);
 		listaAmigos = (ListView) findViewById(R.id.friends_list);
+
 		listaAmigos
 				.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
@@ -77,6 +85,7 @@ public class ListaAmigosFacebook extends Activity {
 						aFace.seleccionar();
 						ViewHolder viewHolder = (ViewHolder) item.getTag();
 						viewHolder.check.setChecked(aFace.isSeleccionado());
+
 					}
 				});
 		listaAmigos.setTextFilterEnabled(true);
@@ -169,7 +178,8 @@ public class ListaAmigosFacebook extends Activity {
 
 							ApplicationController app = ((ApplicationController) getApplicationContext());
 
-							params.putString("message", Constantes.MSG_INVITACIONES_FACEBOOK);
+							params.putString("message",
+									Constantes.MSG_INVITACIONES_FACEBOOK);
 							InvitarAmigosActivity.facebook.request(
 									aFace.getId() + "/feed", params, "POST");
 
@@ -257,11 +267,10 @@ public class ListaAmigosFacebook extends Activity {
 		private List<AmigoFacebook> filtered;
 		private CustomFilter filter;
 
-		public FriendListAdapter(List<AmigoFacebook> list,
-				Context context) {
+		public FriendListAdapter(List<AmigoFacebook> list, Context context) {
 			super(context, R.layout.amigo_facebook, list);
-			this.friendsList = new ArrayList<AmigoFacebook>(list); 
-			//this.friendsList = list;
+			this.friendsList = new ArrayList<AmigoFacebook>(list);
+			// this.friendsList = list;
 			this.filtered = new ArrayList<AmigoFacebook>(list);
 
 			if (FacebookUtil.model == null) {
@@ -310,9 +319,9 @@ public class ListaAmigosFacebook extends Activity {
 			protected void publishResults(CharSequence constraint,
 					FilterResults results) {
 				filtered = (ArrayList<AmigoFacebook>) results.values;
-				if(results.count > 0){
+				if (results.count > 0) {
 					notifyDataSetChanged();
-				}else{
+				} else {
 					notifyDataSetInvalidated();
 				}
 
@@ -328,11 +337,11 @@ public class ListaAmigosFacebook extends Activity {
 				return 0;
 			}
 		}
-		
+
 		@Override
 		public AmigoFacebook getItem(int position) {
-	        return filtered.get(position);
-	    }
+			return filtered.get(position);
+		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -355,8 +364,13 @@ public class ListaAmigosFacebook extends Activity {
 				holder.check.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						CheckBox cb = (CheckBox) v;
-						AmigoFacebook planet = (AmigoFacebook) cb.getTag();
-						planet.setSeleccionado(cb.isChecked());
+						AmigoFacebook amigo = (AmigoFacebook) cb.getTag();
+						amigo.setSeleccionado(cb.isChecked());
+						if (haySeleccionados()) {
+							btnInvitar.setEnabled(true);
+						} else {
+							btnInvitar.setEnabled(false);
+						}
 					}
 				});
 			} else {
