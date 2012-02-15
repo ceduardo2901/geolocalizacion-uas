@@ -71,7 +71,7 @@ public class UsuarioAdapter extends ArrayAdapter<UsuarioDTO> {
 
 		if (usuario.getAvatar() != null)
 			holder.icono
-					.setImageBitmap(Util.ArrayToBitmap(usuario.getAvatar()));
+					.setImageBitmap(Util.arrayToBitmap(usuario.getAvatar()));
 
 		holder.nombre.setText(usuario.getNombre());
 		holder.email.setText(usuario.getEmail());
