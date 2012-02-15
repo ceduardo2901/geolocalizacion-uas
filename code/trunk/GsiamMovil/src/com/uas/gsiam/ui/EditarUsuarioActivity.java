@@ -100,7 +100,7 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 		passTxt.addTextChangedListener(this);
 
 		if (userLogin.getAvatar() != null)
-			avatar.setImageBitmap(Util.ArrayToBitmap(userLogin.getAvatar()));
+			avatar.setImageBitmap(Util.arrayToBitmap(userLogin.getAvatar()));
 
 		editarPerfilFiltro = new IntentFilter(
 				Constantes.MODIFICAR_USUARIO_FILTRO_ACTION);
@@ -330,14 +330,14 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 
 						byte[] arrayBytes = null;
 						try {
-							arrayBytes = Util.BitmapToArray((BitmapDrawable) drawable);
+							arrayBytes = Util.bitmapToArray((BitmapDrawable) drawable);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						
 						
-						Log.i(TAG, "getHeight " + Util.ArrayToBitmap(arrayBytes).getHeight() + "getWidth " +Util.ArrayToBitmap(arrayBytes).getWidth());
+						Log.i(TAG, "getHeight " + Util.arrayToBitmap(arrayBytes).getHeight() + "getWidth " +Util.arrayToBitmap(arrayBytes).getWidth());
 						usuario.setAvatar(arrayBytes);
 						usuario.setAvatar(arrayBytes);
 					}

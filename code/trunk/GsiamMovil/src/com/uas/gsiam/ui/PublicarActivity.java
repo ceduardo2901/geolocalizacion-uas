@@ -303,7 +303,7 @@ public class PublicarActivity extends GDActivity implements
 			if (fotoButton.getDrawable() != null) {
 
 				parameters.putByteArray("picture", Util
-						.BitmapToArray((BitmapDrawable) fotoButton
+						.bitmapToArray((BitmapDrawable) fotoButton
 								.getDrawable()));
 				parameters.putString("caption", msg);
 				response = facebook.request("me/photos", parameters, "POST");

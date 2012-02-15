@@ -191,7 +191,7 @@ public class Util {
 	 * @return Retorna un byte[] con la imagen transformada
 	 * @throws IOException
 	 */
-	public static byte[] BitmapToArray(BitmapDrawable drawable)
+	public static byte[] bitmapToArray(BitmapDrawable drawable)
 			throws IOException {
 
 		Bitmap bitmap = drawable.getBitmap();
@@ -214,7 +214,7 @@ public class Util {
 	 *            Imagen en formato de arreglo de byte a ser transformada
 	 * @return Retorna un bitmap con la imagen transformada
 	 */
-	public static Bitmap ArrayToBitmap(byte[] byteArray) {
+	public static Bitmap arrayToBitmap(byte[] byteArray) {
 
 		return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
@@ -227,7 +227,7 @@ public class Util {
 	 *            Imagen en formato de Bitmap a ser transformada
 	 * @return Retorna un Drawable con la imagen transformada
 	 */
-	public static Drawable BitmapToDrawable(Bitmap bitmap) {
+	public static Drawable bitmapToDrawable(Bitmap bitmap) {
 
 		return new BitmapDrawable(bitmap);
 

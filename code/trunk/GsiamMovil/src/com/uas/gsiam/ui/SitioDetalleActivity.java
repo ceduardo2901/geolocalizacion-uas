@@ -251,7 +251,7 @@ public class SitioDetalleActivity extends Activity implements
 
 			ImageView imgView = new ImageView(mContext);
 
-			imgView.setImageBitmap(Util.ArrayToBitmap(fotos.get(position)));
+			imgView.setImageBitmap(Util.arrayToBitmap(fotos.get(position)));
 
 			imgView.setLayoutParams(new Gallery.LayoutParams(130, 100));
 			imgView.setScaleType(ImageView.ScaleType.FIT_XY);
