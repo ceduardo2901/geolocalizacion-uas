@@ -122,9 +122,9 @@ public class RadarActivity extends GDMapActivity implements LocationListener {
 
 					Drawable drw;
 					if (usuarioDTO.getAvatar() != null) {
-						Bitmap bit = Util.ArrayToBitmap(usuarioDTO.getAvatar());
+						Bitmap bit = Util.arrayToBitmap(usuarioDTO.getAvatar());
 						bit = Util.getResizedBitmap(bit, 50, 50);
-						drw = Util.BitmapToDrawable(bit);
+						drw = Util.bitmapToDrawable(bit);
 					} else {
 						drw = getResources().getDrawable(
 								R.drawable.avatardefault);

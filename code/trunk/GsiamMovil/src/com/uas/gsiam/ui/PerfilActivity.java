@@ -52,7 +52,7 @@ public class PerfilActivity extends GDActivity {
 	    emailTxt.setText(user.getEmail());
 	    
 	    if (user.getAvatar() != null)
-	    	iv.setImageBitmap(Util.ArrayToBitmap(user.getAvatar()));
+	    	iv.setImageBitmap(Util.arrayToBitmap(user.getAvatar()));
 
 	    inicializarBar();
 

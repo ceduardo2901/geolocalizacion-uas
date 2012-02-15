@@ -133,7 +133,7 @@ public class CrearUsuarioActivity extends Activity implements TextWatcher{
 
 			byte[] bitmapdata = null;
 			try {
-				bitmapdata = Util.BitmapToArray((BitmapDrawable) drawable);
+				bitmapdata = Util.bitmapToArray((BitmapDrawable) drawable);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

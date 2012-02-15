@@ -63,7 +63,7 @@ public class VisorImagenes extends Activity implements
 			//fotos.add(foto);
 			
 			ImageView i = new ImageView(this);
-			i.setImageBitmap(Util.ArrayToBitmap(foto));
+			i.setImageBitmap(Util.arrayToBitmap(foto));
 			imagenes.add(i.getDrawable());
 		}
 		Gallery g = (Gallery) findViewById(R.id.galeria);
