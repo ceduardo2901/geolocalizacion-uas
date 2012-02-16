@@ -2,8 +2,10 @@ package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem.Type;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -76,18 +78,31 @@ public class ModificarSitioActivity extends GDActivity {
 	 * @param v
 	 */
 	public void btnModificar(View v) {
-
-		Intent intentModificarSitio = new Intent(this,
-				ModificarSitioServicio.class);
-		sitio.setNombre(nombre.getText().toString());
-		sitio.setDireccion(direccion.getText().toString());
-		sitio.setTelefono(telefono.getText().toString());
-		sitio.setWeb(web.getText().toString());
-		intentModificarSitio.putExtra("sitio", sitio);
-		startService(intentModificarSitio);
-		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
-
+		
+		ConfirmarModificacion();
 	}
+	
+	
+	/**
+	 * Modifica el sitio correspondiente
+	 */
+	public void modificarSitio() {
+
+		if (nombre.getText().length() == 0 || direccion.getText().length() == 0) {
+			Util.showToast(this, Constantes.MSG_CAMPOS_OBLIGATORIOS);
+		} else {
+			Intent intentModificarSitio = new Intent(this,
+					ModificarSitioServicio.class);
+			sitio.setNombre(nombre.getText().toString());
+			sitio.setDireccion(direccion.getText().toString());
+			sitio.setTelefono(telefono.getText().toString());
+			sitio.setWeb(web.getText().toString());
+			intentModificarSitio.putExtra("sitio", sitio);
+			startService(intentModificarSitio);
+			Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+		}
+	}
+	
 
 	private void mostarSitios() {
 		Intent intentMostarSitios = new Intent(this, SitiosActivity.class);
@@ -116,5 +131,37 @@ public class ModificarSitioActivity extends GDActivity {
 
 		}
 	};
+	
+	
+	public void ConfirmarModificacion() {
+		
+		
+		   AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
+	  	   dialogResponder.setTitle(getString(R.string.confirmacion)); 
+	  	   dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_MODIFICAR_SITIO);
+	  	   dialogResponder.setCancelable(true);
+	  	   dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);  
+	  	   
+	  	   dialogResponder.setPositiveButton(getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+
+	  		   public void onClick(DialogInterface dialog, int id) {
+	  			   
+	  			 modificarSitio();  
+	  			 dialog.cancel();
+	  		   }
+	  	   });
+
+	  	   dialogResponder.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+
+	  		   public void onClick(DialogInterface dialog, int id) {
+	  			  
+	  			   dialog.cancel();
+	  		   }
+	  	   });
+
+	  	   dialogResponder.show();
+	  	   
+
+		}
 
 }

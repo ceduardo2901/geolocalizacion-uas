@@ -4,23 +4,23 @@
 	android:layout_height="match_parent" android:background="@color/background2">
 
 	<EditText android:id="@+id/txtNombreId" android:layout_height="wrap_content"
-		android:layout_width="fill_parent" android:hint="@string/Nombre">
+		android:layout_width="fill_parent" android:hint="@string/Nombre" android:maxLength="30">
 		<requestFocus></requestFocus>
 	</EditText>
 
 	<EditText android:id="@+id/txtDireccionId"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:hint="@string/direccion">
+		android:hint="@string/direccion" android:maxLength="50">
 		<requestFocus></requestFocus>
 	</EditText>
 	<EditText android:id="@+id/txtTelefonoId"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:hint="@string/telefono" android:inputType="phone">
+		android:hint="@string/telefono" android:inputType="phone" android:maxLength="15">
 		<requestFocus></requestFocus>
 	</EditText>
 	<EditText android:id="@+id/txtWebId"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:hint="@string/web" android:inputType="textWebEditText">
+		android:hint="@string/web" android:inputType="textWebEditText" android:maxLength="50">
 		<requestFocus></requestFocus>
 	</EditText>
 	<Button android:text="@string/modificar" android:id="@+id/modificarBtn"

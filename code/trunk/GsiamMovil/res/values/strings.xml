@@ -61,6 +61,9 @@
 	<string name="rating">Rating</string>
 	<string name="ubicacion">Ubicacion</string>
 	<string name="conf">Configuracion</string>
+	<string name="confirmacion">Confirmar</string>
+	<string name="aceptar">Aceptar</string>
+	<string name="cancelar">Cancelar</string>
 	<string name="compUbicacion">Compartir tu ubicacion</string>
 	<string name="compUbicacionDes">Si selecciona esta opccion podra compartir su ubicacion con sus amigos</string>
 </resources>
