@@ -4,9 +4,7 @@ package com.uas.gsiam.negocio.dto;
 import java.io.Serializable;
 
 
-public class UsuarioDTO implements Serializable{
-
-	// TODO: Como almacenamos la foto del usuario??
+public class UsuarioDTO implements Serializable, Comparable<Object> {
 
 	
 	private static final long serialVersionUID = 1L;
@@ -87,6 +85,20 @@ public class UsuarioDTO implements Serializable{
 		this.password = password;
 	}
 
+	@Override
+	public int compareTo(Object o) {
+		
+		UsuarioDTO user = (UsuarioDTO) o;       
+        return this.nombre.compareToIgnoreCase(user.nombre);
+             
+    } 
+		
+	public boolean equals (Object o){
+		UsuarioDTO user = (UsuarioDTO) o;  
+		
+		return user.getEmail().equalsIgnoreCase(this.email);
+	}
+	
 	
 
 }
