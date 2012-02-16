@@ -477,7 +477,7 @@ public class SitiosActivity extends GDActivity implements
 				if (msg != null && msg.length() > 0) {
 					mostrarMensaje(msg);
 				} else {
-					mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
+					mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS_POR_NOMBRE);
 				}
 
 			}

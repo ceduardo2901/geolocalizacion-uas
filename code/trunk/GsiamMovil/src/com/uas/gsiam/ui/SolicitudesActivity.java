@@ -1,12 +1,15 @@
 package com.uas.gsiam.ui;
 
-import java.util.ArrayList;
-
 import greendroid.app.GDTabActivity;
 import greendroid.widget.LoaderActionBarItem;
 import greendroid.widget.SegmentedAdapter;
 import greendroid.widget.SegmentedBar.OnSegmentChangeListener;
 import greendroid.widget.SegmentedHost;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ListIterator;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -23,8 +26,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.uas.gsiam.adapter.UsuarioAdapter;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
@@ -67,7 +70,6 @@ public class SolicitudesActivity extends ListActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.i(TAG, "***** estoy en el onCreate");
 		app = ((ApplicationController) getApplicationContext());
 		lv = getListView();
 		setContentView(R.layout.solicitudes_amigos_tab);
@@ -194,6 +196,58 @@ public class SolicitudesActivity extends ListActivity implements
 			} else {
 				Util.showToast(context, respuesta);
 				usuariosSolicitudesRecibidas.remove(pos);
+				Log.i(TAG, "Elimino el de la pos=" + pos);
+				
+				if (respuesta.equalsIgnoreCase(Constantes.MSG_SOLICITUD_APROBADA)){
+					// tengo que actualizar la lista de amigos.. en caso de q este en memoria
+					
+					if (MisAmigosActivity.misAmigos != null){
+						MisAmigosActivity.misAmigos.add(usuarioSeleccionadoRecibidas);
+						Collections.sort(MisAmigosActivity.misAmigos);
+					}
+					 
+					// tengo que eliminarlo de la lista de busqueda en caso de que este en memoria
+					
+					if (AgregarAmigosActivity.usuarios != null){
+						
+						if (!AgregarAmigosActivity.usuarios.isEmpty()){
+							
+							ListIterator<UsuarioDTO> usuarios = AgregarAmigosActivity.usuarios.listIterator();
+						    while (usuarios.hasNext()) {
+						    	UsuarioDTO user = usuarios.next();
+						    	if(user.getEmail().equalsIgnoreCase(usuarioSeleccionadoRecibidas.getEmail())){
+									
+						    		usuarios.remove();
+									
+								}
+						    }
+						}
+					}
+					
+				}
+				else{
+					// tengo que modificarlo de la lista de busqueda en caso de que este en memoria
+					if (AgregarAmigosActivity.usuarios != null){
+
+						if (!AgregarAmigosActivity.usuarios.isEmpty()){
+
+							
+							ListIterator<UsuarioDTO> usuarios = AgregarAmigosActivity.usuarios.listIterator();
+						    while (usuarios.hasNext()) {
+						    	UsuarioDTO user = usuarios.next();
+						    	if(user.getEmail().equalsIgnoreCase(usuarioSeleccionadoRecibidas.getEmail())){
+									
+						    		user.setSolicitudRecibida(false);
+									usuarios.set(user);
+									
+								}
+						    }
+							
+							
+						}
+					}
+				}
+				
 				mostrarSolicitudesRecibidas();
 
 			}
@@ -223,7 +277,6 @@ public class SolicitudesActivity extends ListActivity implements
 		@Override
 		public View getView(int position, ViewGroup parent) {
 
-			Log.d(TAG, "***** estoy en el getView :" + position);
 			return lv;
 
 		}
@@ -254,7 +307,7 @@ public class SolicitudesActivity extends ListActivity implements
 			long id) {
 
 		final Context appContext = this;
-		final int pos = position;
+		pos = position;
 
 		if (vista == 0) {
 
@@ -294,7 +347,7 @@ public class SolicitudesActivity extends ListActivity implements
 									.setIcon(android.R.drawable.ic_dialog_alert);
 
 							dialogResponder.setPositiveButton(
-									"Confirmar Amistad",
+									"Confirmar \nAmistad",
 									new DialogInterface.OnClickListener() {
 
 										public void onClick(
@@ -310,7 +363,7 @@ public class SolicitudesActivity extends ListActivity implements
 									});
 
 							dialogResponder.setNegativeButton(
-									"Rechazar Amistad",
+									"Rechazar \nAmistad",
 									new DialogInterface.OnClickListener() {
 
 										public void onClick(
