@@ -77,8 +77,14 @@ public class ResponderSolicitudServicio extends IntentService {
 			}
 
 			if (respuesta.getStatusCode() == HttpStatus.OK) {
-				intentBack.putExtra("respuesta",
-						Constantes.MSG_SOLICITUD_RESPONDIDA_OK);
+				
+				if (accion.equalsIgnoreCase(Constantes.ACEPTAR_SOLICITUD)) {
+					intentBack.putExtra("respuesta", Constantes.MSG_SOLICITUD_APROBADA);
+				}
+				else{
+					intentBack.putExtra("respuesta", Constantes.MSG_SOLICITUD_RECHAZADA);
+				}
+				
 			} else {
 				intentBack.putExtra("error", Constantes.MSG_ERROR_INESPERADO);
 
