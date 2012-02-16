@@ -25,9 +25,9 @@ public class Constantes {
 	// Servicios
 
 	// TODO poner esto en un archivo de configuracion
-	// public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	 public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	// ip tony
-	public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
+	//public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
 	// ipmartin
 	// public static final String DOMINIO_SERVICE =
 	// "http://gsiamweb.no-ip.info:8080";
@@ -120,7 +120,8 @@ public class Constantes {
 	public static final String MSG_CONFIRMAR_MODIFICACION_USUARIO = "¿Esta seguro que desea modificar su perfil?";
 	public static final String MSG_CONFIRMAR_CIERRE_CUENTA = "¿Esta seguro que desea cerrar su cuenta?";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
-	public static final String MSG_SOLICITUD_RESPONDIDA_OK = "La solicitud se aprobo/rechazo correctamente";
+	public static final String MSG_SOLICITUD_APROBADA = "La solicitud se aprobo correctamente";
+	public static final String MSG_SOLICITUD_RECHAZADA = "La solicitud se rechazo correctamente";
 	public static final String MSG_USUARIO_EDITADO_OK = "Perfil actualizado exitosamente";
 	public static final String MSG_CUENTA_CERRADA_OK = "Su cuenta se ha \ndado de baja existosamente";
 	public static final String MSG_ERROR_MAIL = "El email es invalido, igrese uno correcto";
@@ -130,8 +131,7 @@ public class Constantes {
 	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
 	public static final String MSG_MENSAJE_ENVIADO = "El mensaje se envio correctamente";
 	public static final String MSG_PUBLICACION_CREADA = "La publicacion se creo correctamente";
-	public static final String MSG_NO_EXISTEN_SITIOS = "No se encontraron sitios cercanos a su ubicación";
-	public static final String MSG_NO_EXISTEN_SITIOS_POR_NOMBRE = "No se encontró ningun sitio con ese nombre";
+	public static final String MSG_NO_EXISTEN_SITIOS_POR_NOMBRE = "No se encontraron sitios cercanos a su ubicación";
 	public static final String MSG_SITIO_CREADO = "El Sitio se creo correctamente";
 	public static final String MSG_INVITACIONES_OK = "Invitacion enviada existosamente";
 	public static final String MSG_CONEXION_ERROR = "Para continuar debe tener conexion a internet";
