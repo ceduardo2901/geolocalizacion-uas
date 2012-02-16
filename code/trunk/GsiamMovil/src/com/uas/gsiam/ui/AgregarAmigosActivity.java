@@ -96,6 +96,10 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		 this.registerReceiver(receiverEnviarSolicitud, enviarSolicitudFiltro);
 		 this.registerReceiver(receiverResponderSolicitud, responderSolicitudFiltro);
 		 
+		// esto es por si tengo que actualizar la lista 
+			if (usuarios != null)
+				mostrarUsuarios();
+		 
 	 }
 	
 	protected void onPause(){
@@ -257,7 +261,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				        	   dialogResponder.setCancelable(true);
 				        	   dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);  
 				        	   
-				        	   dialogResponder.setPositiveButton("Confirmar Amistad", new DialogInterface.OnClickListener() {
+				        	   dialogResponder.setPositiveButton("Confirmar \nAmistad", new DialogInterface.OnClickListener() {
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Confirmar Amistad 
@@ -267,7 +271,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				        		   }
 				        	   });
 
-				        	   dialogResponder.setNegativeButton("Rechazar Amistad", new DialogInterface.OnClickListener() {
+				        	   dialogResponder.setNegativeButton("Rechazar \nAmistad", new DialogInterface.OnClickListener() {
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Rechazar Amistad

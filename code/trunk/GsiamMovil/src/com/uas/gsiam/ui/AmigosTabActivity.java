@@ -42,6 +42,8 @@ public class AmigosTabActivity extends GDTabActivity {
 	protected static final int ACTUALIZAR = 0;
 	protected static final int RADAR = 1;
 
+	protected static boolean HAY_CAMBIOS = false;
+	
 	private String tabClick;
 
 	private Location loc;
