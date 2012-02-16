@@ -45,31 +45,30 @@ public class MisAmigosActivity extends ListActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.mis_amigos_tab);
 		lv = getListView();
 		lv.setOnItemClickListener(this);
 
 		misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-		Log.d(TAG, "***** REGSITRO oncreate");
 
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		Intent intent = new Intent(this, GetAmigosServicio.class);
 		startService(intent);
-
+		
 	}
 
 	protected void onResume() {
 		super.onResume();
 		this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-
+		// esto es por si tengo que actualizar la lista 
+		if (misAmigos != null)
+			mostrarAmigos();
 	}
 
 	protected void onPause() {
 		super.onPause();
 		this.unregisterReceiver(receiverGetAmigos);
-		Log.i(TAG, "***** SACO onPause");
 		Util.dismissProgressDialog();
 	}
 
@@ -93,8 +92,7 @@ public class MisAmigosActivity extends ListActivity implements
 			} else {
 
 				misAmigos = respuesta;
-				Log.i(TAG, "mi lista}11111111 = " + misAmigos.size());
-
+			
 				mostrarAmigos();
 
 				Util.dismissProgressDialog();
