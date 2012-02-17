@@ -69,7 +69,7 @@ public class ActualizarPosicionServicio extends Service {
 
 	private void startService() {
 		Log.i(TAG, "startService");
-		timer.scheduleAtFixedRate(new mainTask(), 0, 30000);
+		timer.scheduleAtFixedRate(new mainTask(), 0, Constantes.ACTUALIZAR_POSICION);
 	}
 
 	private class mainTask extends TimerTask {

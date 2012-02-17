@@ -554,7 +554,8 @@ public class SitiosActivity extends GDActivity implements
 				sitioDetalleIntent.putExtra("sitio", sitios.get(position));
 				sitioDetalleIntent.putExtra("ubicacion", loc);
 				startActivity(sitioDetalleIntent);
-				Util.showProgressDialog(ctx, Constantes.MSG_ESPERA_DETALLE_SITIO);
+				Util.showProgressDialog(ctx,
+						Constantes.MSG_ESPERA_DETALLE_SITIO);
 
 			}
 		});
@@ -570,11 +571,40 @@ public class SitiosActivity extends GDActivity implements
 	}
 
 	private void eliminarSitio(Integer sitioId) {
-		Intent intent = new Intent(this, EliminarSitioServicio.class);
+		final Intent intent = new Intent(this, EliminarSitioServicio.class);
 		intent.putExtra("sitio", sitioId);
 		idSitioEliminar = sitioId;
 		startService(intent);
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
+
+	}
+
+	private void confirmarEliminacion(final Integer sitioId) {
+		AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
+		dialogResponder.setTitle(getString(R.string.confirmacion));
+		dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_ELIMINACION_SITIO);
+		dialogResponder.setCancelable(true);
+		dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);
+
+		dialogResponder.setPositiveButton(getString(R.string.aceptar),
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int id) {
+						eliminarSitio(sitioId);
+						dialog.cancel();
+					}
+				});
+
+		dialogResponder.setNegativeButton(getString(R.string.cancelar),
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int id) {
+
+						dialog.cancel();
+					}
+				});
+
+		dialogResponder.show();
 	}
 
 	private void actualizarSitios(Location loc) {
@@ -621,8 +651,8 @@ public class SitiosActivity extends GDActivity implements
 
 					actualizarSitio(sitio);
 				} else {
+					confirmarEliminacion(sitio.getIdSitio());
 
-					eliminarSitio(sitio.getIdSitio());
 				}
 			}
 		});

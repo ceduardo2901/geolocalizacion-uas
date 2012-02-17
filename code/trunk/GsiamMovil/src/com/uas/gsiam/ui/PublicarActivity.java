@@ -79,8 +79,7 @@ public class PublicarActivity extends GDActivity implements
 	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicacion;
-	
-	
+
 	protected String path = "";
 
 	@Override
@@ -91,7 +90,7 @@ public class PublicarActivity extends GDActivity implements
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
-		// fotoPub = (ImageView) findViewById(R.id.fotoPubId);
+
 		fotoButton = (ImageButton) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
@@ -105,7 +104,7 @@ public class PublicarActivity extends GDActivity implements
 		inicializarActionBar();
 
 	}
-	
+
 	private void inicializarActionBar() {
 
 		getActionBar().setTitle(getString(R.string.gsiam_publicar));
@@ -139,33 +138,35 @@ public class PublicarActivity extends GDActivity implements
 
 	}
 
-	
 	final Context ctx = this;
-	
+
 	/**
-	 * Metodo que escucha la respuesta del servicio de
-	 * {@link PublicarServicio} 
+	 * Metodo que escucha la respuesta del servicio de {@link PublicarServicio}
 	 */
 	protected BroadcastReceiver receiverPublicar = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Log.i(TAG, "onReceive");
 			int respuesta = intent.getIntExtra("respuesta", 0);
-			Log.i(TAG, "Respuesta = "+ respuesta);
+			Log.i(TAG, "Respuesta = " + respuesta);
 			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
 			if (error != null) {
 				Util.showToast(getApplicationContext(), error);
 			} else {
-				Util.showToast(getApplicationContext(), Constantes.MSG_PUBLICACION_CREADA);
-				
-		
+				Util.showToast(getApplicationContext(),
+						Constantes.MSG_PUBLICACION_CREADA);
+
 				publicacion.setIdPublicacion(respuesta);
-				String nombreArchivo =  "publicacion_" + publicacion.getIdPublicacion() + ".jpg"; 
-				Util.guardarImagenMemoria(ctx, publicacion.getFoto(), nombreArchivo);
-				publicacion.setFoto(null);
-				publicacion.setFotoRuta(nombreArchivo);
-				
+				String nombreArchivo = "publicacion_"
+						+ publicacion.getIdPublicacion() + ".jpg";
+				if (publicacion.getFoto() != null) {
+					Util.guardarImagenMemoria(ctx, publicacion.getFoto(),
+							nombreArchivo);
+					publicacion.setFoto(null);
+					publicacion.setFotoRuta(nombreArchivo);
+				}
+
 				volverPublicaciones();
 			}
 
@@ -204,7 +205,7 @@ public class PublicarActivity extends GDActivity implements
 				publicacion.setFecha(new Date());
 				publicacion.setNombreUsuario(usuario.getNombre());
 				publicacion.setFoto(foto);
-			
+
 				Intent intent = new Intent(this, PublicarServicio.class);
 				intent.putExtra("publicacion", publicacion);
 				Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
@@ -295,7 +296,7 @@ public class PublicarActivity extends GDActivity implements
 	}
 
 	public void postOnWall(String msg) {
-	
+
 		try {
 			String response;
 
@@ -364,13 +365,14 @@ public class PublicarActivity extends GDActivity implements
 
 				myBitmap = BitmapFactory.decodeFile(path);
 
-				if (myBitmap.getHeight() > 1000 || myBitmap.getWidth() > 1000 ){
-					myBitmap = Util.getResizedBitmap(myBitmap,  myBitmap.getWidth()/2, myBitmap.getHeight()/2);
+				if (myBitmap.getHeight() > 1000 || myBitmap.getWidth() > 1000) {
+					myBitmap = Util.getResizedBitmap(myBitmap,
+							myBitmap.getWidth() / 2, myBitmap.getHeight() / 2);
 				}
-				
+
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				myBitmap.compress(CompressFormat.JPEG, 95, out);
-				
+
 				foto = out.toByteArray();
 				fotoButton.setImageBitmap(myBitmap);
 				almacenarEnMemoria();
@@ -384,19 +386,22 @@ public class PublicarActivity extends GDActivity implements
 				InputStream is;
 
 				try {
-					
+
 					is = getContentResolver().openInputStream(selectedImage);
 
 					BufferedInputStream bis = new BufferedInputStream(is);
 					myBitmap = BitmapFactory.decodeStream(bis);
-					
-					if (myBitmap.getHeight() > 1000 || myBitmap.getWidth() > 1000 ){
-						myBitmap = Util.getResizedBitmap(myBitmap,  myBitmap.getWidth()/2, myBitmap.getHeight()/2);
+
+					if (myBitmap.getHeight() > 1000
+							|| myBitmap.getWidth() > 1000) {
+						myBitmap = Util.getResizedBitmap(myBitmap,
+								myBitmap.getWidth() / 2,
+								myBitmap.getHeight() / 2);
 					}
-					
+
 					ByteArrayOutputStream out = new ByteArrayOutputStream();
 					myBitmap.compress(CompressFormat.JPEG, 95, out);
-					
+
 					foto = out.toByteArray();
 					fotoButton.setImageBitmap(myBitmap);
 
@@ -455,7 +460,7 @@ public class PublicarActivity extends GDActivity implements
 
 		@Override
 		public void onCancel() {
-		
+
 		}
 
 	}
