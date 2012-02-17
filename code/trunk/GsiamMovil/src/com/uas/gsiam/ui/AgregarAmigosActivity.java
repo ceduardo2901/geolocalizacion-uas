@@ -1,6 +1,8 @@
 package com.uas.gsiam.ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ListIterator;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -182,12 +184,64 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 						if (aceptarAmistad){
 							usuarios.remove(pos);
+							
+							// tengo que actualizar la lista de amigos.. en caso de q este en memoria
+							
+							if (MisAmigosActivity.misAmigos != null){
+								MisAmigosActivity.misAmigos.add(usuarioSeleccionado);
+								Collections.sort(MisAmigosActivity.misAmigos);
+							}
+							 
+							// tengo que eliminarlo de la lista de solicitudes recibidas en caso de que este en memoria
+							
+							if (SolicitudesActivity.usuariosSolicitudesRecibidas != null){
+								
+								if (!SolicitudesActivity.usuariosSolicitudesRecibidas.isEmpty()){
+									
+									ListIterator<UsuarioDTO> usuarios = SolicitudesActivity.usuariosSolicitudesRecibidas.listIterator();
+								    while (usuarios.hasNext()) {
+								    	UsuarioDTO user = usuarios.next();
+								    	Log.i(TAG, "Itero a = " + user.getNombre());
+								    	if(user.getEmail().equalsIgnoreCase(usuarioSeleccionado.getEmail())){
+								    		Log.i(TAG, "Voy a aeliminar a = "+user.getNombre());
+								    		usuarios.remove();
+											
+										}
+								    }
+								}
+							}
+							
+
 						}
 						else{
 							usuarioSeleccionado.setSolicitudRecibida(false);
 							usuarios.set(pos, usuarioSeleccionado);
+			
+							// tengo que eliminarlo de la lista de solicitudes recibidas en caso de que este en memoria
+							if (SolicitudesActivity.usuariosSolicitudesRecibidas != null){
+
+								if (!SolicitudesActivity.usuariosSolicitudesRecibidas.isEmpty()){
+
+									
+									ListIterator<UsuarioDTO> usuarios = SolicitudesActivity.usuariosSolicitudesRecibidas.listIterator();
+								    while (usuarios.hasNext()) {
+								    	UsuarioDTO user = usuarios.next();
+								    	if(user.getEmail().equalsIgnoreCase(usuarioSeleccionado.getEmail())){
+											
+								    		usuarios.remove();
+											
+										}
+								    }
+									
+									
+								}
+							}
+							
+							
 						}
 
+						
+						
 						mostrarUsuarios();
 					}
 
