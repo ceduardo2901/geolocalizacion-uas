@@ -11,6 +11,7 @@ public class Constantes {
 	// radio por defecto.
 	public static final int RADIO = 150;
 	public static final int TIMEOUT = 20000;
+	public static final int ACTUALIZAR_POSICION = 60000;
 	public static String METROS = "metros";
 	public static final String SHARED_PREFERENCE_FILE = "SHARED_PREFERENCE_FILE";
 
