@@ -2,6 +2,7 @@ package com.uas.gsiam.ui;
 
 import greendroid.app.GDMapActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -108,12 +110,15 @@ public class RadarActivity extends GDMapActivity implements LocationListener {
 					getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
 			miPosicionOverlay.addOverlay(new OverlayItem(geoPointUbicacion,
 					"Aquí esoy", null));
-
+			
+			Float distanciaMasCercana = Float.MAX_VALUE;
+			GeoPoint geoPointMasCercano = null; 
+			boolean hayAmigos = false;
+			
 			for (UsuarioDTO usuarioDTO : amigos) {
 
-				// TODO : aqui falta filtar el tema de la hora de
-				// actualizacion!!!
-
+				// TODO : se podria agregar el tema de la hora de actualizacion en caso de ser necesario
+	
 				if (usuarioDTO.getPosicion() != null) {
 
 					GeoPoint geoPoint = new GeoPoint((int) (usuarioDTO
@@ -123,7 +128,7 @@ public class RadarActivity extends GDMapActivity implements LocationListener {
 					Drawable drw;
 					if (usuarioDTO.getAvatar() != null) {
 						Bitmap bit = Util.arrayToBitmap(usuarioDTO.getAvatar());
-						bit = Util.getResizedBitmap(bit, 50, 50);
+						bit = Util.getResizedBitmap(bit, 40, 40);
 						drw = Util.bitmapToDrawable(bit);
 					} else {
 						drw = getResources().getDrawable(
@@ -136,25 +141,85 @@ public class RadarActivity extends GDMapActivity implements LocationListener {
 					Location locAmigo = new Location("Ubicacion Amigo");
 					locAmigo.setLatitude(usuarioDTO.getPosicion().getLat());
 					locAmigo.setLongitude(usuarioDTO.getPosicion().getLon());
-					Float distance = loc.distanceTo(locAmigo);
+					
+					Float distancia = loc.distanceTo(locAmigo);
+					
+					if (distancia < distanciaMasCercana){
+						distanciaMasCercana = distancia;
+						geoPointMasCercano = geoPoint;
+					}
+					
+					String distanciaStr = null;
+					
+					// paso a kilometros
+					distancia = distancia / 1000; 
+					Log.i(TAG, "Distancia=" + distancia);
+					
+					String unidad = " km";
+					if (distancia < 1){
+						unidad = " mt";
+						DecimalFormat df = new DecimalFormat("0");
+						distanciaStr = df.format(distancia * 1000);
+						
+					}else{
+						DecimalFormat df = new DecimalFormat("0.0");
+						distanciaStr = df.format(distancia);
+					}
+					
+					
+					String fechaFormateada = new SimpleDateFormat("MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion().getFechaActualizacion());
 
-					String fechaFormateada = new SimpleDateFormat(
-							"MM/dd/yyyy hh:mm").format(usuarioDTO.getPosicion()
-							.getFechaActualizacion());
-
-					amigoOverlay
-							.addOverlay(new OverlayItem(geoPoint,
-									"Aquí se encuentra "
-											+ usuarioDTO.getNombre(),
-									"Ultima actualización: " + fechaFormateada
-											+ "\nDistancia: " + distance / 1000
-											+ "Km"));
+					amigoOverlay.addOverlay(new OverlayItem(geoPoint,
+									"Aquí se encuentra " + usuarioDTO.getNombre(),
+									"Ultima actualización: " + fechaFormateada + "\nDistancia: " + distanciaStr + unidad));
 					mapa.getOverlays().add(amigoOverlay);
+					hayAmigos = true;
+					
 				}
+				
 			}
 
 			mapControl.setCenter(geoPointUbicacion);
 			mapa.getOverlays().add(miPosicionOverlay);
+		
+			if (geoPointMasCercano != null){
+				
+				int minLatitude = Integer.MAX_VALUE;
+				int maxLatitude = Integer.MIN_VALUE;
+				int minLongitude = Integer.MAX_VALUE;
+				int maxLongitude = Integer.MIN_VALUE;
+
+				if (geoPointMasCercano.getLatitudeE6() > geoPointUbicacion.getLatitudeE6()) {
+					maxLatitude = geoPointMasCercano.getLatitudeE6();
+					minLatitude = geoPointUbicacion.getLatitudeE6();
+
+				} else {
+					maxLatitude = geoPointUbicacion.getLatitudeE6();
+					minLatitude = geoPointMasCercano.getLatitudeE6();
+
+				}
+				if (geoPointMasCercano.getLongitudeE6() > geoPointUbicacion.getLongitudeE6()) {
+					maxLongitude = geoPointMasCercano.getLongitudeE6();
+					minLongitude = geoPointUbicacion.getLongitudeE6();
+
+				} else {
+					maxLongitude = geoPointUbicacion.getLongitudeE6();
+					minLongitude = geoPointMasCercano.getLongitudeE6();
+
+				}
+
+				mapControl.zoomToSpan(Math.abs(maxLatitude - minLatitude),
+						Math.abs(maxLongitude - minLongitude));
+
+				mapControl.animateTo(new GeoPoint((maxLatitude + minLatitude) / 2,
+						(maxLongitude + minLongitude) / 2));
+			}
+			
+			
+			if(!hayAmigos){
+				Util.showToast(this, "Ninguno de sus amigos comparte su ubicación");
+			}
+			
 		}
 
 	}
