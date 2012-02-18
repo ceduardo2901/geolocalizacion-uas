@@ -134,7 +134,9 @@ public class SolicitudesActivity extends ListActivity implements
 		this.registerReceiver(receiverSolicitudes, solicitudesFiltro);
 		this.registerReceiver(receiverResponderSolicitud,
 				responderSolicitudFiltro);
-		Log.i(TAG, "registro el servicio");
+		// esto es por si tengo que actualizar la lista 
+		if (usuariosSolicitudesRecibidas != null)
+			mostrarSolicitudesRecibidas();
 	}
 
 	protected void onPause() {
@@ -196,7 +198,6 @@ public class SolicitudesActivity extends ListActivity implements
 			} else {
 				Util.showToast(context, respuesta);
 				usuariosSolicitudesRecibidas.remove(pos);
-				Log.i(TAG, "Elimino el de la pos=" + pos);
 				
 				if (respuesta.equalsIgnoreCase(Constantes.MSG_SOLICITUD_APROBADA)){
 					// tengo que actualizar la lista de amigos.. en caso de q este en memoria
