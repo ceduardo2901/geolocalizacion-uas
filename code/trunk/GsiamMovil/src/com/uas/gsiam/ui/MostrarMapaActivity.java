@@ -106,6 +106,9 @@ public class MostrarMapaActivity extends GDMapActivity {
 		geoPointUbicacion = new GeoPoint((int) (loc.getLatitude() * 1000000),
 				(int) (loc.getLongitude() * 1000000));
 		mapa.setBuiltInZoomControls(true);
+		mapa.getZoomButtonsController().setAutoDismissed(false);
+		mapa.getZoomButtonsController().setVisible(true);
+		
 		int latSpan = 0;
 		int lonSpan = 0;
 
@@ -119,7 +122,7 @@ public class MostrarMapaActivity extends GDMapActivity {
 		sitioOverlay.addOverlay(new OverlayItem(geoPoint,
 				SitioTabActivity.sitio.getNombre(), SitioTabActivity.sitio
 						.getNombre()));
-
+		
 		mapa.setClickable(true);
 		mapa.displayZoomControls(true);
 
