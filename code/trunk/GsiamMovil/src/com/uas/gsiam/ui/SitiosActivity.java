@@ -361,9 +361,15 @@ public class SitiosActivity extends GDActivity implements
 			startSearch(null, false, null, false);
 			break;
 		case ACTUALIZAR:
-			// loc = PosicionGPS.getPosicion(getApplicationContext());
 			locHelper.getLocation(this, locationResult);
-			actualizarSitios(loc);
+			if (loc != null) {
+				actualizarSitios(loc);
+			} else {
+				LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar()
+						.getItem(ACTUALIZAR);
+				loaderActionBarItem.setLoading(false);
+				Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+			}
 
 			break;
 		case FILTRAR:

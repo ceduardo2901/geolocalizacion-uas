@@ -20,8 +20,10 @@ import android.widget.TextView;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.servicios.ActualizarPosicionServicio;
 import com.uas.gsiam.utils.ApplicationController;
+import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
+import com.uas.gsiam.utils.Util;
 
 /**
  * Esta activity es la interfaz principal de la aplicacion. En ella se puede
@@ -86,7 +88,11 @@ public class MainActivity extends GDActivity {
 		}
 		if (compartirUbicacion) {
 			if (!isMyServiceRunning()) {
+				if(currentLocation != null){
 				startService(intent);
+				}else{
+					Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+				}
 			}
 
 		} else {
