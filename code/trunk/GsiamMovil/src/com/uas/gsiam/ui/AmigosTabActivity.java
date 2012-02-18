@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 
@@ -67,14 +66,11 @@ public class AmigosTabActivity extends GDTabActivity {
 				.getDefaultSharedPreferences(this);
 		int currentTab = prefs.getInt(PREF_STICKY_TAB, 0);
 		mTabHost.setCurrentTab(currentTab);
-		Log.i(TAG, "**** currentTab =  " + currentTab);
 		tabClick = mTabHost.getCurrentTabTag();
 
 		mTabHost.setOnTabChangedListener(new OnTabChangeListener() {
 			@Override
 			public void onTabChanged(String tabId) {
-				Log.i(TAG, "**** click " + tabId);
-
 				tabClick = tabId;
 
 			}

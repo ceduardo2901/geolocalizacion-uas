@@ -109,9 +109,6 @@ public class MostrarMapaActivity extends GDMapActivity {
 		mapa.getZoomButtonsController().setAutoDismissed(false);
 		mapa.getZoomButtonsController().setVisible(true);
 		
-		int latSpan = 0;
-		int lonSpan = 0;
-
 		BasicItemizedOverlay miPosicionOverlay = new BasicItemizedOverlay(
 				getResources().getDrawable(R.drawable.gd_map_pin_pin), this);
 
