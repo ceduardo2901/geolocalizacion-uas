@@ -581,12 +581,12 @@ public class SitiosActivity extends GDActivity implements
 
 	private void confirmarEliminacion(final Integer sitioId) {
 		AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
-		dialogResponder.setTitle(getString(R.string.confirmacion));
+		dialogResponder.setTitle("Confirmar");
 		dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_ELIMINACION_SITIO);
 		dialogResponder.setCancelable(true);
 		dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);
 
-		dialogResponder.setPositiveButton(getString(R.string.aceptar),
+		dialogResponder.setPositiveButton("Si",
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int id) {
@@ -595,7 +595,7 @@ public class SitiosActivity extends GDActivity implements
 					}
 				});
 
-		dialogResponder.setNegativeButton(getString(R.string.cancelar),
+		dialogResponder.setNegativeButton("No",
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int id) {
