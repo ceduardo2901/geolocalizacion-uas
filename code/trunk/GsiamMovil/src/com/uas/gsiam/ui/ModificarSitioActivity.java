@@ -1,7 +1,6 @@
 package com.uas.gsiam.ui;
 
 import greendroid.app.GDActivity;
-import greendroid.widget.ActionBarItem.Type;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -137,12 +136,12 @@ public class ModificarSitioActivity extends GDActivity {
 		
 		
 		   AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
-	  	   dialogResponder.setTitle(getString(R.string.confirmacion)); 
+	  	   dialogResponder.setTitle("Confirmar"); 
 	  	   dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_MODIFICAR_SITIO);
 	  	   dialogResponder.setCancelable(true);
 	  	   dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);  
 	  	   
-	  	   dialogResponder.setPositiveButton(getString(R.string.aceptar), new DialogInterface.OnClickListener() {
+	  	   dialogResponder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 
 	  		   public void onClick(DialogInterface dialog, int id) {
 	  			   
@@ -151,7 +150,7 @@ public class ModificarSitioActivity extends GDActivity {
 	  		   }
 	  	   });
 
-	  	   dialogResponder.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+	  	   dialogResponder.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
 	  		   public void onClick(DialogInterface dialog, int id) {
 	  			  
