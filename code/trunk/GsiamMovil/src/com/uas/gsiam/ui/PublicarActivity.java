@@ -28,8 +28,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -59,7 +62,7 @@ import com.uas.gsiam.utils.Util;
  * 
  */
 public class PublicarActivity extends GDActivity implements
-		OnRatingBarChangeListener {
+		OnRatingBarChangeListener, TextWatcher {
 
 	protected static final String TAG = "PublicarActivity";
 	private static final int COMPARTIR = 1;
@@ -75,10 +78,10 @@ public class PublicarActivity extends GDActivity implements
 	private ApplicationController app;
 	private static final int RESULT = 1001;
 	private String nombre;
-	// private ImageView fotoPub;
 	private byte[] foto;
 	private String APP_ID;
 	private PublicacionDTO publicacion;
+	private Button btnPublicar;
 
 	protected String path = "";
 
@@ -90,7 +93,7 @@ public class PublicarActivity extends GDActivity implements
 		puntaje = (RatingBar) findViewById(R.id.puntajeId);
 		comentario = (EditText) findViewById(R.id.txtComentarioId);
 		comentarFaceBook = (CheckBox) findViewById(R.id.cheBoxFaceBook);
-
+		btnPublicar = (Button) findViewById(R.id.btnPubId);
 		fotoButton = (ImageButton) findViewById(R.id.fotoPubId);
 		puntaje.setOnRatingBarChangeListener(this);
 		APP_ID = getString(R.string.facebook_app_id);
@@ -100,7 +103,8 @@ public class PublicarActivity extends GDActivity implements
 				Constantes.CREAR_PUBLICACION_FILTRO_ACTION);
 
 		app = ((ApplicationController) getApplicationContext());
-
+		comentario.addTextChangedListener(this);
+		btnPublicar.setEnabled(false);
 		inicializarActionBar();
 
 	}
@@ -462,6 +466,28 @@ public class PublicarActivity extends GDActivity implements
 		public void onCancel() {
 
 		}
+
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		if (!comentario.getText().toString().equals("")) {
+			btnPublicar.setEnabled(true);
+		} else {
+			btnPublicar.setEnabled(false);
+		}
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		// TODO Auto-generated method stub
 
 	}
 
