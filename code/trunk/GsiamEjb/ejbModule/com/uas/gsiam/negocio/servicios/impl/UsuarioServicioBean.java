@@ -394,22 +394,26 @@ public class UsuarioServicioBean implements UsuarioServicio {
 	public void enviarInvitaciones(String direccion, String nombre)
 			throws UsuarioExcepcion {
 
-		// TODO: deberiamos fijarnos si el mail ingresado ya pertenece a
-		// GSIAM???? par evitar spam
-
 		try {
-			EmailTemplate template = EmailTemplateFactory
-					.createEmailTemplate("mailTemplates/invitacion.vm");
-			template.put("p_nombre", nombre);
+			
+			
+			if (AbstractFactory.getInstance().getUsuarioDAO().existeUsuario(direccion, Constantes.USUARIO_ACTIVO)){
+				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO_INVITACION);
+			}
+			else{
+				EmailTemplate template = EmailTemplateFactory
+						.createEmailTemplate("mailTemplates/invitacion.vm");
+				template.put("p_nombre", nombre);
 
-			EmailSender mail = new EmailSender();
-			mail.setTemplate(template);
+				EmailSender mail = new EmailSender();
+				mail.setTemplate(template);
 
-			mail.setEmailDestinatario(direccion);
+				mail.setEmailDestinatario(direccion);
 
-			mail.setSubject(nombre + Constantes.EMAIL_SUBJECT_INVITACION);
+				mail.setSubject(nombre + Constantes.EMAIL_SUBJECT_INVITACION);
 
-			new Thread(mail).start();
+				new Thread(mail).start();
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
