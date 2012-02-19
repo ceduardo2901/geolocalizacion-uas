@@ -1,154 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/background2"
-    android:orientation="horizontal"
-    android:padding="10dip" >
+    android:layout_height="fill_parent" >
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content"
+        android:background="@color/background2"
+        android:orientation="horizontal"
+        android:padding="10dip" >
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <TableLayout
+            android:id="@+id/tableLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background2"
-            android:orientation="vertical"
-            android:weightSum="1" >
+            android:stretchColumns="0,0,0,0,0,0" >
 
-            <TableLayout
-                android:id="@+id/tableLayout1"
-                android:layout_width="match_parent"
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:stretchColumns="0,0,0,0,0,0" >
+                android:layout_marginBottom="0dp"
+                android:paddingBottom="0px" >
 
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    android:paddingBottom="0px" >
-
-                    <EditText
-                        android:id="@+id/txtNombreId"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:hint="@string/Nombre"
-                        android:maxLength="30" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="0dp" >
-
-                    <EditText
-                        android:id="@+id/txtDireccionId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_weight="1"
-                        android:hint="@string/direccion"
-                        android:maxLength="50" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <EditText
-                        android:id="@+id/txtTelefonoId"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="@string/telefono"
-                        android:inputType="number"
-                        android:maxLength="15" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <EditText
-                        android:id="@+id/txtWebId"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="@string/web"
-                        android:inputType="textWebEditText"
-                        android:maxLength="50" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <Button
-                        android:id="@+id/btnCategoriaSitioId"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:onClick="mostarCategoria"
-                        android:text="@string/categoria" />
-
-                    <EditText
-                        android:id="@+id/txtCategoriaId"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:cursorVisible="false"
-                        android:enabled="true"
-                        android:focusable="false"
-                        android:hint="@string/categoria" >
-                    </EditText>
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow65"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-                </TableRow>
-            </TableLayout>
-
-            <AbsoluteLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:paddingTop="10dp" >
-
-                <view
-                    android:id="@+id/crearSitioMapaId"
+                <EditText
+                    android:id="@+id/txtNombreId"
                     android:layout_width="match_parent"
-                    android:layout_height="149dp"
-                    android:layout_x="11dp"
-                    android:apiKey="0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw"
-                    class="com.google.android.maps.MapView"
-                    android:clickable="true"
-                    android:focusableInTouchMode="true" />
-            </AbsoluteLayout>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/Nombre"
+                    android:maxLength="30" />
+            </TableRow>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <TableRow
+                android:id="@+id/tableRow22"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:scrollbars="none" >
+                android:paddingTop="0dp" >
+
+                <EditText
+                    android:id="@+id/txtDireccionId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_weight="1"
+                    android:hint="@string/direccion"
+                    android:maxLength="50" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <EditText
+                    android:id="@+id/txtTelefonoId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/telefono"
+                    android:inputType="number"
+                    android:maxLength="15" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <EditText
+                    android:id="@+id/txtWebId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/web"
+                    android:inputType="textWebEditText"
+                    android:maxLength="50" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
                 <Button
-                    android:id="@+id/btnAgregarSitioId"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:ellipsize="start"
-                    android:onClick="crearSitio"
-                    android:text="@string/agregar" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+                    android:id="@+id/btnCategoriaSitioId"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="mostarCategoria"
+                    android:text="@string/categoria" />
 
-</LinearLayout>
+                <EditText
+                    android:id="@+id/txtCategoriaId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:cursorVisible="false"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:hint="@string/categoria" >
+                </EditText>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow65"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
+        </TableLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingTop="10dp" >
+
+            <view
+                android:id="@+id/crearSitioMapaId"
+                android:layout_width="match_parent"
+                android:layout_height="149dp"
+                
+                android:apiKey="0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw"
+                class="com.google.android.maps.MapView"
+                android:clickable="true"
+                android:focusableInTouchMode="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:scrollbars="none" >
+
+            <Button
+                android:id="@+id/btnAgregarSitioId"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:ellipsize="start"
+                android:onClick="crearSitio"
+                android:text="@string/agregar" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

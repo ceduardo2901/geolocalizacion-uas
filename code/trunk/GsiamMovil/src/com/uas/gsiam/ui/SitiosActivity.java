@@ -580,6 +580,7 @@ public class SitiosActivity extends GDActivity implements
 	private void actualizarSitio(SitioDTO sitio) {
 		Intent intentModificar = new Intent(this, ModificarSitioActivity.class);
 		intentModificar.putExtra("sitio", sitio);
+		
 		startActivity(intentModificar);
 
 	}
