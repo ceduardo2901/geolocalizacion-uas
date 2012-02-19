@@ -59,7 +59,7 @@ public class PublicacionDAO implements IPublicacionDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("lalalalalalal="+idPublicacion);
+		
 		return idPublicacion;
 		
 	}
