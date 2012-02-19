@@ -112,7 +112,7 @@ public class SitiosActivity extends GDActivity implements
 		if (loc == null) {
 
 			Util.dismissProgressDialog();
-			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+			inicializarActionBarRefresh();
 		} else {
 			inicializarActionBar();
 			initQuickActionBar();
@@ -140,6 +140,13 @@ public class SitiosActivity extends GDActivity implements
 		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
+	private void inicializarActionBarRefresh() {
+		
+		addActionBarItem(Type.Refresh, ACTUALIZAR);
+
+		getActionBar().setTitle("GSIAM - Sitios");
+	}
+	
 	/**
 	 * Este metodo inicializa los botones de la barra superior de la activity
 	 */
