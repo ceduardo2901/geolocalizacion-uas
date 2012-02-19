@@ -29,8 +29,8 @@ import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.utils.Constantes;
 import com.uas.gsiam.utils.LocationHelper;
-import com.uas.gsiam.utils.Util;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
+import com.uas.gsiam.utils.Util;
 
 public class SitioDetalleActivity extends Activity implements
 		OnItemClickListener {
