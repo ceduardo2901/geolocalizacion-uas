@@ -168,7 +168,8 @@ public class SitiosActivity extends GDActivity implements
 							break;
 
 						case 2:
-							mostrarSitios(getSitios());
+							if (getSitios() != null)
+								mostrarSitios(getSitios());
 							break;
 
 						}
