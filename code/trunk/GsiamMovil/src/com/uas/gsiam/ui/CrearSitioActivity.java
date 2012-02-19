@@ -72,11 +72,12 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 	private GeoPoint geoPoint;
 	private MapController mapControl;
 	private CategoriaDTO categoriaSeleccionada;
+	private AlertDialog dialog = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBarContentView(R.layout.agregar_sitio);
+		setActionBarContentView(R.layout.crear_sitio);
 		Bundle bundle = getIntent().getExtras();
 		loc = bundle.getParcelable("ubicacion");
 		nombreSitioTxt = (EditText) findViewById(R.id.txtNombreId);
@@ -154,7 +155,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
 	}
 
-	private AlertDialog dialog = null;
+
 
 	public void mostarCategoria(View v) {
 
