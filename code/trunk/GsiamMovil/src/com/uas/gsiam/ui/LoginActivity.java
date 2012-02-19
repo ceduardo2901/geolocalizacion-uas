@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -142,7 +141,7 @@ public class LoginActivity extends Activity implements TextWatcher{
 	protected BroadcastReceiver loginReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Log.i(TAG, "mensaje de prueba estoy aca !!!!");
+			
 			Util.dismissProgressDialog();
 			String error = intent.getStringExtra("error");
 			if (error != null) {

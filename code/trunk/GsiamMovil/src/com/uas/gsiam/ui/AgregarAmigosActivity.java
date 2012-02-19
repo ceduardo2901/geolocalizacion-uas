@@ -61,6 +61,8 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 		
 		app = ((ApplicationController) getApplicationContext());
 		setContentView(R.layout.agregar_amigos_tab);
+		if (usuarios != null)
+			usuarios.clear();
 		nombreTxt = (EditText) findViewById(R.id.nombreTxt);
 		lv = getListView();
 		lv.setOnItemClickListener(this);
