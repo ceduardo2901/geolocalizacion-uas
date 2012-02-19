@@ -103,18 +103,17 @@ public class SitiosActivity extends GDActivity implements
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 
-		
+		inicializarActionBar();
 		sitios = (List<SitioDTO>) getLastNonConfigurationInstance();
 		if (sitios != null) {
 			mostrarSitios(sitios);
 		}
 
 		if (loc == null) {
-
 			Util.dismissProgressDialog();
-			inicializarActionBarRefresh();
+			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
-			inicializarActionBar();
+			
 			initQuickActionBar();
 			if (sitios == null) {
 
@@ -133,6 +132,7 @@ public class SitiosActivity extends GDActivity implements
 	}
 
 	private void inicializarActionBar() {
+		
 		addActionBarItem(Type.List, FILTRAR);
 		addActionBarItem(Type.Search, BUSCAR);
 		addActionBarItem(Type.Refresh, ACTUALIZAR);
@@ -140,12 +140,6 @@ public class SitiosActivity extends GDActivity implements
 		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
-	private void inicializarActionBarRefresh() {
-		
-		addActionBarItem(Type.Refresh, ACTUALIZAR);
-
-		getActionBar().setTitle("GSIAM - Sitios");
-	}
 	
 	/**
 	 * Este metodo inicializa los botones de la barra superior de la activity
@@ -277,10 +271,12 @@ public class SitiosActivity extends GDActivity implements
 
 	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
-		if (!sitios.isEmpty()) {
-			for (SitioDTO s : sitios) {
-				if (s.getCategoria().getIdCategoria() == categoria.intValue()) {
-					sitiosFiltro.add(s);
+		if (sitios != null){
+			if (!sitios.isEmpty()) {
+				for (SitioDTO s : sitios) {
+					if (s.getCategoria().getIdCategoria() == categoria.intValue()) {
+						sitiosFiltro.add(s);
+					}
 				}
 			}
 		}
@@ -289,17 +285,20 @@ public class SitiosActivity extends GDActivity implements
 
 	private ArrayList<SitioDTO> filtrarPorRating(Integer rating) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
-		if (!sitios.isEmpty()) {
-			if (rating == 1) {
-				rating = 0;
-			}
-			for (SitioDTO s : sitios) {
+		if (sitios != null){
+			if (!sitios.isEmpty()) {
+				if (rating == 1) {
+					rating = 0;
+				}
+				for (SitioDTO s : sitios) {
 
-				if (getPromedioPuntaje(s).intValue() == rating) {
-					sitiosFiltro.add(s);
+					if (getPromedioPuntaje(s).intValue() == rating) {
+						sitiosFiltro.add(s);
+					}
 				}
 			}
 		}
+		
 		return sitiosFiltro;
 	}
 
@@ -364,12 +363,17 @@ public class SitiosActivity extends GDActivity implements
 
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		
+		locHelper.getLocation(this, locationResult);
 		switch (item.getItemId()) {
 		case BUSCAR:
-			startSearch(null, false, null, false);
+			if (loc != null) {
+				startSearch(null, false, null, false);
+			} else {
+				Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+			}
 			break;
 		case ACTUALIZAR:
-			locHelper.getLocation(this, locationResult);
 			if (loc != null) {
 				actualizarSitios(loc);
 			} else {
@@ -378,10 +382,16 @@ public class SitiosActivity extends GDActivity implements
 				loaderActionBarItem.setLoading(false);
 				Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 			}
-
 			break;
 		case FILTRAR:
-			quickActions.show(item.getItemView());
+			if (loc != null) {
+				
+				if (quickActions == null)
+					initQuickActionBar();
+				quickActions.show(item.getItemView());
+			} else {
+				Util.showToast(this, Constantes.MSG_GPS_DISABLE);
+			}
 			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
@@ -580,7 +590,6 @@ public class SitiosActivity extends GDActivity implements
 	private void actualizarSitio(SitioDTO sitio) {
 		Intent intentModificar = new Intent(this, ModificarSitioActivity.class);
 		intentModificar.putExtra("sitio", sitio);
-		
 		startActivity(intentModificar);
 
 	}
