@@ -26,9 +26,9 @@ public class Constantes {
 	// Servicios
 
 	// TODO poner esto en un archivo de configuracion
-	// public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	// ip tony
-	public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
+	//public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
 	// ipmartin
 	// public static final String DOMINIO_SERVICE =
 	// "http://gsiamweb.no-ip.info:8080";

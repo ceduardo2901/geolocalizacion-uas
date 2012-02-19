@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.facebook.android.DialogError;
@@ -27,7 +30,7 @@ import com.uas.gsiam.utils.Util;
  * @author Martin
  * 
  */
-public class InvitarAmigosActivity extends Activity {
+public class InvitarAmigosActivity extends Activity implements TextWatcher{
 
 	protected static String TAG = "InvitarAmigosActivity";
 
@@ -36,15 +39,18 @@ public class InvitarAmigosActivity extends Activity {
 	protected String email;
 	protected String APP_ID;
 	protected static Facebook facebook;
-
+	protected Button invitarBtn;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.invitar_amigos_tab);
 		this.emailTxt = (EditText) findViewById(R.id.emailTxt);
-		enviarInvitacionesFiltro = new IntentFilter(
-				Constantes.ENVIAR_INVITACIONES_FILTRO_ACTION);
+		this.invitarBtn = (Button) findViewById(R.id.invitarBtn);
+		emailTxt.addTextChangedListener(this);
+		invitarBtn.setEnabled(false);
+		enviarInvitacionesFiltro = new IntentFilter(Constantes.ENVIAR_INVITACIONES_FILTRO_ACTION);
 	}
 
 	protected void onResume() {
@@ -57,6 +63,28 @@ public class InvitarAmigosActivity extends Activity {
 		unregisterReceiver(receiverEnviarInvitaciones);
 	}
 
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		if (!emailTxt.getText().toString().equals("")) {
+			invitarBtn.setEnabled(true);
+		} else {
+			invitarBtn.setEnabled(false);
+		}
+		
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		
+	}
+	
 	/**
 	 * Accion que llama al servicio que envia una solicitud de invitacion por
 	 * email
