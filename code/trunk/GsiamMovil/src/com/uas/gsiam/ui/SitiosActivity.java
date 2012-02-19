@@ -103,8 +103,7 @@ public class SitiosActivity extends GDActivity implements
 		intentEliminarSitio = new IntentFilter(
 				Constantes.ELIMINAR_SITIO_FILTRO_ACTION);
 
-		inicializarActionBar();
-		initQuickActionBar();
+		
 		sitios = (List<SitioDTO>) getLastNonConfigurationInstance();
 		if (sitios != null) {
 			mostrarSitios(sitios);
@@ -115,6 +114,8 @@ public class SitiosActivity extends GDActivity implements
 			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
+			inicializarActionBar();
+			initQuickActionBar();
 			if (sitios == null) {
 
 				actualizarSitios(loc);
