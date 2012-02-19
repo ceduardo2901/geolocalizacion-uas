@@ -152,6 +152,9 @@ public class MainActivity extends GDActivity {
 						ActualizarPosicionServicio.class);
 				stopService(intent);
 			}
+			
+			
+			
 			Intent loginIntent = new Intent(this, LoginActivity.class);
 			startActivity(loginIntent);
 

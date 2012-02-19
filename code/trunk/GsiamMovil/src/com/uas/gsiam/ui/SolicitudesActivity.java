@@ -71,6 +71,10 @@ public class SolicitudesActivity extends ListActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = ((ApplicationController) getApplicationContext());
+		if (usuariosSolicitudesEnviadas != null)
+			usuariosSolicitudesEnviadas.clear();
+		if (usuariosSolicitudesRecibidas != null)
+			usuariosSolicitudesRecibidas.clear();
 		lv = getListView();
 		setContentView(R.layout.solicitudes_amigos_tab);
 

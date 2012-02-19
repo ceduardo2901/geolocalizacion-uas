@@ -46,12 +46,14 @@ public class MisAmigosActivity extends ListActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mis_amigos_tab);
+		if (misAmigos != null)
+			misAmigos.clear();
 		lv = getListView();
 		lv.setOnItemClickListener(this);
-
+		
 		misAmigosFiltro = new IntentFilter(Constantes.GET_AMIGOS_FILTRO_ACTION);
 		this.registerReceiver(receiverGetAmigos, misAmigosFiltro);
-
+		
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_BUSCANDO);
 		Intent intent = new Intent(this, GetAmigosServicio.class);
 		startService(intent);
