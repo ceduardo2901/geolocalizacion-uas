@@ -48,6 +48,7 @@ public class SitioDetalleActivity extends Activity implements
 	private ArrayList<String> fotosRutas;
 	private IntentFilter detalleFiltro;
 	private LocationHelper locHelper;
+	private FotosAdapter adapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,8 @@ public class SitioDetalleActivity extends Activity implements
 		fotosRutas = new ArrayList<String>();
 		sitio = SitioTabActivity.sitio;
 		cargarFotos(sitio.getPublicaciones());
-		galeria.setAdapter(new FotosAdapter(this));
+		adapter = new FotosAdapter(this);
+		galeria.setAdapter(adapter);
 
 		if (fotos.size() > 1) {
 			galeria.setSelection(1);
@@ -120,8 +122,13 @@ public class SitioDetalleActivity extends Activity implements
 				List<PublicacionDTO> publicaciones = sitios.get(0)
 						.getPublicaciones();
 				if (!publicaciones.isEmpty()) {
-
-					cargarFotos(sitio.getPublicaciones());
+					fotos.clear();
+					for(PublicacionDTO pub : publicaciones){
+						fotos.add(pub.getFoto());
+					}
+					
+					galeria.setAdapter(adapter);
+					
 				}
 
 			}
