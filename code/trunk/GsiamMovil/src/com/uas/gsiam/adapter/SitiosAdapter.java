@@ -58,9 +58,11 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		SitioDTO sitioMovil = sitiosDTO.get(position);
 		Location locSitio = new Location("");
-		locSitio.setLatitude(new Double(sitioMovil.getLat()));
-		locSitio.setLongitude(new Double(sitioMovil.getLon()));
-		Float distancia = loc.distanceTo(locSitio);
+		locSitio.setLatitude(sitioMovil.getLat());
+		locSitio.setLongitude(sitioMovil.getLon());
+		//float[] results = new float[1];
+		
+		//Location.distanceBetween(loc.getLatitude(), loc.getLongitude(), sitioMovil.getLat(), sitioMovil.getLon(), results);
 		View item = convertView;
 		ViewHolder holder;
 
@@ -94,7 +96,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		holder.Nombre.setText(sitioMovil.getNombre());
 		holder.Direccion.setText(sitioMovil.getDireccion());
 		holder.distancia
-				.setText(distancia.intValue() + " " + Constantes.METROS);
+				.setText(sitioMovil.getDistancia() + " " + Constantes.METROS);
 		holder.rating.setRating(obtenerPromedioPuntaje(sitioMovil));
 		return item;
 	}

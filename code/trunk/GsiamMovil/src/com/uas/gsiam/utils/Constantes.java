@@ -26,9 +26,9 @@ public class Constantes {
 	// Servicios
 
 	// TODO poner esto en un archivo de configuracion
-	public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	// public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	// ip tony
-	//public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
+	public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
 	// ipmartin
 	// public static final String DOMINIO_SERVICE =
 	// "http://gsiamweb.no-ip.info:8080";
@@ -134,7 +134,7 @@ public class Constantes {
 	public static final String MSG_LOGIN_ERROR = "El email o password incorrecto";
 	public static final String MSG_MENSAJE_ENVIADO = "El mensaje se envio correctamente";
 	public static final String MSG_PUBLICACION_CREADA = "La publicacion se creo correctamente";
-	public static final String MSG_NO_EXISTEN_SITIOS_POR_NOMBRE = "No se encontraron sitios cercanos a su ubicación";
+	public static final String MSG_NO_EXISTEN_SITIOS_POR_NOMBRE = "No se encontraron sitios con el nombre ingresado";
 	public static final String MSG_SITIO_CREADO = "El Sitio se creo correctamente";
 	public static final String MSG_INVITACIONES_OK = "Invitacion enviada existosamente";
 	public static final String MSG_CONEXION_ERROR = "Para continuar debe tener conexion a internet";
