@@ -15,6 +15,8 @@ public class Constantes {
 	public static final int USUARIO_ACTIVO = 1;
 	public static final int USUARIO_INACTIVO = 0;
 
+	public static final int RADIO = 1000;
+	
 	// Mensajes de Error
 	public static String ERROR_COMUNICACION_BD = "Error al comunicarse con la Base de Datos";
 	public static String ERROR_CREAR_USUARIO = "Error al intentar crear el usuario";
