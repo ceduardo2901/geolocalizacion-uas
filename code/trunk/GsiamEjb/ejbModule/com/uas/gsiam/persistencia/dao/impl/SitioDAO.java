@@ -6,8 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgis.Geometry;
+import org.postgis.GeometryCollection;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
+import org.postgresql.geometric.PGpolygon;
+import org.postgresql.util.PGobject;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -58,7 +62,8 @@ public class SitioDAO implements ISitioDAO {
 			while (rs.next()) {
 				resultado = new SitioDTO();
 				categoria = new CategoriaDTO();
-				geom = (PGgeometry) rs.getObject("sit_punto");
+				PGobject pgObj = (PGobject) rs.getObject("sit_punto");
+				geom = new PGgeometry(pgObj.getValue());
 				resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 				resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 				resultado.setIdSitio(rs.getInt("sit_id"));
@@ -173,7 +178,7 @@ public class SitioDAO implements ISitioDAO {
 		ArrayList<PublicacionDTO> publicaciones = new ArrayList<PublicacionDTO>();
 		PublicacionDTO publicacion;
 
-		String sqlCrearSitio = "SELECT * FROM t_publicacion p, t_usuario u WHERE p.pub_id_usuario=u.usu_id and pub_id_sitio = ?";
+		String sqlCrearSitio = "SELECT * FROM t_publicacion p, t_usuario u WHERE p.pub_id_usuario=u.usu_id and pub_id_sitio = ? ORDER BY p.pub_fecha DESC";
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sqlCrearSitio);
 
@@ -236,19 +241,24 @@ public class SitioDAO implements ISitioDAO {
 		ResultSet rs = null;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		Point punto = new Point(sitio.getLat(), sitio.getLon());
+		PGobject d = new PGobject();
+		d.setType(punto.getTypeString());
+		d.setValue(punto.getValue());
 		PGgeometry pgeom = new PGgeometry(punto);
-
-		String sql = "select s.*, c.* " + "from t_sitio s, t_categoria c "
+		
+		String sql = "select s.*, c.*, ST_Distance(s.sit_punto,ST_GeographyFromText(?)) as distancia" +
+				" from t_sitio s, t_categoria c "
 				+ "where s.sit_id_categoria=c.cat_id "
-				+ "and ST_DWithin(s.sit_punto,GeomFromText(?),?)"
-				+ " order by ST_Distance(sit_punto,GeomFromText(?))";
+				+ "and ST_DWithin(s.sit_punto,ST_GeographyFromText(?),?)"
+				+ " order by ST_Distance(sit_punto,ST_GeographyFromText(?))";
 
 		ps = ConexionJDBCUtil.getConexion().prepareStatement(sql);
 
 		PGgeometry geom;
 		ps.setObject(1, pgeom);
-		ps.setDouble(2, 0.01);
-		ps.setObject(3, pgeom);
+		ps.setObject(2, pgeom);
+		ps.setDouble(3, Constantes.RADIO);
+		ps.setObject(4, pgeom);
 
 		rs = ps.executeQuery();
 
@@ -256,7 +266,10 @@ public class SitioDAO implements ISitioDAO {
 
 			categoria = new CategoriaDTO();
 			resultado = new SitioDTO();
-			geom = (PGgeometry) rs.getObject("sit_punto");
+			PGobject pgObj = (PGobject) rs.getObject("sit_punto");
+			geom = new PGgeometry(pgObj.getValue());
+			
+			//geom = (PGgeometry) rs.getObject("sit_punto");
 			resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 			resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 			resultado.setIdSitio(rs.getInt("sit_id"));
@@ -264,11 +277,13 @@ public class SitioDAO implements ISitioDAO {
 			resultado.setDireccion(rs.getString("sit_direccion"));
 			resultado.setTelefono(rs.getString("sit_telefono"));
 			resultado.setWeb(rs.getString("sit_web"));
+			resultado.setDistancia(rs.getString("distancia"));
 			resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 					.getIdSitio()));
 			categoria.setIdCategoria(rs.getInt("cat_id"));
 			categoria.setDescripcion(rs.getString("cat_descripcion"));
 			categoria.setImagen(rs.getString("cat_imagen"));
+			
 			resultado.setCategoria(categoria);
 			sitios.add(resultado);
 
