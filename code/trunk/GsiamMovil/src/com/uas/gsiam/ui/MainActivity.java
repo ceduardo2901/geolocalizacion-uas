@@ -79,6 +79,7 @@ public class MainActivity extends GDActivity {
 		preferencias = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean compartirUbicacion = preferencias.getBoolean("compUbicacionId",
 				false);
+		
 		Intent intent = new Intent(this, ActualizarPosicionServicio.class);
 
 		LocationHelper h = new LocationHelper();

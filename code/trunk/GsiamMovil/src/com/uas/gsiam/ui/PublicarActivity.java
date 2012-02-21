@@ -305,7 +305,7 @@ public class PublicarActivity extends GDActivity implements
 			String response;
 
 			Bundle parameters = new Bundle();
-			if (fotoButton.getDrawable() != null) {
+			if (foto != null && foto.length > 0) {
 
 				parameters.putByteArray("picture", Util
 						.bitmapToArray((BitmapDrawable) fotoButton
