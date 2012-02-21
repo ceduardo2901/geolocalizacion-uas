@@ -323,6 +323,7 @@ public class CrearSitioActivity extends GDMapActivity implements TextWatcher {
 					loc.setLatitude(punto.getLatitudeE6() / 1000000F);
 					loc.setLongitude(punto.getLongitudeE6() / 1000000F);
 					mapControl.setCenter(punto);
+					mapControl.animateTo(punto);
 					PosicionOverlay miPosicionOverlay = new PosicionOverlay(
 							getResources().getDrawable(
 									R.drawable.gd_map_pin_pin));

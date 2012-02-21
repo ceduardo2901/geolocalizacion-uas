@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Html;
 import android.widget.TabHost;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -54,8 +53,7 @@ public class SitioTabActivity extends GDTabActivity {
 		mTabHost = getTabHost();
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
-		
-		
+
 		addTab1();
 		addTab2();
 
@@ -67,9 +65,9 @@ public class SitioTabActivity extends GDTabActivity {
 
 		mTabHost.getCurrentTabTag();
 		sitioAccion = new IntentFilter(Constantes.SITIO_FILTRO_ACTION);
-		
+
 		Util.dismissProgressDialog();
-		
+
 	}
 
 	@Override
@@ -106,7 +104,7 @@ public class SitioTabActivity extends GDTabActivity {
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
 		case MAPA:
-			
+
 			mostarMapa();
 			break;
 		case COMPARTIR:
@@ -134,12 +132,15 @@ public class SitioTabActivity extends GDTabActivity {
 	}
 
 	private void compartir() {
+
 		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
-		compartirIntent.setType("text/html");
-		
+		compartirIntent.setType("text/plain");
+
+		compartirIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,
+				getString(R.string.app_name));
 		compartirIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-				Html.fromHtml("<p>Mira el sitio " + sitio.getNombre() + " en Gsiam.</p>"));
-		
+				"Mira el sitio " + sitio.getNombre() + " en Gsiam");
+
 		startActivityForResult(Intent.createChooser(compartirIntent, "Title:"),
 				RESULT);
 
@@ -184,6 +185,5 @@ public class SitioTabActivity extends GDTabActivity {
 		startActivity(intent);
 
 	}
-	
 
 }
