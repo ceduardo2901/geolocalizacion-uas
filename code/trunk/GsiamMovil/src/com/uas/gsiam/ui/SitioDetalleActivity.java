@@ -72,7 +72,7 @@ public class SitioDetalleActivity extends Activity implements
 		txtTelefono = (TextView) findViewById(R.id.txtSitioTelefonoId);
 		txtWeb = (TextView) findViewById(R.id.txtSitioWebId);
 		txtFotos = (TextView) findViewById(R.id.txtFotosId);
-	    if (fotos.isEmpty()) {
+		if (fotos.isEmpty()) {
 			txtFotos.setText(null);
 			Log.i(TAG, "oncreate -no hay fotos: ");
 		} else {
@@ -93,7 +93,7 @@ public class SitioDetalleActivity extends Activity implements
 		if (!publicaciones.isEmpty()) {
 			for (PublicacionDTO p : publicaciones) {
 				if (p.getFotoRuta() != null) {
-					 
+
 					fotos.add(Util.recuperarImagenMemoria(this, p.getFotoRuta()));
 					fotosRutas.add(p.getFotoRuta());
 				}
@@ -118,17 +118,27 @@ public class SitioDetalleActivity extends Activity implements
 			ArrayList<SitioDTO> sitios = (ArrayList<SitioDTO>) bundle
 					.getSerializable("sitios");
 			if (!sitios.isEmpty()) {
+
 				setSitio(sitios.get(0));
 				List<PublicacionDTO> publicaciones = sitios.get(0)
 						.getPublicaciones();
 				if (!publicaciones.isEmpty()) {
+
 					fotos.clear();
-					for(PublicacionDTO pub : publicaciones){
-						fotos.add(pub.getFoto());
-					}
-					
-					galeria.setAdapter(adapter);
-					
+					fotosRutas.clear();
+					cargarFotos(getSitio().getPublicaciones());
+					SitioDetalleActivity.this
+
+					.runOnUiThread(new Runnable() {
+
+						public void run() {
+
+							updateUI();
+
+						}
+
+					});
+
 				}
 
 			}
@@ -142,9 +152,16 @@ public class SitioDetalleActivity extends Activity implements
 		}
 	};
 
+	public void updateUI() {
+		Log.i(TAG, String.valueOf(fotos.size()));
+	
+		adapter.addImage();
+
+	}
+
 	public void onResume() {
 		super.onResume();
-	
+
 		txtNombre.setText(sitio.getNombre());
 		txtDireccion.setText(sitio.getDireccion());
 		txtTelefono.setText(sitio.getTelefono());
@@ -169,8 +186,7 @@ public class SitioDetalleActivity extends Activity implements
 	public void setFotos(ArrayList<byte[]> fotos) {
 		this.fotos = fotos;
 	}
-	
-	
+
 	public ArrayList<String> getFotosRutas() {
 		return fotosRutas;
 	}
@@ -178,7 +194,6 @@ public class SitioDetalleActivity extends Activity implements
 	public void setFotosRutas(ArrayList<String> fotosRutas) {
 		this.fotosRutas = fotosRutas;
 	}
-	
 
 	public void onPause() {
 		super.onPause();
@@ -231,8 +246,20 @@ public class SitioDetalleActivity extends Activity implements
 					0);
 			attr.recycle();
 			this.fotos = getFotos();
-		
 
+		}
+
+		public void borrarImagenes() {
+			fotos.clear();
+			// notifyDataSetChanged();
+		}
+
+		public void addImage() {
+			// borrarImagenes();
+			// for(PublicacionDTO pub : getSitio().getPublicaciones()){
+			// fotos.add(pub.getFoto());
+			// }
+			notifyDataSetChanged();
 		}
 
 		@Override
@@ -244,7 +271,7 @@ public class SitioDetalleActivity extends Activity implements
 		@Override
 		public Object getItem(int position) {
 
-			return position;
+			return fotos.get(position);
 		}
 
 		@Override
@@ -257,13 +284,13 @@ public class SitioDetalleActivity extends Activity implements
 		public View getView(int position, View convertView, ViewGroup parent) {
 
 			ImageView imgView = new ImageView(mContext);
+			if (fotos.get(position) != null) {
+				imgView.setImageBitmap(Util.arrayToBitmap(fotos.get(position)));
 
-			imgView.setImageBitmap(Util.arrayToBitmap(fotos.get(position)));
-
-			imgView.setLayoutParams(new Gallery.LayoutParams(130, 100));
-			imgView.setScaleType(ImageView.ScaleType.FIT_XY);
-			imgView.setBackgroundResource(mGalleryItemBackground);
-
+				imgView.setLayoutParams(new Gallery.LayoutParams(130, 100));
+				imgView.setScaleType(ImageView.ScaleType.FIT_XY);
+				imgView.setBackgroundResource(mGalleryItemBackground);
+			}
 			return imgView;
 		}
 

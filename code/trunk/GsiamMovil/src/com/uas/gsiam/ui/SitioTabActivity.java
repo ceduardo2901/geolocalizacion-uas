@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.widget.TabHost;
 
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -134,10 +135,11 @@ public class SitioTabActivity extends GDTabActivity {
 
 	private void compartir() {
 		Intent compartirIntent = new Intent(Intent.ACTION_SEND);
-		compartirIntent.setType("plain/text");
-		compartirIntent.putExtra(Intent.EXTRA_TEXT,
-				"Mira el sitio " + sitio.getNombre() + " en Gsiam");
-
+		compartirIntent.setType("text/html");
+		
+		compartirIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+				Html.fromHtml("<p>Mira el sitio " + sitio.getNombre() + " en Gsiam.</p>"));
+		
 		startActivityForResult(Intent.createChooser(compartirIntent, "Title:"),
 				RESULT);
 
