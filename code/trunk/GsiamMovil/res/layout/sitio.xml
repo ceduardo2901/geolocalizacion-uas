@@ -14,16 +14,16 @@
 		
 		<TextView android:id="@+id/LblNombre" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:textStyle="bold"
-			android:textSize="16px" android:textColor="@color/fuente"/>
+			android:textSize="16dp" android:textColor="@color/fuente"/>
 
 		<TextView android:id="@+id/LblDireccion"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textStyle="normal" android:textSize="10px" android:textColor="@color/fuente"/>
+			android:textStyle="normal" android:textSize="10dp" android:textColor="@color/fuente"/>
 
 
 		<TextView android:id="@+id/LblDistancia"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:textStyle="normal" android:textSize="10px" android:textColor="@color/email" />
+			android:textStyle="normal" android:textSize="10dp" android:textColor="@color/fuente" />
 
 		<RatingBar android:id="@+id/puntajeSitioId"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
