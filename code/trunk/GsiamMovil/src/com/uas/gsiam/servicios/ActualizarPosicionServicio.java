@@ -33,7 +33,7 @@ import com.uas.gsiam.utils.RestResponseException;
  */
 public class ActualizarPosicionServicio extends Service {
 
-	private static Timer timer = new Timer();
+	private static Timer timer;
 	private static final String TAG = "ActualizarPosicionServicio";
 	private RestTemplate restTemp;
 	private HttpHeaders requestHeaders;
@@ -50,7 +50,7 @@ public class ActualizarPosicionServicio extends Service {
 
 		super.onCreate();
 		Log.i(TAG, "onCreate");
-
+		timer = new Timer(true);
 		requestHeaders = new HttpHeaders();
 		requestHeaders.setContentType(new MediaType("application", "json"));
 		restTemp = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
@@ -69,7 +69,13 @@ public class ActualizarPosicionServicio extends Service {
 
 	private void startService() {
 		Log.i(TAG, "startService");
-		timer.scheduleAtFixedRate(new mainTask(), 0, Constantes.ACTUALIZAR_POSICION);
+		if (timer == null) {
+			timer = new Timer(true);
+		}
+
+		timer.scheduleAtFixedRate(new mainTask(), 0,
+				Constantes.ACTUALIZAR_POSICION);
+
 	}
 
 	private class mainTask extends TimerTask {
@@ -106,7 +112,10 @@ public class ActualizarPosicionServicio extends Service {
 		Log.i(TAG, "onDestroy");
 		super.onDestroy();
 		if (timer != null) {
+
 			timer.cancel();
+			timer.purge();
+			timer = null;
 		}
 
 	}

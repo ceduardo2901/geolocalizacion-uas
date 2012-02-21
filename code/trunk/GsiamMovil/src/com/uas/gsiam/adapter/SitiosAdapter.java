@@ -1,6 +1,5 @@
 package com.uas.gsiam.adapter;
 
-
 import java.util.List;
 
 import android.app.Activity;
@@ -60,9 +59,10 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		Location locSitio = new Location("");
 		locSitio.setLatitude(sitioMovil.getLat());
 		locSitio.setLongitude(sitioMovil.getLon());
-		//float[] results = new float[1];
-		
-		//Location.distanceBetween(loc.getLatitude(), loc.getLongitude(), sitioMovil.getLat(), sitioMovil.getLon(), results);
+		// float[] results = new float[1];
+
+		// Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
+		// sitioMovil.getLat(), sitioMovil.getLon(), results);
 		View item = convertView;
 		ViewHolder holder;
 
@@ -95,8 +95,8 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
 		holder.Nombre.setText(sitioMovil.getNombre());
 		holder.Direccion.setText(sitioMovil.getDireccion());
-		holder.distancia
-				.setText(sitioMovil.getDistancia() + " " + Constantes.METROS);
+		holder.distancia.setText(convertirDistancia(sitioMovil.getDistancia())
+				+ " " + Constantes.METROS);
 		holder.rating.setRating(obtenerPromedioPuntaje(sitioMovil));
 		return item;
 	}
@@ -118,6 +118,19 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		}
 		promedio = promedio / sitio.getPublicaciones().size();
 		return promedio.intValue();
+	}
+
+	private String convertirDistancia(String distancia) {
+		String dis;
+		if (distancia.contains(".")) {
+			int index = distancia.indexOf(".");
+			dis = distancia.substring(0, index);
+
+		} else {
+			dis = distancia;
+		}
+
+		return dis;
 	}
 
 	static class ViewHolder {

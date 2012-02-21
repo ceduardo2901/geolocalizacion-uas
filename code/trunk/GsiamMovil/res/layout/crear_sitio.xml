@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:hint="@string/Nombre"
-            android:maxLength="30" >
+            android:maxLength="30" android:focusable="true">
 
             <requestFocus />
         </EditText>
@@ -78,7 +78,7 @@
             android:layout_toRightOf="@+id/btnCategoriaSitioId"
             android:hint="@string/categoria" >
 
-            <requestFocus />
+            
         </EditText>
 
         <LinearLayout
