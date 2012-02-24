@@ -2,12 +2,16 @@ package com.uas.gsiam.web.delegate;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.SolicitudContactoDTO;
 import com.uas.gsiam.negocio.dto.UsuarioDTO;
 import com.uas.gsiam.negocio.excepciones.UsuarioExcepcion;
 import com.uas.gsiam.negocio.excepciones.UsuarioNoExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.UsuarioServicio;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 import com.uas.gsiam.persistencia.utiles.Constantes;
 import com.uas.gsiam.web.sl.ServiceLocator;
 
@@ -21,6 +25,9 @@ import com.uas.gsiam.web.sl.ServiceLocator;
  */
 public class UsuarioDelegate {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+	
 	private UsuarioServicio servicioUsuario;
 
 	public UsuarioDelegate() {
@@ -33,7 +40,7 @@ public class UsuarioDelegate {
 			this.servicioUsuario = (UsuarioServicio) ServiceLocator
 					.getBean(UsuarioServicio.SERVICE_ADDRESS);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 

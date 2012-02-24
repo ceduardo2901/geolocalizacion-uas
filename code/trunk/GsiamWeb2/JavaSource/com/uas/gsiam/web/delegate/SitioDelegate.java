@@ -3,6 +3,9 @@ package com.uas.gsiam.web.delegate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
@@ -10,6 +13,7 @@ import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
 import com.uas.gsiam.negocio.servicios.SitioServicio;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 import com.uas.gsiam.web.sl.ServiceLocator;
 
 /**
@@ -21,6 +25,9 @@ import com.uas.gsiam.web.sl.ServiceLocator;
  */
 public class SitioDelegate {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+	
 	private SitioServicio servicioSitio;
 
 	public SitioDelegate() {
@@ -32,7 +39,7 @@ public class SitioDelegate {
 			this.servicioSitio = (SitioServicio) ServiceLocator
 					.getBean(SitioServicio.SERVICE_ADDRESS);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 
@@ -49,6 +56,7 @@ public class SitioDelegate {
 	 */
 	public List<SitioDTO> getSitios(String lat, String lon)
 			throws SitioExcepcion {
+		
 		SitioDTO sitio = new SitioDTO();
 		sitio.setLat(new Double(lat));
 		sitio.setLon(new Double(lon));
