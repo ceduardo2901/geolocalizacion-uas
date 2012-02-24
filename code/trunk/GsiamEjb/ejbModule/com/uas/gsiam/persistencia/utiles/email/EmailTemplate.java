@@ -4,6 +4,10 @@ import java.io.StringWriter;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 
 /**
  * Clase que obtiene el template para enviar los email de invitacion al sistema
@@ -13,6 +17,9 @@ import org.apache.velocity.VelocityContext;
  */
 public class EmailTemplate {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+	
 	private VelocityContext context;
 	private Template template;
 
@@ -31,7 +38,7 @@ public class EmailTemplate {
 			template.merge(context, writer);
 			writer.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		return writer.toString();
 	}

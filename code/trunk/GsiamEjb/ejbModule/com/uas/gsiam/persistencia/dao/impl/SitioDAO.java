@@ -12,17 +12,23 @@ import org.postgis.PGgeometry;
 import org.postgis.Point;
 import org.postgresql.geometric.PGpolygon;
 import org.postgresql.util.PGobject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 import com.uas.gsiam.persistencia.dao.ISitioDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
 import com.uas.gsiam.persistencia.utiles.Constantes;
 
 public class SitioDAO implements ISitioDAO {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
 
 	@Override
 	public List<SitioDTO> buscarSitio(SitioDTO sitioInteres)
@@ -81,6 +87,7 @@ public class SitioDAO implements ISitioDAO {
 			}
 
 		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_BUSCAR_SITIO);
 		} finally {
 			try {
@@ -88,7 +95,7 @@ public class SitioDAO implements ISitioDAO {
 				ps.close();
 			} catch (SQLException e) {
 
-				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 		}
 		return sitios;
@@ -117,13 +124,13 @@ public class SitioDAO implements ISitioDAO {
 			ps.setInt(7, sitioInteres.getIdUsuario());
 			ps.execute();
 		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_CREAR_SITIO);
 		} finally {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 		}
 
@@ -145,6 +152,7 @@ public class SitioDAO implements ISitioDAO {
 			ps.close();
 
 		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
 
@@ -166,6 +174,7 @@ public class SitioDAO implements ISitioDAO {
 			ps.close();
 
 		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_ELIMINAR_SITIO);
 		}
 
@@ -228,6 +237,7 @@ public class SitioDAO implements ISitioDAO {
 
 			ps.execute();
 		} catch (SQLException e) {
+			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_MODIFICAR_SITIO);
 		}
 
@@ -245,9 +255,9 @@ public class SitioDAO implements ISitioDAO {
 		d.setType(punto.getTypeString());
 		d.setValue(punto.getValue());
 		PGgeometry pgeom = new PGgeometry(punto);
-		
-		String sql = "select s.*, c.*, ST_Distance(s.sit_punto,ST_GeographyFromText(?)) as distancia" +
-				" from t_sitio s, t_categoria c "
+
+		String sql = "select s.*, c.*, ST_Distance(s.sit_punto,ST_GeographyFromText(?)) as distancia"
+				+ " from t_sitio s, t_categoria c "
 				+ "where s.sit_id_categoria=c.cat_id "
 				+ "and ST_DWithin(s.sit_punto,ST_GeographyFromText(?),?)"
 				+ " order by ST_Distance(sit_punto,ST_GeographyFromText(?))";
@@ -268,8 +278,7 @@ public class SitioDAO implements ISitioDAO {
 			resultado = new SitioDTO();
 			PGobject pgObj = (PGobject) rs.getObject("sit_punto");
 			geom = new PGgeometry(pgObj.getValue());
-			
-			//geom = (PGgeometry) rs.getObject("sit_punto");
+
 			resultado.setLat(geom.getGeometry().getFirstPoint().getX());
 			resultado.setLon(geom.getGeometry().getFirstPoint().getY());
 			resultado.setIdSitio(rs.getInt("sit_id"));
@@ -283,7 +292,7 @@ public class SitioDAO implements ISitioDAO {
 			categoria.setIdCategoria(rs.getInt("cat_id"));
 			categoria.setDescripcion(rs.getString("cat_descripcion"));
 			categoria.setImagen(rs.getString("cat_imagen"));
-			
+
 			resultado.setCategoria(categoria);
 			sitios.add(resultado);
 
@@ -331,9 +340,10 @@ public class SitioDAO implements ISitioDAO {
 
 		} finally {
 
-			if (ConexionJDBCUtil.getConexion() != null)
+			if (ConexionJDBCUtil.getConexion() != null){
+				logger.debug("cierro la conexion");
 				ConexionJDBCUtil.getConexion().close();
-
+			}
 		}
 
 		return listaRetorno;
@@ -356,8 +366,10 @@ public class SitioDAO implements ISitioDAO {
 			ps.close();
 		} finally {
 
-			if (ConexionJDBCUtil.getConexion() != null)
+			if (ConexionJDBCUtil.getConexion() != null){
+				logger.debug("cierro la conexion");
 				ConexionJDBCUtil.getConexion().close();
+			}
 
 		}
 		return result;

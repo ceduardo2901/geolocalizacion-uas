@@ -37,6 +37,7 @@ public class SitioServicioBean implements SitioServicio {
 		try {
 			AbstractFactory.getInstance().getSitioDAO()
 					.agregarSitio(sitioInteres);
+			logger.debug("El sitio creado fue: "+sitioInteres.getNombre());
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 			throw new SitioExcepcion(Constantes.ERROR_COMUNICACION_BD);
@@ -63,6 +64,7 @@ public class SitioServicioBean implements SitioServicio {
 			ISitioDAO sitioDao = AbstractFactory.getInstance().getSitioDAO();
 			if (sitioDao.usuarioCreadorSitio(sitio)) {
 				sitioDao.eliminarSitio(sitio.getIdSitio());
+				logger.debug("El sitio eliminado es: "+sitio.getIdSitio());
 			} else {
 				logger.warn(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
 				throw new SitioExcepcion(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
@@ -94,6 +96,7 @@ public class SitioServicioBean implements SitioServicio {
 			ISitioDAO sitioDao = AbstractFactory.getInstance().getSitioDAO();
 			if (sitioDao.usuarioCreadorSitio(sitio)) {
 				sitioDao.modificarSitio(sitio);
+				logger.debug("El sitio modificado fue: "+sitio.getIdSitio());
 			} else {
 				logger.warn(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
 				throw new SitioExcepcion(Constantes.ERROR_USUARIO_NO_AUTORIZADO);
