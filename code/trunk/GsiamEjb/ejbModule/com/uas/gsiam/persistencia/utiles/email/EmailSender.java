@@ -12,76 +12,60 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class EmailSender implements Runnable{
-	
-	//TODO Poner esto en un archivo...
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
+
+public class EmailSender implements Runnable {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+
 	private static final String EMAIL_GSIAM = "gsiam.notificacion@gmail.com";
 	private static final String PASS_GSIAM = "gsiam.2011";
 	private static final String HOST = "smtp.gmail.com";
 	private static final String PORT = "587";
-	
-	private EmailTemplate template;
-//	private ArrayList<String> listEmailDestinatario;
-	private String emailDestinatario;
-	
 
+	private EmailTemplate template;
+
+	private String emailDestinatario;
 
 	private String subject;
-	
-	
-	public EmailSender() {
-		
-	}
 
+	public EmailSender() {
+
+	}
 
 	public EmailTemplate getTemplate() {
 		return template;
 	}
 
-
 	public void setTemplate(EmailTemplate template) {
 		this.template = template;
 	}
-	
-	/*
-	public ArrayList<String> getListEmailDestinatario() {
-		
-		return listEmailDestinatario;
-	}
 
-	public void setListEmailDestinatario(ArrayList<String> listEmailDestinatario) {
-		this.listEmailDestinatario = listEmailDestinatario;
-	}
-*/
-	
 	public String getEmailDestinatario() {
 		return emailDestinatario;
 	}
-
 
 	public void setEmailDestinatario(String emailDestinatario) {
 		this.emailDestinatario = emailDestinatario;
 	}
 
-
 	public String getSubject() {
 		return subject;
 	}
-
-
 
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
-
-
 	@Override
 	public void run() {
-		
+		logger.info("Envio de mail");
 		try {
-			
+
 			Properties props = new Properties();
 			props.setProperty("mail.smtp.host", HOST);
 			props.setProperty("mail.smtp.port", PORT);
@@ -91,85 +75,34 @@ public class EmailSender implements Runnable{
 
 			Session session = Session.getDefaultInstance(props);
 			MimeMessage message = new MimeMessage(session);
-			
+
 			message.setFrom(new InternetAddress(EMAIL_GSIAM));
-			/*
-			for (String iterable_element : listEmailDestinatario) {
-				message.addRecipient(Message.RecipientType.BCC, new InternetAddress(iterable_element));
-			} 
-			*/
-			
-			message.addRecipient(Message.RecipientType.BCC, new InternetAddress(emailDestinatario));
-			
+
+			message.addRecipient(Message.RecipientType.BCC,
+					new InternetAddress(emailDestinatario));
+
 			message.setSubject(subject);
-			
-			
+
 			MimeBodyPart mbp = new MimeBodyPart();
 			mbp.setContent(template.toString(), "text/html");
-			MimeMultipart multipart = new MimeMultipart(); 
+			MimeMultipart multipart = new MimeMultipart();
 			multipart.addBodyPart(mbp);
 
 			message.setContent(multipart);
 
 			Transport t = session.getTransport("smtp");
 			t.connect(EMAIL_GSIAM, PASS_GSIAM);
-			t.sendMessage(message,message.getAllRecipients());
+			t.sendMessage(message, message.getAllRecipients());
 			t.close();
 
-
-			//TODO QUe hacemos con estas excepciones?
 		} catch (AddressException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 
 	}
 
-
-	/*  
-	
-	public void enviarMailConAdjunto(String emailDestinatario,String asunto,String cuerpo, String rutaArchivo, String nombreArchivo) throws MessagingException{
-		
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.starttls.enable", "true");
-		props.setProperty("mail.smtp.port","587");
-		props.setProperty("mail.smtp.user", EMAIL_GSIAM);
-		props.setProperty("mail.smtp.auth", "true");
-
-		Session session = Session.getDefaultInstance(props, null);
-			
-		BodyPart texto = new MimeBodyPart();
-		texto.setText(cuerpo);
-		
-		BodyPart adjunto = new MimeBodyPart();
-		adjunto.setDataHandler(new DataHandler(new FileDataSource(rutaArchivo)));
-		adjunto.setFileName(nombreArchivo);
-
-		MimeMultipart multiParte = new MimeMultipart();
-		multiParte.addBodyPart(texto);
-		multiParte.addBodyPart(adjunto);
-
-		MimeMessage message = new MimeMessage(session);
-		message.setFrom(new InternetAddress(emailDestinatario));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(EMAIL_GSIAM));
-		message.setSubject(asunto);
-		message.setContent(multiParte);
-		
-		Transport t = session.getTransport("smtp");
-		t.connect(EMAIL_GSIAM, PASS_GSIAM);
-		t.sendMessage(message,message.getAllRecipients());
-		t.close();
-
-		
-	}
-	*/
 }
-	
-

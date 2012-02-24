@@ -3,8 +3,11 @@ package com.uas.gsiam.persistencia.utiles.email;
 import java.util.Properties;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.uas.gsiam.negocio.excepciones.RuntimeApplicationException;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 
 /**
  * 
@@ -15,6 +18,9 @@ import com.uas.gsiam.negocio.excepciones.RuntimeApplicationException;
  */
 public final class EmailTemplateFactory {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+	
 	private VelocityEngine engine;
 
 	private static final EmailTemplateFactory instance = new EmailTemplateFactory();
@@ -32,8 +38,9 @@ public final class EmailTemplateFactory {
 			engine.init(props);
 
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			throw new RuntimeApplicationException(
-					"EmailTemplateFactory Initialization Error !!", e);
+					"EmailTemplateFactory error en la inicializacion", e);
 		}
 	}
 
@@ -46,6 +53,7 @@ public final class EmailTemplateFactory {
 	 */
 	public static EmailTemplate createEmailTemplate(String template)
 			throws Exception {
+		logger.debug("crear email template");
 		return new EmailTemplate(instance.engine.getTemplate(template));
 	}
 

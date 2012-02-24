@@ -6,18 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 import com.uas.gsiam.persistencia.dao.IPublicacionDAO;
 import com.uas.gsiam.persistencia.utiles.ConexionJDBCUtil;
 import com.uas.gsiam.persistencia.utiles.Constantes;
 
 public class PublicacionDAO implements IPublicacionDAO {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
+
 	@Override
 	public int crearPublicacion(PublicacionDTO publicacion)
 			throws PublicacionExcepcion {
-
+		
 		PreparedStatement ps=null;
 		ResultSet rs = null;
 		int idPublicacion = 0;
@@ -36,6 +44,7 @@ public class PublicacionDAO implements IPublicacionDAO {
 			
 			int affectedRows = ps.executeUpdate(); 
 	        if (affectedRows == 0) { 
+	        	logger.warn(Constantes.ERROR_CREAR_PUBLICACION);
 	            throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
 	        } 
 	 
@@ -43,6 +52,7 @@ public class PublicacionDAO implements IPublicacionDAO {
 	        if (rs.next()) { 
 	        	idPublicacion = rs.getInt("pub_id"); 
 	        } else { 
+	        	logger.warn(Constantes.ERROR_CREAR_PUBLICACION);
 	            throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
 	        } 
 			
@@ -50,18 +60,17 @@ public class PublicacionDAO implements IPublicacionDAO {
 			ps.close();
 			
 		} catch (SQLException e) {
+			logger.error(e.getMessage(),e);
 			throw new PublicacionExcepcion(Constantes.ERROR_CREAR_PUBLICACION);
 		}finally {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e.getMessage(),e);
 			}
 		}
 		
 		return idPublicacion;
 		
 	}
-
 }
