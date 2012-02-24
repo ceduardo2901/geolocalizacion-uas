@@ -19,6 +19,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 import org.jboss.resteasy.specimpl.ResponseBuilderImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
@@ -26,6 +28,7 @@ import com.uas.gsiam.negocio.dto.SitioDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioExcepcion;
 import com.uas.gsiam.negocio.excepciones.SitioYaExisteExcepcion;
+import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
 import com.uas.gsiam.web.delegate.SitioDelegate;
 
 /**
@@ -37,6 +40,9 @@ import com.uas.gsiam.web.delegate.SitioDelegate;
  */
 @Path("/sitios")
 public class SitioServicios {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(SitioServicioBean.class);
 
 	private SitioDelegate servicio;
 
@@ -59,10 +65,14 @@ public class SitioServicios {
 	@Produces("application/json")
 	public List<SitioDTO> getSitios(@PathParam("lat") String lat,
 			@PathParam("lon") String lon) {
+		logger.info("********* Servicio: getSitios ************");
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
+		
 		try {
 			sitios = servicio.getSitios(lat, lon);
 		} catch (SitioExcepcion e) {
+			
+			logger.error(e.getMensaje(), e);
 			ResponseBuilderImpl builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -90,15 +100,18 @@ public class SitioServicios {
 			@PathParam("nombre") String nombre) {
 		SitioDTO sitio = new SitioDTO();
 		if (!id.isEmpty() && id.trim().length() > 0) {
+			logger.debug("Buscar sitio a partir del id: "+ id);
 			sitio.setIdSitio(Integer.valueOf(id));
 		}
 		if (!nombre.isEmpty() && !nombre.equals(" ")) {
+			logger.debug("Buscar sitio a partir del nombre: "+ nombre);
 			sitio.setNombre(nombre);
 		}
 		List<SitioDTO> sitios = null;
 		try {
 			sitios = servicio.buscarSitios(sitio);
 		} catch (SitioExcepcion e) {
+			logger.error(e.getMensaje(), e);
 			ResponseBuilderImpl builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -129,12 +142,14 @@ public class SitioServicios {
 			servicio.crearSitio(sitio);
 			builder.status(Status.OK);
 		} catch (SitioYaExisteExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.CONFLICT);
 			builder.entity(e.getMessage());
 			Response response = builder.build();
 			throw new WebApplicationException(response);
 		} catch (SitioExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -168,6 +183,7 @@ public class SitioServicios {
 			sitioDto.setIdUsuario(usuario);
 			servicio.eliminarSitio(sitioDto);
 		} catch (SitioExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -199,6 +215,7 @@ public class SitioServicios {
 		try {
 			servicio.modificarSitio(sitio);
 		} catch (SitioExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -230,6 +247,7 @@ public class SitioServicios {
 		try {
 			idPublicacion = servicio.crearPublicacion(publicacion);
 		} catch (PublicacionExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			ResponseBuilderImpl builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
@@ -257,6 +275,7 @@ public class SitioServicios {
 			listaCategorias = servicio.getCategorias();
 
 		} catch (SitioExcepcion e) {
+			logger.error(e.getMensaje(),e);
 			ResponseBuilderImpl builder = new ResponseBuilderImpl();
 			builder.status(Response.Status.INTERNAL_SERVER_ERROR);
 			builder.entity(e.getMessage());
