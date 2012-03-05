@@ -5,7 +5,7 @@
 = Entorno de desarrollo a utilizar en G-SIAM =
 
 
- Instalar java 1.6 update 26
+ Instalar java 1.6 update 30
 
  Instalar eclipse jee 3.7 (Indigo)
 
