@@ -81,7 +81,7 @@ public class LoginActivity extends Activity implements TextWatcher{
 
 	}
 
-	public void btnValidarEmail(View v) {
+	public void login(View v) {
 
 		email = emailTxt.getText().toString().trim();
 		pass = passTxt.getText().toString().trim();
