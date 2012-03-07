@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.uas.gsiam.negocio.dto.CategoriaDTO;
@@ -54,10 +53,8 @@ public class LoginServicio extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Bundle bundle = intent.getExtras();
-
-		String pass = bundle.getString("pass");
-		String email = bundle.getString("email");
+		String pass = intent.getStringExtra("pass");
+		String email = intent.getStringExtra("email");
 		Intent intentLogin = new Intent(Constantes.LOGIN_FILTRO_ACTION);
 		try {
 
@@ -86,8 +83,7 @@ public class LoginServicio extends IntentService {
 				// ///////////////////////////////////////////////
 
 			}
-			bundle.putSerializable("usuario", user);
-			intentLogin.putExtra("usuario", bundle);
+			intentLogin.putExtra("usuario", user);
 			sendBroadcast(intentLogin);
 
 		} catch (RestResponseException e) {
