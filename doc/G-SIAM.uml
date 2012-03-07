@@ -12455,8 +12455,8 @@
 <XPD:OBJ name="OwnedViews[3]" type="UMLSeqObjectView" guid="tWDg7nqBokugcF+myHK7MwAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Left" type="integer">1412</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">60</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">1376</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">56</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">115</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">529</XPD:ATTR>
 <XPD:REF name="Model">JZfOS6D5B0K6G5RAqOrETwAA</XPD:REF>
@@ -13032,7 +13032,7 @@ el servicio envia respuesta.
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1225,528;1462,528</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1225,528;1426,528</XPD:ATTR>
 <XPD:REF name="Model">PEpeewQdAUOxqNVfDWWgTgAA</XPD:REF>
 <XPD:REF name="Head">O32Y94Q//0SIG6UNfyBJ4QAA</XPD:REF>
 <XPD:REF name="Tail">xeQeEiNL10mEL5/wLlRSawAA</XPD:REF>
@@ -13058,7 +13058,7 @@ el servicio envia respuesta.
 <XPD:REF name="HostEdge">TmqaJpCpVk+v+lwNbmWxzQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="9p8WhcFLGkWKJfbmiCMrZgAA">
-<XPD:ATTR name="Left" type="integer">1462</XPD:ATTR>
+<XPD:ATTR name="Left" type="integer">1426</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">528</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
@@ -13068,7 +13068,7 @@ el servicio envia respuesta.
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">1462,548;1225,548</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">1426,548;1225,548</XPD:ATTR>
 <XPD:REF name="Model">aIFyzjaeXUCEpbob2oXLkAAA</XPD:REF>
 <XPD:REF name="Head">xeQeEiNL10mEL5/wLlRSawAA</XPD:REF>
 <XPD:REF name="Tail">O32Y94Q//0SIG6UNfyBJ4QAA</XPD:REF>
