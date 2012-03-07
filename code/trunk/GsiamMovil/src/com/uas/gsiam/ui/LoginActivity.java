@@ -92,12 +92,10 @@ public class LoginActivity extends Activity implements TextWatcher{
 
 		} else {
 			if (isOnline()) {
-				Bundle bundle = new Bundle();
-				bundle.putString("email", email);
-				bundle.putString("pass", pass);
 
 				Intent intent = new Intent(this, LoginServicio.class);
-				intent.putExtras(bundle);
+				intent.putExtra("email", email);
+				intent.putExtra("pass", pass);
 				startService(intent);
 
 				Util.showProgressDialog(this,
@@ -147,19 +145,14 @@ public class LoginActivity extends Activity implements TextWatcher{
 			if (error != null) {
 				Util.showToast(context, error);
 			} else {
-				Bundle bundle = intent.getBundleExtra("usuario");
-
-				if (bundle == null) {
-					Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
-				} else {
-					user = (UsuarioDTO) bundle.getSerializable("usuario");
+					user = (UsuarioDTO) intent.getSerializableExtra("usuario");
 					if (user.getEmail() != null) {
 
 						actividadPrincipal();
 					} else {
 						Util.showToast(context, Constantes.MSG_LOGIN_ERROR);
 					}
-				}
+				
 			}
 
 		}
