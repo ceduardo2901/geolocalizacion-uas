@@ -35,7 +35,7 @@ public class UsuarioDelegate {
 
 	}
 
-	public void initialLoadBean() {
+	private void initialLoadBean() {
 		try {
 			this.servicioUsuario = (UsuarioServicio) ServiceLocator
 					.getBean(UsuarioServicio.SERVICE_ADDRESS);
