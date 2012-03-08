@@ -34,7 +34,7 @@ public class SitioDelegate {
 		initialLoadBean();
 	}
 
-	public void initialLoadBean() {
+	private void initialLoadBean() {
 		try {
 			this.servicioSitio = (SitioServicio) ServiceLocator
 					.getBean(SitioServicio.SERVICE_ADDRESS);
