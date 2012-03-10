@@ -40,7 +40,7 @@ public class SitioDAO implements ISitioDAO {
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 
 		StringBuilder sqlExisteSitio = new StringBuilder(
-				"SELECT s.*, c.* FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
+				"SELECT s.*, c.*, ST_Distance(s.sit_punto,ST_GeographyFromText(?)) as distancia FROM t_sitio s, t_categoria c WHERE s.sit_id_categoria=c.cat_id ");
 		if (sitioInteres.getIdSitio() != null) {
 			if (sitioInteres.getIdSitio().doubleValue() > 0) {
 				sqlExisteSitio.append("and s.sit_id=?");
@@ -53,16 +53,21 @@ public class SitioDAO implements ISitioDAO {
 				sqlExisteSitio.append("and upper(s.sit_nombre) like ?");
 			}
 		}
+		Point punto = new Point(sitioInteres.getLat(), sitioInteres.getLon());
+		PGgeometry pgeom = new PGgeometry(punto);
+
 		try {
 
 			ps = ConexionJDBCUtil.getConexion().prepareStatement(
 					sqlExisteSitio.toString());
+			ps.setObject(1, pgeom);
 			if (sitioInteres.getNombre() != null) {
-				ps.setString(1, "%" + sitioInteres.getNombre().toUpperCase()
+				ps.setString(2, "%" + sitioInteres.getNombre().toUpperCase()
 						+ "%");
 			} else {
-				ps.setInt(1, sitioInteres.getIdSitio());
+				ps.setInt(2, sitioInteres.getIdSitio());
 			}
+
 			rs = ps.executeQuery();
 			PGgeometry geom;
 			while (rs.next()) {
@@ -77,6 +82,7 @@ public class SitioDAO implements ISitioDAO {
 				resultado.setDireccion(rs.getString("sit_direccion"));
 				resultado.setTelefono(rs.getString("sit_telefono"));
 				resultado.setWeb(rs.getString("sit_web"));
+				resultado.setDistancia(rs.getString("distancia"));
 				resultado.setPublicaciones(obtenerPublicacionPorSitio(resultado
 						.getIdSitio()));
 				categoria.setIdCategoria(rs.getInt("cat_id"));
@@ -251,9 +257,7 @@ public class SitioDAO implements ISitioDAO {
 		ResultSet rs = null;
 		List<SitioDTO> sitios = new ArrayList<SitioDTO>();
 		Point punto = new Point(sitio.getLat(), sitio.getLon());
-		PGobject d = new PGobject();
-		d.setType(punto.getTypeString());
-		d.setValue(punto.getValue());
+		
 		PGgeometry pgeom = new PGgeometry(punto);
 
 		String sql = "select s.*, c.*, ST_Distance(s.sit_punto,ST_GeographyFromText(?)) as distancia"
@@ -340,7 +344,7 @@ public class SitioDAO implements ISitioDAO {
 
 		} finally {
 
-			if (ConexionJDBCUtil.getConexion() != null){
+			if (ConexionJDBCUtil.getConexion() != null) {
 				logger.debug("cierro la conexion");
 				ConexionJDBCUtil.getConexion().close();
 			}
@@ -366,7 +370,7 @@ public class SitioDAO implements ISitioDAO {
 			ps.close();
 		} finally {
 
-			if (ConexionJDBCUtil.getConexion() != null){
+			if (ConexionJDBCUtil.getConexion() != null) {
 				logger.debug("cierro la conexion");
 				ConexionJDBCUtil.getConexion().close();
 			}
