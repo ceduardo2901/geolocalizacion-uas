@@ -75,7 +75,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 					.getUsuarioDAO()
 					.existeUsuario(usuario.getEmail(),
 							Constantes.USUARIO_ACTIVO)) {
-				logger.warn(Constantes.ERROR_YA_EXISTE_USUARIO_INACTIVO);
+				logger.warn(Constantes.ERROR_YA_EXISTE_USUARIO);
 				throw new UsuarioExcepcion(Constantes.ERROR_YA_EXISTE_USUARIO);
 			} else {
 
