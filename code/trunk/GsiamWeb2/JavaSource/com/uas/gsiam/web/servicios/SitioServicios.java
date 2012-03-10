@@ -94,10 +94,10 @@ public class SitioServicios {
 	 * @return Retorna todos los sitios que corresponden con el filtro ingresado
 	 */
 	@GET
-	@Path("/sitio/{id}/{nombre}")
+	@Path("/sitio/{id}/{nombre}/{lat}/{lon}")
 	@Produces("application/json")
 	public List<SitioDTO> buscarSitios(@PathParam("id") String id,
-			@PathParam("nombre") String nombre) {
+			@PathParam("nombre") String nombre, @PathParam("lat") String lat, @PathParam("lon") String lon) {
 		SitioDTO sitio = new SitioDTO();
 		if (!id.isEmpty() && id.trim().length() > 0) {
 			logger.debug("Buscar sitio a partir del id: "+ id);
@@ -107,6 +107,8 @@ public class SitioServicios {
 			logger.debug("Buscar sitio a partir del nombre: "+ nombre);
 			sitio.setNombre(nombre);
 		}
+		sitio.setLat(new Double(lat));
+		sitio.setLon(new Double(lon));
 		List<SitioDTO> sitios = null;
 		try {
 			sitios = servicio.buscarSitios(sitio);
