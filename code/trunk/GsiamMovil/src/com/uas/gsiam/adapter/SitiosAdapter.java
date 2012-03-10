@@ -59,10 +59,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		Location locSitio = new Location("");
 		locSitio.setLatitude(sitioMovil.getLat());
 		locSitio.setLongitude(sitioMovil.getLon());
-		// float[] results = new float[1];
 
-		// Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
-		// sitioMovil.getLat(), sitioMovil.getLon(), results);
 		View item = convertView;
 		ViewHolder holder;
 
@@ -95,10 +92,28 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
 		holder.Nombre.setText(sitioMovil.getNombre());
 		holder.Direccion.setText(sitioMovil.getDireccion());
-		holder.distancia.setText(convertirDistancia(sitioMovil.getDistancia())
-				+ " " + Constantes.METROS);
+		if (sitioMovil.getDistancia() != null
+				&& sitioMovil.getDistancia().length() > 0) {
+			holder.distancia.setText(convertirDistancia(sitioMovil
+					.getDistancia()) + " " + Constantes.METROS);
+		}
 		holder.rating.setRating(obtenerPromedioPuntaje(sitioMovil));
 		return item;
+	}
+
+	/**
+	 * Calcula la distancia al sitio de interes desde la posicion del usuario
+	 * 
+	 * @param sitio
+	 * @return
+	 */
+	private String calcularDistancia(SitioDTO sitio) {
+		Location locSitio = new Location("");
+		locSitio.setLatitude(sitio.getLat());
+		locSitio.setLongitude(sitio.getLon());
+		float dis = loc.distanceTo(locSitio);
+
+		return convertirDistancia(String.valueOf(dis));
 	}
 
 	/**
@@ -122,6 +137,7 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 
 	private String convertirDistancia(String distancia) {
 		String dis;
+
 		if (distancia.contains(".")) {
 			int index = distancia.indexOf(".");
 			dis = distancia.substring(0, index);
@@ -129,7 +145,6 @@ public class SitiosAdapter extends ArrayAdapter<SitioDTO> {
 		} else {
 			dis = distancia;
 		}
-
 		return dis;
 	}
 
