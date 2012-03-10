@@ -125,8 +125,10 @@ public class SitioTabActivity extends GDTabActivity {
 		Intent intent = new Intent(this, SitioServicio.class);
 		SitioDTO sitioUpdate = new SitioDTO();
 		sitioUpdate.setIdSitio(sitio.getIdSitio());
+		sitioUpdate.setLat(sitio.getLat());
+		sitioUpdate.setLon(sitio.getLon());
 		intent.putExtra("sitio", sitioUpdate);
-
+		intent.putExtra("action", false);
 		startService(intent);
 
 	}

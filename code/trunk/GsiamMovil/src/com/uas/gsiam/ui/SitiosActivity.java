@@ -15,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -113,7 +115,7 @@ public class SitiosActivity extends GDActivity implements
 			Util.dismissProgressDialog();
 			Util.showToast(this, Constantes.MSG_GPS_DISABLE);
 		} else {
-			
+
 			initQuickActionBar();
 			if (sitios == null) {
 
@@ -132,7 +134,7 @@ public class SitiosActivity extends GDActivity implements
 	}
 
 	private void inicializarActionBar() {
-		
+
 		addActionBarItem(Type.List, FILTRAR);
 		addActionBarItem(Type.Search, BUSCAR);
 		addActionBarItem(Type.Refresh, ACTUALIZAR);
@@ -140,7 +142,6 @@ public class SitiosActivity extends GDActivity implements
 		getActionBar().setTitle("GSIAM - Sitios");
 	}
 
-	
 	/**
 	 * Este metodo inicializa los botones de la barra superior de la activity
 	 */
@@ -272,10 +273,11 @@ public class SitiosActivity extends GDActivity implements
 
 	private ArrayList<SitioDTO> filtrarPorCategoria(Integer categoria) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
-		if (sitios != null){
+		if (sitios != null) {
 			if (!sitios.isEmpty()) {
 				for (SitioDTO s : sitios) {
-					if (s.getCategoria().getIdCategoria() == categoria.intValue()) {
+					if (s.getCategoria().getIdCategoria() == categoria
+							.intValue()) {
 						sitiosFiltro.add(s);
 					}
 				}
@@ -286,7 +288,7 @@ public class SitiosActivity extends GDActivity implements
 
 	private ArrayList<SitioDTO> filtrarPorRating(Integer rating) {
 		ArrayList<SitioDTO> sitiosFiltro = new ArrayList<SitioDTO>();
-		if (sitios != null){
+		if (sitios != null) {
 			if (!sitios.isEmpty()) {
 				if (rating == 1) {
 					rating = 0;
@@ -299,7 +301,7 @@ public class SitiosActivity extends GDActivity implements
 				}
 			}
 		}
-		
+
 		return sitiosFiltro;
 	}
 
@@ -364,7 +366,7 @@ public class SitiosActivity extends GDActivity implements
 
 	@Override
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
-		
+
 		locHelper.getLocation(this, locationResult);
 		switch (item.getItemId()) {
 		case BUSCAR:
@@ -386,7 +388,7 @@ public class SitiosActivity extends GDActivity implements
 			break;
 		case FILTRAR:
 			if (loc != null) {
-				
+
 				if (quickActions == null)
 					initQuickActionBar();
 				quickActions.show(item.getItemView());
@@ -411,9 +413,11 @@ public class SitiosActivity extends GDActivity implements
 		Log.i(TAG, "Estoy en la busqueda");
 		SitioDTO sitio = new SitioDTO();
 		sitio.setNombre(query);
+		sitio.setLat(loc.getLatitude());
+		sitio.setLon(loc.getLongitude());
 		Intent intentBuscarSitio = new Intent(this, SitioServicio.class);
 		intentBuscarSitio.putExtra("sitio", sitio);
-
+		intentBuscarSitio.putExtra("action", false);
 		startService(intentBuscarSitio);
 
 		Util.showProgressDialog(this, Constantes.MSG_ESPERA_GENERICO);
@@ -487,25 +491,30 @@ public class SitiosActivity extends GDActivity implements
 					.getSerializable("sitios");
 
 			String msg = intent.getStringExtra("buscarSitio");
-
-			if (sitios != null) {
-				setSitios(sitios);
-				mostrarSitios(sitios);
-			}
+			String error = intent.getStringExtra("error");
 			Util.dismissProgressDialog();
+			
+			if (error != null && error.length() > 0) {
+				mostrarMensaje(error);
+			} else {
+				if (sitios != null) {
+					setSitios(sitios);
+					mostrarSitios(sitios);
+				}
+
+				if (sitios.size() == 0) {
+					if (msg != null && msg.length() > 0) {
+						mostrarMensaje(msg);
+					} else {
+						mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
+					}
+
+				}
+			}
 
 			LoaderActionBarItem loaderActionBarItem = (LoaderActionBarItem) getActionBar()
 					.getItem(ACTUALIZAR);
 			loaderActionBarItem.setLoading(false);
-
-			if (sitios.size() == 0) {
-				if (msg != null && msg.length() > 0) {
-					mostrarMensaje(msg);
-				} else {
-					mostrarMensaje(Constantes.MSG_NO_EXISTEN_SITIOS);
-				}
-
-			}
 
 		}
 	};
@@ -642,7 +651,7 @@ public class SitiosActivity extends GDActivity implements
 
 			bundle.putDouble("lat", loc.getLatitude());
 			bundle.putDouble("lon", loc.getLongitude());
-
+			bundle.putBoolean("action", true);
 			Intent intent = new Intent(this, SitioServicio.class);
 			intent.putExtra("sitio", sitio);
 

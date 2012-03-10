@@ -59,7 +59,7 @@ public class SitioServicio extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 
 		SitioDTO sitio = (SitioDTO) intent.getSerializableExtra("sitio");
-
+		Boolean obtenerSitios = intent.getBooleanExtra("action", true);
 		SitioDTO[] respuesta = null;
 
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
@@ -68,9 +68,8 @@ public class SitioServicio extends IntentService {
 
 		Intent intentSitio = new Intent(Constantes.SITIO_FILTRO_ACTION);
 		try {
-			if (sitio.getLat() != null && sitio.getLon() != null) {
+			if (obtenerSitios) {
 				Map<String, Double> parms = new HashMap<String, Double>();
-
 				parms.put("lat", sitio.getLat());
 				parms.put("lon", sitio.getLon());
 
@@ -78,7 +77,7 @@ public class SitioServicio extends IntentService {
 						Constantes.SITIOS_SERVICE_URL, SitioDTO[].class, parms);
 			} else {
 				Map<String, String> parms = new HashMap<String, String>();
-
+				
 				if (sitio.getIdSitio() != null) {
 					String id = String.valueOf(sitio.getIdSitio());
 					parms.put("id", id);
@@ -90,7 +89,8 @@ public class SitioServicio extends IntentService {
 				} else {
 					parms.put("nombre", " ");
 				}
-
+				parms.put("lat", sitio.getLat().toString());
+				parms.put("lon", sitio.getLon().toString());
 				respuesta = restTemp.getForObject(
 						Constantes.BUSQUEDA_SITIOS_SERVICE_URL,
 						SitioDTO[].class, parms);

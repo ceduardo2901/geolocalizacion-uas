@@ -251,14 +251,11 @@ public class SitioDetalleActivity extends Activity implements
 
 		public void borrarImagenes() {
 			fotos.clear();
-			// notifyDataSetChanged();
+			
 		}
 
 		public void addImage() {
-			// borrarImagenes();
-			// for(PublicacionDTO pub : getSitio().getPublicaciones()){
-			// fotos.add(pub.getFoto());
-			// }
+			
 			notifyDataSetChanged();
 		}
 
