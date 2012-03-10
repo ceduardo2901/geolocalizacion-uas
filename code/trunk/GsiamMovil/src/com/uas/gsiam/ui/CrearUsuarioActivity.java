@@ -168,9 +168,7 @@ public class CrearUsuarioActivity extends Activity implements TextWatcher{
 
 			} else {
 				Util.showToast(context, respuesta);
-				Intent actividadLogin = new Intent(getApplicationContext(),
-						LoginActivity.class);
-				startActivity(actividadLogin);
+				actividadPrincipal();
 			}
 
 		}
@@ -180,6 +178,10 @@ public class CrearUsuarioActivity extends Activity implements TextWatcher{
 		setTitle("GSIAM - Registrarse");
 	}
 
-	
+	private void actividadPrincipal() {
+		Intent actividadLogin = new Intent(getApplicationContext(),
+				LoginActivity.class);
+		startActivity(actividadLogin);
+	}
 
 }
