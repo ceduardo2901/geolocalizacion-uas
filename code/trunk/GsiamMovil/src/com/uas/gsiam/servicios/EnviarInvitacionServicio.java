@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
@@ -54,13 +51,13 @@ public class EnviarInvitacionServicio extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		String direccion = intent.getStringExtra("direccion");
+		String email = intent.getStringExtra("email");
 
 		ApplicationController app = ((ApplicationController) getApplicationContext());
 		UsuarioDTO user = app.getUserLogin();
 
 		Map<String, String> parms = new HashMap<String, String>();
-		parms.put("direccion", direccion);
+		parms.put("email", email);
 		parms.put("nombre", user.getNombre());
 
 		restTemp.setErrorHandler(new RestResponseErrorHandler<String>(
