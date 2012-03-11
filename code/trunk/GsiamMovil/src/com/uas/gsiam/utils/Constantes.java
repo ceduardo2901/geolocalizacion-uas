@@ -96,7 +96,7 @@ public class Constantes {
 	public static final String RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION = "com.gsiam.places.RESPONDER_SOLICITUD_AMISTAD_FILTRO_ACTION";
 
 	public static final String ENVIAR_INVITACIONES_SERVICE_URL = DOMINIO_SERVICE
-			+ "/GsiamWeb2/usuarios/invitar/{direccion}/{nombre}";
+			+ "/GsiamWeb2/usuarios/invitar/{email}/{nombre}";
 	public static final String ENVIAR_INVITACIONES_FILTRO_ACTION = "com.gsiam.places.ENVIAR_INVITACIONES_FILTRO_ACTION";
 
 	public static final String ACTUALIZAR_POSICION_USUARIO_SERVICE_URL = DOMINIO_SERVICE
