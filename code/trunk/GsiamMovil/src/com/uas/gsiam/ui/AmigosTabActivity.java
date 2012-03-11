@@ -56,10 +56,10 @@ public class AmigosTabActivity extends GDTabActivity {
 		inicializarActionBar();
 		mTabHost = getTabHost();
 
-		anadirTab2();
-		anadirTab1();
-		anadirTab3();
-		anadirTab4();
+		tabAgregarAmigos();
+		tabMisAmigos();
+		tabSolicitudes();
+		tabInvitar();
 
 		// Al abrir la aplicacion restauramos la ultima pestania activada
 		SharedPreferences prefs = PreferenceManager
@@ -91,9 +91,9 @@ public class AmigosTabActivity extends GDTabActivity {
 	}
 
 	/**
-	 * tab 1. Este es el tab que muestra la lista de amigos
+	 * Este es el tab que muestra la lista de amigos
 	 */
-	private void anadirTab1() {
+	private void tabMisAmigos() {
 
 		Intent intent = new Intent(this, MisAmigosActivity.class);
 		addTab(TAG_MIS_AMIGOS, "Amigos", intent);
@@ -101,9 +101,9 @@ public class AmigosTabActivity extends GDTabActivity {
 	}
 
 	/**
-	 * tab 2. Este tab muestra la activity de buscar usuarios en la aplicacion
+	 * Este tab muestra la activity de buscar usuarios en la aplicacion
 	 */
-	private void anadirTab2() {
+	private void tabAgregarAmigos() {
 
 		Intent intent = new Intent(this, AgregarAmigosActivity.class);
 		addTab(TAG_BUSCAR_AMIGOS, "Buscar", intent);
@@ -111,9 +111,9 @@ public class AmigosTabActivity extends GDTabActivity {
 	}
 
 	/**
-	 * tab 3. Mustra las solicitudes pendientes y enviadas
+	 * Mustra las solicitudes pendientes y enviadas
 	 */
-	private void anadirTab3() {
+	private void tabSolicitudes() {
 
 		Intent intent = new Intent(this, SolicitudesActivity.class);
 		addTab(TAG_SOLICITUDES, "Solicitudes", intent);
@@ -121,9 +121,9 @@ public class AmigosTabActivity extends GDTabActivity {
 	}
 
 	/**
-	 * tab 4. Muestra la vetana de invitar a un usuario por facebook o por email
+	 * Muestra la vetana de invitar a un usuario por facebook o por email
 	 */
-	private void anadirTab4() {
+	private void tabInvitar() {
 
 		Intent intent = new Intent(this, InvitarAmigosActivity.class);
 		addTab(TAG_INVITAR_AMIGOS, "Invitar", intent);
