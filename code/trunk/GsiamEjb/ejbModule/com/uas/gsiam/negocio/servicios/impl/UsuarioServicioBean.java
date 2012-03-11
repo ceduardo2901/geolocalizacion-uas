@@ -477,13 +477,13 @@ public class UsuarioServicioBean implements UsuarioServicio {
 		}
 	}
 
-	public void enviarInvitaciones(String direccion, String nombre)
+	public void enviarInvitaciones(String email, String nombre)
 			throws UsuarioExcepcion {
-		logger.info("********** void enviarInvitaciones(String direccion, String nombre) ***********");
+		logger.info("********** void enviarInvitaciones(String email, String nombre) ***********");
 		try {
 
 			if (AbstractFactory.getInstance().getUsuarioDAO()
-					.existeUsuario(direccion, Constantes.USUARIO_ACTIVO)) {
+					.existeUsuario(email, Constantes.USUARIO_ACTIVO)) {
 				logger.warn(Constantes.ERROR_YA_EXISTE_USUARIO_INVITACION);
 				throw new UsuarioExcepcion(
 						Constantes.ERROR_YA_EXISTE_USUARIO_INVITACION);
@@ -495,7 +495,7 @@ public class UsuarioServicioBean implements UsuarioServicio {
 				EmailSender mail = new EmailSender();
 				mail.setTemplate(template);
 
-				mail.setEmailDestinatario(direccion);
+				mail.setEmailDestinatario(email);
 
 				mail.setSubject(nombre + Constantes.EMAIL_SUBJECT_INVITACION);
 
