@@ -408,15 +408,15 @@ public class UsuarioServicios {
 	 *         correspondiente
 	 */
 	@GET
-	@Path("/invitar/{direccion}/{nombre}")
+	@Path("/invitar/{email}/{nombre}")
 	@Produces("application/json")
-	public String enviarInvitaciones(@PathParam("direccion") String direccion,
+	public String enviarInvitaciones(@PathParam("email") String email,
 			@PathParam("nombre") String nombre) {
 
 		ResponseBuilder builder = Response.ok();
 		try {
 
-			servicio.enviarInvitaciones(direccion, nombre);
+			servicio.enviarInvitaciones(email, nombre);
 
 		} catch (UsuarioExcepcion e) {
 			builder = new ResponseBuilderImpl();

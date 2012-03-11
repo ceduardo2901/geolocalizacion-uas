@@ -189,16 +189,16 @@ public class UsuarioDelegate {
 	 * Envia una invitación para unirse a la red de amigos a la dirección de
 	 * mail ingresada por parametro
 	 * 
-	 * @param direccion
+	 * @param email
 	 *            Email al que se le enviara la invitación
 	 * @param nombre
 	 *            Nombre del usuario
 	 * @throws UsuarioExcepcion
 	 */
-	public void enviarInvitaciones(String direccion, String nombre)
+	public void enviarInvitaciones(String email, String nombre)
 			throws UsuarioExcepcion {
 
-		servicioUsuario.enviarInvitaciones(direccion, nombre);
+		servicioUsuario.enviarInvitaciones(email, nombre);
 	}
 
 	/**
