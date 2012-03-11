@@ -339,7 +339,7 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 						
 						Log.i(TAG, "getHeight " + Util.arrayToBitmap(arrayBytes).getHeight() + "getWidth " +Util.arrayToBitmap(arrayBytes).getWidth());
 						usuario.setAvatar(arrayBytes);
-						usuario.setAvatar(arrayBytes);
+					
 					}
 
 					Intent intent = new Intent(ctx, EditarUsuarioServicio.class);
