@@ -169,13 +169,20 @@ public class PerfilActivity extends GDActivity {
 
 				Util.showToast(context, respuesta);
 
-				Intent intentLogin = new Intent(getApplicationContext(),
-						LoginActivity.class);
-				startActivity(intentLogin);
+				actividadLogin();
 
 			}
 
 		}
 	};
+	
+	
+	public void actividadLogin() {
+
+		Intent intentLogin = new Intent(getApplicationContext(),
+				LoginActivity.class);
+		startActivity(intentLogin);
+	}
+	
 
 }
