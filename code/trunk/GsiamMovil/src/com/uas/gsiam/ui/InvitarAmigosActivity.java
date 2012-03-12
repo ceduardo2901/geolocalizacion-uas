@@ -115,7 +115,7 @@ public class InvitarAmigosActivity extends Activity implements TextWatcher{
 	 * 
 	 * @param v
 	 */
-	public void btnInvitarAmigosFacebook(View v) {
+	public void enviarInvitacionFacebook(View v) {
 
 		APP_ID = getString(R.string.facebook_app_id);
 		facebook = new Facebook(APP_ID);
