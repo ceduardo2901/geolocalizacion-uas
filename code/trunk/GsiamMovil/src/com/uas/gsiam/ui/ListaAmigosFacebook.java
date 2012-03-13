@@ -150,7 +150,7 @@ public class ListaAmigosFacebook extends Activity {
 	 * 
 	 * @param v
 	 */
-	public void btnInvitarAmigos(View v) {
+	public void invitarAmigos(View v) {
 
 		boolean error = Boolean.FALSE;
 
