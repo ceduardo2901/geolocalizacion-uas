@@ -321,7 +321,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Confirmar Amistad 
-				        			   responderAmistad(usuarioSeleccionado.getId(), Constantes.ACEPTAR_SOLICITUD);
+				        			   responderSolicitud(usuarioSeleccionado.getId(), Constantes.ACEPTAR_SOLICITUD);
 				        			   aceptarAmistad = true;
 				        			   dialog.cancel();
 				        		   }
@@ -331,7 +331,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 
 				        		   public void onClick(DialogInterface dialog, int id) {
 				        			   //  Rechazar Amistad
-				        			   responderAmistad(usuarioSeleccionado.getId(), Constantes.RECHAZAR_SOLICITUD);
+				        			   responderSolicitud(usuarioSeleccionado.getId(), Constantes.RECHAZAR_SOLICITUD);
 				        			   aceptarAmistad = false;
 				        			   dialog.cancel();
 				        		   }
@@ -398,7 +398,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 	  }
 	  
 	  
-	  public void responderAmistad(int idUsuarioSeleccionado, String accion){
+	  public void responderSolicitud(int idUsuarioSeleccionado, String accion){
 		  
 		  SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
 		  solicitud.setIdUsuarioSolicitante(idUsuarioSeleccionado);
