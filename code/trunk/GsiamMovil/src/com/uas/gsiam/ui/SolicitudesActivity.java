@@ -359,7 +359,7 @@ public class SolicitudesActivity extends ListActivity implements
 												DialogInterface dialog, int id) {
 											// Confirmar Amistad
 
-											responderAmistad(
+											responderSolicitud(
 													usuarioSeleccionadoRecibidas
 															.getId(),
 													Constantes.ACEPTAR_SOLICITUD);
@@ -375,7 +375,7 @@ public class SolicitudesActivity extends ListActivity implements
 												DialogInterface dialog, int id) {
 											// Rechazar Amistad
 
-											responderAmistad(
+											responderSolicitud(
 													usuarioSeleccionadoRecibidas
 															.getId(),
 													Constantes.RECHAZAR_SOLICITUD);
@@ -410,7 +410,7 @@ public class SolicitudesActivity extends ListActivity implements
 	 * 
 	 * @param accion
 	 */
-	public void responderAmistad(int idUsuarioSeleccionado, String accion) {
+	public void responderSolicitud(int idUsuarioSeleccionado, String accion) {
 
 		SolicitudContactoDTO solicitud = new SolicitudContactoDTO();
 		solicitud.setIdUsuarioSolicitante(idUsuarioSeleccionado);
