@@ -54,8 +54,8 @@ public class SitioTabActivity extends GDTabActivity {
 		intent = getIntent();
 		sitio = (SitioDTO) intent.getSerializableExtra("sitio");
 
-		addTab1();
-		addTab2();
+		tabDetalle();
+		tabComentarios();
 
 		// Al abrir la aplicacion restauramos la �ltima pesta�a activada
 		SharedPreferences prefs = PreferenceManager
@@ -167,7 +167,7 @@ public class SitioTabActivity extends GDTabActivity {
 	 * Tab 1
 	 */
 
-	private void addTab1() {
+	private void tabDetalle() {
 		Intent intent = new Intent(this, SitioDetalleActivity.class);
 		addTab(TAG_SITIO_DETALLE, "Sitio", intent);
 
@@ -176,7 +176,7 @@ public class SitioTabActivity extends GDTabActivity {
 	/*
 	 * Tab 2
 	 */
-	private void addTab2() {
+	private void tabComentarios() {
 		Intent intent = new Intent(this, ComentariosActivity.class);
 		addTab(TAG_SITIO_COMENTARIO, "Comentarios", intent);
 
