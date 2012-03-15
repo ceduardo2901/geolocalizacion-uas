@@ -97,7 +97,7 @@ public class ActualizarPosicionServicio extends Service {
 						Constantes.ACTUALIZAR_POSICION_USUARIO_SERVICE_URL,
 						posUsuario, String.class);
 
-				// TODO: Que hacemos si hay error aca???
+				
 			} catch (RestResponseException e) {
 				String msg = e.getMensaje();
 				Log.i(TAG, "Error: " + msg);
