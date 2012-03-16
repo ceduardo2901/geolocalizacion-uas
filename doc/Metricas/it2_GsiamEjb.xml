@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Metrics scope="GsiamEjb" type="Project" date="2011-12-10" xmlns="http://metrics.sourceforge.net/2003/Metrics-First-Flat">
+   <Cycle name="com.uas.gsiam.negocio.servicios.impl et al" nodes="2" diameter="1">
+      <Package>com.uas.gsiam.negocio.servicios.impl</Package>
+      <Package>com.uas.gsiam.persistencia.utiles.email</Package>
+   </Cycle>
+   <Metric id = "NORM" description ="Number of Overridden Methods">
+      <Values per = "type" total = "2" avg = "0,08" stddev = "0,271" max = "1">
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "NOF" description ="Number of Attributes">
+      <Values per = "type" total = "49" avg = "1,96" stddev = "3,013" max = "11">
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="11"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="9"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="7"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="6"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="4"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="4"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="3"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "NSC" description ="Number of Children">
+      <Values per = "type" total = "1" avg = "0,04" stddev = "0,196" max = "1">
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "NOC" description ="Number of Classes">
+      <Values per = "packageFragment" total = "25" avg = "2,273" stddev = "2,049" max = "7">
+         <Value name="com.uas.gsiam.negocio.excepciones" package ="com.uas.gsiam.negocio.excepciones" value ="7"/>
+         <Value name="com.uas.gsiam.negocio.dto" package ="com.uas.gsiam.negocio.dto" value ="5"/>
+         <Value name="com.uas.gsiam.persistencia.dao.impl" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="com.uas.gsiam.persistencia.utiles.email" package ="com.uas.gsiam.persistencia.utiles.email" value ="3"/>
+         <Value name="com.uas.gsiam.negocio.servicios.impl" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="com.uas.gsiam.persistencia.utiles" package ="com.uas.gsiam.persistencia.utiles" value ="2"/>
+         <Value name="com.uas.gsiam.persistencia" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="com.uas.gsiam.persistencia.postgresql" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="com.uas.gsiam.persistencia.test" package ="com.uas.gsiam.persistencia.test" value ="1"/>
+         <Value name="com.uas.gsiam.negocio.servicios" package ="com.uas.gsiam.negocio.servicios" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.dao" package ="com.uas.gsiam.persistencia.dao" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "MLOC" description ="Method Lines of Code">
+      <Values per = "method" total = "1040" avg = "6,667" stddev = "12,607" max = "73">
+         <Value name="getUsuarios" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="73"/>
+         <Value name="buscarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="65"/>
+         <Value name="crearUsuario" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="53"/>
+         <Value name="obtenerSitios" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="43"/>
+         <Value name="crearSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="39"/>
+         <Value name="crearPublicacion" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="38"/>
+         <Value name="responderSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="35"/>
+         <Value name="getContactos" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="34"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="31"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="31"/>
+         <Value name="run" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="30"/>
+         <Value name="getCategorias" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="29"/>
+         <Value name="agregarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="25"/>
+         <Value name="obtenerPublicacionPorSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="25"/>
+         <Value name="getUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="25"/>
+         <Value name="login" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="24"/>
+         <Value name="login" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="23"/>
+         <Value name="obtenerSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="22"/>
+         <Value name="existeUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="22"/>
+         <Value name="enviarInvitaciones" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="21"/>
+         <Value name="getAmigos" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="20"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="20"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="20"/>
+         <Value name="getUsuarios" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="20"/>
+         <Value name="buscarSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="19"/>
+         <Value name="getCategorias" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="19"/>
+         <Value name="crearUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="19"/>
+         <Value name="crearSitio" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="18"/>
+         <Value name="crearPublicacion" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="16"/>
+         <Value name="main" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="13"/>
+         <Value name="aprobarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="12"/>
+         <Value name="crearContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="12"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="12"/>
+         <Value name="eliminarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="8"/>
+         <Value name="toString" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="8"/>
+         <Value name="compareTo" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="2"/>
+         <Value name="equals" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="2"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="2"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="createEmailTemplate" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="getDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getPublicacionDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getSitioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getUsuarioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="put" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getConexion" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="getInstance" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="getPublicacionDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getSitioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getUsuarioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "TLOC" description ="Total Lines of Code">
+      <Value value="1801"/>
+   </Metric>
+   <Metric id = "NOM" description ="Number of Methods">
+      <Values per = "type" total = "152" avg = "6,08" stddev = "6,086" max = "23">
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="23"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="19"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="17"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="13"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="11"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="10"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="8"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="8"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="8"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="5"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="3"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="3"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="3"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "NBD" description ="Nested Block Depth" max ="5" hint ="use Extract-method to split the method up">
+      <Values per = "method" avg = "1,327" stddev = "0,786" max = "5">
+         <Value name="crearUsuario" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="5"/>
+         <Value name="responderSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="5"/>
+         <Value name="crearSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="3"/>
+         <Value name="enviarInvitaciones" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="3"/>
+         <Value name="login" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="3"/>
+         <Value name="crearPublicacion" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="agregarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="buscarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getCategorias" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="obtenerPublicacionPorSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="crearUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="existeUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getContactos" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getUsuarios" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="login" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="buscarSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="crearPublicacion" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="crearSitio" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getCategorias" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="obtenerSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getAmigos" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getUsuarios" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="obtenerSitios" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="2"/>
+         <Value name="main" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="2"/>
+         <Value name="run" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="toString" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="compareTo" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="equals" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="aprobarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="crearContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="eliminarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getPublicacionDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getSitioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getUsuarioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="put" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="createEmailTemplate" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getConexion" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="getInstance" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="getPublicacionDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getSitioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getUsuarioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "LCOM" description ="Lack of Cohesion of Methods">
+      <Values per = "type" avg = "0,22" stddev = "0,374" max = "0,952">
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,952"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,941"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,914"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,909"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,857"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,857"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0,667"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0,25"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "DIT" description ="Depth of Inheritance Tree">
+      <Values per = "type" avg = "1,64" stddev = "0,975" max = "4">
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="4"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="2"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="1"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+      </Values>
+   </Metric>
+   <Metric id = "NOP" description ="Number of Packages">
+      <Value value="11"/>
+   </Metric>
+   <Metric id = "CA" description ="Afferent Coupling">
+      <Values per = "packageFragment" avg = "0" stddev = "0">
+      </Values>
+   </Metric>
+   <Metric id = "NOI" description ="Number of Interfaces">
+      <Values per = "packageFragment" total = "5" avg = "0,455" stddev = "0,988" max = "3">
+         <Value name="com.uas.gsiam.persistencia.dao" package ="com.uas.gsiam.persistencia.dao" value ="3"/>
+         <Value name="com.uas.gsiam.negocio.servicios" package ="com.uas.gsiam.negocio.servicios" value ="2"/>
+         <Value name="com.uas.gsiam.negocio.dto" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="com.uas.gsiam.negocio.excepciones" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="com.uas.gsiam.negocio.servicios.impl" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.dao.impl" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.postgresql" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.test" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.utiles" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="com.uas.gsiam.persistencia.utiles.email" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "VG" description ="McCabe Cyclomatic Complexity" max ="10" hint ="use Extract-method to split the method up">
+      <Values per = "method" avg = "1,731" stddev = "1,737" max = "10">
+         <Value name="responderSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="10"/>
+         <Value name="crearUsuario" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="9"/>
+         <Value name="buscarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="9"/>
+         <Value name="crearSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="7"/>
+         <Value name="getCategorias" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="obtenerSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="getAmigos" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="getUsuarios" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="login" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="6"/>
+         <Value name="buscarSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="5"/>
+         <Value name="crearPublicacion" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="5"/>
+         <Value name="crearSitio" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="5"/>
+         <Value name="crearPublicacion" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="5"/>
+         <Value name="getUsuarios" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="5"/>
+         <Value name="run" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="4"/>
+         <Value name="enviarInvitaciones" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="3"/>
+         <Value name="agregarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getCategorias" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="obtenerPublicacionPorSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="existeUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getContactos" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="getUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="login" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="3"/>
+         <Value name="obtenerSitios" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="2"/>
+         <Value name="crearUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="2"/>
+         <Value name="main" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="2"/>
+         <Value name="toString" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="compareTo" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="equals" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="getPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="isSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="getMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="aprobarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="crearContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="eliminarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getPublicacionDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getSitioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="getUsuarioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="1"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="put" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="createEmailTemplate" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="getConexion" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="getInstance" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="getPublicacionDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="getSitioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="getUsuarioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+      </Values>
+   </Metric>
+   <Metric id = "RMI" description ="Instability">
+      <Values per = "packageFragment" avg = "0" stddev = "0">
+      </Values>
+   </Metric>
+   <Metric id = "PAR" description ="Number of Parameters" max ="5" hint ="Move invoked method or pass an object">
+      <Values per = "method" avg = "0,622" stddev = "0,57" max = "2">
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="2"/>
+         <Value name="enviarInvitaciones" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="getUsuarios" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="responderSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="2"/>
+         <Value name="existeUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="2"/>
+         <Value name="getUsuarios" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="2"/>
+         <Value name="put" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="setDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="compareTo" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="equals" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="setSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="setMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="buscarSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="crearPublicacion" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="crearSitio" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="obtenerSitios" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="crearSolicitudContacto" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="crearUsuario" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="getAmigos" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="login" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="crearPublicacion" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="agregarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="buscarSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="obtenerPublicacionPorSitio" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="obtenerSitios" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="aprobarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="crearContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="crearUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="eliminarSolicitudContacto" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getContactos" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getSolicitudesEnviadasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getSolicitudesRecibidasPendientes" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="getUsuario" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="login" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="main" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="1"/>
+         <Value name="setEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="setTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="createEmailTemplate" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getDescripcion" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getDescripcionGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdCategoria" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getImagen" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getImagenGrupo" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFechaActualizacion" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdUsuario" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getLat" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getLon" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getComentario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFecha" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFoto" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFotoRuta" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdPublicacion" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdSitio" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getNombreUsuario" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getPuntaje" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getCategoria" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getDireccion" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getDistancia" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdSitio" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdUsuario" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getLat" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getLon" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getNombre" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getPublicaciones" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getTelefono" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getWeb" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFechaAprobacion" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getFechaSolicitud" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdUsuarioAprobador" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getIdUsuarioSolicitante" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getAvatar" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getEmail" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getId" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getNombre" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getPassword" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="isSolicitudEnviada" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="isSolicitudRecibida" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="getMensaje" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="getMensaje" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="getMensaje" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="getMensaje" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="getMensaje" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="getMensaje" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="getCategorias" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="getCategorias" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="getPublicacionDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="getSitioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="getUsuarioDAO" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="getEmailDestinatario" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="getSubject" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="getTemplate" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="run" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="toString" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="getConexion" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="getInstance" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getPublicacionDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getSitioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+         <Value name="getUsuarioDAO" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "CE" description ="Efferent Coupling">
+      <Values per = "packageFragment" avg = "0" stddev = "0">
+      </Values>
+   </Metric>
+   <Metric id = "NSM" description ="Number of Static Methods">
+      <Values per = "type" total = "4" avg = "0,16" stddev = "0,367" max = "1">
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="1"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="1"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "RMD" description ="Normalized Distance">
+      <Values per = "packageFragment" avg = "0" stddev = "0">
+      </Values>
+   </Metric>
+   <Metric id = "RMA" description ="Abstractness">
+      <Values per = "packageFragment" avg = "0" stddev = "0">
+      </Values>
+   </Metric>
+   <Metric id = "SIX" description ="Specialization Index">
+      <Values per = "type" avg = "0,016" stddev = "0,066" max = "0,333">
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0,333"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0,059"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="0"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="0"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="0"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="0"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="0"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "WMC" description ="Weighted methods per Class">
+      <Values per = "type" total = "270" avg = "10,8" stddev = "13,158" max = "60">
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="60"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="28"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="28"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="23"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="20"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="19"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="17"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="13"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="11"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="8"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="8"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="5"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="4"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="4"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="3"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="3"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="3"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="2"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="0"/>
+      </Values>
+   </Metric>
+   <Metric id = "NSF" description ="Number of Static Attributes">
+      <Values per = "type" total = "53" avg = "2,12" stddev = "5,156" max = "27">
+         <Value name="Constantes" source ="Constantes.java" package ="com.uas.gsiam.persistencia.utiles" value ="27"/>
+         <Value name="EmailSender" source ="EmailSender.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="5"/>
+         <Value name="EmailTemplateFactory" source ="EmailTemplateFactory.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="2"/>
+         <Value name="CategoriaDTO" source ="CategoriaDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PosicionUsuarioDTO" source ="PosicionUsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionDTO" source ="PublicacionDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SitioDTO" source ="SitioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="SolicitudContactoDTO" source ="SolicitudContactoDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="UsuarioDTO" source ="UsuarioDTO.java" package ="com.uas.gsiam.negocio.dto" value ="1"/>
+         <Value name="PublicacionExcepcion" source ="PublicacionExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="RuntimeApplicationException" source ="RuntimeApplicationException.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioExcepcion" source ="SitioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioNoExisteExcepcion" source ="SitioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioYaExisteExcepcion" source ="SitioYaExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioExcepcion" source ="UsuarioExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="UsuarioNoExisteExcepcion" source ="UsuarioNoExisteExcepcion.java" package ="com.uas.gsiam.negocio.excepciones" value ="1"/>
+         <Value name="SitioServicioBean" source ="SitioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="UsuarioServicioBean" source ="UsuarioServicioBean.java" package ="com.uas.gsiam.negocio.servicios.impl" value ="1"/>
+         <Value name="PublicacionDAO" source ="PublicacionDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="SitioDAO" source ="SitioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="UsuarioDAO" source ="UsuarioDAO.java" package ="com.uas.gsiam.persistencia.dao.impl" value ="1"/>
+         <Value name="EmailTemplate" source ="EmailTemplate.java" package ="com.uas.gsiam.persistencia.utiles.email" value ="1"/>
+         <Value name="ConexionJDBCUtil" source ="ConexionJDBCUtil.java" package ="com.uas.gsiam.persistencia.utiles" value ="1"/>
+         <Value name="PostgreSqlFactory" source ="PostgreSqlFactory.java" package ="com.uas.gsiam.persistencia.postgresql" value ="0"/>
+         <Value name="Prueba" source ="Prueba.java" package ="com.uas.gsiam.persistencia.test" value ="0"/>
+         <Value name="AbstractFactory" source ="AbstractFactory.java" package ="com.uas.gsiam.persistencia" value ="0"/>
+      </Values>
+   </Metric>
+   </Metrics>
