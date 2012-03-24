@@ -266,7 +266,6 @@ public class ListaAmigosFacebook extends Activity {
 		public FriendListAdapter(List<AmigoFacebook> list, Context context) {
 			super(context, R.layout.amigo_facebook, list);
 			this.friendsList = new ArrayList<AmigoFacebook>(list);
-			// this.friendsList = list;
 			this.filtered = new ArrayList<AmigoFacebook>(list);
 
 			if (FacebookUtil.model == null) {
@@ -353,7 +352,6 @@ public class ListaAmigosFacebook extends Activity {
 				holder.profile_pic = (ImageView) hView
 						.findViewById(R.id.profile_pic);
 				holder.name = (TextView) hView.findViewById(R.id.name);
-				// holder.info = (TextView) hView.findViewById(R.id.info);
 				holder.check = (CheckBox) hView.findViewById(R.id.checkInv);
 				hView.setTag(holder);
 
