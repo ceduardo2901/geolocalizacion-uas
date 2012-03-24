@@ -32,6 +32,16 @@ import com.uas.gsiam.utils.LocationHelper;
 import com.uas.gsiam.utils.LocationHelper.LocationResult;
 import com.uas.gsiam.utils.Util;
 
+/**
+ * Este clase muestra el detalle del sitio seleccionado.
+ * 
+ * Se mostrara el nombre, direccion, telefono (opcional) y web (opcional) El
+ * accion como ir permitira ver el camino desde la ubicacion del usuario al
+ * punto de interes
+ * 
+ * @author Antonio
+ * 
+ */
 public class SitioDetalleActivity extends Activity implements
 		OnItemClickListener {
 
@@ -154,7 +164,7 @@ public class SitioDetalleActivity extends Activity implements
 
 	public void updateUI() {
 		Log.i(TAG, String.valueOf(fotos.size()));
-	
+
 		adapter.addImage();
 
 	}
@@ -251,11 +261,11 @@ public class SitioDetalleActivity extends Activity implements
 
 		public void borrarImagenes() {
 			fotos.clear();
-			
+
 		}
 
 		public void addImage() {
-			
+
 			notifyDataSetChanged();
 		}
 
