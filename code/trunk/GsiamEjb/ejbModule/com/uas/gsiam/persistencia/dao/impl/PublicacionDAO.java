@@ -9,7 +9,6 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.uas.gsiam.negocio.dto.PosicionUsuarioDTO;
 import com.uas.gsiam.negocio.dto.PublicacionDTO;
 import com.uas.gsiam.negocio.excepciones.PublicacionExcepcion;
 import com.uas.gsiam.negocio.servicios.impl.SitioServicioBean;
