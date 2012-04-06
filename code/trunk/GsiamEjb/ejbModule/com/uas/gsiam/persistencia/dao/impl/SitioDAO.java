@@ -6,11 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.postgis.Geometry;
-import org.postgis.GeometryCollection;
 import org.postgis.PGgeometry;
 import org.postgis.Point;
-import org.postgresql.geometric.PGpolygon;
 import org.postgresql.util.PGobject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
