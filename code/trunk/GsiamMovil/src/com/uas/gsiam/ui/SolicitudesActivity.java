@@ -329,7 +329,7 @@ public class SolicitudesActivity extends ListActivity implements
 			dialog.setTitle(Html
 					.fromHtml("<b><font color=#ff0000> Solicitud de Amistad Pendiente"));
 			dialog.setMessage(usuarioSeleccionadoRecibidas.getNombre()
-					+ " quiere ser tu amigo.\n\n¿Deseeas responder la solicitud?");
+					+ " quiere ser tu amigo.\n\n¿Deseas responder la solicitud?");
 
 			dialog.setCancelable(false);
 			dialog.setIcon(android.R.drawable.ic_dialog_alert);

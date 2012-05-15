@@ -297,7 +297,7 @@ public class AgregarAmigosActivity extends ListActivity implements OnItemClickLi
 				AlertDialog.Builder dialog = new AlertDialog.Builder(appContext);
 				
 				dialog.setTitle(Html.fromHtml("<b><font color=#ff0000> Solicitud de Amistad Pendiente")); 
-				dialog.setMessage(usuarioSeleccionado.getNombre() +" quiere ser tu amigo.\n\n¿Deseeas responder la solicitud?");
+				dialog.setMessage(usuarioSeleccionado.getNombre() +" quiere ser tu amigo.\n\n¿Deseas responder la solicitud?");
 				
 			//	Html.fromHtml("<b><font color=#ff0000> Html View " +"</font></b><br>Androidpeople.com")
 				
