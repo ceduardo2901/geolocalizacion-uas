@@ -4,11 +4,6 @@
 	android:orientation="vertical" android:layout_width="match_parent"
 	android:layout_height="match_parent" android:paddingLeft="8dip"
 	android:paddingRight="8dip" android:background="@color/background2">
-	
-	<TextView android:text="@string/comentarios"
-			android:layout_width="wrap_content" android:id="@+id/textView1"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:layout_height="wrap_content" android:textColor="@color/fuente" />
 			
 	<ListView android:id="@+id/listComentariosId"
 		android:layout_width="match_parent" android:layout_height="0dip"
