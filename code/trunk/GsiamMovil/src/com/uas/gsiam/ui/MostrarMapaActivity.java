@@ -74,7 +74,7 @@ public class MostrarMapaActivity extends GDMapActivity {
 
 	private void inicializarBar() {
 
-		setTitle(R.string.app_name);
+		setTitle("GSIAM - Sitios");
 	}
 
 	protected void onResume() {
