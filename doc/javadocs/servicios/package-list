@@ -1,0 +1,14 @@
+com.uas.gsiam.negocio.dto
+com.uas.gsiam.negocio.excepciones
+com.uas.gsiam.negocio.servicios
+com.uas.gsiam.negocio.servicios.impl
+com.uas.gsiam.persistencia
+com.uas.gsiam.persistencia.dao
+com.uas.gsiam.persistencia.dao.impl
+com.uas.gsiam.persistencia.postgresql
+com.uas.gsiam.persistencia.test
+com.uas.gsiam.persistencia.utiles
+com.uas.gsiam.persistencia.utiles.email
+com.uas.gsiam.web.delegate
+com.uas.gsiam.web.servicios
+com.uas.gsiam.web.sl
