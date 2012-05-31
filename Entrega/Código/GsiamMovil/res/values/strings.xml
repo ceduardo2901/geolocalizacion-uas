@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="permissions">
+		<item>publish_stream</item>
+		<item>read_stream</item>
+		<item>offline_access</item>
+		<item>user_location</item>
+	</string-array>
+	<string-array name="cargarFoto">
+		<item>Camara</item>
+		<item>Galeria</item>
+
+	</string-array>
+	
+	<string name="radar">GSIAM - Radar Amigos</string>
+	<string name="app_name">GSIAM</string>
+	<string name="gsiam_modificar">GSIAM - Modificar Sitio</string>
+	<string name="email">Email</string>
+	<string name="pass">Contraseña</string>
+	<string name="BtnLogin">Entrar</string>
+	<string name="BtnActualizar">Actualizar</string>
+	<string name="facebook_app_id">264847263529970</string>
+	<string name="facebook_app_secret">4f6c3e260c3a24ba530c87f23d74950e</string>
+	<string name="facebook_description">facebook description</string>
+	<string name="facebook_oauth_callback_url">https://www.facebook.com/connect/login_success.html
+	</string>
+	<string name="facebook_scope">"publish_stream,offline_access,read_stream,user_about_me,email"
+	</string>
+	<string name="seleccionar">Seleccionar una acción</string>
+	<string name="sitios">Sitios</string>
+	<string name="amigos">Amigos</string>
+	<string name="perfil">Perfil</string>
+	<string name="avatar">Avatar</string>
+	<string name="BtnEditarPerfil">Editar Perfil</string>
+	<string name="BtnEliminarPerfil">Cerrar Cuenta</string>
+	<string name="BtnCrearUsuario">Crear Cuenta</string>
+	<string name="BtnRegistrarse">Registrarse</string>
+	<string name="BtnInvitar">Invitar</string>
+	<string name="Nombre">Nombre</string>
+	<string name="compartirFacebook">Compartir en Facebook</string>
+	<string name="listaVacia">No se han encontrado registros</string>
+	<string name="cerrarSesion">Cerrar Sesion</string>
+	<string name="agregarSitio">Agregar Sitio</string>
+	<string name="buscar">Buscar</string>
+	<string name="publicar">Publicar</string>
+	<string name="gsiam_publicar">GSIAM - Publicar</string>
+	<string name="foto">Foto</string>
+	<string name="fotos">Fotos</string>
+	<string name="comoIr">Como Ir</string>
+	<string name="compartir">Compartir</string>
+	<string name="comentarios">Comentarios</string>
+	<string name="mostrarMapa">Mostrar en Mapa</string>
+	<string name="direccion">Direccion</string>
+	<string name="filtrar">Filtrar</string>
+	<string name="telefono">Telefono</string>
+	<string name="web">Web</string>
+	<string name="agregar">Agregar</string>
+	<string name="modificar">Modificar</string>
+	<string name="nombreHit">Nombre del Sitio</string>
+	<string name="categoria">Categoria</string>
+	<string name="rating">Rating</string>
+	<string name="ubicacion">Ubicacion</string>
+	<string name="conf">Configuracion</string>
+	<string name="confirmacion">Confirmar</string>
+	<string name="aceptar">Aceptar</string>
+	<string name="cancelar">Cancelar</string>
+	<string name="compUbicacion">Compartir tu ubicacion</string>
+	<string name="compUbicacionDes">Si selecciona esta opccion podra compartir su ubicacion con sus amigos</string>
+</resources>

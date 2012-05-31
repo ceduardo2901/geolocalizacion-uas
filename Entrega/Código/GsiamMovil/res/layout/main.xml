@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@color/background1">
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="vertical" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:gravity="center" android:layout_weight="7">
+
+		<TextView android:id="@+id/textNombre" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:gravity="center"
+			android:textStyle="bold" android:textColor="@color/fuente" />
+
+	</LinearLayout>
+
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_weight="1">
+
+		<TableRow android:layout_weight="1" android:gravity="center"
+			android:paddingLeft="20px" android:paddingRight="20px"
+			android:paddingBottom="10px" android:paddingTop="10px">
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:layout_weight="1"
+				android:gravity="center" android:paddingRight="20px" android:paddingTop="20px">
+				<ImageButton android:layout_width="80dp"
+					android:id="@+id/sitios_button" android:layout_height="80dp"
+					android:background="@drawable/sitios"
+					android:clickable="true" />
+
+				<TextView android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:gravity="center"
+					android:textStyle="bold" android:textColor="@color/fuente" android:text="@string/sitios" />
+			</LinearLayout>
+
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:layout_weight="1"
+				android:gravity="center" android:paddingLeft="20px" android:paddingTop="20px">
+
+				<Button android:layout_width="80dp" android:id="@+id/amigos_button"
+					android:layout_height="80dp" android:background="@drawable/amigos" />
+
+				<TextView android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:gravity="center"
+					android:textStyle="bold" android:textColor="@color/fuente" android:text="@string/amigos" />
+			</LinearLayout>
+
+
+		</TableRow>
+
+		<TableRow android:layout_weight="1" android:gravity="center"
+			android:paddingLeft="20px" android:paddingRight="20px"
+			android:paddingTop="20px" android:paddingBottom="30px">
+
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:layout_weight="1"
+				android:gravity="center" android:paddingRight="20px" android:paddingBottom="20px">
+				<Button android:padding="20px" android:layout_width="80dp" android:background="@drawable/perfil" android:id="@+id/perfil_button" android:layout_height="80dp"></Button>
+
+				<TextView android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:gravity="center"
+					android:textStyle="bold" android:textColor="@color/fuente" android:text="@string/perfil" />
+			</LinearLayout>
+
+			<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:layout_weight="1"
+				android:gravity="center" android:paddingLeft="20px" android:paddingBottom="20px">
+
+				<Button android:layout_width="80dp" android:id="@+id/preferencias_button"
+					android:layout_height="80dp" android:background="@drawable/configuracion" />
+
+				<TextView android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:gravity="center"
+					android:textStyle="bold" android:textColor="@color/fuente" android:text="Configuracion" />
+			</LinearLayout>
+
+		</TableRow>
+
+	</TableLayout>
+
+</LinearLayout>
