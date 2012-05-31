@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="?android:attr/listPreferredItemHeight"
+	android:padding="6dip">
+
+	<ImageView android:id="@+id/icCategoriaId"
+		android:layout_width="65dp"
+        android:layout_height="65dp"
+		android:layout_marginRight="6dip" />
+
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="0dip" android:layout_weight="1"
+		android:layout_height="fill_parent">
+		
+		<TextView android:id="@+id/LblNombre" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textStyle="bold"
+			android:textSize="16dp" android:textColor="@color/fuente"/>
+
+		<TextView android:id="@+id/LblDireccion"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textStyle="normal" android:textSize="10dp" android:textColor="@color/fuente"/>
+
+
+		<TextView android:id="@+id/LblDistancia"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textStyle="normal" android:textSize="10dp" android:textColor="@color/fuente" />
+
+		<RatingBar android:id="@+id/puntajeSitioId"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			style="?android:attr/ratingBarStyleSmall" android:numStars="5"
+			android:isIndicator="true" />
+	</LinearLayout>
+
+</LinearLayout>
+

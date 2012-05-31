@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/scroller" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:fillViewport="true"
+	android:scrollbars="vertical">
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:background="@color/background2">
+
+		<TableLayout android:layout_width="match_parent"
+			android:id="@+id/tableLayout1" android:layout_height="wrap_content">
+			<TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:layout_width="wrap_content" android:id="@+id/txtSitioNombreId"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:layout_height="wrap_content" android:textColor="@color/fuente" android:paddingLeft="15dp"/>
+
+			</TableRow>
+			<TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:id="@+id/txtSitioDireccionId"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:textColor="@color/fuente" android:paddingLeft="15dp"/>
+
+			</TableRow>
+			<TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:id="@+id/txtSitioTelefonoId"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:textColor="@color/fuente" android:inputType="phone"
+					android:linksClickable="true" android:clickable="true"
+					android:autoLink="phone" android:paddingLeft="15dp"/>
+
+			</TableRow>
+			<TableRow android:id="@+id/tableRow33" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:id="@+id/txtSitioWebId"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:textColor="@color/fuente" android:linksClickable="true"
+					android:clickable="true" android:inputType="textUri"
+					android:autoLink="web" android:paddingLeft="15dp"/>
+
+			</TableRow>
+			<TableRow android:id="@+id/tableRow5" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+				<TextView android:id="@+id/txtSitioPuntajeId"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:textColor="@color/fuente" android:paddingLeft="15dp"/>
+			</TableRow>
+			<TableRow android:id="@+id/tableRow6" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<TextView android:id="@+id/txtSitioTelefonoId2"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:textColor="@color/fuente" android:paddingLeft="15dp"/>
+			</TableRow>
+
+			<TableRow android:id="@+id/tableRow7" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+			</TableRow>
+		</TableLayout>
+
+
+		<TextView android:id="@+id/txtFotosId" android:text="@string/fotos" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:textColor="@color/fuente" android:paddingLeft="15dp"/>
+		<Gallery android:persistentDrawingCache="all"
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/gallery" android:layout_width="fill_parent"
+			android:gravity="left" android:layout_marginLeft="0dp" 
+			android:layout_gravity="left" android:layout_height="wrap_content"/>
+
+
+		<TableLayout android:id="@+id/tableLayout2"
+			android:layout_width="match_parent" android:layout_height="wrap_content">
+			<TableRow android:id="@+id/tableRow35" android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+
+				<Button android:text="@string/comoIr" android:id="@+id/btnComoIrId"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:onClick="comoIr" />
+
+			</TableRow>
+
+		</TableLayout>
+
+	</LinearLayout>
+</ScrollView>

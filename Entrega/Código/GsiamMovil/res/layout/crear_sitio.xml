@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical"
+    android:background="@color/background2"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <EditText
+            android:id="@+id/txtNombreId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:hint="@string/Nombre"
+            android:maxLength="30" android:focusable="true">
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/txtDireccionId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtNombreId"
+            android:hint="@string/direccion"
+            android:maxLength="50" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/txtTelefonoId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtDireccionId"
+            android:hint="@string/telefono"
+            android:inputType="number"
+            android:maxLength="15" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/txtWebId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtTelefonoId"
+            android:hint="@string/web"
+            android:inputType="textWebEditText"
+            android:maxLength="50" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btnCategoriaSitioId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtWebId"
+            android:onClick="mostarCategoria"
+            android:text="@string/categoria" />
+
+        <EditText
+            android:id="@+id/txtCategoriaId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtWebId"
+            android:layout_toRightOf="@+id/btnCategoriaSitioId"
+            android:hint="@string/categoria" >
+
+            
+        </EditText>
+
+        <LinearLayout
+            android:id="@+id/crearSitioMapaLayoutId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCategoriaId"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal" android:scrollbars="none">
+
+            <view
+                android:id="@+id/crearSitioMapaId"
+                android:layout_width="fill_parent"
+                android:layout_height="175dp"
+                android:apiKey="0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw"
+                class="com.google.android.maps.MapView"
+                android:clickable="true"
+                android:drawingCacheQuality="high"
+                android:fitsSystemWindows="true"
+                android:focusableInTouchMode="true"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAgregarSitioId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/crearSitioMapaLayoutId"
+            android:ellipsize="start"
+            android:onClick="crearSitio"
+            android:text="@string/agregar" />
+    </RelativeLayout>
+
+</LinearLayout>

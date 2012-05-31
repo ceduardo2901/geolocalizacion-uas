@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<greendroid.widget.SegmentedHost
+	xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/segmented_host" android:cacheColorHint="#00000000"
+	android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@color/background2">
+	<greendroid.widget.SegmentedBar
+		android:id="@id/gd_segmented_bar" android:layout_width="fill_parent" android:background="@color/background2"
+		android:layout_height="wrap_content" />
+	<FrameLayout android:id="@id/gd_segmented_content_view" android:cacheColorHint="#00000000"
+		android:layout_width="fill_parent" android:layout_height="0dp" android:background="@color/background2"
+		android:layout_weight="1" android:foreground="@drawable/gd_shadow_top"> 
+
+<LinearLayout
+	android:orientation="vertical" android:layout_width="fill_parent" android:background="@color/background2"
+	android:layout_height="fill_parent" android:cacheColorHint="#00000000">
+<ListView android:id="@id/android:list" android:layout_width="fill_parent"
+        android:layout_height="0dp" android:cacheColorHint="#00000000"
+        android:layout_weight="1"  />
+	
+	<TextView android:id="@android:id/empty" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:text="@string/listaVacia"
+		 />		
+		 </LinearLayout>
+	</FrameLayout>	
+
+</greendroid.widget.SegmentedHost>
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:background="@color/background1" 
+	android:orientation="horizontal"
+	android:padding="10dip">
+
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:orientation="vertical"
+	    android:background="@color/background1" 
+		>
+
+		<TextView android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/BtnCrearUsuario"
+			android:id="@+id/textView1" android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_gravity="center_horizontal|center"
+			android:textColor="@color/fuente" android:paddingBottom="20dp"/>
+
+
+		<TextView android:layout_width="fill_parent" android:text="@string/Nombre"
+			android:layout_height="wrap_content" android:id="@+id/textView43"
+			android:layout_weight="1" android:textColor="@color/fuente"></TextView>
+
+
+		<EditText android:layout_height="wrap_content" android:id="@+id/nombreTxt"
+			android:inputType="textPersonName" android:layout_width="match_parent"
+			android:maxLength="30">
+			<requestFocus></requestFocus>
+		</EditText>
+
+
+		<TextView android:layout_width="fill_parent" android:text="@string/email"
+			android:layout_height="wrap_content" android:id="@+id/emailLbl"
+			android:layout_weight="1" android:textColor="@color/fuente"
+			android:layout_marginTop="15dp"></TextView>
+
+
+
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/emailTxt"
+			android:inputType="textEmailAddress" android:maxLength="30">
+		</EditText>
+		<TextView android:layout_width="fill_parent" android:text="@string/pass"
+			android:textColor="@color/fuente" android:layout_height="wrap_content"
+			android:id="@+id/passLbl" android:layout_weight="1"
+			android:layout_marginTop="15dp"></TextView>
+		<EditText android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/passTxt"
+			android:inputType="textPassword" android:maxLength="20"/>
+
+		<Button android:id="@+id/crearUsuarioBtn"
+			android:layout_height="wrap_content" android:text="@string/BtnRegistrarse"
+			android:onClick="crearUsuario" android:gravity="center_vertical|center_horizontal|center"
+			android:layout_gravity="right" android:layout_width="100dp"
+			android:layout_marginTop="15dp"></Button>
+
+
+
+	</LinearLayout>
+</LinearLayout>

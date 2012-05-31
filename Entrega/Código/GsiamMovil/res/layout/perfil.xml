@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_height="fill_parent"
+	android:layout_width="fill_parent" android:padding="10dip"
+	android:orientation="horizontal" android:background="@color/background2">
+	
+	<LinearLayout 
+	    android:background="@color/background2"
+	    android:orientation="vertical"
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent" 
+		android:layout_gravity="center">
+	
+	
+	<TableLayout 
+	    android:background="@color/background2"
+	    android:id="@+id/tableLayout1" 
+		android:layout_width="match_parent" 
+		android:layout_height="fill_parent">
+			
+		<TableRow android:id="@+id/tableRow5" 
+				  android:layout_width="wrap_content" 
+				  android:layout_height="wrap_content">
+				  
+			<TextView android:text="@string/avatar" 
+					  android:textAppearance="?android:attr/textAppearanceLarge" 
+					  android:layout_height="wrap_content" 
+					  android:layout_width="wrap_content" 
+					  android:textColor="@color/fuente"
+					  android:id="@+id/textView1"/>
+					  
+			<ImageView android:id="@+id/avatar" android:layout_height="150dp" android:layout_width="150dp"/>
+		 
+		</TableRow>	
+			
+				 
+		<TableRow android:id="@+id/tableRow6" 
+				  android:layout_width="wrap_content" 
+				  android:layout_height="wrap_content">
+				  
+			<TextView android:text="@string/Nombre" 
+			          android:textAppearance="?android:attr/textAppearanceLarge" 
+			          android:textColor="@color/fuente"
+					  android:layout_height="wrap_content" 
+					  android:layout_width="wrap_content" 
+					  android:id="@+id/textView13"/>
+			
+			<TextView android:text="" android:id="@+id/nombreTxt" 
+					  android:textColor="@color/fuente"
+					  android:layout_width="wrap_content" 
+					  android:layout_height="wrap_content"></TextView>
+					  
+		</TableRow>
+		
+		<TableRow android:id="@+id/tableRow1" 
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content">
+				  
+			<TextView android:id="@+id/emailLbl" 
+			android:textAppearance="?android:attr/textAppearanceLarge" 
+			android:textColor="@color/fuente"
+					  android:layout_height="wrap_content"
+					  android:layout_width="fill_parent" 
+					  android:text="@string/email"/>
+					  
+			<TextView android:text="" 
+					  android:id="@+id/emailTxt" 
+					  android:textColor="@color/fuente"
+					  android:layout_width="wrap_content" 
+					  android:layout_height="wrap_content"></TextView>
+					  
+		
+
+		</TableRow>
+		
+		
+		<TableRow android:id="@+id/tableRow3" 
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content" 
+				  android:paddingTop="10dp">
+		</TableRow>
+		
+		<TableRow android:id="@+id/tableRow4" 
+			      android:layout_width="wrap_content" 
+			      android:layout_height="wrap_content">
+			<Button android:id="@+id/editarPerfilBtn" 
+			 	    android:text="@string/BtnEditarPerfil"
+			 	    android:layout_width="wrap_content" 
+			 	    android:layout_height="wrap_content"
+			 	    android:onClick="editarPerfil"/>
+			 	    
+		<!--  	<Button android:id="@+id/eliminarPerfilBtn" 
+			 	    android:text="@string/BtnEliminarPerfil"
+			 	    android:layout_width="wrap_content" 
+			 	    android:layout_height="wrap_content"
+			 	    android:onClick="cerrarCuenta"/>-->
+		</TableRow>
+		
+		
+	</TableLayout>
+</LinearLayout>
+</LinearLayout>
