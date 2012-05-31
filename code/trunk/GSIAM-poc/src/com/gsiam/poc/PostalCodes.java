@@ -4,9 +4,9 @@ public class PostalCodes {
 
 	private PostalCode[] postalCodes;
 
-	PostalCodes() {
-
-	}
+//	public PostalCodes() {
+//
+//	}
 
 	public PostalCode[] getPostalCodes() {
 		return postalCodes;

@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -60,6 +61,7 @@ public class LocationActivity extends MapActivity implements Runnable,
 		btUpdate = (Button) this.findViewById(R.id.btUpdate);
 		btUpdate.setOnClickListener(this);
 		mapView = (MapView) this.findViewById(R.id.myMapView);
+		Geocoder g = new Geocoder(this);
 		
 		txtLocation = (TextView) this.findViewById(R.id.tvGPS);
 
@@ -79,7 +81,7 @@ public class LocationActivity extends MapActivity implements Runnable,
 			mLocationListener.setHandler(handler);
 			Looper.loop();
 
-			Looper.myLooper().quit();
+			//Looper.myLooper().quit();
 		} else {
 			Toast.makeText(getBaseContext(), "Signal GPS not found",
 					Toast.LENGTH_LONG).show();

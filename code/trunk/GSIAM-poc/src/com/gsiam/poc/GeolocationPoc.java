@@ -1,26 +1,14 @@
 package com.gsiam.poc;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HttpContext;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,6 +16,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -149,6 +138,7 @@ public class GeolocationPoc extends Activity {
             @Override
             protected List<PostalCode> doInBackground(Void... params) {
                     try {
+                    		
                             // Create a new RestTemplate instance
                             RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 //                            URI ur = new URI("http://ws.geonames.org/findNearbyPostalCodesJSON?postalcode=92187&country=US&radius=10");
@@ -168,7 +158,7 @@ public class GeolocationPoc extends Activity {
                             // objects in response
                             AircraftTypes result2 = restTemplate.getForObject(url4, AircraftTypes.class);
                             PostalCodes result = restTemplate.getForObject(url, PostalCodes.class);
-
+                            
                             // convert the array to a list and return it
                             return Arrays.asList(result.getPostalCodes());
                     } catch (Exception e) {
