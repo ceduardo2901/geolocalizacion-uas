@@ -31,8 +31,6 @@
             android:layout_below="@+id/txtNombreId"
             android:hint="@string/direccion"
             android:maxLength="50" >
-
-            <requestFocus />
         </EditText>
 
         <EditText
@@ -45,7 +43,6 @@
             android:inputType="number"
             android:maxLength="15" >
 
-            <requestFocus />
         </EditText>
 
         <EditText
@@ -58,7 +55,6 @@
             android:inputType="textWebEditText"
             android:maxLength="50" >
 
-            <requestFocus />
         </EditText>
 
         <Button
@@ -93,7 +89,7 @@
                 android:id="@+id/crearSitioMapaId"
                 android:layout_width="fill_parent"
                 android:layout_height="175dp"
-                android:apiKey="0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw"
+                android:apiKey="0Qsl4_fn8srr-vYJwa3QOAS01SvS7B6pvbwnoog"
                 class="com.google.android.maps.MapView"
                 android:clickable="true"
                 android:drawingCacheQuality="high"
