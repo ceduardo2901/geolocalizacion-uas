@@ -613,10 +613,10 @@ public class SitiosActivity extends GDActivity implements
 
 	}
 
-	private void confirmarEliminacion(final Integer sitioId) {
+	private void confirmarEliminacion(final SitioDTO sitio) {
 		AlertDialog.Builder dialogResponder = new AlertDialog.Builder(this);
 		dialogResponder.setTitle("Confirmar");
-		dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_ELIMINACION_SITIO);
+		dialogResponder.setMessage(Constantes.MSG_CONFIRMAR_ELIMINACION_SITIO + sitio.getNombre() + "?");
 		dialogResponder.setCancelable(true);
 		dialogResponder.setIcon(android.R.drawable.ic_dialog_alert);
 
@@ -624,7 +624,7 @@ public class SitiosActivity extends GDActivity implements
 				new DialogInterface.OnClickListener() {
 
 					public void onClick(DialogInterface dialog, int id) {
-						eliminarSitio(sitioId);
+						eliminarSitio(sitio.getIdSitio());
 						dialog.cancel();
 					}
 				});
@@ -685,7 +685,7 @@ public class SitiosActivity extends GDActivity implements
 
 					actualizarSitio(sitio);
 				} else {
-					confirmarEliminacion(sitio.getIdSitio());
+					confirmarEliminacion(sitio);
 
 				}
 			}
