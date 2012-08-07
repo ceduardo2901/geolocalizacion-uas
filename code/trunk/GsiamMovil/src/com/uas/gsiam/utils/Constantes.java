@@ -26,9 +26,9 @@ public class Constantes {
 	// Servicios
 
 	// TODO poner esto en un archivo de configuracion
-	// public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
+	 public static final String DOMINIO_SERVICE = "http://10.0.2.2:8080";
 	// ip tony
-	public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
+	//public static final String DOMINIO_SERVICE = "http://gsiam.servehttp.com:8080";
 	// ipmartin
 	// public static final String DOMINIO_SERVICE =
 	// "http://gsiamweb.no-ip.info:8080";
@@ -121,7 +121,7 @@ public class Constantes {
 	public static final String MSG_CONFIRMAR_MODIFICACION_USUARIO = "¿Esta seguro que desea modificar su perfil?";
 	public static final String MSG_CONFIRMAR_CIERRE_CUENTA = "¿Esta seguro que desea cerrar su cuenta?";
 	public static final String MSG_CONFIRMAR_MODIFICAR_SITIO = "¿Esta seguro que desea modificar el sitio?";
-	public static final String MSG_CONFIRMAR_ELIMINACION_SITIO = "¿Esta seguro que desea eliminar el sitio?";
+	public static final String MSG_CONFIRMAR_ELIMINACION_SITIO = "¿Esta seguro que desea eliminar ";
 	public static final String MSG_SOLICITUD_CREADA_OK = "La solicitud se envio correctamente";
 	public static final String MSG_SOLICITUD_APROBADA = "La solicitud se aprobo correctamente";
 	public static final String MSG_SOLICITUD_RECHAZADA = "La solicitud se rechazo correctamente";
