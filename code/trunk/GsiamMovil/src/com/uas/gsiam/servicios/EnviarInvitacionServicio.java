@@ -51,7 +51,7 @@ public class EnviarInvitacionServicio extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		String email = intent.getStringExtra("email");
+		String email = intent.getStringExtra("direccion");
 
 		ApplicationController app = ((ApplicationController) getApplicationContext());
 		UsuarioDTO user = app.getUserLogin();
