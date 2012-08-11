@@ -11,7 +11,7 @@
 		<item>Galeria</item>
 
 	</string-array>
-	
+	<string name="mapaKey">0VISs42MeYw0eJ3bl_Wi5WDRAGo_mwvPyeNuErw</string>
 	<string name="radar">GSIAM - Radar Amigos</string>
 	<string name="app_name">GSIAM</string>
 	<string name="gsiam_modificar">GSIAM - Modificar Sitio</string>
