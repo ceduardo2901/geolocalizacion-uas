@@ -47,7 +47,7 @@ public class RatingAdapter extends ArrayAdapter<String> {
 		ImageView icon2;
 		ImageView icon3;
 		ImageView icon4;
-		TextView title;
+		//TextView title;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -65,7 +65,7 @@ public class RatingAdapter extends ArrayAdapter<String> {
 			holder.icon2 = (ImageView) convertView.findViewById(R.id.icon2);
 			holder.icon3 = (ImageView) convertView.findViewById(R.id.icon3);
 			holder.icon4 = (ImageView) convertView.findViewById(R.id.icon4);
-			holder.title = (TextView) convertView.findViewById(R.id.title);
+		//	holder.title = (TextView) convertView.findViewById(R.id.title);
 			convertView.setTag(holder);
 
 		} else {
@@ -75,7 +75,7 @@ public class RatingAdapter extends ArrayAdapter<String> {
 
 		}
 
-		holder.title.setText(items[position]);
+		//holder.title.setText(items[position]);
 
 		switch (position) {
 		case 0:
