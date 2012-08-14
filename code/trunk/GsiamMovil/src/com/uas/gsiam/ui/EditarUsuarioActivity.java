@@ -163,8 +163,6 @@ public class EditarUsuarioActivity extends GDActivity implements TextWatcher{
 		builder.setTitle("Seleccionar una acción");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
-				Toast.makeText(getApplicationContext(), items[item],
-						Toast.LENGTH_SHORT).show();
 
 				if (item == 0) {
 					getCamara();
