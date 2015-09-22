@@ -1,0 +1,15 @@
+## Geolocalización de Sitios de Interés Para Teléfonos Móviles ##
+## G-SIAM ##
+
+
+Proyecto de Grado
+
+Licenciatura en Informática
+Instituto Universitario Autónomo del Sur
+
+
+A/S     Antonio Porcelli
+
+A/S     Martín Loureiro
+
+Tutor: Ing. Martín Cabrera

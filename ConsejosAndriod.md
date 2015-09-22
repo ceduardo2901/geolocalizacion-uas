@@ -1,0 +1,26 @@
+## Consejos para desarrollar en Android ##
+
+Para desarrollar una buena aplicación Android, además de la dedicación y empollarse bien la documentación de referencia de la SDK conviene prestar atención a una serie de puntos.
+
+1. Añadir la opción de salir de la aplicación. No es tan normal verlo en todas las aplicación, y a veces tenemos que recurrir aun task killer para matar a las aplicaciones.
+
+2. Guardar los datos en la tarjeta SD. Es la mejor forma para mantener la información sin ocupar espacio vital para el teléfono y más fácil para el usuario el borrado.
+
+3. Si se almacenan datos en la memoria, es conveniente dar la posibilidad de borrar los datos desde el menú de ajustes de la aplicación.
+
+4. Dar la posibilidad de elegir el intervalo de sincronización de datos.
+
+5. Invertir en la usabilidad y en la interfaz de nuestra aplicación.
+
+6. Utiliza pestañas de navegación, parece que es la estructura más práctica para manejar por la aplicación de una forma intuitiva.
+
+7. Pensar en futuras ampliaciones de la aplicación.
+
+8. Evitar en los posible los procesos en segundo plano. Evitando que el usuario no sepa exactamente lo que hace nuestra aplicación y minimizando el uso de la batería.
+
+9. Prestar atención a los comentarios de los usuarios y realizar actualizaciones con regularidad.
+
+10. Establecer un servicio de información para el usuario como un blog o un correo electrónico.
+
+
+**[Volver](http://code.google.com/p/geolocalizacion-uas/wiki/Principal)**

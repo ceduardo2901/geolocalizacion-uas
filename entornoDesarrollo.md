@@ -1,0 +1,24 @@
+# Entorno de desarrollo a utilizar en G-SIAM #
+
+
+> Instalar java 1.6 update 30
+
+> Instalar eclipse jee 3.7 (Indigo)
+
+> Instalar el SDK de Android y plataforma Android 2.3.4 (agregar al path de windows tools/ y platform-tools/)
+
+> Instalar plugin para eclipse ADT 12.0.0
+
+> Instalar subeclipse 1.6
+
+> Instalar jboss 6.0
+
+> Instalar postgres 9.0
+
+> Instalar postgis
+
+Bajar del repositorio los proyectos GsiamEjb, GsiamWeb2 y GsiamMovil
+
+
+
+**[Volver](http://code.google.com/p/geolocalizacion-uas/wiki/Principal)**
